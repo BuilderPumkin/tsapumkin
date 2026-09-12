@@ -2,16 +2,18 @@
  * Cloudflare Pages Function: /api/ai
  * PUMKIN Socratic AI Tutor - Secure Gemini API Gateway
  *
- * BẢO MẬT:
+ * BẢO MẬT & TƯƠNG THÍCH MÔ HÌNH:
  * - API Key chỉ được đọc từ Cloudflare Environment Secrets (context.env.GEMINI_API_KEY).
- * - Không bao giờ trả API key về client hoặc in ra log.
+ * - Sử dụng các mô hình thế hệ mới nhất: gemini-3.6-flash, gemini-3.7-flash, gemini-3.8-flash.
+ * - Tự động loại bỏ các mô hình cũ đã bị Google ngừng hỗ trợ (gemini-2.5-flash, gemini-1.5-flash).
  */
 
 const DEFAULT_MODEL = "gemini-3.6-flash";
 const CANDIDATE_MODELS = [
     "gemini-3.6-flash",
-    "gemini-3.5-flash",
-    "gemini-2.5-flash"
+    "gemini-3.7-flash",
+    "gemini-3.8-flash",
+    "gemini-flash-latest"
 ];
 
 export async function onRequestOptions() {
@@ -35,9 +37,11 @@ export async function onRequestPost(context) {
     try {
         const { request, env } = context;
 
-        // 1. Kiểm tra API Key từ Cloudflare Secrets
-        const apiKey = env.GEMINI_API_KEY || env.PUMKIN_AI_API_KEY;
-        if (!apiKey || apiKey.trim() === "" || apiKey === "your_gemini_api_key_here") {
+        // 1. Kiểm tra và làm sạch API Key từ Cloudflare Secrets
+        const rawApiKey = env.GEMINI_API_KEY || env.PUMKIN_AI_API_KEY || "";
+        const apiKey = rawApiKey.trim();
+
+        if (!apiKey || apiKey === "your_gemini_api_key_here") {
             return new Response(JSON.stringify({
                 error: "⚠️ GEMINI_API_KEY chưa được thiết lập trên Cloudflare Pages.\n\n" +
                        "👉 Vui lòng vào Cloudflare Dashboard > Workers & Pages > Settings > Variables and Secrets để thêm biến bí mật GEMINI_API_KEY."
@@ -86,10 +90,15 @@ ${q.choices ? "- Các phương án: " + JSON.stringify(q.choices) : ""}
 ${student.recurring_errors ? "- Lỗi sai thường gặp của học sinh: " + JSON.stringify(student.recurring_errors) : ""}
 `;
 
-        const targetModel = env.GEMINI_MODEL || DEFAULT_MODEL;
+        // 4. Lựa chọn mô hình thông minh (Tự động chuyển đổi nếu người dùng điền model cũ)
+        let targetModel = (env.GEMINI_MODEL || DEFAULT_MODEL).trim();
+        if (targetModel.includes("2.5") || targetModel.includes("1.5") || targetModel.includes("2.0") || targetModel.includes("pro-exp")) {
+            targetModel = DEFAULT_MODEL; // Tự động ép về gemini-3.6-flash để không bị lỗi 404
+        }
+
         const modelsToTry = [targetModel, ...CANDIDATE_MODELS.filter(m => m !== targetModel)];
 
-        let lastError = null;
+        let attemptErrors = [];
         let aiResultText = null;
         let usedModel = null;
 
@@ -122,28 +131,30 @@ ${student.recurring_errors ? "- Lỗi sai thường gặp của học sinh: " + 
 
                 if (!geminiRes.ok) {
                     const errData = await geminiRes.json().catch(() => ({}));
-                    throw new Error(`Model ${model} failed (${geminiRes.status}): ${JSON.stringify(errData)}`);
+                    throw new Error(`Model ${model} (${geminiRes.status}): ${errData.error?.message || JSON.stringify(errData)}`);
                 }
 
                 const geminiData = await geminiRes.json();
                 const candidate = geminiData.candidates?.[0];
                 const textPart = candidate?.content?.parts?.[0]?.text;
 
-                if (textPart) {
-                    aiResultText = textPart;
+                if (textPart && textPart.trim()) {
+                    aiResultText = textPart.trim();
                     usedModel = model;
                     break;
+                } else {
+                    throw new Error(`Model ${model}: Phản hồi rỗng`);
                 }
             } catch (err) {
-                lastError = err;
+                attemptErrors.push(err.message);
             }
         }
 
         if (!aiResultText) {
-            throw lastError || new Error("Không nhận được phản hồi từ mô hình AI.");
+            throw new Error("Không thể tạo nội dung từ các mô hình AI khả dụng: " + attemptErrors.join(" | "));
         }
 
-        // 4. Trả về đúng schema mà TutorIntegration.js mong đợi
+        // 5. Trả về đúng schema cho TutorIntegration.js
         return new Response(JSON.stringify({
             response: {
                 message: aiResultText,
