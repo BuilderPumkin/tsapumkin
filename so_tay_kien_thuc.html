@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sổ tay Kiến thức & Tra cứu Công thức Toán - PUMKIN.DEV</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- MathJax 3 Configuration & Queue Manager -->
+    <script>
+        window.PumkinMath = {
+            isReady: false,
+            queue: new Set(),
+            onReady() {
+                this.isReady = true;
+                this.flush();
+            },
+            typeset(target) {
+                const el = target || document.body;
+                if (this.isReady && window.MathJax && window.MathJax.typesetPromise) {
+                    window.MathJax.typesetPromise([el]).catch(() => {});
+                } else {
+                    this.queue.add(el);
+                }
+            },
+            flush() {
+                if (!window.MathJax || !window.MathJax.typesetPromise) return;
+                if (this.queue.size > 0) {
+                    const items = Array.from(this.queue);
+                    this.queue.clear();
+                    window.MathJax.typesetPromise(items).catch(() => {});
+                }
+            }
+        };
+
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            },
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady().then(() => {
+                        window.PumkinMath.onReady();
+                    });
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #eef2ff;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-subtle: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-full: 9999px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.dark-mode {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --primary-light: rgba(99, 102, 241, 0.15);
+            --secondary: #38bdf8;
+            --accent: #fbbf24;
+            --success: #34d399;
+            --danger: #f87171;
+            --bg-main: #090d16;
+            --bg-card: #131b2e;
+            --bg-subtle: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.3);
+            --shadow-md: 0 4px 8px -1px rgb(0 0 0 / 0.4);
+            --shadow-lg: 0 10px 20px -3px rgb(0 0 0 / 0.5);
+        }
+
+        body.dark-mode .formula-math-box {
+            background: #0f172a !important;
+            border-color: #334155 !important;
+            color: #93c5fd !important;
+        }
+
+        body.dark-mode .formula-math-box mjx-container,
+        body.dark-mode mjx-container {
+            color: inherit !important;
+        }
+
+        body.dark-mode .formula-math-box mjx-container {
+            color: #93c5fd !important;
+        }
+
+        body.dark-mode table {
+            background: #0f172a !important;
+            border: 1px solid #334155 !important;
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode th {
+            background: #1e293b !important;
+            color: #93c5fd !important;
+            border: 1px solid #334155 !important;
+        }
+
+        body.dark-mode td {
+            background: #0f172a !important;
+            color: #f8fafc !important;
+            border: 1px solid #334155 !important;
+        }
+
+        body.dark-mode tr:nth-child(even) td {
+            background: #131c31 !important;
+        }
+
+        body.dark-mode .example-card {
+            background: #0f172a !important;
+            border-color: #334155 !important;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: var(--transition);
+            min-height: 100vh;
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .brand-logo .logo-badge {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: #fff;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-title {
+            font-weight: 800;
+            font-size: 17px;
+            background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--text-main);
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-link:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .btn-link.primary {
+            background: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%);
+            color: #fff;
+            border: none;
+        }
+
+        .btn-link.primary:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+        }
+
+        .btn-theme-toggle {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .btn-theme-toggle:hover {
+            transform: rotate(15deg) scale(1.05);
+            border-color: var(--accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 20px 60px 20px;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(14, 165, 233, 0.08) 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            margin-bottom: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-pill {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        /* Main View Switcher Tabs */
+        .view-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .view-tab-btn {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-muted);
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-tab-btn:hover {
+            color: var(--primary);
+            background-color: var(--primary-light);
+        }
+
+        .view-tab-btn.active {
+            color: #fff;
+            background: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Search and Filter Controls */
+        .controls-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 18px 20px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .search-row {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 18px 12px 42px;
+            font-size: 14.5px;
+            font-family: inherit;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-right: 4px;
+        }
+
+        .pill-btn {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pill-btn:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .pill-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        /* 1-CARD PER ROW LIST LAYOUT */
+        .single-column-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        /* Knowledge Topic Card */
+        .topic-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 22px 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .topic-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stream-tag {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-tsa { background: rgba(79, 70, 229, 0.12); color: var(--primary); }
+        .tag-hsa { background: rgba(14, 165, 233, 0.12); color: var(--secondary); }
+        .tag-thpt { background: rgba(16, 185, 129, 0.12); color: var(--success); }
+        .tag-calc { background: rgba(245, 158, 11, 0.12); color: var(--accent); }
+
+        .chapter-tag {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .topic-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .topic-desc {
+            font-size: 14.5px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .topic-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed var(--border);
+            padding-top: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .topic-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .btn-view-topic {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            font-weight: 700;
+            font-size: 13px;
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-view-topic:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* Formula Card (1 per row, NO copy button, scrollable formula) */
+        .formula-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .formula-item:hover {
+            border-color: var(--secondary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .formula-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .formula-title {
+            font-size: 16.5px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .formula-math-box {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            overflow-x: auto;
+            max-width: 100%;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+
+        .formula-math-box::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .formula-math-box::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .formula-math-box:hover::-webkit-scrollbar-thumb {
+            background: var(--primary);
+        }
+
+        .formula-notes {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Full Article Modal / Drawer */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .article-modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-lg);
+            animation: modalFadeIn 0.25s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .article-modal-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .article-modal-title {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .btn-modal-close {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .btn-modal-close:hover {
+            background: var(--bg-subtle);
+            color: var(--danger);
+        }
+
+        .article-modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .example-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 18px;
+            margin-top: 14px;
+        }
+
+        .example-header {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .example-step {
+            margin-top: 8px;
+            padding-left: 12px;
+            border-left: 3px solid var(--secondary);
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .site-footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-actions {
+                justify-content: space-between;
+            }
+            .hero-title {
+                font-size: 22px;
+            }
+            .view-tabs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body data-author="PUMKIN.DEV">
+
+    <!-- Sticky Top Navigation -->
+    <header class="top-nav">
+        <a href="index.html" class="brand-logo">
+            <span class="logo-badge">🎃 PUMKIN.DEV</span>
+            <div>
+                <div class="brand-title">SỔ TAY TOÁN HỌC & CÔNG THỨC</div>
+                <div class="brand-sub">Hệ thống Lý thuyết & Cheatsheet Toàn diện</div>
+            </div>
+        </a>
+
+        <div class="nav-actions">
+            <a href="index.html" class="btn-link primary">🏠 Nền tảng chính (Luyện thi)</a>
+            <a href="index.html#qbank" class="btn-link">📚 Ngân hàng đề</a>
+            <a href="index.html#dashboard" class="btn-link">📊 Năng lực & Lộ trình</a>
+            <button id="btn-theme-toggle" class="btn-theme-toggle" onclick="PumkinTheme.toggleTheme()" title="Chuyển chế độ Sáng / Tối">🌙</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Banner -->
+        <section class="hero-banner">
+            <span class="hero-pill">⚡ Sổ tay Độc lập - Tối ưu Tốc độ</span>
+            <h1 class="hero-title">Sổ tay Kiến thức & Tra cứu Công thức Toán toàn diện</h1>
+            <p class="hero-desc">Tổng hợp 25 chuyên đề lý thuyết chuyên sâu, 44+ công thức cốt lõi và các ví dụ giải từng bước cho kỳ thi Đánh giá tư duy (TSA), Đánh giá năng lực (HSA), THPT Quốc Gia & Giải tích Đại học.</p>
+        </section>
+
+        <!-- View Switcher Tabs -->
+        <div class="view-tabs">
+            <button id="tab-btn-topics" class="view-tab-btn active" onclick="switchView('topics')">
+                <span>📖</span> 25 Chuyên đề Lý thuyết & Ví dụ
+            </button>
+            <button id="tab-btn-formulas" class="view-tab-btn" onclick="switchView('formulas')">
+                <span>📐</span> Tra cứu 44+ Công thức Cốt lõi
+            </button>
+        </div>
+
+        <!-- Controls: Search & Stream Filter -->
+        <div class="controls-card">
+            <div class="search-row">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="filter-search" class="search-input" placeholder="Tìm kiếm chuyên đề, tên công thức, ký hiệu LaTeX, đạo hàm, tích phân, xác suất..." oninput="onSearchChange(this.value)">
+            </div>
+            <div class="filter-row">
+                <span class="filter-label">Kỳ thi / Khối:</span>
+                <button class="pill-btn active" data-stream="all" onclick="setStreamFilter('all')">Tất cả</button>
+                <button class="pill-btn" data-stream="TSA Bách Khoa" onclick="setStreamFilter('TSA Bách Khoa')">TSA Bách Khoa</button>
+                <button class="pill-btn" data-stream="HSA ĐHQG" onclick="setStreamFilter('HSA ĐHQG')">HSA ĐHQG</button>
+                <button class="pill-btn" data-stream="THPT Quốc Gia" onclick="setStreamFilter('THPT Quốc Gia')">THPT Quốc Gia</button>
+                <button class="pill-btn" data-stream="Giải tích Đại học" onclick="setStreamFilter('Giải tích Đại học')">Giải tích Đại học</button>
+                <button class="pill-btn" data-stream="Toán 12" onclick="setStreamFilter('Toán 12')">Toán 12</button>
+                <button class="pill-btn" data-stream="Toán 11" onclick="setStreamFilter('Toán 11')">Toán 11</button>
+                <button class="pill-btn" data-stream="Toán 10" onclick="setStreamFilter('Toán 10')">Toán 10</button>
+            </div>
+        </div>
+
+        <!-- Section 1: Topics List (1 per row) -->
+        <div id="section-topics" class="single-column-list"></div>
+
+        <!-- Section 2: Formulas List (1 per row, NO copy buttons) -->
+        <div id="section-formulas" class="single-column-list" style="display: none;"></div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p><strong>PUMKIN.DEV MATH PRO</strong> &bull; Nền tảng Công nghệ Giáo dục & Sổ tay Luyện thi Toán thông minh</p>
+            <p style="margin-top: 6px;">Được tối ưu tải trang siêu tốc, hiển thị chuẩn KaTeX/MathJax và hoạt động offline.</p>
+        </footer>
+    </div>
+
+    <!-- Full Article Modal -->
+    <div id="article-modal" class="modal-backdrop" onclick="closeArticleModal(event)">
+        <div class="article-modal" onclick="event.stopPropagation()">
+            <div class="article-modal-header">
+                <h2 id="modal-article-title" class="article-modal-title">Chi tiết Chuyên đề</h2>
+                <button class="btn-modal-close" onclick="closeArticleModal()">✕</button>
+            </div>
+            <div id="modal-article-body" class="article-modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+    // =========================================================================
+    // DATA SOURCE: 25 KNOWLEDGE ARTICLES WITH FORMULAS & STEP-BY-STEP EXAMPLES
+    // =========================================================================
+    const PUMKIN_KNOWLEDGE_BASE = [
+    // ==========================================
+    // STREAM 1: TOÁN 10
+    // ==========================================
+    {
+        id: "kb_toan10_01",
+        grade: "Toán 10",
+        chapter: "Chương 1: Mệnh đề & Tập hợp",
+        title: "Mệnh đề, Tập hợp và Các phép toán trên tập hợp",
+        overview: "Nền tảng của tư duy logic toán học, cấu trúc dữ liệu và bài toán đếm bù trừ.",
+        theory_markdown: `### 1. Mệnh đề toán học và Mệnh đề phủ định
+Một mệnh đề là một khẳng định đúng hoặc sai, không thể vừa đúng vừa sai.
+- Mệnh đề kéo theo: \\(P \\implies Q\\) chỉ sai khi \\(P\\) đúng và \\(Q\\) sai.
+- Mệnh đề đảo của \\(P \\implies Q\\) là \\(Q \\implies P\\).
+- Mệnh đề phản đảo: \\(\\overline{Q} \\implies \\overline{P}\\) (có cùng giá trị chân lý với \\(P \\implies Q\\)).
+
+### 2. Các phép toán trên tập hợp
+- **Giao**: \\(A \\cap B = \\{x \\mid x \\in A \\text{ và } x \\in B\\}\\).
+- **Hợp**: \\(A \\cup B = \\{x \\mid x \\in A \\text{ hoặc } x \\in B\\}\\).
+- **Hiệu**: \\(A \\setminus B = \\{x \\mid x \\in A \\text{ và } x \\notin B\\}\\).
+- **Phần bù**: \\(C_E A = E \\setminus A\\) (với \\(A \\subset E\\)).`,
+        formulas: [
+            {
+                name: "Nguyên lý bù trừ 2 tập",
+                latex: "|A \\cup B| = |A| + |B| - |A \\cap B|",
+                desc: "Tính số phần tử của hợp hai tập hữu hạn",
+                tags: ["Tập hợp", "Đếm"]
+            },
+            {
+                name: "Nguyên lý bù trừ 3 tập",
+                latex: "|A \\cup B \\cup C| = |A|+|B|+|C| - (|A \\cap B| + |B \\cap C| + |C \\cap A|) + |A \\cap B \\cap C|",
+                desc: "Tính số phần tử khi có 3 tập giao nhau",
+                tags: ["Tập hợp", "Xác suất"]
+            },
+            {
+                name: "Điều kiện hai khoảng giao khác rỗng",
+                latex: "(a; b) \\cap (c; d) \\ne \\emptyset \\iff a < d \\text{ và } c < b",
+                desc: "Điều kiện để hai khoảng số thực giao nhau khác rỗng",
+                tags: ["Số thực", "Khoảng đoạn"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tìm m để giao hai tập hợp khác rỗng",
+                question: "Cho \\(A = [m; m+3]\\) và \\(B = (2; 6)\\). Tìm tất cả giá trị thực của tham số \\(m\\) để \\(A \\cap B \\ne \\emptyset\\).",
+                solution_steps: [
+                    "Bước 1: Xác định điều kiện hai khoảng/đoạn giao khác rỗng: đầu mút trái của tập này phải nhỏ hơn đầu mút phải của tập kia.",
+                    "Bước 2: Ta có hệ bất phương trình: \\(m < 6\\) và \\(m + 3 > 2\\).",
+                    "Bước 3: Suy ra \\(-1 < m < 6\\). Do \\(A\\) là đoạn nên tại các mút: nếu \\(m=6\\) thì \\(A=[6;9]\\), giao với \\(B\\) bằng rỗng. Vậy \\(m \\in (-1; 6)\\)."
+                ],
+                takeaway: "Sử dụng trục số để biểu diễn mút: [a, b] và (c, d) giao nhau khi max(a, c) < min(b, d)."
+            }
+        ],
+        applications: "Ứng dụng trong việc thiết lập câu lệnh truy vấn cơ sở dữ liệu (SQL INTERSECT / UNION), kiểm tra điều kiện kích hoạt trong hệ thống nhúng và biểu diễn không gian mẫu xác suất.",
+        drill_tags: ["Tập hợp", "Mệnh đề", "Logic"],
+        related_question_ids: ["q_tsa_06", "q_hsa_03", "q_tsa_36"]
+    },
+    {
+        id: "kb_toan10_02",
+        grade: "Toán 10",
+        chapter: "Chương 2: Bất phương trình & Hệ BPT bậc nhất hai ẩn",
+        title: "Bất phương trình & Bài toán Tối ưu Tuyến tính",
+        overview: "Phương pháp biểu diễn miền nghiệm đa giác và tìm cực trị hàm mục tiêu (Linear Programming).",
+        theory_markdown: `### 1. Bất phương trình bậc nhất hai ẩn
+Dạng tổng quát: \\(ax + by + c \\le 0\\) (với \\(a^2 + b^2 > 0\\)).
+Miền nghiệm là một nửa mặt phẳng kể cả bờ là đường thẳng \\(d: ax + by + c = 0\\).
+- Quy tắc kiểm tra điểm mốc: Thử điểm \\(O(0;0)\\) (nếu \\(c \\ne 0\\)).
+
+### 2. Định lý Tối ưu trên miền đa giác
+Cho hàm mục tiêu \\(F(x, y) = ax + by\\). Nếu miền nghiệm của hệ bất phương trình là một đa giác lồi \\(A_1A_2\\dots A_n\\), thì giá trị lớn nhất và giá trị nhỏ nhất của \\(F(x, y)\\) luôn đạt tại một trong các đỉnh của đa giác.`,
+        formulas: [
+            {
+                name: "Hàm mục tiêu tuyến tính",
+                latex: "F(x, y) = ax + by + c \\implies \\max F = \\max_{i=1}^n \\{F(A_i)\\}",
+                desc: "Cực trị tuyến tính trên miền đa giác luôn đạt tại đỉnh",
+                tags: ["Quy hoạch tuyến tính", "Đỉnh đa giác"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tối ưu hóa chi phí sản xuất",
+                question: "Một phân xưởng sản xuất 2 loại sản phẩm A và B. Lợi nhuận mỗi tấn A là 4 triệu, mỗi tấn B là 3 triệu. Miền ràng buộc nguyên liệu tạo thành tứ giác có tọa độ 4 đỉnh \\(O(0,0), P(0,4), Q(3,2), R(4,0)\\). Tìm lợi nhuận tối đa.",
+                solution_steps: [
+                    "Bước 1: Hàm mục tiêu: \\(L(x, y) = 4x + 3y\\).",
+                    "Bước 2: Tính giá trị tại 4 đỉnh: \\(L(O) = 0\\), \\(L(P) = 4(0) + 3(4) = 12\\), \\(L(Q) = 4(3) + 3(2) = 18\\), \\(L(R) = 4(4) + 3(0) = 16\\).",
+                    "Bước 3: So sánh: \\(\\max L = 18\\) triệu đồng, đạt tại \\(Q(3, 2)\\)."
+                ],
+                takeaway: "Chỉ cần tính giá trị hàm mục tiêu tại các đỉnh, không cần xét các điểm trong."
+            }
+        ],
+        applications: "Mô hình quy hoạch tuyến tính ứng dụng trong logistic, lập kế hoạch ngân sách quảng cáo đa kênh, phối trộn thức ăn chăn nuôi và tối ưu hóa năng lực máy móc.",
+        drill_tags: ["Quy hoạch tuyến tính", "Hệ BPT", "Tối ưu hóa"],
+        related_question_ids: ["q_tsa_09", "q_tsa_22", "q_hsa_18"]
+    },
+    {
+        id: "kb_toan10_03",
+        grade: "Toán 10",
+        chapter: "Chương 3: Hàm số bậc hai",
+        title: "Hàm số bậc hai & Ứng dụng Parabol trong thực tiễn",
+        overview: "Khảo sát đồ thị parabol, tọa độ đỉnh, bảng biến thiên và mô hình quỹ đạo parabol.",
+        theory_markdown: `### 1. Hàm số bậc hai
+Dạng tổng quát: \\(y = ax^2 + bx + c\\) (\\(a \\ne 0\\)).
+- Đỉnh \\(I\\left(-\\frac{b}{2a}; -\\frac{\\Delta}{4a}\\right)\\).
+- Trục đối xứng: \\(x = -\\frac{b}{2a}\\).
+- Nếu \\(a > 0\\): bề lõm hướng lên trên, hàm số đạt GTNN tại \\(x = -\\frac{b}{2a}\\).
+- Nếu \\(a < 0\\): bề lõm hướng xuống dưới, hàm số đạt GTLN tại \\(x = -\\frac{b}{2a}\\).`,
+        formulas: [
+            {
+                name: "Tọa độ đỉnh Parabol",
+                latex: "x_I = -\\frac{b}{2a}, \\quad y_I = f(x_I) = -\\frac{\\Delta}{4a}",
+                desc: "Điểm cực trị tuyệt đối của tam thức bậc hai",
+                tags: ["Parabol", "Cực trị"]
+            },
+            {
+                name: "Định lý Viète bậc hai",
+                latex: "x_1 + x_2 = -\\frac{b}{a}, \\quad x_1 x_2 = \\frac{c}{a}",
+                desc: "Mối liên hệ giữa nghiệm và hệ số",
+                tags: ["Viète", "Nghiệm"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Quỹ đạo bắn cổng parabol",
+                question: "Cổng vòm trường đại học có dạng Parabol \\(y = -0,5x^2 + 4x\\) (đơn vị mét). Tìm chiều cao lớn nhất của cổng vòm và khoảng cách giữa hai chân cổng.",
+                solution_steps: [
+                    "Bước 1: Chân cổng là giao điểm với mặt đất \\(y = 0\\): \\(-0,5x^2 + 4x = 0 \\iff x(-0,5x + 4) = 0 \\implies x_1 = 0, x_2 = 8\\). Chiều rộng 2 chân là 8 mét.",
+                    "Bước 2: Trục đối xứng nằm ở trung điểm: \\(x = 4\\).",
+                    "Bước 3: Chiều cao cực đại: \\(y(4) = -0,5(16) + 4(4) = -8 + 16 = 8\\text{ m}\\)."
+                ],
+                takeaway: "Tận dụng tính chất đối xứng của Parabol để tìm nhanh trung điểm và đỉnh."
+            }
+        ],
+        applications: "Thiết kế cầu treo dây võng (Golden Gate), đèn pha ô tô gương cầu Parabol tập trung chùm tia song song, anten chảo vệ tinh viễn thông.",
+        drill_tags: ["Hàm số bậc hai", "Parabol", "Quỹ đạo"],
+        related_question_ids: ["q_tsa_02", "q_hsa_04", "q_tsa_24"]
+    },
+    {
+        id: "kb_toan10_04",
+        grade: "Toán 10",
+        chapter: "Chương 4: Hệ thức lượng & Vectơ",
+        title: "Hệ thức lượng trong tam giác, Vectơ và Công thức Shoelace",
+        overview: "Công cụ tính góc, cạnh, diện tích tam giác và kỹ thuật giải tích hình học tọa độ.",
+        theory_markdown: `### 1. Các định lý cốt lõi trong tam giác
+- **Định lý Cosin**: \\(a^2 = b^2 + c^2 - 2bc\\cos A\\).
+- **Định lý Sin**: \\(\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R\\).
+- **Công thức tính diện tích**:
+  \\(S = \\frac{1}{2}ab\\sin C = \\frac{abc}{4R} = pr = \\sqrt{p(p-a)(p-b)(p-c)}\\).
+
+### 2. Tích vô hướng của hai vectơ
+- \\(\\vec{u} \\cdot \\vec{v} = |\\vec{u}| |\\vec{v}| \\cos(\\vec{u}, \\vec{v})\\).
+- Biểu thức tọa độ: \\(\\vec{u} = (x_1, y_1), \\vec{v} = (x_2, y_2) \\implies \\vec{u} \\cdot \\vec{v} = x_1x_2 + y_1y_2\\).`,
+        formulas: [
+            {
+                name: "Công thức Shoelace (Dây giày)",
+                latex: "S = \\frac{1}{2} |(x_A y_B + x_B y_C + x_C y_A) - (y_A x_B + y_B x_C + y_C x_A)|",
+                desc: "Tính diện tích đa giác khi biết tọa độ các đỉnh trong mặt phẳng",
+                tags: ["Shoelace", "Tọa độ phẳng", "Diện tích"]
+            },
+            {
+                name: "Độ dài đường trung tuyến",
+                latex: "m_a^2 = \\frac{2(b^2 + c^2) - a^2}{4}",
+                desc: "Tính độ dài trung tuyến ứng với cạnh a",
+                tags: ["Trung tuyến", "Hình học"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tính diện tích tam giác qua Shoelace",
+                question: "Trong mặt phẳng tọa độ Oxy, cho tam giác ABC với \\(A(1, 2), B(4, 6), C(7, 1)\\). Tính diện tích tam giác ABC.",
+                solution_steps: [
+                    "Bước 1: Áp dụng định thức Dây giày Shoelace:",
+                    "Bước 2: Cột x: (1, 4, 7, 1), Cột y: (2, 6, 1, 2).",
+                    "Bước 3: Tổng tích xuôi: \\(1(6) + 4(1) + 7(2) = 6 + 4 + 14 = 24\\).",
+                    "Bước 4: Tổng tích ngược: \\(2(4) + 6(7) + 1(1) = 8 + 42 + 1 = 51\\).",
+                    "Bước 5: \\(S = \\frac{1}{2} |24 - 51| = \\frac{27}{2} = 13,5\\)."
+                ],
+                takeaway: "Công thức Shoelace giúp giải bài toán diện tích siêu tốc trong đề thi TSA/HSA mà không cần lập phương trình cạnh hay đường cao."
+            }
+        ],
+        applications: "Đo đạc trắc địa GPS, đồ họa máy tính 2D/3D (Rasterization polygon), phân tích lực cân bằng trong kết cấu cơ học cầu đường.",
+        drill_tags: ["Hệ thức lượng", "Vectơ", "Shoelace"],
+        related_question_ids: ["q_tsa_04", "q_hsa_07", "q_tsa_25"]
+    },
+    {
+        id: "kb_toan10_05",
+        grade: "Toán 10",
+        chapter: "Chương 5: Thống kê & Xác suất cổ điển",
+        title: "Thống kê mô tả & Xác suất cổ điển",
+        overview: "Đại lượng đo xu thế trung tâm, đo độ phân tán và quy tắc đếm tổ hợp xác suất.",
+        theory_markdown: `### 1. Số đặc trưng đo xu thế trung tâm
+- **Số trung bình**: \\(\\bar{x} = \\frac{1}{n}\\sum_{i=1}^k n_i x_i\\).
+- **Trung vị (Median)**: Giá trị chia mẫu số liệu đã sắp xếp thành hai phần bằng nhau.
+- **Tứ phân vị**: \\(Q_1, Q_2 (=M_e), Q_3\\). Khoảng tứ phân vị: \\(\\Delta_Q = Q_3 - Q_1\\).
+
+### 2. Số đặc trưng đo mức độ phân tán
+- **Phương sai**: \\(s^2 = \\frac{1}{n}\\sum (x_i - \\bar{x})^2 = \\frac{1}{n}\\sum x_i^2 - (\\bar{x})^2\\).
+- **Độ lệch chuẩn**: \\(s = \\sqrt{s^2}\\). Độ lệch chuẩn càng nhỏ thì dữ liệu càng đồng đều và ổn định.`,
+        formulas: [
+            {
+                name: "Công thức tính nhanh phương sai",
+                latex: "s^2 = \\overline{x^2} - (\\bar{x})^2",
+                desc: "Phương sai bằng trung bình bình phương trừ bình phương trung bình",
+                tags: ["Thống kê", "Phương sai"]
+            },
+            {
+                name: "Xác suất cổ điển Laplace",
+                latex: "P(A) = \\frac{n(A)}{n(\\Omega)} = \\frac{|A|}{|\\Omega|}",
+                desc: "Xác suất biến cố trong không gian mẫu đồng khả năng",
+                tags: ["Xác suất", "Tổ hợp"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: So sánh độ ổn định của hai dây chuyền",
+                question: "Dây chuyền 1 có độ lệch chuẩn khối lượng sản phẩm \\(s_1 = 0,15\\text{ g}\\), dây chuyền 2 có \\(s_2 = 0,42\\text{ g}\\). Dây chuyền nào hoạt động ổn định và kiểm soát chất lượng tốt hơn?",
+                solution_steps: [
+                    "Bước 1: Hiểu ý nghĩa độ lệch chuẩn: phản ánh mức độ biến động/phân tán xung quanh khối lượng chuẩn.",
+                    "Bước 2: Vì \\(s_1 < s_2\\) (\\(0,15 < 0,42\\)), sai số của dây chuyền 1 tập trung chặt chẽ hơn quanh giá trị trung bình.",
+                    "Bước 3: Kết luận: Dây chuyền 1 ổn định hơn dây chuyền 2."
+                ],
+                takeaway: "Đề thi TSA/HSA thường kiểm tra năng lực hiểu bản chất số đo phân tán chứ không bắt bấm máy số phức tạp."
+            }
+        ],
+        applications: "Đánh giá rủi ro danh mục đầu tư tài chính (Sharpe Ratio), kiểm định chất lượng dây chuyền sản xuất Six Sigma, phân tích kết quả thử nghiệm lâm sàng vắc-xin.",
+        drill_tags: ["Thống kê", "Độ lệch chuẩn", "Xác suất"],
+        related_question_ids: ["q_tsa_11", "q_hsa_10", "q_tsa_26"]
+    },
+
+    // ==========================================
+    // STREAM 2: TOÁN 11
+    // ==========================================
+    {
+        id: "kb_toan11_01",
+        grade: "Toán 11",
+        chapter: "Chương 1: Hàm số & Phương trình lượng giác",
+        title: "Lượng giác toàn diện & Kỹ thuật chuyển đổi góc",
+        overview: "Hệ thống công thức biến đổi lượng giác, chu kỳ hàm sóng và phương pháp giải phương trình lượng giác thực chiến.",
+        theory_markdown: `### 1. Bảng giá trị đặc biệt và chu kỳ
+- \\(y = \\sin x, y = \\cos x\\) có tập xác định \\(\\mathbb{R}\\), tập giá trị \\([-1; 1]\\), chu kỳ \\(T = 2\\pi\\).
+- \\(y = \\tan x, y = \\cot x\\) có chu kỳ \\(T = \\pi\\).
+
+### 2. Phương trình lượng giác cổ điển
+- \\(a\\sin x + b\\cos x = c\\):
+  Điều kiện có nghiệm: \\(a^2 + b^2 \\ge c^2\\).
+  Cách giải: Chia hai vế cho \\(\\sqrt{a^2 + b^2}\\) để đưa về dạng \\(\\sin(x + \\varphi) = \\frac{c}{\\sqrt{a^2+b^2}}\\).`,
+        formulas: [
+            {
+                name: "Hạ bậc và nhân đôi",
+                latex: "\\cos^2 x = \\frac{1 + \\cos 2x}{2}, \\quad \\sin^2 x = \\frac{1 - \\cos 2x}{2}",
+                desc: "Biến đổi giảm bậc phục vụ tính tích phân và giải phương trình",
+                tags: ["Lượng giác", "Hạ bậc"]
+            },
+            {
+                name: "Điều kiện có nghiệm pt thuần nhất bậc nhất",
+                latex: "a\\sin x + b\\cos x = c \\iff a^2 + b^2 \\ge c^2",
+                desc: "Điều kiện cần và đủ để phương trình lượng giác có nghiệm",
+                tags: ["Phương trình", "Lượng giác"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tìm tham số m để phương trình có nghiệm",
+                question: "Tìm tất cả giá trị thực của tham số \\(m\\) để phương trình \\(3\\sin 2x + 4\\cos 2x = 2m - 1\\) có nghiệm.",
+                solution_steps: [
+                    "Bước 1: Nhận diện dạng phương trình: \\(a\\sin 2x + b\\cos 2x = c\\) với \\(a = 3, b = 4, c = 2m - 1\\).",
+                    "Bước 2: Điều kiện có nghiệm: \\(a^2 + b^2 \\ge c^2 \\iff 3^2 + 4^2 \\ge (2m - 1)^2\\).",
+                    "Bước 3: Ta có \\(25 \\ge (2m - 1)^2 \\iff -5 \\le 2m - 1 \\le 5 \\iff -4 \\le 2m \\le 6 \\iff -2 \\le m \\le 3\\)."
+                ],
+                takeaway: "Áp dụng ngay điều kiện Cauchy-Schwarz/Buniacovsky cho biểu thức tuyến tính lượng giác."
+            }
+        ],
+        applications: "Phân tích tín hiệu âm thanh và xử lý sóng vô tuyến (Fourier Transform), mô hình hóa chuyển động con lắc đơn, dòng điện xoay chiều AC trong kỹ thuật điện tử.",
+        drill_tags: ["Lượng giác", "Chu kỳ", "Dao động"],
+        related_question_ids: ["q_tsa_07", "q_hsa_06", "q_thpt_03"]
+    },
+    {
+        id: "kb_toan11_02",
+        grade: "Toán 11",
+        chapter: "Chương 2: Dãy số, Cấp số cộng & Cấp số nhân",
+        title: "Dãy số, Cấp số & Mô hình Lãi kép Tài chính",
+        overview: "Công thức tổng quát, sai phân tuyến tính và ứng dụng bài toán gửi góp tiết kiệm, vay trả góp ngân hàng.",
+        theory_markdown: `### 1. Cấp số cộng (CSC)
+- Số hạng tổng quát: \\(u_n = u_1 + (n - 1)d\\).
+- Tổng \\(n\\) số hạng đầu: \\(S_n = \\frac{n(u_1 + u_n)}{2} = \\frac{n[2u_1 + (n - 1)d]}{2}\\).
+
+### 2. Cấp số nhân (CSN)
+- Số hạng tổng quát: \\(u_n = u_1 \\cdot q^{n - 1}\\).
+- Tổng \\(n\\) số hạng đầu (với \\(q \\ne 1\\)): \\(S_n = u_1 \\frac{1 - q^n}{1 - q}\\).
+- Tổng CSN lùi vô hạn (\\(|q| < 1\\)): \\(S = \\frac{u_1}{1 - q}\\).`,
+        formulas: [
+            {
+                name: "Công thức Vay trả góp định kỳ (Amortization)",
+                latex: "M = A \\frac{r(1 + r)^n}{(1 + r)^n - 1}",
+                desc: "Số tiền trả đều đặn M mỗi tháng khi vay A triệu đồng lãi suất r trong n tháng",
+                tags: ["Tài chính", "Lãi kép", "Trả góp"]
+            },
+            {
+                name: "Tổng cấp số nhân lùi vô hạn",
+                latex: "S = \\sum_{k=1}^\\infty u_1 q^{k-1} = \\frac{u_1}{1 - q} \\quad (|q| < 1)",
+                desc: "Hội tụ tổng vô hạn của cấp số nhân",
+                tags: ["Chuỗi", "Cấp số nhân"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tính số tiền trả góp hàng tháng",
+                question: "Một kỹ sư vay mua nhà 1,2 tỷ đồng, trả góp đều hàng tháng trong 10 năm (120 tháng) với lãi suất cố định 0,8%/tháng. Tính số tiền kỹ sư phải trả mỗi tháng.",
+                solution_steps: [
+                    "Bước 1: Áp dụng công thức niên kim trả góp: \\(M = A \\frac{r(1+r)^n}{(1+r)^n - 1}\\).",
+                    "Bước 2: Thay số: \\(A = 1200\\text{ triệu}\\), \\(r = 0,008\\), \\(n = 120\\).",
+                    "Bước 3: Ta có \\((1 + 0,008)^{120} \\approx 2,5992\\).",
+                    "Bước 4: \\(M = 1200 \\cdot \\frac{0,008 \\cdot 2,5992}{2,5992 - 1} = 1200 \\cdot \\frac{0,02079}{1,5992} \\approx 15,6\\text{ triệu đồng/tháng}\\)."
+                ],
+                takeaway: "Hiểu bản chất tổng cấp số nhân của dòng tiền chiết khấu (Discounted Cash Flow)."
+            }
+        ],
+        applications: "Tính biểu phí bảo hiểm nhân thọ (Actuarial Science), định giá trái phiếu, thuật toán phân chia nhị phân (Divide and Conquer), tăng trưởng dân số vi sinh.",
+        drill_tags: ["Cấp số cộng", "Cấp số nhân", "Lãi kép", "Tài chính"],
+        related_question_ids: ["q_tsa_10", "q_hsa_09", "q_tsa_27"]
+    },
+    {
+        id: "kb_toan11_03",
+        grade: "Toán 11",
+        chapter: "Chương 3: Giới hạn & Tính liên tục",
+        title: "Giới hạn dãy số, Giới hạn hàm số & Định lý Bolzano-Cauchy",
+        overview: "Kỹ thuật triệt tiêu dạng vô định 0/0, vô cùng trừ vô cùng, nhân lượng liên hợp và chứng minh nghiệm phương trình.",
+        theory_markdown: `### 1. Các dạng vô định cơ bản
+- \\(\\frac{0}{0}\\): Phân tích nhân tử \\((x - x_0)\\), nhân lượng liên hợp khử căn thức hoặc dùng quy tắc L'Hôpital / vô cùng bé tương đương.
+- \\(\\frac{\\infty}{\\infty}\\): Chia cả tử và mẫu cho lũy thừa bậc cao nhất.
+- \\(\\infty - \\infty\\): Nhân liên hợp đưa về dạng phân thức.
+
+### 2. Định lý Bolzano-Cauchy (Giá trị trung gian)
+Nếu hàm số \\(y = f(x)\\) liên tục trên đoạn \\([a; b]\\) và \\(f(a) \\cdot f(b) < 0\\), thì tồn tại ít nhất một điểm \\(c \\in (a; b)\\) sao cho \\(f(c) = 0\\).`,
+        formulas: [
+            {
+                name: "Giới hạn lượng giác cơ bản",
+                latex: "\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1, \\quad \\lim_{x \\to 0} \\frac{1 - \\cos x}{x^2} = \\frac{1}{2}",
+                desc: "Giới hạn quan trọng trong giải tích và xấp xỉ nhỏ",
+                tags: ["Giới hạn", "Lượng giác"]
+            },
+            {
+                name: "Giới hạn số Euler e",
+                latex: "\\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x = e, \\quad \\lim_{u \\to 0} (1 + u)^{1/u} = e",
+                desc: "Định nghĩa hằng số Euler",
+                tags: ["Euler", "Giới hạn"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Khử căn thức dạng vô định 0/0",
+                question: "Tính giới hạn \\(L = \\lim_{x \\to 0} \\frac{\\sqrt{1 + 3x} - 1}{x}\\).",
+                solution_steps: [
+                    "Bước 1: Thay x = 0 thấy dạng vô định 0/0.",
+                    "Bước 2: Nhân lượng liên hợp \\(\\sqrt{1+3x} + 1\\):",
+                    "\\(L = \\lim_{x \\to 0} \\frac{(1+3x) - 1}{x(\\sqrt{1+3x} + 1)} = \\lim_{x \\to 0} \\frac{3x}{x(\\sqrt{1+3x}+1)}\\).",
+                    "Bước 3: Rút gọn x: \\(L = \\lim_{x \\to 0} \\frac{3}{\\sqrt{1+3x} + 1} = \\frac{3}{1+1} = \\frac{3}{2}\\)."
+                ],
+                takeaway: "Nhớ nhanh công thức xấp xỉ vi phân bậc nhất: \\(\\sqrt{1 + u} \\approx 1 + \\frac{1}{2}u\\) khi \\(u \\to 0\\)."
+            }
+        ],
+        applications: "Phân tích điểm gián đoạn của tín hiệu số (Sampling Rate), điều kiện ổn định của hệ thống hồi tiếp điều khiển tự động.",
+        drill_tags: ["Giới hạn", "Vô định", "Hàm liên tục"],
+        related_question_ids: ["q_calc_01", "q_hsa_11", "q_tsa_28"]
+    },
+    {
+        id: "kb_toan11_04",
+        grade: "Toán 11",
+        chapter: "Chương 4: Đạo hàm & Ý nghĩa thực tiễn",
+        title: "Đạo hàm, Tiếp tuyến & Mô hình Vận tốc - Gia tốc tức thời",
+        overview: "Định nghĩa đạo hàm theo giới hạn, bảng công thức đạo hàm hàm hợp và ứng dụng vật lý tức thời.",
+        theory_markdown: `### 1. Định nghĩa và ý nghĩa hình học
+- \\(f'(x_0) = \\lim_{\\Delta x \\to 0} \\frac{f(x_0 + \\Delta x) - f(x_0)}{\\Delta x}\\).
+- Hệ số góc tiếp tuyến của đồ thị tại điểm \\(M(x_0, y_0)\\) là \\(k = f'(x_0)\\).
+- Phương trình tiếp tuyến: \\(y = f'(x_0)(x - x_0) + y_0\\).
+
+### 2. Ý nghĩa vật lý
+- Vận tốc tức thời: \\(v(t) = s'(t)\\).
+- Gia tốc tức thời: \\(a(t) = v'(t) = s''(t)\\).`,
+        formulas: [
+            {
+                name: "Phương trình tiếp tuyến tại điểm",
+                latex: "y = f'(x_0)(x - x_0) + f(x_0)",
+                desc: "Đường thẳng tuyến tính hóa tốt nhất hàm số tại lân cận x0",
+                tags: ["Tiếp tuyến", "Đạo hàm"]
+            },
+            {
+                name: "Đạo hàm hàm hợp",
+                latex: "(f(u))'_x = f'(u) \\cdot u'_x",
+                desc: "Quy tắc dây chuyền (Chain Rule)",
+                tags: ["Chain Rule", "Đạo hàm"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tìm gia tốc khi vận tốc triệt tiêu",
+                question: "Một chất điểm chuyển động theo phương trình \\(s(t) = t^3 - 6t^2 + 9t + 5\\) (t tính bằng giây, s tính bằng mét). Tìm gia tốc của chất điểm tại thời điểm vận tốc triệt tiêu lần thứ hai.",
+                solution_steps: [
+                    "Bước 1: Vận tốc tức thời: \\(v(t) = s'(t) = 3t^2 - 12t + 9\\).",
+                    "Bước 2: Vận tốc triệt tiêu \\(v(t) = 0 \\iff 3(t^2 - 4t + 3) = 0 \\implies t_1 = 1\\text{ s}, t_2 = 3\\text{ s}\\). Thời điểm thứ hai là \\(t = 3\\).",
+                    "Bước 3: Gia tốc tức thời: \\(a(t) = v'(t) = 6t - 12\\).",
+                    "Bước 4: Thay \\(t = 3\\): \\(a(3) = 6(3) - 12 = 6\\text{ m/s}^2\\)."
+                ],
+                takeaway: "Nắm vững chuỗi vi phân: Vị trí s(t) -> Đạo hàm bậc 1 -> Vận tốc v(t) -> Đạo hàm bậc 2 -> Gia tốc a(t)."
+            }
+        ],
+        applications: "Phân tích biến thiên vận tốc trong xe tự hành Autonomous Vehicles, tính tốc độ lan truyền dịch bệnh dI/dt, tính tốc độ phản ứng hóa học.",
+        drill_tags: ["Đạo hàm", "Tiếp tuyến", "Chuyển động", "Vật lý"],
+        related_question_ids: ["q_tsa_02", "q_thpt_01", "q_tsa_29"]
+    },
+    {
+        id: "kb_toan11_05",
+        grade: "Toán 11",
+        chapter: "Chương 5: Xác suất có điều kiện & Định lý Bayes",
+        title: "Xác suất có điều kiện, Biến cố độc lập & Định lý Bayes",
+        overview: "Trọng tâm mới của chương trình GDPT và đề thi ĐGNL: tính xác suất khi đã có thông tin phụ.",
+        theory_markdown: `### 1. Xác suất có điều kiện
+Xác suất của biến cố A khi biết biến cố B đã xảy ra:
+\\(P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}\\) (với \\(P(B) > 0\\)).
+
+### 2. Hai biến cố độc lập
+A và B độc lập khi và chỉ khi: \\(P(A \\cap B) = P(A) \\cdot P(B)\\).
+
+### 3. Công thức Xác suất toàn phần & Định lý Bayes
+Cho hệ đầy đủ các biến cố \\(B_1, B_2, \\dots, B_n\\):
+- Xác suất toàn phần: \\(P(A) = \\sum_{i=1}^n P(B_i) \\cdot P(A \\mid B_i)\\).
+- Định lý Bayes: \\(P(B_k \\mid A) = \\frac{P(B_k) \\cdot P(A \\mid B_k)}{P(A)}\\).`,
+        formulas: [
+            {
+                name: "Định lý Bayes",
+                latex: "P(B_k \\mid A) = \\frac{P(B_k) P(A \\mid B_k)}{\\sum_{i=1}^n P(B_i) P(A \\mid B_i)}",
+                desc: "Cập nhật xác suất tiên nghiệm thành xác suất hậu nghiệm",
+                tags: ["Bayes", "Xác suất điều kiện"]
+            },
+            {
+                name: "Công thức nhân xác suất",
+                latex: "P(A \\cap B) = P(B) \\cdot P(A \\mid B) = P(A) \\cdot P(B \\mid A)",
+                desc: "Tính xác suất đồng thời của hai biến cố",
+                tags: ["Quy tắc nhân", "Xác suất"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Độ tin cậy xét nghiệm y tế (Bayes)",
+                question: "Tỉ lệ người mắc bệnh hiếm X trong dân số là 0,1%. Một que xét nghiệm có độ nhạy 99% (người bệnh que dương tính) và độ đặc hiệu 98% (người lành que âm tính). Một người xét nghiệm cho kết quả dương tính. Xác suất người này thực sự bị bệnh là bao nhiêu?",
+                solution_steps: [
+                    "Bước 1: Đặt B là biến cố mắc bệnh: \\(P(B) = 0,001 \\implies P(\\bar{B}) = 0,999\\).",
+                    "Bước 2: Đặt T là que dương tính. \\(P(T \\mid B) = 0,99\\), \\(P(T \\mid \\bar{B}) = 1 - 0,98 = 0,02\\).",
+                    "Bước 3: Xác suất toàn phần que dương tính: \\(P(T) = 0,001 \\cdot 0,99 + 0,999 \\cdot 0,02 = 0,00099 + 0,01998 = 0,02097\\).",
+                    "Bước 4: Định lý Bayes: \\(P(B \\mid T) = \\frac{0,00099}{0,02097} \\approx 0,0472\\) (chỉ khoảng 4,72%!)."
+                ],
+                takeaway: "Hiện tượng nghịch lý xét nghiệm bệnh hiếm (False Positive Paradox) xuất hiện rất thường xuyên trong đề thi TSA Bách Khoa."
+            }
+        ],
+        applications: "Bộ lọc thư rác (Spam Filter Naive Bayes), chẩn đoán bệnh lâm sàng trong y khoa, phân loại văn bản AI và máy học.",
+        drill_tags: ["Bayes", "Xác suất điều kiện", "Xét nghiệm"],
+        related_question_ids: ["q_tsa_03", "q_tsa_11", "q_tsa_30"]
+    },
+
+    // ==========================================
+    // STREAM 3: TOÁN 12
+    // ==========================================
+    {
+        id: "kb_toan12_01",
+        grade: "Toán 12",
+        chapter: "Chương 1: Ứng dụng Đạo hàm Khảo sát Hàm số",
+        title: "Khảo sát hàm số, Cực trị & Tối ưu hóa Thực tế",
+        overview: "Xác định tính đơn điệu, cực trị, tiệm cận (đứng, ngang, xiên) và mô hình bài toán kinh tế - hình học tối ưu.",
+        theory_markdown: `### 1. Điều kiện cực trị của hàm số
+- Nếu \\(f'(x_0) = 0\\) và \\(f'(x)\\) đổi dấu từ dương sang âm qua \\(x_0\\) thì \\(x_0\\) là điểm cực đại.
+- Nếu \\(f'(x_0) = 0\\) và \\(f'(x)\\) đổi dấu từ âm sang dương qua \\(x_0\\) thì \\(x_0\\) là điểm cực tiểu.
+
+### 2. Tiệm cận xiên của đồ thị hàm phân thức
+Đường thẳng \\(y = ax + b\\) (\\(a \\ne 0\\)) là tiệm cận xiên của \\(y = f(x)\\) nếu:
+\\(a = \\lim_{x \\to \\pm\\infty} \\frac{f(x)}{x}, \\quad b = \\lim_{x \\to \\pm\\infty} [f(x) - ax]\\).
+
+### 3. Kỹ thuật bất đẳng thức AM-GM trong bài toán tối ưu
+Thay vì đạo hàm phức tạp, nhiều bài toán thể tích/chi phí có thể giải nhanh bằng cách tách hạng tử để triệt tiêu biến số.`,
+        formulas: [
+            {
+                name: "Bất đẳng thức AM-GM 3 số",
+                latex: "x + y + z \\ge 3\\sqrt[3]{xyz} \\quad (x, y, z > 0)",
+                desc: "Đẳng thức xảy ra khi x = y = z. Dùng tìm GTNN/GTLN nhanh",
+                tags: ["AM-GM", "Tối ưu hóa", "Cực trị"]
+            },
+            {
+                name: "Điều kiện cực trị cấp 2",
+                latex: "f'(x_0) = 0, f''(x_0) < 0 \\implies x_0 \\text{ là cực đại}",
+                desc: "Nhận biết cực trị qua đạo hàm bậc hai",
+                tags: ["Đạo hàm cấp 2", "Cực đại"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Chi phí làm bồn chứa trụ tối thiểu",
+                question: "Một bồn trụ có thể tích \\(V = 2\\pi\\text{ m}^3\\). Giá đáy và nắp là 1,5 tr/m2, giá thân xung quanh là 1,0 tr/m2. Tìm bán kính đáy để chi phí tối thiểu.",
+                solution_steps: [
+                    "Bước 1: Ràng buộc: \\(V = \\pi r^2 h = 2\\pi \\implies h = 2/r^2\\).",
+                    "Bước 2: Chi phí: \\(C(r) = 1,5(2\\pi r^2) + 1,0(2\\pi r h) = 3\\pi r^2 + \\frac{4\\pi}{r}\\).",
+                    "Bước 3: Tách để dùng AM-GM 3 số: \\(C(r) = 3\\pi r^2 + \\frac{2\\pi}{r} + \\frac{2\\pi}{r} \\ge 3\\sqrt[3]{3\\pi r^2 \\cdot \\frac{2\\pi}{r} \\cdot \\frac{2\\pi}{r}} = 3\\sqrt[3]{12\\pi^3}\\).",
+                    "Bước 4: Đẳng thức xảy ra khi \\(3\\pi r^2 = \\frac{2\\pi}{r} \\iff r^3 = \\frac{2}{3} \\iff r = \\sqrt[3]{2/3}\\text{ m}\\)."
+                ],
+                takeaway: "Kỹ thuật tách hạng tử cân bằng bậc AM-GM giúp tìm nghiệm chính xác trong 30 giây."
+            }
+        ],
+        applications: "Đóng gói hàng không tối ưu kích thước bao bì, kiến trúc kết cấu vòm chịu tải trọng tối ưu, tối đa hóa doanh thu biên trong kinh tế học.",
+        drill_tags: ["Cực trị", "Tối ưu hóa", "AM-GM", "Tiệm cận"],
+        related_question_ids: ["q_tsa_01", "q_thpt_01", "q_tsa_31"]
+    },
+    {
+        id: "kb_toan12_02",
+        grade: "Toán 12",
+        chapter: "Chương 2: Hàm số Mũ, Logarit & Tăng trưởng",
+        title: "Hàm số Lũy thừa, Mũ & Logarit Thực chiến",
+        overview: "Công thức biến đổi cơ số, phương trình logarit, bài toán phóng xạ hạt nhân và tăng trưởng tự nhiên.",
+        theory_markdown: `### 1. Các quy tắc cơ bản của Logarit
+- \\(\\log_a(xy) = \\log_a x + \\log_a y\\).
+- \\(\\log_a\\left(\\frac{x}{y}\\right) = \\log_a x - \\log_a y\\).
+- Đổi cơ số: \\(\\log_a b = \\frac{\\log_c b}{\\log_c a} = \\frac{1}{\\log_b a}\\).
+- Đạo hàm: \\((\\ln x)' = \\frac{1}{x}\\), \\((\\log_a x)' = \\frac{1}{x\\ln a}\\), \\((a^x)' = a^x \\ln a\\).
+
+### 2. Mô hình tăng trưởng hàm mũ liên tục
+\\(N(t) = N_0 e^{kt}\\).
+- Nếu \\(k > 0\\): mô hình tăng trưởng dân số / vi khuẩn.
+- Nếu \\(k < 0\\): mô hình phân rã phóng xạ với chu kỳ bán rã \\(T = \\frac{\\ln 2}{|k|}\\).`,
+        formulas: [
+            {
+                name: "Chu kỳ bán rã phóng xạ",
+                latex: "m(t) = m_0 \\left(\\frac{1}{2}\\right)^{t/T} = m_0 e^{-\\lambda t} \\quad \\left(\\lambda = \\frac{\\ln 2}{T}\\right)",
+                desc: "Khối lượng đồng vị phóng xạ còn lại sau thời gian t",
+                tags: ["Phóng xạ", "Logarit", "Bán rã"]
+            },
+            {
+                name: "Đổi cơ số Logarit",
+                latex: "\\log_a b \\cdot \\log_b c = \\log_a c",
+                desc: "Quy tắc nối xích cơ số",
+                tags: ["Logarit", "Đổi cơ số"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tính tuổi cổ vật bằng Cacbon C-14",
+                question: "Cacbon 14 có chu kỳ bán rã 5730 năm. Một mẫu gỗ cổ khai quật có lượng C-14 chỉ bằng 25% lượng C-14 trong cây sống cùng loại. Mẫu gỗ này có tuổi thọ khoảng bao nhiêu năm?",
+                solution_steps: [
+                    "Bước 1: Phương trình phân rã: \\(m(t) = m_0 (1/2)^{t / 5730}\\).",
+                    "Bước 2: Theo đề: \\(m(t)/m_0 = 0,25 = (1/2)^2\\).",
+                    "Bước 3: Đồng nhất số mũ: \\(t / 5730 = 2 \\implies t = 2 \\times 5730 = 11460\\text{ năm}\\)."
+                ],
+                takeaway: "Dạng bài logarit thực tế trong HSA/TSA thường có số mũ nguyên hoặc quy về tỉ số đơn giản."
+            }
+        ],
+        applications: "Định tuổi khảo cổ học bằng đồng vị Cacbon phóng xạ, tính thang đo độ lớn động đất Richter, đo mức áp suất âm thanh Decibel (dB), thuật toán nén entropy.",
+        drill_tags: ["Logarit", "Mũ", "Phóng xạ", "Tăng trưởng"],
+        related_question_ids: ["q_tsa_13", "q_hsa_02", "q_tsa_32"]
+    },
+    {
+        id: "kb_toan12_03",
+        grade: "Toán 12",
+        chapter: "Chương 3: Nguyên hàm & Tích phân",
+        title: "Tích phân toàn diện & Kỹ thuật Múa cột DI Method",
+        overview: "Phương pháp đổi biến số, từng phần theo sơ đồ đường chéo DI giải trong 10 giây, tính diện tích và thể tích tròn xoay.",
+        theory_markdown: `### 1. Kỹ thuật múa cột DI Method (Tích phân từng phần)
+Cho \\(I = \\int u \\cdot v\\,dx\\). Tạo 2 cột:
+- **Cột D (Đạo hàm)**: Chọn hàm đa thức hoặc hàm dễ triệt tiêu khi đạo hàm nhiều lần.
+- **Cột I (Tích phân)**: Chọn hàm lượng giác, hàm mũ \\(e^{ax}\\).
+Quy tắc dấu: xen kẽ \\(+ - + - \\dots\\) và nhân chéo.
+
+### 2. Ứng dụng hình học của tích phân
+- **Diện tích hình phẳng**: \\(S = \\int_a^b |f(x) - g(x)|\\,dx\\).
+- **Thể tích vật thể tròn xoay quanh trục Ox**: \\(V = \\pi \\int_a^b [f(x)]^2\\,dx\\).`,
+        formulas: [
+            {
+                name: "Công thức tích phân từng phần",
+                latex: "\\int_a^b u\\,dv = \\left. uv \\right|_a^b - \\int_a^b v\\,du",
+                desc: "Phương pháp từng phần cổ điển",
+                tags: ["Tích phân", "Từng phần"]
+            },
+            {
+                name: "Thể tích khối tròn xoay quanh Ox",
+                latex: "V = \\pi \\int_a^b [f(x)]^2\\,dx",
+                desc: "Thể tích tạo thành khi quay đồ thị hàm số quanh trục hoành",
+                tags: ["Thể tích", "Tròn xoay"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tính tích phân từng phần bằng cột DI",
+                question: "Tính nguyên hàm \\(I = \\int (2x + 1) e^{3x}\\,dx\\).",
+                solution_steps: [
+                    "Bước 1: Lập cột D và I:",
+                    "Cột D: (2x + 1) -> Đạo hàm thành 2 -> Đạo hàm thành 0.",
+                    "Cột I: e^{3x} -> Tích phân thành (1/3)e^{3x} -> Tích phân tiếp thành (1/9)e^{3x}.",
+                    "Bước 2: Nhân chéo với dấu đan xen:",
+                    "\\(I = +(2x + 1) \\cdot \\frac{1}{3}e^{3x} - 2 \\cdot \\frac{1}{9}e^{3x} + C\\).",
+                    "Bước 3: Rút gọn: \\(I = e^{3x} \\left(\\frac{2}{3}x + \\frac{1}{3} - \\frac{2}{9}\\right) + C = e^{3x}\\left(\\frac{2}{3}x + \\frac{1}{9}\\right) + C\\)."
+                ],
+                takeaway: "Phương pháp DI loại bỏ hoàn toàn việc viết đi viết lại biến u, v, tránh nhầm lẫn dấu âm."
+            }
+        ],
+        applications: "Tính thể tích bồn chứa phi tiêu chuẩn, tính công cơ học của lực biến thiên \\(W = \\int F\\,dx\\), tính giá trị kỳ vọng biến ngẫu nhiên liên tục.",
+        drill_tags: ["Tích phân", "Nguyên hàm", "DI Method", "Thể tích"],
+        related_question_ids: ["q_tsa_05", "q_thpt_04", "q_tsa_33"]
+    },
+    {
+        id: "kb_toan12_04",
+        grade: "Toán 12",
+        chapter: "Chương 4: Hình học Giải tích Oxyz",
+        title: "Phương pháp Tọa độ Không gian Oxyz Toàn diện",
+        overview: "Tích có hướng của hai vectơ, phương trình mặt phẳng, đường thẳng, mặt cầu, bài toán khoảng cách và góc.",
+        theory_markdown: `### 1. Tích có hướng của hai vectơ
+Cho \\(\\vec{u} = (x_1, y_1, z_1)\\) và \\(\\vec{v} = (x_2, y_2, z_2)\\):
+\\([\\vec{u}, \\vec{v}] = \\left( \\begin{vmatrix} y_1 & z_1 \\\\ y_2 & z_2 \\end{vmatrix}, \\begin{vmatrix} z_1 & x_1 \\\\ z_2 & x_2 \\end{vmatrix}, \\begin{vmatrix} x_1 & y_1 \\\\ x_2 & y_2 \\end{vmatrix} \\right)\\).
+- \\([\\vec{u}, \\vec{v}]\\) vuông góc với cả \\(\\vec{u}\\) và \\(\\vec{v}\\).
+- Diện tích tam giác: \\(S_{\\Delta ABC} = \\frac{1}{2} |[\\vec{AB}, \\vec{AC}]|\\).
+- Thể tích tứ diện: \\(V_{ABCD} = \\frac{1}{6} |[\\vec{AB}, \\vec{AC}] \\cdot \\vec{AD}|\\).
+
+### 2. Khoảng cách từ điểm đến mặt phẳng
+Khoảng cách từ \\(M(x_0, y_0, z_0)\\) đến \\((P): Ax + By + Cz + D = 0\\):
+\\(d(M, (P)) = \\frac{|Ax_0 + By_0 + Cz_0 + D|}{\\sqrt{A^2 + B^2 + C^2}}\\).`,
+        formulas: [
+            {
+                name: "Khoảng cách từ điểm đến mặt phẳng",
+                latex: "d(M, (P)) = \\frac{|Ax_0 + By_0 + Cz_0 + D|}{\\sqrt{A^2 + B^2 + C^2}}",
+                desc: "Khoảng cách vuông góc chuẩn mực trong không gian Oxyz",
+                tags: ["Oxyz", "Khoảng cách", "Mặt phẳng"]
+            },
+            {
+                name: "Thể tích khối tứ diện",
+                latex: "V_{ABCD} = \\frac{1}{6} \\left| [\\vec{AB}, \\vec{AC}] \\cdot \\vec{AD} \\right|",
+                desc: "Tích hỗn tạp tính thể tích tứ diện",
+                tags: ["Thể tích", "Tứ diện", "Tích có hướng"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tính khoảng cách giữa hai đường chéo nhau",
+                question: "Trong Oxyz, cho \\(d_1: \\frac{x-1}{2} = \\frac{y}{1} = \\frac{z+1}{-1}\\) và \\(d_2: \\frac{x}{1} = \\frac{y-2}{-1} = \\frac{z}{1}\\). Tính khoảng cách giữa \\(d_1\\) và \\(d_2\\).",
+                solution_steps: [
+                    "Bước 1: Lấy điểm \\(M_1(1, 0, -1) \\in d_1\\), \\(\\vec{u}_1 = (2, 1, -1)\\).",
+                    "Bước 2: Lấy điểm \\(M_2(0, 2, 0) \\in d_2\\), \\(\\vec{u}_2 = (1, -1, 1)\\). Ta có \\(\\vec{M_1M_2} = (-1, 2, 1)\\).",
+                    "Bước 3: Tích có hướng: \\([\\vec{u}_1, \\vec{u}_2] = (1(1) - (-1)(-1), (-1)(1) - 2(1), 2(-1) - 1(1)) = (0, -3, -3)\\).",
+                    "Bước 4: Khoảng cách: \\(d = \\frac{|[\\vec{u}_1, \\vec{u}_2] \\cdot \\vec{M_1M_2}|}{|[\\vec{u}_1, \\vec{u}_2]|} = \\frac{|0(-1) + (-3)(2) + (-3)(1)|}{\\sqrt{0^2 + (-3)^2 + (-3)^2}} = \\frac{|-9|}{\\sqrt{18}} = \\frac{9}{3\\sqrt{2}} = \\frac{3\\sqrt{2}}{2}\\)."
+                ],
+                takeaway: "Công thức tích hỗn tạp tính khoảng cách hai đường thẳng chéo nhau là tiêu chuẩn bắt buộc cho mọi đề thi THPT/HSA."
+            }
+        ],
+        applications: "Định vị vệ tinh không gian 3 chiều GNSS/GPS, lập trình vật lý trong Game Engine (phát hiện va chạm Raycasting), điều khiển cánh tay robot công nghiệp 6 bậc tự do.",
+        drill_tags: ["Oxyz", "Mặt phẳng", "Khoảng cách", "Vectơ"],
+        related_question_ids: ["q_thpt_02", "q_hsa_08", "q_tsa_34"]
+    },
+    {
+        id: "kb_toan12_05",
+        grade: "Toán 12",
+        chapter: "Chương 5: Thống kê Ghép nhóm & Xác suất Nâng cao",
+        title: "Thống kê Mẫu Số liệu Ghép nhóm & Biến ngẫu nhiên",
+        overview: "Tính tứ phân vị, mốt, phương sai mẫu ghép nhóm và phân phối xác suất rời rạc, kỳ vọng toán học E(X).",
+        theory_markdown: `### 1. Nhóm chứa tứ phân vị của số liệu ghép nhóm
+Cho mẫu cỡ \\(n\\). Tứ phân vị thứ nhất \\(Q_1\\) thuộc nhóm \\([u_m; u_{m+1})\\) đầu tiên có tần số tích lũy \\(C_m \\ge \\frac{n}{4}\\):
+\\(Q_1 = u_m + \\frac{\\frac{n}{4} - C_{m-1}}{n_m} (u_{m+1} - u_m)\\).
+
+### 2. Kỳ vọng và Phương sai của Biến ngẫu nhiên rời rạc
+Cho bảng phân phối xác suất \\(X \\in \\{x_1, \\dots, x_k\\}\\) với \\(P(X = x_i) = p_i\\):
+- **Kỳ vọng**: \\(E(X) = \\sum_{i=1}^k x_i p_i\\) (giá trị kỳ vọng trung bình).
+- **Phương sai**: \\(V(X) = E(X^2) - [E(X)]^2 = \\sum x_i^2 p_i - [E(X)]^2\\).`,
+        formulas: [
+            {
+                name: "Công thức tứ phân vị ghép nhóm",
+                latex: "Q_p = u_m + \\frac{p \\cdot n - C_{m-1}}{n_m} \\cdot h",
+                desc: "Xác định phân vị p (0.25, 0.5, 0.75) cho dữ liệu nhóm độ rộng h",
+                tags: ["Thống kê", "Ghép nhóm", "Tứ phân vị"]
+            },
+            {
+                name: "Kỳ vọng biến ngẫu nhiên",
+                latex: "E(X) = \\sum_{i=1}^n x_i P(X = x_i)",
+                desc: "Giá trị trung bình kỳ vọng của phép thử ngẫu nhiên",
+                tags: ["Kỳ vọng", "Xác suất"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tính kỳ vọng lợi nhuận dự án",
+                question: "Một dự án kinh doanh có 60% xác suất lãi 500 triệu đồng, 30% xác suất lãi 100 triệu, và 10% xác suất lỗ 300 triệu (tương ứng -300). Tính kỳ vọng lợi nhuận của dự án.",
+                solution_steps: [
+                    "Bước 1: Lập bảng phân phối xác suất: \\(x_1 = 500 (p_1 = 0,6)\\), \\(x_2 = 100 (p_2 = 0,3)\\), \\(x_3 = -300 (p_3 = 0,1)\\).",
+                    "Bước 2: Tính kỳ vọng: \\(E(X) = 500(0,6) + 100(0,3) + (-300)(0,1)\\).",
+                    "Bước 3: \\(E(X) = 300 + 30 - 30 = 300\\text{ triệu đồng}\\)."
+                ],
+                takeaway: "Kỳ vọng E(X) dương lớn hơn chi phí cơ hội là tiêu chí cốt lõi để ra quyết định đầu tư."
+            }
+        ],
+        applications: "Định giá quyền chọn và phân tích rủi ro tài chính, thiết kế hệ thống xếp hàng viễn thông, kiểm soát chất lượng mẫu kiểm toán độc lập.",
+        drill_tags: ["Thống kê", "Ghép nhóm", "Kỳ vọng", "Biến ngẫu nhiên"],
+        related_question_ids: ["q_tsa_11", "q_hsa_10", "q_tsa_35"]
+    },
+
+    // ==========================================
+    // STREAM 4: TOÁN CAO CẤP (ĐẠI SỐ TUYẾN TÍNH)
+    // ==========================================
+    {
+        id: "kb_dstt_01",
+        grade: "Toán cao cấp",
+        chapter: "Chương 1: Ma trận & Các phép toán Ma trận",
+        title: "Ma trận, Phép nhân & Ma trận Nghịch đảo",
+        overview: "Phép nhân ma trận không giao hoán, ma trận phụ hợp và thuật toán tìm ma trận nghịch đảo qua khử Gauss-Jordan.",
+        theory_markdown: `### 1. Phép nhân ma trận
+Nếu ma trận \\(A\\) có kích thước \\(m \\times k\\) và \\(B\\) có kích thước \\(k \\times n\\), thì tích \\(C = AB\\) có kích thước \\(m \\times n\\):
+\\(c_{ij} = \\sum_{r=1}^k a_{ir} b_{rj}\\).
+Lưu ý quan trọng: Phép nhân ma trận **không có tính giao hoán** (\\(AB \\ne BA\\) nói chung).
+
+### 2. Ma trận nghịch đảo
+Ma trận vuông \\(A\\) khả nghịch khi và chỉ khi \\(\\det(A) \\ne 0\\).
+Công thức ma trận phụ hợp:
+\\(A^{-1} = \\frac{1}{\\det(A)} C^T\\), trong đó \\(C_{ij} = (-1)^{i+j} M_{ij}\\).`,
+        formulas: [
+            {
+                name: "Ma trận nghịch đảo cấp 2",
+                latex: "\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}",
+                desc: "Công thức tính nghịch đảo siêu tốc cho ma trận 2x2",
+                tags: ["Ma trận", "Nghịch đảo", "Đại số tuyến tính"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tìm ma trận nghịch đảo cấp 2",
+                question: "Cho \\(A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}\\). Tìm \\(A^{-1}\\).",
+                solution_steps: [
+                    "Bước 1: Tính định thức: \\(\\det(A) = 2(3) - 1(5) = 6 - 5 = 1 \\ne 0\\). Khả nghịch.",
+                    "Bước 2: Đổi chỗ đường chéo chính, đổi dấu đường chéo phụ: \\(d = 3, a = 2\\), \\(b = -1, c = -5\\).",
+                    "Bước 3: \\(A^{-1} = \\frac{1}{1} \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix} = \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}\\)."
+                ],
+                takeaway: "Ghi nhớ thần chú: Đổi vị trí chéo chính, đổi dấu chéo phụ, chia định thức."
+            }
+        ],
+        applications: "Mã hóa văn bản Hill Cipher, biến đổi hình học trong xử lý ảnh (xoay, co giãn, phép dời), đồ họa máy tính 3D Shader.",
+        drill_tags: ["Ma trận", "Nghịch đảo", "ĐSTT"],
+        related_question_ids: ["q_calc_04", "q_tsa_03", "q_calc_07"]
+    },
+    {
+        id: "kb_dstt_02",
+        grade: "Toán cao cấp",
+        chapter: "Chương 2: Định thức & Quy tắc Cramer",
+        title: "Định thức Ma trận & Định lý Cramer Giải Hệ Tuyến Tính",
+        overview: "Quy tắc Sarrus định thức cấp 3, tính chất biến đổi hàng sơ cấp và công thức nghiệm Cramer.",
+        theory_markdown: `### 1. Tính chất then chốt của định thức
+- Đổi chỗ hai hàng (hoặc cột) thì định thức đổi dấu.
+- Nhân một hàng với số thực \\(k\\) thì định thức nhân với \\(k\\).
+- Cộng bội số của hàng này vào hàng khác thì định thức **không đổi**.
+- Ma trận có hai hàng tỉ lệ thì \\(\\det = 0\\).
+- \\(\\det(AB) = \\det(A) \\cdot \\det(B)\\).
+
+### 2. Định lý Cramer
+Hệ gồm \\(n\\) phương trình, \\(n\\) ẩn \\(AX = B\\) có nghiệm duy nhất khi và chỉ khi \\(D = \\det(A) \\ne 0\\):
+\\(x_i = \\frac{D_i}{D}\\), trong đó \\(D_i\\) là định thức nhận được bằng cách thay cột thứ \\(i\\) bằng cột hệ số tự do \\(B\\).`,
+        formulas: [
+            {
+                name: "Công thức nghiệm Cramer",
+                latex: "x_i = \\frac{\\det(A_i)}{\\det(A)} = \\frac{D_i}{D} \\quad (D \\ne 0)",
+                desc: "Nghiệm tường minh của hệ phương trình vuông Cramer",
+                tags: ["Cramer", "Định thức", "Hệ phương trình"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Giải hệ Cramer trong mạch điện",
+                question: "Giải hệ dòng điện Kirchhoff: \\(\\begin{cases} 3I_1 + 2I_2 = 12 \\\\ 4I_1 - I_2 = 5 \\end{cases}\\) bằng định lý Cramer.",
+                solution_steps: [
+                    "Bước 1: Tính \\(D = \\begin{vmatrix} 3 & 2 \\\\ 4 & -1 \\end{vmatrix} = 3(-1) - 2(4) = -3 - 8 = -11\\).",
+                    "Bước 2: Thay cột 1 bằng hệ số tự do: \\(D_1 = \\begin{vmatrix} 12 & 2 \\\\ 5 & -1 \\end{vmatrix} = 12(-1) - 2(5) = -22\\).",
+                    "Bước 3: Thay cột 2 bằng hệ số tự do: \\(D_2 = \\begin{vmatrix} 3 & 12 \\\\ 4 & 5 \\end{vmatrix} = 3(5) - 12(4) = 15 - 48 = -33\\).",
+                    "Bước 4: Nghiệm: \\(I_1 = \\frac{D_1}{D} = \\frac{-22}{-11} = 2\\text{ A}\\), \\(I_2 = \\frac{D_2}{D} = \\frac{-33}{-11} = 3\\text{ A}\\)."
+                ],
+                takeaway: "Cramer cực kỳ tiện lợi cho hệ 2 hoặc 3 phương trình có chứa tham số."
+            }
+        ],
+        applications: "Phân tích mạch điện nhiều mắt lưới, cân bằng phương trình phản ứng hóa học phức tạp, bài toán cân bằng vật thể trong cơ học lý thuyết.",
+        drill_tags: ["Cramer", "Định thức", "Mạch điện"],
+        related_question_ids: ["q_tsa_04", "q_calc_04", "q_calc_08"]
+    },
+    {
+        id: "kb_dstt_03",
+        grade: "Toán cao cấp",
+        chapter: "Chương 3: Hệ Phương trình Tuyến tính & Khử Gauss",
+        title: "Thuật toán Khử Gauss & Mô hình Cân bằng Leontief",
+        overview: "Đưa ma trận mở rộng về dạng bậc thang, định lý Kronecker-Capelli và mô hình phân tích Input-Output Leontief.",
+        theory_markdown: `### 1. Thuật toán Khử Gauss
+- Lập ma trận bổ sung \\(\\tilde{A} = (A \\mid B)\\).
+- Dùng 3 phép biến đổi hàng sơ cấp đưa \\(\\tilde{A}\\) về ma trận bậc thang:
+  1. Đổi chỗ 2 hàng.
+  2. Nhân một hàng với số khác 0.
+  3. Cộng vào một hàng một bội số của hàng khác.
+
+### 2. Định lý Kronecker-Capelli
+- Hệ có nghiệm khi và chỉ khi \\(\\text{rank}(A) = \\text{rank}(\\tilde{A})\\).
+- Nếu \\(\\text{rank} = n\\) (số ẩn): Hệ có nghiệm duy nhất.
+- Nếu \\(\\text{rank} < n\\): Hệ có vô số nghiệm phụ thuộc \\(n - \\text{rank}\\) ẩn tự do.`,
+        formulas: [
+            {
+                name: "Mô hình Cân bằng Kinh tế Leontief",
+                latex: "X = (I - A)^{-1} D",
+                desc: "Vector tổng sản lượng X cần sản xuất để đáp ứng nhu cầu cuối cùng D với ma trận chi phí đầu vào A",
+                tags: ["Leontief", "Kinh tế lượng", "Hệ tuyến tính"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tìm hạng ma trận bậc thang",
+                question: "Cho ma trận \\(A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 0 & 0 & m - 2 \\end{pmatrix}\\). Tìm \\(m\\) để ma trận có hạng bằng 2.",
+                solution_steps: [
+                    "Bước 1: Ma trận đã có dạng bậc thang.",
+                    "Bước 2: Hạng của ma trận bậc thang bằng số hàng khác 0.",
+                    "Bước 3: Để \\(\\text{rank}(A) = 2\\), hàng thứ 3 phải là hàng toàn số 0: \\(m - 2 = 0 \\iff m = 2\\)."
+                ],
+                takeaway: "Biến đổi Gauss là công cụ mạnh nhất và ổn định số học nhất để tính hạng ma trận."
+            }
+        ],
+        applications: "Phân tích kinh tế vĩ mô đa ngành Leontief Input-Output (giải Nobel Kinh tế), giải thuật định tuyến luồng mạng, nén tín hiệu số.",
+        drill_tags: ["Gauss", "Hạng ma trận", "Leontief"],
+        related_question_ids: ["q_tsa_08", "q_calc_05", "q_calc_09"]
+    },
+    {
+        id: "kb_dstt_04",
+        grade: "Toán cao cấp",
+        chapter: "Chương 4: Không gian Vectơ, Cơ sở & Trị riêng",
+        title: "Không gian Vectơ, Trị riêng & Vectơ riêng (Eigenvalues)",
+        overview: "Độc lập tuyến tính, chiều không gian, đa thức đặc trưng và ý nghĩa của giá trị riêng trong ma trận ổn định.",
+        theory_markdown: `### 1. Độc lập và Phụ thuộc tuyến tính
+Hệ vectơ \\(\\{v_1, v_2, \\dots, v_k\\}\\) độc lập tuyến tính khi và chỉ khi:
+\\(c_1 v_1 + c_2 v_2 + \\dots + c_k v_k = 0 \\implies c_1 = c_2 = \\dots = c_k = 0\\).
+
+### 2. Trị riêng và Vectơ riêng
+Số vô hướng \\(\\lambda\\) là giá trị riêng của ma trận vuông \\(A\\) nếu tồn tại vectơ \\(v \\ne 0\\) sao cho:
+\\(Av = \\lambda v \\iff (A - \\lambda I)v = 0\\).
+Phương trình đặc trưng: \\(\\det(A - \\lambda I) = 0\\).`,
+        formulas: [
+            {
+                name: "Phương trình đặc trưng Trị riêng",
+                latex: "\\det(A - \\lambda I) = 0",
+                desc: "Phương trình đa thức xác định các giá trị riêng của ma trận A",
+                tags: ["Trị riêng", "Eigenvalues", "ĐSTT"]
+            },
+            {
+                name: "Vết và Định thức qua Trị riêng",
+                latex: "\\text{tr}(A) = \\sum_{i=1}^n \\lambda_i, \\quad \\det(A) = \\prod_{i=1}^n \\lambda_i",
+                desc: "Tổng và tích các giá trị riêng",
+                tags: ["Trace", "Trị riêng"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tìm trị riêng của ma trận cấp 2",
+                question: "Tìm các giá trị riêng của ma trận \\(A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}\\).",
+                solution_steps: [
+                    "Bước 1: Phương trình đặc trưng: \\(\\det(A - \\lambda I) = \\begin{vmatrix} 4 - \\lambda & 2 \\\\ 1 & 3 - \\lambda \\end{vmatrix} = 0\\).",
+                    "Bước 2: Khai triển: \\((4 - \\lambda)(3 - \\lambda) - 2 = \\lambda^2 - 7\\lambda + 12 - 2 = \\lambda^2 - 7\\lambda + 10 = 0\\).",
+                    "Bước 3: Giải phương trình bậc hai: \\(\\lambda_1 = 5, \\lambda_2 = 2\\).",
+                    "Bước 4: Kiểm tra nhanh: Tổng \\(5 + 2 = 7 = 4 + 3 = \\text{tr}(A)\\), Tích \\(5 \\times 2 = 10 = 4(3) - 2(1) = \\det(A)\\)."
+                ],
+                takeaway: "Luôn dùng vết (trace) và định thức (det) để kiểm tra nhanh kết quả trị riêng."
+            }
+        ],
+        applications: "Thuật toán xếp hạng trang web PageRank của Google (tìm vectơ riêng chính của ma trận lướt ngẫu nhiên), phân tích thành phần chính PCA trong Machine Learning, nén ảnh SVD.",
+        drill_tags: ["Trị riêng", "Vectơ riêng", "PageRank", "PCA"],
+        related_question_ids: ["q_calc_04", "q_tsa_03", "q_calc_10"]
+    },
+    {
+        id: "kb_dstt_05",
+        grade: "Toán cao cấp",
+        chapter: "Chương 5: Xích Markov & Phân phối Dừng",
+        title: "Xích Markov Rời rạc & Bài toán Cân bằng Thị phần",
+        overview: "Ma trận chuyển trạng thái ngẫu nhiên và giải hệ phương trình tìm vectơ phân phối dừng cân bằng dài hạn.",
+        theory_markdown: `### 1. Ma trận chuyển trạng thái Markov
+Một ma trận ngẫu nhiên theo cột \\(P\\) thỏa mãn:
+- Các phần tử \\(p_{ij} \\ge 0\\) (xác suất chuyển từ trạng thái \\(j\\) sang trạng thái \\(i\\)).
+- Tổng các phần tử trên mỗi cột luôn bằng 1: \\(\\sum_i p_{ij} = 1\\).
+
+### 2. Trạng thái dừng cân bằng dài hạn
+Vectơ xác suất \\(\\pi = (\\pi_1, \\pi_2, \\dots, \\pi_n)^T\\) thỏa:
+\\(P\\pi = \\pi \\iff (P - I)\\pi = 0\\) và \\(\\sum_{i=1}^n \\pi_i = 1\\).`,
+        formulas: [
+            {
+                name: "Phương trình trạng thái dừng Markov",
+                latex: "(P - I)\\pi = 0 \\quad \\text{kèm } \\sum \\pi_i = 1",
+                desc: "Hệ phương trình xác định thị phần cân bằng ổn định dài hạn",
+                tags: ["Markov", "Thị phần", "Xác suất"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Thị phần taxi công nghệ",
+                question: "Hai hãng A và B có ma trận chuyển trạng thái khách hàng theo năm: \\(P = \\begin{pmatrix} 0,8 & 0,4 \\\\ 0,2 & 0,6 \\end{pmatrix}\\). Tìm thị phần ổn định của hãng A.",
+                solution_steps: [
+                    "Bước 1: Hệ dừng: \\((0,8 - 1)\\pi_A + 0,4\\pi_B = 0 \\iff -0,2\\pi_A + 0,4\\pi_B = 0 \\iff \\pi_A = 2\\pi_B\\).",
+                    "Bước 2: Ràng buộc tổng xác suất: \\(\\pi_A + \\pi_B = 1\\).",
+                    "Bước 3: Thay \\(\\pi_A = 2\\pi_B\\) vào: \\(3\\pi_B = 1 \\implies \\pi_B = 1/3 \\approx 33,33\\%\\), \\(\\pi_A = 2/3 \\approx 66,67\\%\\)."
+                ],
+                takeaway: "Đây là dạng câu hỏi xuất hiện liên tục trong các đề thi TSA ĐHBK Hà Nội những năm gần đây."
+            }
+        ],
+        applications: "Dự báo thời tiết chuyển tiếp mưa/nắng, mô hình dự đoán xu hướng di cư dân số, thuật toán tạo văn bản chuỗi từ (Markov Text Generator).",
+        drill_tags: ["Markov", "Thị phần", "Trạng thái dừng"],
+        related_question_ids: ["q_tsa_03", "q_tsa_12", "q_tsa_37"]
+    },
+
+    // ==========================================
+    // STREAM 5: GIẢI TÍCH 1
+    // ==========================================
+    {
+        id: "kb_gt1_01",
+        grade: "Giải tích 1",
+        chapter: "Chương 1: Dãy số Thực & Vô cùng bé Tương đương",
+        title: "Dãy số thực, Định lý Kẹp & Vô cùng bé Tương đương",
+        overview: "Kỹ thuật kẹp Squeeze Theorem, thay thế vô cùng bé tương đương khi x tiến về 0 và quy tắc L'Hôpital.",
+        theory_markdown: `### 1. Bảng vô cùng bé tương đương khi \\(x \\to 0\\)
+- \\(\\sin x \\sim x\\), \\(\\tan x \\sim x\\), \\(\\arcsin x \\sim x\\), \\(\\arctan x \\sim x\\).
+- \\(e^x - 1 \\sim x\\), \\(\\ln(1 + x) \\sim x\\).
+- \\(1 - \\cos x \\sim \\frac{x^2}{2}\\).
+- \\(\\sqrt[n]{1 + x} - 1 \\sim \\frac{x}{n}\\).
+
+### 2. Quy tắc thay thế vô cùng bé
+Trong biểu thức tích và thương, ta được phép thay thế trực tiếp một vô cùng bé bằng vô cùng bé tương đương với nó:
+Nếu \\(f(x) \\sim f_1(x)\\) và \\(g(x) \\sim g_1(x)\\) thì \\(\\lim \\frac{f(x)}{g(x)} = \\lim \\frac{f_1(x)}{g_1(x)}\\).
+**Chú ý**: Không được tùy tiện thay thế trong phép cộng/trừ nếu xảy ra triệt tiêu bậc chính!`,
+        formulas: [
+            {
+                name: "Vô cùng bé tương đương lượng giác",
+                latex: "1 - \\cos x \\sim \\frac{x^2}{2} \\quad (x \\to 0)",
+                desc: "Thay thế tương đương giải giới hạn 0/0 siêu tốc",
+                tags: ["Vô cùng bé", "Giới hạn", "Giải tích 1"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tính giới hạn bằng thay thế tương đương",
+                question: "Tính \\(L = \\lim_{x \\to 0} \\frac{\\ln(1 + 3x) \\cdot (1 - \\cos 2x)}{x \\cdot \\sin^2 x}\\).",
+                solution_steps: [
+                    "Bước 1: Khi \\(x \\to 0\\): \\(\\ln(1 + 3x) \\sim 3x\\).",
+                    "Bước 2: \\(1 - \\cos 2x \\sim \\frac{(2x)^2}{2} = 2x^2\\).",
+                    "Bước 3: Mẫu số: \\(\\sin^2 x \\sim x^2 \\implies x \\cdot \\sin^2 x \\sim x^3\\).",
+                    "Bước 4: Thay thế vào tích: \\(L = \\lim_{x \\to 0} \\frac{(3x)(2x^2)}{x^3} = \\lim_{x \\to 0} \\frac{6x^3}{x^3} = 6\\)."
+                ],
+                takeaway: "Thay thế tương đương giúp rút gọn các biểu thức lượng giác và logarit phức tạp thành đa thức chỉ trong 1 dòng."
+            }
+        ],
+        applications: "Phân tích độ phức tạp thuật toán xấp xỉ Big-O trong Khoa học máy tính, tính sai số tương đối trong đo lường vật lý kỹ thuật.",
+        drill_tags: ["Giới hạn", "Vô cùng bé", "L'Hopital"],
+        related_question_ids: ["q_calc_01", "q_calc_02", "q_calc_11"]
+    },
+    {
+        id: "kb_gt1_02",
+        grade: "Giải tích 1",
+        chapter: "Chương 2: Khai triển Taylor-Maclaurin & Công thức Leibniz",
+        title: "Khai triển Taylor-Maclaurin & Đạo hàm Cấp cao Leibniz",
+        overview: "Khai triển đa thức xấp xỉ hàm số tại lân cận x = 0 và công thức tính đạo hàm cấp n của tích hai hàm số.",
+        theory_markdown: `### 1. Bảng khai triển Maclaurin chuẩn
+- \\(e^x = 1 + x + \\frac{x^2}{2!} + \\dots + \\frac{x^n}{n!} + o(x^n)\\).
+- \\(\\sin x = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\dots\\)
+- \\(\\cos x = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} - \\dots\\)
+- \\(\\ln(1 + x) = x - \\frac{x^2}{2} + \\frac{x^3}{3} - \\dots\\)
+
+### 2. Công thức Leibniz tính đạo hàm cấp n của tích
+\\((uv)^{(n)} = \\sum_{k=0}^n C_n^k u^{(k)} v^{(n-k)}\\).
+Tương tự như khai triển nhị thức Newton nhưng thay số mũ bằng cấp đạo hàm.`,
+        formulas: [
+            {
+                name: "Công thức Leibniz",
+                latex: "(uv)^{(n)} = \\sum_{k=0}^n C_n^k u^{(k)} v^{(n-k)}",
+                desc: "Đạo hàm cấp n của tích hai hàm số khả vi n lần",
+                tags: ["Leibniz", "Đạo hàm cấp cao"]
+            },
+            {
+                name: "Khai triển Maclaurin của e^x",
+                latex: "e^x = \\sum_{k=0}^n \\frac{x^k}{k!} + o(x^n)",
+                desc: "Xấp xỉ đa thức của hàm mũ tại x = 0",
+                tags: ["Maclaurin", "Taylor", "Xấp xỉ"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tính đạo hàm cấp 10 của tích x^2 * e^x",
+                question: "Tính đạo hàm cấp 10 của \\(f(x) = x^2 e^{2x}\\) tại \\(x = 0\\).",
+                solution_steps: [
+                    "Bước 1: Áp dụng Leibniz: \\((x^2 e^{2x})^{(10)} = C_{10}^0 x^2 (e^{2x})^{(10)} + C_{10}^1 (x^2)' (e^{2x})^{(9)} + C_{10}^2 (x^2)'' (e^{2x})^{(8)}\\) (các số hạng sau triệt tiêu vì đạo hàm cấp 3 của x^2 bằng 0).",
+                    "Bước 2: Thay \\(x = 0\\): số hạng chứa \\(x^2\\) và \\(x\\) triệt tiêu.",
+                    "Bước 3: Chỉ còn số hạng thứ 3: \\(C_{10}^2 \\cdot 2 \\cdot (2^8 e^{0}) = \\frac{10 \\times 9}{2} \\times 2 \\times 256 = 90 \\times 256 = 23040\\)."
+                ],
+                takeaway: "Chọn hàm đa thức làm u để khi đạo hàm vài cấp sẽ về 0, giúp triệt tiêu hầu hết tổng Leibniz."
+            }
+        ],
+        applications: "Tính toán hàm lượng giác và hàm mũ trong CPU/GPU bằng vi lệnh đa thức, phân tích ổn định hệ thống điều khiển tuyến tính.",
+        drill_tags: ["Maclaurin", "Taylor", "Leibniz", "Đạo hàm"],
+        related_question_ids: ["q_calc_02", "q_calc_06", "q_calc_12"]
+    },
+    {
+        id: "kb_gt1_03",
+        grade: "Giải tích 1",
+        chapter: "Chương 3: Tích phân Suy rộng",
+        title: "Tích phân Suy rộng Loại 1 & Loại 2 Toàn diện",
+        overview: "Tích phân với cận vô hạn (loại 1) và tích phân của hàm không bị chặn (loại 2), tiêu chuẩn so sánh hội tụ.",
+        theory_markdown: `### 1. Tích phân suy rộng loại 1 (Cận vô hạn)
+\\(\\int_a^{+\\infty} f(x)\\,dx = \\lim_{t \\to +\\infty} \\int_a^t f(x)\\,dx\\).
+Tích phân chuẩn Riemann:
+\\(\\int_1^{+\\infty} \\frac{1}{x^\\alpha}\\,dx\\) **hội tụ khi và chỉ khi \\(\\alpha > 1\\)** (phân kỳ khi \\(\\alpha \\le 1\\)).
+
+### 2. Tích phân suy rộng loại 2 (Hàm không bị chặn tại điểm kỳ dị)
+Nếu \\(f(x)\\) gián đoạn vô cực tại \\(x = b\\):
+\\(\\int_a^b f(x)\\,dx = \\lim_{\\epsilon \\to 0^+} \\int_a^{b - \\epsilon} f(x)\\,dx\\).
+Tích phân chuẩn:
+\\(\\int_0^1 \\frac{1}{x^\\alpha}\\,dx\\) **hội tụ khi và chỉ khi \\(\\alpha < 1\\)**.`,
+        formulas: [
+            {
+                name: "Tiêu chuẩn hội tụ Tích phân Riemann",
+                latex: "\\int_1^{+\\infty} \\frac{dx}{x^\\alpha} \\text{ hội tụ } \\iff \\alpha > 1",
+                desc: "Chuẩn mực so sánh kiểm tra hội tụ tích phân loại 1",
+                tags: ["Tích phân suy rộng", "Hội tụ", "Riemann"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Khảo sát sự hội tụ của tích phân",
+                question: "Khảo sát sự hội tụ của \\(I = \\int_1^{+\\infty} \\frac{x + 2}{\\sqrt{x^5 + 3x}}\\,dx\\).",
+                solution_steps: [
+                    "Bước 1: Xét hàm dưới dấu tích phân khi \\(x \\to +\\infty\\):",
+                    "Tử số: \\(x + 2 \\sim x\\). Mẫu số: \\(\\sqrt{x^5 + 3x} \\sim x^{5/2}\\).",
+                    "Bước 2: Vô cùng lớn tương đương: \\(f(x) \\sim \\frac{x}{x^{5/2}} = \\frac{1}{x^{3/2}}\\).",
+                    "Bước 3: Vì \\(\\alpha = 3/2 > 1\\), tích phân \\(\\int_1^{+\\infty} \\frac{dx}{x^{3/2}}\\) hội tụ.",
+                    "Bước 4: Theo tiêu chuẩn so sánh 2, tích phân \\(I\\) hội tụ."
+                ],
+                takeaway: "Giữ lại bậc cao nhất ở tử và mẫu để xác định số mũ alpha của Riemann."
+            }
+        ],
+        applications: "Tính hàm mật độ xác suất liên tục trên toàn trục số (phân phối Gauss / Normal Distribution), tính năng lượng toàn phần của tín hiệu trong miền thời gian.",
+        drill_tags: ["Tích phân suy rộng", "Hội tụ", "Riemann"],
+        related_question_ids: ["q_calc_03", "q_calc_05", "q_calc_13"]
+    },
+    {
+        id: "kb_gt1_04",
+        grade: "Giải tích 1",
+        chapter: "Chương 4: Chuỗi số Thực & Chuỗi Lũy thừa",
+        title: "Chuỗi số Thực, Tiêu chuẩn D'Alembert & Bán kính Hội tụ",
+        overview: "Điều kiện cần để chuỗi hội tụ, chuỗi số dương (tiêu chuẩn so sánh, D'Alembert, Cauchy) và khoảng hội tụ của chuỗi lũy thừa.",
+        theory_markdown: `### 1. Điều kiện cần để chuỗi hội tụ
+Nếu chuỗi \\(\\sum_{n=1}^\\infty a_n\\) hội tụ thì \\(\\lim_{n \\to \\infty} a_n = 0\\).
+Nếu \\(\\lim_{n \\to \\infty} a_n \\ne 0\\) thì chuỗi **chắc chắn phân kỳ**.
+
+### 2. Tiêu chuẩn D'Alembert (Tỉ số)
+Xét \\(D = \\lim_{n \\to \\infty} \\left| \\frac{a_{n+1}}{a_n} \\right|\\):
+- Nếu \\(D < 1\\): Chuỗi hội tụ tuyệt đối.
+- Nếu \\(D > 1\\): Chuỗi phân kỳ.
+- Nếu \\(D = 1\\): Chưa thể kết luận.
+
+### 3. Bán kính hội tụ của chuỗi lũy thừa \\(\\sum a_n x^n\\)
+\\(R = \\lim_{n \\to \\infty} \\left| \\frac{a_n}{a_{n+1}} \\right|\\) hoặc \\(R = \\frac{1}{\\lim \\sqrt[n]{|a_n|}}\\).`,
+        formulas: [
+            {
+                name: "Công thức Bán kính hội tụ D'Alembert",
+                latex: "R = \\lim_{n \\to \\infty} \\left| \\frac{a_n}{a_{n+1}} \\right|",
+                desc: "Khoảng hội tụ của chuỗi lũy thừa (-R, R)",
+                tags: ["Chuỗi lũy thừa", "Bán kính hội tụ", "D'Alembert"]
+            },
+            {
+                name: "Chuỗi điều hòa p-series",
+                latex: "\\sum_{n=1}^\\infty \\frac{1}{n^p} \\text{ hội tụ } \\iff p > 1",
+                desc: "Chuỗi chuẩn so sánh số dương",
+                tags: ["Chuỗi", "Hội tụ"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Tìm bán kính hội tụ chuỗi lũy thừa",
+                question: "Tìm bán kính hội tụ của chuỗi lũy thừa \\(\\sum_{n=1}^\\infty \\frac{x^n}{n \\cdot 3^n}\\).",
+                solution_steps: [
+                    "Bước 1: Hệ số \\(a_n = \\frac{1}{n 3^n}\\).",
+                    "Bước 2: Hệ số tiếp theo: \\(a_{n+1} = \\frac{1}{(n+1) 3^{n+1}}\\).",
+                    "Bước 3: Lập tỉ số: \\(\\frac{a_n}{a_{n+1}} = \\frac{(n+1) 3^{n+1}}{n 3^n} = 3 \\frac{n+1}{n}\\).",
+                    "Bước 4: Bán kính hội tụ: \\(R = \\lim_{n \\to \\infty} 3 \\frac{n+1}{n} = 3\\). Chuỗi hội tụ khi \\(|x| < 3\\)."
+                ],
+                takeaway: "Với chuỗi chứa lũy thừa c^n thì bán kính hội tụ thường tỉ lệ thuận với cơ số c."
+            }
+        ],
+        applications: "Biến đổi Z (Z-Transform) trong xử lý tín hiệu số DSP, hàm sinh (Generating Function) trong bài toán đếm tổ hợp rời rạc nâng cao.",
+        drill_tags: ["Chuỗi số", "Bán kính hội tụ", "D'Alembert"],
+        related_question_ids: ["q_calc_02", "q_calc_06", "q_calc_14"]
+    },
+    {
+        id: "kb_gt1_05",
+        grade: "Giải tích 1",
+        chapter: "Chương 5: Phương trình Vi phân Cấp 1 & Cấp 2",
+        title: "Phương trình Vi phân Tuyến tính & Phương trình Đặc trưng",
+        overview: "Phương trình phân ly biến số, vi phân tuyến tính cấp 1 (hệ số tích phân) và phương trình vi phân thuần nhất cấp 2 hệ số hằng.",
+        theory_markdown: `### 1. Phương trình vi phân tuyến tính cấp 1
+Dạng: \\(y' + P(x)y = Q(x)\\).
+Thừa số tích phân: \\(I(x) = e^{\\int P(x)\\,dx}\\).
+Công thức nghiệm tổng quát:
+\\(y = \\frac{1}{I(x)} \\left( \\int I(x) Q(x)\\,dx + C \\right)\\).
+
+### 2. Phương trình vi phân thuần nhất cấp 2 hệ số hằng
+Dạng: \\(y'' + p y' + q y = 0\\).
+Phương trình đặc trưng: \\(k^2 + pk + q = 0\\):
+- Hai nghiệm thực phân biệt \\(k_1 \\ne k_2\\): \\(y = C_1 e^{k_1 x} + C_2 e^{k_2 x}\\).
+- Nghiệm kép \\(k_1 = k_2 = k_0\\): \\(y = (C_1 + C_2 x) e^{k_0 x}\\).
+- Nghiệm phức \\(k = \\alpha \\pm i\\beta\\): \\(y = e^{\\alpha x} (C_1 \\cos \\beta x + C_2 \\sin \\beta x)\\).`,
+        formulas: [
+            {
+                name: "Nghiệm phương trình vi phân tuyến tính cấp 1",
+                latex: "y = e^{-\\int P(x)dx} \\left( \\int Q(x) e^{\\int P(x)dx} dx + C \\right)",
+                desc: "Công thức nghiệm tường minh bằng thừa số tích phân Euler",
+                tags: ["Vi phân cấp 1", "Tuyến tính"]
+            },
+            {
+                name: "Phương trình đặc trưng cấp 2",
+                latex: "k^2 + pk + q = 0",
+                desc: "Xác định nghiệm cơ bản của dao động tự do",
+                tags: ["Vi phân cấp 2", "Dao động"]
+            }
+        ],
+        examples: [
+            {
+                title: "Ví dụ 1: Giải phương trình vi phân tuyến tính cấp 1",
+                question: "Giải phương trình vi phân \\(y' + 2y = 4\\) thỏa điều kiện ban đầu \\(y(0) = 5\\).",
+                solution_steps: [
+                    "Bước 1: Xác định \\(P(x) = 2, Q(x) = 4\\).",
+                    "Bước 2: Thừa số tích phân: \\(I(x) = e^{\\int 2 dx} = e^{2x}\\).",
+                    "Bước 3: Tích phân nghiệm: \\(y = e^{-2x} \\left( \\int 4 e^{2x} dx + C \\right) = e^{-2x} (2e^{2x} + C) = 2 + C e^{-2x}\\).",
+                    "Bước 4: Điều kiện \\(y(0) = 5 \\implies 2 + C = 5 \\implies C = 3\\). Vậy \\(y = 2 + 3e^{-2x}\\)."
+                ],
+                takeaway: "Đây là phương trình nạp điện tụ qua điện trở RC kinh điển: điện áp tiệm cận về giá trị ổn định."
+            }
+        ],
+        applications: "Mô hình dao động điều hòa và giảm chấn trong kỹ thuật cơ khí, nạp xả tụ điện trong mạch RC/RLC, mô hình truyền nhiệt Newton.",
+        drill_tags: ["Phương trình vi phân", "Vi phân cấp 2", "Mạch RC"],
+        related_question_ids: ["q_calc_02", "q_calc_05", "q_calc_15"]
+    }
+];
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { PUMKIN_KNOWLEDGE_BASE };
+}
+
+
+
+/* ==========================================================================
+   PUMKIN.DEV MATH EXAM PLATFORM - TSA QUESTION BANK DATASET
+   ========================================================================== */
+
+    // =========================================================================
+    // THEME CONTROLLER (SYNCED WITH INDEX.HTML)
+    // =========================================================================
+    const PumkinTheme = {
+        THEME_KEY: "pumkin_theme_v3",
+        init() {
+            const saved = localStorage.getItem(this.THEME_KEY) || "light";
+            this.applyTheme(saved);
+        },
+        toggleTheme() {
+            const isDark = document.body.classList.contains("dark-mode");
+            const nextTheme = isDark ? "light" : "dark";
+            this.applyTheme(nextTheme);
+            localStorage.setItem(this.THEME_KEY, nextTheme);
+        },
+        applyTheme(theme) {
+            const btn = document.getElementById("btn-theme-toggle");
+            if (theme === "dark") {
+                document.body.classList.add("dark-mode");
+                if (btn) btn.textContent = "☀️";
+            } else {
+                document.body.classList.remove("dark-mode");
+                if (btn) btn.textContent = "🌙";
+            }
+        }
+    };
+
+    // =========================================================================
+    // PAGE CONTROLLER & RENDERING LOGIC
+    // =========================================================================
+    let currentView = "topics";
+    let currentStream = "all";
+    let searchQuery = "";
+
+    function switchView(view) {
+        currentView = view;
+        document.getElementById("tab-btn-topics").classList.toggle("active", view === "topics");
+        document.getElementById("tab-btn-formulas").classList.toggle("active", view === "formulas");
+        document.getElementById("section-topics").style.display = (view === "topics") ? "flex" : "none";
+        document.getElementById("section-formulas").style.display = (view === "formulas") ? "flex" : "none";
+        renderContent();
+    }
+
+    function setStreamFilter(stream) {
+        currentStream = stream;
+        document.querySelectorAll(".pill-btn").forEach(btn => {
+            btn.classList.toggle("active", btn.getAttribute("data-stream") === stream);
+        });
+        renderContent();
+    }
+
+    function onSearchChange(val) {
+        searchQuery = val.trim().toLowerCase();
+        renderContent();
+    }
+
+    function renderContent() {
+        if (currentView === "topics") {
+            renderTopics();
+        } else {
+            renderFormulas();
+        }
+    }
+
+    function renderTopics() {
+        const container = document.getElementById("section-topics");
+        let articles = PUMKIN_KNOWLEDGE_BASE;
+
+        if (currentStream !== "all") {
+            articles = articles.filter(a => (a.grade === currentStream || a.stream === currentStream));
+        }
+
+        if (searchQuery) {
+            articles = articles.filter(a => {
+                const tm = a.title && a.title.toLowerCase().includes(searchQuery);
+                const cm = a.chapter && a.chapter.toLowerCase().includes(searchQuery);
+                const om = a.overview && a.overview.toLowerCase().includes(searchQuery);
+                const fm = a.formulas && a.formulas.some(f => 
+                    (f.name && f.name.toLowerCase().includes(searchQuery)) ||
+                    (f.title && f.title.toLowerCase().includes(searchQuery)) ||
+                    (f.latex && f.latex.toLowerCase().includes(searchQuery))
+                );
+                return tm || cm || om || fm;
+            });
+        }
+
+        if (articles.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 50px 20px; color: var(--text-muted); background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border);">
+                    🔍 Không tìm thấy chuyên đề phù hợp với từ khóa "${searchQuery}". Vui lòng thử từ khóa khác!
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = articles.map(a => {
+            const stream = a.grade || a.stream || "Toán";
+            let tagClass = "tag-thpt";
+            if (stream.includes("TSA")) tagClass = "tag-tsa";
+            else if (stream.includes("HSA")) tagClass = "tag-hsa";
+            else if (stream.includes("Đại học")) tagClass = "tag-calc";
+
+            const formulaCount = (a.formulas || []).length;
+            const exampleCount = (a.examples || []).length;
+
+            return `
+                <article class="topic-card">
+                    <div class="topic-header">
+                        <span class="stream-tag ${tagClass}">${stream}</span>
+                        <span class="chapter-tag">${a.chapter || 'Chuyên đề kiến thức'}</span>
+                    </div>
+                    <h2 class="topic-title">${a.title}</h2>
+                    <p class="topic-desc">${a.overview}</p>
+                    <div class="topic-footer">
+                        <div class="topic-meta">
+                            <span>📐 <strong>${formulaCount}</strong> công thức cốt lõi</span>
+                            <span>📝 <strong>${exampleCount}</strong> ví dụ giải chi tiết</span>
+                        </div>
+                        <button class="btn-view-topic" onclick="openArticleModal('${a.id}')">
+                            Xem chi tiết lý thuyết & ví dụ 📖
+                        </button>
+                    </div>
+                </article>
+            `;
+        }).join("");
+
+        triggerMathJax(container);
+    }
+
+    function renderFormulas() {
+        const container = document.getElementById("section-formulas");
+        const allFormulas = [];
+
+        PUMKIN_KNOWLEDGE_BASE.forEach(art => {
+            const stream = art.grade || art.stream || "Toán";
+            if (currentStream === "all" || stream === currentStream) {
+                (art.formulas || []).forEach(f => {
+                    allFormulas.push({
+                        ...f,
+                        parentTitle: art.title,
+                        chapter: art.chapter,
+                        stream: stream
+                    });
+                });
+            }
+        });
+
+        let filtered = allFormulas;
+        if (searchQuery) {
+            filtered = filtered.filter(f => {
+                const nm = f.name && f.name.toLowerCase().includes(searchQuery);
+                const tm = f.title && f.title.toLowerCase().includes(searchQuery);
+                const lm = f.latex && f.latex.toLowerCase().includes(searchQuery);
+                const dm = f.desc && f.desc.toLowerCase().includes(searchQuery);
+                const om = f.note && f.note.toLowerCase().includes(searchQuery);
+                const pm = f.parentTitle && f.parentTitle.toLowerCase().includes(searchQuery);
+                const cm = f.chapter && f.chapter.toLowerCase().includes(searchQuery);
+                const tagM = f.tags && f.tags.some(t => t.toLowerCase().includes(searchQuery));
+                return nm || tm || lm || dm || om || pm || cm || tagM;
+            });
+        }
+
+        if (filtered.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 50px 20px; color: var(--text-muted); background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border);">
+                    🔍 Không tìm thấy công thức nào phù hợp với bộ lọc hiện tại.
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = filtered.map(f => {
+            const title = f.name || f.title || "Công thức";
+            const note = f.note || f.desc || "Công thức trọng tâm áp dụng giải nhanh bài toán.";
+            const latex = f.latex || "";
+            let streamTagClass = "tag-thpt";
+            if (f.stream.includes("TSA")) streamTagClass = "tag-tsa";
+            else if (f.stream.includes("HSA")) streamTagClass = "tag-hsa";
+            else if (f.stream.includes("Đại học")) streamTagClass = "tag-calc";
+
+            return `
+                <div class="formula-item">
+                    <div class="formula-header">
+                        <span class="stream-tag ${streamTagClass}">${f.stream}</span>
+                        <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">${f.parentTitle}</span>
+                    </div>
+                    <h3 class="formula-title">${title}</h3>
+                    <div class="formula-math-box">
+                        $${latex}$
+                    </div>
+                    <p class="formula-notes">💡 <strong>Ứng dụng & Chú ý:</strong> ${note}</p>
+                </div>
+            `;
+        }).join("");
+
+        triggerMathJax(container);
+    }
+
+    function openArticleModal(articleId) {
+        const art = PUMKIN_KNOWLEDGE_BASE.find(a => a.id === articleId);
+        if (!art) return;
+
+        document.getElementById("modal-article-title").textContent = art.title;
+        const bodyEl = document.getElementById("modal-article-body");
+
+        const formulasHtml = (art.formulas || []).map(f => {
+            const title = f.name || f.title || "Công thức";
+            const note = f.note || "";
+            return `
+                <div style="margin-bottom: 16px;">
+                    <div style="font-weight: 700; font-size: 14.5px; margin-bottom: 6px; color: var(--text-main);">${title}</div>
+                    <div class="formula-math-box">$${f.latex}$</div>
+                    ${note ? `<div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">💡 ` + note + `</div>` : ''}
+                </div>
+            `;
+        }).join("");
+
+        const examplesHtml = (art.examples || []).map((ex, idx) => {
+            const stepsHtml = (ex.steps || []).map(st => `
+                <div class="example-step">
+                    <strong>${st.step || 'Bước'}:</strong> ${st.content || ''}
+                </div>
+            `).join("");
+
+            return `
+                <div class="example-card">
+                    <div class="example-header">Ví dụ minh họa #${idx + 1}: ${ex.title || ''}</div>
+                    <div style="font-size: 14.5px; margin-bottom: 10px;">${ex.question || ''}</div>
+                    <div>${stepsHtml}</div>
+                    ${ex.conclusion ? `<div style="margin-top: 8px; font-weight: 600; color: var(--success); font-size: 13.5px;">✓ Kết luận: ` + ex.conclusion + `</div>` : ''}
+                </div>
+            `;
+        }).join("");
+
+        bodyEl.innerHTML = `
+            <div style="margin-bottom: 20px; line-height: 1.6; font-size: 15px; color: var(--text-main);">
+                ${art.overview}
+            </div>
+
+            <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 14px; border-bottom: 2px solid var(--border); padding-bottom: 6px;">
+                📐 Hệ thống Công thức Cốt lõi
+            </h3>
+            <div>${formulasHtml}</div>
+
+            <h3 style="font-size: 17px; font-weight: 800; margin: 26px 0 14px 0; border-bottom: 2px solid var(--border); padding-bottom: 6px;">
+                📝 Bài tập Ví dụ Có Lời giải Chi tiết
+            </h3>
+            <div>${examplesHtml}</div>
+        `;
+
+        document.getElementById("article-modal").classList.add("open");
+        triggerMathJax(bodyEl);
+    }
+
+    function closeArticleModal(e) {
+        document.getElementById("article-modal").classList.remove("open");
+    }
+
+    function triggerMathJax(element) {
+        if (window.PumkinMath) {
+            window.PumkinMath.typeset(element);
+        } else if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise(element ? [element] : []).catch(() => {});
+        }
+    }
+
+    // Initialize Page
+    document.addEventListener("DOMContentLoaded", () => {
+        PumkinTheme.init();
+        renderContent();
+    });
+    </script>
+</body>
+</html>

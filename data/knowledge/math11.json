@@ -1,0 +1,533 @@
+[
+  {
+    "id": "kb_toan11_01",
+    "grade": "Toán 11",
+    "chapter": "Chương 1: Hàm số & Phương trình lượng giác",
+    "title": "Lượng giác toàn diện & Kỹ thuật chuyển đổi góc",
+    "overview": "Hệ thống công thức biến đổi lượng giác toàn tập, chu kỳ hàm số, cung liên kết, kỹ thuật góc chia đôi và phương pháp giải phương trình lượng giác thực chiến.",
+    "theory_markdown": "### 1. Bảng giá trị đặc biệt và chu kỳ tuần hoàn\n- \\(y = \\sin x, y = \\cos x\\) có tập xác định \\(\\mathbb{R}\\), tập giá trị \\([-1; 1]\\), chu kỳ tuần hoàn \\(T = 2\\pi\\).\n- \\(y = \\tan x\\) xác định khi \\(x \\ne \\frac{\\pi}{2} + k\\pi\\), tập giá trị \\(\\mathbb{R}\\), chu kỳ tuần hoàn \\(T = \\pi\\).\n- \\(y = \\cot x\\) xác định khi \\(x \\ne k\\pi\\), tập giá trị \\(\\mathbb{R}\\), chu kỳ tuần hoàn \\(T = \\pi\\).\n\n### 2. Hệ thức lượng giác cơ bản & Cung liên kết\n- **Hệ thức cơ bản**:\n  - \\(\\sin^2 x + \\cos^2 x = 1\\)\n  - \\(1 + \\tan^2 x = \\frac{1}{\\cos^2 x}\\) \\(\\left(x \\ne \\frac{\\pi}{2} + k\\pi\\right)\\)\n  - \\(1 + \\cot^2 x = \\frac{1}{\\sin^2 x}\\) \\((x \\ne k\\pi)\\)\n  - \\(\\tan x \\cdot \\cot x = 1\\)\n- **Cung liên kết** (Cos đối - Sin bù - Phụ chéo - Hơn kém \\(\\pi\\)):\n  - Cos đối: \\(\\cos(-x) = \\cos x\\); \\(\\sin(-x) = -\\sin x\\); \\(\\tan(-x) = -\\tan x\\).\n  - Sin bù: \\(\\sin(\\pi - x) = \\sin x\\); \\(\\cos(\\pi - x) = -\\cos x\\); \\(\\tan(\\pi - x) = -\\tan x\\).\n  - Phụ chéo: \\(\\sin\\left(\\frac{\\pi}{2} - x\\right) = \\cos x\\); \\(\\cos\\left(\\frac{\\pi}{2} - x\\right) = \\sin x\\); \\(\\tan\\left(\\frac{\\pi}{2} - x\\right) = \\cot x\\).\n  - Hơn kém \\(\\pi\\): \\(\\tan(x + \\pi) = \\tan x\\); \\(\\sin(x + \\pi) = -\\sin x\\); \\(\\cos(x + \\pi) = -\\cos x\\).\n\n### 3. Công thức cộng lượng giác (Addition Formulas)\n- \\(\\sin(a \\pm b) = \\sin a \\cos b \\pm \\cos a \\sin b\\).\n- \\(\\cos(a \\pm b) = \\cos a \\cos b \\mp \\sin a \\sin b\\) *(lưu ý dấu nghịch chiều)*.\n- \\(\\tan(a \\pm b) = \\frac{\\tan a \\pm \\tan b}{1 \\mp \\tan a \\tan b}\\).\n\n### 4. Công thức nhân đôi, nhân ba & Hạ bậc\n- **Nhân đôi**:\n  - \\(\\sin 2a = 2\\sin a \\cos a\\).\n  - \\(\\cos 2a = \\cos^2 a - \\sin^2 a = 2\\cos^2 a - 1 = 1 - 2\\sin^2 a\\).\n  - \\(\\tan 2a = \\frac{2\\tan a}{1 - \\tan^2 a}\\).\n- **Hạ bậc bậc hai**:\n  - \\(\\cos^2 a = \\frac{1 + \\cos 2a}{2}\\); \\(\\sin^2 a = \\frac{1 - \\cos 2a}{2}\\); \\(\\tan^2 a = \\frac{1 - \\cos 2a}{1 + \\cos 2a}\\).\n- **Nhân ba & Hạ bậc ba**:\n  - \\(\\sin 3a = 3\\sin a - 4\\sin^3 a \\implies \\sin^3 a = \\frac{3\\sin a - \\sin 3a}{4}\\).\n  - \\(\\cos 3a = 4\\cos^3 a - 3\\cos a \\implies \\cos^3 a = \\frac{3\\cos a + \\cos 3a}{4}\\).\n\n### 5. Biến đổi Tích thành Tổng & Tổng thành Tích\n- **Tích thành tổng**:\n  - \\(\\cos a \\cos b = \\frac{1}{2}[\\cos(a - b) + \\cos(a + b)]\\).\n  - \\(\\sin a \\sin b = \\frac{1}{2}[\\cos(a - b) - \\cos(a + b)]\\).\n  - \\(\\sin a \\cos b = \\frac{1}{2}[\\sin(a + b) + \\sin(a - b)]\\).\n- **Tổng thành tích**:\n  - \\(\\cos u + \\cos v = 2\\cos\\frac{u + v}{2}\\cos\\frac{u - v}{2}\\).\n  - \\(\\cos u - \\cos v = -2\\sin\\frac{u + v}{2}\\sin\\frac{u - v}{2}\\).\n  - \\(\\sin u \\pm \\sin v = 2\\sin\\frac{u \\pm v}{2}\\cos\\frac{u \\mp v}{2}\\).\n\n### 6. Kỹ thuật góc chia đôi (Weierstrass Substitution)\nĐặt \\(t = \\tan\\frac{x}{2}\\) (với \\(x \\ne \\pi + k2\\pi\\)):\n\\[\\sin x = \\frac{2t}{1 + t^2}, \\quad \\cos x = \\frac{1 - t^2}{1 + t^2}, \\quad \\tan x = \\frac{2t}{1 - t^2}\\]\n\n### 7. Phương trình lượng giác cơ bản & Dạng cổ điển\n- \\(\\sin x = \\sin\\alpha \\iff x = \\alpha + k2\\pi \\lor x = \\pi - \\alpha + k2\\pi\\).\n- \\(\\cos x = \\cos\\alpha \\iff x = \\pm\\alpha + k2\\pi\\).\n- \\(\\tan x = \\tan\\alpha \\iff x = \\alpha + k\\pi\\).\n- \\(a\\sin x + b\\cos x = c\\): có nghiệm \\(\\iff a^2 + b^2 \\ge c^2\\).",
+    "formulas": [
+      {
+        "id": "kb_toan11_01_f1",
+        "name": "Công thức Hạ bậc bậc hai",
+        "latex": "\\cos^2 x = \\frac{1 + \\cos 2x}{2}, \\quad \\sin^2 x = \\frac{1 - \\cos 2x}{2}",
+        "desc": "Biến đổi giảm bậc từ bậc 2 về bậc 1 phục vụ tính tích phân và giải phương trình",
+        "tags": [
+          "Lượng giác",
+          "Hạ bậc"
+        ]
+      },
+      {
+        "id": "kb_toan11_01_f2",
+        "name": "Điều kiện có nghiệm pt thuần nhất bậc nhất",
+        "latex": "a\\sin x + b\\cos x = c \\iff a^2 + b^2 \\ge c^2",
+        "desc": "Điều kiện cần và đủ để phương trình lượng giác tuyến tính có nghiệm",
+        "tags": [
+          "Phương trình",
+          "Lượng giác",
+          "Điều kiện nghiệm"
+        ]
+      },
+      {
+        "id": "kb_toan11_01_f3",
+        "name": "Hệ thức lượng giác cơ bản & Tập xác định",
+        "latex": "\\sin^2 x + \\cos^2 x = 1, \\quad 1 + \\tan^2 x = \\frac{1}{\\cos^2 x}, \\quad 1 + \\cot^2 x = \\frac{1}{\\sin^2 x}, \\quad \\tan x \\cdot \\cot x = 1",
+        "desc": "Mối liên hệ giữa các giá trị lượng giác của cùng một cung góc",
+        "tags": [
+          "Lượng giác",
+          "Cơ bản",
+          "Hằng đẳng thức"
+        ]
+      },
+      {
+        "id": "kb_toan11_01_f4",
+        "name": "Công thức cộng lượng giác toàn diện",
+        "latex": "\\sin(a \\pm b) = \\sin a \\cos b \\pm \\cos a \\sin b, \\quad \\cos(a \\pm b) = \\cos a \\cos b \\mp \\sin a \\sin b, \\quad \\tan(a \\pm b) = \\frac{\\tan a \\pm \\tan b}{1 \\mp \\tan a \\tan b}",
+        "desc": "Biến đổi lượng giác của tổng và hiệu hai cung góc",
+        "tags": [
+          "Lượng giác",
+          "Công thức cộng"
+        ]
+      },
+      {
+        "id": "kb_toan11_01_f5",
+        "name": "Công thức nhân đôi toàn diện (Double Angle)",
+        "latex": "\\sin 2a = 2\\sin a \\cos a, \\quad \\cos 2a = \\cos^2 a - \\sin^2 a = 2\\cos^2 a - 1 = 1 - 2\\sin^2 a, \\quad \\tan 2a = \\frac{2\\tan a}{1 - \\tan^2 a}",
+        "desc": "Biểu diễn hàm lượng giác cung 2a theo cung a với 3 dạng biến đổi của cos(2a)",
+        "tags": [
+          "Lượng giác",
+          "Nhân đôi"
+        ]
+      },
+      {
+        "id": "kb_toan11_01_f6",
+        "name": "Công thức nhân ba và hạ bậc bậc ba",
+        "latex": "\\sin 3a = 3\\sin a - 4\\sin^3 a, \\quad \\cos 3a = 4\\cos^3 a - 3\\cos a, \\quad \\sin^3 a = \\frac{3\\sin a - \\sin 3a}{4}, \\quad \\cos^3 a = \\frac{3\\cos a + \\cos 3a}{4}",
+        "desc": "Biến đổi nhân ba và hạ bậc ba phục vụ giải phương trình lượng giác nâng cao",
+        "tags": [
+          "Lượng giác",
+          "Nhân ba",
+          "Hạ bậc"
+        ]
+      },
+      {
+        "id": "kb_toan11_01_f7",
+        "name": "Công thức biến đổi tích thành tổng (Product-to-Sum)",
+        "latex": "\\cos a \\cos b = \\frac{1}{2}[\\cos(a-b) + \\cos(a+b)], \\quad \\sin a \\sin b = \\frac{1}{2}[\\cos(a-b) - \\cos(a+b)], \\quad \\sin a \\cos b = \\frac{1}{2}[\\sin(a+b) + \\sin(a-b)]",
+        "desc": "Biến đổi tích của hai hàm lượng giác thành tổng các hàm lượng giác đơn giản",
+        "tags": [
+          "Lượng giác",
+          "Tích thành tổng"
+        ]
+      },
+      {
+        "id": "kb_toan11_01_f8",
+        "name": "Công thức biến đổi tổng thành tích (Sum-to-Product)",
+        "latex": "\\cos u + \\cos v = 2\\cos\\frac{u+v}{2}\\cos\\frac{u-v}{2}, \\quad \\cos u - \\cos v = -2\\sin\\frac{u+v}{2}\\sin\\frac{u-v}{2}, \\quad \\sin u \\pm \\sin v = 2\\sin\\frac{u \\pm v}{2}\\cos\\frac{u \\mp v}{2}",
+        "desc": "Biến đổi tổng hiệu hai hàm lượng giác thành tích phục vụ giải phương trình tích",
+        "tags": [
+          "Lượng giác",
+          "Tổng thành tích"
+        ]
+      },
+      {
+        "id": "kb_toan11_01_f9",
+        "name": "Công thức góc chia đôi (Weierstrass Substitution)",
+        "latex": "t = \\tan\\frac{x}{2} \\implies \\sin x = \\frac{2t}{1 + t^2}, \\quad \\cos x = \\frac{1 - t^2}{1 + t^2}, \\quad \\tan x = \\frac{2t}{1 - t^2} \\quad (x \\ne \\pi + k2\\pi)",
+        "desc": "Hữu tỉ hóa toàn bộ hàm lượng giác theo biến t phục vụ phương trình và nguyên hàm",
+        "tags": [
+          "Lượng giác",
+          "Đổi biến",
+          "Weierstrass"
+        ]
+      },
+      {
+        "id": "kb_toan11_01_f10",
+        "name": "Công thức tính nhanh đối xứng & Bậc cao",
+        "latex": "\\sin x \\pm \\cos x = \\sqrt{2}\\sin\\left(x \\pm \\frac{\\pi}{4}\\right), \\quad \\sin^4 x + \\cos^4 x = 1 - \\frac{1}{2}\\sin^2 2x, \\quad \\sin^6 x + \\cos^6 x = 1 - \\frac{3}{4}\\sin^2 2x",
+        "desc": "Công thức rút gọn nhanh các biểu thức đối xứng sin và cos thường gặp trong đề thi",
+        "tags": [
+          "Lượng giác",
+          "Tính nhanh",
+          "Đối xứng"
+        ]
+      },
+      {
+        "id": "kb_toan11_01_f11",
+        "name": "Phương trình lượng giác cơ bản & Họ nghiệm",
+        "latex": "\\sin x = \\sin\\alpha \\iff \\left[\\begin{aligned} x &= \\alpha + k2\\pi \\\\ x &= \\pi - \\alpha + k2\\pi \\end{aligned}\\right., \\quad \\cos x = \\cos\\alpha \\iff x = \\pm\\alpha + k2\\pi, \\quad \\tan x = \\tan\\alpha \\iff x = \\alpha + k\\pi",
+        "desc": "Công thức nghiệm chuẩn xác của các phương trình lượng giác cơ bản với k thuộc Z",
+        "tags": [
+          "Lượng giác",
+          "Phương trình",
+          "Nghiệm"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan11_01_f1",
+      "kb_toan11_01_f2",
+      "kb_toan11_01_f3",
+      "kb_toan11_01_f4",
+      "kb_toan11_01_f5",
+      "kb_toan11_01_f6",
+      "kb_toan11_01_f7",
+      "kb_toan11_01_f8",
+      "kb_toan11_01_f9",
+      "kb_toan11_01_f10",
+      "kb_toan11_01_f11"
+    ],
+    "prerequisites": [
+      "kb_toan10_02"
+    ],
+    "related_topics": [
+      "kb_toan12_01"
+    ],
+    "common_traps": [
+      "Quên đặt điều kiện xác định cho tan(x) (x khác pi/2 + k*pi) và cot(x) (x khác k*pi)",
+      "Sai lầm đổi dấu ở công thức cộng cos: cos(a+b) = cos(a)cos(b) - sin(a)sin(b) (phải là dấu trừ)",
+      "Bình phương hai vế làm phát sinh nghiệm ngoại lai mà không kiểm tra lại hoặc đối chiếu điều kiện",
+      "Nhầm lẫn chu kỳ họ nghiệm: sin và cos có chu kỳ k*2*pi, trong khi tan và cot có chu kỳ k*pi",
+      "Lỗi trùng lặp hoặc sót điểm biểu diễn khi gộp các họ nghiệm trên đường tròn lượng giác"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tìm tham số m để phương trình có nghiệm",
+        "question": "Tìm tất cả giá trị thực của tham số \\(m\\) để phương trình \\(3\\sin 2x + 4\\cos 2x = 2m - 1\\) có nghiệm.",
+        "solution_steps": [
+          "Bước 1: Nhận diện dạng phương trình: \\(a\\sin 2x + b\\cos 2x = c\\) với \\(a = 3, b = 4, c = 2m - 1\\).",
+          "Bước 2: Điều kiện có nghiệm: \\(a^2 + b^2 \\ge c^2 \\iff 3^2 + 4^2 \\ge (2m - 1)^2\\).",
+          "Bước 3: Ta có \\(25 \\ge (2m - 1)^2 \\iff -5 \\le 2m - 1 \\le 5 \\iff -4 \\le 2m \\le 6 \\iff -2 \\le m \\le 3\\)."
+        ],
+        "takeaway": "Áp dụng ngay điều kiện Cauchy-Schwarz/Buniacovsky cho biểu thức tuyến tính lượng giác."
+      }
+    ],
+    "applications": "Phân tích tín hiệu âm thanh và xử lý sóng vô tuyến (Fourier Transform), mô hình hóa chuyển động con lắc đơn, dòng điện xoay chiều AC trong kỹ thuật điện tử.",
+    "drill_tags": [
+      "Lượng giác",
+      "Chu kỳ",
+      "Dao động"
+    ],
+    "related_question_ids": [
+      "q_tsa_07",
+      "q_hsa_06",
+      "q_thpt_03"
+    ]
+  },
+  {
+    "id": "kb_toan11_02",
+    "grade": "Toán 11",
+    "chapter": "Chương 2: Dãy số, Cấp số cộng & Cấp số nhân",
+    "title": "Dãy số, Cấp số & Mô hình Lãi kép Tài chính",
+    "overview": "Công thức tổng quát, sai phân tuyến tính và ứng dụng bài toán gửi góp tiết kiệm, vay trả góp ngân hàng.",
+    "theory_markdown": "### 1. Cấp số cộng (CSC)\n- Định nghĩa: \\(u_{n+1} = u_n + d\\) (với \\(d\\) là công sai).\n- Số hạng tổng quát: \\(u_n = u_1 + (n - 1)d\\).\n- Tổng \\(n\\) số hạng đầu: \\(S_n = \\frac{n(u_1 + u_n)}{2} = \\frac{n[2u_1 + (n - 1)d]}{2}\\).\n- Tính chất trung bình cộng: \\(u_k = \\frac{u_{k-1} + u_{k+1}}{2}\\) \\((k \\ge 2)\\).\n\n### 2. Cấp số nhân (CSN)\n- Định nghĩa: \\(u_{n+1} = u_n \\cdot q\\) (với \\(q\\) là công bội).\n- Số hạng tổng quát: \\(u_n = u_1 \\cdot q^{n - 1}\\).\n- Tổng \\(n\\) số hạng đầu (với \\(q \\ne 1\\)): \\(S_n = u_1 \\frac{1 - q^n}{1 - q}\\).\n- Tổng CSN lùi vô hạn (\\(|q| < 1\\)): \\(S = \\frac{u_1}{1 - q}\\).\n- Tính chất trung bình nhân: \\(u_k^2 = u_{k-1} \\cdot u_{k+1}\\) \\((k \\ge 2)\\).",
+    "formulas": [
+      {
+        "id": "kb_toan11_02_f1",
+        "name": "Công thức Vay trả góp định kỳ (Amortization)",
+        "latex": "M = A \\frac{r(1 + r)^n}{(1 + r)^n - 1}",
+        "desc": "Số tiền trả đều đặn M mỗi tháng khi vay A triệu đồng lãi suất r trong n tháng",
+        "tags": [
+          "Tài chính",
+          "Lãi kép",
+          "Trả góp"
+        ]
+      },
+      {
+        "id": "kb_toan11_02_f2",
+        "name": "Tổng cấp số nhân lùi vô hạn",
+        "latex": "S = \\sum_{k=1}^\\infty u_1 q^{k-1} = \\frac{u_1}{1 - q} \\quad (|q| < 1)",
+        "desc": "Hội tụ tổng vô hạn của cấp số nhân khi công bội trị tuyệt đối nhỏ hơn 1",
+        "tags": [
+          "Chuỗi",
+          "Cấp số nhân"
+        ]
+      },
+      {
+        "id": "kb_toan11_02_f3",
+        "name": "Cấp số cộng toàn diện (Arithmetic Progression)",
+        "latex": "u_n = u_1 + (n-1)d, \\quad S_n = \\frac{n(u_1 + u_n)}{2} = \\frac{n[2u_1 + (n-1)d]}{2}, \\quad u_k = \\frac{u_{k-1} + u_{k+1}}{2}",
+        "desc": "Số hạng tổng quát, tổng n số hạng đầu và tính chất trung bình cộng của cấp số cộng",
+        "tags": [
+          "Cấp số cộng",
+          "Dãy số"
+        ]
+      },
+      {
+        "id": "kb_toan11_02_f4",
+        "name": "Cấp số nhân toàn diện (Geometric Progression)",
+        "latex": "u_n = u_1 \\cdot q^{n-1}, \\quad S_n = u_1 \\frac{1 - q^n}{1 - q} \\; (q \\ne 1), \\quad u_k^2 = u_{k-1} \\cdot u_{k+1}",
+        "desc": "Số hạng tổng quát, tổng n số hạng đầu và tính chất trung bình nhân của cấp số nhân",
+        "tags": [
+          "Cấp số nhân",
+          "Dãy số"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan11_02_f1",
+      "kb_toan11_02_f2",
+      "kb_toan11_02_f3",
+      "kb_toan11_02_f4"
+    ],
+    "prerequisites": [
+      "kb_toan10_01"
+    ],
+    "related_topics": [
+      "kb_toan11_03"
+    ],
+    "common_traps": [
+      "Nhầm lẫn công thức số hạng tổng quát của CSC (dùng n thay vì n-1)",
+      "Áp dụng công thức tổng CSN lùi vô hạn khi |q| >= 1"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tính tiền vay mua nhà trả góp",
+        "question": "Anh Nam vay ngân hàng 1 tỷ đồng với lãi suất 0,8%/tháng. Anh trả góp đều đặn hàng tháng trong 5 năm (60 tháng). Tính số tiền anh Nam phải trả mỗi tháng.",
+        "solution_steps": [
+          "Bước 1: Áp dụng công thức Amortization với \\(A = 10^9\\), \\(r = 0,008\\), \\(n = 60\\).",
+          "Bước 2: Mẫu số: \\((1 + 0,008)^{60} - 1 \\approx 1,6122 - 1 = 0,6122\\).",
+          "Bước 3: Tử số: \\(10^9 \\times 0,008 \\times 1,6122 = 12.897.600\\).",
+          "Bước 4: \\(M = \\frac{12.897.600}{0,6122} \\approx 21.067.000\\text{ VNĐ}\\)."
+        ],
+        "takeaway": "Nắm vững công thức trả góp đều đặn M = A * r(1+r)^n / ((1+r)^n - 1)."
+      }
+    ],
+    "applications": "Mô hình định giá trái phiếu, tính khấu hao tài sản cố định, quy hoạch hưu trí tài chính cá nhân.",
+    "drill_tags": [
+      "Cấp số cộng",
+      "Cấp số nhân",
+      "Lãi kép",
+      "Tài chính"
+    ],
+    "related_question_ids": [
+      "q_tsa_08",
+      "q_hsa_08",
+      "q_thpt_05"
+    ]
+  },
+  {
+    "id": "kb_toan11_03",
+    "grade": "Toán 11",
+    "chapter": "Chương 3: Giới hạn & Hàm số liên tục",
+    "title": "Giới hạn dãy số, Giới hạn hàm số & Định lý Bolzano-Cauchy",
+    "overview": "Phương pháp nhân liên hợp khử dạng vô định 0/0, vô cùng trừ vô cùng và định lý giá trị trung gian Bolzano-Cauchy.",
+    "theory_markdown": "### 1. Giới hạn cơ bản & Vô định\n- Các dạng vô định kinh điển: \\(\\frac{0}{0}, \\frac{\\infty}{\\infty}, \\infty - \\infty, 0 \\cdot \\infty\\).\n- Kỹ thuật nhân lượng liên hợp:\n  - Bậc hai: \\(a - b = \\frac{a^2 - b^2}{a + b}\\).\n  - Bậc ba: \\(a - b = \\frac{a^3 - b^3}{a^2 + ab + b^2}\\).\n- Giới hạn then chốt:\n  - \\(\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1\\).\n  - \\(\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1, \\quad \\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = 1\\).\n\n### 2. Định lý Bolzano-Cauchy (Giá trị trung gian)\nNếu hàm số \\(y = f(x)\\) liên tục trên đoạn \\([a; b]\\) và \\(f(a) \\cdot f(b) < 0\\), thì tồn tại ít nhất một điểm \\(c \\in (a; b)\\) sao cho \\(f(c) = 0\\).",
+    "formulas": [
+      {
+        "id": "kb_toan11_03_f1",
+        "name": "Giới hạn lượng giác cơ bản",
+        "latex": "\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1, \\quad \\lim_{x \\to 0} \\frac{1 - \\cos x}{x^2} = \\frac{1}{2}",
+        "desc": "Giới hạn then chốt giải quyết các dạng vô định lượng giác 0/0",
+        "tags": [
+          "Giới hạn",
+          "Lượng giác"
+        ]
+      },
+      {
+        "id": "kb_toan11_03_f2",
+        "name": "Giới hạn số Euler e",
+        "latex": "\\lim_{n \\to \\infty} \\left(1 + \\frac{1}{n}\\right)^n = e, \\quad \\lim_{x \\to 0} (1 + x)^{1/x} = e",
+        "desc": "Hằng số Euler e và giới hạn định nghĩa hàm số mũ tự nhiên",
+        "tags": [
+          "Giới hạn",
+          "Số e"
+        ]
+      },
+      {
+        "id": "kb_toan11_03_f3",
+        "name": "Giới hạn hàm số mũ và logarit cơ bản",
+        "latex": "\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1, \\quad \\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = 1, \\quad \\lim_{x \\to 0} \\frac{(1+x)^\\alpha - 1}{x} = \\alpha",
+        "desc": "Hệ thống giới hạn hữu hạn cơ bản phục vụ giải nhanh dạng vô định 0/0",
+        "tags": [
+          "Giới hạn",
+          "Số Euler",
+          "Hàm số"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan11_03_f1",
+      "kb_toan11_03_f2",
+      "kb_toan11_03_f3"
+    ],
+    "prerequisites": [
+      "kb_toan11_02"
+    ],
+    "related_topics": [
+      "kb_toan11_04",
+      "kb_gt1_01"
+    ],
+    "common_traps": [
+      "Áp dụng lim(sin x / x) = 1 khi x tiến ra vô cùng (kết quả đúng phải là 0)",
+      "Quên nhân liên hợp bậc 3 đúng dạng hằng đẳng thức"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Chứng minh phương trình có nghiệm",
+        "question": "Chứng minh phương trình \\(x^5 - 3x - 1 = 0\\) có ít nhất 3 nghiệm thực phân biệt trên đoạn \\([-2; 2]\\).",
+        "solution_steps": [
+          "Bước 1: Đặt \\(f(x) = x^5 - 3x - 1\\), liên tục trên \\(\\mathbb{R}\\).",
+          "Bước 2: Tính các giá trị mốc: \\(f(-2) = -27 < 0\\), \\(f(-1) = 1 > 0\\), \\(f(0) = -1 < 0\\), \\(f(2) = 25 > 0\\).",
+          "Bước 3: Tích dấu đổi chiều liên tiếp: \\(f(-2)f(-1) < 0\\), \\(f(-1)f(0) < 0\\), \\(f(0)f(2) < 0\\).",
+          "Bước 4: Theo định lý Bolzano-Cauchy, tồn tại ít nhất 3 nghiệm thuộc \\((-2; -1), (-1; 0), (0; 2)\\)."
+        ],
+        "takeaway": "Tìm các giá trị mốc sao cho tích giá trị hàm số trái dấu để khẳng định nghiệm."
+      }
+    ],
+    "applications": "Thuật toán tìm nghiệm chia đôi (Bisection Method) trong tính toán số học, chứng minh tính liên tục trong cơ chế điều khiển robot tự hành.",
+    "drill_tags": [
+      "Giới hạn",
+      "Liên tục",
+      "Bolzano-Cauchy"
+    ],
+    "related_question_ids": [
+      "q_tsa_10",
+      "q_hsa_11",
+      "q_thpt_06"
+    ]
+  },
+  {
+    "id": "kb_toan11_04",
+    "grade": "Toán 11",
+    "chapter": "Chương 4: Đạo hàm & Tiếp tuyến",
+    "title": "Đạo hàm, Tiếp tuyến & Mô hình Vận tốc - Gia tốc tức thời",
+    "overview": "Định nghĩa đạo hàm qua giới hạn vi phân, quy tắc tính đạo hàm hàm hợp và ứng dụng tiếp tuyến trong đồ thị học.",
+    "theory_markdown": "### 1. Ý nghĩa hình học & Phương trình tiếp tuyến\n- Đạo hàm \\(f'(x_0)\\) là hệ số góc của tiếp tuyến tại điểm \\(M(x_0; y_0)\\).\n- Phương trình tiếp tuyến: \\(y = f'(x_0)(x - x_0) + y_0\\).\n\n### 2. Ý nghĩa vật lý\n- Vận tốc tức thời: \\(v(t) = s'(t)\\).\n- Gia tốc tức thời: \\(a(t) = v'(t) = s''(t)\\).\n\n### 3. Đạo hàm hàm hợp (Chain Rule)\nNếu \\(y = f(u)\\) và \\(u = u(x)\\) thì \\(y'_x = y'_u \\cdot u'_x\\).",
+    "formulas": [
+      {
+        "id": "kb_toan11_04_f1",
+        "name": "Phương trình tiếp tuyến tại điểm",
+        "latex": "y = f'(x_0)(x - x_0) + y_0",
+        "desc": "Phương trình tiếp tuyến của đồ thị hàm số y = f(x) tại tiếp điểm M(x0, y0)",
+        "tags": [
+          "Đạo hàm",
+          "Tiếp tuyến"
+        ]
+      },
+      {
+        "id": "kb_toan11_04_f2",
+        "name": "Đạo hàm hàm hợp (Chain Rule)",
+        "latex": "y = f(u(x)) \\implies y' = f'(u) \\cdot u'(x)",
+        "desc": "Quy tắc dây chuyền tính đạo hàm của hàm hợp",
+        "tags": [
+          "Đạo hàm",
+          "Hàm hợp"
+        ]
+      },
+      {
+        "id": "kb_toan11_04_f3",
+        "name": "Bảng đạo hàm các hàm sơ cấp cơ bản",
+        "latex": "(x^\\alpha)' = \\alpha x^{\\alpha-1}, \\quad (\\sqrt{x})' = \\frac{1}{2\\sqrt{x}}, \\quad (\\sin x)' = \\cos x, \\quad (\\cos x)' = -\\sin x, \\quad (\\tan x)' = \\frac{1}{\\cos^2 x}",
+        "desc": "Quy tắc đạo hàm chuẩn của hàm lũy thừa, căn bậc hai và hàm lượng giác",
+        "tags": [
+          "Đạo hàm",
+          "Quy tắc"
+        ]
+      },
+      {
+        "id": "kb_toan11_04_f4",
+        "name": "Công thức tính nhanh đạo hàm phân thức hữu tỉ",
+        "latex": "\\left(\\frac{ax+b}{cx+d}\\right)' = \\frac{ad - bc}{(cx+d)^2}, \\quad \\left(\\frac{ax^2+bx+c}{dx+e}\\right)' = \\frac{ad x^2 + 2ae x + (be - cd)}{(dx+e)^2}",
+        "desc": "Công thức định thức tính nhanh đạo hàm phân thức bậc 1/1 và bậc 2/1",
+        "tags": [
+          "Đạo hàm",
+          "Tính nhanh",
+          "Phân thức"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan11_04_f1",
+      "kb_toan11_04_f2",
+      "kb_toan11_04_f3",
+      "kb_toan11_04_f4"
+    ],
+    "prerequisites": [
+      "kb_toan11_03"
+    ],
+    "related_topics": [
+      "kb_toan12_01"
+    ],
+    "common_traps": [
+      "Quên nhân thêm u'(x) khi tính đạo hàm hàm hợp",
+      "Nhầm lẫn giữa tiếp tuyến 'tại điểm' và tiếp tuyến 'đi qua điểm'"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tìm gia tốc tức thời của vật thể",
+        "question": "Một vật chuyển động theo phương trình \\(s(t) = 2t^3 - 6t^2 + 15t\\) (m, giây). Tìm gia tốc của vật tại thời điểm vận tốc triệt tiêu.",
+        "solution_steps": [
+          "Bước 1: Vận tốc tức thời: \\(v(t) = s'(t) = 6t^2 - 12t + 15\\).",
+          "Bước 2: Tìm thời điểm vận tốc cực tiểu: \\(a(t) = v'(t) = 12t - 12\\).",
+          "Bước 3: Vận tốc triệt tiêu khi \\(6t^2 - 12t + 15 = 0\\), phương trình vô nghiệm thực (luôn dương).",
+          "Bước 4: Xét thời điểm vận tốc nhỏ nhất: \\(t = 1\\text{ s}\\), khi đó gia tốc \\(a(1) = 0\\text{ m/s}^2\\)."
+        ],
+        "takeaway": "Vận tốc là đạo hàm bậc nhất của quãng đường, gia tốc là đạo hàm bậc hai."
+      }
+    ],
+    "applications": "Mô phỏng động lực học ô tô, phân tích tốc độ phản ứng hóa học (Kinetics) và tối ưu hóa giải thuật học sâu Gradient Descent trong AI.",
+    "drill_tags": [
+      "Đạo hàm",
+      "Tiếp tuyến",
+      "Vận tốc",
+      "Gia tốc"
+    ],
+    "related_question_ids": [
+      "q_tsa_13",
+      "q_hsa_14",
+      "q_thpt_08"
+    ]
+  },
+  {
+    "id": "kb_toan11_05",
+    "grade": "Toán 11",
+    "chapter": "Chương 5: Xác suất & Đại số tổ hợp",
+    "title": "Xác suất có điều kiện, Biến cố độc lập, Bayes & Đại số tổ hợp",
+    "overview": "Công thức xác suất có điều kiện, định lý Bayes, hệ biến cố đầy đủ, công thức nhân xác suất và đại số tổ hợp nhị thức Newton.",
+    "theory_markdown": "### 1. Đại số tổ hợp nền tảng\n- Hoán vị: \\(P_n = n!\\).\n- Chỉnh hợp (chọn và xếp thứ tự): \\(A_n^k = \\frac{n!}{(n-k)!}\\).\n- Tổ hợp (chọn không thứ tự): \\(C_n^k = \\frac{n!}{k!(n-k)!}\\).\n- Nhị thức Newton: \\((a+b)^n = \\sum_{k=0}^n C_n^k a^{n-k} b^k\\).\n\n### 2. Xác suất có điều kiện & Công thức nhân\n- Xác suất có điều kiện của A khi biết B đã xảy ra: \\(P(A|B) = \\frac{P(A \\cap B)}{P(B)}\\).\n- Công thức nhân: \\(P(A \\cap B) = P(B) \\cdot P(A|B) = P(A) \\cdot P(B|A)\\).\n- Nếu A và B độc lập: \\(P(A \\cap B) = P(A) \\cdot P(B)\\).\n\n### 3. Công thức xác suất toàn phần & Định lý Bayes\nCho \\(\\{A_1, A_2, \\dots, A_n\\}\\) là hệ biến cố đầy đủ:\n- Xác suất toàn phần: \\(P(B) = \\sum_{i=1}^n P(A_i) \\cdot P(B|A_i)\\).\n- Định lý Bayes: \\(P(A_k|B) = \\frac{P(A_k) \\cdot P(B|A_k)}{P(B)}\\).",
+    "formulas": [
+      {
+        "id": "kb_toan11_05_f1",
+        "name": "Định lý Bayes",
+        "latex": "P(A_i|B) = \\frac{P(A_i)P(B|A_i)}{\\sum_{j=1}^n P(A_j)P(B|A_j)}",
+        "desc": "Tính xác suất hậu nghiệm dựa trên thông tin quan sát mới",
+        "tags": [
+          "Xác suất",
+          "Bayes"
+        ]
+      },
+      {
+        "id": "kb_toan11_05_f2",
+        "name": "Công thức nhân xác suất",
+        "latex": "P(A \\cap B) = P(A)P(B|A) = P(B)P(A|B)",
+        "desc": "Xác suất của giao hai biến cố có điều kiện",
+        "tags": [
+          "Xác suất",
+          "Nhân xác suất"
+        ]
+      },
+      {
+        "id": "kb_toan11_05_f3",
+        "name": "Hoán vị, Chỉnh hợp, Tổ hợp & Nhị thức Newton",
+        "latex": "P_n = n!, \\quad A_n^k = \\frac{n!}{(n-k)!}, \\quad C_n^k = \\frac{n!}{k!(n-k)!}, \\quad (a+b)^n = \\sum_{k=0}^n C_n^k a^{n-k} b^k",
+        "desc": "Các công thức đếm đại số tổ hợp nền tảng và khai triển nhị thức",
+        "tags": [
+          "Tổ hợp",
+          "Chỉnh hợp",
+          "Nhị thức Newton"
+        ]
+      },
+      {
+        "id": "kb_toan11_05_f4",
+        "name": "Công thức xác suất toàn phần (Total Probability)",
+        "latex": "P(B) = \\sum_{i=1}^n P(A_i) \\cdot P(B|A_i) \\quad (\\{A_1, \\dots, A_n\\} \\text{ là hệ đầy đủ})",
+        "desc": "Tính xác suất biên của biến cố thông qua phân rã điều kiện theo hệ đầy đủ",
+        "tags": [
+          "Xác suất",
+          "Xác suất toàn phần"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan11_05_f1",
+      "kb_toan11_05_f2",
+      "kb_toan11_05_f3",
+      "kb_toan11_05_f4"
+    ],
+    "prerequisites": [
+      "kb_toan10_05"
+    ],
+    "related_topics": [
+      "kb_toan12_05"
+    ],
+    "common_traps": [
+      "Nhầm lẫn giữa P(A|B) và P(B|A)",
+      "Không nhận diện được hệ biến cố đầy đủ khi áp dụng công thức xác suất toàn phần"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Bài toán chẩn đoán y khoa qua Bayes",
+        "question": "Một căn bệnh hiếm có tỷ lệ nhiễm là 0,1% dân số. Xét nghiệm phát hiện bệnh có độ nhạy 99% (người bệnh xét nghiệm dương tính 99%) và độ đặc hiệu 95% (người không bệnh xét nghiệm âm tính 95%). Một người đi xét nghiệm nhận kết quả dương tính. Xác suất người này thực sự mắc bệnh là bao nhiêu?",
+        "solution_steps": [
+          "Bước 1: Gọi D là biến cố mắc bệnh: \\(P(D) = 0,001\\), \\(P(\\bar{D}) = 0,999\\).",
+          "Bước 2: Gọi T+ là kết quả dương tính: \\(P(T+|D) = 0,99\\), \\(P(T+|\\bar{D}) = 1 - 0,95 = 0,05\\).",
+          "Bước 3: Xác suất toàn phần ra dương tính: \\(P(T+) = 0,001(0,99) + 0,999(0,05) = 0,00099 + 0,04995 = 0,05094\\).",
+          "Bước 4: Áp dụng định lý Bayes: \\(P(D|T+) = \\frac{0,00099}{0,05094} \\approx 1,94\\%\\)."
+        ],
+        "takeaway": "Mặc dù xét nghiệm có độ chính xác 99%, xác suất người dương tính thực sự mắc bệnh chỉ ~2% do bệnh quá hiếm (nghịch lý tỷ lệ nền - Base Rate Fallacy)."
+      }
+    ],
+    "applications": "Bộ lọc thư rác Naive Bayes Spam Filter, đánh giá rủi ro gian lận tín dụng ngân hàng, xét nghiệm y tế chẩn đoán lâm sàng.",
+    "drill_tags": [
+      "Xác suất có điều kiện",
+      "Bayes",
+      "Tổ hợp"
+    ],
+    "related_question_ids": [
+      "q_tsa_15",
+      "q_hsa_16",
+      "q_thpt_09"
+    ]
+  }
+]

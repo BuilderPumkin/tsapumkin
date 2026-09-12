@@ -1,0 +1,2212 @@
+[
+  {
+    "id": "q_hsa_01",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Cấp số nhân",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Cho cấp số nhân \\((u_n)\\) có số hạng đầu \\(u_1 = 3\\) và công bội \\(q = 2\\). Giá trị của số hạng thứ 8 là:",
+    "options": [
+      "192",
+      "384",
+      "768",
+      "256"
+    ],
+    "correct_answer": 1,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Số hạng tổng quát: \\(u_8 = u_1 \\cdot q^7 = 3 \\cdot 2^7 = 3 \\cdot 128 = 384\\).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan11_02"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Cấp số nhân",
+      "Dãy số",
+      "HSA"
+    ],
+    "knowledge_id": "kb_toan11_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_02",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Xác suất",
+    "subtopic": "Biến cố đối",
+    "skills": [
+      "skill_probability",
+      "skill_reasoning",
+      "skill_data_analysis"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Một hộp chứa 6 quả cầu đỏ và 4 quả cầu xanh. Lấy ngẫu nhiên đồng thời 3 quả cầu. Xác suất để lấy được ít nhất 1 quả cầu đỏ là:",
+    "options": [
+      "\\(\\frac{29}{30}\\)",
+      "\\(\\frac{1}{30}\\)",
+      "\\(\\frac{5}{6}\\)",
+      "\\(\\frac{4}{5}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Xác suất biến cố đối (cả 3 quả đều xanh): \\(P(\\bar{A}) = \\frac{C_4^3}{C_{10}^3} = \\frac{4}{120} = \\frac{1}{30}\\). Do đó xác suất cần tìm là \\(1 - 1/30 = 29/30\\).",
+    "common_traps": [
+      "Nhầm giữa biến cố độc lập và biến cố xung khắc",
+      "Không áp dụng đúng công thức Bayes",
+      "Đếm lặp trường hợp khi áp dụng quy tắc cộng"
+    ],
+    "prerequisites": [
+      "kb_toan10_05"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Xác suất",
+      "Tổ hợp",
+      "Biến cố đối"
+    ],
+    "knowledge_id": "kb_toan10_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_03",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Phương trình Logarit",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Nghiệm của phương trình \\(\\log_2(x - 1) + \\log_2(x + 1) = 3\\) là:",
+    "options": [
+      "\\(x = \\pm 3\\)",
+      "\\(x = 3\\)",
+      "\\(x = \\sqrt{10}\\)",
+      "\\(x = 4\\)"
+    ],
+    "correct_answer": 1,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Điều kiện \\(x > 1\\). Phương trình trở thành \\(x^2 - 1 = 8 \\iff x^2 = 9 \\implies x = 3\\).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2024,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Logarit",
+      "Điều kiện nghiệm"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_04",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Thể tích khối chóp",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Cho hình chóp \\(S.ABC\\) có đáy \\(ABC\\) là tam giác vuông cân tại \\(B\\), cạnh \\(AB = a\\). Cạnh bên \\(SA\\) vuông góc với mặt phẳng đáy và \\(SA = a\\sqrt{2}\\). Thể tích của khối chóp \\(S.ABC\\) bằng:",
+    "options": [
+      "\\(\\frac{a^3\\sqrt{2}}{6}\\)",
+      "\\(\\frac{a^3\\sqrt{2}}{2}\\)",
+      "\\(\\frac{a^3\\sqrt{2}}{3}\\)",
+      "\\(\\frac{a^3}{6}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Thể tích: \\(V = \\frac{1}{3} S_{ABC} \\cdot SA = \\frac{1}{3} \\cdot \\frac{a^2}{2} \\cdot a\\sqrt{2} = \\frac{a^3\\sqrt{2}}{6}\\).",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Hình chóp",
+      "Thể tích",
+      "Không gian"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_05",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Cấp số cộng",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Một cấp số cộng \\((u_n)\\) có số hạng đầu \\(u_1 = -2\\) và công sai \\(d = 5\\). Số hạng thứ 20 của cấp số cộng là:",
+    "options": [
+      "93",
+      "98",
+      "103",
+      "88"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Công thức số hạng tổng quát: \\(u_n = u_1 + (n-1)d\\). Với \\(n = 20\\): \\(u_{20} = -2 + 19 \\cdot 5 = -2 + 95 = 93\\).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan11_02"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Cấp số cộng",
+      "Đại số"
+    ],
+    "knowledge_id": "kb_toan11_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_06",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Cực trị lượng giác",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Giá trị lớn nhất của hàm số lượng giác \\(y = 2\\sin x + 3\\cos x\\) là:",
+    "options": [
+      "5",
+      "\\(\\sqrt{13}\\)",
+      "\\(\\sqrt{5}\\)",
+      "13"
+    ],
+    "correct_answer": 1,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Theo bất đẳng thức Cauchy-Schwarz: \\((2\\sin x + 3\\cos x)^2 \\le (2^2 + 3^2)(\\sin^2 x + \\cos^2 x) = 13 \\cdot 1 = 13\\). Vậy giá trị lớn nhất là \\(\\sqrt{13}\\).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan11_01"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Lượng giác",
+      "Max Min"
+    ],
+    "knowledge_id": "kb_toan11_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_07",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Toán tài chính & Lãi kép",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Bác An gửi tiết kiệm 100 triệu đồng vào ngân hàng với lãi suất kép 6%/năm. Hỏi sau 3 năm, số tiền cả gốc và lãi bác An nhận được là bao nhiêu (làm tròn đến triệu đồng)?",
+    "options": [
+      "118 triệu",
+      "119 triệu",
+      "120 triệu",
+      "121 triệu"
+    ],
+    "correct_answer": 1,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Công thức lãi kép: \\(A = P(1 + r)^n = 100(1 + 0,06)^3 = 100(1,191016) \\approx 119,1\\) triệu đồng.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan11_02"
+    ],
+    "year": 2024,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Lãi kép",
+      "Toán tài chính"
+    ],
+    "knowledge_id": "kb_toan11_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_08",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Phương trình lượng giác",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Số nghiệm của phương trình lượng giác \\(\\cos 2x - 3\\cos x + 2 = 0\\) trên đoạn \\([0, 2\\pi]\\) là:",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "1"
+    ],
+    "correct_answer": 2,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Biến đổi: \\(2\\cos^2 x - 1 - 3\\cos x + 2 = 0 \\iff 2\\cos^2 x - 3\\cos x + 1 = 0\\). Nghiệm \\(\\cos x = 1\\) (ra nghiệm \\(x = 0, x = 2\\pi\\)) hoặc \\(\\cos x = 1/2\\) (ra \\(x = \\pi/3, x = 5\\pi/3\\)). Trên \\([0, 2\\pi]\\) có đúng 4 nghiệm phân biệt.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan11_01"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Lượng giác",
+      "Số nghiệm"
+    ],
+    "knowledge_id": "kb_toan11_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_09",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Thể tích lăng trụ",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Thể tích của khối lăng trụ đứng tam giác đều có tất cả các cạnh đều bằng \\(a\\) là:",
+    "options": [
+      "\\(\\frac{a^3\\sqrt{3}}{4}\\)",
+      "\\(\\frac{a^3\\sqrt{3}}{12}\\)",
+      "\\(\\frac{a^3}{4}\\)",
+      "\\(\\frac{a^3\\sqrt{3}}{2}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Diện tích đáy tam giác đều: \\(S = \\frac{a^2\\sqrt{3}}{4}\\). Chiều cao lăng trụ bằng \\(a\\). Thể tích: \\(V = S \\cdot h = \\frac{a^3\\sqrt{3}}{4}\\).",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2024,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Lăng trụ đứng",
+      "Thể tích"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_10",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Xác suất",
+    "subtopic": "Chỉnh hợp & Tổ hợp",
+    "skills": [
+      "skill_probability",
+      "skill_reasoning",
+      "skill_data_analysis"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Từ một nhóm gồm 10 học sinh, có bao nhiêu cách bầu chọn một ban cán sự lớp gồm 1 lớp trưởng, 1 lớp phó học tập và 1 lớp phó đời sống (mỗi người giữ đúng 1 chức vụ)?",
+    "options": [
+      "720",
+      "120",
+      "240",
+      "504"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Chọn và xếp chức vụ 3 người từ 10 người là chỉnh hợp chập 3 của 10: \\(A_{10}^3 = 10 \\cdot 9 \\cdot 8 = 720\\) cách.",
+    "common_traps": [
+      "Nhầm giữa biến cố độc lập và biến cố xung khắc",
+      "Không áp dụng đúng công thức Bayes",
+      "Đếm lặp trường hợp khi áp dụng quy tắc cộng"
+    ],
+    "prerequisites": [
+      "kb_toan10_05"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Chỉnh hợp",
+      "Xác suất"
+    ],
+    "knowledge_id": "kb_toan10_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_11",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Bất phương trình mũ",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Tập nghiệm của bất phương trình mũ \\(2^{2x} - 5 \\cdot 2^x + 4 \\le 0\\) là đoạn \\([a, b]\\). Giá trị của biểu thức \\(P = b - a\\) bằng:",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct_answer": 1,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Đặt \\(t = 2^x > 0\\), bất phương trình trở thành \\(t^2 - 5t + 4 \\le 0 \\iff 1 \\le t \\le 4\\). Suy ra \\(1 \\le 2^x \\le 4 \\iff 0 \\le x \\le 2\\). Vậy đoạn nghiệm là \\([0, 2]\\), hiệu \\(b - a = 2 - 0 = 2\\).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2024,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Mũ",
+      "Bất phương trình"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_12",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Khoảng cách điểm đến mặt phẳng",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Trong không gian \\(Oxyz\\), khoảng cách từ điểm \\(M(1, 2, -3)\\) đến mặt phẳng \\((P): 2x - 2y + z + 11 = 0\\) bằng:",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "1"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Áp dụng công thức khoảng cách: \\(d = \\frac{|2(1) - 2(2) + (-3) + 11|}{\\sqrt{2^2 + (-2)^2 + 1^2}} = \\frac{|2 - 4 - 3 + 11|}{\\sqrt{9}} = \\frac{6}{3} = 2\\).",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxyz",
+      "Khoảng cách"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_13",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Hình nón & Tròn xoay",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Một người thợ kim hoàn có một tấm vàng mỏng hình tròn bán kính \\(R = 6\\text{ cm}\\). Người đó cắt bỏ một hình quạt tròn góc ở tâm \\(120^\\circ\\) rồi uốn phần còn lại thành một chiếc phễu hình nón. Bán kính đáy \\(r\\) của chiếc phễu đó bằng:",
+    "options": [
+      "4 cm",
+      "2 cm",
+      "3 cm",
+      "4,5 cm"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Độ dài cung tròn còn lại góc 240° (4π/3 rad) là C = R · θ = 6 · (4π/3) = 8π cm.<br>Chu vi đáy hình nón là 2πr = 8π => r = 4 cm.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Hình nón",
+      "Chu vi",
+      "Quạt tròn"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_14",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Thống kê",
+    "subtopic": "Trung vị mẫu số liệu ghép nhóm",
+    "skills": [
+      "skill_probability",
+      "skill_data_analysis"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Cho bảng số liệu ghép nhóm về điểm kiểm tra môn Toán của 40 học sinh: nhóm [5; 7) có 8 học sinh, nhóm [7; 8) có 18 học sinh, nhóm [8; 9) có 10 học sinh, nhóm [9; 10] có 4 học sinh. Tứ phân vị thứ hai (trung vị) của mẫu số liệu ghép nhóm thuộc nhóm nào?",
+    "options": [
+      "[7; 8)",
+      "[8; 9)",
+      "[5; 7)",
+      "[9; 10]"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Cỡ mẫu n = 40. Vị trí trung vị n/2 = 20. Tần số tích lũy: nhóm 1 là 8; nhóm 2 là 8 + 18 = 26 ≥ 20. Do đó trung vị Me thuộc nhóm [7; 8).",
+    "common_traps": [
+      "Bất cẩn trong biến đổi đại số cơ bản",
+      "Bỏ quên điều kiện ràng buộc của bài toán"
+    ],
+    "prerequisites": [
+      "kb_toan12_05"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Thống kê",
+      "Ghép nhóm",
+      "Trung vị"
+    ],
+    "knowledge_id": "kb_toan12_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_15",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tích phân từng phần",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Biết rằng \\(\\int_0^1 (2x + 3)e^x dx = a \\cdot e + b\\) với \\(a, b\\) là các số nguyên. Giá trị của \\(a + b\\) bằng:",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "1"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "I = [(2x + 1)e^x]₀¹ = 3e - 1 => a = 3, b = -1 => a + b = 2.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_03"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Tích phân",
+      "Từng phần"
+    ],
+    "knowledge_id": "kb_toan12_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_16",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Đồ thị hàm phân thức bậc nhất",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Cho hàm số \\(y = \\frac{ax + b}{cx + d}\\) có đồ thị đi qua \\(A(0, -1)\\) và có hai đường tiệm cận \\(x = 1, y = 2\\). Giá trị biểu thức \\(T = a + b + c + d\\) khi chọn \\(c = 1\\) là:",
+    "options": [
+      "3",
+      "0",
+      "1",
+      "2"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Tiệm cận đứng x = 1 => d = -1. Tiệm cận ngang y = 2 => a = 2. Qua (0, -1) => b/(-1) = -1 => b = 1. T = 2 + 1 + 1 - 1 = 3.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Tiệm cận",
+      "Hàm phân thức"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_17",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tích phân trong chuyển động",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Một người chạy bộ trên một đoạn đường thẳng với vận tốc biến thiên theo thời gian \\(v(t) = 6t - t^2\\) (m/s) trong khoảng thời gian từ \\(t = 0\\) đến khi vận tốc giảm về 0. Quãng đường người đó chạy được là:",
+    "options": [
+      "36 m",
+      "18 m",
+      "24 m",
+      "54 m"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Vận tốc giảm về 0 khi: 6t - t² = 0 ⇔ t = 6 giây.<br>Quãng đường s = ∫₀⁶ (6t - t²) dt = [3t² - t³/3]₀⁶ = 3(36) - 216/3 = 108 - 72 = 36 m.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_03"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Vận tốc",
+      "Quãng đường",
+      "Tích phân"
+    ],
+    "knowledge_id": "kb_toan12_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_18",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Bất đẳng thức AM-GM",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tìm giá trị nhỏ nhất của hàm số \\(f(x) = x + \\frac{4}{x - 1}\\) trên khoảng \\((1; +\\infty)\\).",
+    "options": [
+      "5",
+      "4",
+      "3",
+      "6"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Biến đổi: f(x) = (x - 1) + 4/(x - 1) + 1.<br>Vì x > 1, áp dụng AM-GM cho 2 số dương (x - 1) và 4/(x - 1):<br>(x - 1) + 4/(x - 1) ≥ 2√[(x - 1) · 4/(x - 1)] = 2√4 = 4.<br>Do đó f(x) ≥ 4 + 1 = 5. Dấu '=' xảy ra khi (x - 1)² = 4 ⇔ x - 1 = 2 ⇔ x = 3.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "AM-GM",
+      "Min Max",
+      "Cực trị"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_19",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Mặt cầu tiếp xúc mặt phẳng tọa độ",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Trong không gian Oxyz, phương trình mặt cầu có tâm \\(I(2, -1, 3)\\) và tiếp xúc với mặt phẳng \\((Oxy)\\) là:",
+    "options": [
+      "\\((x-2)^2 + (y+1)^2 + (z-3)^2 = 9\\)",
+      "\\((x-2)^2 + (y+1)^2 + (z-3)^2 = 4\\)",
+      "\\((x-2)^2 + (y+1)^2 + (z-3)^2 = 1\\)",
+      "\\((x-2)^2 + (y+1)^2 + (z-3)^2 = 14\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Khoảng cách từ tâm I(2, -1, 3) đến mặt phẳng (Oxy): z = 0 là R = |z_I| = |3| = 3.<br>Bán kính R = 3 => R² = 9.<br>Phương trình mặt cầu: (x-2)² + (y+1)² + (z-3)² = 9.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxyz",
+      "Mặt cầu",
+      "Tiếp xúc"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_20",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Xác suất",
+    "subtopic": "Xác suất cổ điển xúc xắc",
+    "skills": [
+      "skill_probability",
+      "skill_reasoning",
+      "skill_data_analysis"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Gieo đồng thời hai con xúc xắc cân đối đồng chất. Xác suất để tổng số chấm xuất hiện trên hai mặt bằng 8 là:",
+    "options": [
+      "\\(\\frac{5}{36}\\)",
+      "\\(\\frac{1}{6}\\)",
+      "\\(\\frac{1}{9}\\)",
+      "\\(\\frac{7}{36}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Không gian mẫu: n(Ω) = 6 × 6 = 36.<br>Các cặp có tổng bằng 8: (2,6), (3,5), (4,4), (5,3), (6,2) gồm 5 trường hợp.<br>Xác suất: P = 5/36.",
+    "common_traps": [
+      "Nhầm giữa biến cố độc lập và biến cố xung khắc",
+      "Không áp dụng đúng công thức Bayes",
+      "Đếm lặp trường hợp khi áp dụng quy tắc cộng"
+    ],
+    "prerequisites": [
+      "kb_toan10_05"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Xúc xắc",
+      "Không gian mẫu"
+    ],
+    "knowledge_id": "kb_toan10_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_21",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Khảo sát tiệm cận đứng",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Số đường tiệm cận đứng của đồ thị hàm số \\(y = \\frac{x - 2}{x^2 - 4}\\) là:",
+    "options": [
+      "1",
+      "2",
+      "0",
+      "3"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Mẫu số x² - 4 = 0 ⇔ x = 2 hoặc x = -2.<br>Tại x = 2: lim_{x→2} (x - 2)/[(x-2)(x+2)] = lim 1/(x+2) = 1/4 (hữu hạn, không phải tiệm cận đứng).<br>Tại x = -2: lim_{x→-2} 1/(x+2) = ∞ (là tiệm cận đứng duy nhất x = -2). Vậy có 1 đường tiệm cận đứng.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Tiệm cận đứng",
+      "Khử dạng vô định"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_22",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Thể tích lăng trụ đứng",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Cho hình lăng trụ đứng \\(ABC.A'B'C'\\) có đáy \\(ABC\\) là tam giác vuông tại \\(A\\), \\(AB = 3, AC = 4\\), chiều cao \\(AA' = 5\\). Thể tích khối lăng trụ đó bằng:",
+    "options": [
+      "30",
+      "60",
+      "20",
+      "15"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Diện tích đáy tam giác vuông: S = (1/2) · 3 · 4 = 6.<br>Thể tích lăng trụ: V = S · h = 6 · 5 = 30.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Lăng trụ",
+      "Thể tích",
+      "Tam giác vuông"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_tf_01",
+    "type": "true_false_group",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Xác suất",
+    "subtopic": "Xác suất cổ điển & Tổ hợp",
+    "skills": [
+      "skill_probability",
+      "skill_reasoning",
+      "skill_data_analysis"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 100,
+    "question": "Một hộp kín chứa 5 quả cầu màu đỏ và 4 quả cầu màu xanh có cùng kích thước. Lấy ngẫu nhiên đồng thời 3 quả cầu từ hộp. Xét tính đúng / sai của các khẳng định sau:",
+    "options": null,
+    "correct_answer": null,
+    "items": [
+      {
+        "label": "a",
+        "text": "Số phần tử của không gian mẫu là \\(n(\\Omega) = C_9^3 = 84\\).",
+        "correct": true
+      },
+      {
+        "label": "b",
+        "text": "Xác suất để lấy được 3 quả cầu cùng màu đỏ là \\(\\frac{5}{42}\\).",
+        "correct": true
+      },
+      {
+        "label": "c",
+        "text": "Số cách lấy được 3 quả cầu có cả hai màu là 50 cách.",
+        "correct": false
+      },
+      {
+        "label": "d",
+        "text": "Xác suất để trong 3 quả cầu lấy ra có đúng 2 quả màu đỏ là \\(\\frac{10}{21}\\).",
+        "correct": true
+      }
+    ],
+    "correct_value": null,
+    "explanation": "a) Đúng: \\(n(\\Omega) = C_9^3 = \\frac{9 \\cdot 8 \\cdot 7}{6} = 84\\).<br>b) Đúng: Số cách chọn 3 quả đỏ là \\(C_5^3 = 10\\). Xác suất \\(P = 10/84 = 5/42\\).<br>c) Sai: Số cách chọn 3 quả cùng màu là \\(C_5^3 + C_4^3 = 10 + 4 = 14\\). Do đó số cách chọn có cả 2 màu là \\(84 - 14 = 70\\) cách (không phải 50).<br>d) Đúng: Số cách lấy 2 đỏ, 1 xanh là \\(C_5^2 \\cdot C_4^1 = 10 \\cdot 4 = 40\\). Xác suất \\(P = 40/84 = 10/21\\).",
+    "common_traps": [
+      "Nhầm giữa biến cố độc lập và biến cố xung khắc",
+      "Không áp dụng đúng công thức Bayes",
+      "Đếm lặp trường hợp khi áp dụng quy tắc cộng"
+    ],
+    "prerequisites": [
+      "kb_toan10_05"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Đúng/Sai chùm",
+      "Xác suất",
+      "Tổ hợp"
+    ],
+    "knowledge_id": "kb_toan10_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_sa_01",
+    "type": "short_answer",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Cực trị trái dấu",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Có bao nhiêu giá trị nguyên của tham số \\(m\\) thuộc đoạn \\([-5; 5]\\) để hàm số \\(y = x^3 - 3mx^2 + 3(m^2 - 1)x\\) có hai điểm cực trị nằm về hai phía của trục tung?",
+    "options": null,
+    "correct_answer": null,
+    "items": null,
+    "correct_value": "1",
+    "explanation": "Hàm số có hai cực trị nằm về hai phía trục tung khi và chỉ khi phương trình y' = 0 có hai nghiệm trái dấu: x₁ · x₂ < 0.<br>y' = 3x² - 6mx + 3(m² - 1) = 0 ⇔ x² - 2mx + (m² - 1) = 0.<br>Hai nghiệm trái dấu ⇔ a · c < 1 · (m² - 1) < 0 ⇔ -1 < m < 1.<br>Vì m nguyên nên m = 0 (đúng 1 giá trị).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Điền đáp số",
+      "Cực trị",
+      "Tham số m"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_23",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Tổng n số hạng cấp số cộng",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tổng của 10 số hạng đầu tiên của cấp số cộng có số hạng đầu \\(u_1 = 4\\) và công sai \\(d = 3\\) là:",
+    "options": [
+      "175",
+      "160",
+      "190",
+      "145"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "S₁₀ = 10 · [2(4) + 9(3)] / 2 = 5 · (8 + 27) = 5 · 35 = 175.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan11_02"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Cấp số cộng",
+      "Tổng CSC"
+    ],
+    "knowledge_id": "kb_toan11_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_24",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Cấp số nhân lùi vô hạn",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Một người thả một quả bóng từ độ cao 10 m xuống mặt đất. Sau mỗi lần chạm đất, bóng nảy lên độ cao bằng 3/4 độ cao của lần rơi trước đó. Tổng quãng đường quả bóng di chuyển được kể từ lúc thả đến khi bóng dừng hẳn là:",
+    "options": [
+      "70 m",
+      "40 m",
+      "60 m",
+      "80 m"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Lần rơi đầu: 10 m.<br>Các lần nảy lên và rơi xuống sau: 2 × [10(3/4) + 10(3/4)² + ...].<br>Tổng chuỗi CSN lùi vô hạn: S = 10 + 20 × [(3/4) / (1 - 3/4)] = 10 + 20 × 3 = 10 + 60 = 70 m.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan11_02"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Cấp số nhân",
+      "CSN lùi vô hạn",
+      "Vật lý"
+    ],
+    "knowledge_id": "kb_toan11_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_25",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Góc giữa hai mặt phẳng Oxyz",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Góc giữa hai mặt phẳng \\((P): x + y - 2 = 0\\) và \\((Q): y + z + 1 = 0\\) bằng:",
+    "options": [
+      "60°",
+      "45°",
+      "30°",
+      "90°"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Vectơ pháp tuyến: n_P = (1, 1, 0), n_Q = (0, 1, 1).<br>cos φ = |n_P · n_Q| / (|n_P| · |n_Q|) = |1(0) + 1(1) + 0(1)| / (√2 · √2) = 1/2 => φ = 60°.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxyz",
+      "Góc hai mặt phẳng"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_26",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Nhị thức Newton",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Hệ số của số hạng chứa \\(x^3\\) trong khai triển nhị thức Newton \\((2x - 1)^5\\) là:",
+    "options": [
+      "80",
+      "-80",
+      "40",
+      "-40"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Số hạng tổng quát: T_{k+1} = C₅^k (2x)^{5-k} (-1)^k = C₅^k 2^{5-k} (-1)^k x^{5-k}.<br>Cần số hạng chứa x³ => 5 - k = 3 => k = 2.<br>Hệ số: C₅² · 2³ · (-1)² = 10 · 8 · 1 = 80.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan10_05"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Nhị thức Newton",
+      "Hệ số"
+    ],
+    "knowledge_id": "kb_toan10_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_27",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Bất phương trình chứa căn",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tập nghiệm của bất phương trình \\(\\sqrt{x - 1} < 3\\) là:",
+    "options": [
+      "\\([1; 10)\\)",
+      "\\((-\\infty; 10)\\)",
+      "\\((1; 10)\\)",
+      "\\([1; 10]\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Điều kiện: x - 1 ≥ 0 ⇔ x ≥ 1.<br>Bình phương 2 vế: x - 1 < 9 ⇔ x < 10.<br>Tập nghiệm: [1; 10).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan10_01"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Căn thức",
+      "Bất phương trình"
+    ],
+    "knowledge_id": "kb_toan10_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_28",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Đạo hàm hàm logarit",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tính đạo hàm của hàm số \\(y = \\log_3(x^2 + 1)\\) tại \\(x = 1\\).",
+    "options": [
+      "\\(\\frac{1}{\\ln 3}\\)",
+      "\\(\\frac{2}{\\ln 3}\\)",
+      "\\(\\frac{1}{2\\ln 3}\\)",
+      "\\(1\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "y' = (x² + 1)' / [(x² + 1) ln 3] = 2x / [(x² + 1) ln 3].<br>Tại x = 1: y'(1) = 2(1) / [(1 + 1) ln 3] = 2 / (2 ln 3) = 1 / ln 3.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Đạo hàm",
+      "Logarit"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_29",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Khoảng cách hai đường thẳng song song phẳng",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Khoảng cách giữa hai đường thẳng song song \\(d_1: 3x - 4y + 5 = 0\\) và \\(d_2: 3x - 4y - 15 = 0\\) trong mặt phẳng Oxy bằng:",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "5"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Công thức khoảng cách hai đường song song: d = |c₁ - c₂| / √(a² + b²) = |5 - (-15)| / √(3² + (-4)²) = 20 / 5 = 4.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan10_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxy",
+      "Khoảng cách",
+      "Hình học phẳng"
+    ],
+    "knowledge_id": "kb_toan10_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_30",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Thống kê",
+    "subtopic": "Tính phương sai mẫu số liệu",
+    "skills": [
+      "skill_probability",
+      "skill_data_analysis"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Một mẫu số liệu gồm 5 giá trị: 4, 6, 8, 10, 12. Phương sai \\(s^2\\) của mẫu số liệu này bằng:",
+    "options": [
+      "8",
+      "2√2",
+      "10",
+      "6,4"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Trung bình: x̄ = (4 + 6 + 8 + 10 + 12) / 5 = 40 / 5 = 8.<br>Phương sai: s² = [(-4)² + (-2)² + 0² + 2² + 4²] / 5 = (16 + 4 + 0 + 4 + 16) / 5 = 40 / 5 = 8.",
+    "common_traps": [
+      "Bất cẩn trong biến đổi đại số cơ bản",
+      "Bỏ quên điều kiện ràng buộc của bài toán"
+    ],
+    "prerequisites": [
+      "kb_toan10_05"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Thống kê",
+      "Phương sai"
+    ],
+    "knowledge_id": "kb_toan10_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_31",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Bất phương trình logarit nghiệm nguyên",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Nghiệm nguyên nhỏ nhất của bất phương trình \\(\\log_3(x - 2) > 2\\) là:",
+    "options": [
+      "12",
+      "11",
+      "10",
+      "13"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "log₃(x - 2) > 2 ⇔ x - 2 > 3² = 9 ⇔ x > 11. Nghiệm nguyên nhỏ nhất là x = 12.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Logarit",
+      "Nghiệm nguyên"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_32",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Thể tích lăng trụ tam giác đều",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Cho hình lăng trụ tam giác đều \\(ABC.A'B'C'\\) có cạnh đáy bằng \\(a\\) và cạnh bên bằng \\(2a\\). Thể tích của khối lăng trụ đó là:",
+    "options": [
+      "\\(\\frac{a^3\\sqrt{3}}{2}\\)",
+      "\\(\\frac{a^3\\sqrt{3}}{6}\\)",
+      "\\(a^3\\sqrt{3}\\)",
+      "\\(\\frac{a^3\\sqrt{3}}{4}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Diện tích đáy tam giác đều: S = a²√3 / 4.<br>Thể tích: V = S · h = (a²√3 / 4) · (2a) = a³√3 / 2.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Lăng trụ đều",
+      "Thể tích"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_33",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Định lý Viète cho cực trị bậc ba",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Biết rằng đồ thị hàm số \\(y = x^3 - 3x^2 + mx - 1\\) có hai điểm cực trị \\(x_1, x_2\\) thỏa mãn \\(x_1^2 + x_2^2 = 6\\). Giá trị của tham số m bằng:",
+    "options": [
+      "-3",
+      "3",
+      "0",
+      "1"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "y' = 3x² - 6x + m = 0. Theo Viète: x₁ + x₂ = 2, x₁ · x₂ = m/3.<br>x₁² + x₂² = (x₁ + x₂)² - 2x₁ x₂ = 4 - 2m/3 = 6 ⇔ 2m/3 = -2 ⇔ m = -3.<br>Khi m = -3, Δ' = 9 - 3(-3) = 18 > 0 (thỏa mãn có 2 cực trị).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Viète",
+      "Cực trị",
+      "Tham số m"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_34",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Xác suất",
+    "subtopic": "Xác suất chọn tổ hợp hai nhóm",
+    "skills": [
+      "skill_probability",
+      "skill_reasoning",
+      "skill_data_analysis"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Một lớp học có 25 học sinh nam và 15 học sinh nữ. Chọn ngẫu nhiên 2 học sinh đi dự đại hội Đoàn. Xác suất để chọn được 1 học sinh nam và 1 học sinh nữ là:",
+    "options": [
+      "\\(\\frac{25}{52}\\)",
+      "\\(\\frac{15}{52}\\)",
+      "\\(\\frac{1}{2}\\)",
+      "\\(\\frac{5}{13}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "n(Ω) = C₄₀² = 780.<br>Số cách chọn 1 nam và 1 nữ: 25 × 15 = 375.<br>Xác suất P = 375 / 780 = 25 / 52.",
+    "common_traps": [
+      "Nhầm giữa biến cố độc lập và biến cố xung khắc",
+      "Không áp dụng đúng công thức Bayes",
+      "Đếm lặp trường hợp khi áp dụng quy tắc cộng"
+    ],
+    "prerequisites": [
+      "kb_toan10_05"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Xác suất",
+      "Tổ hợp"
+    ],
+    "knowledge_id": "kb_toan10_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_35",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Mặt phẳng trung trực Oxyz",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Trong không gian Oxyz, cho hai điểm \\(A(1, 1, 2)\\) và \\(B(3, 5, 4)\\). Phương trình mặt phẳng trung trực của đoạn thẳng AB là:",
+    "options": [
+      "\\(x + 2y + z - 11 = 0\\)",
+      "\\(x + 2y + z + 11 = 0\\)",
+      "\\(2x + 4y + 2z - 9 = 0\\)",
+      "\\(x + 2y - z - 5 = 0\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Trung điểm M của AB là M(2, 3, 3).<br>Vectơ AB = (2, 4, 2) = 2(1, 2, 1).<br>Mặt phẳng trung trực qua M nhận n = (1, 2, 1) làm pháp tuyến:<br>1(x - 2) + 2(y - 3) + 1(z - 3) = 0 ⇔ x + 2y + z - 11 = 0.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxyz",
+      "Mặt phẳng trung trực"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_36",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tối ưu hóa diện tích hàng rào",
+    "skills": [
+      "skill_modeling",
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Một người nông dân muốn rào một khu vườn hình chữ nhật có một cạnh giáp bờ sông (không cần làm rào ở cạnh này). Tổng chiều dài lưới thép có sẵn là 120 m. Diện tích lớn nhất của khu vườn mà người đó có thể rào được là:",
+    "options": [
+      "1800 m²",
+      "3600 m²",
+      "2400 m²",
+      "1600 m²"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Gọi x là độ dài 2 cạnh vuông góc với bờ sông (x > 0). Cạnh song song bờ sông có chiều dài 120 - 2x.<br>Diện tích: S(x) = x(120 - 2x) = -2x² + 120x.<br>Parabol đạt cực đại tại x = -120 / (2 · (-2)) = 30 m.<br>Diện tích lớn nhất S_max = 30 · (120 - 60) = 1800 m².",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan10_03"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Tối ưu parabol",
+      "Hình chữ nhật"
+    ],
+    "knowledge_id": "kb_toan10_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_37",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Tập hợp điểm biểu diễn số phức",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tập hợp các điểm biểu diễn số phức z thỏa mãn điều kiện \\(|z - 1 + 2i| = 3\\) trong mặt phẳng phức là:",
+    "options": [
+      "Đường tròn tâm I(1, -2), bán kính R = 3",
+      "Đường tròn tâm I(-1, 2), bán kính R = 3",
+      "Đường tròn tâm I(1, -2), bán kính R = 9",
+      "Đường thẳng x - 2y = 3"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Đặt z = x + yi. Ta có |(x - 1) + (y + 2)i| = 3 ⇔ (x - 1)² + (y + 2)² = 9.<br>Đây là phương trình đường tròn tâm I(1, -2) và bán kính R = 3.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Số phức",
+      "Tập hợp điểm",
+      "Đường tròn"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_38",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Nguyên hàm lượng giác cơ bản",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Nguyên hàm của hàm số \\(f(x) = \\cos(3x + 1)\\) là:",
+    "options": [
+      "\\(\\frac{1}{3}\\sin(3x + 1) + C\\)",
+      "\\(-\\frac{1}{3}\\sin(3x + 1) + C\\)",
+      "\\(3\\sin(3x + 1) + C\\)",
+      "\\(\\sin(3x + 1) + C\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "∫ cos(ax + b) dx = (1/a) sin(ax + b) + C. Với a = 3 => (1/3) sin(3x + 1) + C.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_03"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Nguyên hàm",
+      "Lượng giác"
+    ],
+    "knowledge_id": "kb_toan12_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_39",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Đường sinh hình nón",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Một hình nón có bán kính đáy \\(r = 5\\) và diện tích xung quanh \\(S_{xq} = 65\\pi\\). Độ dài đường sinh \\(l\\) của hình nón bằng:",
+    "options": [
+      "13",
+      "12",
+      "10",
+      "15"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "S_xq = π r l ⇔ 65π = π · 5 · l => l = 65 / 5 = 13.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Hình nón",
+      "Đường sinh"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_40",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Bất phương trình mũ",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Bất phương trình \\(3^{x^2 - 4} \\ge 1\\) có tập nghiệm là:",
+    "options": [
+      "\\((-\\infty; -2] \\cup [2; +\\infty)\\)",
+      "\\([-2; 2]\\)",
+      "\\((-\\infty; -2) \\cup (2; +\\infty)\\)",
+      "\\(\\mathbb{R}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "3^{x² - 4} ≥ 3⁰ ⇔ x² - 4 ≥ 0 ⇔ x ≤ -2 hoặc x ≥ 2. Tập nghiệm: (-∞; -2] ∪ [2; +∞).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Mũ",
+      "Bất phương trình"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_46",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Công thức Heron tính diện tích tam giác",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Cho tam giác ABC có ba cạnh \\(a = 5, b = 6, c = 7\\). Diện tích của tam giác ABC theo công thức Heron bằng:",
+    "options": [
+      "\\(6\\sqrt{6}\\)",
+      "\\(12\\sqrt{3}\\)",
+      "\\(18\\)",
+      "\\(8\\sqrt{5}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Nửa chu vi p = (5 + 6 + 7) / 2 = 9.<br>Heron: S = √[9(9 - 5)(9 - 6)(9 - 7)] = √[9 · 4 · 3 · 2] = √216 = 6√6.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan10_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Heron",
+      "Diện tích tam giác",
+      "Hình học phẳng"
+    ],
+    "knowledge_id": "kb_toan10_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_47",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tâm đối xứng đồ thị hàm phân thức",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Đồ thị hàm số \\(y = \\frac{2x + 1}{x - 3}\\) có tâm đối xứng là điểm nào?",
+    "options": [
+      "\\(I(3, 2)\\)",
+      "\\(I(-3, 2)\\)",
+      "\\(I(3, -2)\\)",
+      "\\(I(2, 3)\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Tâm đối xứng của đồ thị hàm phân thức bậc nhất là giao điểm của 2 đường tiệm cận: tiệm cận đứng x = 3, tiệm cận ngang y = 2 => I(3, 2).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Tâm đối xứng",
+      "Tiệm cận"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_48",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Phương trình đường tròn phẳng",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Trong mặt phẳng Oxy, phương trình đường tròn có tâm \\(I(1, -2)\\) và đi qua điểm \\(A(4, 2)\\) là:",
+    "options": [
+      "\\((x - 1)^2 + (y + 2)^2 = 25\\)",
+      "\\((x - 1)^2 + (y + 2)^2 = 5\\)",
+      "\\((x + 1)^2 + (y - 2)^2 = 25\\)",
+      "\\((x - 1)^2 + (y + 2)^2 = 16\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Bán kính R = IA = √[(4 - 1)² + (2 - (-2))²] = √[3² + 4²] = 5.<br>Phương trình đường tròn: (x - 1)² + (y + 2)² = 25.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan10_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Đường tròn",
+      "Oxy"
+    ],
+    "knowledge_id": "kb_toan10_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_49",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Bất phương trình logarit chứa điều kiện",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Tập nghiệm của bất phương trình \\(\\log_2(x^2 - 3x) \\le 2\\) là:",
+    "options": [
+      "\\([-1; 0) \\cup (3; 4]\\)",
+      "\\([-1; 4]\\)",
+      "\\((0; 3)\\)",
+      "\\((-\\infty; -1] \\cup [4; +\\infty)\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Điều kiện: x² - 3x > 0 ⇔ x < 0 hoặc x > 3.<br>Bất phương trình: x² - 3x ≤ 2² = 4 ⇔ x² - 3x - 4 ≤ 0 ⇔ -1 ≤ x ≤ 4.<br>Kết hợp điều kiện: x ∈ [-1; 0) ∪ (3; 4].",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Logarit",
+      "Bất phương trình"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_hsa_50",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "HSA",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Diện tích toàn phần hình lập phương",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tính diện tích toàn phần của hình lập phương có cạnh bằng \\(3\\text{ cm}\\).",
+    "options": [
+      "54 cm²",
+      "27 cm²",
+      "36 cm²",
+      "18 cm²"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Hình lập phương có 6 mặt hình vuông: S_tp = 6 · a² = 6 · 3² = 54 cm².",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi ĐGNL ĐHQGHN",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Hình lập phương",
+      "Diện tích toàn phần"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  }
+]

@@ -1,0 +1,96 @@
+[
+  {
+    "id": "skill_reasoning",
+    "name": "Tư duy suy luận logic & Chứng minh",
+    "category": "Tư duy & Lập luận",
+    "description": "Khả năng phân tích giả thiết, nhận diện tính đúng sai của khẳng định, suy diễn logic đa tầng và phát hiện mâu thuẫn dữ kiện trong bài toán.",
+    "prerequisites": [
+      "kb_toan10_01"
+    ],
+    "related_topics": [
+      "Hàm số",
+      "Bất đẳng thức",
+      "Hình học không gian",
+      "Logic mệnh đề"
+    ]
+  },
+  {
+    "id": "skill_calculation",
+    "name": "Kỹ năng tính toán & Biến đổi đại số",
+    "category": "Kỹ năng tính toán",
+    "description": "Mức độ chính xác và thuần thục trong các phép biến đổi đại số, lượng giác, đạo hàm, nguyên hàm, tích phân và giải hệ phương trình.",
+    "prerequisites": [
+      "kb_toan10_02",
+      "kb_toan11_01"
+    ],
+    "related_topics": [
+      "Đại số",
+      "Giải tích",
+      "Số phức",
+      "Mũ và Logarit"
+    ]
+  },
+  {
+    "id": "skill_modeling",
+    "name": "Mô hình hóa toán học thực tế",
+    "category": "Mô hình hóa toán học",
+    "description": "Năng lực chuyển đổi bài toán đời sống (kinh tế, sinh học, vật lý, kỹ thuật) thành mô hình hàm số hoặc phương trình tối ưu để giải quyết.",
+    "prerequisites": [
+      "kb_toan12_01",
+      "skill_calculation"
+    ],
+    "related_topics": [
+      "Tối ưu hóa",
+      "Ứng dụng đạo hàm",
+      "Tăng trưởng mũ",
+      "Bài toán cực trị"
+    ]
+  },
+  {
+    "id": "skill_spatial",
+    "name": "Trực giác hình học không gian & Tọa độ Oxyz",
+    "category": "Trực giác hình học",
+    "description": "Khả năng tưởng tượng vị trí tương đối trong không gian 3 chiều, thiết lập hệ trục tọa độ Oxyz và giải các bài toán cực trị khoảng cách, góc.",
+    "prerequisites": [
+      "kb_toan11_02",
+      "kb_toan12_03"
+    ],
+    "related_topics": [
+      "Hình học không gian",
+      "Hình học Oxyz",
+      "Khối đa diện",
+      "Mặt cầu"
+    ]
+  },
+  {
+    "id": "skill_probability",
+    "name": "Phân tích dữ liệu & Xác suất thống kê",
+    "category": "Xử lý dữ liệu & Xác suất",
+    "description": "Kỹ năng tính số phần tử biến cố, vận dụng quy tắc đếm, công thức xác suất toàn phần, công thức Bayes và phân tích xu hướng số liệu thống kê.",
+    "prerequisites": [
+      "kb_toan10_01",
+      "kb_toan11_03"
+    ],
+    "related_topics": [
+      "Tổ hợp",
+      "Xác suất cổ điển",
+      "Xác suất có điều kiện",
+      "Công thức Bayes"
+    ]
+  },
+  {
+    "id": "skill_data_analysis",
+    "name": "Đọc hiểu biểu đồ & Ma trận thông tin",
+    "category": "Xử lý dữ liệu & Xác suất",
+    "description": "Năng lực đọc hiểu bảng số liệu thực nghiệm, đồ thị hàm số động, biểu đồ phân bố và trích xuất thông tin định lượng chính xác.",
+    "prerequisites": [
+      "skill_reasoning"
+    ],
+    "related_topics": [
+      "Đồ thị hàm số",
+      "Thống kê",
+      "Bảng biến thiên",
+      "Biểu đồ"
+    ]
+  }
+]

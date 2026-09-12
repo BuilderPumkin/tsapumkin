@@ -1,0 +1,351 @@
+[
+  {
+    "id": "kb_gt1_01",
+    "grade": "Giải tích 1",
+    "chapter": "Chương 1: Dãy số thực & Giới hạn",
+    "title": "Dãy số thực, Định lý Kẹp & Vô cùng bé Tương đương",
+    "overview": "Định nghĩa giới hạn dãy số, tiêu chuẩn Weierstrass đơn điệu bị chặn, định lý kẹp ba chàng ngự lâm và bảng thay thế vô cùng bé tương đương.",
+    "theory_markdown": "### 1. Dãy số thực & Tiêu chuẩn Weierstrass\n- Dãy số \\((x_n)\\) tăng và bị chặn trên thì có giới hạn hữu hạn: \\(\\lim x_n = \\sup \\{x_n\\}\\).\n- Dãy số \\((x_n)\\) giảm và bị chặn dưới thì có giới hạn hữu hạn: \\(\\lim x_n = \\inf \\{x_n\\}\\).\n- Định lý kẹp: Nếu \\(y_n \\le x_n \\le z_n\\) với mọi \\(n\\) và \\(\\lim y_n = \\lim z_n = L\\) thì \\(\\lim x_n = L\\).\n\n### 2. Bảng Vô cùng bé Tương đương chuẩn (khi \\(x \\to 0\\))\n- \\(\\sin x \\sim x\\); \\(\\tan x \\sim x\\); \\(\\arcsin x \\sim x\\); \\(\\arctan x \\sim x\\)\n- \\(\\ln(1 + x) \\sim x\\); \\(e^x - 1 \\sim x\\); \\(a^x - 1 \\sim x \\ln a\\)\n- \\(1 - \\cos x \\sim \\frac{x^2}{2}\\)\n- \\((1 + x)^\\alpha - 1 \\sim \\alpha x\\) (Đặc biệt: \\(\\sqrt{1 + x} - 1 \\sim \\frac{x}{2}\\))",
+    "formulas": [
+      {
+        "id": "kb_gt1_01_f1",
+        "name": "Vô cùng bé tương đương lượng giác",
+        "latex": "\\sin x \\sim x, \\quad \\tan x \\sim x, \\quad \\arcsin x \\sim x, \\quad \\arctan x \\sim x \\quad (x \\to 0)",
+        "desc": "Thay thế tương đương khi tính giới hạn các biểu thức lượng giác",
+        "tags": [
+          "Giải tích 1",
+          "Vô cùng bé"
+        ]
+      },
+      {
+        "id": "kb_gt1_01_f2",
+        "name": "Bảng vô cùng bé tương đương chuẩn khi x dần về 0",
+        "latex": "\\sin x \\sim x, \\quad \\tan x \\sim x, \\quad \\ln(1+x) \\sim x, \\quad e^x - 1 \\sim x, \\quad 1 - \\cos x \\sim \\frac{x^2}{2}, \\quad (1+x)^\\alpha - 1 \\sim \\alpha x",
+        "desc": "Bảng quy tắc thay thế vô cùng bé tương đương giải quyết nhanh giới hạn dạng 0/0",
+        "tags": [
+          "Giải tích 1",
+          "Vô cùng bé",
+          "Giới hạn"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_gt1_01_f1",
+      "kb_gt1_01_f2"
+    ],
+    "prerequisites": [
+      "kb_toan11_03"
+    ],
+    "related_topics": [
+      "kb_gt1_02"
+    ],
+    "common_traps": [
+      "Thay thế vô cùng bé tương đương vào một hiệu (f(x) - g(x)) khi hai số hạng triệt tiêu nhau",
+      "Áp dụng quy tắc tương đương khi x không dần về 0"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tính giới hạn bằng vô cùng bé tương đương",
+        "question": "Tính giới hạn \\(L = \\lim_{x \\to 0} \\frac{\\ln(1 + 3x) \\cdot (e^{2x} - 1)}{1 - \\cos 4x}\\).",
+        "solution_steps": [
+          "Bước 1: Khi \\(x \\to 0\\), ta có các vô cùng bé tương đương:",
+          "Tử số: \\(\\ln(1 + 3x) \\sim 3x\\) và \\(e^{2x} - 1 \\sim 2x\\). Do đó Tử số \\(\\sim 3x \\cdot 2x = 6x^2\\).",
+          "Mẫu số: \\(1 - \\cos 4x \\sim \\frac{(4x)^2}{2} = 8x^2\\).",
+          "Bước 2: Thay vào biểu thức giới hạn: \\(L = \\lim_{x \\to 0} \\frac{6x^2}{8x^2} = \\frac{6}{8} = \\frac{3}{4}\\)."
+        ],
+        "takeaway": "Chỉ được thay vô cùng bé tương đương vào một tích hoặc một thương."
+      }
+    ],
+    "applications": "Xấp xỉ tuyến tính trong kỹ thuật điều khiển tự động, phân tích độ nhạy của cảm biến công nghiệp, xấp xỉ sai số đo lường vật lý.",
+    "drill_tags": [
+      "Giải tích 1",
+      "Giới hạn",
+      "Vô cùng bé"
+    ],
+    "related_question_ids": [
+      "q_calc_01",
+      "q_calc_07"
+    ]
+  },
+  {
+    "id": "kb_gt1_02",
+    "grade": "Giải tích 1",
+    "chapter": "Chương 2: Phép tính vi phân hàm một biến",
+    "title": "Khai triển Taylor-Maclaurin, Đạo hàm Leibniz & Quy tắc L'Hôpital",
+    "overview": "Đạo hàm cấp cao của tích bằng công thức Leibniz, khử dạng vô định bằng quy tắc L'Hôpital và xấp xỉ hàm số bằng đa thức Taylor-Maclaurin.",
+    "theory_markdown": "### 1. Đạo hàm cấp cao & Công thức Leibniz\nCho hai hàm số \\(u(x), v(x)\\) có đạo hàm đến cấp \\(n\\):\n\\[(u \\cdot v)^{(n)} = \\sum_{k=0}^n C_n^k u^{(k)} v^{(n-k)}\\]\n\n### 2. Quy tắc L'Hôpital\nNếu \\(\\lim_{x \\to x_0} f(x) = \\lim_{x \\to x_0} g(x) = 0\\) (hoặc \\(\\pm\\infty\\)) và \\(g'(x) \\ne 0\\) trong lân cận \\(x_0\\), thì:\n\\[\\lim_{x \\to x_0} \\frac{f(x)}{g(x)} = \\lim_{x \\to x_0} \\frac{f'(x)}{g'(x)}\\]\n\n### 3. Khai triển Maclaurin của các hàm sơ cấp cơ bản\n- \\(e^x = 1 + x + \\frac{x^2}{2!} + \\dots + \\frac{x^n}{n!} + o(x^n)\\)\n- \\(\\sin x = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\dots + (-1)^n \\frac{x^{2n+1}}{(2n+1)!} + o(x^{2n+2})\\)\n- \\(\\cos x = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} - \\dots + (-1)^n \\frac{x^{2n}}{(2n)!} + o(x^{2n+1})\\)\n- \\(\\ln(1 + x) = x - \\frac{x^2}{2} + \\frac{x^3}{3} - \\dots + (-1)^{n-1}\\frac{x^n}{n} + o(x^n)\\)",
+    "formulas": [
+      {
+        "id": "kb_gt1_02_f1",
+        "name": "Công thức Leibniz đạo hàm cấp n của tích",
+        "latex": "(uv)^{(n)} = \\sum_{k=0}^n C_n^k u^{(k)} v^{(n-k)}",
+        "desc": "Tính đạo hàm cấp cao của tích hai hàm số khả vi n lần",
+        "tags": [
+          "Đạo hàm cấp cao",
+          "Leibniz"
+        ]
+      },
+      {
+        "id": "kb_gt1_02_f2",
+        "name": "Khai triển Maclaurin của e^x",
+        "latex": "e^x = \\sum_{k=0}^n \\frac{x^k}{k!} + o(x^n) = 1 + x + \\frac{x^2}{2!} + \\dots + \\frac{x^n}{n!} + o(x^n)",
+        "desc": "Xấp xỉ đa thức của hàm mũ tại lân cận x = 0",
+        "tags": [
+          "Maclaurin",
+          "Taylor"
+        ]
+      },
+      {
+        "id": "kb_gt1_02_f3",
+        "name": "Quy tắc L'Hôpital khử dạng vô định 0/0 và vô cùng / vô cùng",
+        "latex": "\\lim_{x \\to x_0} \\frac{f(x)}{g(x)} = \\lim_{x \\to x_0} \\frac{f'(x)}{g'(x)} \\quad \\left(\\text{khi } \\lim f(x) = \\lim g(x) = 0 \\text{ hoặc } \\pm\\infty\\right)",
+        "desc": "Quy tắc lấy đạo hàm tử và mẫu khử dạng vô định của Bernoulli và L'Hôpital",
+        "tags": [
+          "Giải tích 1",
+          "L'Hopital",
+          "Đạo hàm"
+        ]
+      },
+      {
+        "id": "kb_gt1_02_f4",
+        "name": "Bảng khai triển Maclaurin các hàm sơ cấp",
+        "latex": "\\sin x = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} + o(x^5), \\quad \\cos x = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} + o(x^4), \\quad \\ln(1+x) = x - \\frac{x^2}{2} + \\frac{x^3}{3} + o(x^3)",
+        "desc": "Xấp xỉ đa thức Taylor tại lân cận x = 0 của các hàm lượng giác và logarit",
+        "tags": [
+          "Giải tích 1",
+          "Maclaurin",
+          "Taylor"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_gt1_02_f1",
+      "kb_gt1_02_f2",
+      "kb_gt1_02_f3",
+      "kb_gt1_02_f4"
+    ],
+    "prerequisites": [
+      "kb_toan11_04"
+    ],
+    "related_topics": [
+      "kb_gt1_03"
+    ],
+    "common_traps": [
+      "Lạm dụng L'Hopital khi phân thức chưa phải là dạng vô định 0/0 hoặc vô cùng / vô cùng",
+      "Quên số dư Peano o(x^n) khi khai triển Taylor bậc n"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tính đạo hàm cấp 10 bằng Leibniz",
+        "question": "Tính đạo hàm cấp 10 của hàm số \\(y = x^2 e^{2x}\\).",
+        "solution_steps": [
+          "Bước 1: Chọn \\(u = e^{2x}\\) (đạo hàm cấp k là \\(2^k e^{2x}\\)) và \\(v = x^2\\) (đạo hàm cấp 1: 2x, cấp 2: 2, cấp >= 3: 0).",
+          "Bước 2: Áp dụng công thức Leibniz, chỉ giữ lại k = 0, 1, 2:",
+          "\\(y^{(10)} = C_{10}^0 u^{(10)} v + C_{10}^1 u^{(9)} v' + C_{10}^2 u^{(8)} v''\\).",
+          "Bước 3: Thay số:",
+          "\\(y^{(10)} = 1(2^{10} e^{2x})(x^2) + 10(2^9 e^{2x})(2x) + 45(2^8 e^{2x})(2)\\).",
+          "Bước 4: Rút gọn: \\(y^{(10)} = 2^8 e^{2x} (4x^2 + 20x + 90) = 2^9 e^{2x} (2x^2 + 10x + 45)\\)."
+        ],
+        "takeaway": "Chọn v là hàm đa thức để đạo hàm triệt tiêu nhanh chỉ sau vài bước."
+      }
+    ],
+    "applications": "Thuật toán tối ưu hóa bậc hai Newton-Raphson trong Machine Learning, ước lượng năng lượng hạt vi mô trong cơ học lượng tử.",
+    "drill_tags": [
+      "Leibniz",
+      "Taylor",
+      "Maclaurin",
+      "L'Hopital"
+    ],
+    "related_question_ids": [
+      "q_calc_02",
+      "q_calc_08"
+    ]
+  },
+  {
+    "id": "kb_gt1_03",
+    "grade": "Giải tích 1",
+    "chapter": "Chương 3: Tích phân Suy rộng",
+    "title": "Tích phân Suy rộng Loại 1 & Loại 2 Toàn diện",
+    "overview": "Tích phân với cận vô hạn (loại 1) và tích phân của hàm không bị chặn (loại 2), tiêu chuẩn so sánh hội tụ.",
+    "theory_markdown": "### 1. Tích phân suy rộng loại 1 (Cận vô hạn)\n\\(\\int_a^{+\\infty} f(x)\\,dx = \\lim_{t \\to +\\infty} \\int_a^t f(x)\\,dx\\).\nTích phân chuẩn Riemann:\n\\(\\int_1^{+\\infty} \\frac{1}{x^\\alpha}\\,dx\\) **hội tụ khi và chỉ khi \\(\\alpha > 1\\)** (phân kỳ khi \\(\\alpha \\le 1\\)).\n\n### 2. Tích phân suy rộng loại 2 (Hàm không bị chặn tại điểm kỳ dị)\nNếu \\(f(x)\\) gián đoạn vô cực tại \\(x = b\\):\n\\(\\int_a^b f(x)\\,dx = \\lim_{\\epsilon \\to 0^+} \\int_a^{b - \\epsilon} f(x)\\,dx\\).\nTích phân chuẩn:\n\\(\\int_0^1 \\frac{1}{x^\\alpha}\\,dx\\) **hội tụ khi và chỉ khi \\(\\alpha < 1\\)**.",
+    "formulas": [
+      {
+        "id": "kb_gt1_03_f1",
+        "name": "Tiêu chuẩn hội tụ Tích phân Riemann",
+        "latex": "\\int_1^{+\\infty} \\frac{dx}{x^\\alpha} \\text{ hội tụ } \\iff \\alpha > 1",
+        "desc": "Chuẩn mực so sánh kiểm tra hội tụ tích phân loại 1",
+        "tags": [
+          "Tích phân suy rộng",
+          "Hội tụ",
+          "Riemann"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_gt1_03_f1"
+    ],
+    "prerequisites": [
+      "kb_toan10_01"
+    ],
+    "related_topics": [],
+    "common_traps": [
+      "Nhầm lẫn điều kiện hội tụ giữa loại 1 (alpha > 1) và loại 2 (alpha < 1)"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Khảo sát sự hội tụ của tích phân",
+        "question": "Khảo sát sự hội tụ của \\(I = \\int_1^{+\\infty} \\frac{x + 2}{\\sqrt{x^5 + 3x}}\\,dx\\).",
+        "solution_steps": [
+          "Bước 1: Xét hàm dưới dấu tích phân khi \\(x \\to +\\infty\\):",
+          "Tử số: \\(x + 2 \\sim x\\). Mẫu số: \\(\\sqrt{x^5 + 3x} \\sim x^{5/2}\\).",
+          "Bước 2: Vô cùng lớn tương đương: \\(f(x) \\sim \\frac{x}{x^{5/2}} = \\frac{1}{x^{3/2}}\\).",
+          "Bước 3: Vì \\(\\int_1^{+\\infty} \\frac{1}{x^{3/2}}\\,dx\\) hội tụ (do \\(\\alpha = 3/2 > 1\\)), theo tiêu chuẩn so sánh giới hạn, tích phân \\(I\\) hội tụ."
+        ],
+        "takeaway": "Chỉ giữ lại bậc cao nhất ở cả tử và mẫu khi x tiến ra dương vô cùng."
+      }
+    ],
+    "applications": "Tính toán hàm mật độ xác suất liên tục trên miền vô hạn (phân phối chuẩn Gauss), lý thuyết điện từ trường trong không gian mở.",
+    "drill_tags": [
+      "Tích phân suy rộng",
+      "Tiêu chuẩn so sánh",
+      "Hội tụ"
+    ],
+    "related_question_ids": [
+      "q_calc_03",
+      "q_calc_09"
+    ]
+  },
+  {
+    "id": "kb_gt1_04",
+    "grade": "Giải tích 1",
+    "chapter": "Chương 4: Chuỗi số & Chuỗi hàm",
+    "title": "Chuỗi số Thực, Tiêu chuẩn D'Alembert & Bán kính Hội tụ",
+    "overview": "Tiêu chuẩn hội tụ chuỗi số dương D'Alembert, Cauchy, chuỗi đan dấu Leibniz và bán kính hội tụ chuỗi lũy thừa.",
+    "theory_markdown": "### 1. Chuỗi số dương & Tiêu chuẩn so sánh\n- Điều kiện cần để chuỗi \\(\\sum u_n\\) hội tụ: \\(\\lim_{n \\to \\infty} u_n = 0\\).\n- **Chuỗi điều hòa p-series**: \\(\\sum_{n=1}^\\infty \\frac{1}{n^p}\\) hội tụ khi \\(p > 1\\), phân kỳ khi \\(p \\le 1\\).\n\n### 2. Tiêu chuẩn D'Alembert (Tỉ số)\nXét \\(D = \\lim_{n \\to \\infty} \\frac{u_{n+1}}{u_n}\\):\n- Nếu \\(D < 1\\): Chuỗi hội tụ.\n- Nếu \\(D > 1\\): Chuỗi phân kỳ.\n- Nếu \\(D = 1\\): Chưa kết luận được (cần dùng tiêu chuẩn khác).\n\n### 3. Bán kính hội tụ chuỗi lũy thừa\nChuỗi \\(\\sum_{n=0}^\\infty a_n x^n\\) có bán kính hội tụ \\(R = \\lim_{n \\to \\infty} \\left|\\frac{a_n}{a_{n+1}}\\right|\\).",
+    "formulas": [
+      {
+        "id": "kb_gt1_04_f1",
+        "name": "Công thức Bán kính hội tụ D'Alembert",
+        "latex": "R = \\lim_{n \\to \\infty} \\left|\\frac{a_n}{a_{n+1}}\\right|",
+        "desc": "Xác định khoảng hội tụ (-R, R) của chuỗi lũy thừa",
+        "tags": [
+          "Chuỗi hàm",
+          "Bán kính hội tụ"
+        ]
+      },
+      {
+        "id": "kb_gt1_04_f2",
+        "name": "Chuỗi điều hòa p-series",
+        "latex": "\\sum_{n=1}^\\infty \\frac{1}{n^p} \\text{ hội tụ } \\iff p > 1",
+        "desc": "Chuẩn mực so sánh kiểm tra hội tụ chuỗi số",
+        "tags": [
+          "Chuỗi số",
+          "p-series"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_gt1_04_f1",
+      "kb_gt1_04_f2"
+    ],
+    "prerequisites": [
+      "kb_toan11_02"
+    ],
+    "related_topics": [],
+    "common_traps": [
+      "Quên kiểm tra sự hội tụ tại hai mút x = -R và x = R của khoảng hội tụ chuỗi lũy thừa",
+      "Nhầm lẫn D = 1 là hội tụ (thực tế chưa kết luận được)"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tìm bán kính hội tụ của chuỗi lũy thừa",
+        "question": "Tìm miền hội tụ của chuỗi lũy thừa \\(\\sum_{n=1}^\\infty \\frac{x^n}{n \\cdot 3^n}\\).",
+        "solution_steps": [
+          "Bước 1: Hệ số \\(a_n = \\frac{1}{n \\cdot 3^n}\\).",
+          "Bước 2: Bán kính hội tụ: \\(R = \\lim_{n \\to \\infty} \\frac{a_n}{a_{n+1}} = \\lim_{n \\to \\infty} \\frac{(n+1)3^{n+1}}{n 3^n} = 3 \\lim \\frac{n+1}{n} = 3\\).",
+          "Bước 3: Khoảng hội tụ: \\((-3; 3)\\).",
+          "Bước 4: Xét hai đầu mút:",
+          "- Tại \\(x = 3\\): Chuỗi trở thành \\(\\sum \\frac{1}{n}\\) (chuỗi điều hòa p = 1 phân kỳ).",
+          "- Tại \\(x = -3\\): Chuỗi trở thành \\(\\sum \\frac{(-1)^n}{n}\\) (chuỗi đan dấu hội tụ theo Leibniz).",
+          "Bước 5: Miền hội tụ: \\([-3; 3)\\)."
+        ],
+        "takeaway": "Luôn luôn phải kiểm tra độc lập tại 2 đầu mút sau khi tìm được bán kính R."
+      }
+    ],
+    "applications": "Khai triển giải thuật biến đổi Fourier nhanh (FFT), nén ảnh JPEG qua chuỗi Cosine rời rạc, tính toán xấp xỉ số học trong siêu máy tính.",
+    "drill_tags": [
+      "Chuỗi số",
+      "Bán kính hội tụ",
+      "D'Alembert"
+    ],
+    "related_question_ids": [
+      "q_calc_04",
+      "q_calc_10"
+    ]
+  },
+  {
+    "id": "kb_gt1_05",
+    "grade": "Giải tích 1",
+    "chapter": "Chương 5: Phương trình Vi phân",
+    "title": "Phương trình Vi phân Tuyến tính & Phương trình Đặc trưng",
+    "overview": "Phương trình vi phân cấp 1 tách biến, tuyến tính và phương trình vi phân tuyến tính cấp 2 hệ số hằng qua phương trình đặc trưng.",
+    "theory_markdown": "### 1. Phương trình vi phân tuyến tính cấp 1\nDạng: \\(y' + p(x)y = q(x)\\).\n- Thừa số tích phân: \\(I(x) = e^{\\int p(x)dx}\\).\n- Nghiệm tổng quát: \\(y = e^{-\\int p(x)dx} \\left[\\int q(x)e^{\\int p(x)dx}dx + C\\right]\\).\n\n### 2. Phương trình vi phân tuyến tính cấp 2 hệ số hằng thuần nhất\nDạng: \\(y'' + ay' + by = 0\\).\n- Phương trình đặc trưng: \\(k^2 + ak + b = 0\\).\n  - \\(\\Delta > 0\\) (2 nghiệm thực phân biệt \\(k_1, k_2\\)): \\(y = C_1 e^{k_1 x} + C_2 e^{k_2 x}\\).\n  - \\(\\Delta = 0\\) (nghiệm kép \\(k\\)): \\(y = (C_1 + C_2 x)e^{kx}\\).\n  - \\(\\Delta < 0\\) (nghiệm phức \\(\\alpha \\pm i\\beta\\)): \\(y = e^{\\alpha x}(C_1 \\cos\\beta x + C_2 \\sin\\beta x)\\).",
+    "formulas": [
+      {
+        "id": "kb_gt1_05_f1",
+        "name": "Nghiệm phương trình vi phân tuyến tính cấp 1",
+        "latex": "y = e^{-\\int p(x)dx} \\left(\\int q(x)e^{\\int p(x)dx}dx + C\\right)",
+        "desc": "Công thức tích phân thừa số giải phương trình vi phân tuyến tính bậc nhất",
+        "tags": [
+          "Vi phân cấp 1",
+          "Thừa số tích phân"
+        ]
+      },
+      {
+        "id": "kb_gt1_05_f2",
+        "name": "Phương trình đặc trưng cấp 2",
+        "latex": "k^2 + ak + b = 0",
+        "desc": "Giải nghiệm đại số tìm nghiệm cơ bản của phương trình vi phân cấp 2",
+        "tags": [
+          "Vi phân cấp 2",
+          "Phương trình đặc trưng"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_gt1_05_f1",
+      "kb_gt1_05_f2"
+    ],
+    "prerequisites": [
+      "kb_gt1_03"
+    ],
+    "related_topics": [],
+    "common_traps": [
+      "Quên dấu trừ trong mũ e^{-\\int p(x)dx} khi viết công thức nghiệm tổng quát",
+      "Nhầm lẫn giữa nghiệm kép (nhân thêm x) và hai nghiệm phân biệt"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Giải phương trình vi phân cấp 2 dao động",
+        "question": "Tìm nghiệm tổng quát của phương trình \\(y'' - 4y' + 13y = 0\\).",
+        "solution_steps": [
+          "Bước 1: Phương trình đặc trưng: \\(k^2 - 4k + 13 = 0\\).",
+          "Bước 2: Biệt thức: \\(\\Delta' = 4 - 13 = -9 = (3i)^2\\).",
+          "Bước 3: Nghiệm phức: \\(k_{1, 2} = 2 \\pm 3i \\implies \\alpha = 2, \\beta = 3\\).",
+          "Bước 4: Nghiệm tổng quát: \\(y = e^{2x}(C_1 \\cos 3x + C_2 \\sin 3x)\\) với \\(C_1, C_2 \\in \\mathbb{R}\\)."
+        ],
+        "takeaway": "Nghiệm phức liên hợp mô tả dao động điều hòa suy giảm hoặc tăng dần."
+      }
+    ],
+    "applications": "Mô hình hóa mạch dao động điện RLC trong kỹ thuật điện tử, dao động cơ học giảm chấn của hệ thống treo ô tô, động lực học quần thể sinh thái.",
+    "drill_tags": [
+      "Phương trình vi phân",
+      "Cấp 2",
+      "Dao động"
+    ],
+    "related_question_ids": [
+      "q_calc_05",
+      "q_calc_11"
+    ]
+  }
+]

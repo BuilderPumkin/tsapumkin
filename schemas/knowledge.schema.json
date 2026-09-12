@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/knowledge.schema.json",
+  "title": "PumkinKnowledgeArticle",
+  "description": "Đặc tả chuyên đề bài giảng lý thuyết, công thức toán học và sơ đồ tiên quyết trên nền tảng PUMKIN.DEV",
+  "type": "object",
+  "required": ["id", "grade", "chapter", "title", "theory_markdown"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^kb_[a-z0-9_]+$" },
+    "grade": { "type": "string" },
+    "chapter": { "type": "string" },
+    "title": { "type": "string" },
+    "overview": { "type": "string" },
+    "theory_markdown": { "type": "string" },
+    "formulas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "latex"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "latex": { "type": "string" },
+          "desc": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "formula_ids": {
+      "type": "array",
+      "description": "Danh sách ID công thức liên kết",
+      "items": { "type": "string" }
+    },
+    "prerequisites": {
+      "type": "array",
+      "description": "Danh sách ID chuyên đề hoặc kỹ năng tiên quyết",
+      "items": { "type": "string" }
+    },
+    "related_topics": {
+      "type": "array",
+      "description": "Danh sách ID các chuyên đề kế tiếp hoặc liên quan",
+      "items": { "type": "string" }
+    },
+    "common_traps": {
+      "type": "array",
+      "description": "Các sai lầm và hiểu lầm khái niệm học sinh thường mắc phải",
+      "items": { "type": "string" }
+    },
+    "examples": { "type": "array" },
+    "applications": { "type": "string" },
+    "drill_tags": { "type": "array", "items": { "type": "string" } },
+    "related_question_ids": { "type": "array", "items": { "type": "string" } }
+  }
+}

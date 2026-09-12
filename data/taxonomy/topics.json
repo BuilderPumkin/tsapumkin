@@ -1,0 +1,136 @@
+{
+  "grades": [
+    "Toán 10",
+    "Toán 11",
+    "Toán 12",
+    "Toán cao cấp",
+    "Giải tích 1"
+  ],
+  "exam_types": [
+    "TSA",
+    "HSA",
+    "THPT",
+    "Giải tích 1",
+    "Toán cao cấp"
+  ],
+  "difficulty_levels": [
+    "Dễ",
+    "Trung bình",
+    "Khó"
+  ],
+  "skills": [
+    {
+      "id": "skill_reasoning",
+      "name": "Tư duy suy luận logic & Chứng minh",
+      "category": "Tư duy & Lập luận"
+    },
+    {
+      "id": "skill_calculation",
+      "name": "Kỹ năng tính toán & Biến đổi đại số",
+      "category": "Kỹ năng tính toán"
+    },
+    {
+      "id": "skill_modeling",
+      "name": "Mô hình hóa toán học thực tế",
+      "category": "Mô hình hóa toán học"
+    },
+    {
+      "id": "skill_spatial",
+      "name": "Trực giác hình học không gian & Tọa độ Oxyz",
+      "category": "Trực giác hình học"
+    },
+    {
+      "id": "skill_probability",
+      "name": "Phân tích dữ liệu & Xác suất thống kê",
+      "category": "Xử lý dữ liệu & Xác suất"
+    },
+    {
+      "id": "skill_data_analysis",
+      "name": "Đọc hiểu biểu đồ & Ma trận thông tin",
+      "category": "Xử lý dữ liệu & Xác suất"
+    }
+  ],
+  "question_types": [
+    {
+      "key": "single_choice",
+      "name": "Trắc nghiệm 4 lựa chọn (A, B, C, D)"
+    },
+    {
+      "key": "true_false_group",
+      "name": "Đúng / Sai dạng chùm 4 ý (a, b, c, d)"
+    },
+    {
+      "key": "short_answer",
+      "name": "Điền đáp số ngắn"
+    },
+    {
+      "key": "step_solution",
+      "name": "Tự luận theo bước & Barem"
+    }
+  ],
+  "chapters_by_grade": {
+    "Toán 10": [
+      "Chương 1: Mệnh đề & Tập hợp",
+      "Chương 2: Bất phương trình & Hệ BPT bậc nhất hai ẩn",
+      "Chương 3: Hàm số bậc hai",
+      "Chương 4: Hệ thức lượng & Vectơ",
+      "Chương 5: Thống kê & Xác suất cổ điển"
+    ],
+    "Toán 11": [
+      "Chương 1: Hàm số & Phương trình lượng giác",
+      "Chương 2: Dãy số, Cấp số cộng & Cấp số nhân",
+      "Chương 3: Giới hạn & Tính liên tục",
+      "Chương 4: Đạo hàm & Ý nghĩa thực tiễn",
+      "Chương 5: Xác suất có điều kiện & Định lý Bayes"
+    ],
+    "Toán 12": [
+      "Chương 1: Ứng dụng Đạo hàm Khảo sát Hàm số",
+      "Chương 2: Hàm số Mũ, Logarit & Tăng trưởng",
+      "Chương 3: Nguyên hàm & Tích phân",
+      "Chương 4: Hình học Giải tích Oxyz",
+      "Chương 5: Thống kê Ghép nhóm & Xác suất Nâng cao"
+    ],
+    "Toán cao cấp": [
+      "Chương 1: Ma trận & Các phép toán Ma trận",
+      "Chương 2: Định thức & Quy tắc Cramer",
+      "Chương 3: Hệ Phương trình Tuyến tính & Khử Gauss",
+      "Chương 4: Không gian Vectơ, Cơ sở & Trị riêng",
+      "Chương 5: Xích Markov & Phân phối Dừng"
+    ],
+    "Giải tích 1": [
+      "Chương 1: Dãy số Thực & Vô cùng bé Tương đương",
+      "Chương 2: Khai triển Taylor-Maclaurin & Công thức Leibniz",
+      "Chương 3: Tích phân Suy rộng",
+      "Chương 4: Chuỗi số Thực & Chuỗi Lũy thừa",
+      "Chương 5: Phương trình Vi phân Cấp 1 & Cấp 2"
+    ]
+  },
+  "topics_by_exam": {
+    "TSA": [
+      "Giải tích",
+      "Hình học",
+      "Xác suất",
+      "Đại số",
+      "Thống kê"
+    ],
+    "HSA": [
+      "Đại số",
+      "Xác suất",
+      "Hình học",
+      "Thống kê",
+      "Giải tích"
+    ],
+    "THPT": [
+      "Giải tích",
+      "Đại số",
+      "Hình học",
+      "Xác suất"
+    ],
+    "Giải tích 1": [
+      "Giải tích"
+    ],
+    "Toán cao cấp": [
+      "Đại số"
+    ]
+  }
+}

@@ -1,0 +1,705 @@
+﻿{
+    "value":  [
+                  {
+                      "id":  "exam_tsa_standard_40",
+                      "title":  "TSA 2026 – Đề Chuẩn Cấu Trúc Bách Khoa 40 Câu (Trắc nghiệm, Đúng/Sai, Kéo thả \u0026 Điền số)",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2026-STANDARD-40",
+                      "year":  2026,
+                      "duration_minutes":  60,
+                      "question_count":  40,
+                      "question_ids":  [
+                                           "q_tsa_01",
+                                           "q_tsa_02",
+                                           "q_tsa_03",
+                                           "q_tsa_04",
+                                           "q_tsa_05",
+                                           "q_tsa_06",
+                                           "q_tsa_07",
+                                           "q_tsa_08",
+                                           "q_tsa_09",
+                                           "q_tsa_10",
+                                           "q_tsa_11",
+                                           "q_tsa_12",
+                                           "q_tsa_13",
+                                           "q_tsa_14",
+                                           "q_tsa_15",
+                                           "q_tsa_16",
+                                           "q_tsa_17",
+                                           "q_tsa_18",
+                                           "q_tsa_19",
+                                           "q_tsa_20",
+                                           "q_tsa_21",
+                                           "q_tsa_22",
+                                           "q_tsa_23",
+                                           "q_tsa_24",
+                                           "q_tsa_tf_01",
+                                           "q_tsa_tf_02",
+                                           "q_tsa_tf_03",
+                                           "q_tsa_tf_04",
+                                           "q_tsa_tf_05",
+                                           "q_tsa_tf_06",
+                                           "q_tsa_tf_07",
+                                           "q_tsa_tf_08",
+                                           "q_tsa_dd_01",
+                                           "q_tsa_dd_02",
+                                           "q_tsa_dd_03",
+                                           "q_tsa_dd_04",
+                                           "q_tsa_sa_01",
+                                           "q_tsa_sa_02",
+                                           "q_tsa_sa_03",
+                                           "q_tsa_sa_04"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "Đại học Bách Khoa Hà Nội (Chuẩn cấu trúc 40 câu)",
+                      "source_type":  "official",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Đề thi chuẩn hóa 40 câu – 60 phút đầy đủ 4 dạng câu hỏi cốt lõi của kỳ thi Đánh giá tư duy ĐHBK Hà Nội: 24 câu trắc nghiệm khách quan 4 lựa chọn, 8 câu trắc nghiệm Đúng/Sai đa ý, 4 câu kéo thả đáp án vào ô trống và 4 câu điền đáp số ngắn.",
+                      "attempts_count":  5820,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan nhiều lựa chọn (24 câu)",
+                                           "question_count":  24
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai theo chùm (8 câu)",
+                                           "question_count":  8
+                                       },
+                                       {
+                                           "id":  "sec_dd",
+                                           "title":  "Phần 3: Kéo thả đáp án vào ô trống (4 câu)",
+                                           "question_count":  4
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 4: Điền đáp số ngắn (4 câu)",
+                                           "question_count":  4
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_01",
+                      "title":  "TSA 2025 – Đề Thi Thử Nghiệm Tư Duy Toán Học Đợt 1 (Mã 101)",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2025",
+                      "year":  2025,
+                      "duration_minutes":  60,
+                      "question_count":  40,
+                      "question_ids":  [
+                                           "q_tsa_01",
+                                           "q_tsa_02",
+                                           "q_tsa_03",
+                                           "q_tsa_04",
+                                           "q_tsa_05",
+                                           "q_tsa_06",
+                                           "q_tsa_07",
+                                           "q_tsa_08",
+                                           "q_tsa_09",
+                                           "q_tsa_10",
+                                           "q_tsa_11",
+                                           "q_tsa_12",
+                                           "q_tsa_13",
+                                           "q_tsa_14",
+                                           "q_tsa_15",
+                                           "q_tsa_16",
+                                           "q_tsa_17",
+                                           "q_tsa_18",
+                                           "q_tsa_19",
+                                           "q_tsa_20",
+                                           "q_tsa_21",
+                                           "q_tsa_22",
+                                           "q_tsa_23",
+                                           "q_tsa_24",
+                                           "q_tsa_tf_01",
+                                           "q_tsa_tf_02",
+                                           "q_tsa_tf_03",
+                                           "q_tsa_tf_04",
+                                           "q_tsa_tf_05",
+                                           "q_tsa_tf_06",
+                                           "q_tsa_tf_07",
+                                           "q_tsa_tf_08",
+                                           "q_tsa_dd_01",
+                                           "q_tsa_dd_02",
+                                           "q_tsa_dd_03",
+                                           "q_tsa_dd_04",
+                                           "q_tsa_sa_01",
+                                           "q_tsa_sa_02",
+                                           "q_tsa_sa_03",
+                                           "q_tsa_sa_04"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "Đại học Bách Khoa Hà Nội",
+                      "source_type":  "official",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Đề thi chuẩn hóa bám sát cấu trúc đề thi chính thức: Tối ưu hóa AM-GM, cực trị hình thang, xích Markov 2 trạng thái và hệ Cramer.",
+                      "attempts_count":  3420,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan nhiều lựa chọn (24 câu)",
+                                           "question_count":  24
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai theo chùm (8 câu)",
+                                           "question_count":  8
+                                       },
+                                       {
+                                           "id":  "sec_dd",
+                                           "title":  "Phần 3: Kéo thả đáp án vào ô trống (4 câu)",
+                                           "question_count":  4
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 4: Điền đáp số ngắn (4 câu)",
+                                           "question_count":  4
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_02",
+                      "title":  "TSA 2025 – Đề Khảo Sát Năng Lực Tư Duy Đợt 2 (Mã 102)",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2025",
+                      "year":  2025,
+                      "duration_minutes":  60,
+                      "question_count":  12,
+                      "question_ids":  [
+                                           "q_tsa_11",
+                                           "q_tsa_12",
+                                           "q_tsa_13",
+                                           "q_tsa_14",
+                                           "q_tsa_tf_01",
+                                           "q_tsa_sa_01",
+                                           "q_tsa_15",
+                                           "q_tsa_16",
+                                           "q_tsa_17",
+                                           "q_tsa_18",
+                                           "q_tsa_19",
+                                           "q_tsa_20"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "Đại học Bách Khoa Hà Nội",
+                      "source_type":  "official",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Đặc trưng tư duy logic, mô hình hóa tăng trưởng Logarit, định lý Bayes trong xét nghiệm y tế và bài toán cắt tấm tôn tối ưu.",
+                      "attempts_count":  2890,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan 4 lựa chọn",
+                                           "question_count":  6
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai chùm 4 ý",
+                                           "question_count":  3
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 3: Điền đáp số ngắn",
+                                           "question_count":  3
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_03",
+                      "title":  "TSA 2024 – Đề Thi Chính Thức Tư Duy Toán Học Đợt 1 (Mã 201)",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2025",
+                      "year":  2024,
+                      "duration_minutes":  60,
+                      "question_count":  10,
+                      "question_ids":  [
+                                           "q_tsa_01",
+                                           "q_tsa_03",
+                                           "q_tsa_06",
+                                           "q_tsa_08",
+                                           "q_tsa_10",
+                                           "q_tsa_12",
+                                           "q_tsa_14",
+                                           "q_tsa_16",
+                                           "q_tsa_18",
+                                           "q_tsa_20"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "Đại học Bách Khoa Hà Nội",
+                      "source_type":  "official",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Đề thi tuyển sinh Đợt 1 năm 2024 với các dạng toán thực tế ứng dụng cao, đòi hỏi tính toán nhanh và chính xác.",
+                      "attempts_count":  5120,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan 4 lựa chọn",
+                                           "question_count":  5
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai chùm 4 ý",
+                                           "question_count":  3
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 3: Điền đáp số ngắn",
+                                           "question_count":  3
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_04",
+                      "title":  "TSA 2024 – Đề Thi Chính Thức Tư Duy Toán Học Đợt 2 (Mã 202)",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2025",
+                      "year":  2024,
+                      "duration_minutes":  60,
+                      "question_count":  10,
+                      "question_ids":  [
+                                           "q_tsa_02",
+                                           "q_tsa_04",
+                                           "q_tsa_05",
+                                           "q_tsa_07",
+                                           "q_tsa_09",
+                                           "q_tsa_11",
+                                           "q_tsa_13",
+                                           "q_tsa_15",
+                                           "q_tsa_17",
+                                           "q_tsa_19"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "Đại học Bách Khoa Hà Nội",
+                      "source_type":  "official",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Tập trung vào phân tích định lượng, biểu đồ biến thiên, ma trận nghịch đảo và bài toán lãi suất niên kim.",
+                      "attempts_count":  4680,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan 4 lựa chọn",
+                                           "question_count":  5
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai chùm 4 ý",
+                                           "question_count":  3
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 3: Điền đáp số ngắn",
+                                           "question_count":  3
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_05",
+                      "title":  "TSA 2026 – Đề Dự Bị Phát Triển Đề Minh Họa Chuẩn Cấu Trúc Mới",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2026",
+                      "year":  2026,
+                      "duration_minutes":  60,
+                      "question_count":  11,
+                      "question_ids":  [
+                                           "q_tsa_01",
+                                           "q_tsa_02",
+                                           "q_tsa_07",
+                                           "q_tsa_09",
+                                           "q_tsa_11",
+                                           "q_tsa_tf_01",
+                                           "q_tsa_13",
+                                           "q_tsa_16",
+                                           "q_tsa_18",
+                                           "q_tsa_20",
+                                           "q_tsa_sa_01"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "Tổ Chuyên Môn Toán PUMKIN.DEV",
+                      "source_type":  "adapted",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Đề thi phát triển định hướng Chương trình GDPT 2018 với 100% câu hỏi gắn với bối cảnh khoa học công nghệ hiện đại.",
+                      "attempts_count":  1950,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan 4 lựa chọn",
+                                           "question_count":  6
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai chùm 4 ý",
+                                           "question_count":  3
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 3: Điền đáp số ngắn",
+                                           "question_count":  3
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_06",
+                      "title":  "TSA 2025 – Đề Khảo Sát Đợt 3 Chuyên Đề Tối Ưu Hóa \u0026 Quy Hoạch Tuyến Tính",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2025",
+                      "year":  2025,
+                      "duration_minutes":  60,
+                      "question_count":  10,
+                      "question_ids":  [
+                                           "q_tsa_01",
+                                           "q_tsa_02",
+                                           "q_tsa_09",
+                                           "q_tsa_15",
+                                           "q_tsa_21",
+                                           "q_tsa_22",
+                                           "q_tsa_23",
+                                           "q_tsa_24",
+                                           "q_tsa_tf_01",
+                                           "q_tsa_sa_01"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "Đại học Bách Khoa Hà Nội",
+                      "source_type":  "official",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Chuyên sâu về các bài toán cực trị đa biến, quy hoạch lồi, tìm điểm tối ưu trên miền đa giác và phân bổ nguồn lực.",
+                      "attempts_count":  1820,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan 4 lựa chọn",
+                                           "question_count":  5
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai chùm 4 ý",
+                                           "question_count":  3
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 3: Điền đáp số ngắn",
+                                           "question_count":  3
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_07",
+                      "title":  "TSA 2025 – Đề Khảo Sát Đợt 4 Chuyên Đề Xác Suất \u0026 Mô Hình Markov",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2025",
+                      "year":  2025,
+                      "duration_minutes":  60,
+                      "question_count":  10,
+                      "question_ids":  [
+                                           "q_tsa_03",
+                                           "q_tsa_10",
+                                           "q_tsa_11",
+                                           "q_tsa_12",
+                                           "q_tsa_25",
+                                           "q_tsa_26",
+                                           "q_tsa_27",
+                                           "q_tsa_28",
+                                           "q_tsa_tf_01",
+                                           "q_tsa_sa_01"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "Đại học Bách Khoa Hà Nội",
+                      "source_type":  "official",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Kiểm tra năng lực phân tích xác suất có điều kiện, định lý Bayes, chuỗi thời gian và trạng thái dừng của ma trận ngẫu nhiên.",
+                      "attempts_count":  2210,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan 4 lựa chọn",
+                                           "question_count":  5
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai chùm 4 ý",
+                                           "question_count":  3
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 3: Điền đáp số ngắn",
+                                           "question_count":  3
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_08",
+                      "title":  "TSA 2025 – Đề Khảo Sát Đợt 5 Chuyên Đề Đại Số Ma Trận \u0026 Thuật Toán",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2025",
+                      "year":  2025,
+                      "duration_minutes":  60,
+                      "question_count":  10,
+                      "question_ids":  [
+                                           "q_tsa_04",
+                                           "q_tsa_08",
+                                           "q_tsa_14",
+                                           "q_tsa_29",
+                                           "q_tsa_30",
+                                           "q_tsa_31",
+                                           "q_tsa_32",
+                                           "q_tsa_33",
+                                           "q_tsa_tf_01",
+                                           "q_tsa_sa_01"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "Đại học Bách Khoa Hà Nội",
+                      "source_type":  "official",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Hệ thống bài tập tư duy đại số hiện đại: giải hệ Cramer, ma trận xoay 2D, giải mã ký tự và phân tích độ phức tạp thuật toán.",
+                      "attempts_count":  1640,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan 4 lựa chọn",
+                                           "question_count":  5
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai chùm 4 ý",
+                                           "question_count":  3
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 3: Điền đáp số ngắn",
+                                           "question_count":  3
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_09",
+                      "title":  "TSA 2025 – Đề Khảo Sát Đợt 6 Tổng Hợp Tư Duy Toán Học Toàn Diện",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2025",
+                      "year":  2025,
+                      "duration_minutes":  60,
+                      "question_count":  11,
+                      "question_ids":  [
+                                           "q_tsa_01",
+                                           "q_tsa_03",
+                                           "q_tsa_05",
+                                           "q_tsa_07",
+                                           "q_tsa_13",
+                                           "q_tsa_17",
+                                           "q_tsa_21",
+                                           "q_tsa_25",
+                                           "q_tsa_34",
+                                           "q_tsa_35",
+                                           "q_tsa_step_01"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "Đại học Bách Khoa Hà Nội",
+                      "source_type":  "official",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Đề tổng hợp mô phỏng kỳ thi chính thức Đợt 6, kết hợp toàn diện từ giải tích, hình học tọa độ đến xác suất ứng dụng.",
+                      "attempts_count":  2470,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan 4 lựa chọn",
+                                           "question_count":  6
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai chùm 4 ý",
+                                           "question_count":  3
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 3: Điền đáp số ngắn",
+                                           "question_count":  3
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_10",
+                      "title":  "TSA 2026 – Đề Thi Thử Thách Điểm Tuyệt Đối 40/40 (Đợt A)",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2026",
+                      "year":  2026,
+                      "duration_minutes":  60,
+                      "question_count":  11,
+                      "question_ids":  [
+                                           "q_tsa_02",
+                                           "q_tsa_04",
+                                           "q_tsa_06",
+                                           "q_tsa_12",
+                                           "q_tsa_16",
+                                           "q_tsa_20",
+                                           "q_tsa_22",
+                                           "q_tsa_28",
+                                           "q_tsa_32",
+                                           "q_tsa_36",
+                                           "q_tsa_step_01"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "CLB Bách Khoa Kỹ Thuật",
+                      "source_type":  "official",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Đề phân loại đỉnh cao dành cho thí sinh đặt mục tiêu thủ khoa và xét tuyển vào các ngành IT1, IT2, ME1 ĐHBK.",
+                      "attempts_count":  1530,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan 4 lựa chọn",
+                                           "question_count":  6
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai chùm 4 ý",
+                                           "question_count":  3
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 3: Điền đáp số ngắn",
+                                           "question_count":  3
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_11",
+                      "title":  "TSA 2026 – Đề Luyện Tập Tư Duy Tốc Độ 60 Giây / Câu (Đợt B)",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2026",
+                      "year":  2026,
+                      "duration_minutes":  60,
+                      "question_count":  11,
+                      "question_ids":  [
+                                           "q_tsa_01",
+                                           "q_tsa_05",
+                                           "q_tsa_08",
+                                           "q_tsa_10",
+                                           "q_tsa_14",
+                                           "q_tsa_19",
+                                           "q_tsa_23",
+                                           "q_tsa_27",
+                                           "q_tsa_31",
+                                           "q_tsa_37",
+                                           "q_tsa_sa_01"
+                                       ],
+                      "difficulty":  "Trung bình",
+                      "source":  "Tổ Chuyên Môn Toán PUMKIN.DEV",
+                      "source_type":  "adapted",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Rèn luyện phản xạ phát hiện mâu thuẫn dữ kiện, kỹ thuật loại trừ đáp án nhanh và bấm máy Casio hỗ trợ tối ưu.",
+                      "attempts_count":  2190,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan 4 lựa chọn",
+                                           "question_count":  6
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai chùm 4 ý",
+                                           "question_count":  3
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 3: Điền đáp số ngắn",
+                                           "question_count":  3
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  },
+                  {
+                      "id":  "exam_tsa_12",
+                      "title":  "TSA 2026 – Đề Đột Phá Câu Hỏi Điền Đáp Số Ngắn \u0026 Đúng Sai Chùm",
+                      "type":  "TSA",
+                      "exam_format_version":  "TSA-2026",
+                      "year":  2026,
+                      "duration_minutes":  60,
+                      "question_count":  10,
+                      "question_ids":  [
+                                           "q_tsa_tf_01",
+                                           "q_tsa_sa_01",
+                                           "q_tsa_step_01",
+                                           "q_tsa_03",
+                                           "q_tsa_09",
+                                           "q_tsa_15",
+                                           "q_tsa_24",
+                                           "q_tsa_26",
+                                           "q_tsa_30",
+                                           "q_tsa_35"
+                                       ],
+                      "difficulty":  "Khó",
+                      "source":  "Đại học Bách Khoa Hà Nội",
+                      "source_type":  "official",
+                      "license":  "CC BY-NC-SA 4.0",
+                      "description":  "Đề tập trung vào định dạng câu hỏi chùm Đúng/Sai phân bậc điểm Bộ GD\u0026ĐT và câu hỏi điền số thực chuẩn hóa.",
+                      "attempts_count":  2840,
+                      "sections":  [
+                                       {
+                                           "id":  "sec_mcq",
+                                           "title":  "Phần 1: Trắc nghiệm khách quan 4 lựa chọn",
+                                           "question_count":  5
+                                       },
+                                       {
+                                           "id":  "sec_tf",
+                                           "title":  "Phần 2: Trắc nghiệm Đúng / Sai chùm 4 ý",
+                                           "question_count":  3
+                                       },
+                                       {
+                                           "id":  "sec_sa",
+                                           "title":  "Phần 3: Điền đáp số ngắn",
+                                           "question_count":  3
+                                       }
+                                   ],
+                      "scoring":  {
+                                      "type":  "tsa_stepped",
+                                      "max_score":  40
+                                  }
+                  }
+              ],
+    "Count":  13
+}

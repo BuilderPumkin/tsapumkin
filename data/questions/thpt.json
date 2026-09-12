@@ -1,0 +1,1505 @@
+[
+  {
+    "id": "q_thpt_01",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Khảo sát hàm số",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Số điểm cực trị của hàm số trùng phương \\(f(x) = x^4 - 4x^2 + 3\\) là:",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct_answer": 2,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Đạo hàm: \\(f'(x) = 4x(x^2 - 2) = 0 \\iff x = 0, x = \\pm\\sqrt{2}\\). Đạo hàm đổi dấu 3 lần qua các nghiệm đơn nên hàm số có 3 điểm cực trị.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Cực trị",
+      "Hàm trùng phương"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_02",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Số phức",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Cho số phức \\(z\\) thỏa mãn \\((1 + 2i)z = 3 - 4i\\). Môđun của số phức \\(z\\) bằng:",
+    "options": [
+      "5",
+      "\\(\\sqrt{5}\\)",
+      "\\(\\sqrt{3}\\)",
+      "2"
+    ],
+    "correct_answer": 1,
+    "items": null,
+    "correct_value": null,
+    "explanation": "\\(|z| = \\frac{|3 - 4i|}{|1 + 2i|} = \\frac{5}{\\sqrt{5}} = \\sqrt{5}\\).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Số phức",
+      "Môđun"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_03",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Mặt cầu Oxyz",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Trong không gian \\(Oxyz\\), cho mặt cầu \\((S): (x - 1)^2 + (y + 2)^2 + (z - 3)^2 = 25\\). Tọa độ tâm \\(I\\) và bán kính \\(R\\) của mặt cầu \\((S)\\) là:",
+    "options": [
+      "\\(I(1, -2, 3), R = 5\\)",
+      "\\(I(-1, 2, -3), R = 5\\)",
+      "\\(I(1, -2, 3), R = 25\\)",
+      "\\(I(-1, 2, -3), R = 25\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Phương trình mặt cầu chính tắc: tâm \\(I(1, -2, 3)\\) và bán kính \\(R = \\sqrt{25} = 5\\).",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxyz",
+      "Mặt cầu"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_04",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tích phân từng phần",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Họ nguyên hàm của hàm số \\(f(x) = x \\cdot e^x\\) là:",
+    "options": [
+      "\\((x - 1)e^x + C\\)",
+      "\\((x + 1)e^x + C\\)",
+      "\\(x e^x - e^x\\)",
+      "\\(\\frac{x^2}{2}e^x + C\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Tích phân từng phần: \\(u = x, dv = e^x dx \\implies \\int x e^x dx = x e^x - e^x + C = (x - 1)e^x + C\\).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_03"
+    ],
+    "year": 2024,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Nguyên hàm",
+      "Từng phần"
+    ],
+    "knowledge_id": "kb_toan12_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_05",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Đường tiệm cận",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tiệm cận đứng và tiệm cận ngang của đồ thị hàm số \\(y = \\frac{2x - 1}{x + 1}\\) lần lượt là:",
+    "options": [
+      "\\(x = -1\\) và \\(y = 2\\)",
+      "\\(x = 1\\) và \\(y = 2\\)",
+      "\\(x = -1\\) và \\(y = -1\\)",
+      "\\(x = 2\\) và \\(y = -1\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Nghiệm của mẫu số là \\(x = -1\\) (tiệm cận đứng). Bậc tử bằng bậc mẫu, tỉ số hệ số là \\(2/1 = 2\\) nên \\(y = 2\\) (tiệm cận ngang).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Tiệm cận",
+      "Hàm phân thức"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_06",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Ứng dụng hình phẳng tích phân",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Diện tích hình phẳng giới hạn bởi parabol \\(y = x^2\\) và đường thẳng \\(y = 2x\\) là:",
+    "options": [
+      "\\(\\frac{4}{3}\\)",
+      "\\(\\frac{2}{3}\\)",
+      "\\(\\frac{8}{3}\\)",
+      "2"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Phương trình hoành độ giao điểm: \\(x^2 - 2x = 0 \\iff x = 0\\) hoặc \\(x = 2\\).<br>Diện tích: \\(S = \\int_0^2 (2x - x^2)dx = \\left[ x^2 - \\frac{x^3}{3} \\right]_0^2 = 4 - \\frac{8}{3} = \\frac{4}{3}\\).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_03"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Diện tích hình phẳng",
+      "Tích phân"
+    ],
+    "knowledge_id": "kb_toan12_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_07",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Bất phương trình logarit",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Tập nghiệm của bất phương trình \\(\\log_{0,5}(2x - 3) \\ge -1\\) là:",
+    "options": [
+      "\\((\\frac{3}{2}; \\frac{5}{2}]\\)",
+      "\\([\\frac{3}{2}; \\frac{5}{2}]\\)",
+      "\\((\\frac{3}{2}; +\\infty)\\)",
+      "\\((-\\infty; \\frac{5}{2}]\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Điều kiện xác định: \\(2x - 3 > 0 \\iff x > 3/2\\).<br>Vì cơ số \\(0,5 < 1\\) nên bất phương trình đổi chiều: \\(2x - 3 \\le (0,5)^{-1} = 2 \\iff 2x \\le 5 \\iff x \\le 5/2\\). Kết hợp điều kiện ta có \\(x \\in (3/2; 5/2]\\).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2024,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Bất phương trình",
+      "Logarit"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_08",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Đường thẳng Oxyz",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Trong không gian \\(Oxyz\\), phương trình đường thẳng \\(d\\) đi qua \\(A(1, 2, -1)\\) và vuông góc với mặt phẳng \\((P): 2x - y + 3z - 5 = 0\\) là:",
+    "options": [
+      "\\(\\frac{x - 1}{2} = \\frac{y - 2}{-1} = \\frac{z + 1}{3}\\)",
+      "\\(\\frac{x + 1}{2} = \\frac{y + 2}{-1} = \\frac{z - 1}{3}\\)",
+      "\\(\\frac{x - 1}{2} = \\frac{y - 2}{1} = \\frac{z + 1}{3}\\)",
+      "\\(\\frac{x - 1}{1} = \\frac{y - 2}{2} = \\frac{z + 1}{-1}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Đường thẳng vuông góc với mặt phẳng \\((P)\\) nhận vectơ pháp tuyến \\(\\vec{n} = (2, -1, 3)\\) làm vectơ chỉ phương. Phương trình chính tắc đi qua \\(A(1, 2, -1)\\) là \\(\\frac{x - 1}{2} = \\frac{y - 2}{-1} = \\frac{z + 1}{3}\\).",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxyz",
+      "Đường thẳng"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_09",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Cực trị hàm số",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Cho hàm số \\(y = f(x)\\) có đạo hàm \\(f'(x) = x(x-1)^2(x+3)\\). Số điểm cực tiểu của hàm số là:",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "f'(x) = 0 có các nghiệm: x = -3 (nghiệm đơn), x = 0 (nghiệm đơn), x = 1 (nghiệm kép).<br>Bảng xét dấu: x < -3: f' > 0; -3 < x < 0: f' < 0; 0 < x < 1: f' > 0; x > 1: f' > 0.<br>Đạo hàm đổi dấu từ âm sang dương tại x = 0 duy nhất => có đúng 1 điểm cực tiểu.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Cực trị",
+      "Cực tiểu",
+      "Đạo hàm"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_10",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "GTLN GTNN trên đoạn",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Giá trị lớn nhất của hàm số \\(f(x) = x^3 - 3x + 2\\) trên đoạn \\([-2; 2]\\) bằng:",
+    "options": [
+      "4",
+      "2",
+      "0",
+      "6"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "f'(x) = 3x² - 3 = 0 ⇔ x = ±1.<br>Tính giá trị tại các điểm và 2 đầu mút:<br>f(-2) = -8 + 6 + 2 = 0.<br>f(-1) = -1 + 3 + 2 = 4.<br>f(1) = 1 - 3 + 2 = 0.<br>f(2) = 8 - 6 + 2 = 4.<br>Giá trị lớn nhất là 4.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Min Max",
+      "Khảo sát hàm số"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_11",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Tập xác định hàm lũy thừa",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tìm tập xác định của hàm số \\(y = (x^2 - 4x + 3)^{-3}\\).",
+    "options": [
+      "\\(\\mathbb{R} \\setminus \\{1; 3\\}\\)",
+      "\\((1; 3)\\)",
+      "\\((-\\infty; 1) \\cup (3; +\\infty)\\)",
+      "\\([1; 3]\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Vì số mũ là số nguyên âm (-3), điều kiện xác định là cơ số khác 0:<br>x² - 4x + 3 ≠ 0 ⇔ x ≠ 1 và x ≠ 3. Tập xác định: D = ℝ \\ {1; 3}.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Lũy thừa",
+      "Tập xác định"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_12",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tính chất tích phân",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Biết \\(\\int_0^1 f(x) dx = 3\\) và \\(\\int_0^1 g(x) dx = -2\\). Giá trị của \\(\\int_0^1 [2f(x) - 3g(x)] dx\\) bằng:",
+    "options": [
+      "12",
+      "0",
+      "6",
+      "10"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Theo tính chất tuyến tính của tích phân: I = 2(3) - 3(-2) = 6 + 6 = 12.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_03"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Tích phân",
+      "Tuyến tính"
+    ],
+    "knowledge_id": "kb_toan12_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_13",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Vectơ pháp tuyến mặt phẳng",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Trong không gian Oxyz, cho mặt phẳng \\((P): x - 2y + 2z - 6 = 0\\). Vectơ nào dưới đây là một vectơ pháp tuyến của (P)?",
+    "options": [
+      "\\(\\vec{n} = (1, -2, 2)\\)",
+      "\\(\\vec{n} = (1, 2, 2)\\)",
+      "\\(\\vec{n} = (1, -2, -6)\\)",
+      "\\(\\vec{n} = (2, -4, 2)\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Các hệ số trước x, y, z trong phương trình mặt phẳng là tọa độ của vectơ pháp tuyến: n = (1, -2, 2).",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxyz",
+      "Mặt phẳng",
+      "Pháp tuyến"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_14",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Diện tích xung quanh hình nón",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Cho hình nón có bán kính đáy \\(r = 3\\) và chiều cao \\(h = 4\\). Diện tích xung quanh của hình nón đã cho bằng:",
+    "options": [
+      "\\(15\\pi\\)",
+      "\\(12\\pi\\)",
+      "\\(20\\pi\\)",
+      "\\(24\\pi\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Độ dài đường sinh: l = √(r² + h²) = √(3² + 4²) = 5.<br>Diện tích xung quanh: S_xq = π r l = π · 3 · 5 = 15π.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Hình nón",
+      "Đường sinh",
+      "Diện tích"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_15",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Xác suất",
+    "subtopic": "Quy tắc đếm & Chỉnh hợp",
+    "skills": [
+      "skill_probability",
+      "skill_reasoning",
+      "skill_data_analysis"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Có bao nhiêu số tự nhiên có 3 chữ số đôi một khác nhau được lập từ các chữ số \\(\\{1, 2, 3, 4, 5\\}\\)?",
+    "options": [
+      "60",
+      "125",
+      "10",
+      "20"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Số các số tự nhiên có 3 chữ số phân biệt chọn từ 5 chữ số là chỉnh hợp chập 3 của 5: A₅³ = 5 · 4 · 3 = 60.",
+    "common_traps": [
+      "Nhầm giữa biến cố độc lập và biến cố xung khắc",
+      "Không áp dụng đúng công thức Bayes",
+      "Đếm lặp trường hợp khi áp dụng quy tắc cộng"
+    ],
+    "prerequisites": [
+      "kb_toan10_05"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Đếm",
+      "Chỉnh hợp"
+    ],
+    "knowledge_id": "kb_toan10_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_tf_01",
+    "type": "true_false_group",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Mặt cầu và Mặt phẳng Oxyz",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 130,
+    "question": "Trong không gian với hệ tọa độ \\(Oxyz\\), cho mặt cầu \\((S): (x-1)^2 + (y+2)^2 + (z-3)^2 = 25\\) và mặt phẳng \\((P): 2x - 2y + z + 5 = 0\\). Xét tính đúng / sai của các khẳng định sau:",
+    "options": null,
+    "correct_answer": null,
+    "items": [
+      {
+        "label": "a",
+        "text": "Mặt cầu (S) có tọa độ tâm là \\(I(1; -2; 3)\\) và bán kính \\(R = 5\\).",
+        "correct": true
+      },
+      {
+        "label": "b",
+        "text": "Khoảng cách từ tâm I đến mặt phẳng (P) bằng 4.",
+        "correct": false
+      },
+      {
+        "label": "c",
+        "text": "Mặt phẳng (P) cắt mặt cầu (S) theo giao tuyến là một đường tròn.",
+        "correct": true
+      },
+      {
+        "label": "d",
+        "text": "Bán kính của đường tròn giao tuyến bằng \\(r = \\frac{\\sqrt{29}}{3}\\).",
+        "correct": true
+      }
+    ],
+    "correct_value": null,
+    "explanation": "a) Đúng: Phương trình chính tắc cho tâm \\(I(1; -2; 3)\\) và bán kính \\(R = \\sqrt{25} = 5\\).<br>b) Sai: Khoảng cách \\(d(I, P) = \\frac{|2(1) - 2(-2) + 3 + 5|}{\\sqrt{2^2 + (-2)^2 + 1^2}} = \\frac{|2 + 4 + 3 + 5|}{3} = \\frac{14}{3} \\approx 4,67 \\neq 4\\).<br>c) Đúng: Vì \\(d = \\frac{14}{3} < R = 5\\) nên mặt phẳng \\((P)\\) cắt mặt cầu \\((S)\\) theo giao tuyến là một đường tròn.<br>d) Đúng: Bán kính đường tròn giao tuyến: \\(r = \\sqrt{R^2 - d^2} = \\sqrt{25 - (14/3)^2} = \\sqrt{25 - \\frac{196}{9}} = \\sqrt{\\frac{29}{9}} = \\frac{\\sqrt{29}}{3}\\).",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "official",
+    "source": "Đề thi Tham khảo THPT 2025 Bộ GD&ĐT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Đúng/Sai chùm",
+      "Hình học Oxyz",
+      "Mặt cầu"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_sa_01",
+    "type": "short_answer",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tích phân hàm phân thức hữu tỉ",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Biết tích phân \\(\\int_1^2 \\frac{2x + 1}{x^2 + x} dx = a \\ln 2 + b \\ln 3\\) với \\(a, b\\) là các số nguyên. Tính giá trị biểu thức \\(P = a + 2b\\).",
+    "options": null,
+    "correct_answer": null,
+    "items": null,
+    "correct_value": "2",
+    "explanation": "Tách phân thức: \\(\\frac{2x+1}{x(x+1)} = \\frac{1}{x} + \\frac{1}{x+1}\\).<br>Tích phân \\(I = [\\ln|x| + \\ln|x+1|]_1^2 = (\\ln 2 + \\ln 3) - (\\ln 1 + \\ln 2) = \\ln 3 = 0 \\ln 2 + 1 \\ln 3\\).<br>Suy ra \\(a = 0, b = 1 \\implies P = a + 2b = 0 + 2(1) = 2\\).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_03"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Điền đáp số",
+      "Tích phân"
+    ],
+    "knowledge_id": "kb_toan12_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_16",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Đơn điệu hàm bậc ba",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Hàm số \\(y = \\frac{1}{3}x^3 - 2x^2 + 3x - 1\\) nghịch biến trên khoảng nào dưới đây?",
+    "options": [
+      "\\((1; 3)\\)",
+      "\\((-\\infty; 1)\\)",
+      "\\((3; +\\infty)\\)",
+      "\\((0; 3)\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "y' = x² - 4x + 3 = (x - 1)(x - 3).<br>y' < 0 ⇔ 1 < x < 3. Hàm số nghịch biến trên khoảng (1; 3).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Đơn điệu",
+      "Nghịch biến"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_17",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Phương trình mũ cơ bản",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Nghiệm của phương trình \\(3^{x - 2} = 27\\) là:",
+    "options": [
+      "\\(x = 5\\)",
+      "\\(x = 3\\)",
+      "\\(x = 1\\)",
+      "\\(x = -1\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "3^{x - 2} = 3³ ⇔ x - 2 = 3 ⇔ x = 5.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Mũ",
+      "Phương trình"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_18",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Hình chiếu lên mặt phẳng tọa độ",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Trong không gian Oxyz, hình chiếu vuông góc của điểm \\(M(2, -3, 5)\\) lên mặt phẳng \\((Oxy)\\) có tọa độ là:",
+    "options": [
+      "\\((2, -3, 0)\\)",
+      "\\((2, 0, 5)\\)",
+      "\\((0, -3, 5)\\)",
+      "\\((0, 0, 5)\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Hình chiếu lên mặt phẳng (Oxy) thì giữ nguyên hoành độ x và tung độ y, cho cao độ z = 0 => (2, -3, 0).",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxyz",
+      "Hình chiếu"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_19",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Diện tích toàn phần hình trụ",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Một hình trụ có bán kính đáy \\(r = 4\\) và độ dài đường sinh \\(l = 5\\). Diện tích toàn phần của hình trụ đó bằng:",
+    "options": [
+      "\\(72\\pi\\)",
+      "\\(40\\pi\\)",
+      "\\(32\\pi\\)",
+      "\\(80\\pi\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "S_tp = 2π r l + 2π r² = 2π(4)(5) + 2π(16) = 40π + 32π = 72π.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Hình trụ",
+      "Diện tích toàn phần"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_20",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Số phức liên hợp",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Số phức liên hợp của số phức \\(z = 3 - 5i\\) là:",
+    "options": [
+      "\\(\\bar{z} = 3 + 5i\\)",
+      "\\(\\bar{z} = -3 + 5i\\)",
+      "\\(\\bar{z} = -3 - 5i\\)",
+      "\\(\\bar{z} = 5 - 3i\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Số phức liên hợp giữ nguyên phần thực và đổi dấu phần ảo: z = a + bi => z̄ = a - bi. Ở đây z = 3 - 5i => z̄ = 3 + 5i.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Số phức",
+      "Liên hợp"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_21",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Thể tích khối chóp tứ giác đều",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Thể tích khối chóp tứ giác đều có cạnh đáy bằng \\(a\\) và chiều cao bằng \\(a\\sqrt{3}\\) là:",
+    "options": [
+      "\\(\\frac{a^3\\sqrt{3}}{3}\\)",
+      "\\(a^3\\sqrt{3}\\)",
+      "\\(\\frac{a^3\\sqrt{3}}{6}\\)",
+      "\\(\\frac{a^3}{3}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "V = (1/3) · S_đáy · h = (1/3) · a² · a√3 = a³√3 / 3.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Khối chóp",
+      "Thể tích"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_22",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Giao điểm hai đường tiệm cận",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tọa độ giao điểm của hai đường tiệm cận của đồ thị hàm số \\(y = \\frac{3x + 2}{x - 1}\\) là:",
+    "options": [
+      "\\((1, 3)\\)",
+      "\\((-1, 3)\\)",
+      "\\((1, -3)\\)",
+      "\\((3, 1)\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Tiệm cận đứng: x = 1. Tiệm cận ngang: y = 3. Giao điểm là I(1, 3).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_01"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Tiệm cận",
+      "Tâm đối xứng"
+    ],
+    "knowledge_id": "kb_toan12_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_23",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Phép nhân hai số phức",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Cho hai số phức \\(z_1 = 1 + 2i\\) và \\(z_2 = 2 - i\\). Số phức \\(w = z_1 \\cdot z_2\\) bằng:",
+    "options": [
+      "\\(4 + 3i\\)",
+      "\\(4 - 3i\\)",
+      "\\(2 - 2i\\)",
+      "\\(5i\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "(1 + 2i)(2 - i) = 2 - i + 4i - 2i² = 2 + 3i + 2 = 4 + 3i.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Số phức",
+      "Nhân số phức"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_24",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Khoảng cách giữa hai điểm Oxyz",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Trong không gian Oxyz, khoảng cách giữa điểm \\(A(1, 2, 3)\\) và điểm \\(B(4, 2, -1)\\) bằng:",
+    "options": [
+      "5",
+      "25",
+      "√7",
+      "4"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "AB = √[(4 - 1)² + (2 - 2)² + (-1 - 3)²] = √[3² + 0² + (-4)²] = √[9 + 16] = 5.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxyz",
+      "Khoảng cách hai điểm"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_25",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tích phân đa thức cơ bản",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Giá trị của tích phân \\(I = \\int_0^1 (3x^2 + 2x) dx\\) bằng:",
+    "options": [
+      "2",
+      "1",
+      "3",
+      "5"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "I = [x³ + x²]₀¹ = (1 + 1) - 0 = 2.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_03"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Tích phân",
+      "Cơ bản"
+    ],
+    "knowledge_id": "kb_toan12_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_36",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Đổi biến số tích phân",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Cho hàm số \\(y = f(x)\\) liên tục trên \\(\\mathbb{R}\\) và có \\(\\int_0^2 f(x)dx = 6\\). Tính \\(I = \\int_0^1 f(2x)dx\\).",
+    "options": [
+      "3",
+      "12",
+      "6",
+      "2"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Đổi biến số: đặt t = 2x => dt = 2dx => dx = dt / 2.<br>Đổi cận: x = 0 => t = 0; x = 1 => t = 2.<br>I = ∫₀² f(t) (dt / 2) = (1/2) ∫₀² f(t)dt = (1/2) · 6 = 3.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_toan12_03"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Đổi biến",
+      "Tích phân"
+    ],
+    "knowledge_id": "kb_toan12_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_37",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Điểm thuộc mặt phẳng",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Trong không gian Oxyz, cho mặt phẳng \\((P): 2x - y + 2z - 9 = 0\\) và điểm \\(M(1, -1, 3)\\). Khoảng cách từ M đến (P) bằng:",
+    "options": [
+      "0",
+      "2",
+      "3",
+      "1"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Thay tọa độ M vào vế trái của phương trình (P): 2(1) - (-1) + 2(3) - 9 = 2 + 1 + 6 - 9 = 0.<br>Do đó điểm M thuộc mặt phẳng (P), khoảng cách từ M đến (P) bằng 0.",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxyz",
+      "Khoảng cách",
+      "Mặt phẳng"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_38",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Phương trình trùng phương",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Số nghiệm thực của phương trình \\(x^4 - 2x^2 - 3 = 0\\) là:",
+    "options": [
+      "2",
+      "4",
+      "0",
+      "1"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Đặt t = x² (t ≥ 0). Phương trình: t² - 2t - 3 = 0 ⇔ t = -1 (loại) hoặc t = 3 (nhận).<br>Với t = 3 => x² = 3 ⇔ x = ±√3. Phương trình có đúng 2 nghiệm thực.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan10_03"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Trùng phương",
+      "Số nghiệm"
+    ],
+    "knowledge_id": "kb_toan10_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_39",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Hình học",
+    "subtopic": "Vectơ chỉ phương đường thẳng Oxyz",
+    "skills": [
+      "skill_spatial",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Trong không gian Oxyz, một vectơ chỉ phương của đường thẳng \\(d: \\frac{x - 3}{1} = \\frac{y + 1}{-2} = \\frac{z}{4}\\) là:",
+    "options": [
+      "\\(\\vec{u} = (1, -2, 4)\\)",
+      "\\(\\vec{u} = (3, -1, 0)\\)",
+      "\\(\\vec{u} = (-1, -2, 4)\\)",
+      "\\(\\vec{u} = (1, 2, 4)\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Các mẫu số của phương trình chính tắc là tọa độ vectơ chỉ phương: u = (1, -2, 4).",
+    "common_traps": [
+      "Nhầm góc giữa đường thẳng và mặt phẳng với góc giữa đường thẳng và VTPT",
+      "Sai dấu khi tính tích có hướng trong không gian Oxyz"
+    ],
+    "prerequisites": [
+      "kb_toan12_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Oxyz",
+      "Đường thẳng",
+      "Chỉ phương"
+    ],
+    "knowledge_id": "kb_toan12_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_thpt_40",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "THPT",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Bất phương trình mũ cơ bản",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tập nghiệm của bất phương trình \\(2^{x} > 8\\) là:",
+    "options": [
+      "\\((3; +\\infty)\\)",
+      "\\([3; +\\infty)\\)",
+      "\\((-\\infty; 3)\\)",
+      "\\((0; 3)\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Vì cơ số 2 > 1: 2^x > 2³ ⇔ x > 3. Tập nghiệm: (3; +∞).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đề thi Tốt nghiệp THPT",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Mũ",
+      "Bất phương trình"
+    ],
+    "knowledge_id": "kb_toan12_02",
+    "status": "published",
+    "schema_version": "2.0"
+  }
+]

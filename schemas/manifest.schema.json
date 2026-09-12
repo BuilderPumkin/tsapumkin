@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/manifest.schema.json",
+  "title": "PumkinManifest",
+  "description": "Đặc tả tệp kê khai siêu dữ liệu và kiểm định tính toàn vẹn (SHA-256) cho kho dữ liệu mở",
+  "type": "object",
+  "required": ["name", "version", "generated_at", "license", "stats", "files"],
+  "properties": {
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "license": { "type": "string" },
+    "stats": { "type": "object" },
+    "files": { "type": "object" }
+  }
+}

@@ -1,0 +1,484 @@
+[
+  {
+    "id": "kb_toan12_01",
+    "grade": "Toán 12",
+    "chapter": "Chương 1: Ứng dụng đạo hàm để khảo sát hàm số",
+    "title": "Khảo sát hàm số, Cực trị & Tối ưu hóa Thực tế",
+    "overview": "Khảo sát tính đơn điệu, cực trị hàm đa thức bậc 3, bậc 4 trùng phương, tiệm cận đồ thị và giải quyết bài toán tối ưu hóa ứng dụng thực tế.",
+    "theory_markdown": "### 1. Tính đơn điệu & Cực trị hàm số\n- Hàm số \\(y = f(x)\\) đồng biến trên \\(K \\iff f'(x) \\ge 0, \\forall x \\in K\\) (dấu '=' chỉ xảy ra tại hữu hạn điểm).\n- **Quy tắc cực trị 1**: Đổi dấu từ dương sang âm qua \\(x_0\\) là điểm cực đại; từ âm sang dương là điểm cực tiểu.\n- **Quy tắc cực trị 2**: \\(f'(x_0) = 0\\) và \\(f''(x_0) < 0 \\implies x_0\\) là cực đại; \\(f''(x_0) > 0 \\implies x_0\\) là cực tiểu.\n\n### 2. Công thức tính nhanh cực trị hàm bậc ba \\(y = ax^3 + bx^2 + cx + d\\)\n- Đạo hàm: \\(y' = 3ax^2 + 2bx + c\\). Hàm số có 2 cực trị khi và chỉ khi \\(b^2 - 3ac > 0\\).\n- Đường thẳng đi qua 2 điểm cực trị: \\(y = \\left(\\frac{2c}{3} - \\frac{2b^2}{9a}\\right)x + \\left(d - \\frac{bc}{9a}\\right)\\).\n\n### 3. Công thức tính nhanh cực trị hàm trùng phương \\(y = ax^4 + bx^2 + c\\)\n- Có 3 cực trị \\(\\iff ab < 0\\); Có 1 cực trị \\(\\iff ab \\ge 0\\).\n- Tọa độ 3 cực trị khi \\(ab < 0\\): \\(A(0; c), B\\left(-\\sqrt{-\\frac{b}{2a}}; -\\frac{\\Delta}{4a}\\right), C\\left(\\sqrt{-\\frac{b}{2a}}; -\\frac{\\Delta}{4a}\\right)\\).\n- Diện tích tam giác cực trị: \\(S_{\\triangle ABC} = \\sqrt{-\\frac{b^5}{32a^3}}\\).",
+    "formulas": [
+      {
+        "id": "kb_toan12_01_f1",
+        "name": "Bất đẳng thức AM-GM 3 số",
+        "latex": "a + b + c \\ge 3\\sqrt[3]{abc} \\quad (a, b, c \\ge 0)",
+        "desc": "Áp dụng tìm giá trị nhỏ nhất của tổng hoặc giá trị lớn nhất của tích",
+        "tags": [
+          "Bất đẳng thức",
+          "AM-GM",
+          "Tối ưu"
+        ]
+      },
+      {
+        "id": "kb_toan12_01_f2",
+        "name": "Điều kiện cực trị cấp 2",
+        "latex": "f'(x_0) = 0, \\; f''(x_0) > 0 \\implies \\text{Cực tiểu}; \\quad f'(x_0) = 0, \\; f''(x_0) < 0 \\implies \\text{Cực đại}",
+        "desc": "Tiêu chuẩn đạo hàm cấp 2 xác định nhanh điểm cực đại, cực tiểu",
+        "tags": [
+          "Khảo sát hàm số",
+          "Cực trị"
+        ]
+      },
+      {
+        "id": "kb_toan12_01_f3",
+        "name": "Công thức tính nhanh cực trị hàm bậc 3",
+        "latex": "y = ax^3 + bx^2 + cx + d \\implies \\text{Có 2 cực trị } \\iff b^2 - 3ac > 0; \\quad \\text{Đường thẳng qua 2 cực trị: } y = \\left(\\frac{2c}{3} - \\frac{2b^2}{9a}\\right)x + \\left(d - \\frac{bc}{9a}\\right)",
+        "desc": "Điều kiện có 2 cực trị và phương trình đường thẳng đi qua 2 điểm cực trị của hàm bậc 3",
+        "tags": [
+          "Hàm số",
+          "Cực trị",
+          "Hàm bậc 3"
+        ]
+      },
+      {
+        "id": "kb_toan12_01_f4",
+        "name": "Công thức tính nhanh cực trị hàm trùng phương",
+        "latex": "y = ax^4 + bx^2 + c \\implies \\text{3 cực trị } \\iff ab < 0; \\quad \\text{1 cực trị } \\iff ab \\ge 0; \\quad S_{\\triangle ABC} = \\sqrt{-\\frac{b^5}{32a^3}}",
+        "desc": "Điều kiện số lượng điểm cực trị và diện tích tam giác tạo bởi 3 điểm cực trị hàm trùng phương",
+        "tags": [
+          "Hàm số",
+          "Cực trị",
+          "Hàm trùng phương"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan12_01_f1",
+      "kb_toan12_01_f2",
+      "kb_toan12_01_f3",
+      "kb_toan12_01_f4"
+    ],
+    "prerequisites": [
+      "kb_toan11_04"
+    ],
+    "related_topics": [
+      "kb_toan12_02"
+    ],
+    "common_traps": [
+      "Nhầm lẫn giữa 'Điểm cực trị của hàm số' (x) và 'Cực trị của hàm số' (y)",
+      "Quên kiểm tra đạo hàm đổi dấu khi f'(x) = 0 có nghiệm bội chẵn"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tối ưu dung tích hộp không nắp",
+        "question": "Từ một tấm tôn hình vuông cạnh 60 cm, người ta cắt bỏ 4 hình vuông bằng nhau ở 4 góc rồi gập mép lên để hàn thành một cái hộp chữ nhật không nắp. Tìm cạnh hình vuông bị cắt để thể tích hộp lớn nhất.",
+        "solution_steps": [
+          "Bước 1: Gọi cạnh hình vuông bị cắt là \\(x\\) (cm, \\(0 < x < 30\\)).",
+          "Bước 2: Kích thước đáy: \\(60 - 2x\\), chiều cao: \\(x\\). Thể tích: \\(V(x) = x(60 - 2x)^2 = 4x(30 - x)^2\\).",
+          "Bước 3: Dùng AM-GM: \\(4x(30 - x)^2 = 2 \\cdot (2x)(30 - x)(30 - x) \\le 2 \\cdot \\left(\\frac{2x + 30 - x + 30 - x}{3}\\right)^3 = 2 \\cdot 20^3 = 16.000\\text{ cm}^3\\).",
+          "Bước 4: Dấu bằng khi \\(2x = 30 - x \\iff x = 10\\text{ cm}\\)."
+        ],
+        "takeaway": "Kỹ thuật cân bằng hệ số trong AM-GM giúp tìm cực trị hình học nhanh chóng mà không cần đạo hàm."
+      }
+    ],
+    "applications": "Tối ưu hóa bao bì sản phẩm công nghiệp (giảm tiêu hao nguyên vật liệu), định giá động tối đa hóa doanh thu trong kinh tế học và thiết kế khí động học cánh máy bay.",
+    "drill_tags": [
+      "Cực trị",
+      "Khảo sát hàm số",
+      "Tối ưu hóa",
+      "Hàm trùng phương"
+    ],
+    "related_question_ids": [
+      "q_tsa_01",
+      "q_hsa_01",
+      "q_thpt_01"
+    ]
+  },
+  {
+    "id": "kb_toan12_02",
+    "grade": "Toán 12",
+    "chapter": "Chương 2: Hàm số Lũy thừa, Mũ & Logarit",
+    "title": "Hàm số Lũy thừa, Mũ & Logarit Thực chiến",
+    "overview": "Hệ thống quy tắc logarit toàn tập, phương trình mũ - logarit, đạo hàm, điều kiện xác định và mô hình tăng trưởng lũy thừa thực tế.",
+    "theory_markdown": "### 1. Hệ thống quy tắc Logarit toàn diện\nĐiều kiện: \\(a, b > 0, a \\ne 1\\), \\(x, y > 0\\):\n- \\(\\log_a(xy) = \\log_a x + \\log_a y\\)\n- \\(\\log_a\\left(\\frac{x}{y}\\right) = \\log_a x - \\log_a y\\)\n- \\(\\log_a(x^\\alpha) = \\alpha\\log_a x\\)\n- \\(\\log_{a^\\beta} x = \\frac{1}{\\beta}\\log_a x\\)\n- **Đổi cơ số**: \\(\\log_a b = \\frac{\\log_c b}{\\log_c a}\\) \\((c > 0, c \\ne 1)\\)\n- **Đẳng thức mũ - logarit**: \\(a^{\\log_b c} = c^{\\log_b a}\\)\n\n### 2. Đạo hàm hàm số Mũ và Logarit\n- \\((a^x)' = a^x \\ln a\\); \\((e^x)' = e^x\\); \\((a^u)' = u' \\cdot a^u \\ln a\\).\n- \\((\\log_a |x|)' = \\frac{1}{x \\ln a}\\); \\((\\ln |x|)' = \\frac{1}{x}\\); \\((\\ln |u|)' = \\frac{u'}{u}\\).\n\n### 3. Phương trình & Bất phương trình Mũ - Logarit cơ bản\n- \\(a^x = b \\iff x = \\log_a b\\) (với \\(b > 0\\)).\n- \\(\\log_a x = b \\iff x = a^b\\).\n- Bất phương trình \\(\\log_a f(x) > \\log_a g(x)\\):\n  - Nếu \\(a > 1\\): \\(f(x) > g(x) > 0\\) (cùng chiều).\n  - Nếu \\(0 < a < 1\\): \\(0 < f(x) < g(x)\\) (đổi chiều).",
+    "formulas": [
+      {
+        "id": "kb_toan12_02_f1",
+        "name": "Chu kỳ bán rã phóng xạ",
+        "latex": "N(t) = N_0 \\cdot e^{-\\lambda t} = N_0 \\cdot 2^{-t/T}",
+        "desc": "Mô hình suy giảm mũ trong vật lý hạt nhân với chu kỳ bán rã T",
+        "tags": [
+          "Mũ",
+          "Phóng xạ",
+          "Ứng dụng"
+        ]
+      },
+      {
+        "id": "kb_toan12_02_f2",
+        "name": "Đổi cơ số Logarit toàn diện",
+        "latex": "\\log_a b = \\frac{\\log_c b}{\\log_c a}, \\quad \\log_{a^\\alpha} b = \\frac{1}{\\alpha}\\log_a b, \\quad \\log_a(b^\\beta) = \\beta\\log_a b",
+        "desc": "Biến đổi cơ số logarit sang cơ số mới phục vụ giải phương trình",
+        "tags": [
+          "Logarit",
+          "Đổi cơ số"
+        ]
+      },
+      {
+        "id": "kb_toan12_02_f3",
+        "name": "Hệ thống hằng đẳng thức Logarit cốt lõi",
+        "latex": "\\log_a(xy) = \\log_a x + \\log_a y, \\quad \\log_a\\left(\\frac{x}{y}\\right) = \\log_a x - \\log_a y, \\quad a^{\\log_b c} = c^{\\log_b a} \\; (a, b \\ne 1; x, y, c > 0)",
+        "desc": "Các quy tắc biến đổi logarit của tích, thương, lũy thừa và hoán vị cơ số lũy thừa",
+        "tags": [
+          "Logarit",
+          "Lũy thừa",
+          "Quy tắc"
+        ]
+      },
+      {
+        "id": "kb_toan12_02_f4",
+        "name": "Đạo hàm hàm số Mũ và Logarit",
+        "latex": "(a^x)' = a^x \\ln a, \\quad (e^x)' = e^x, \\quad (\\log_a |x|)' = \\frac{1}{x \\ln a}, \\quad (\\ln |x|)' = \\frac{1}{x}",
+        "desc": "Quy tắc đạo hàm chuẩn xác của hàm mũ và hàm logarit với cơ số bất kỳ",
+        "tags": [
+          "Đạo hàm",
+          "Hàm mũ",
+          "Logarit"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan12_02_f1",
+      "kb_toan12_02_f2",
+      "kb_toan12_02_f3",
+      "kb_toan12_02_f4"
+    ],
+    "prerequisites": [
+      "kb_toan11_02"
+    ],
+    "related_topics": [
+      "kb_toan12_03"
+    ],
+    "common_traps": [
+      "Quên đặt điều kiện xác định cho biểu thức trong logarit (biểu thức phải thực sự > 0)",
+      "Quên đổi chiều bất phương trình khi cơ số 0 < a < 1"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Mô hình tăng trưởng vi khuẩn",
+        "question": "Số lượng vi khuẩn sau \\(t\\) giờ tuân theo \\(N(t) = 500 \\cdot e^{0,4t}\\). Sau bao lâu số lượng vi khuẩn đạt 10.000 con?",
+        "solution_steps": [
+          "Bước 1: Thiết lập phương trình: \\(500 \\cdot e^{0,4t} = 10.000\\).",
+          "Bước 2: Rút gọn: \\(e^{0,4t} = 20\\).",
+          "Bước 3: Lấy logarit tự nhiên hai vế: \\(0,4t = \\ln 20 \\implies t = \\frac{\\ln 20}{0,4} \\approx \\frac{2,9957}{0,4} \\approx 7,49\\text{ giờ}\\)."
+        ],
+        "takeaway": "Lấy logarit tự nhiên hai vế để hạ số mũ xuống tuyến tính."
+      }
+    ],
+    "applications": "Mô hình tính độ pH dung dịch trong hóa học, thang đo cường độ động đất Richter, mô hình truyền thông tin lan truyền mạng xã hội.",
+    "drill_tags": [
+      "Logarit",
+      "Hàm số mũ",
+      "Tăng trưởng",
+      "Đổi cơ số"
+    ],
+    "related_question_ids": [
+      "q_tsa_03",
+      "q_hsa_02",
+      "q_thpt_02"
+    ]
+  },
+  {
+    "id": "kb_toan12_03",
+    "grade": "Toán 12",
+    "chapter": "Chương 3: Nguyên hàm, Tích phân & Ứng dụng",
+    "title": "Tích phân toàn diện & Kỹ thuật Múa cột DI Method",
+    "overview": "Bảng nguyên hàm chuẩn 10 hàm cơ bản, tích phân từng phần (phương pháp sơ đồ múa cột DI), tính diện tích hình phẳng và thể tích khối tròn xoay.",
+    "theory_markdown": "### 1. Bảng nguyên hàm cơ bản trọng tâm\n- \\(\\int x^\\alpha dx = \\frac{x^{\\alpha+1}}{\\alpha+1} + C\\) \\((\\alpha \\ne -1)\\)\n- \\(\\int \\frac{1}{x} dx = \\ln|x| + C\\)\n- \\(\\int e^x dx = e^x + C\\); \\(\\int a^x dx = \\frac{a^x}{\\ln a} + C\\)\n- \\(\\int \\cos x dx = \\sin x + C\\); \\(\\int \\sin x dx = -\\cos x + C\\)\n- \\(\\int \\frac{1}{\\cos^2 x} dx = \\tan x + C\\); \\(\\int \\frac{1}{\\sin^2 x} dx = -\\cot x + C\\)\n\n### 2. Tích phân từng phần & Phương pháp múa cột DI\n- Công thức chuẩn: \\(\\int u dv = uv - \\int v du\\).\n- **Phương pháp múa cột (D-I Method)**:\n  - Cột D (Đạo hàm): Chọn hàm theo thứ tự 'Nhất lô, nhì đa, tam lượng, tứ mũ'. Đạo hàm đến 0 (nếu là đa thức) hoặc đến dòng lặp lại.\n  - Cột I (Nguyên hàm): Lấy nguyên hàm liên tiếp.\n  - Ghép tích đường chéo với dấu đan xen: \\(+ - + - \\dots\\)\n\n### 3. Ứng dụng hình học của Tích phân\n- **Diện tích hình phẳng**: \\(S = \\int_a^b |f(x) - g(x)| dx\\).\n- **Thể tích khối tròn xoay quay quanh Ox**: \\(V = \\pi \\int_a^b [f(x)]^2 dx\\).",
+    "formulas": [
+      {
+        "id": "kb_toan12_03_f1",
+        "name": "Công thức tích phân từng phần (Integration by Parts)",
+        "latex": "\\int_a^b u\\,dv = uv\\Big|_a^b - \\int_a^b v\\,du",
+        "desc": "Thứ tự ưu tiên đặt u: 'Nhất lô (logarit), nhì đa (đa thức), tam lượng (lượng giác), tứ mũ (hàm mũ)'",
+        "tags": [
+          "Tích phân",
+          "Từng phần"
+        ]
+      },
+      {
+        "id": "kb_toan12_03_f2",
+        "name": "Thể tích khối tròn xoay quanh Ox",
+        "latex": "V = \\pi \\int_a^b [f(x)]^2\\,dx",
+        "desc": "Thể tích vật thể tròn xoay khi quay hình phẳng giới hạn bởi y = f(x) quanh trục hoành",
+        "tags": [
+          "Tích phân",
+          "Thể tích",
+          "Tròn xoay"
+        ]
+      },
+      {
+        "id": "kb_toan12_03_f3",
+        "name": "Bảng nguyên hàm chuẩn 10 hàm cơ bản",
+        "latex": "\\int x^\\alpha dx = \\frac{x^{\\alpha+1}}{\\alpha+1} + C \\; (\\alpha \\ne -1), \\quad \\int \\frac{1}{x} dx = \\ln|x| + C, \\quad \\int e^x dx = e^x + C, \\quad \\int \\cos x dx = \\sin x + C, \\quad \\int \\sin x dx = -\\cos x + C",
+        "desc": "Bảng các nguyên hàm sơ cấp nền tảng không thể thiếu trong mọi bài toán giải tích",
+        "tags": [
+          "Nguyên hàm",
+          "Tích phân",
+          "Bảng chuẩn"
+        ]
+      },
+      {
+        "id": "kb_toan12_03_f4",
+        "name": "Diện tích hình phẳng giới hạn bởi đồ thị",
+        "latex": "S = \\int_a^b |f(x) - g(x)| dx",
+        "desc": "Ứng dụng hình học của tích phân xác định tính diện tích giữa hai đường cong cong",
+        "tags": [
+          "Tích phân",
+          "Diện tích",
+          "Ứng dụng"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan12_03_f1",
+      "kb_toan12_03_f2",
+      "kb_toan12_03_f3",
+      "kb_toan12_03_f4"
+    ],
+    "prerequisites": [
+      "kb_toan12_02"
+    ],
+    "related_topics": [
+      "kb_toan12_04",
+      "kb_gt1_03"
+    ],
+    "common_traps": [
+      "Quên nhân số pi trong công thức tính thể tích khối tròn xoay V = pi * tích phân (f(x))^2 dx",
+      "Quên đóng dấu trị tuyệt đối khi tính diện tích hình phẳng có phần nằm dưới trục hoành"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tính tích phân từng phần bằng sơ đồ cột",
+        "question": "Tính tích phân \\(I = \\int_0^1 (2x + 1)e^x\\,dx\\).",
+        "solution_steps": [
+          "Bước 1: Lập sơ đồ múa cột DI:",
+          "Cột D: \\(2x + 1 \\to 2 \\to 0\\).",
+          "Cột I: \\(e^x \\to e^x \\to e^x\\).",
+          "Bước 2: Ghép đường chéo đan dấu:",
+          "\\(I = \\left[(2x + 1)e^x - 2e^x\\right]_0^1 = \\left[(2x - 1)e^x\\right]_0^1\\).",
+          "Bước 3: Thay cận: \\((2 - 1)e^1 - (-1)e^0 = e + 1\\)."
+        ],
+        "takeaway": "Kỹ thuật múa cột giải quyết tích phân đa thức nhân mũ/lượng giác chỉ trong 10 giây."
+      }
+    ],
+    "applications": "Tính trọng tâm vật thể không đồng nhất, tính công cơ học của lực biến thiên, ước lượng diện tích hồ chứa thủy điện qua dữ liệu đo sâu.",
+    "drill_tags": [
+      "Tích phân",
+      "Nguyên hàm",
+      "Múa cột",
+      "Thể tích"
+    ],
+    "related_question_ids": [
+      "q_tsa_05",
+      "q_hsa_05",
+      "q_thpt_04"
+    ]
+  },
+  {
+    "id": "kb_toan12_04",
+    "grade": "Toán 12",
+    "chapter": "Chương 4: Phương pháp Tọa độ Không gian Oxyz",
+    "title": "Phương pháp Tọa độ Không gian Oxyz Toàn diện",
+    "overview": "Tích có hướng của 2 vectơ, phương trình mặt phẳng, phương trình đường thẳng, mặt cầu, khoảng cách 2 đường thẳng chéo nhau và bộ công thức khối tròn xoay.",
+    "theory_markdown": "### 1. Tọa độ Vectơ & Tích có hướng\nCho \\(\\vec{u} = (x_1, y_1, z_1)\\) và \\(\\vec{v} = (x_2, y_2, z_2)\\):\n- Tích vô hướng: \\(\\vec{u} \\cdot \\vec{v} = x_1x_2 + y_1y_2 + z_1z_2\\).\n- Tích có hướng: \\([\\vec{u}, \\vec{v}] = (y_1z_2 - z_1y_2; z_1x_2 - x_1z_2; x_1y_2 - y_1x_2)\\).\n- Ứng dụng tích có hướng:\n  - Diện tích tam giác: \\(S_{\\triangle ABC} = \\frac{1}{2}|[\\vec{AB}, \\vec{AC}]|\\).\n  - Thể tích tứ diện: \\(V_{ABCD} = \\frac{1}{6}|[\\vec{AB}, \\vec{AC}] \\cdot \\vec{AD}|\\).\n\n### 2. Khoảng cách trong không gian Oxyz\n- Khoảng cách từ điểm \\(M_0(x_0, y_0, z_0)\\) đến mặt phẳng \\((P): Ax + By + Cz + D = 0\\):\n  \\[d(M_0, (P)) = \\frac{|Ax_0 + By_0 + Cz_0 + D|}{\\sqrt{A^2 + B^2 + C^2}}\\]\n- Khoảng cách giữa 2 đường thẳng chéo nhau \\(\\Delta_1\\) (qua \\(M_1\\), VTCP \\(\\vec{u}_1\\)) và \\(\\Delta_2\\) (qua \\(M_2\\), VTCP \\(\\vec{u}_2\\)):\n  \\[d(\\Delta_1, \\Delta_2) = \\frac{|[\\vec{u}_1, \\vec{u}_2] \\cdot \\vec{M_1 M_2}|}{|[\\vec{u}_1, \\vec{u}_2]|}\\]\n\n### 3. Mặt cầu & Khối tròn xoay\n- Phương trình mặt cầu tâm \\(I(a, b, c)\\) bán kính \\(R\\):\n  \\((x - a)^2 + (y - b)^2 + (z - c)^2 = R^2\\).\n- Thể tích và diện tích các khối tròn xoay:\n  - Nón: \\(V = \\frac{1}{3}\\pi r^2 h\\), \\(S_{xq} = \\pi r l\\) (với \\(l = \\sqrt{r^2 + h^2}\\)).\n  - Trụ: \\(V = \\pi r^2 h\\), \\(S_{xq} = 2\\pi r h\\).\n  - Cầu: \\(V = \\frac{4}{3}\\pi R^3\\), \\(S = 4\\pi R^2\\).",
+    "formulas": [
+      {
+        "id": "kb_toan12_04_f1",
+        "name": "Khoảng cách từ điểm đến mặt phẳng",
+        "latex": "d(M_0, (P)) = \\frac{|Ax_0 + By_0 + Cz_0 + D|}{\\sqrt{A^2 + B^2 + C^2}}",
+        "desc": "Tính khoảng cách từ điểm M0(x0, y0, z0) đến mặt phẳng (P): Ax + By + Cz + D = 0",
+        "tags": [
+          "Tọa độ Oxyz",
+          "Khoảng cách",
+          "Mặt phẳng"
+        ]
+      },
+      {
+        "id": "kb_toan12_04_f2",
+        "name": "Thể tích khối tứ diện (Oxyz)",
+        "latex": "V_{ABCD} = \\frac{1}{6}|[\\vec{AB}, \\vec{AC}] \\cdot \\vec{AD}|",
+        "desc": "Tính thể tích khối tứ diện thông qua tích có hướng và tích vô hướng hỗn tạp",
+        "tags": [
+          "Tọa độ Oxyz",
+          "Thể tích",
+          "Tứ diện"
+        ]
+      },
+      {
+        "id": "kb_toan12_04_f3",
+        "name": "Tích có hướng của 2 vectơ & Ứng dụng Oxyz",
+        "latex": "[\\vec{u}, \\vec{v}] = \\left(y_1 z_2 - z_1 y_2; \\; z_1 x_2 - x_1 z_2; \\; x_1 y_2 - y_1 x_2\\right), \\quad S_{\\triangle ABC} = \\frac{1}{2}\\left|[\\vec{AB}, \\vec{AC}]\\right|",
+        "desc": "Công thức tọa độ tích có hướng hai vectơ và ứng dụng tính diện tích tam giác không gian",
+        "tags": [
+          "Tọa độ Oxyz",
+          "Tích có hướng",
+          "Vectơ"
+        ]
+      },
+      {
+        "id": "kb_toan12_04_f4",
+        "name": "Khoảng cách giữa hai đường thẳng chéo nhau",
+        "latex": "d(\\Delta_1, \\Delta_2) = \\frac{\\left|[\\vec{u}_1, \\vec{u}_2] \\cdot \\vec{M_1 M_2}\\right|}{\\left|[\\vec{u}_1, \\vec{u}_2]\\right|}",
+        "desc": "Tính khoảng cách ngắn nhất giữa hai đường thẳng chéo nhau trong không gian Oxyz",
+        "tags": [
+          "Tọa độ Oxyz",
+          "Khoảng cách",
+          "Đường thẳng chéo nhau"
+        ]
+      },
+      {
+        "id": "kb_toan12_04_f5",
+        "name": "Phương trình mặt cầu trong không gian Oxyz",
+        "latex": "(x - a)^2 + (y - b)^2 + (z - c)^2 = R^2 \\iff x^2 + y^2 + z^2 - 2ax - 2by - 2cz + d = 0 \\quad (R = \\sqrt{a^2 + b^2 + c^2 - d} > 0)",
+        "desc": "Phương trình chính tắc và dạng tổng quát của mặt cầu tâm I(a,b,c) bán kính R",
+        "tags": [
+          "Tọa độ Oxyz",
+          "Mặt cầu"
+        ]
+      },
+      {
+        "id": "kb_toan12_04_f6",
+        "name": "Bộ công thức Thể tích & Diện tích các khối tròn xoay",
+        "latex": "\\text{Nón: } V = \\frac{1}{3}\\pi r^2 h, \\; S_{xq} = \\pi r l; \\quad \\text{Trụ: } V = \\pi r^2 h, \\; S_{xq} = 2\\pi r h; \\quad \\text{Cầu: } V = \\frac{4}{3}\\pi R^3, \\; S = 4\\pi R^2",
+        "desc": "Toàn bộ công thức diện tích xung quanh, toàn phần và thể tích khối nón, khối trụ và mặt cầu",
+        "tags": [
+          "Hình học không gian",
+          "Thể tích",
+          "Tròn xoay"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan12_04_f1",
+      "kb_toan12_04_f2",
+      "kb_toan12_04_f3",
+      "kb_toan12_04_f4",
+      "kb_toan12_04_f5",
+      "kb_toan12_04_f6"
+    ],
+    "prerequisites": [
+      "kb_toan10_04"
+    ],
+    "related_topics": [
+      "kb_dstt_04"
+    ],
+    "common_traps": [
+      "Quên đổi dấu tọa độ tâm mặt cầu khi đọc từ dạng tổng quát (chia hệ số cho -2)",
+      "Nhầm lẫn giữa đường sinh l và chiều cao h của hình nón (l^2 = h^2 + r^2)"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tính khoảng cách từ điểm đến mặt phẳng",
+        "question": "Trong không gian Oxyz, tính khoảng cách từ \\(A(1, -2, 3)\\) đến mặt phẳng \\((P): 2x - 2y + z - 6 = 0\\).",
+        "solution_steps": [
+          "Bước 1: Thay tọa độ điểm A vào vế trái phương trình mặt phẳng: \\(2(1) - 2(-2) + 3 - 6 = 2 + 4 + 3 - 6 = 3\\).",
+          "Bước 2: Độ dài vectơ pháp tuyến: \\(|\\vec{n}| = \\sqrt{2^2 + (-2)^2 + 1^2} = \\sqrt{4 + 4 + 1} = 3\\).",
+          "Bước 3: Khoảng cách: \\(d = \\frac{|3|}{3} = 1\\)."
+        ],
+        "takeaway": "Ghi nhớ công thức khoảng cách chuẩn: thay tọa độ vào tử số lấy trị tuyệt đối, chia cho độ dài VTPT."
+      }
+    ],
+    "applications": "Dẫn đường tên lửa và định vị quỹ đạo vệ tinh GPS, dựng mô hình 3D trong game engine (Unity/Unreal), thiết kế kiến trúc kết cấu vòm không gian.",
+    "drill_tags": [
+      "Tọa độ Oxyz",
+      "Mặt phẳng",
+      "Khoảng cách",
+      "Khối tròn xoay"
+    ],
+    "related_question_ids": [
+      "q_tsa_14",
+      "q_hsa_15",
+      "q_thpt_10"
+    ]
+  },
+  {
+    "id": "kb_toan12_05",
+    "grade": "Toán 12",
+    "chapter": "Chương 5: Xác suất & Thống kê nâng cao",
+    "title": "Thống kê Mẫu Số liệu Ghép nhóm & Biến ngẫu nhiên",
+    "overview": "Bảng tần số ghép nhóm, số trung bình, trung vị, tứ phân vị ghép nhóm và phân phối xác suất của biến ngẫu nhiên rời rạc.",
+    "theory_markdown": "### 1. Số đặc trưng mẫu số liệu ghép nhóm\n- **Số trung bình**: \\(\\bar{x} = \\frac{1}{n}\\sum_{i=1}^k m_i c_i\\) (với \\(c_i\\) là giá trị đại diện nửa tổng hai mút nhóm).\n- **Tứ phân vị thứ nhất \\(Q_1\\)**: Thuộc nhóm \\([u_m; u_{m+1})\\) có tần số tích lũy đầu tiên \\(\\ge \\frac{n}{4}\\):\n  \\[Q_1 = u_m + \\frac{\\frac{n}{4} - C}{m_m} \\cdot (u_{m+1} - u_m)\\]\n- **Trung vị (Tứ phân vị \\(Q_2\\))**: Thuộc nhóm có tần số tích lũy \\(\\ge \\frac{n}{2}\\).\n\n### 2. Biến ngẫu nhiên rời rạc & Các tham số đặc trưng\nCho biến ngẫu nhiên rời rạc \\(X\\) nhận các giá trị \\(x_1, x_2, \\dots, x_k\\) với xác suất tương ứng \\(p_1, p_2, \\dots, p_k\\) (\\(\\sum p_i = 1\\)):\n- **Kỳ vọng (Giá trị trung bình)**: \\(E(X) = \\sum_{i=1}^k x_i p_i\\).\n- **Phương sai**: \\(V(X) = E(X^2) - [E(X)]^2 = \\sum_{i=1}^k (x_i - E(X))^2 p_i\\).\n- **Độ lệch chuẩn**: \\(\\sigma(X) = \\sqrt{V(X)}\\).",
+    "formulas": [
+      {
+        "id": "kb_toan12_05_f1",
+        "name": "Công thức tứ phân vị ghép nhóm",
+        "latex": "Q_p = u_m + \\frac{p \\cdot n - C}{m_m} \\cdot h",
+        "desc": "Xác định tứ phân vị mẫu số liệu ghép nhóm bằng phép nội suy tuyến tính",
+        "tags": [
+          "Thống kê",
+          "Ghép nhóm",
+          "Tứ phân vị"
+        ]
+      },
+      {
+        "id": "kb_toan12_05_f2",
+        "name": "Kỳ vọng biến ngẫu nhiên",
+        "latex": "E(X) = \\sum_{i=1}^n x_i P(X = x_i)",
+        "desc": "Giá trị trung bình kỳ vọng lý thuyết của biến ngẫu nhiên rời rạc",
+        "tags": [
+          "Xác suất",
+          "Kỳ vọng"
+        ]
+      },
+      {
+        "id": "kb_toan12_05_f3",
+        "name": "Phương sai & Độ lệch chuẩn của biến ngẫu nhiên rời rạc",
+        "latex": "V(X) = E(X^2) - [E(X)]^2 = \\sum_{i=1}^n (x_i - \\mu)^2 p_i, \\quad \\sigma(X) = \\sqrt{V(X)}",
+        "desc": "Đo lường mức độ phân tán rủi ro xung quanh giá trị trung bình kỳ vọng",
+        "tags": [
+          "Biến ngẫu nhiên",
+          "Phương sai",
+          "Độ lệch chuẩn"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan12_05_f1",
+      "kb_toan12_05_f2",
+      "kb_toan12_05_f3"
+    ],
+    "prerequisites": [
+      "kb_toan11_05"
+    ],
+    "related_topics": [
+      "kb_dstt_05"
+    ],
+    "common_traps": [
+      "Nhầm lẫn tần số tích lũy C của nhóm đứng trước với tần số m_m của nhóm đang xét",
+      "Quên bình phương E(X) trong công thức tính phương sai V(X) = E(X^2) - [E(X)]^2"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tính kỳ vọng lợi nhuận dự án đầu tư",
+        "question": "Một dự án đầu tư có xác suất thành công lớn là 40% (lợi nhuận 500 triệu), thành công vừa là 40% (lợi nhuận 200 triệu), thất bại là 20% (lỗ 100 triệu, ghi -100). Tính kỳ vọng lợi nhuận của dự án.",
+        "solution_steps": [
+          "Bước 1: Bảng phân bố xác suất: \\(x_1 = 500, p_1 = 0,4\\); \\(x_2 = 200, p_2 = 0,4\\); \\(x_3 = -100, p_3 = 0,2\\).",
+          "Bước 2: Áp dụng công thức kỳ vọng: \\(E(X) = 500(0,4) + 200(0,4) + (-100)(0,2)\\).",
+          "Bước 3: \\(E(X) = 200 + 80 - 20 = 260\\text{ triệu đồng}\\)."
+        ],
+        "takeaway": "Kỳ vọng lợi nhuận phản ánh giá trị bình quân của khoản đầu tư nếu lặp lại nhiều lần."
+      }
+    ],
+    "applications": "Định giá phí bảo hiểm nhân thọ (Actuarial Science), thuật toán phân luồng gói tin trên mạng Internet, quản trị rủi ro danh mục tín dụng ngân hàng.",
+    "drill_tags": [
+      "Thống kê ghép nhóm",
+      "Biến ngẫu nhiên",
+      "Kỳ vọng",
+      "Phương sai"
+    ],
+    "related_question_ids": [
+      "q_tsa_16",
+      "q_hsa_17",
+      "q_thpt_12"
+    ]
+  }
+]

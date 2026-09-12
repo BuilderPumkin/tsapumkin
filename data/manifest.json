@@ -1,0 +1,168 @@
+﻿{
+    "name":  "pumkindev-math-open-data",
+    "version":  "v2.0.0",
+    "schema_version":  "2.0",
+    "title":  "PUMKIN.DEV Standardized Math Examination, Skill Graph and Knowledge Open Dataset",
+    "description":  "Kho du lieu mo chuan hoa phuc vu khao thi va luyen thi Toan TSA, HSA, THPT, Giai tich 1 voi Question DNA va Do thi Ky nang",
+    "license":  "CC BY-NC-SA 4.0",
+    "generated_at":  "2026-09-08T16:32:00Z",
+    "maintainer":  {
+                       "team":  "PUMKIN.DEV Education and Open Source Team",
+                       "repository":  "https://github.com/pumkindev/math-exam-platform"
+                   },
+    "stats":  {
+                  "total_questions":  182,
+                  "total_exams":  43,
+                  "total_knowledge_articles":  25,
+                  "total_formulas":  84,
+                  "total_skills":  6,
+                  "total_public_files":  23
+              },
+    "schemas":  {
+                    "question":  "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/question.schema.json",
+                    "skills":  "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/skills.schema.json",
+                    "exam":  "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/exam.schema.json",
+                    "knowledge":  "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/knowledge.schema.json",
+                    "manifest":  "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/manifest.schema.json"
+                },
+    "files":  {
+                  "bundle.json":  {
+                                      "path":  "bundle.json",
+                                      "format":  "JSON",
+                                      "bytes":  891880,
+                                      "sha256":  "afdee72334abc099880d58295389d0784c0bfb832074adf20639f372df877e57"
+                                  },
+                  "skills/skills.json":  {
+                                             "path":  "skills/skills.json",
+                                             "format":  "JSON",
+                                             "bytes":  3345,
+                                             "sha256":  "c5d8a23c0aa7e995c07ba6d7e8b89ce87ac4eac223825872fa178e569c8a391e"
+                                         },
+                  "questions/all.json":  {
+                                             "path":  "questions/all.json",
+                                             "format":  "JSON",
+                                             "bytes":  433431,
+                                             "sha256":  "91ac4034be1ff164be2004449fd4cf7ba86392e3e14669fcfa218f7f9504488e"
+                                         },
+                  "questions/tsa.json":  {
+                                             "path":  "questions/tsa.json",
+                                             "format":  "JSON",
+                                             "bytes":  224892,
+                                             "sha256":  "3df86294d734ed2ec5cf5d35dffe68aeb42fbadfb6e388894806013c05584b16"
+                                         },
+                  "questions/hsa.json":  {
+                                             "path":  "questions/hsa.json",
+                                             "format":  "JSON",
+                                             "bytes":  70922,
+                                             "sha256":  "e14dbd62d59087b89ecc2ec9a7d29b3ea8e8d6599062af862b7c0127f1c06538"
+                                         },
+                  "questions/thpt.json":  {
+                                              "path":  "questions/thpt.json",
+                                              "format":  "JSON",
+                                              "bytes":  47303,
+                                              "sha256":  "6aee59ce07e87540bd25eab7c83183232f7a5a07bd1441f1b94598817a0585e5"
+                                          },
+                  "questions/calculus1.json":  {
+                                                   "path":  "questions/calculus1.json",
+                                                   "format":  "JSON",
+                                                   "bytes":  36706,
+                                                   "sha256":  "f545e404625c63191da93fd7050e83c1f851c022213fd54033ec28a153ccb29c"
+                                               },
+                  "questions/questions.csv":  {
+                                                  "path":  "questions/questions.csv",
+                                                  "format":  "CSV",
+                                                  "bytes":  107356,
+                                                  "sha256":  "bc0ca0a77a3863baad00a750845f3acb44cf412242283708afdbfd1bb2695194"
+                                              },
+                  "exams/all.json":  {
+                                         "path":  "exams/all.json",
+                                         "format":  "JSON",
+                                         "bytes":  116397,
+                                         "sha256":  "f37b6725abd4615a74c368076b88f18a9ce3b207113ca8bdcd8a5b554df2a509"
+                                     },
+                  "exams/tsa.json":  {
+                                         "path":  "exams/tsa.json",
+                                         "format":  "JSON",
+                                         "bytes":  40758,
+                                         "sha256":  "9d21cc5b1bdad8d11f025bc05f59a97f989fdc89371a20e25c6e8d1c1d718eb0"
+                                     },
+                  "exams/hsa.json":  {
+                                         "path":  "exams/hsa.json",
+                                         "format":  "JSON",
+                                         "bytes":  14151,
+                                         "sha256":  "0874d5dea6e659084c8cf891979fc65a86929202a034e2e17c337f42e61b12e5"
+                                     },
+                  "exams/thpt.json":  {
+                                          "path":  "exams/thpt.json",
+                                          "format":  "JSON",
+                                          "bytes":  18789,
+                                          "sha256":  "39bc6dac676b3b72b21577d7b2f3ba94d173e6d7a0469ee1f8faf966f88871a0"
+                                      },
+                  "exams/calculus1.json":  {
+                                               "path":  "exams/calculus1.json",
+                                               "format":  "JSON",
+                                               "bytes":  3616,
+                                               "sha256":  "2b69ce93f84f7ef6c690da6da5299e7a343a8b9f8ce3eb53b054e58418cd9752"
+                                           },
+                  "knowledge/all.json":  {
+                                             "path":  "knowledge/all.json",
+                                             "format":  "JSON",
+                                             "bytes":  165384,
+                                             "sha256":  "1aec646bff6febefb0f9a69afc1351fc28e494853426130d8105cfd462fc6bfb"
+                                         },
+                  "knowledge/math10.json":  {
+                                                "path":  "knowledge/math10.json",
+                                                "format":  "JSON",
+                                                "bytes":  24046,
+                                                "sha256":  "04c46c4afd31c73fa65835cdd1cebbb862b52c624b16f32d69fd524d59c2abeb"
+                                            },
+                  "knowledge/math11.json":  {
+                                                "path":  "knowledge/math11.json",
+                                                "format":  "JSON",
+                                                "bytes":  30476,
+                                                "sha256":  "3ce08ba8049ed4602c1de4e30f42d38a8eb44dfd16240680a2bed5b74c2f0a8f"
+                                            },
+                  "knowledge/math12.json":  {
+                                                "path":  "knowledge/math12.json",
+                                                "format":  "JSON",
+                                                "bytes":  27159,
+                                                "sha256":  "29656d120cd0c696c1b77ec534c49df98b1802b9774a3129c52293deabed23fe"
+                                            },
+                  "knowledge/advanced_algebra.json":  {
+                                                          "path":  "knowledge/advanced_algebra.json",
+                                                          "format":  "JSON",
+                                                          "bytes":  16763,
+                                                          "sha256":  "0e64d4ddea78814387bd253daeeba42dd6e6d16276e5aeb9aaa9dbb41d76f38a"
+                                                      },
+                  "knowledge/calculus1.json":  {
+                                                   "path":  "knowledge/calculus1.json",
+                                                   "format":  "JSON",
+                                                   "bytes":  19037,
+                                                   "sha256":  "52710ed78bff58cadc4d80bb36d531a4d02d7172cb62ea8484d66d5ccceabe80"
+                                               },
+                  "knowledge/knowledge_handbook.md":  {
+                                                          "path":  "knowledge/knowledge_handbook.md",
+                                                          "format":  "Markdown",
+                                                          "bytes":  80755,
+                                                          "sha256":  "b7e839ee43e2614a76bf6c2d2b0d48b242a5a40abef75c177d5f3ce8c46520ab"
+                                                      },
+                  "formulas/cheatsheet.json":  {
+                                                   "path":  "formulas/cheatsheet.json",
+                                                   "format":  "JSON",
+                                                   "bytes":  56657,
+                                                   "sha256":  "521e56c91bc49b09246a9f9a55d5380b1eed6594edeeef0255a891d1206ace01"
+                                               },
+                  "formulas/cheatsheet.md":  {
+                                                 "path":  "formulas/cheatsheet.md",
+                                                 "format":  "Markdown",
+                                                 "bytes":  37416,
+                                                 "sha256":  "65e0357811d6b2cde1f1ed3dd8da364e34e4222d40a69a05f86047199e52026b"
+                                             },
+                  "taxonomy/topics.json":  {
+                                               "path":  "taxonomy/topics.json",
+                                               "format":  "JSON",
+                                               "bytes":  3821,
+                                               "sha256":  "e2377efb4245957dfe3dbbdaabacb89e4c175887896ba299a9bbee12dae2f6fb"
+                                           }
+              }
+}

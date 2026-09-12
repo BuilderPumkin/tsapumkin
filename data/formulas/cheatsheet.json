@@ -1,0 +1,1138 @@
+[
+    {
+        "id":  "kb_toan10_01_f1",
+        "article_id":  "kb_toan10_01",
+        "article_title":  "Mệnh đề, Tập hợp và Các phép toán trên tập hợp",
+        "grade":  "Toán 10",
+        "name":  "Nguyên lý bù trừ 2 tập",
+        "latex":  "|A \\cup B| = |A| + |B| - |A \\cap B|",
+        "desc":  "Tính số phần tử của hợp hai tập hữu hạn",
+        "tags":  [
+                     "Tập hợp",
+                     "Đếm"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_01_f2",
+        "article_id":  "kb_toan10_01",
+        "article_title":  "Mệnh đề, Tập hợp và Các phép toán trên tập hợp",
+        "grade":  "Toán 10",
+        "name":  "Nguyên lý bù trừ 3 tập",
+        "latex":  "|A \\cup B \\cup C| = |A|+|B|+|C| - (|A \\cap B| + |B \\cap C| + |C \\cap A|) + |A \\cap B \\cap C|",
+        "desc":  "Tính số phần tử khi có 3 tập giao nhau",
+        "tags":  [
+                     "Tập hợp",
+                     "Xác suất"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_01_f3",
+        "article_id":  "kb_toan10_01",
+        "article_title":  "Mệnh đề, Tập hợp và Các phép toán trên tập hợp",
+        "grade":  "Toán 10",
+        "name":  "Điều kiện hai khoảng giao khác rỗng",
+        "latex":  "(a; b) \\cap (c; d) \\ne \\emptyset \\iff a \u003c d \\text{ và } c \u003c b",
+        "desc":  "Điều kiện để hai khoảng số thực giao nhau khác rỗng",
+        "tags":  [
+                     "Số thực",
+                     "Khoảng đoạn"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_02_f1",
+        "article_id":  "kb_toan10_02",
+        "article_title":  "Bất phương trình, Quy hoạch tuyến tính \u0026 Bất đẳng thức AM-GM, Cauchy-Schwarz",
+        "grade":  "Toán 10",
+        "name":  "Hàm mục tiêu tuyến tính",
+        "latex":  "F(x, y) = ax + by + c \\implies \\max F = \\max_{i=1}^n \\{F(A_i)\\}",
+        "desc":  "Cực trị tuyến tính trên miền đa giác luôn đạt tại một trong các đỉnh",
+        "tags":  [
+                     "Quy hoạch tuyến tính",
+                     "Đỉnh đa giác"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_02_f2",
+        "article_id":  "kb_toan10_02",
+        "article_title":  "Bất phương trình, Quy hoạch tuyến tính \u0026 Bất đẳng thức AM-GM, Cauchy-Schwarz",
+        "grade":  "Toán 10",
+        "name":  "Bất đẳng thức AM-GM (Cauchy) 2 số \u0026 3 số",
+        "latex":  "a + b \\ge 2\\sqrt{ab} \\; (a, b \\ge 0), \\quad a + b + c \\ge 3\\sqrt[3]{abc} \\; (a, b, c \\ge 0) \\quad (\\text{Dấu \u0027=\u0027 } \\iff a = b = c)",
+        "desc":  "Bất đẳng thức giữa trung bình cộng và trung bình nhân cho các số thực không âm",
+        "tags":  [
+                     "Bất đẳng thức",
+                     "AM-GM",
+                     "Cauchy"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_02_f3",
+        "article_id":  "kb_toan10_02",
+        "article_title":  "Bất phương trình, Quy hoạch tuyến tính \u0026 Bất đẳng thức AM-GM, Cauchy-Schwarz",
+        "grade":  "Toán 10",
+        "name":  "Bất đẳng thức Cauchy-Schwarz (Bunhiacopxki) \u0026 Dạng Engel",
+        "latex":  "(ax + by)^2 \\le (a^2 + b^2)(x^2 + y^2), \\quad \\frac{a^2}{x} + \\frac{b^2}{y} \\ge \\frac{(a+b)^2}{x+y} \\; (x, y \u003e 0)",
+        "desc":  "Bất đẳng thức tích vô hướng và kỹ thuật cộng mẫu số Engel (Svac-xơ)",
+        "tags":  [
+                     "Bất đẳng thức",
+                     "Bunhiacopxki",
+                     "Cauchy-Schwarz"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_03_f1",
+        "article_id":  "kb_toan10_03",
+        "article_title":  "Hàm số bậc hai, Định lý dấu Tam thức \u0026 Ứng dụng Parabol",
+        "grade":  "Toán 10",
+        "name":  "Tọa độ đỉnh Parabol",
+        "latex":  "x_I = -\\frac{b}{2a}, \\quad y_I = f(x_I) = -\\frac{\\Delta}{4a}",
+        "desc":  "Điểm cực trị tuyệt đối của tam thức bậc hai",
+        "tags":  [
+                     "Parabol",
+                     "Cực trị"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_03_f2",
+        "article_id":  "kb_toan10_03",
+        "article_title":  "Hàm số bậc hai, Định lý dấu Tam thức \u0026 Ứng dụng Parabol",
+        "grade":  "Toán 10",
+        "name":  "Định lý Viète bậc hai",
+        "latex":  "x_1 + x_2 = -\\frac{b}{a}, \\quad x_1 x_2 = \\frac{c}{a}",
+        "desc":  "Mối liên hệ giữa nghiệm và hệ số của phương trình bậc hai",
+        "tags":  [
+                     "Viète",
+                     "Nghiệm"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_03_f3",
+        "article_id":  "kb_toan10_03",
+        "article_title":  "Hàm số bậc hai, Định lý dấu Tam thức \u0026 Ứng dụng Parabol",
+        "grade":  "Toán 10",
+        "name":  "Định lý dấu tam thức bậc hai \u0026 Điều kiện không đổi dấu",
+        "latex":  "f(x) = ax^2 + bx + c \u003e 0, \\forall x \\in \\mathbb{R} \\iff \\begin{cases} a \u003e 0 \\\\ \\Delta \u003c 0 \\end{cases}; \\quad f(x) \\ge 0, \\forall x \\in \\mathbb{R} \\iff \\begin{cases} a \u003e 0 \\\\ \\Delta \\le 0 \\end{cases}",
+        "desc":  "Điều kiện cần và đủ để tam thức bậc hai giữ nguyên dấu dương trên toàn trục số",
+        "tags":  [
+                     "Hàm số",
+                     "Tam thức bậc hai",
+                     "Biện luận"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_04_f1",
+        "article_id":  "kb_toan10_04",
+        "article_title":  "Hệ thức lượng trong tam giác, Vectơ và Công thức Shoelace",
+        "grade":  "Toán 10",
+        "name":  "Công thức Shoelace (Dây giày)",
+        "latex":  "S = \\frac{1}{2} |(x_A y_B + x_B y_C + x_C y_A) - (y_A x_B + y_B x_C + y_C x_A)|",
+        "desc":  "Tính diện tích đa giác khi biết tọa độ các đỉnh trong mặt phẳng",
+        "tags":  [
+                     "Shoelace",
+                     "Tọa độ phẳng",
+                     "Diện tích"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_04_f2",
+        "article_id":  "kb_toan10_04",
+        "article_title":  "Hệ thức lượng trong tam giác, Vectơ và Công thức Shoelace",
+        "grade":  "Toán 10",
+        "name":  "Độ dài đường trung tuyến",
+        "latex":  "m_a^2 = \\frac{2(b^2 + c^2) - a^2}{4}",
+        "desc":  "Tính độ dài trung tuyến ứng với cạnh a của tam giác ABC",
+        "tags":  [
+                     "Trung tuyến",
+                     "Hình học"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_04_f3",
+        "article_id":  "kb_toan10_04",
+        "article_title":  "Hệ thức lượng trong tam giác, Vectơ và Công thức Shoelace",
+        "grade":  "Toán 10",
+        "name":  "Định lý hàm số Cosin \u0026 Hệ quả góc",
+        "latex":  "a^2 = b^2 + c^2 - 2bc\\cos A, \\quad \\cos A = \\frac{b^2 + c^2 - a^2}{2bc}",
+        "desc":  "Tính cạnh và góc trong tam giác tổng quát khi biết hai cạnh và góc xen giữa",
+        "tags":  [
+                     "Hệ thức lượng",
+                     "Định lý Cosin"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_04_f4",
+        "article_id":  "kb_toan10_04",
+        "article_title":  "Hệ thức lượng trong tam giác, Vectơ và Công thức Shoelace",
+        "grade":  "Toán 10",
+        "name":  "Định lý hàm số Sin \u0026 Bán kính đường tròn ngoại tiếp",
+        "latex":  "\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R",
+        "desc":  "Mối liên hệ giữa cạnh, góc đối diện và bán kính đường tròn ngoại tiếp R",
+        "tags":  [
+                     "Hệ thức lượng",
+                     "Định lý Sin",
+                     "Bán kính ngoại tiếp"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_04_f5",
+        "article_id":  "kb_toan10_04",
+        "article_title":  "Hệ thức lượng trong tam giác, Vectơ và Công thức Shoelace",
+        "grade":  "Toán 10",
+        "name":  "5 Công thức tính diện tích tam giác toàn diện",
+        "latex":  "S = \\frac{1}{2}a h_a = \\frac{1}{2}ab\\sin C = \\frac{abc}{4R} = pr = \\sqrt{p(p-a)(p-b)(p-c)} \\quad \\left(p = \\frac{a+b+c}{2}\\right)",
+        "desc":  "Bộ 5 công thức diện tích tam giác chuẩn: chiều cao, góc xen giữa, bán kính R, bán kính r và Heron",
+        "tags":  [
+                     "Hình học",
+                     "Diện tích",
+                     "Heron"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_04_f6",
+        "article_id":  "kb_toan10_04",
+        "article_title":  "Hệ thức lượng trong tam giác, Vectơ và Công thức Shoelace",
+        "grade":  "Toán 10",
+        "name":  "Tích vô hướng hai vectơ \u0026 Công thức góc",
+        "latex":  "\\vec{u} \\cdot \\vec{v} = |\\vec{u}| |\\vec{v}| \\cos(\\vec{u}, \\vec{v}) = x_1 x_2 + y_1 y_2, \\quad \\vec{u} \\perp \\vec{v} \\iff x_1 x_2 + y_1 y_2 = 0",
+        "desc":  "Định nghĩa hình học và tọa độ của tích vô hướng, điều kiện hai vectơ vuông góc",
+        "tags":  [
+                     "Vectơ",
+                     "Tích vô hướng"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_05_f1",
+        "article_id":  "kb_toan10_05",
+        "article_title":  "Thống kê mô tả \u0026 Xác suất cổ điển",
+        "grade":  "Toán 10",
+        "name":  "Công thức tính nhanh phương sai",
+        "latex":  "s^2 = \\overline{x^2} - (\\bar{x})^2",
+        "desc":  "Phương sai bằng trung bình bình phương trừ bình phương trung bình",
+        "tags":  [
+                     "Thống kê",
+                     "Phương sai"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_05_f2",
+        "article_id":  "kb_toan10_05",
+        "article_title":  "Thống kê mô tả \u0026 Xác suất cổ điển",
+        "grade":  "Toán 10",
+        "name":  "Xác suất cổ điển Laplace",
+        "latex":  "P(A) = \\frac{n(A)}{n(\\Omega)} = \\frac{|A|}{|\\Omega|}",
+        "desc":  "Xác suất biến cố trong không gian mẫu đồng khả năng",
+        "tags":  [
+                     "Xác suất",
+                     "Tổ hợp"
+                 ]
+    },
+    {
+        "id":  "kb_toan10_05_f3",
+        "article_id":  "kb_toan10_05",
+        "article_title":  "Thống kê mô tả \u0026 Xác suất cổ điển",
+        "grade":  "Toán 10",
+        "name":  "Khoảng biến thiên \u0026 Khoảng tứ phân vị (IQR)",
+        "latex":  "R = x_{\\max} - x_{\\min}, \\quad \\Delta_Q = Q_3 - Q_1 \\quad (\\text{Ngoại lệ: } x \u003c Q_1 - 1,5\\Delta_Q \\lor x \u003e Q_3 + 1,5\\Delta_Q)",
+        "desc":  "Đo độ phân tán của mẫu số liệu và tiêu chuẩn nhận diện giá trị ngoại lệ",
+        "tags":  [
+                     "Thống kê",
+                     "Tứ phân vị",
+                     "Ngoại lệ"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_01_f1",
+        "article_id":  "kb_toan11_01",
+        "article_title":  "Lượng giác toàn diện \u0026 Kỹ thuật chuyển đổi góc",
+        "grade":  "Toán 11",
+        "name":  "Công thức Hạ bậc bậc hai",
+        "latex":  "\\cos^2 x = \\frac{1 + \\cos 2x}{2}, \\quad \\sin^2 x = \\frac{1 - \\cos 2x}{2}",
+        "desc":  "Biến đổi giảm bậc từ bậc 2 về bậc 1 phục vụ tính tích phân và giải phương trình",
+        "tags":  [
+                     "Lượng giác",
+                     "Hạ bậc"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_01_f2",
+        "article_id":  "kb_toan11_01",
+        "article_title":  "Lượng giác toàn diện \u0026 Kỹ thuật chuyển đổi góc",
+        "grade":  "Toán 11",
+        "name":  "Điều kiện có nghiệm pt thuần nhất bậc nhất",
+        "latex":  "a\\sin x + b\\cos x = c \\iff a^2 + b^2 \\ge c^2",
+        "desc":  "Điều kiện cần và đủ để phương trình lượng giác tuyến tính có nghiệm",
+        "tags":  [
+                     "Phương trình",
+                     "Lượng giác",
+                     "Điều kiện nghiệm"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_01_f3",
+        "article_id":  "kb_toan11_01",
+        "article_title":  "Lượng giác toàn diện \u0026 Kỹ thuật chuyển đổi góc",
+        "grade":  "Toán 11",
+        "name":  "Hệ thức lượng giác cơ bản \u0026 Tập xác định",
+        "latex":  "\\sin^2 x + \\cos^2 x = 1, \\quad 1 + \\tan^2 x = \\frac{1}{\\cos^2 x}, \\quad 1 + \\cot^2 x = \\frac{1}{\\sin^2 x}, \\quad \\tan x \\cdot \\cot x = 1",
+        "desc":  "Mối liên hệ giữa các giá trị lượng giác của cùng một cung góc",
+        "tags":  [
+                     "Lượng giác",
+                     "Cơ bản",
+                     "Hằng đẳng thức"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_01_f4",
+        "article_id":  "kb_toan11_01",
+        "article_title":  "Lượng giác toàn diện \u0026 Kỹ thuật chuyển đổi góc",
+        "grade":  "Toán 11",
+        "name":  "Công thức cộng lượng giác toàn diện",
+        "latex":  "\\sin(a \\pm b) = \\sin a \\cos b \\pm \\cos a \\sin b, \\quad \\cos(a \\pm b) = \\cos a \\cos b \\mp \\sin a \\sin b, \\quad \\tan(a \\pm b) = \\frac{\\tan a \\pm \\tan b}{1 \\mp \\tan a \\tan b}",
+        "desc":  "Biến đổi lượng giác của tổng và hiệu hai cung góc",
+        "tags":  [
+                     "Lượng giác",
+                     "Công thức cộng"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_01_f5",
+        "article_id":  "kb_toan11_01",
+        "article_title":  "Lượng giác toàn diện \u0026 Kỹ thuật chuyển đổi góc",
+        "grade":  "Toán 11",
+        "name":  "Công thức nhân đôi toàn diện (Double Angle)",
+        "latex":  "\\sin 2a = 2\\sin a \\cos a, \\quad \\cos 2a = \\cos^2 a - \\sin^2 a = 2\\cos^2 a - 1 = 1 - 2\\sin^2 a, \\quad \\tan 2a = \\frac{2\\tan a}{1 - \\tan^2 a}",
+        "desc":  "Biểu diễn hàm lượng giác cung 2a theo cung a với 3 dạng biến đổi của cos(2a)",
+        "tags":  [
+                     "Lượng giác",
+                     "Nhân đôi"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_01_f6",
+        "article_id":  "kb_toan11_01",
+        "article_title":  "Lượng giác toàn diện \u0026 Kỹ thuật chuyển đổi góc",
+        "grade":  "Toán 11",
+        "name":  "Công thức nhân ba và hạ bậc bậc ba",
+        "latex":  "\\sin 3a = 3\\sin a - 4\\sin^3 a, \\quad \\cos 3a = 4\\cos^3 a - 3\\cos a, \\quad \\sin^3 a = \\frac{3\\sin a - \\sin 3a}{4}, \\quad \\cos^3 a = \\frac{3\\cos a + \\cos 3a}{4}",
+        "desc":  "Biến đổi nhân ba và hạ bậc ba phục vụ giải phương trình lượng giác nâng cao",
+        "tags":  [
+                     "Lượng giác",
+                     "Nhân ba",
+                     "Hạ bậc"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_01_f7",
+        "article_id":  "kb_toan11_01",
+        "article_title":  "Lượng giác toàn diện \u0026 Kỹ thuật chuyển đổi góc",
+        "grade":  "Toán 11",
+        "name":  "Công thức biến đổi tích thành tổng (Product-to-Sum)",
+        "latex":  "\\cos a \\cos b = \\frac{1}{2}[\\cos(a-b) + \\cos(a+b)], \\quad \\sin a \\sin b = \\frac{1}{2}[\\cos(a-b) - \\cos(a+b)], \\quad \\sin a \\cos b = \\frac{1}{2}[\\sin(a+b) + \\sin(a-b)]",
+        "desc":  "Biến đổi tích của hai hàm lượng giác thành tổng các hàm lượng giác đơn giản",
+        "tags":  [
+                     "Lượng giác",
+                     "Tích thành tổng"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_01_f8",
+        "article_id":  "kb_toan11_01",
+        "article_title":  "Lượng giác toàn diện \u0026 Kỹ thuật chuyển đổi góc",
+        "grade":  "Toán 11",
+        "name":  "Công thức biến đổi tổng thành tích (Sum-to-Product)",
+        "latex":  "\\cos u + \\cos v = 2\\cos\\frac{u+v}{2}\\cos\\frac{u-v}{2}, \\quad \\cos u - \\cos v = -2\\sin\\frac{u+v}{2}\\sin\\frac{u-v}{2}, \\quad \\sin u \\pm \\sin v = 2\\sin\\frac{u \\pm v}{2}\\cos\\frac{u \\mp v}{2}",
+        "desc":  "Biến đổi tổng hiệu hai hàm lượng giác thành tích phục vụ giải phương trình tích",
+        "tags":  [
+                     "Lượng giác",
+                     "Tổng thành tích"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_01_f9",
+        "article_id":  "kb_toan11_01",
+        "article_title":  "Lượng giác toàn diện \u0026 Kỹ thuật chuyển đổi góc",
+        "grade":  "Toán 11",
+        "name":  "Công thức góc chia đôi (Weierstrass Substitution)",
+        "latex":  "t = \\tan\\frac{x}{2} \\implies \\sin x = \\frac{2t}{1 + t^2}, \\quad \\cos x = \\frac{1 - t^2}{1 + t^2}, \\quad \\tan x = \\frac{2t}{1 - t^2} \\quad (x \\ne \\pi + k2\\pi)",
+        "desc":  "Hữu tỉ hóa toàn bộ hàm lượng giác theo biến t phục vụ phương trình và nguyên hàm",
+        "tags":  [
+                     "Lượng giác",
+                     "Đổi biến",
+                     "Weierstrass"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_01_f10",
+        "article_id":  "kb_toan11_01",
+        "article_title":  "Lượng giác toàn diện \u0026 Kỹ thuật chuyển đổi góc",
+        "grade":  "Toán 11",
+        "name":  "Công thức tính nhanh đối xứng \u0026 Bậc cao",
+        "latex":  "\\sin x \\pm \\cos x = \\sqrt{2}\\sin\\left(x \\pm \\frac{\\pi}{4}\\right), \\quad \\sin^4 x + \\cos^4 x = 1 - \\frac{1}{2}\\sin^2 2x, \\quad \\sin^6 x + \\cos^6 x = 1 - \\frac{3}{4}\\sin^2 2x",
+        "desc":  "Công thức rút gọn nhanh các biểu thức đối xứng sin và cos thường gặp trong đề thi",
+        "tags":  [
+                     "Lượng giác",
+                     "Tính nhanh",
+                     "Đối xứng"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_01_f11",
+        "article_id":  "kb_toan11_01",
+        "article_title":  "Lượng giác toàn diện \u0026 Kỹ thuật chuyển đổi góc",
+        "grade":  "Toán 11",
+        "name":  "Phương trình lượng giác cơ bản \u0026 Họ nghiệm",
+        "latex":  "\\sin x = \\sin\\alpha \\iff \\left[\\begin{aligned} x \u0026= \\alpha + k2\\pi \\\\ x \u0026= \\pi - \\alpha + k2\\pi \\end{aligned}\\right., \\quad \\cos x = \\cos\\alpha \\iff x = \\pm\\alpha + k2\\pi, \\quad \\tan x = \\tan\\alpha \\iff x = \\alpha + k\\pi",
+        "desc":  "Công thức nghiệm chuẩn xác của các phương trình lượng giác cơ bản với k thuộc Z",
+        "tags":  [
+                     "Lượng giác",
+                     "Phương trình",
+                     "Nghiệm"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_02_f1",
+        "article_id":  "kb_toan11_02",
+        "article_title":  "Dãy số, Cấp số \u0026 Mô hình Lãi kép Tài chính",
+        "grade":  "Toán 11",
+        "name":  "Công thức Vay trả góp định kỳ (Amortization)",
+        "latex":  "M = A \\frac{r(1 + r)^n}{(1 + r)^n - 1}",
+        "desc":  "Số tiền trả đều đặn M mỗi tháng khi vay A triệu đồng lãi suất r trong n tháng",
+        "tags":  [
+                     "Tài chính",
+                     "Lãi kép",
+                     "Trả góp"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_02_f2",
+        "article_id":  "kb_toan11_02",
+        "article_title":  "Dãy số, Cấp số \u0026 Mô hình Lãi kép Tài chính",
+        "grade":  "Toán 11",
+        "name":  "Tổng cấp số nhân lùi vô hạn",
+        "latex":  "S = \\sum_{k=1}^\\infty u_1 q^{k-1} = \\frac{u_1}{1 - q} \\quad (|q| \u003c 1)",
+        "desc":  "Hội tụ tổng vô hạn của cấp số nhân khi công bội trị tuyệt đối nhỏ hơn 1",
+        "tags":  [
+                     "Chuỗi",
+                     "Cấp số nhân"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_02_f3",
+        "article_id":  "kb_toan11_02",
+        "article_title":  "Dãy số, Cấp số \u0026 Mô hình Lãi kép Tài chính",
+        "grade":  "Toán 11",
+        "name":  "Cấp số cộng toàn diện (Arithmetic Progression)",
+        "latex":  "u_n = u_1 + (n-1)d, \\quad S_n = \\frac{n(u_1 + u_n)}{2} = \\frac{n[2u_1 + (n-1)d]}{2}, \\quad u_k = \\frac{u_{k-1} + u_{k+1}}{2}",
+        "desc":  "Số hạng tổng quát, tổng n số hạng đầu và tính chất trung bình cộng của cấp số cộng",
+        "tags":  [
+                     "Cấp số cộng",
+                     "Dãy số"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_02_f4",
+        "article_id":  "kb_toan11_02",
+        "article_title":  "Dãy số, Cấp số \u0026 Mô hình Lãi kép Tài chính",
+        "grade":  "Toán 11",
+        "name":  "Cấp số nhân toàn diện (Geometric Progression)",
+        "latex":  "u_n = u_1 \\cdot q^{n-1}, \\quad S_n = u_1 \\frac{1 - q^n}{1 - q} \\; (q \\ne 1), \\quad u_k^2 = u_{k-1} \\cdot u_{k+1}",
+        "desc":  "Số hạng tổng quát, tổng n số hạng đầu và tính chất trung bình nhân của cấp số nhân",
+        "tags":  [
+                     "Cấp số nhân",
+                     "Dãy số"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_03_f1",
+        "article_id":  "kb_toan11_03",
+        "article_title":  "Giới hạn dãy số, Giới hạn hàm số \u0026 Định lý Bolzano-Cauchy",
+        "grade":  "Toán 11",
+        "name":  "Giới hạn lượng giác cơ bản",
+        "latex":  "\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1, \\quad \\lim_{x \\to 0} \\frac{1 - \\cos x}{x^2} = \\frac{1}{2}",
+        "desc":  "Giới hạn then chốt giải quyết các dạng vô định lượng giác 0/0",
+        "tags":  [
+                     "Giới hạn",
+                     "Lượng giác"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_03_f2",
+        "article_id":  "kb_toan11_03",
+        "article_title":  "Giới hạn dãy số, Giới hạn hàm số \u0026 Định lý Bolzano-Cauchy",
+        "grade":  "Toán 11",
+        "name":  "Giới hạn số Euler e",
+        "latex":  "\\lim_{n \\to \\infty} \\left(1 + \\frac{1}{n}\\right)^n = e, \\quad \\lim_{x \\to 0} (1 + x)^{1/x} = e",
+        "desc":  "Hằng số Euler e và giới hạn định nghĩa hàm số mũ tự nhiên",
+        "tags":  [
+                     "Giới hạn",
+                     "Số e"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_03_f3",
+        "article_id":  "kb_toan11_03",
+        "article_title":  "Giới hạn dãy số, Giới hạn hàm số \u0026 Định lý Bolzano-Cauchy",
+        "grade":  "Toán 11",
+        "name":  "Giới hạn hàm số mũ và logarit cơ bản",
+        "latex":  "\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1, \\quad \\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = 1, \\quad \\lim_{x \\to 0} \\frac{(1+x)^\\alpha - 1}{x} = \\alpha",
+        "desc":  "Hệ thống giới hạn hữu hạn cơ bản phục vụ giải nhanh dạng vô định 0/0",
+        "tags":  [
+                     "Giới hạn",
+                     "Số Euler",
+                     "Hàm số"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_04_f1",
+        "article_id":  "kb_toan11_04",
+        "article_title":  "Đạo hàm, Tiếp tuyến \u0026 Mô hình Vận tốc - Gia tốc tức thời",
+        "grade":  "Toán 11",
+        "name":  "Phương trình tiếp tuyến tại điểm",
+        "latex":  "y = f\u0027(x_0)(x - x_0) + y_0",
+        "desc":  "Phương trình tiếp tuyến của đồ thị hàm số y = f(x) tại tiếp điểm M(x0, y0)",
+        "tags":  [
+                     "Đạo hàm",
+                     "Tiếp tuyến"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_04_f2",
+        "article_id":  "kb_toan11_04",
+        "article_title":  "Đạo hàm, Tiếp tuyến \u0026 Mô hình Vận tốc - Gia tốc tức thời",
+        "grade":  "Toán 11",
+        "name":  "Đạo hàm hàm hợp (Chain Rule)",
+        "latex":  "y = f(u(x)) \\implies y\u0027 = f\u0027(u) \\cdot u\u0027(x)",
+        "desc":  "Quy tắc dây chuyền tính đạo hàm của hàm hợp",
+        "tags":  [
+                     "Đạo hàm",
+                     "Hàm hợp"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_04_f3",
+        "article_id":  "kb_toan11_04",
+        "article_title":  "Đạo hàm, Tiếp tuyến \u0026 Mô hình Vận tốc - Gia tốc tức thời",
+        "grade":  "Toán 11",
+        "name":  "Bảng đạo hàm các hàm sơ cấp cơ bản",
+        "latex":  "(x^\\alpha)\u0027 = \\alpha x^{\\alpha-1}, \\quad (\\sqrt{x})\u0027 = \\frac{1}{2\\sqrt{x}}, \\quad (\\sin x)\u0027 = \\cos x, \\quad (\\cos x)\u0027 = -\\sin x, \\quad (\\tan x)\u0027 = \\frac{1}{\\cos^2 x}",
+        "desc":  "Quy tắc đạo hàm chuẩn của hàm lũy thừa, căn bậc hai và hàm lượng giác",
+        "tags":  [
+                     "Đạo hàm",
+                     "Quy tắc"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_04_f4",
+        "article_id":  "kb_toan11_04",
+        "article_title":  "Đạo hàm, Tiếp tuyến \u0026 Mô hình Vận tốc - Gia tốc tức thời",
+        "grade":  "Toán 11",
+        "name":  "Công thức tính nhanh đạo hàm phân thức hữu tỉ",
+        "latex":  "\\left(\\frac{ax+b}{cx+d}\\right)\u0027 = \\frac{ad - bc}{(cx+d)^2}, \\quad \\left(\\frac{ax^2+bx+c}{dx+e}\\right)\u0027 = \\frac{ad x^2 + 2ae x + (be - cd)}{(dx+e)^2}",
+        "desc":  "Công thức định thức tính nhanh đạo hàm phân thức bậc 1/1 và bậc 2/1",
+        "tags":  [
+                     "Đạo hàm",
+                     "Tính nhanh",
+                     "Phân thức"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_05_f1",
+        "article_id":  "kb_toan11_05",
+        "article_title":  "Xác suất có điều kiện, Biến cố độc lập, Bayes \u0026 Đại số tổ hợp",
+        "grade":  "Toán 11",
+        "name":  "Định lý Bayes",
+        "latex":  "P(A_i|B) = \\frac{P(A_i)P(B|A_i)}{\\sum_{j=1}^n P(A_j)P(B|A_j)}",
+        "desc":  "Tính xác suất hậu nghiệm dựa trên thông tin quan sát mới",
+        "tags":  [
+                     "Xác suất",
+                     "Bayes"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_05_f2",
+        "article_id":  "kb_toan11_05",
+        "article_title":  "Xác suất có điều kiện, Biến cố độc lập, Bayes \u0026 Đại số tổ hợp",
+        "grade":  "Toán 11",
+        "name":  "Công thức nhân xác suất",
+        "latex":  "P(A \\cap B) = P(A)P(B|A) = P(B)P(A|B)",
+        "desc":  "Xác suất của giao hai biến cố có điều kiện",
+        "tags":  [
+                     "Xác suất",
+                     "Nhân xác suất"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_05_f3",
+        "article_id":  "kb_toan11_05",
+        "article_title":  "Xác suất có điều kiện, Biến cố độc lập, Bayes \u0026 Đại số tổ hợp",
+        "grade":  "Toán 11",
+        "name":  "Hoán vị, Chỉnh hợp, Tổ hợp \u0026 Nhị thức Newton",
+        "latex":  "P_n = n!, \\quad A_n^k = \\frac{n!}{(n-k)!}, \\quad C_n^k = \\frac{n!}{k!(n-k)!}, \\quad (a+b)^n = \\sum_{k=0}^n C_n^k a^{n-k} b^k",
+        "desc":  "Các công thức đếm đại số tổ hợp nền tảng và khai triển nhị thức",
+        "tags":  [
+                     "Tổ hợp",
+                     "Chỉnh hợp",
+                     "Nhị thức Newton"
+                 ]
+    },
+    {
+        "id":  "kb_toan11_05_f4",
+        "article_id":  "kb_toan11_05",
+        "article_title":  "Xác suất có điều kiện, Biến cố độc lập, Bayes \u0026 Đại số tổ hợp",
+        "grade":  "Toán 11",
+        "name":  "Công thức xác suất toàn phần (Total Probability)",
+        "latex":  "P(B) = \\sum_{i=1}^n P(A_i) \\cdot P(B|A_i) \\quad (\\{A_1, \\dots, A_n\\} \\text{ là hệ đầy đủ})",
+        "desc":  "Tính xác suất biên của biến cố thông qua phân rã điều kiện theo hệ đầy đủ",
+        "tags":  [
+                     "Xác suất",
+                     "Xác suất toàn phần"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_01_f1",
+        "article_id":  "kb_toan12_01",
+        "article_title":  "Khảo sát hàm số, Cực trị \u0026 Tối ưu hóa Thực tế",
+        "grade":  "Toán 12",
+        "name":  "Bất đẳng thức AM-GM 3 số",
+        "latex":  "a + b + c \\ge 3\\sqrt[3]{abc} \\quad (a, b, c \\ge 0)",
+        "desc":  "Áp dụng tìm giá trị nhỏ nhất của tổng hoặc giá trị lớn nhất của tích",
+        "tags":  [
+                     "Bất đẳng thức",
+                     "AM-GM",
+                     "Tối ưu"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_01_f2",
+        "article_id":  "kb_toan12_01",
+        "article_title":  "Khảo sát hàm số, Cực trị \u0026 Tối ưu hóa Thực tế",
+        "grade":  "Toán 12",
+        "name":  "Điều kiện cực trị cấp 2",
+        "latex":  "f\u0027(x_0) = 0, \\; f\u0027\u0027(x_0) \u003e 0 \\implies \\text{Cực tiểu}; \\quad f\u0027(x_0) = 0, \\; f\u0027\u0027(x_0) \u003c 0 \\implies \\text{Cực đại}",
+        "desc":  "Tiêu chuẩn đạo hàm cấp 2 xác định nhanh điểm cực đại, cực tiểu",
+        "tags":  [
+                     "Khảo sát hàm số",
+                     "Cực trị"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_01_f3",
+        "article_id":  "kb_toan12_01",
+        "article_title":  "Khảo sát hàm số, Cực trị \u0026 Tối ưu hóa Thực tế",
+        "grade":  "Toán 12",
+        "name":  "Công thức tính nhanh cực trị hàm bậc 3",
+        "latex":  "y = ax^3 + bx^2 + cx + d \\implies \\text{Có 2 cực trị } \\iff b^2 - 3ac \u003e 0; \\quad \\text{Đường thẳng qua 2 cực trị: } y = \\left(\\frac{2c}{3} - \\frac{2b^2}{9a}\\right)x + \\left(d - \\frac{bc}{9a}\\right)",
+        "desc":  "Điều kiện có 2 cực trị và phương trình đường thẳng đi qua 2 điểm cực trị của hàm bậc 3",
+        "tags":  [
+                     "Hàm số",
+                     "Cực trị",
+                     "Hàm bậc 3"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_01_f4",
+        "article_id":  "kb_toan12_01",
+        "article_title":  "Khảo sát hàm số, Cực trị \u0026 Tối ưu hóa Thực tế",
+        "grade":  "Toán 12",
+        "name":  "Công thức tính nhanh cực trị hàm trùng phương",
+        "latex":  "y = ax^4 + bx^2 + c \\implies \\text{3 cực trị } \\iff ab \u003c 0; \\quad \\text{1 cực trị } \\iff ab \\ge 0; \\quad S_{\\triangle ABC} = \\sqrt{-\\frac{b^5}{32a^3}}",
+        "desc":  "Điều kiện số lượng điểm cực trị và diện tích tam giác tạo bởi 3 điểm cực trị hàm trùng phương",
+        "tags":  [
+                     "Hàm số",
+                     "Cực trị",
+                     "Hàm trùng phương"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_02_f1",
+        "article_id":  "kb_toan12_02",
+        "article_title":  "Hàm số Lũy thừa, Mũ \u0026 Logarit Thực chiến",
+        "grade":  "Toán 12",
+        "name":  "Chu kỳ bán rã phóng xạ",
+        "latex":  "N(t) = N_0 \\cdot e^{-\\lambda t} = N_0 \\cdot 2^{-t/T}",
+        "desc":  "Mô hình suy giảm mũ trong vật lý hạt nhân với chu kỳ bán rã T",
+        "tags":  [
+                     "Mũ",
+                     "Phóng xạ",
+                     "Ứng dụng"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_02_f2",
+        "article_id":  "kb_toan12_02",
+        "article_title":  "Hàm số Lũy thừa, Mũ \u0026 Logarit Thực chiến",
+        "grade":  "Toán 12",
+        "name":  "Đổi cơ số Logarit toàn diện",
+        "latex":  "\\log_a b = \\frac{\\log_c b}{\\log_c a}, \\quad \\log_{a^\\alpha} b = \\frac{1}{\\alpha}\\log_a b, \\quad \\log_a(b^\\beta) = \\beta\\log_a b",
+        "desc":  "Biến đổi cơ số logarit sang cơ số mới phục vụ giải phương trình",
+        "tags":  [
+                     "Logarit",
+                     "Đổi cơ số"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_02_f3",
+        "article_id":  "kb_toan12_02",
+        "article_title":  "Hàm số Lũy thừa, Mũ \u0026 Logarit Thực chiến",
+        "grade":  "Toán 12",
+        "name":  "Hệ thống hằng đẳng thức Logarit cốt lõi",
+        "latex":  "\\log_a(xy) = \\log_a x + \\log_a y, \\quad \\log_a\\left(\\frac{x}{y}\\right) = \\log_a x - \\log_a y, \\quad a^{\\log_b c} = c^{\\log_b a} \\; (a, b \\ne 1; x, y, c \u003e 0)",
+        "desc":  "Các quy tắc biến đổi logarit của tích, thương, lũy thừa và hoán vị cơ số lũy thừa",
+        "tags":  [
+                     "Logarit",
+                     "Lũy thừa",
+                     "Quy tắc"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_02_f4",
+        "article_id":  "kb_toan12_02",
+        "article_title":  "Hàm số Lũy thừa, Mũ \u0026 Logarit Thực chiến",
+        "grade":  "Toán 12",
+        "name":  "Đạo hàm hàm số Mũ và Logarit",
+        "latex":  "(a^x)\u0027 = a^x \\ln a, \\quad (e^x)\u0027 = e^x, \\quad (\\log_a |x|)\u0027 = \\frac{1}{x \\ln a}, \\quad (\\ln |x|)\u0027 = \\frac{1}{x}",
+        "desc":  "Quy tắc đạo hàm chuẩn xác của hàm mũ và hàm logarit với cơ số bất kỳ",
+        "tags":  [
+                     "Đạo hàm",
+                     "Hàm mũ",
+                     "Logarit"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_03_f1",
+        "article_id":  "kb_toan12_03",
+        "article_title":  "Tích phân toàn diện \u0026 Kỹ thuật Múa cột DI Method",
+        "grade":  "Toán 12",
+        "name":  "Công thức tích phân từng phần (Integration by Parts)",
+        "latex":  "\\int_a^b u\\,dv = uv\\Big|_a^b - \\int_a^b v\\,du",
+        "desc":  "Thứ tự ưu tiên đặt u: \u0027Nhất lô (logarit), nhì đa (đa thức), tam lượng (lượng giác), tứ mũ (hàm mũ)\u0027",
+        "tags":  [
+                     "Tích phân",
+                     "Từng phần"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_03_f2",
+        "article_id":  "kb_toan12_03",
+        "article_title":  "Tích phân toàn diện \u0026 Kỹ thuật Múa cột DI Method",
+        "grade":  "Toán 12",
+        "name":  "Thể tích khối tròn xoay quanh Ox",
+        "latex":  "V = \\pi \\int_a^b [f(x)]^2\\,dx",
+        "desc":  "Thể tích vật thể tròn xoay khi quay hình phẳng giới hạn bởi y = f(x) quanh trục hoành",
+        "tags":  [
+                     "Tích phân",
+                     "Thể tích",
+                     "Tròn xoay"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_03_f3",
+        "article_id":  "kb_toan12_03",
+        "article_title":  "Tích phân toàn diện \u0026 Kỹ thuật Múa cột DI Method",
+        "grade":  "Toán 12",
+        "name":  "Bảng nguyên hàm chuẩn 10 hàm cơ bản",
+        "latex":  "\\int x^\\alpha dx = \\frac{x^{\\alpha+1}}{\\alpha+1} + C \\; (\\alpha \\ne -1), \\quad \\int \\frac{1}{x} dx = \\ln|x| + C, \\quad \\int e^x dx = e^x + C, \\quad \\int \\cos x dx = \\sin x + C, \\quad \\int \\sin x dx = -\\cos x + C",
+        "desc":  "Bảng các nguyên hàm sơ cấp nền tảng không thể thiếu trong mọi bài toán giải tích",
+        "tags":  [
+                     "Nguyên hàm",
+                     "Tích phân",
+                     "Bảng chuẩn"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_03_f4",
+        "article_id":  "kb_toan12_03",
+        "article_title":  "Tích phân toàn diện \u0026 Kỹ thuật Múa cột DI Method",
+        "grade":  "Toán 12",
+        "name":  "Diện tích hình phẳng giới hạn bởi đồ thị",
+        "latex":  "S = \\int_a^b |f(x) - g(x)| dx",
+        "desc":  "Ứng dụng hình học của tích phân xác định tính diện tích giữa hai đường cong cong",
+        "tags":  [
+                     "Tích phân",
+                     "Diện tích",
+                     "Ứng dụng"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_04_f1",
+        "article_id":  "kb_toan12_04",
+        "article_title":  "Phương pháp Tọa độ Không gian Oxyz Toàn diện",
+        "grade":  "Toán 12",
+        "name":  "Khoảng cách từ điểm đến mặt phẳng",
+        "latex":  "d(M_0, (P)) = \\frac{|Ax_0 + By_0 + Cz_0 + D|}{\\sqrt{A^2 + B^2 + C^2}}",
+        "desc":  "Tính khoảng cách từ điểm M0(x0, y0, z0) đến mặt phẳng (P): Ax + By + Cz + D = 0",
+        "tags":  [
+                     "Tọa độ Oxyz",
+                     "Khoảng cách",
+                     "Mặt phẳng"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_04_f2",
+        "article_id":  "kb_toan12_04",
+        "article_title":  "Phương pháp Tọa độ Không gian Oxyz Toàn diện",
+        "grade":  "Toán 12",
+        "name":  "Thể tích khối tứ diện (Oxyz)",
+        "latex":  "V_{ABCD} = \\frac{1}{6}|[\\vec{AB}, \\vec{AC}] \\cdot \\vec{AD}|",
+        "desc":  "Tính thể tích khối tứ diện thông qua tích có hướng và tích vô hướng hỗn tạp",
+        "tags":  [
+                     "Tọa độ Oxyz",
+                     "Thể tích",
+                     "Tứ diện"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_04_f3",
+        "article_id":  "kb_toan12_04",
+        "article_title":  "Phương pháp Tọa độ Không gian Oxyz Toàn diện",
+        "grade":  "Toán 12",
+        "name":  "Tích có hướng của 2 vectơ \u0026 Ứng dụng Oxyz",
+        "latex":  "[\\vec{u}, \\vec{v}] = \\left(y_1 z_2 - z_1 y_2; \\; z_1 x_2 - x_1 z_2; \\; x_1 y_2 - y_1 x_2\\right), \\quad S_{\\triangle ABC} = \\frac{1}{2}\\left|[\\vec{AB}, \\vec{AC}]\\right|",
+        "desc":  "Công thức tọa độ tích có hướng hai vectơ và ứng dụng tính diện tích tam giác không gian",
+        "tags":  [
+                     "Tọa độ Oxyz",
+                     "Tích có hướng",
+                     "Vectơ"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_04_f4",
+        "article_id":  "kb_toan12_04",
+        "article_title":  "Phương pháp Tọa độ Không gian Oxyz Toàn diện",
+        "grade":  "Toán 12",
+        "name":  "Khoảng cách giữa hai đường thẳng chéo nhau",
+        "latex":  "d(\\Delta_1, \\Delta_2) = \\frac{\\left|[\\vec{u}_1, \\vec{u}_2] \\cdot \\vec{M_1 M_2}\\right|}{\\left|[\\vec{u}_1, \\vec{u}_2]\\right|}",
+        "desc":  "Tính khoảng cách ngắn nhất giữa hai đường thẳng chéo nhau trong không gian Oxyz",
+        "tags":  [
+                     "Tọa độ Oxyz",
+                     "Khoảng cách",
+                     "Đường thẳng chéo nhau"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_04_f5",
+        "article_id":  "kb_toan12_04",
+        "article_title":  "Phương pháp Tọa độ Không gian Oxyz Toàn diện",
+        "grade":  "Toán 12",
+        "name":  "Phương trình mặt cầu trong không gian Oxyz",
+        "latex":  "(x - a)^2 + (y - b)^2 + (z - c)^2 = R^2 \\iff x^2 + y^2 + z^2 - 2ax - 2by - 2cz + d = 0 \\quad (R = \\sqrt{a^2 + b^2 + c^2 - d} \u003e 0)",
+        "desc":  "Phương trình chính tắc và dạng tổng quát của mặt cầu tâm I(a,b,c) bán kính R",
+        "tags":  [
+                     "Tọa độ Oxyz",
+                     "Mặt cầu"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_04_f6",
+        "article_id":  "kb_toan12_04",
+        "article_title":  "Phương pháp Tọa độ Không gian Oxyz Toàn diện",
+        "grade":  "Toán 12",
+        "name":  "Bộ công thức Thể tích \u0026 Diện tích các khối tròn xoay",
+        "latex":  "\\text{Nón: } V = \\frac{1}{3}\\pi r^2 h, \\; S_{xq} = \\pi r l; \\quad \\text{Trụ: } V = \\pi r^2 h, \\; S_{xq} = 2\\pi r h; \\quad \\text{Cầu: } V = \\frac{4}{3}\\pi R^3, \\; S = 4\\pi R^2",
+        "desc":  "Toàn bộ công thức diện tích xung quanh, toàn phần và thể tích khối nón, khối trụ và mặt cầu",
+        "tags":  [
+                     "Hình học không gian",
+                     "Thể tích",
+                     "Tròn xoay"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_05_f1",
+        "article_id":  "kb_toan12_05",
+        "article_title":  "Thống kê Mẫu Số liệu Ghép nhóm \u0026 Biến ngẫu nhiên",
+        "grade":  "Toán 12",
+        "name":  "Công thức tứ phân vị ghép nhóm",
+        "latex":  "Q_p = u_m + \\frac{p \\cdot n - C}{m_m} \\cdot h",
+        "desc":  "Xác định tứ phân vị mẫu số liệu ghép nhóm bằng phép nội suy tuyến tính",
+        "tags":  [
+                     "Thống kê",
+                     "Ghép nhóm",
+                     "Tứ phân vị"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_05_f2",
+        "article_id":  "kb_toan12_05",
+        "article_title":  "Thống kê Mẫu Số liệu Ghép nhóm \u0026 Biến ngẫu nhiên",
+        "grade":  "Toán 12",
+        "name":  "Kỳ vọng biến ngẫu nhiên",
+        "latex":  "E(X) = \\sum_{i=1}^n x_i P(X = x_i)",
+        "desc":  "Giá trị trung bình kỳ vọng lý thuyết của biến ngẫu nhiên rời rạc",
+        "tags":  [
+                     "Xác suất",
+                     "Kỳ vọng"
+                 ]
+    },
+    {
+        "id":  "kb_toan12_05_f3",
+        "article_id":  "kb_toan12_05",
+        "article_title":  "Thống kê Mẫu Số liệu Ghép nhóm \u0026 Biến ngẫu nhiên",
+        "grade":  "Toán 12",
+        "name":  "Phương sai \u0026 Độ lệch chuẩn của biến ngẫu nhiên rời rạc",
+        "latex":  "V(X) = E(X^2) - [E(X)]^2 = \\sum_{i=1}^n (x_i - \\mu)^2 p_i, \\quad \\sigma(X) = \\sqrt{V(X)}",
+        "desc":  "Đo lường mức độ phân tán rủi ro xung quanh giá trị trung bình kỳ vọng",
+        "tags":  [
+                     "Biến ngẫu nhiên",
+                     "Phương sai",
+                     "Độ lệch chuẩn"
+                 ]
+    },
+    {
+        "id":  "kb_dstt_01_f1",
+        "article_id":  "kb_dstt_01",
+        "article_title":  "Ma trận, Phép nhân \u0026 Ma trận Nghịch đảo",
+        "grade":  "Toán cao cấp",
+        "name":  "Ma trận nghịch đảo cấp 2",
+        "latex":  "\\begin{pmatrix} a \u0026 b \\\\ c \u0026 d \\end{pmatrix}^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d \u0026 -b \\\\ -c \u0026 a \\end{pmatrix}",
+        "desc":  "Công thức tính nghịch đảo siêu tốc cho ma trận 2x2",
+        "tags":  [
+                     "Ma trận",
+                     "Nghịch đảo",
+                     "Đại số tuyến tính"
+                 ]
+    },
+    {
+        "id":  "kb_dstt_01_f2",
+        "article_id":  "kb_dstt_01",
+        "article_title":  "Ma trận, Phép nhân \u0026 Ma trận Nghịch đảo",
+        "grade":  "Toán cao cấp",
+        "name":  "Công thức ma trận phụ hợp và nghịch đảo tổng quát",
+        "latex":  "A^{-1} = \\frac{1}{\\det(A)} C^T \\quad (\\det(A) \\ne 0, \\; C_{ij} = (-1)^{i+j} M_{ij})",
+        "desc":  "Nghịch đảo ma trận vuông cấp n thông qua ma trận phần bù đại số",
+        "tags":  [
+                     "Đại số tuyến tính",
+                     "Ma trận nghịch đảo",
+                     "Định thức"
+                 ]
+    },
+    {
+        "id":  "kb_dstt_02_f1",
+        "article_id":  "kb_dstt_02",
+        "article_title":  "Định thức Ma trận \u0026 Định lý Cramer Giải Hệ Tuyến Tính",
+        "grade":  "Toán cao cấp",
+        "name":  "Công thức nghiệm Cramer",
+        "latex":  "x_i = \\frac{\\det(A_i)}{\\det(A)} = \\frac{D_i}{D} \\quad (D \\ne 0)",
+        "desc":  "Nghiệm tường minh của hệ phương trình vuông Cramer",
+        "tags":  [
+                     "Cramer",
+                     "Định thức",
+                     "Hệ phương trình"
+                 ]
+    },
+    {
+        "id":  "kb_dstt_02_f2",
+        "article_id":  "kb_dstt_02",
+        "article_title":  "Định thức Ma trận \u0026 Định lý Cramer Giải Hệ Tuyến Tính",
+        "grade":  "Toán cao cấp",
+        "name":  "Tính chất của định thức ma trận vuông",
+        "latex":  "\\det(AB) = \\det(A)\\det(B), \\quad \\det(A^T) = \\det(A), \\quad \\det(kA) = k^n \\det(A) \\; (A \\in \\mathcal{M}_n), \\quad \\det(A^{-1}) = \\frac{1}{\\det(A)}",
+        "desc":  "Các tính chất định lượng then chốt của định thức phục vụ rút gọn và tính toán",
+        "tags":  [
+                     "Đại số tuyến tính",
+                     "Định thức",
+                     "Tính chất"
+                 ]
+    },
+    {
+        "id":  "kb_dstt_03_f1",
+        "article_id":  "kb_dstt_03",
+        "article_title":  "Thuật toán Khử Gauss \u0026 Mô hình Cân bằng Leontief",
+        "grade":  "Toán cao cấp",
+        "name":  "Mô hình Cân bằng Kinh tế Leontief",
+        "latex":  "X = (I - A)^{-1} D",
+        "desc":  "Vector tổng sản lượng X cần sản xuất để đáp ứng nhu cầu cuối cùng D với ma trận chi phí đầu vào A",
+        "tags":  [
+                     "Leontief",
+                     "Kinh tế lượng",
+                     "Hệ tuyến tính"
+                 ]
+    },
+    {
+        "id":  "kb_dstt_04_f1",
+        "article_id":  "kb_dstt_04",
+        "article_title":  "Không gian Vectơ, Trị riêng \u0026 Vectơ riêng (Eigenvalues)",
+        "grade":  "Toán cao cấp",
+        "name":  "Phương trình đặc trưng Trị riêng",
+        "latex":  "\\det(A - \\lambda I) = 0",
+        "desc":  "Phương trình đa thức xác định các giá trị riêng của ma trận A",
+        "tags":  [
+                     "Trị riêng",
+                     "Eigenvalues",
+                     "ĐSTT"
+                 ]
+    },
+    {
+        "id":  "kb_dstt_04_f2",
+        "article_id":  "kb_dstt_04",
+        "article_title":  "Không gian Vectơ, Trị riêng \u0026 Vectơ riêng (Eigenvalues)",
+        "grade":  "Toán cao cấp",
+        "name":  "Vết và Định thức qua Trị riêng",
+        "latex":  "\\text{tr}(A) = \\sum_{i=1}^n \\lambda_i, \\quad \\det(A) = \\prod_{i=1}^n \\lambda_i",
+        "desc":  "Tổng và tích các giá trị riêng",
+        "tags":  [
+                     "Trace",
+                     "Trị riêng"
+                 ]
+    },
+    {
+        "id":  "kb_dstt_05_f1",
+        "article_id":  "kb_dstt_05",
+        "article_title":  "Xích Markov Rời rạc \u0026 Bài toán Cân bằng Thị phần",
+        "grade":  "Toán cao cấp",
+        "name":  "Phương trình trạng thái dừng Markov",
+        "latex":  "(P - I)\\pi = 0 \\quad \\text{kèm } \\sum \\pi_i = 1",
+        "desc":  "Hệ phương trình xác định thị phần cân bằng ổn định dài hạn",
+        "tags":  [
+                     "Markov",
+                     "Thị phần",
+                     "Xác suất"
+                 ]
+    },
+    {
+        "id":  "kb_gt1_01_f1",
+        "article_id":  "kb_gt1_01",
+        "article_title":  "Dãy số thực, Định lý Kẹp \u0026 Vô cùng bé Tương đương",
+        "grade":  "Giải tích 1",
+        "name":  "Vô cùng bé tương đương lượng giác",
+        "latex":  "\\sin x \\sim x, \\quad \\tan x \\sim x, \\quad \\arcsin x \\sim x, \\quad \\arctan x \\sim x \\quad (x \\to 0)",
+        "desc":  "Thay thế tương đương khi tính giới hạn các biểu thức lượng giác",
+        "tags":  [
+                     "Giải tích 1",
+                     "Vô cùng bé"
+                 ]
+    },
+    {
+        "id":  "kb_gt1_01_f2",
+        "article_id":  "kb_gt1_01",
+        "article_title":  "Dãy số thực, Định lý Kẹp \u0026 Vô cùng bé Tương đương",
+        "grade":  "Giải tích 1",
+        "name":  "Bảng vô cùng bé tương đương chuẩn khi x dần về 0",
+        "latex":  "\\sin x \\sim x, \\quad \\tan x \\sim x, \\quad \\ln(1+x) \\sim x, \\quad e^x - 1 \\sim x, \\quad 1 - \\cos x \\sim \\frac{x^2}{2}, \\quad (1+x)^\\alpha - 1 \\sim \\alpha x",
+        "desc":  "Bảng quy tắc thay thế vô cùng bé tương đương giải quyết nhanh giới hạn dạng 0/0",
+        "tags":  [
+                     "Giải tích 1",
+                     "Vô cùng bé",
+                     "Giới hạn"
+                 ]
+    },
+    {
+        "id":  "kb_gt1_02_f1",
+        "article_id":  "kb_gt1_02",
+        "article_title":  "Khai triển Taylor-Maclaurin, Đạo hàm Leibniz \u0026 Quy tắc L\u0027Hôpital",
+        "grade":  "Giải tích 1",
+        "name":  "Công thức Leibniz đạo hàm cấp n của tích",
+        "latex":  "(uv)^{(n)} = \\sum_{k=0}^n C_n^k u^{(k)} v^{(n-k)}",
+        "desc":  "Tính đạo hàm cấp cao của tích hai hàm số khả vi n lần",
+        "tags":  [
+                     "Đạo hàm cấp cao",
+                     "Leibniz"
+                 ]
+    },
+    {
+        "id":  "kb_gt1_02_f2",
+        "article_id":  "kb_gt1_02",
+        "article_title":  "Khai triển Taylor-Maclaurin, Đạo hàm Leibniz \u0026 Quy tắc L\u0027Hôpital",
+        "grade":  "Giải tích 1",
+        "name":  "Khai triển Maclaurin của e^x",
+        "latex":  "e^x = \\sum_{k=0}^n \\frac{x^k}{k!} + o(x^n) = 1 + x + \\frac{x^2}{2!} + \\dots + \\frac{x^n}{n!} + o(x^n)",
+        "desc":  "Xấp xỉ đa thức của hàm mũ tại lân cận x = 0",
+        "tags":  [
+                     "Maclaurin",
+                     "Taylor"
+                 ]
+    },
+    {
+        "id":  "kb_gt1_02_f3",
+        "article_id":  "kb_gt1_02",
+        "article_title":  "Khai triển Taylor-Maclaurin, Đạo hàm Leibniz \u0026 Quy tắc L\u0027Hôpital",
+        "grade":  "Giải tích 1",
+        "name":  "Quy tắc L\u0027Hôpital khử dạng vô định 0/0 và vô cùng / vô cùng",
+        "latex":  "\\lim_{x \\to x_0} \\frac{f(x)}{g(x)} = \\lim_{x \\to x_0} \\frac{f\u0027(x)}{g\u0027(x)} \\quad \\left(\\text{khi } \\lim f(x) = \\lim g(x) = 0 \\text{ hoặc } \\pm\\infty\\right)",
+        "desc":  "Quy tắc lấy đạo hàm tử và mẫu khử dạng vô định của Bernoulli và L\u0027Hôpital",
+        "tags":  [
+                     "Giải tích 1",
+                     "L\u0027Hopital",
+                     "Đạo hàm"
+                 ]
+    },
+    {
+        "id":  "kb_gt1_02_f4",
+        "article_id":  "kb_gt1_02",
+        "article_title":  "Khai triển Taylor-Maclaurin, Đạo hàm Leibniz \u0026 Quy tắc L\u0027Hôpital",
+        "grade":  "Giải tích 1",
+        "name":  "Bảng khai triển Maclaurin các hàm sơ cấp",
+        "latex":  "\\sin x = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} + o(x^5), \\quad \\cos x = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} + o(x^4), \\quad \\ln(1+x) = x - \\frac{x^2}{2} + \\frac{x^3}{3} + o(x^3)",
+        "desc":  "Xấp xỉ đa thức Taylor tại lân cận x = 0 của các hàm lượng giác và logarit",
+        "tags":  [
+                     "Giải tích 1",
+                     "Maclaurin",
+                     "Taylor"
+                 ]
+    },
+    {
+        "id":  "kb_gt1_03_f1",
+        "article_id":  "kb_gt1_03",
+        "article_title":  "Tích phân Suy rộng Loại 1 \u0026 Loại 2 Toàn diện",
+        "grade":  "Giải tích 1",
+        "name":  "Tiêu chuẩn hội tụ Tích phân Riemann",
+        "latex":  "\\int_1^{+\\infty} \\frac{dx}{x^\\alpha} \\text{ hội tụ } \\iff \\alpha \u003e 1",
+        "desc":  "Chuẩn mực so sánh kiểm tra hội tụ tích phân loại 1",
+        "tags":  [
+                     "Tích phân suy rộng",
+                     "Hội tụ",
+                     "Riemann"
+                 ]
+    },
+    {
+        "id":  "kb_gt1_04_f1",
+        "article_id":  "kb_gt1_04",
+        "article_title":  "Chuỗi số Thực, Tiêu chuẩn D\u0027Alembert \u0026 Bán kính Hội tụ",
+        "grade":  "Giải tích 1",
+        "name":  "Công thức Bán kính hội tụ D\u0027Alembert",
+        "latex":  "R = \\lim_{n \\to \\infty} \\left|\\frac{a_n}{a_{n+1}}\\right|",
+        "desc":  "Xác định khoảng hội tụ (-R, R) của chuỗi lũy thừa",
+        "tags":  [
+                     "Chuỗi hàm",
+                     "Bán kính hội tụ"
+                 ]
+    },
+    {
+        "id":  "kb_gt1_04_f2",
+        "article_id":  "kb_gt1_04",
+        "article_title":  "Chuỗi số Thực, Tiêu chuẩn D\u0027Alembert \u0026 Bán kính Hội tụ",
+        "grade":  "Giải tích 1",
+        "name":  "Chuỗi điều hòa p-series",
+        "latex":  "\\sum_{n=1}^\\infty \\frac{1}{n^p} \\text{ hội tụ } \\iff p \u003e 1",
+        "desc":  "Chuẩn mực so sánh kiểm tra hội tụ chuỗi số",
+        "tags":  [
+                     "Chuỗi số",
+                     "p-series"
+                 ]
+    },
+    {
+        "id":  "kb_gt1_05_f1",
+        "article_id":  "kb_gt1_05",
+        "article_title":  "Phương trình Vi phân Tuyến tính \u0026 Phương trình Đặc trưng",
+        "grade":  "Giải tích 1",
+        "name":  "Nghiệm phương trình vi phân tuyến tính cấp 1",
+        "latex":  "y = e^{-\\int p(x)dx} \\left(\\int q(x)e^{\\int p(x)dx}dx + C\\right)",
+        "desc":  "Công thức tích phân thừa số giải phương trình vi phân tuyến tính bậc nhất",
+        "tags":  [
+                     "Vi phân cấp 1",
+                     "Thừa số tích phân"
+                 ]
+    },
+    {
+        "id":  "kb_gt1_05_f2",
+        "article_id":  "kb_gt1_05",
+        "article_title":  "Phương trình Vi phân Tuyến tính \u0026 Phương trình Đặc trưng",
+        "grade":  "Giải tích 1",
+        "name":  "Phương trình đặc trưng cấp 2",
+        "latex":  "k^2 + ak + b = 0",
+        "desc":  "Giải nghiệm đại số tìm nghiệm cơ bản của phương trình vi phân cấp 2",
+        "tags":  [
+                     "Vi phân cấp 2",
+                     "Phương trình đặc trưng"
+                 ]
+    }
+]

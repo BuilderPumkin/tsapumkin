@@ -1,0 +1,29 @@
+﻿# Environment and Secrets (TUYỆT ĐỐI KHÔNG COMMIT LÊN GITHUB)
+.env
+.env.*
+!.env.example
+*.local
+
+# Cloudflare Wrangler Build Cache
+.wrangler/
+dist/
+.cache/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Logs & Temporary Files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+scratch/

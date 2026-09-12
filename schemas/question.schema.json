@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/question.schema.json",
+  "title": "PumkinQuestionDNA",
+  "description": "Đặc tả cấu trúc chuẩn hóa Question DNA cho câu hỏi thi Toán học trên nền tảng PUMKIN.DEV (TSA, HSA, THPT, Giải tích 1)",
+  "type": "object",
+  "required": ["id", "type", "exam_type", "question"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Định danh duy nhất của câu hỏi (ví dụ: q_tsa_01, q_hsa_15, q_thpt_tf_02)",
+      "pattern": "^q_[a-z0-9_]+$"
+    },
+    "type": {
+      "type": "string",
+      "description": "Dạng thức câu hỏi thi",
+      "enum": ["single_choice", "true_false_group", "short_answer", "step_solution", "drag_drop"]
+    },
+    "subject": {
+      "type": "string",
+      "description": "Môn học (mặc định Toán học)",
+      "default": "Mathematics"
+    },
+    "exam_type": {
+      "type": "string",
+      "description": "Kỳ thi mục tiêu",
+      "enum": ["TSA", "HSA", "THPT", "Giải tích 1", "Toán cao cấp"]
+    },
+    "grade": {
+      "type": "string",
+      "description": "Khối lớp kiến thức",
+      "enum": ["Toán 10", "Toán 11", "Toán 12", "Đại học", "Toán cao cấp", "Giải tích 1"]
+    },
+    "topic": {
+      "type": "string",
+      "description": "Chuyên đề toán học chính"
+    },
+    "subtopic": {
+      "type": "string",
+      "description": "Phân mục chi tiết của chuyên đề"
+    },
+    "skills": {
+      "type": "array",
+      "description": "Danh mục kỹ năng và năng lực toán học cần vận dụng",
+      "items": { "type": "string" }
+    },
+    "difficulty": {
+      "type": "string",
+      "description": "Mức độ nhận thức hiển thị",
+      "enum": ["Dễ", "Trung bình", "Khó", "Rất khó"]
+    },
+    "difficulty_score": {
+      "type": "number",
+      "description": "Chỉ số độ khó chuẩn hóa từ 0.0 (rất dễ) đến 1.0 (rất khó/phân loại)",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "cognitive_level": {
+      "type": "string",
+      "description": "Bậc nhận thức theo khung khảo thí Bộ GD&ĐT",
+      "enum": ["M1", "M2", "M3", "M4", "Nhận biết", "Thông hiểu", "Vận dụng", "Vận dụng cao"]
+    },
+    "estimated_time_seconds": {
+      "type": "integer",
+      "description": "Thời gian giải tiêu chuẩn dự kiến (giây)",
+      "minimum": 15,
+      "maximum": 600
+    },
+    "question": {
+      "type": "string",
+      "description": "Nội dung câu hỏi, hỗ trợ định dạng KaTeX/MathJax: \\(...\\) cho inline math và $$...$$ cho display math"
+    },
+    "options": {
+      "type": ["array", "null"],
+      "description": "Danh sách 4 phương án lựa chọn cho dạng single_choice",
+      "items": { "type": "string" }
+    },
+    "correct_answer": {
+      "type": ["integer", "null"],
+      "description": "Chỉ số đáp án đúng (0 = A, 1 = B, 2 = C, 3 = D) cho single_choice",
+      "minimum": 0,
+      "maximum": 3
+    },
+    "items": {
+      "type": ["array", "null"],
+      "description": "Danh sách các ý a, b, c, d cho dạng true_false_group",
+      "items": {
+        "type": "object",
+        "required": ["label", "text", "correct"],
+        "properties": {
+          "label": { "type": "string", "enum": ["a", "b", "c", "d"] },
+          "text": { "type": "string" },
+          "correct": { "type": "boolean" }
+        }
+      }
+    },
+    "correct_value": {
+      "type": ["string", "number", "null"],
+      "description": "Giá trị số hoặc phân số chính xác cho dạng short_answer"
+    },
+    "cloze_text": {
+      "type": "string",
+      "description": "Đoạn văn chứa các chỗ trống dạng [blank_1], [blank_2] cho dạng drag_drop"
+    },
+    "blanks": {
+      "type": "array",
+      "description": "Danh sách các vị trí cần điền đáp án cho dạng drag_drop",
+      "items": {
+        "type": "object",
+        "required": ["id", "correct"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "correct": { "type": "string" }
+        }
+      }
+    },
+    "drag_items": {
+      "type": "array",
+      "description": "Ngân hàng thẻ đáp án kéo thả cho dạng drag_drop",
+      "items": {
+        "type": "object",
+        "required": ["id", "content"],
+        "properties": {
+          "id": { "type": "string" },
+          "content": { "type": "string" }
+        }
+      }
+    },
+    "explanation": {
+      "type": "string",
+      "description": "Lời giải chi tiết từng bước, kèm công thức KaTeX và nhận xét kinh nghiệm"
+    },
+    "common_traps": {
+      "type": "array",
+      "description": "Phân tích bẫy toán học và sai lầm thường gặp của học sinh",
+      "items": { "type": "string" }
+    },
+    "prerequisites": {
+      "type": "array",
+      "description": "Danh sách ID kiến thức/kỹ năng tiên quyết cần có để giải",
+      "items": { "type": "string" }
+    },
+    "year": {
+      "type": "integer",
+      "description": "Năm ra đề hoặc biên soạn",
+      "minimum": 2020,
+      "maximum": 2030
+    },
+    "source_type": {
+      "type": "string",
+      "description": "Phân loại nguồn gốc",
+      "enum": ["original", "adapted", "official", "public-domain", "sample"]
+    },
+    "source": {
+      "type": "string",
+      "description": "Nguồn gốc đề thi (ví dụ: Đề thi TSA ĐHBK Hà Nội 2025, Đề ĐGNL ĐHQGHN...)"
+    },
+    "license": {
+      "type": "string",
+      "description": "Giấy phép bản quyền mở",
+      "default": "CC BY-NC-SA 4.0"
+    },
+    "tags": {
+      "type": "array",
+      "description": "Từ khóa phân loại và tra cứu",
+      "items": { "type": "string" }
+    },
+    "knowledge_id": {
+      "type": ["string", "null"],
+      "description": "Liên kết tới chuyên đề lý thuyết trong Sổ tay kiến thức (ví dụ: kb_toan12_01)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["published", "draft", "archived"],
+      "default": "published"
+    },
+    "schema_version": {
+      "type": "string",
+      "default": "2.0"
+    }
+  }
+}

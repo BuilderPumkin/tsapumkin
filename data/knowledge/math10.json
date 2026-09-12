@@ -1,0 +1,437 @@
+[
+  {
+    "id": "kb_toan10_01",
+    "grade": "Toán 10",
+    "chapter": "Chương 1: Mệnh đề & Tập hợp",
+    "title": "Mệnh đề, Tập hợp và Các phép toán trên tập hợp",
+    "overview": "Nền tảng của tư duy logic toán học, cấu trúc dữ liệu và bài toán đếm bù trừ.",
+    "theory_markdown": "### 1. Mệnh đề toán học và Mệnh đề phủ định\nMột mệnh đề là một khẳng định đúng hoặc sai, không thể vừa đúng vừa sai.\n- Mệnh đề kéo theo: \\(P \\implies Q\\) chỉ sai khi \\(P\\) đúng và \\(Q\\) sai.\n- Mệnh đề đảo của \\(P \\implies Q\\) là \\(Q \\implies P\\).\n- Mệnh đề phản đảo: \\(\\overline{Q} \\implies \\overline{P}\\) (có cùng giá trị chân lý với \\(P \\implies Q\\)).\n\n### 2. Các phép toán trên tập hợp\n- **Giao**: \\(A \\cap B = \\{x \\mid x \\in A \\text{ và } x \\in B\\}\\).\n- **Hợp**: \\(A \\cup B = \\{x \\mid x \\in A \\text{ hoặc } x \\in B\\}\\).\n- **Hiệu**: \\(A \\setminus B = \\{x \\mid x \\in A \\text{ và } x \\notin B\\}\\).\n- **Phần bù**: \\(C_E A = E \\setminus A\\) (với \\(A \\subset E\\)).",
+    "formulas": [
+      {
+        "id": "kb_toan10_01_f1",
+        "name": "Nguyên lý bù trừ 2 tập",
+        "latex": "|A \\cup B| = |A| + |B| - |A \\cap B|",
+        "desc": "Tính số phần tử của hợp hai tập hữu hạn",
+        "tags": [
+          "Tập hợp",
+          "Đếm"
+        ]
+      },
+      {
+        "id": "kb_toan10_01_f2",
+        "name": "Nguyên lý bù trừ 3 tập",
+        "latex": "|A \\cup B \\cup C| = |A|+|B|+|C| - (|A \\cap B| + |B \\cap C| + |C \\cap A|) + |A \\cap B \\cap C|",
+        "desc": "Tính số phần tử khi có 3 tập giao nhau",
+        "tags": [
+          "Tập hợp",
+          "Xác suất"
+        ]
+      },
+      {
+        "id": "kb_toan10_01_f3",
+        "name": "Điều kiện hai khoảng giao khác rỗng",
+        "latex": "(a; b) \\cap (c; d) \\ne \\emptyset \\iff a < d \\text{ và } c < b",
+        "desc": "Điều kiện để hai khoảng số thực giao nhau khác rỗng",
+        "tags": [
+          "Số thực",
+          "Khoảng đoạn"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan10_01_f1",
+      "kb_toan10_01_f2",
+      "kb_toan10_01_f3"
+    ],
+    "prerequisites": [],
+    "related_topics": [
+      "kb_toan10_02",
+      "kb_toan11_03"
+    ],
+    "common_traps": [
+      "Nhầm giữa quan hệ phần tử thuộc tập (thuộc) và tập con (chứa trong)",
+      "Quên xét trường hợp mút vuông hay tròn khi kiểm tra giao khác rỗng"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tìm m để giao hai tập hợp khác rỗng",
+        "question": "Cho \\(A = [m; m+3]\\) và \\(B = (2; 6)\\). Tìm tất cả giá trị thực của tham số \\(m\\) để \\(A \\cap B \\ne \\emptyset\\).",
+        "solution_steps": [
+          "Bước 1: Xác định điều kiện hai khoảng/đoạn giao khác rỗng: đầu mút trái của tập này phải nhỏ hơn đầu mút phải của tập kia.",
+          "Bước 2: Ta có hệ bất phương trình: \\(m < 6\\) và \\(m + 3 > 2\\).",
+          "Bước 3: Suy ra \\(-1 < m < 6\\). Do \\(A\\) là đoạn nên tại các mút: nếu \\(m=6\\) thì \\(A=[6;9]\\), giao với \\(B\\) bằng rỗng. Vậy \\(m \\in (-1; 6)\\)."
+        ],
+        "takeaway": "Sử dụng trục số để biểu diễn mút: [a, b] và (c, d) giao nhau khi max(a, c) < min(b, d)."
+      }
+    ],
+    "applications": "Ứng dụng trong việc thiết lập câu lệnh truy vấn cơ sở dữ liệu (SQL INTERSECT / UNION), kiểm tra điều kiện kích hoạt trong hệ thống nhúng và biểu diễn không gian mẫu xác suất.",
+    "drill_tags": [
+      "Tập hợp",
+      "Mệnh đề",
+      "Logic"
+    ],
+    "related_question_ids": [
+      "q_tsa_06",
+      "q_hsa_03",
+      "q_tsa_36"
+    ]
+  },
+  {
+    "id": "kb_toan10_02",
+    "grade": "Toán 10",
+    "chapter": "Chương 2: Bất phương trình & Bất đẳng thức",
+    "title": "Bất phương trình, Quy hoạch tuyến tính & Bất đẳng thức AM-GM, Cauchy-Schwarz",
+    "overview": "Phương pháp biểu diễn miền nghiệm đa giác, tìm cực trị hàm mục tiêu tuyến tính và kỹ thuật chứng minh bất đẳng thức thực chiến.",
+    "theory_markdown": "### 1. Bất phương trình bậc nhất hai ẩn & Quy hoạch tuyến tính\nDạng tổng quát: \\(ax + by + c \\le 0\\) (với \\(a^2 + b^2 > 0\\)).\n- Miền nghiệm là một nửa mặt phẳng kể cả bờ là đường thẳng \\(d: ax + by + c = 0\\).\n- **Định lý tối ưu trên miền đa giác**: Cho hàm mục tiêu \\(F(x, y) = ax + by\\). Nếu miền nghiệm của hệ bất phương trình là một đa giác lồi \\(A_1A_2\\dots A_n\\), thì giá trị lớn nhất và giá trị nhỏ nhất của \\(F(x, y)\\) luôn đạt tại một trong các đỉnh của đa giác.\n\n### 2. Bất đẳng thức AM-GM (Cauchy)\nCho các số thực không âm \\(a_1, a_2, \\dots, a_n \\ge 0\\):\n\\[\\frac{a_1 + a_2 + \\dots + a_n}{n} \\ge \\sqrt[n]{a_1 a_2 \\dots a_n}\\]\nDấu bằng xảy ra khi và chỉ khi \\(a_1 = a_2 = \\dots = a_n\\).\n\n### 3. Bất đẳng thức Cauchy-Schwarz (Bunhiacopxki) & Kỹ thuật Engel\nCho hai dãy số thực \\((a_1, \\dots, a_n)\\) và \\((b_1, \\dots, b_n)\\):\n\\[(a_1 b_1 + \\dots + a_n b_n)^2 \\le (a_1^2 + \\dots + a_n^2)(b_1^2 + \\dots + b_n^2)\\]\n- **Dạng phân thức Engel (Svac-xơ)** với \\(x_i > 0\\):\n\\[\\frac{a_1^2}{x_1} + \\frac{a_2^2}{x_2} + \\dots + \\frac{a_n^2}{x_n} \\ge \\frac{(a_1 + a_2 + \\dots + a_n)^2}{x_1 + x_2 + \\dots + x_n}\\]",
+    "formulas": [
+      {
+        "id": "kb_toan10_02_f1",
+        "name": "Hàm mục tiêu tuyến tính",
+        "latex": "F(x, y) = ax + by + c \\implies \\max F = \\max_{i=1}^n \\{F(A_i)\\}",
+        "desc": "Cực trị tuyến tính trên miền đa giác luôn đạt tại một trong các đỉnh",
+        "tags": [
+          "Quy hoạch tuyến tính",
+          "Đỉnh đa giác"
+        ]
+      },
+      {
+        "id": "kb_toan10_02_f2",
+        "name": "Bất đẳng thức AM-GM (Cauchy) 2 số & 3 số",
+        "latex": "a + b \\ge 2\\sqrt{ab} \\; (a, b \\ge 0), \\quad a + b + c \\ge 3\\sqrt[3]{abc} \\; (a, b, c \\ge 0) \\quad (\\text{Dấu '=' } \\iff a = b = c)",
+        "desc": "Bất đẳng thức giữa trung bình cộng và trung bình nhân cho các số thực không âm",
+        "tags": [
+          "Bất đẳng thức",
+          "AM-GM",
+          "Cauchy"
+        ]
+      },
+      {
+        "id": "kb_toan10_02_f3",
+        "name": "Bất đẳng thức Cauchy-Schwarz (Bunhiacopxki) & Dạng Engel",
+        "latex": "(ax + by)^2 \\le (a^2 + b^2)(x^2 + y^2), \\quad \\frac{a^2}{x} + \\frac{b^2}{y} \\ge \\frac{(a+b)^2}{x+y} \\; (x, y > 0)",
+        "desc": "Bất đẳng thức tích vô hướng và kỹ thuật cộng mẫu số Engel (Svac-xơ)",
+        "tags": [
+          "Bất đẳng thức",
+          "Bunhiacopxki",
+          "Cauchy-Schwarz"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan10_02_f1",
+      "kb_toan10_02_f2",
+      "kb_toan10_02_f3"
+    ],
+    "prerequisites": [
+      "kb_toan10_01"
+    ],
+    "related_topics": [
+      "kb_toan10_03",
+      "kb_toan11_01"
+    ],
+    "common_traps": [
+      "Áp dụng bất đẳng thức AM-GM khi các biến chưa được chứng minh là số không âm",
+      "Quên kiểm tra điều kiện dấu bằng xảy ra trong bài toán tìm cực trị",
+      "Chọn sai đỉnh khi giải quy hoạch tuyến tính trên miền không bị chặn"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tối ưu hóa chi phí sản xuất",
+        "question": "Một phân xưởng sản xuất 2 loại sản phẩm A và B. Lợi nhuận mỗi tấn A là 4 triệu, mỗi tấn B là 3 triệu. Miền ràng buộc nguyên liệu tạo thành tứ giác có tọa độ 4 đỉnh \\(O(0,0), P(0,4), Q(3,2), R(4,0)\\). Tìm lợi nhuận tối đa.",
+        "solution_steps": [
+          "Bước 1: Hàm mục tiêu: \\(L(x, y) = 4x + 3y\\).",
+          "Bước 2: Tính giá trị tại 4 đỉnh: \\(L(O) = 0\\), \\(L(P) = 4(0) + 3(4) = 12\\), \\(L(Q) = 4(3) + 3(2) = 18\\), \\(L(R) = 4(4) + 3(0) = 16\\).",
+          "Bước 3: So sánh: \\(\\max L = 18\\) triệu đồng, đạt tại \\(Q(3, 2)\\)."
+        ],
+        "takeaway": "Chỉ cần tính giá trị hàm mục tiêu tại các đỉnh, không cần xét các điểm trong."
+      }
+    ],
+    "applications": "Mô hình quy hoạch tuyến tính ứng dụng trong logistic, lập kế hoạch ngân sách quảng cáo đa kênh, phối trộn thức ăn chăn nuôi và tối ưu hóa năng lực máy móc.",
+    "drill_tags": [
+      "Quy hoạch tuyến tính",
+      "Hệ BPT",
+      "Tối ưu hóa",
+      "Bất đẳng thức"
+    ],
+    "related_question_ids": [
+      "q_tsa_09",
+      "q_tsa_22",
+      "q_hsa_18"
+    ]
+  },
+  {
+    "id": "kb_toan10_03",
+    "grade": "Toán 10",
+    "chapter": "Chương 3: Hàm số bậc hai & Tam thức bậc hai",
+    "title": "Hàm số bậc hai, Định lý dấu Tam thức & Ứng dụng Parabol",
+    "overview": "Khảo sát đồ thị parabol, tọa độ đỉnh, định lý dấu tam thức bậc hai, định lý Viète và mô hình quỹ đạo parabol.",
+    "theory_markdown": "### 1. Hàm số bậc hai & Đồ thị Parabol\nDạng tổng quát: \\(y = ax^2 + bx + c\\) (\\(a \\ne 0\\)).\n- Đỉnh \\(I\\left(-\\frac{b}{2a}; -\\frac{\\Delta}{4a}\\right)\\).\n- Trục đối xứng: \\(x = -\\frac{b}{2a}\\).\n- Nếu \\(a > 0\\): bề lõm hướng lên trên, hàm số đạt GTNN tại \\(x = -\\frac{b}{2a}\\).\n- Nếu \\(a < 0\\): bề lõm hướng xuống dưới, hàm số đạt GTLN tại \\(x = -\\frac{b}{2a}\\).\n\n### 2. Định lý dấu Tam thức bậc hai\nCho \\(f(x) = ax^2 + bx + c\\) (\\(a \\ne 0\\)), biệt thức \\(\\Delta = b^2 - 4ac\\):\n- Nếu \\(\\Delta < 0\\): \\(f(x)\\) cùng dấu với hệ số \\(a\\) với mọi \\(x \\in \\mathbb{R}\\).\n- Nếu \\(\\Delta = 0\\): \\(f(x)\\) cùng dấu với \\(a\\) với mọi \\(x \\ne -\\frac{b}{2a}\\).\n- Nếu \\(\\Delta > 0\\): \\(f(x)\\) có hai nghiệm phân biệt \\(x_1 < x_2\\). Trong khoảng hai nghiệm \\((x_1; x_2)\\) thì \\(f(x)\\) trái dấu với \\(a\\); ngoài khoảng hai nghiệm thì \\(f(x)\\) cùng dấu với \\(a\\) *(Trong trái - Ngoài cùng)*.",
+    "formulas": [
+      {
+        "id": "kb_toan10_03_f1",
+        "name": "Tọa độ đỉnh Parabol",
+        "latex": "x_I = -\\frac{b}{2a}, \\quad y_I = f(x_I) = -\\frac{\\Delta}{4a}",
+        "desc": "Điểm cực trị tuyệt đối của tam thức bậc hai",
+        "tags": [
+          "Parabol",
+          "Cực trị"
+        ]
+      },
+      {
+        "id": "kb_toan10_03_f2",
+        "name": "Định lý Viète bậc hai",
+        "latex": "x_1 + x_2 = -\\frac{b}{a}, \\quad x_1 x_2 = \\frac{c}{a}",
+        "desc": "Mối liên hệ giữa nghiệm và hệ số của phương trình bậc hai",
+        "tags": [
+          "Viète",
+          "Nghiệm"
+        ]
+      },
+      {
+        "id": "kb_toan10_03_f3",
+        "name": "Định lý dấu tam thức bậc hai & Điều kiện không đổi dấu",
+        "latex": "f(x) = ax^2 + bx + c > 0, \\forall x \\in \\mathbb{R} \\iff \\begin{cases} a > 0 \\\\ \\Delta < 0 \\end{cases}; \\quad f(x) \\ge 0, \\forall x \\in \\mathbb{R} \\iff \\begin{cases} a > 0 \\\\ \\Delta \\le 0 \\end{cases}",
+        "desc": "Điều kiện cần và đủ để tam thức bậc hai giữ nguyên dấu dương trên toàn trục số",
+        "tags": [
+          "Hàm số",
+          "Tam thức bậc hai",
+          "Biện luận"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan10_03_f1",
+      "kb_toan10_03_f2",
+      "kb_toan10_03_f3"
+    ],
+    "prerequisites": [
+      "kb_toan10_01"
+    ],
+    "related_topics": [
+      "kb_toan11_02",
+      "kb_toan12_04"
+    ],
+    "common_traps": [
+      "Quên xét trường hợp hệ số a = 0 khi đề bài cho tham số ở hệ số bậc 2",
+      "Nhầm lẫn giữa Delta < 0 và Delta <= 0 khi bất phương trình có dấu bằng"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Quỹ đạo bắn cổng parabol",
+        "question": "Cổng vòm trường đại học có dạng Parabol \\(y = -0,5x^2 + 4x\\) (đơn vị mét). Tìm chiều cao lớn nhất của cổng vòm và khoảng cách giữa hai chân cổng.",
+        "solution_steps": [
+          "Bước 1: Chân cổng là giao điểm với mặt đất \\(y = 0\\): \\(-0,5x^2 + 4x = 0 \\iff x(-0,5x + 4) = 0 \\implies x_1 = 0, x_2 = 8\\). Chiều rộng 2 chân là 8 mét.",
+          "Bước 2: Trục đối xứng nằm ở trung điểm: \\(x = 4\\).",
+          "Bước 3: Chiều cao cực đại: \\(y(4) = -0,5(16) + 4(4) = -8 + 16 = 8\\text{ m}\\)."
+        ],
+        "takeaway": "Tận dụng tính chất đối xứng của Parabol để tìm nhanh trung điểm và đỉnh."
+      }
+    ],
+    "applications": "Thiết kế cầu treo dây võng (Golden Gate), đèn pha ô tô gương cầu Parabol tập trung chùm tia song song, anten chảo vệ tinh viễn thông.",
+    "drill_tags": [
+      "Hàm số bậc hai",
+      "Parabol",
+      "Quỹ đạo",
+      "Tam thức"
+    ],
+    "related_question_ids": [
+      "q_tsa_02",
+      "q_hsa_04",
+      "q_tsa_24"
+    ]
+  },
+  {
+    "id": "kb_toan10_04",
+    "grade": "Toán 10",
+    "chapter": "Chương 4: Hệ thức lượng & Vectơ",
+    "title": "Hệ thức lượng trong tam giác, Vectơ và Công thức Shoelace",
+    "overview": "Bộ công cụ định lý Cosin, Sin, 5 công thức tính diện tích tam giác, công thức trung tuyến, phân giác và tích vô hướng vectơ.",
+    "theory_markdown": "### 1. Các định lý cốt lõi trong tam giác\n- **Định lý Cosin**: \\(a^2 = b^2 + c^2 - 2bc\\cos A \\implies \\cos A = \\frac{b^2 + c^2 - a^2}{2bc}\\).\n- **Định lý Sin**: \\(\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R\\).\n- **Đường trung tuyến**: \\(m_a^2 = \\frac{2(b^2 + c^2) - a^2}{4}\\).\n- **Đường phân giác trong**: \\(l_a = \\frac{2bc\\cos(A/2)}{b + c}\\).\n\n### 2. Bộ 5 Công thức tính Diện tích tam giác toàn diện\n- \\(S = \\frac{1}{2} a h_a\\) (chiều cao)\n- \\(S = \\frac{1}{2} ab \\sin C\\) (hai cạnh và góc xen giữa)\n- \\(S = \\frac{abc}{4R}\\) (bán kính đường tròn ngoại tiếp R)\n- \\(S = pr\\) (nửa chu vi \\(p = \\frac{a+b+c}{2}\\) và bán kính nội tiếp r)\n- \\(S = \\sqrt{p(p-a)(p-b)(p-c)}\\) (Công thức Heron)\n\n### 3. Tích vô hướng của hai vectơ\n- Định nghĩa: \\(\\vec{u} \\cdot \\vec{v} = |\\vec{u}| |\\vec{v}| \\cos(\\vec{u}, \\vec{v})\\).\n- Biểu thức tọa độ: \\(\\vec{u} = (x_1, y_1), \\vec{v} = (x_2, y_2) \\implies \\vec{u} \\cdot \\vec{v} = x_1x_2 + y_1y_2\\).\n- Điều kiện vuông góc: \\(\\vec{u} \\perp \\vec{v} \\iff \\vec{u} \\cdot \\vec{v} = 0 \\iff x_1x_2 + y_1y_2 = 0\\).",
+    "formulas": [
+      {
+        "id": "kb_toan10_04_f1",
+        "name": "Công thức Shoelace (Dây giày)",
+        "latex": "S = \\frac{1}{2} |(x_A y_B + x_B y_C + x_C y_A) - (y_A x_B + y_B x_C + y_C x_A)|",
+        "desc": "Tính diện tích đa giác khi biết tọa độ các đỉnh trong mặt phẳng",
+        "tags": [
+          "Shoelace",
+          "Tọa độ phẳng",
+          "Diện tích"
+        ]
+      },
+      {
+        "id": "kb_toan10_04_f2",
+        "name": "Độ dài đường trung tuyến",
+        "latex": "m_a^2 = \\frac{2(b^2 + c^2) - a^2}{4}",
+        "desc": "Tính độ dài trung tuyến ứng với cạnh a của tam giác ABC",
+        "tags": [
+          "Trung tuyến",
+          "Hình học"
+        ]
+      },
+      {
+        "id": "kb_toan10_04_f3",
+        "name": "Định lý hàm số Cosin & Hệ quả góc",
+        "latex": "a^2 = b^2 + c^2 - 2bc\\cos A, \\quad \\cos A = \\frac{b^2 + c^2 - a^2}{2bc}",
+        "desc": "Tính cạnh và góc trong tam giác tổng quát khi biết hai cạnh và góc xen giữa",
+        "tags": [
+          "Hệ thức lượng",
+          "Định lý Cosin"
+        ]
+      },
+      {
+        "id": "kb_toan10_04_f4",
+        "name": "Định lý hàm số Sin & Bán kính đường tròn ngoại tiếp",
+        "latex": "\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R",
+        "desc": "Mối liên hệ giữa cạnh, góc đối diện và bán kính đường tròn ngoại tiếp R",
+        "tags": [
+          "Hệ thức lượng",
+          "Định lý Sin",
+          "Bán kính ngoại tiếp"
+        ]
+      },
+      {
+        "id": "kb_toan10_04_f5",
+        "name": "5 Công thức tính diện tích tam giác toàn diện",
+        "latex": "S = \\frac{1}{2}a h_a = \\frac{1}{2}ab\\sin C = \\frac{abc}{4R} = pr = \\sqrt{p(p-a)(p-b)(p-c)} \\quad \\left(p = \\frac{a+b+c}{2}\\right)",
+        "desc": "Bộ 5 công thức diện tích tam giác chuẩn: chiều cao, góc xen giữa, bán kính R, bán kính r và Heron",
+        "tags": [
+          "Hình học",
+          "Diện tích",
+          "Heron"
+        ]
+      },
+      {
+        "id": "kb_toan10_04_f6",
+        "name": "Tích vô hướng hai vectơ & Công thức góc",
+        "latex": "\\vec{u} \\cdot \\vec{v} = |\\vec{u}| |\\vec{v}| \\cos(\\vec{u}, \\vec{v}) = x_1 x_2 + y_1 y_2, \\quad \\vec{u} \\perp \\vec{v} \\iff x_1 x_2 + y_1 y_2 = 0",
+        "desc": "Định nghĩa hình học và tọa độ của tích vô hướng, điều kiện hai vectơ vuông góc",
+        "tags": [
+          "Vectơ",
+          "Tích vô hướng"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan10_04_f1",
+      "kb_toan10_04_f2",
+      "kb_toan10_04_f3",
+      "kb_toan10_04_f4",
+      "kb_toan10_04_f5",
+      "kb_toan10_04_f6"
+    ],
+    "prerequisites": [
+      "kb_toan10_01"
+    ],
+    "related_topics": [
+      "kb_toan11_01"
+    ],
+    "common_traps": [
+      "Nhầm lẫn dấu trừ trong định lý Cosin thành dấu cộng (a^2 = b^2 + c^2 - 2bc cos A)",
+      "Quên chia 2 trong công thức tính bán kính đường tròn ngoại tiếp R (a / sin A = 2R chứ không phải R)"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: Tính diện tích tam giác qua Shoelace",
+        "question": "Trong mặt phẳng tọa độ Oxy, cho tam giác ABC với \\(A(1, 2), B(4, 6), C(7, 1)\\). Tính diện tích tam giác ABC.",
+        "solution_steps": [
+          "Bước 1: Áp dụng định thức Dây giày Shoelace:",
+          "Bước 2: Cột x: (1, 4, 7, 1), Cột y: (2, 6, 1, 2).",
+          "Bước 3: Tổng tích xuôi: \\(1(6) + 4(1) + 7(2) = 6 + 4 + 14 = 24\\).",
+          "Bước 4: Tổng tích ngược: \\(2(4) + 6(7) + 1(1) = 8 + 42 + 1 = 51\\).",
+          "Bước 5: \\(S = \\frac{1}{2} |24 - 51| = \\frac{27}{2} = 13,5\\)."
+        ],
+        "takeaway": "Công thức Shoelace giúp giải bài toán diện tích siêu tốc trong đề thi TSA/HSA mà không cần lập phương trình cạnh hay đường cao."
+      }
+    ],
+    "applications": "Đo đạc trắc địa GPS, đồ họa máy tính 2D/3D (Rasterization polygon), phân tích lực cân bằng trong kết cấu cơ học cầu đường.",
+    "drill_tags": [
+      "Hệ thức lượng",
+      "Vectơ",
+      "Shoelace",
+      "Diện tích"
+    ],
+    "related_question_ids": [
+      "q_tsa_04",
+      "q_hsa_07",
+      "q_tsa_25"
+    ]
+  },
+  {
+    "id": "kb_toan10_05",
+    "grade": "Toán 10",
+    "chapter": "Chương 5: Thống kê & Xác suất cổ điển",
+    "title": "Thống kê mô tả & Xác suất cổ điển",
+    "overview": "Đại lượng đo xu thế trung tâm, đo độ phân tán, tiêu chuẩn nhận diện giá trị ngoại lệ và quy tắc xác suất Laplace.",
+    "theory_markdown": "### 1. Số đặc trưng đo xu thế trung tâm\n- **Số trung bình**: \\(\\bar{x} = \\frac{1}{n}\\sum_{i=1}^k n_i x_i\\).\n- **Trung vị (Median)**: Giá trị chia mẫu số liệu đã sắp xếp thành hai phần bằng nhau.\n- **Tứ phân vị**: \\(Q_1, Q_2 (=M_e), Q_3\\). Khoảng tứ phân vị: \\(\\Delta_Q = Q_3 - Q_1\\).\n- **Nhận diện giá trị ngoại lệ**: Giá trị \\(x\\) là ngoại lệ nếu \\(x < Q_1 - 1,5\\Delta_Q\\) hoặc \\(x > Q_3 + 1,5\\Delta_Q\\).\n\n### 2. Số đặc trưng đo mức độ phân tán\n- **Phương sai**: \\(s^2 = \\frac{1}{n}\\sum (x_i - \\bar{x})^2 = \\frac{1}{n}\\sum x_i^2 - (\\bar{x})^2\\).\n- **Độ lệch chuẩn**: \\(s = \\sqrt{s^2}\\). Độ lệch chuẩn càng nhỏ thì dữ liệu càng đồng đều và ổn định.",
+    "formulas": [
+      {
+        "id": "kb_toan10_05_f1",
+        "name": "Công thức tính nhanh phương sai",
+        "latex": "s^2 = \\overline{x^2} - (\\bar{x})^2",
+        "desc": "Phương sai bằng trung bình bình phương trừ bình phương trung bình",
+        "tags": [
+          "Thống kê",
+          "Phương sai"
+        ]
+      },
+      {
+        "id": "kb_toan10_05_f2",
+        "name": "Xác suất cổ điển Laplace",
+        "latex": "P(A) = \\frac{n(A)}{n(\\Omega)} = \\frac{|A|}{|\\Omega|}",
+        "desc": "Xác suất biến cố trong không gian mẫu đồng khả năng",
+        "tags": [
+          "Xác suất",
+          "Tổ hợp"
+        ]
+      },
+      {
+        "id": "kb_toan10_05_f3",
+        "name": "Khoảng biến thiên & Khoảng tứ phân vị (IQR)",
+        "latex": "R = x_{\\max} - x_{\\min}, \\quad \\Delta_Q = Q_3 - Q_1 \\quad (\\text{Ngoại lệ: } x < Q_1 - 1,5\\Delta_Q \\lor x > Q_3 + 1,5\\Delta_Q)",
+        "desc": "Đo độ phân tán của mẫu số liệu và tiêu chuẩn nhận diện giá trị ngoại lệ",
+        "tags": [
+          "Thống kê",
+          "Tứ phân vị",
+          "Ngoại lệ"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_toan10_05_f1",
+      "kb_toan10_05_f2",
+      "kb_toan10_05_f3"
+    ],
+    "prerequisites": [
+      "kb_toan10_01"
+    ],
+    "related_topics": [],
+    "common_traps": [
+      "Quên sắp xếp mẫu số liệu theo thứ tự không giảm trước khi tìm trung vị và các tứ phân vị",
+      "Nhầm lẫn khoảng biến thiên R với khoảng tứ phân vị IQR"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1: So sánh độ ổn định của hai dây chuyền",
+        "question": "Dây chuyền 1 có độ lệch chuẩn khối lượng sản phẩm \\(s_1 = 0,15\\text{ g}\\), dây chuyền 2 có \\(s_2 = 0,42\\text{ g}\\). Dây chuyền nào hoạt động ổn định và kiểm soát chất lượng tốt hơn?",
+        "solution_steps": [
+          "Bước 1: Hiểu ý nghĩa độ lệch chuẩn: phản ánh mức độ biến động/phân tán xung quanh khối lượng chuẩn.",
+          "Bước 2: Vì \\(s_1 < s_2\\) (\\(0,15 < 0,42\\)), sai số của dây chuyền 1 tập trung chặt chẽ hơn quanh giá trị trung bình.",
+          "Bước 3: Kết luận: Dây chuyền 1 ổn định hơn dây chuyền 2."
+        ],
+        "takeaway": "Đề thi TSA/HSA thường kiểm tra năng lực hiểu bản chất số đo phân tán chứ không bắt bấm máy số phức tạp."
+      }
+    ],
+    "applications": "Đánh giá rủi ro danh mục đầu tư tài chính (Sharpe Ratio), kiểm định chất lượng dây chuyền sản xuất Six Sigma, phân tích kết quả thử nghiệm lâm sàng vắc-xin.",
+    "drill_tags": [
+      "Thống kê",
+      "Độ lệch chuẩn",
+      "Xác suất"
+    ],
+    "related_question_ids": [
+      "q_tsa_11",
+      "q_hsa_10",
+      "q_tsa_26"
+    ]
+  }
+]

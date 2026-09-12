@@ -1,0 +1,1139 @@
+[
+  {
+    "id": "q_calc_01",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Khai triển Maclaurin & Giới hạn",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Tính giới hạn \\(L = \\lim_{x \\to 0} \\frac{e^x - 1 - x}{\\sin^2 x}\\).",
+    "options": [
+      "0",
+      "\\(\\frac{1}{2}\\)",
+      "1",
+      "\\(\\infty\\)"
+    ],
+    "correct_answer": 1,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Sử dụng khai triển Maclaurin: \\(e^x - 1 - x \\sim \\frac{x^2}{2}\\) và \\(\\sin^2 x \\sim x^2\\). Giới hạn là \\(1/2\\).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_01"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Maclaurin",
+      "Vô cùng bé",
+      "Calculus"
+    ],
+    "knowledge_id": "kb_gt1_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_02",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Phương trình vi phân cấp 1",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Khó",
+    "difficulty_score": 0.88,
+    "cognitive_level": "M4",
+    "estimated_time_seconds": 120,
+    "question": "Nghiệm tổng quát của phương trình vi phân tuyến tính cấp 1: \\(y' + \\frac{1}{x}y = 3x\\) (với \\(x > 0\\)) là:",
+    "options": [
+      "\\(y = x^2 + \\frac{C}{x}\\)",
+      "\\(y = x^3 + C\\)",
+      "\\(y = 3x^2 + \\frac{C}{x}\\)",
+      "\\(y = x^2 + C x\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Thừa số tích phân \\(\\mu = x\\). Tích phân 2 vế: \\(x y = x^3 + C \\implies y = x^2 + C/x\\).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_05"
+    ],
+    "year": 2024,
+    "source_type": "adapted",
+    "source": "Toán Cao cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "PT vi phân",
+      "Thừa số tích phân",
+      "Calculus"
+    ],
+    "knowledge_id": "kb_gt1_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_03",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Chuỗi Taylor - Maclaurin",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Khai triển Maclaurin đến bậc 4 của hàm số \\(f(x) = \\ln(1 + 2x)\\) là:",
+    "options": [
+      "\\(2x - 2x^2 + \\frac{8}{3}x^3 - 4x^4 + O(x^5)\\)",
+      "\\(2x - 4x^2 + 8x^3 - 16x^4 + O(x^5)\\)",
+      "\\(x - \\frac{x^2}{2} + \\frac{x^3}{3} - \\frac{x^4}{4} + O(x^5)\\)",
+      "\\(2x + 2x^2 + \\frac{8}{3}x^3 + 4x^4 + O(x^5)\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "\\(\\ln(1+u) = u - u^2/2 + u^3/3 - u^4/4\\). Thay \\(u = 2x\\) được \\(2x - 2x^2 + \\frac{8}{3}x^3 - 4x^4 + O(x^5)\\).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_02"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Chuỗi Maclaurin",
+      "Logarit"
+    ],
+    "knowledge_id": "kb_gt1_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_04",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Toán cao cấp",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Định thức ma trận",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tính định thức của ma trận \\(A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 4 & 5 \\\\ 0 & 0 & 6 \\end{pmatrix}\\).",
+    "options": [
+      "24",
+      "12",
+      "30",
+      "0"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Ma trận tam giác trên, định thức bằng tích các phần tử trên đường chéo chính: \\(\\det(A) = 1 \\cdot 4 \\cdot 6 = 24\\).",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_dstt_02"
+    ],
+    "year": 2024,
+    "source_type": "adapted",
+    "source": "Đại số Tuyến tính ĐHBK",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Định thức",
+      "Ma trận tam giác",
+      "ĐSTT"
+    ],
+    "knowledge_id": "kb_dstt_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_05",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tích phân suy rộng loại 1",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tích phân suy rộng \\(I = \\int_1^{+\\infty} \\frac{1}{x^p} dx\\) hội tụ khi và chỉ khi:",
+    "options": [
+      "\\(p > 1\\)",
+      "\\(p \\ge 1\\)",
+      "\\(p < 1\\)",
+      "\\(p \\le 1\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Định lý Riemann: tích phân suy rộng loại 1 \\(\\int_1^{+\\infty} \\frac{dx}{x^p}\\) hội tụ khi và chỉ khi \\(p > 1\\).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_03"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Tích phân suy rộng",
+      "Tiêu chuẩn Riemann"
+    ],
+    "knowledge_id": "kb_gt1_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_06",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Phương trình vi phân phân ly",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Nghiệm tổng quát của phương trình vi phân phân ly biến số \\(y' = 2x y^2\\) (với \\(y \\ne 0\\)) là:",
+    "options": [
+      "\\(y = -\\frac{1}{x^2 + C}\\)",
+      "\\(y = \\frac{1}{x^2 + C}\\)",
+      "\\(y = -\\frac{2}{x^2 + C}\\)",
+      "\\(y = e^{x^2 + C}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Phân ly biến số: \\(\\frac{dy}{y^2} = 2x dx\\). Lấy nguyên hàm hai vế: \\(-\\frac{1}{y} = x^2 + C \\implies y = -\\frac{1}{x^2 + C}\\).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_05"
+    ],
+    "year": 2024,
+    "source_type": "adapted",
+    "source": "Toán Cao cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Biến số phân ly",
+      "PT vi phân"
+    ],
+    "knowledge_id": "kb_gt1_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_07",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Toán cao cấp",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Ma trận nghịch đảo",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Cho ma trận vuông \\(A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\). Ma trận nghịch đảo \\(A^{-1}\\) là:",
+    "options": [
+      "\\(\\begin{pmatrix} -2 & 1 \\\\ 1,5 & -0,5 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 4 & -2 \\\\ -3 & 1 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 2 & -1 \\\\ -1,5 & 0,5 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} -4 & 2 \\\\ 3 & -1 \\end{pmatrix}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "det(A) = 1(4) - 2(3) = -2.<br>A⁻¹ = (1/det) · [d, -b; -c, a] = (-1/2) · [4, -2; -3, 1] = [-2, 1; 1,5, -0,5].",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_dstt_01"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đại số Tuyến tính ĐHBK",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Ma trận nghịch đảo",
+      "ĐSTT"
+    ],
+    "knowledge_id": "kb_dstt_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_08",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Toán cao cấp",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Hệ phương trình tuyến tính",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Hệ phương trình tuyến tính \\(\\begin{cases} x + 2y - z = 1 \\\\ 2x + 5y + z = 5 \\\\ 3x + 7y = 6 \\end{cases}\\) có bao nhiêu nghiệm?",
+    "options": [
+      "Vô số nghiệm",
+      "Vô nghiệm",
+      "Nghiệm duy nhất",
+      "Đúng 2 nghiệm"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Cộng phương trình 1 và phương trình 2: (x + 2y - z) + (2x + 5y + z) = 3x + 7y = 6 (chính là phương trình 3).<br>Do đó hàng 3 phụ thuộc tuyến tính vào 2 hàng đầu, rank(A) = rank(A|B) = 2 < 3 (số ẩn). Hệ có vô số nghiệm phụ thuộc 1 tham số tự do.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_dstt_03"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đại số Tuyến tính ĐHBK",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Hệ phương trình",
+      "Kronecker-Capelli",
+      "ĐSTT"
+    ],
+    "knowledge_id": "kb_dstt_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_09",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Bán kính hội tụ chuỗi lũy thừa",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Bán kính hội tụ \\(R\\) của chuỗi lũy thừa \\(\\sum_{n=1}^{\\infty} \\frac{(x - 1)^n}{n \\cdot 2^n}\\) bằng:",
+    "options": [
+      "2",
+      "1",
+      "1/2",
+      "\\(\\infty\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Hệ số a_n = 1 / (n · 2^n).<br>Tỉ số a_n / a_{n+1} = [(n+1) · 2^{n+1}] / [n · 2^n] = 2(n+1)/n.<br>Giới hạn khi n → ∞ là 2. Vậy bán kính hội tụ R = 2.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Chuỗi lũy thừa",
+      "Bán kính hội tụ"
+    ],
+    "knowledge_id": "kb_gt1_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_10",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Đạo hàm cấp cao hàm lượng giác",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Đạo hàm cấp 100 của hàm số \\(f(x) = \\sin x\\) là:",
+    "options": [
+      "\\(\\sin x\\)",
+      "\\(\\cos x\\)",
+      "\\(-\\sin x\\)",
+      "\\(-\\cos x\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Công thức đạo hàm cấp cao: (sin x)^{(n)} = sin(x + nπ/2).<br>Với n = 100 = 4 × 25: (sin x)^{(100)} = sin(x + 50π) = sin(x + 25 · 2π) = sin x.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_02"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Đạo hàm cấp cao",
+      "Lượng giác"
+    ],
+    "knowledge_id": "kb_gt1_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_tf_01",
+    "type": "true_false_group",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Chuỗi số đan dấu & Định lý Leibniz",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 130,
+    "question": "Cho chuỗi số \\(S = \\sum_{n=1}^{\\infty} \\frac{(-1)^{n-1}}{n^p}\\) với \\(p\\) là tham số thực. Xét tính đúng / sai của các mệnh đề sau:",
+    "options": null,
+    "correct_answer": null,
+    "items": [
+      {
+        "label": "a",
+        "text": "Khi \\(p > 1\\), chuỗi số hội tụ tuyệt đối.",
+        "correct": true
+      },
+      {
+        "label": "b",
+        "text": "Khi \\(0 < p \\le 1\\), chuỗi số phân kỳ.",
+        "correct": false
+      },
+      {
+        "label": "c",
+        "text": "Khi \\(p \\le 0\\), chuỗi số phân kỳ do số hạng tổng quát không tiến tới 0.",
+        "correct": true
+      },
+      {
+        "label": "d",
+        "text": "Tại \\(p = 1\\), chuỗi đan dấu điều hòa hội tụ và có tổng bằng \\(\\ln 2\\).",
+        "correct": true
+      }
+    ],
+    "correct_value": null,
+    "explanation": "a) Đúng: Xét chuỗi trị tuyệt đối \\(\\sum \\frac{1}{n^p}\\) hội tụ khi \\(p > 1\\) (chuỗi Riemann).<br>b) Sai: Với \\(0 < p \\le 1\\), chuỗi đan dấu thỏa mãn điều kiện định lý Leibniz (dãy \\(u_n = 1/n^p\\) giảm dần về 0) nên hội tụ (bán hội tụ).<br>c) Đúng: Khi \\(p \\le 0\\), \\(\\lim_{n\\to\\infty} \\frac{1}{n^p} \\neq 0\\), vi phạm điều kiện cần của chuỗi hội tụ.<br>d) Đúng: Đây là khai triển Maclaurin của \\(\\ln(1+x)\\) tại \\(x = 1\\): \\(\\ln 2 = 1 - 1/2 + 1/3 - 1/4 + \\dots\\).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Đúng/Sai chùm",
+      "Chuỗi số",
+      "Định lý Leibniz"
+    ],
+    "knowledge_id": "kb_gt1_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_sa_01",
+    "type": "short_answer",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tích phân suy rộng loại 1",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Tính giá trị của tích phân suy rộng loại 1: \\(I = \\int_0^{+\\infty} x e^{-x} dx\\).",
+    "options": null,
+    "correct_answer": null,
+    "items": null,
+    "correct_value": "1",
+    "explanation": "Áp dụng phương pháp tích phân từng phần:<br>Đặt \\(u = x \\implies du = dx\\); \\(dv = e^{-x}dx \\implies v = -e^{-x}\\).<br>\\(I = \\lim_{t \\to +\\infty} \\left[ -x e^{-x} \\right]_0^t + \\int_0^{+\\infty} e^{-x} dx\\).<br>Vì \\(\\lim_{t \\to +\\infty} \\frac{-t}{e^t} = 0\\) (theo L'Hôpital) và \\(\\int_0^{+\\infty} e^{-x} dx = [-e^{-x}]_0^{+\\infty} = 0 - (-1) = 1\\). Vậy \\(I = 1\\).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_03"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Điền đáp số",
+      "Tích phân suy rộng"
+    ],
+    "knowledge_id": "kb_gt1_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_step_01",
+    "type": "step_solution",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Phương trình vi phân cấp 2 hệ số hằng",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 150,
+    "question": "Giải phương trình vi phân thuần nhất cấp 2 hệ số hằng: \\(y'' - 5y' + 6y = 0\\) thỏa mãn các điều kiện ban đầu \\(y(0) = 2\\) và \\(y'(0) = 5\\). Hãy trình bày các bước giải và viết nghiệm tường minh.",
+    "options": null,
+    "correct_answer": null,
+    "items": null,
+    "correct_value": null,
+    "explanation": "",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_05"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "PT vi phân cấp 2",
+      "Phương trình đặc trưng",
+      "Barem"
+    ],
+    "knowledge_id": "kb_gt1_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_11",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Vô cùng bé tương đương lượng giác",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Tính giới hạn \\(L = \\lim_{x \\to 0} \\frac{\\tan x - \\sin x}{x^3}\\).",
+    "options": [
+      "\\(\\frac{1}{2}\\)",
+      "0",
+      "1",
+      "\\(\\frac{1}{6}\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "tan x - sin x = tan x (1 - cos x) ~ x · (x²/2) = x³/2.<br>Do đó L = lim (x³/2) / x³ = 1/2.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_01"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Giới hạn",
+      "Vô cùng bé"
+    ],
+    "knowledge_id": "kb_gt1_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_12",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Toán cao cấp",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Giá trị riêng ma trận tam giác",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Cho ma trận \\(A = \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & -2 \\end{pmatrix}\\). Các giá trị riêng của ma trận A là:",
+    "options": [
+      "\\(1, 3, -2\\)",
+      "\\(1, -3, 2\\)",
+      "\\(0, 3, 2\\)",
+      "\\(1, 0, -2\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "A là ma trận tam giác trên, do đó các giá trị riêng chính là các phần tử nằm trên đường chéo chính: λ₁ = 1, λ₂ = 3, λ₃ = -2.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_dstt_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đại số Tuyến tính ĐHBK",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Trị riêng",
+      "Ma trận tam giác"
+    ],
+    "knowledge_id": "kb_dstt_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_13",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tích phân suy rộng loại 2",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Tích phân suy rộng loại 2: \\(I = \\int_0^1 \\frac{1}{\\sqrt{1 - x^2}} dx\\) có giá trị bằng:",
+    "options": [
+      "\\(\\frac{\\pi}{2}\\)",
+      "\\(\\pi\\)",
+      "1",
+      "Phân kỳ"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Nguyên hàm cơ bản: ∫ 1/√(1 - x²) dx = arcsin x.<br>I = [arcsin x]₀¹ = arcsin 1 - arcsin 0 = π/2.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_03"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Tích phân suy rộng",
+      "Arcsin"
+    ],
+    "knowledge_id": "kb_gt1_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_14",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Tổng chuỗi vi sai Telescoping",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Chuỗi số \\(\\sum_{n=1}^{\\infty} \\frac{1}{n(n+1)}\\) có tổng bằng:",
+    "options": [
+      "1",
+      "2",
+      "1/2",
+      "Phân kỳ"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Phân tích số hạng: 1/[n(n+1)] = 1/n - 1/(n+1).<br>Tổng riêng phần thứ N là chuỗi vi sai thu gọn (Telescoping Sum): S_N = (1 - 1/2) + (1/2 - 1/3) + ... + (1/N - 1/(N+1)) = 1 - 1/(N+1).<br>Khi N → ∞, tổng S = lim (1 - 1/(N+1)) = 1.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Chuỗi số",
+      "Telescoping",
+      "Tổng chuỗi"
+    ],
+    "knowledge_id": "kb_gt1_04",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_15",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Phương trình vi phân cơ bản",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Nghiệm của phương trình vi phân \\(y' = 3x^2\\) thỏa mãn điều kiện \\(y(0) = 4\\) là:",
+    "options": [
+      "\\(y = x^3 + 4\\)",
+      "\\(y = 6x + 4\\)",
+      "\\(y = x^3\\)",
+      "\\(y = 3x^3 + 4\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "y = ∫ 3x² dx = x³ + C. Điều kiện y(0) = 4 => C = 4 => y = x³ + 4.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_05"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "PT vi phân",
+      "Nguyên hàm"
+    ],
+    "knowledge_id": "kb_gt1_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_tsa_54",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Toán cao cấp",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Tính chất định thức nhân vô hướng",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Một ma trận \\(A\\) vuông cấp 3 có định thức \\(\\det(A) = 3\\). Giá trị của \\(\\det(2A)\\) bằng:",
+    "options": [
+      "24",
+      "6",
+      "18",
+      "12"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Tính chất định thức: det(k A) = k^n det(A) với n là cấp của ma trận vuông. Ở đây n = 3, k = 2 => det(2A) = 2³ · 3 = 8 · 3 = 24.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_dstt_02"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đại số Tuyến tính ĐHBK",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Định thức",
+      "Cấp ma trận",
+      "ĐSTT"
+    ],
+    "knowledge_id": "kb_dstt_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_16",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Phương trình vi phân cấp 2 đặc trưng",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Nghiệm tổng quát của phương trình vi phân thuần nhất cấp 2: \\(y'' - 4y = 0\\) là:",
+    "options": [
+      "\\(y = C_1 e^{2x} + C_2 e^{-2x}\\)",
+      "\\(y = C_1 \\cos 2x + C_2 \\sin 2x\\)",
+      "\\(y = (C_1 + C_2 x) e^{2x}\\)",
+      "\\(y = C_1 e^{4x} + C_2\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Phương trình đặc trưng: k² - 4 = 0 ⇔ k = ±2.<br>Hai nghiệm thực phân biệt nên nghiệm tổng quát là: y = C₁ e^{2x} + C₂ e^{-2x}.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_05"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "PT vi phân",
+      "Phương trình đặc trưng"
+    ],
+    "knowledge_id": "kb_gt1_05",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_17",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Giới hạn hàm nhiều biến",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "M3",
+    "estimated_time_seconds": 90,
+    "question": "Tính giới hạn hai biến \\(L = \\lim_{(x, y) \\to (0, 0)} \\frac{x y}{x^2 + y^2}\\) (hoặc kết luận nếu không tồn tại).",
+    "options": [
+      "Không tồn tại giới hạn",
+      "0",
+      "1/2",
+      "1"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Tiến theo đường thẳng y = kx: lim x(kx) / [x² + k²x²] = k / (1 + k²).<br>Giới hạn phụ thuộc vào hệ số góc k của phương tiến tới (ví dụ k = 0 thì L = 0, k = 1 thì L = 1/2), do đó giới hạn không tồn tại.",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_01"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Hàm nhiều biến",
+      "Giới hạn"
+    ],
+    "knowledge_id": "kb_gt1_01",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_18",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Toán cao cấp",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Hạng ma trận",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Hạng của ma trận \\(A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 2 & 4 & 6 \\\\ -1 & -2 & -3 \\end{pmatrix}\\) bằng:",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Hàng 2 bằng 2 lần hàng 1, hàng 3 bằng -1 lần hàng 1. Cả hai hàng 2 và 3 đều tỉ lệ với hàng 1 nên bị triệt tiêu khi khử Gauss. Hạng ma trận bằng 1.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_dstt_03"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đại số Tuyến tính ĐHBK",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Hạng ma trận",
+      "Khử Gauss",
+      "ĐSTT"
+    ],
+    "knowledge_id": "kb_dstt_03",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_19",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Giải tích 1",
+    "grade": "Toán 12",
+    "topic": "Giải tích",
+    "subtopic": "Đạo hàm riêng hàm nhiều biến",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Đạo hàm riêng cấp 1 theo biến x của hàm hai biến \\(f(x, y) = x^3 y^2 + \\sin(x y)\\) là:",
+    "options": [
+      "\\(f'_x = 3x^2 y^2 + y\\cos(xy)\\)",
+      "\\(f'_x = 3x^2 y^2 + \\cos(xy)\\)",
+      "\\(f'_x = 2x^3 y + x\\cos(xy)\\)",
+      "\\(f'_x = 3x^2 + y\\cos(xy)\\)"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Coi y là hằng số, đạo hàm theo x: (x³ y²)'_x = 3x² y²; (sin(xy))'_x = y cos(xy). Vậy f'_x = 3x² y² + y cos(xy).",
+    "common_traps": [
+      "Quên kiểm tra điều kiện xác định của biểu thức",
+      "Nhầm lẫn dấu đạo hàm khi xét đơn điệu",
+      "Bỏ sót điều kiện biên khi tìm GTLN/GTNN"
+    ],
+    "prerequisites": [
+      "kb_gt1_02"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Toán Cao Cấp ĐHBK Hà Nội",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Đạo hàm riêng",
+      "Hàm hai biến"
+    ],
+    "knowledge_id": "kb_gt1_02",
+    "status": "published",
+    "schema_version": "2.0"
+  },
+  {
+    "id": "q_calc_20",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "Toán cao cấp",
+    "grade": "Toán 12",
+    "topic": "Đại số",
+    "subtopic": "Vết của ma trận vuông",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Dễ",
+    "difficulty_score": 0.35,
+    "cognitive_level": "M2",
+    "estimated_time_seconds": 60,
+    "question": "Vết (Trace) của ma trận \\(A = \\begin{pmatrix} 5 & 2 & 1 \\\\ 0 & -3 & 4 \\\\ 1 & 1 & 7 \\end{pmatrix}\\) bằng:",
+    "options": [
+      "9",
+      "15",
+      "5",
+      "10"
+    ],
+    "correct_answer": 0,
+    "items": null,
+    "correct_value": null,
+    "explanation": "Vết của ma trận vuông là tổng các phần tử trên đường chéo chính: tr(A) = 5 + (-3) + 7 = 9.",
+    "common_traps": [
+      "Quên điều kiện cơ số khi giải bất phương trình logarit",
+      "Chia cho biểu thức chưa xét khác 0"
+    ],
+    "prerequisites": [
+      "kb_dstt_04"
+    ],
+    "year": 2025,
+    "source_type": "adapted",
+    "source": "Đại số Tuyến tính ĐHBK",
+    "license": "CC BY-NC-SA 4.0",
+    "tags": [
+      "Trace",
+      "Vết ma trận",
+      "ĐSTT"
+    ],
+    "knowledge_id": "kb_dstt_04",
+    "status": "published",
+    "schema_version": "2.0"
+  }
+]
