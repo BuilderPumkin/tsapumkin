@@ -144,6 +144,7 @@ BÀI TOÁN:
         let aiResultText = null;
         let usedModel = null;
         let lastError = null;
+        const modelErrors = [];
 
         for (const model of modelsToTry) {
             try {
@@ -171,21 +172,9 @@ BÀI TOÁN:
                     body: JSON.stringify(geminiPayload)
                 });
 
-                // Method 2: Query param fallback if header returns auth challenge
-                if (!geminiRes.ok && (geminiRes.status === 401 || geminiRes.status === 403)) {
-                    const queryEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
-                    const retryRes = await fetch(queryEndpoint, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(geminiPayload)
-                    });
-                    if (retryRes.ok) {
-                        geminiRes = retryRes;
-                    }
-                }
-
                 if (!geminiRes.ok) {
                     const errText = await geminiRes.text();
+                    modelErrors.push({ model, status: geminiRes.status, err: errText.substring(0, 150) });
                     lastError = `Model ${model} error (${geminiRes.status}): ${errText}`;
                     continue;
                 }
@@ -200,6 +189,7 @@ BÀI TOÁN:
                 }
             } catch (err) {
                 lastError = err.message;
+                modelErrors.push({ model, error: err.message });
             }
         }
 
@@ -218,7 +208,8 @@ BÀI TOÁN:
             }
             return new Response(JSON.stringify({
                 error: userFriendlyMsg,
-                details: lastError || "Không thể kết nối đến Gemini API"
+                details: lastError || "Không thể kết nối đến Gemini API",
+                all_model_errors: modelErrors
             }), { status: 503, headers: corsHeaders });
         }
 
