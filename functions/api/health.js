@@ -1,7 +1,7 @@
-﻿export async function onRequestGet() {
+export async function onRequest(context) {
     return new Response(JSON.stringify({
-        status: "OK",
-        service: "PUMKIN Cloudflare Pages Functions Gateway",
+        status: "ok",
+        service: "pumkin-ai-gateway",
         timestamp: new Date().toISOString()
     }), {
         status: 200,

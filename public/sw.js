@@ -1,9 +1,10 @@
 // PUMKIN.DEV Service Worker - Offline Cache & Performance
-const CACHE_NAME = "pumkin-cache-v2.0.0";
+const CACHE_NAME = "pumkin-cache-v4.1.0";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
   "./TSA_do_an.html",
+  "./so_tay_kien_thuc.html",
   "./manifest.webmanifest",
   "./data/manifest.json",
   "./data/questions/all.json",
@@ -41,22 +42,53 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request).then((response) => {
-        if (!response || response.status !== 200 || response.type !== "basic") {
-          return response;
+  const url = new URL(event.request.url);
+
+  // 1. NEVER intercept or cache serverless API calls
+  if (url.pathname.startsWith('/api/')) {
+    return;
+  }
+
+  // 2. Network-First strategy for HTML files and main scripts (instant updates)
+  const isHtmlOrScript = event.request.mode === 'navigate' ||
+    url.pathname.endsWith('.html') ||
+    url.pathname.endsWith('/') ||
+    url.pathname.endsWith('index_script.js');
+
+  if (isHtmlOrScript) {
+    event.respondWith(
+      fetch(event.request).then((response) => {
+        if (response && response.status === 200) {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
         }
-        const responseToCache = response.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
         return response;
       }).catch(() => {
         // Offline fallback
-        return caches.match("./index.html");
-      });
+        return caches.match(event.request).then((cached) => {
+          return cached || caches.match("./index.html");
+        });
+      })
+    );
+    return;
+  }
+
+  // 3. Stale-While-Revalidate for static assets (images, data, styles)
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      const fetchPromise = fetch(event.request).then((response) => {
+        if (response && response.status === 200 && response.type === "basic") {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return response;
+      }).catch(() => null);
+
+      return cached || fetchPromise;
     })
   );
 });

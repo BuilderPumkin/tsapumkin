@@ -116,7 +116,9 @@ const PumkinTutorIntegration = (function() {
 
             if (!response.ok) {
                 const errData = await response.json().catch(() => ({}));
-                throw new Error(errData.error || `Máy chủ AI phản hồi lỗi: HTTP ${response.status}`);
+                const primaryErr = errData.error || `Máy chủ AI phản hồi lỗi: HTTP ${response.status}`;
+                const technicalDetail = errData.details ? `\n\n🔍 Chi tiết kỹ thuật: ${errData.details}` : "";
+                throw new Error(primaryErr + technicalDetail);
             }
 
             const data = await response.json();
