@@ -146,10 +146,12 @@ BÀI TOÁN:
         let lastError = null;
         const modelErrors = [];
 
+        const baseUrl = (env.GEMINI_BASE_URL || env.CLOUDFLARE_AI_GATEWAY || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
+
         for (const model of modelsToTry) {
             try {
                 // Method 1: Header x-goog-api-key (Standard for AQ... Auth keys)
-                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+                const endpoint = `${baseUrl}/v1beta/models/${encodeURIComponent(model)}:generateContent`;
                 const geminiPayload = {
                     contents: [
                         {
@@ -196,8 +198,10 @@ BÀI TOÁN:
         if (!aiResultText) {
             let userFriendlyMsg = "Dịch vụ AI phản hồi chậm hoặc mô hình đang bận.";
             if (lastError) {
-                if (lastError.includes("ACCESS_TOKEN_TYPE_UNSUPPORTED") || lastError.includes("401")) {
-                    userFriendlyMsg = "Khóa GEMINI_API_KEY (mã AQ...) chưa được Google xác thực (Lỗi Google 401: ACCESS_TOKEN_TYPE_UNSUPPORTED).\n\n👉 Vui lòng kiểm tra lại:\n1. Bạn đã copy ĐẦY ĐỦ toàn bộ chuỗi mã khóa trên Google AI Studio chưa (không bị thiếu ký tự ở đầu hoặc cuối)?\n2. Trong Google AI Studio, dự án của bạn đã bật quyền truy cập Gemini API chưa?";
+                if (lastError.includes("User location is not supported")) {
+                    userFriendlyMsg = "Google phát hiện máy chủ Edge của Cloudflare đang đặt tại Hồng Kông (vùng bị Google chặn dịch vụ AI: 'User location is not supported').\n\n👉 Cách khắc phục đơn giản:\nBật tính năng Cloudflare AI Gateway (miễn phí) hoặc điền biến GEMINI_BASE_URL để chuyển tiếp yêu cầu qua máy chủ Mỹ.";
+                } else if (lastError.includes("ACCESS_TOKEN_TYPE_UNSUPPORTED") || lastError.includes("401")) {
+                    userFriendlyMsg = "Khóa GEMINI_API_KEY (mã AQ...) chưa được Google kích hoạt quyền truy cập. Vui lòng kiểm tra lại trong Google AI Studio.";
                 } else if (lastError.includes("API_KEY_INVALID") || lastError.includes("API key not valid")) {
                     userFriendlyMsg = "Khóa GEMINI_API_KEY không hợp lệ hoặc đã bị Google vô hiệu hóa. Vui lòng kiểm tra lại.";
                 } else if (lastError.includes("429") || lastError.includes("RESOURCE_EXHAUSTED")) {
