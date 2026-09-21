@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/skills.schema.json",
+  "title": "PumkinSkill",
+  "description": "Đặc tả cấu trúc kỹ năng toán học và năng lực tư duy trên nền tảng PUMKIN.DEV",
+  "type": "object",
+  "required": ["id", "name", "category", "description"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Định danh duy nhất của kỹ năng (ví dụ: skill_reasoning, skill_calculation)",
+      "pattern": "^skill_[a-z0-9_]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Tên kỹ năng toán học hiển thị"
+    },
+    "category": {
+      "type": "string",
+      "description": "Nhóm năng lực",
+      "enum": ["Tư duy & Lập luận", "Kỹ năng tính toán", "Mô hình hóa toán học", "Trực giác hình học", "Xử lý dữ liệu & Xác suất"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Mô tả chi tiết năng lực và tiêu chuẩn đánh giá"
+    },
+    "prerequisites": {
+      "type": "array",
+      "description": "Danh sách các kỹ năng hoặc chuyên đề nền tảng cần có",
+      "items": { "type": "string" }
+    },
+    "related_topics": {
+      "type": "array",
+      "description": "Các chuyên đề kiến thức liên quan trực tiếp",
+      "items": { "type": "string" }
+    }
+  }
+}

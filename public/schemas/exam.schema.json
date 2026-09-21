@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/exam.schema.json",
+  "title": "PumkinExamBlueprint",
+  "description": "Đặc tả cấu trúc đề thi trắc nghiệm Toán học và cấu hình kỳ thi trên nền tảng PUMKIN.DEV",
+  "type": "object",
+  "required": ["id", "title", "type", "duration_minutes", "question_ids"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Định danh đề thi (ví dụ: exam_tsa_01, exam_hsa_05)",
+      "pattern": "^exam_[a-z0-9_]+$"
+    },
+    "title": { "type": "string", "description": "Tiêu đề hiển thị của đề thi" },
+    "type": { "type": "string", "enum": ["TSA", "HSA", "THPT", "Giải tích 1", "Toán cao cấp"] },
+    "exam_format_version": { "type": "string", "description": "Phiên bản định dạng kỳ thi (ví dụ: TSA-2025, TSA-2026, HSA-2026)" },
+    "year": { "type": "integer", "minimum": 2020, "maximum": 2030 },
+    "duration_minutes": { "type": "integer", "minimum": 5, "maximum": 180 },
+    "question_count": { "type": "integer" },
+    "question_ids": { "type": "array", "items": { "type": "string" } },
+    "difficulty": { "type": "string", "enum": ["Dễ", "Trung bình", "Khó"] },
+    "source": { "type": "string" },
+    "source_type": { "type": "string", "enum": ["official", "adapted", "original", "sample"] },
+    "license": { "type": "string", "default": "CC BY-NC-SA 4.0" },
+    "description": { "type": "string" },
+    "attempts_count": { "type": "integer", "default": 0 },
+    "sections": {
+      "type": "array",
+      "description": "Phân chia các phần thi trong đề",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "question_count": { "type": "integer" },
+          "question_types": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "scoring": {
+      "type": "object",
+      "description": "Quy tắc tính điểm của đề thi",
+      "properties": {
+        "type": { "type": "string", "enum": ["standard", "tsa_stepped", "hsa_raw", "custom"] },
+        "max_score": { "type": "number" }
+      }
+    }
+  }
+}

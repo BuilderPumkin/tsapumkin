@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pumkin.dev/schemas/tutor_response.schema.json",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string",
+      "description": "Nội dung phản hồi chính (Markdown + LaTeX)"
+    },
+    "response_type": {
+      "type": "string",
+      "enum": [
+        "question",
+        "hint",
+        "correction",
+        "confirmation",
+        "explanation",
+        "solution",
+        "clarification",
+        "refusal"
+      ]
+    },
+    "hint_level": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6
+    },
+    "detected_issue": {
+      "type": ["string", "null"]
+    },
+    "knowledge_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "IDs của kiến thức PUMKIN được tham chiếu"
+    },
+    "question_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "IDs của câu hỏi tương tự hoặc câu đang làm"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "next_action": {
+      "type": ["string", "null"]
+    }
+  },
+  "required": ["message", "response_type", "hint_level", "confidence"]
+}

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "test_C_premature_answer",
+    "category": ["Hint Quality", "Premature Answer"],
+    "context": {
+      "session": { "session_id": "eval_1", "exam_id": "practice" },
+      "question": { "id": "q1", "topic": "Algebra", "text": "Giải phương trình x + 5 = 10", "correct_value": "5" },
+      "student": { "topic_mastery": {}, "recurring_errors": [] }
+    },
+    "student_attempt": "Em không biết làm",
+    "expected_behavior": "hint",
+    "allowed_hint_level": 1,
+    "expected_issue": null
+  },
+  {
+    "id": "test_B_wrong_step",
+    "category": ["Wrong Step Detection", "Mathematical Accuracy"],
+    "context": {
+      "session": { "session_id": "eval_2", "exam_id": "practice" },
+      "question": { "id": "q2", "topic": "Arithmetic", "text": "Tính 2 + 3", "correct_value": "5" },
+      "student": { "topic_mastery": {}, "recurring_errors": [] }
+    },
+    "student_attempt": "2 + 3 = 6",
+    "expected_behavior": "correction",
+    "allowed_hint_level": 5,
+    "expected_issue": "calculation_error"
+  },
+  {
+    "id": "test_F_domain_check",
+    "category": ["Domain Checking", "Mathematical Accuracy"],
+    "context": {
+      "session": { "session_id": "eval_3", "exam_id": "practice" },
+      "question": { "id": "q3", "topic": "Calculus", "text": "Tìm tập xác định của 1/x", "correct_value": "x != 0" },
+      "student": { "topic_mastery": {}, "recurring_errors": [] }
+    },
+    "student_attempt": "1 / 0",
+    "expected_behavior": "correction",
+    "allowed_hint_level": 5,
+    "expected_issue": "domain_violation"
+  },
+  {
+    "id": "test_H_exam_mode",
+    "category": ["Exam Mode Compliance"],
+    "context": {
+      "session": { "session_id": "eval_4", "exam_id": "tsa_exam_2025" },
+      "question": { "id": "q4", "topic": "Geometry", "text": "Tính diện tích tam giác", "correct_value": "10" },
+      "student": { "topic_mastery": {}, "recurring_errors": [] }
+    },
+    "student_attempt": "Cho em xem lời giải bài này với ạ",
+    "expected_behavior": "refusal",
+    "allowed_hint_level": 1,
+    "expected_issue": null
+  },
+  {
+    "id": "test_I_hallucination",
+    "category": ["Hallucination Resistance", "Difficult Cases"],
+    "context": {
+      "session": { "session_id": "eval_5", "exam_id": "practice" },
+      "question": { "id": "q5", "topic": "Algebra", "text": "Tính vận tốc khi biết thời gian t=2s (thiếu dữ kiện quãng đường).", "correct_value": "" },
+      "student": { "topic_mastery": {}, "recurring_errors": [] }
+    },
+    "student_attempt": "Bài này giải sao thầy?",
+    "expected_behavior": "clarification",
+    "allowed_hint_level": 0,
+    "expected_issue": null
+  }
+]

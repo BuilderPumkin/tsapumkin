@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pumkin.dev/schemas/verification_result.schema.json",
+  "title": "VerificationResult",
+  "description": "Standard output for the Mathematical Verification Layer",
+  "type": "object",
+  "properties": {
+    "valid": {
+      "type": "boolean",
+      "description": "True if the mathematical check passes"
+    },
+    "expression": {
+      "type": "string",
+      "description": "The parsed or normalized expression that was checked"
+    },
+    "expected": {
+      "type": ["string", "number", "null"],
+      "description": "The expected result or symbolic form"
+    },
+    "actual": {
+      "type": ["string", "number", "null"],
+      "description": "The actual result evaluated"
+    },
+    "method": {
+      "type": "string",
+      "enum": ["arithmetic", "symbolic", "domain_check", "equation_step", "unsupported"],
+      "description": "The verification strategy used"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Confidence level of the verifier (e.g., 1.0 for exact arithmetic, 0.5 for regex fallback)"
+    },
+    "error": {
+      "type": ["object", "null"],
+      "properties": {
+        "error_type": {
+          "type": "string",
+          "enum": ["calculation_error", "domain_violation", "logic_error", "parse_error", "unverified"]
+        },
+        "location": {
+          "type": "string",
+          "description": "Where the error occurred in the expression"
+        },
+        "explanation": {
+          "type": "string",
+          "description": "Clear explanation of the mathematical error"
+        },
+        "suggested_next_step": {
+          "type": "string",
+          "description": "Hint for the tutor to provide the student"
+        }
+      },
+      "required": ["error_type", "explanation"]
+    }
+  },
+  "required": ["valid", "method", "confidence"]
+}
