@@ -1,7 +1,7 @@
 /**
  * Cloudflare Pages Function / Worker API: /api/ai
  * PUMKIN Socratic AI Tutor - Secure Gemini API Gateway
- * Fully supports Google AI Studio Auth Keys (both AQ... and AIza... formats)
+ * Optimized for Gemini Flash (Gemini 2.5 / 2.0 / 1.5 / 3.6 Flash)
  */
 
 const DEFAULT_MODEL = "gemini-2.5-flash";
@@ -42,23 +42,49 @@ function checkRateLimit(ip) {
     return record.count <= RATE_LIMIT_MAX;
 }
 
-export async function onRequestOptions() {
+// Whitelist CORS Origins
+function getCorsHeaders(request, env) {
+    const origin = (request && request.headers && request.headers.get("Origin")) || "";
+    const defaultAllowed = [
+        "https://tsapumkin.pages.dev",
+        "https://pumkin.dev",
+        "https://www.pumkin.dev"
+    ];
+    let customAllowed = [];
+    if (env && env.ALLOWED_ORIGINS) {
+        customAllowed = env.ALLOWED_ORIGINS.split(",").map(s => s.trim().toLowerCase());
+    }
+    const allAllowed = [...defaultAllowed, ...customAllowed];
+
+    let matchedOrigin = "https://tsapumkin.pages.dev";
+    if (origin.startsWith("http://localhost:") || origin.startsWith("http://127.0.0.1:") || origin === "http://localhost" || origin === "http://127.0.0.1") {
+        matchedOrigin = origin;
+    } else if (allAllowed.includes(origin.toLowerCase())) {
+        matchedOrigin = origin;
+    } else if (!origin) {
+        matchedOrigin = "*";
+    }
+
+    return {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": matchedOrigin,
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization, x-goog-api-key",
+        "Access-Control-Max-Age": "86400",
+        "Vary": "Origin"
+    };
+}
+
+export async function onRequestOptions(context) {
+    const headers = getCorsHeaders(context && context.request, context && context.env);
     return new Response(null, {
         status: 204,
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "POST, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization, x-goog-api-key",
-            "Access-Control-Max-Age": "86400"
-        }
+        headers
     });
 }
 
 export async function onRequestPost(context) {
-    const corsHeaders = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
-    };
+    const corsHeaders = getCorsHeaders(context.request, context.env);
 
     try {
         const { request, env } = context;
@@ -71,11 +97,19 @@ export async function onRequestPost(context) {
         }
 
         const rawApiKey = env.GEMINI_API_KEY || env.PUMKIN_AI_API_KEY || "";
-        const apiKey = rawApiKey.trim().replace(/^["']|["']$/g, '');
+        const apiKey = rawApiKey.trim();
 
         if (!apiKey || apiKey === "AIzaSy_YOUR_GEMINI_API_KEY_HERE" || apiKey === "your_gemini_api_key_here") {
             return new Response(JSON.stringify({
                 error: "Chưa cấu hình GEMINI_API_KEY trên Cloudflare. Vui lòng cài đặt tại Cloudflare Settings > Variables and Secrets."
+            }), { status: 503, headers: corsHeaders });
+        }
+
+        // Validate API Key format: Google AI Studio keys must start with AIzaSy
+        if (apiKey.startsWith("AQ.") || apiKey.startsWith("ya29.")) {
+            return new Response(JSON.stringify({
+                error: "Mã GEMINI_API_KEY hiện tại trên Cloudflare không đúng định dạng. Mã bắt đầu bằng 'AQ.' hoặc 'ya29.' là token tạm thời của Google Cloud, không phải Google AI Studio API Key.\n\n👉 Cách khắc phục:\n1. Truy cập https://aistudio.google.com/app/apikey và đăng nhập tài khoản Google.\n2. Bấm 'Create API key' và copy mã key mới (bắt buộc bắt đầu bằng 'AIzaSy...').\n3. Vào Cloudflare Dashboard > tsapumkin > Settings > Variables and Secrets > Sửa lại biến GEMINI_API_KEY thành mã 'AIzaSy...' vừa lấy.",
+                details: "Google API Error: Token type unsupported (ACCESS_TOKEN_TYPE_UNSUPPORTED). Yêu cầu mã API Key AIzaSy... từ Google AI Studio."
             }), { status: 503, headers: corsHeaders });
         }
 
@@ -106,7 +140,7 @@ export async function onRequestPost(context) {
         }
 
         // Jailbreak protection
-        const jailbreakRegex = /(ignore all prior instructions|give me the answer|bỏ qua luật|cho tôi đáp án|đáp án là gì|giải hộ|chọn (a|b|c|d))/i;
+        const jailbreakRegex = /(ignore all prior instructions|give me the answer|bỏ qua (mọi )?(luật|quy tắc|chỉ dẫn)|cho (tôi|em)( biết)? đáp án|đáp án là|giải hộ|chọn (a|b|c|d))/i;
         if (jailbreakRegex.test(userMessage)) {
             return new Response(JSON.stringify({
                 response: {
@@ -144,14 +178,10 @@ BÀI TOÁN:
         let aiResultText = null;
         let usedModel = null;
         let lastError = null;
-        const modelErrors = [];
-
-        const baseUrl = (env.GEMINI_BASE_URL || env.CLOUDFLARE_AI_GATEWAY || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
 
         for (const model of modelsToTry) {
             try {
-                // Method 1: Header x-goog-api-key (Standard for AQ... Auth keys)
-                const endpoint = `${baseUrl}/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
                 const geminiPayload = {
                     contents: [
                         {
@@ -165,7 +195,7 @@ BÀI TOÁN:
                     }
                 };
 
-                let geminiRes = await fetch(endpoint, {
+                const geminiRes = await fetch(endpoint, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -176,8 +206,12 @@ BÀI TOÁN:
 
                 if (!geminiRes.ok) {
                     const errText = await geminiRes.text();
-                    modelErrors.push({ model, status: geminiRes.status, err: errText.substring(0, 150) });
                     lastError = `Model ${model} error (${geminiRes.status}): ${errText}`;
+                    
+                    // If auth fails (401 or 400 with invalid key), no other model will succeed -> stop early
+                    if (geminiRes.status === 401 || (geminiRes.status === 400 && (errText.includes("API_KEY_INVALID") || errText.includes("API key not valid")))) {
+                        break;
+                    }
                     continue;
                 }
 
@@ -191,19 +225,16 @@ BÀI TOÁN:
                 }
             } catch (err) {
                 lastError = err.message;
-                modelErrors.push({ model, error: err.message });
             }
         }
 
         if (!aiResultText) {
             let userFriendlyMsg = "Dịch vụ AI phản hồi chậm hoặc mô hình đang bận.";
             if (lastError) {
-                if (lastError.includes("User location is not supported")) {
-                    userFriendlyMsg = "Google phát hiện máy chủ Edge của Cloudflare đang đặt tại Hồng Kông (vùng bị Google chặn dịch vụ AI: 'User location is not supported').\n\n👉 Cách khắc phục đơn giản:\nBật tính năng Cloudflare AI Gateway (miễn phí) hoặc điền biến GEMINI_BASE_URL để chuyển tiếp yêu cầu qua máy chủ Mỹ.";
-                } else if (lastError.includes("ACCESS_TOKEN_TYPE_UNSUPPORTED") || lastError.includes("401")) {
-                    userFriendlyMsg = "Khóa GEMINI_API_KEY (mã AQ...) chưa được Google kích hoạt quyền truy cập. Vui lòng kiểm tra lại trong Google AI Studio.";
+                if (lastError.includes("ACCESS_TOKEN_TYPE_UNSUPPORTED") || lastError.includes("401")) {
+                    userFriendlyMsg = "Mã GEMINI_API_KEY cài đặt trên Cloudflare không đúng định dạng (Google báo lỗi 401: ACCESS_TOKEN_TYPE_UNSUPPORTED).\n\n👉 Cách khắc phục:\nAPI Key chuẩn của Google AI Studio BẮT BUỘC bắt đầu bằng chữ 'AIzaSy...'.\nVui lòng truy cập https://aistudio.google.com/app/apikey để tạo khóa mới và cập nhật lại vào Cloudflare Settings > Variables and Secrets.";
                 } else if (lastError.includes("API_KEY_INVALID") || lastError.includes("API key not valid")) {
-                    userFriendlyMsg = "Khóa GEMINI_API_KEY không hợp lệ hoặc đã bị Google vô hiệu hóa. Vui lòng kiểm tra lại.";
+                    userFriendlyMsg = "Khóa GEMINI_API_KEY không hợp lệ hoặc đã bị Google vô hiệu hóa. Vui lòng kiểm tra lại API Key trong Cloudflare Dashboard.";
                 } else if (lastError.includes("429") || lastError.includes("RESOURCE_EXHAUSTED")) {
                     userFriendlyMsg = "Đã vượt quá hạn ngạch gọi miễn phí của Google Gemini (15 lượt gọi/phút). Em vui lòng chờ 1 phút rồi hỏi tiếp nhé!";
                 } else if (lastError.includes("404")) {
@@ -212,8 +243,7 @@ BÀI TOÁN:
             }
             return new Response(JSON.stringify({
                 error: userFriendlyMsg,
-                details: lastError || "Không thể kết nối đến Gemini API",
-                all_model_errors: modelErrors
+                details: lastError || "Không thể kết nối đến Gemini API"
             }), { status: 503, headers: corsHeaders });
         }
 

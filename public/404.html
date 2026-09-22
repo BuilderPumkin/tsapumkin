@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Không Tìm Thấy Trang | PUMKIN.DEV</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#1e3a8a">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20%22100%22%20%22100%22><text y=%22.9em%22 font-size=%2290%22>🎃</text></svg>">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-dark: #0f172a;
+            --accent: #f59e0b;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #3b82f6;
+                --primary-dark: #020617;
+                --text: #f8fafc;
+                --text-muted: #94a3b8;
+                --bg: #0b0f19;
+                --card-bg: #1e293b;
+                --border: #334155;
+            }
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 520px;
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+        }
+        .icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .error-code {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: var(--primary);
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 28px;
+        }
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #ffffff;
+        }
+        .btn-primary:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-outline:hover {
+            background: var(--bg);
+        }
+        .footer {
+            margin-top: 32px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" role="main">
+        <div class="icon" aria-hidden="true">🎃</div>
+        <div class="error-code">404</div>
+        <h1>Không Tìm Thấy Trang</h1>
+        <p>Đường dẫn bạn vừa truy cập không tồn tại hoặc đã được di chuyển sang địa chỉ học tập mới. Hãy quay về phòng thi chính để tiếp tục rèn luyện tư duy!</p>
+        
+        <div class="actions">
+            <a href="/" class="btn btn-primary">
+                🏠 Về Trang Chủ Luyện Thi
+            </a>
+            <a href="./so_tay_kien_thuc.html" class="btn btn-outline">
+                📖 Tra Cứu Sổ Tay Kiến Thức
+            </a>
+            <a href="./TSA_do_an.html" class="btn btn-outline">
+                🎯 Luyện Đề Chuyên Sâu TSA
+            </a>
+        </div>
+
+        <div class="footer">
+            PUMKIN.DEV — Nền tảng Khảo thí Toán học & Đánh giá Tư duy
+        </div>
+    </div>
+</body>
+</html>

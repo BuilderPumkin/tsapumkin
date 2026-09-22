@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chính Sách Bảo Mật Quyền Riêng Tư | PUMKIN.DEV</title>
+    <meta name="description" content="Chính sách bảo mật quyền riêng tư và dữ liệu người dùng của nền tảng khảo thí PUMKIN.DEV">
+    <meta name="theme-color" content="#1e3a8a">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20%22100%22%20%22100%22><text y=%22.9em%22 font-size=%2290%22>🎃</text></svg>">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --accent: #f59e0b;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #3b82f6;
+                --text: #f8fafc;
+                --text-muted: #94a3b8;
+                --bg: #0b0f19;
+                --card-bg: #1e293b;
+                --border: #334155;
+            }
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        h1 { color: var(--primary); font-size: 1.8rem; margin-bottom: 8px; }
+        .meta { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+        h2 { font-size: 1.25rem; margin: 24px 0 12px; color: var(--text); }
+        p, li { font-size: 0.95rem; margin-bottom: 12px; }
+        ul { padding-left: 24px; margin-bottom: 16px; }
+        .back-link { display: inline-block; margin-top: 24px; color: var(--primary); text-decoration: none; font-weight: 600; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container" role="main">
+        <h1>Chính Sách Bảo Mật Quyền Riêng Tư</h1>
+        <div class="meta">Cập nhật lần cuối: Ngày 22 tháng 09 năm 2026 | Phiên bản 4.1.0</div>
+
+        <h2>1. Cam Kết Bảo Vệ Quyền Riêng Tư</h2>
+        <p>Nền tảng Khảo thí Toán học & Đánh giá Tư duy PUMKIN.DEV cam kết tôn trọng và bảo vệ tối đa quyền riêng tư của mọi học sinh, giáo viên và người sử dụng. Chúng tôi không bao giờ bán, cho thuê hay thương mại hóa bất kỳ thông tin cá nhân nào của bạn.</p>
+
+        <h2>2. Dữ Liệu Thu Thập & Lưu Trữ Cục Bộ</h2>
+        <p>PUMKIN.DEV được xây dựng theo kiến trúc <strong>Local-First & Privacy-by-Design</strong>:</p>
+        <ul>
+            <li><strong>Lưu trữ trên thiết bị của bạn (LocalStorage):</strong> Tài khoản đăng ký offline, tiến trình học tập, lịch sử thi cử, điểm kinh nghiệm (EXP), cấp độ và danh sách câu hỏi lưu trữ được lưu trực tiếp trên bộ nhớ trình duyệt máy tính/điện thoại của bạn.</li>
+            <li><strong>Không thu thập dữ liệu định danh (PII):</strong> Chúng tôi không yêu cầu số CMND/CCCD, số điện thoại, địa chỉ nhà hay thông tin tài khoản ngân hàng.</li>
+        </ul>
+
+        <h2>3. Tương Tác Với Gia Sư AI Socratic</h2>
+        <p>Khi bạn gửi câu hỏi cho Gia sư AI (PUMKIN AI Tutor):</p>
+        <ul>
+            <li>Dữ liệu câu hỏi bài toán và tin nhắn trao đổi được truyền qua kênh mã hóa HTTPS tới máy chủ Cloudflare Pages Functions để phân tích sư phạm.</li>
+            <li>Khóa bí mật API được lưu trữ trên hạ tầng bảo mật Cloudflare, hoàn toàn không hiển thị phía người dùng.</li>
+            <li>Các hội thoại học tập chỉ phục vụ mục đích đưa ra gợi ý giải toán và tự động bị hủy khỏi bộ nhớ đệm tạm thời sau phiên hỏi đáp.</li>
+        </ul>
+
+        <h2>4. Quyền Kiểm Soát Dữ Liệu Của Bạn</h2>
+        <p>Bạn có toàn quyền xóa dữ liệu học tập bất kỳ lúc nào bằng cách sử dụng tính năng "Xóa dữ liệu" trong phần Cài đặt của nền tảng hoặc xóa LocalStorage/Cache trên trình duyệt của mình.</p>
+
+        <a href="./index.html" class="back-link">← Quay về Trang Chủ PUMKIN.DEV</a>
+    </div>
+</body>
+</html>
