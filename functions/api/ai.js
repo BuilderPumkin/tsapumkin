@@ -105,14 +105,6 @@ export async function onRequestPost(context) {
             }), { status: 503, headers: corsHeaders });
         }
 
-        // Validate API Key format: Google AI Studio keys must start with AIzaSy
-        if (apiKey.startsWith("AQ.") || apiKey.startsWith("ya29.")) {
-            return new Response(JSON.stringify({
-                error: "Mã GEMINI_API_KEY hiện tại trên Cloudflare không đúng định dạng. Mã bắt đầu bằng 'AQ.' hoặc 'ya29.' là token tạm thời của Google Cloud, không phải Google AI Studio API Key.\n\n👉 Cách khắc phục:\n1. Truy cập https://aistudio.google.com/app/apikey và đăng nhập tài khoản Google.\n2. Bấm 'Create API key' và copy mã key mới (bắt buộc bắt đầu bằng 'AIzaSy...').\n3. Vào Cloudflare Dashboard > tsapumkin > Settings > Variables and Secrets > Sửa lại biến GEMINI_API_KEY thành mã 'AIzaSy...' vừa lấy.",
-                details: "Google API Error: Token type unsupported (ACCESS_TOKEN_TYPE_UNSUPPORTED). Yêu cầu mã API Key AIzaSy... từ Google AI Studio."
-            }), { status: 503, headers: corsHeaders });
-        }
-
         let body;
         try {
             body = await request.json();
@@ -179,9 +171,11 @@ BÀI TOÁN:
         let usedModel = null;
         let lastError = null;
 
+        const baseUrl = (env.GEMINI_BASE_URL || env.CLOUDFLARE_AI_GATEWAY || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
+
         for (const model of modelsToTry) {
             try {
-                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+                const endpoint = `${baseUrl}/v1beta/models/${encodeURIComponent(model)}:generateContent`;
                 const geminiPayload = {
                     contents: [
                         {
@@ -195,23 +189,23 @@ BÀI TOÁN:
                     }
                 };
 
-                const geminiRes = await fetch(endpoint, {
+                const requestHeaders = {
+                    "Content-Type": "application/json",
+                    "x-goog-api-key": apiKey
+                };
+                if (apiKey.startsWith("ya29.")) {
+                    requestHeaders["Authorization"] = `Bearer ${apiKey}`;
+                }
+
+                let geminiRes = await fetch(endpoint, {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-goog-api-key": apiKey
-                    },
+                    headers: requestHeaders,
                     body: JSON.stringify(geminiPayload)
                 });
 
                 if (!geminiRes.ok) {
                     const errText = await geminiRes.text();
                     lastError = `Model ${model} error (${geminiRes.status}): ${errText}`;
-                    
-                    // If auth fails (401 or 400 with invalid key), no other model will succeed -> stop early
-                    if (geminiRes.status === 401 || (geminiRes.status === 400 && (errText.includes("API_KEY_INVALID") || errText.includes("API key not valid")))) {
-                        break;
-                    }
                     continue;
                 }
 
@@ -231,12 +225,14 @@ BÀI TOÁN:
         if (!aiResultText) {
             let userFriendlyMsg = "Dịch vụ AI phản hồi chậm hoặc mô hình đang bận.";
             if (lastError) {
-                if (lastError.includes("ACCESS_TOKEN_TYPE_UNSUPPORTED") || lastError.includes("401")) {
-                    userFriendlyMsg = "Mã GEMINI_API_KEY cài đặt trên Cloudflare không đúng định dạng (Google báo lỗi 401: ACCESS_TOKEN_TYPE_UNSUPPORTED).\n\n👉 Cách khắc phục:\nAPI Key chuẩn của Google AI Studio BẮT BUỘC bắt đầu bằng chữ 'AIzaSy...'.\nVui lòng truy cập https://aistudio.google.com/app/apikey để tạo khóa mới và cập nhật lại vào Cloudflare Settings > Variables and Secrets.";
+                if (lastError.includes("User location is not supported")) {
+                    userFriendlyMsg = "Google phát hiện máy chủ Edge của Cloudflare đang đặt tại vùng bị Google chặn dịch vụ AI ('User location is not supported').\n\n👉 Cách khắc phục: Bật tính năng Cloudflare AI Gateway hoặc cấu hình GEMINI_BASE_URL.";
+                } else if (lastError.includes("ACCESS_TOKEN_TYPE_UNSUPPORTED") || lastError.includes("401")) {
+                    userFriendlyMsg = "Khóa GEMINI_API_KEY chưa được kích hoạt hoặc phiên xác thực đã hết hạn. Vui lòng kiểm tra lại.";
                 } else if (lastError.includes("API_KEY_INVALID") || lastError.includes("API key not valid")) {
-                    userFriendlyMsg = "Khóa GEMINI_API_KEY không hợp lệ hoặc đã bị Google vô hiệu hóa. Vui lòng kiểm tra lại API Key trong Cloudflare Dashboard.";
+                    userFriendlyMsg = "Khóa GEMINI_API_KEY không hợp lệ hoặc đã bị Google vô hiệu hóa. Vui lòng kiểm tra lại.";
                 } else if (lastError.includes("429") || lastError.includes("RESOURCE_EXHAUSTED")) {
-                    userFriendlyMsg = "Đã vượt quá hạn ngạch gọi miễn phí của Google Gemini (15 lượt gọi/phút). Em vui lòng chờ 1 phút rồi hỏi tiếp nhé!";
+                    userFriendlyMsg = "Đã vượt quá hạn ngạch gọi của Google Gemini. Em vui lòng chờ 1 phút rồi hỏi tiếp nhé!";
                 } else if (lastError.includes("404")) {
                     userFriendlyMsg = `Mô hình AI (${configuredModel}) không tìm thấy trên Google API.`;
                 }

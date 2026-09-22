@@ -11,7 +11,7 @@ export async function onRequest(context = {}) {
     const cf = request.cf || {};
 
     const rawKey = env.GEMINI_API_KEY || "";
-    const isAiConfigured = Boolean(rawKey && !rawKey.startsWith("AIzaSy_YOUR") && rawKey.startsWith("AIzaSy"));
+    const isAiConfigured = Boolean(rawKey && !rawKey.includes("YOUR_") && rawKey.trim().length > 5);
 
     const healthData = {
         status: "OK",
