@@ -63,7 +63,7 @@ PUMKIN2/
    - **Type:** Chọn **Secret** (hoặc Encrypt).
 4. *(Tùy chọn)* Thêm biến:
    - **Variable name:** `GEMINI_MODEL`
-   - **Value:** `gemini-3.6-flash`
+   - **Value:** `gemini-1.5-flash`
 5. Bấm **Save**. Cloudflare sẽ tự động cập nhật và Gia sư AI Socratic sẽ hoạt động tức thì!
 
 ---

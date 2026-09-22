@@ -4,13 +4,11 @@
  * Optimized for Gemini Flash (Gemini 2.5 / 2.0 / 1.5 / 3.6 Flash)
  */
 
-const DEFAULT_MODEL = "gemini-2.5-flash";
+const DEFAULT_MODEL = "gemini-1.5-flash";
 const FALLBACK_MODELS = [
-    "gemini-2.5-flash",
-    "gemini-2.0-flash",
     "gemini-1.5-flash",
-    "gemini-3.6-flash",
-    "gemini-1.5-flash-latest"
+    "gemini-2.0-flash",
+    "gemini-1.5-flash-8b"
 ];
 
 // In-memory sliding rate limit per isolate (8 req/min for free tier safety)
