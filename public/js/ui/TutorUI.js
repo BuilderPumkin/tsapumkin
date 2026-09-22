@@ -14,6 +14,7 @@ const PumkinTutorUI = (function() {
     let contextBannerEl = null;
     let contextTitleEl = null;
     let contextTagEl = null;
+    let quotaBadgeEl = null;
     
     // Callback hooks
     let _onSendMessage = null;
@@ -42,6 +43,7 @@ const PumkinTutorUI = (function() {
                         <span class="vsc-copilot-icon">🤖</span>
                         <span class="vsc-title">PUMKIN COPILOT</span>
                         <span class="vsc-status-badge">Socratic</span>
+                        <span id="tutor-quota-badge" class="vsc-quota-badge" title="Hạn mức sử dụng AI hôm nay">⚡ 20/20</span>
                     </div>
                     <div class="vsc-window-controls">
                         <button class="vsc-btn-icon" id="tutor-btn-clear" title="Xóa lịch sử trò chuyện">🗑️</button>
@@ -102,6 +104,7 @@ const PumkinTutorUI = (function() {
         contextBannerEl = document.getElementById('tutor-context-banner');
         contextTitleEl = document.getElementById('tutor-context-title');
         contextTagEl = document.getElementById('tutor-context-tag');
+        quotaBadgeEl = document.getElementById('tutor-quota-badge');
 
         // 4. Bind Events
         try {
@@ -233,17 +236,84 @@ const PumkinTutorUI = (function() {
     function removeLoading() {
         const loadingEl = document.getElementById('tutor-loading');
         if (loadingEl) loadingEl.remove();
-        if (sendBtn) sendBtn.disabled = false;
-        if (inputEl) {
-            inputEl.disabled = false;
-            inputEl.focus();
+
+        const quota = (typeof PumkinAiQuota !== 'undefined') ? PumkinAiQuota.getQuotaStatus() : null;
+        if (quota && quota.isExhausted) {
+            updateQuotaUI(quota);
+        } else {
+            if (sendBtn) sendBtn.disabled = false;
+            if (inputEl) {
+                inputEl.disabled = false;
+                inputEl.focus();
+            }
+        }
+    }
+
+    /**
+     * Updates the Copilot UI quota badge and controls based on remaining daily AI requests
+     * @param {Object} quota - { used, limit, remaining, isExhausted, resetNotice }
+     */
+    function updateQuotaUI(quota) {
+        if (!isInitialized) init();
+        if (!quotaBadgeEl) quotaBadgeEl = document.getElementById('tutor-quota-badge');
+        if (!quotaBadgeEl || !quota) return;
+
+        const remaining = quota.remaining !== undefined ? quota.remaining : Math.max(0, (quota.limit || 20) - (quota.used || 0));
+        const limit = quota.limit || 20;
+        const isExhausted = remaining <= 0;
+
+        quotaBadgeEl.className = 'vsc-quota-badge';
+
+        if (isExhausted) {
+            quotaBadgeEl.classList.add('exhausted');
+            quotaBadgeEl.textContent = `🔒 0/${limit}`;
+            quotaBadgeEl.title = `Hôm nay bạn đã dùng hết lượt AI. ${quota.resetNotice || 'Khôi phục lúc 00:00'}`;
+
+            if (inputEl) {
+                inputEl.disabled = true;
+                inputEl.placeholder = "Bạn đã dùng hết lượt AI hôm nay. Hãy quay lại vào ngày mai!";
+            }
+            if (sendBtn) {
+                sendBtn.disabled = true;
+                sendBtn.title = "Đã hết lượt dùng AI hôm nay";
+            }
+            if (panelEl) {
+                const chips = panelEl.querySelectorAll('.vsc-chip');
+                chips.forEach(chip => {
+                    chip.classList.add('disabled');
+                    chip.style.opacity = '0.5';
+                    chip.style.pointerEvents = 'none';
+                });
+            }
+        } else {
+            if (remaining <= 3) {
+                quotaBadgeEl.classList.add('warning');
+            }
+            quotaBadgeEl.textContent = `⚡ ${remaining}/${limit}`;
+            quotaBadgeEl.title = `Còn lại ${remaining}/${limit} lượt hỏi hôm nay. ${quota.resetNotice || ''}`;
+
+            if (inputEl && !document.getElementById('tutor-loading')) {
+                inputEl.disabled = false;
+                inputEl.placeholder = "Hỏi AI về bài toán (Enter để gửi)...";
+            }
+            if (sendBtn && !document.getElementById('tutor-loading')) {
+                sendBtn.disabled = false;
+                sendBtn.title = "Gửi (Enter)";
+            }
+            if (panelEl) {
+                const chips = panelEl.querySelectorAll('.vsc-chip');
+                chips.forEach(chip => {
+                    chip.classList.remove('disabled');
+                    chip.style.opacity = '1';
+                    chip.style.pointerEvents = 'auto';
+                });
+            }
         }
     }
 
     function onSendMessage(callback) {
         _onSendMessage = callback;
     }
-
 
     return {
         init,
@@ -252,6 +322,7 @@ const PumkinTutorUI = (function() {
         addMessage,
         showLoading,
         removeLoading,
+        updateQuotaUI,
         onSendMessage
     };
 })();

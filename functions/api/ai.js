@@ -13,9 +13,9 @@ const FALLBACK_MODELS = [
     "gemini-1.5-flash-latest"
 ];
 
-// In-memory sliding rate limit per isolate (15 req/min for free tier safety)
+// In-memory sliding rate limit per isolate (8 req/min for free tier safety)
 const rateLimitCache = new Map();
-const RATE_LIMIT_MAX = 15;
+const RATE_LIMIT_MAX = 8;
 const RATE_LIMIT_WINDOW = 60000;
 
 function checkRateLimit(ip) {
