@@ -8,12 +8,13 @@ const DEFAULT_MODEL = "gemini-1.5-flash";
 const FALLBACK_MODELS = [
     "gemini-1.5-flash",
     "gemini-2.0-flash",
-    "gemini-1.5-pro"
+    "gemini-1.5-pro",
+    "gemini-1.5-flash-latest"
 ];
 
-// In-memory sliding rate limit per isolate (8 req/min for free tier safety)
+// In-memory sliding rate limit per isolate (15 req/min for free tier safety)
 const rateLimitCache = new Map();
-const RATE_LIMIT_MAX = 8;
+const RATE_LIMIT_MAX = 15;
 const RATE_LIMIT_WINDOW = 60000;
 
 function checkRateLimit(ip) {
@@ -159,9 +160,9 @@ BÀI TOÁN:
 - Chủ đề: ${q.topic || "Toán học"}
 - Độ khó: ${q.difficulty || "Trung bình"}`;
 
+        const baseUrl = (env.GEMINI_BASE_URL || env.CLOUDFLARE_AI_GATEWAY || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
         const envModel = (env.GEMINI_MODEL || "").trim();
         const configuredModel = envModel || DEFAULT_MODEL;
-        // Always ensure DEFAULT_MODEL is in the list, even if env var is invalid
         const modelsToTry = [...new Set([
             configuredModel,
             DEFAULT_MODEL,
@@ -172,11 +173,9 @@ BÀI TOÁN:
         let usedModel = null;
         let lastError = null;
 
-        const baseUrl = (env.GEMINI_BASE_URL || env.CLOUDFLARE_AI_GATEWAY || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
-
         for (const model of modelsToTry) {
             try {
-                const endpoint = `${baseUrl}/v1/models/${encodeURIComponent(model)}:generateContent`;
+                const endpoint = `${baseUrl}/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
                 const geminiPayload = {
                     contents: [
                         {
@@ -198,7 +197,7 @@ BÀI TOÁN:
                     requestHeaders["Authorization"] = `Bearer ${apiKey}`;
                 }
 
-                let geminiRes = await fetch(endpoint, {
+                const geminiRes = await fetch(endpoint, {
                     method: "POST",
                     headers: requestHeaders,
                     body: JSON.stringify(geminiPayload)
@@ -207,6 +206,11 @@ BÀI TOÁN:
                 if (!geminiRes.ok) {
                     const errText = await geminiRes.text();
                     lastError = `Model ${model} error (${geminiRes.status}): ${errText}`;
+                    
+                    // If auth fails (401 or 400 with invalid key), no other model will succeed -> stop early
+                    if (geminiRes.status === 401 || (geminiRes.status === 400 && (errText.includes("API_KEY_INVALID") || errText.includes("API key not valid")))) {
+                        break;
+                    }
                     continue;
                 }
 
@@ -235,7 +239,7 @@ BÀI TOÁN:
                 } else if (lastError.includes("429") || lastError.includes("RESOURCE_EXHAUSTED")) {
                     userFriendlyMsg = "Đã vượt quá hạn ngạch gọi của Google Gemini. Em vui lòng chờ 1 phút rồi hỏi tiếp nhé!";
                 } else if (lastError.includes("404")) {
-                    userFriendlyMsg = `Mô hình AI không tìm thấy trên Google API. Đã thử: ${modelsToTry.join(", ")}.`;
+                    userFriendlyMsg = `Mô hình AI (${configuredModel}) không tìm thấy trên Google API. Đã thử: ${modelsToTry.join(", ")}.`;
                 }
             }
             return new Response(JSON.stringify({
