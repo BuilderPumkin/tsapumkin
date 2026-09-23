@@ -8,7 +8,7 @@ const DEFAULT_MODEL = "gemini-1.5-flash";
 const FALLBACK_MODELS = [
     "gemini-1.5-flash",
     "gemini-2.0-flash",
-    "gemini-1.5-flash-8b"
+    "gemini-1.5-pro"
 ];
 
 // In-memory sliding rate limit per isolate (8 req/min for free tier safety)
@@ -159,11 +159,14 @@ BÀI TOÁN:
 - Chủ đề: ${q.topic || "Toán học"}
 - Độ khó: ${q.difficulty || "Trung bình"}`;
 
-        const configuredModel = (env.GEMINI_MODEL || DEFAULT_MODEL).trim();
-        const modelsToTry = [
+        const envModel = (env.GEMINI_MODEL || "").trim();
+        const configuredModel = envModel || DEFAULT_MODEL;
+        // Always ensure DEFAULT_MODEL is in the list, even if env var is invalid
+        const modelsToTry = [...new Set([
             configuredModel,
-            ...FALLBACK_MODELS.filter(m => m !== configuredModel)
-        ];
+            DEFAULT_MODEL,
+            ...FALLBACK_MODELS
+        ])];
 
         let aiResultText = null;
         let usedModel = null;
@@ -173,7 +176,7 @@ BÀI TOÁN:
 
         for (const model of modelsToTry) {
             try {
-                const endpoint = `${baseUrl}/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+                const endpoint = `${baseUrl}/v1/models/${encodeURIComponent(model)}:generateContent`;
                 const geminiPayload = {
                     contents: [
                         {
@@ -232,7 +235,7 @@ BÀI TOÁN:
                 } else if (lastError.includes("429") || lastError.includes("RESOURCE_EXHAUSTED")) {
                     userFriendlyMsg = "Đã vượt quá hạn ngạch gọi của Google Gemini. Em vui lòng chờ 1 phút rồi hỏi tiếp nhé!";
                 } else if (lastError.includes("404")) {
-                    userFriendlyMsg = `Mô hình AI (${configuredModel}) không tìm thấy trên Google API.`;
+                    userFriendlyMsg = `Mô hình AI không tìm thấy trên Google API. Đã thử: ${modelsToTry.join(", ")}.`;
                 }
             }
             return new Response(JSON.stringify({
