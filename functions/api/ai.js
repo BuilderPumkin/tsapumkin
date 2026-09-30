@@ -8,8 +8,12 @@ const DEFAULT_MODEL = "gemini-2.5-flash";
 const FALLBACK_MODELS = [
     "gemini-2.5-flash",
     "gemini-2.0-flash",
+<<<<<<< HEAD
     "gemini-1.5-flash",
     "gemini-3.6-flash",
+=======
+    "gemini-1.5-pro",
+>>>>>>> origin/main
     "gemini-1.5-flash-latest"
 ];
 
@@ -135,11 +139,14 @@ BÀI TOÁN:
 - Chủ đề: ${q.topic || "Toán học"}
 - Độ khó: ${q.difficulty || "Trung bình"}`;
 
-        const configuredModel = (env.GEMINI_MODEL || DEFAULT_MODEL).trim();
-        const modelsToTry = [
+        const baseUrl = (env.GEMINI_BASE_URL || env.CLOUDFLARE_AI_GATEWAY || "https://generativelanguage.googleapis.com").replace(/\/$/, "");
+        const envModel = (env.GEMINI_MODEL || "").trim();
+        const configuredModel = envModel || DEFAULT_MODEL;
+        const modelsToTry = [...new Set([
             configuredModel,
-            ...FALLBACK_MODELS.filter(m => m !== configuredModel)
-        ];
+            DEFAULT_MODEL,
+            ...FALLBACK_MODELS
+        ])];
 
         let aiResultText = null;
         let usedModel = null;
@@ -147,8 +154,7 @@ BÀI TOÁN:
 
         for (const model of modelsToTry) {
             try {
-                // Method 1: Header x-goog-api-key (Standard for AQ... Auth keys)
-                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+                const endpoint = `${baseUrl}/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
                 const geminiPayload = {
                     contents: [
                         {
@@ -162,12 +168,17 @@ BÀI TOÁN:
                     }
                 };
 
+                const requestHeaders = {
+                    "Content-Type": "application/json",
+                    "x-goog-api-key": apiKey
+                };
+                if (apiKey.startsWith("ya29.")) {
+                    requestHeaders["Authorization"] = `Bearer ${apiKey}`;
+                }
+
                 let geminiRes = await fetch(endpoint, {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-goog-api-key": apiKey
-                    },
+                    headers: requestHeaders,
                     body: JSON.stringify(geminiPayload)
                 });
 
@@ -187,6 +198,11 @@ BÀI TOÁN:
                 if (!geminiRes.ok) {
                     const errText = await geminiRes.text();
                     lastError = `Model ${model} error (${geminiRes.status}): ${errText}`;
+                    
+                    // If auth fails (401 or 400 with invalid key), no other model will succeed -> stop early
+                    if (geminiRes.status === 401 || (geminiRes.status === 400 && (errText.includes("API_KEY_INVALID") || errText.includes("API key not valid")))) {
+                        break;
+                    }
                     continue;
                 }
 
@@ -213,7 +229,7 @@ BÀI TOÁN:
                 } else if (lastError.includes("429") || lastError.includes("RESOURCE_EXHAUSTED")) {
                     userFriendlyMsg = "Đã vượt quá hạn ngạch gọi miễn phí của Google Gemini (15 lượt gọi/phút). Em vui lòng chờ 1 phút rồi hỏi tiếp nhé!";
                 } else if (lastError.includes("404")) {
-                    userFriendlyMsg = `Mô hình AI (${configuredModel}) không tìm thấy trên Google API.`;
+                    userFriendlyMsg = `Mô hình AI (${configuredModel}) không tìm thấy trên Google API. Đã thử: ${modelsToTry.join(", ")}.`;
                 }
             }
             return new Response(JSON.stringify({
