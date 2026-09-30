@@ -149,6 +149,32 @@
     font-weight: 600;
 }
 
+.vsc-quota-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    transition: all 0.2s ease;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.vsc-quota-badge.warning {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    border-color: rgba(245, 158, 11, 0.45);
+}
+
+.vsc-quota-badge.exhausted {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border-color: rgba(239, 68, 68, 0.45);
+}
+
 .vsc-window-controls {
     display: flex;
     align-items: center;

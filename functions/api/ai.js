@@ -8,12 +8,8 @@ const DEFAULT_MODEL = "gemini-2.5-flash";
 const FALLBACK_MODELS = [
     "gemini-2.5-flash",
     "gemini-2.0-flash",
-<<<<<<< HEAD
     "gemini-1.5-flash",
-    "gemini-3.6-flash",
-=======
     "gemini-1.5-pro",
->>>>>>> origin/main
     "gemini-1.5-flash-latest"
 ];
 

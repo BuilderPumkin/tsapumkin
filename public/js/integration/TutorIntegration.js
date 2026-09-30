@@ -48,6 +48,12 @@ const PumkinTutorIntegration = (function() {
             tag: tagText
         });
 
+        // Initialize quota display
+        if (typeof PumkinAiQuota !== 'undefined') {
+            const quota = PumkinAiQuota.getQuotaStatus();
+            PumkinTutorUI.updateQuotaUI(quota);
+        }
+
         // Bind the UI message sender to our backend integration
         PumkinTutorUI.onSendMessage(handleUserMessage);
     }
@@ -78,6 +84,18 @@ const PumkinTutorIntegration = (function() {
      * Handles sending the message to the backend server (http://localhost:3001)
      */
     async function handleUserMessage(message) {
+        // Check AI Quota before sending
+        if (typeof PumkinAiQuota !== 'undefined') {
+            const currentQuota = PumkinAiQuota.getQuotaStatus();
+            if (currentQuota.isExhausted) {
+                PumkinTutorUI.addMessage('user', message);
+                PumkinTutorUI.addMessage('ai', `⚡ **Bạn đã sử dụng hết ${currentQuota.limit} lượt hỏi AI của ngày hôm nay.**\n\n` +
+                    `Hãy tự mình suy nghĩ và áp dụng các gợi ý đã học để giải tiếp bài toán nhé! Hạn mức sẽ tự động được làm mới lúc 00:00 ngày mai (${currentQuota.resetNotice}). Chúc bạn học tốt!`);
+                PumkinTutorUI.updateQuotaUI(currentQuota);
+                return;
+            }
+        }
+
         PumkinTutorUI.addMessage('user', message);
 
         const qId = currentContext?.question?.id || "general";
@@ -126,6 +144,12 @@ const PumkinTutorIntegration = (function() {
 
             if (!tutorResponse || !tutorResponse.message) {
                 throw new Error("Phản hồi từ AI không đúng định dạng quy định.");
+            }
+
+            // Consume 1 quota usage & update UI
+            if (typeof PumkinAiQuota !== 'undefined') {
+                const updatedQuota = PumkinAiQuota.consumeQuota();
+                PumkinTutorUI.updateQuotaUI(updatedQuota);
             }
 
             // Cache response for instant future recall
