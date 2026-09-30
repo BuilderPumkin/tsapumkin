@@ -30627,7 +30627,8 @@
       "Căng não",
       "Markov",
       "Entropy"
-    ]
+    ],
+    "question_text": "Xét xích Markov 2 trạng thái có ma trận chuyển xác suất $P(t) = \\begin{pmatrix} 1 - t & t \\\\ \\frac{1-t}{2} & \\frac{1+t}{2} \\end{pmatrix}$ với tham số điều khiển $t \\in (0, 1)$. Gọi $\\pi(t) = (\\pi_1(t), \\pi_2(t))$ là vector phân phối dừng duy nhất thỏa mãn $\\pi P = \\pi$ và $\\pi_1 + \\pi_2 = 1$. Giá trị của $t \\in (0, 1)$ để hàm entropy nhị phân $H(t) = -\\pi_1(t) \\ln \\pi_1(t) - \\pi_2(t) \\ln \\pi_2(t)$ đạt giá trị lớn nhất là:"
   },
   {
     "id": "q_superhard_type1_02",
@@ -30687,7 +30688,8 @@
       "Căng não",
       "Giá trị riêng",
       "AM-GM"
-    ]
+    ],
+    "question_text": "Cho ma trận đối xứng thực xác định dương $S(t) = \\begin{pmatrix} t & 1 \\\\ 1 & \\frac{4}{t} \\end{pmatrix}$ với $t > 0$. Gọi $\\lambda_1(t) \\ge \\lambda_2(t) > 0$ là hai giá trị riêng của $S(t)$. Giá trị của $t > 0$ để điều kiện số phổ $\\kappa(S) = \\frac{\\lambda_1(t)}{\\lambda_2(t)}$ đạt giá trị nhỏ nhất là:"
   },
   {
     "id": "q_superhard_type1_03",
@@ -30747,7 +30749,8 @@
       "Căng não",
       "Laplacian",
       "Giá trị riêng"
-    ]
+    ],
+    "question_text": "Xét ma trận Laplacian của đồ thị tam giác có trọng số $x > 0$: $L(x) = \\begin{pmatrix} x+1 & -x & -1 \\\\ -x & 2x & -x \\\\ -1 & -x & x+1 \\end{pmatrix}$. Biết rằng các giá trị riêng của $L(x)$ luôn có $\\lambda_1 = 0$, và hai giá trị riêng còn lại thỏa mãn $\\lambda_2(x) \\le \\lambda_3(x)$. Giá trị của $x > 0$ để giá trị riêng Fiedler (độ kết nối đại số) $\\lambda_2(x) = 2$ là:"
   },
   {
     "id": "q_superhard_type1_04",
@@ -30807,7 +30810,8 @@
       "Căng não",
       "Markowitz",
       "Toàn phương"
-    ]
+    ],
+    "question_text": "Một danh mục đầu tư gồm 2 tài sản rủi ro có ma trận hiệp phương sai sai số $\\Sigma = \\begin{pmatrix} 4 & -2 \\\\ -2 & 9 \\end{pmatrix}$. Gọi vector phân bổ tỉ trọng vốn là $w = (w_1, w_2)^T$ với ràng buộc $w_1 + w_2 = 1$ ($w_1, w_2 \\ge 0$). Tỉ trọng vốn $w_1$ đầu tư vào tài sản 1 để phương sai danh mục $\\sigma^2(w) = w^T \\Sigma w$ đạt giá trị nhỏ nhất là:"
   },
   {
     "id": "q_superhard_type1_05",
@@ -30867,7 +30871,8 @@
       "Căng não",
       "Leontief",
       "Đạo hàm"
-    ]
+    ],
+    "question_text": "Trong mô hình kinh tế Input-Output mở Leontief, ma trận tiêu hao trung gian là $A(k) = \\begin{pmatrix} 0.2 & k \\\\ 0.3 & 0.4 \\end{pmatrix}$ với tham số công nghệ $k > 0$. Cho vector cầu cuối $D = \\begin{pmatrix} 100 \\\\ 200 \\end{pmatrix}$. Gọi $X(k) = (I - A(k))^{-1} D = \\begin{pmatrix} X_1(k) \\\\ X_2(k) \\end{pmatrix}$ là tổng sản lượng. Biết rằng điều kiện khả dụng Hawkins-Simon đòi hỏi $\\det(I - A(k)) > 0$. Đạo hàm của tổng sản lượng toàn nền kinh tế $S(k) = X_1(k) + X_2(k)$ tại $k = 0.2$ có giá trị bằng:"
   },
   {
     "id": "q_superhard_type2_01",
@@ -30927,7 +30932,8 @@
       "Căng não",
       "Tích phân kép",
       "Xác suất"
-    ]
+    ],
+    "question_text": "Biến ngẫu nhiên hai chiều $(X, Y)$ có hàm mật độ xác suất đồng thời $f(x, y) = k \\cdot e^{-(x^2 + 4y^2)}$ trên toàn mặt phẳng $\\mathbb{R}^2$. Sau khi chuẩn hóa hàm mật độ ($k = \\frac{2}{\\pi}$), xét miền elip $D_R: x^2 + 4y^2 \\le R^2$. Bán kính tương đương $R > 0$ để xác suất điểm $(X, Y)$ rơi vào bên trong elip $D_R$ đạt đúng $75\\%$ ($P((X,Y) \\in D_R) = 0.75$) là:"
   },
   {
     "id": "q_superhard_type2_02",
@@ -30987,7 +30993,8 @@
       "Căng não",
       "Gauss",
       "Thể tích tròn xoay"
-    ]
+    ],
+    "question_text": "Cho hình phẳng $(H)$ không bị chặn giới hạn bởi đường cong $y = x e^{-x^2/2}$, trục hoành $y = 0$ và đường thẳng $x = 0$ khi $x \\in [0, +\\infty)$. Thể tích khối tròn xoay $V$ sinh ra khi quay hình $(H)$ xung quanh trục hoành $Ox$ bằng:"
   },
   {
     "id": "q_superhard_type2_03",
@@ -31047,7 +31054,8 @@
       "Căng não",
       "Feynman",
       "Leibniz"
-    ]
+    ],
+    "question_text": "Xét tích phân suy rộng phụ thuộc tham số $a > 0$: $I(a) = \\int_0^\\infty \\frac{e^{-x} - e^{-ax}}{x} dx$. Bằng cách lấy đạo hàm dưới dấu tích phân theo quy tắc Leibniz $I'(a) = \\int_0^\\infty \\frac{\\partial}{\\partial a} \\left( \\frac{e^{-x} - e^{-ax}}{x} \\right) dx$, giá trị của $I(5)$ bằng:"
   },
   {
     "id": "q_superhard_type2_04",
@@ -31107,7 +31115,8 @@
       "Căng não",
       "Phân phối mũ",
       "Xác suất liên tục"
-    ]
+    ],
+    "question_text": "Hai máy chủ xử lý tác vụ độc lập có thời gian phản hồi $X$ và $Y$ tuân theo phân phối mũ: $X \\sim \\text{Exp}(\\lambda_1 = 2)$ và $Y \\sim \\text{Exp}(\\lambda_2 = 3)$ với hàm mật độ $f_X(x) = 2e^{-2x}$ ($x > 0$) và $f_Y(y) = 3e^{-3y}$ ($y > 0$). Xác suất vô điều kiện để máy 1 phản hồi nhanh hơn máy 2 ($X < Y$) bằng:"
   },
   {
     "id": "q_superhard_type2_05",
@@ -31167,7 +31176,8 @@
       "Căng não",
       "Chuỗi Basel",
       "Telescoping"
-    ]
+    ],
+    "question_text": "Biết rằng tổng chuỗi Basel kinh điển của Euler là $\\sum_{n=1}^\\infty \\frac{1}{n^2} = \\frac{\\pi^2}{6}$. Giá trị hội tụ của chuỗi số vô hạn $S = \\sum_{n=1}^\\infty \\frac{1}{n^2 (n+1)}$ bằng:"
   },
   {
     "id": "q_superhard_type3_01",
@@ -31227,7 +31237,8 @@
       "Căng não",
       "Oxyz",
       "Cực trị hình học"
-    ]
+    ],
+    "question_text": "Trong không gian $Oxyz$, cho mặt cầu $(S): x^2 + y^2 + z^2 - 2x - 4y + 4 = 0$ và mặt phẳng $(P): 2x - y + 2z + 12 = 0$. Xét hai điểm thay đổi $M \\in (S)$ và $N \\in (P)$. Độ dài đoạn thẳng $MN$ đạt giá trị nhỏ nhất khi điểm $M$ có tọa độ là:"
   },
   {
     "id": "q_superhard_type3_02",
@@ -31287,7 +31298,8 @@
       "Căng não",
       "Oxyz",
       "Cauchy"
-    ]
+    ],
+    "question_text": "Trong không gian $Oxyz$, cho điểm cố định $M(1, 2, 3)$. Mặt phẳng $(\\alpha)$ thay đổi luôn đi qua $M$ và cắt ba tia $Ox, Oy, Oz$ lần lượt tại $A(a, 0, 0), B(0, b, 0), C(0, 0, c)$ với $a, b, c > 0$. Thể tích khối tứ diện $OABC$ đạt giá trị nhỏ nhất bằng:"
   },
   {
     "id": "q_superhard_type3_03",
@@ -31347,7 +31359,8 @@
       "Căng não",
       "Elipsoid",
       "Cauchy-Schwarz"
-    ]
+    ],
+    "question_text": "Trong không gian $Oxyz$, cho mặt elipsoid $(E): \\frac{x^2}{4} + \\frac{y^2}{9} + z^2 = 1$ và mặt phẳng $(P): x + 2y + 2z - 15 = 0$. Khoảng cách nhỏ nhất từ một điểm $M$ bất kỳ thuộc $(E)$ đến mặt phẳng $(P)$ bằng:"
   },
   {
     "id": "q_superhard_type3_04",
@@ -31407,7 +31420,8 @@
       "Căng não",
       "Oxyz",
       "Đường vuông góc chung"
-    ]
+    ],
+    "question_text": "Trong không gian $Oxyz$, cho hai đường thẳng chéo nhau $d_1: \\frac{x-1}{2} = \\frac{y+1}{1} = \\frac{z}{1}$ và $d_2: \\frac{x}{1} = \\frac{y-2}{2} = \\frac{z-1}{-1}$. Gọi $A \\in d_1, B \\in d_2$ là hai điểm sao cho độ dài đoạn $AB$ đạt giá trị nhỏ nhất. Khoảng cách ngắn nhất đó bằng:"
   },
   {
     "id": "q_superhard_type3_05",
@@ -31467,7 +31481,8 @@
       "Căng não",
       "Mặt nón",
       "Conic"
-    ]
+    ],
+    "question_text": "Trong không gian $Oxyz$, cho mặt nón tròn xoay đỉnh $O$ có phương trình $z = \\sqrt{x^2 + y^2}$ ($z \\ge 0$, góc ở đỉnh $90^\\circ$). Mặt phẳng $(Q): z = x + 2$ cắt mặt nón theo một đường conic. Đường conic này là một:"
   },
   {
     "id": "q_superhard_type4_01",
@@ -31527,7 +31542,8 @@
       "Căng não",
       "Vi phân cấp 2",
       "Số phức"
-    ]
+    ],
+    "question_text": "Xét bài toán dao động tắt dần mô tả bởi phương trình vi phân cấp hai: $y''(t) + 2y'(t) + 5y(t) = 0$ với điều kiện ban đầu $y(0) = 0, y'(0) = 2$. Bằng phương pháp số phức nghiệm đặc trưng $\\lambda = -1 \\pm 2i$, giá trị lớn nhất của li độ $y(t)$ khi $t \\ge 0$ đạt được tại thời điểm $t$ bằng:"
   },
   {
     "id": "q_superhard_type4_02",
@@ -31587,7 +31603,8 @@
       "Căng não",
       "RLC",
       "Cộng hưởng"
-    ]
+    ],
+    "question_text": "Mạch điện RLC nối tiếp có điện cảm $L = 0.2\\text{ H}$, điện dung $C = 50\\,\\mu\\text{F} = 5 \\times 10^{-5}\\text{ F}$ và điện trở $R = 20\\,\\Omega$, chịu kích thích bởi điện áp xoay chiều $u(t) = U_0 \\cos(\\omega t)$. Trở kháng phức của mạch là $Z(\\omega) = R + i\\left(\\omega L - \\frac{1}{\\omega C}\\right)$. Tần số góc $\\omega > 0$ để biên độ dòng điện $I_0(\\omega) = \\frac{U_0}{|Z(\\omega)|}$ đạt giá trị lớn nhất (hiện tượng cộng hưởng) bằng:"
   },
   {
     "id": "q_superhard_type4_03",
@@ -31647,7 +31664,8 @@
       "Căng não",
       "Euler-Cauchy",
       "Nghiệm kép"
-    ]
+    ],
+    "question_text": "Xét phương trình vi phân thuần nhất Euler-Cauchy: $x^2 y''(x) - 3x y'(x) + 4y(x) = 0$ với $x > 0$. Bằng cách thử nghiệm dạng $y = x^r$, phương trình đặc trưng có nghiệm kép $r$. Nghiệm riêng $y(x)$ thỏa mãn điều kiện ban đầu $y(1) = 2$ và $y'(1) = 5$ là:"
   },
   {
     "id": "q_superhard_type4_04",
@@ -31707,7 +31725,8 @@
       "Căng não",
       "Bernoulli",
       "Tiệm cận"
-    ]
+    ],
+    "question_text": "Xét phương trình vi phân phi tuyến Bernoulli: $y'(x) + \\frac{1}{x} y(x) = x [y(x)]^2$ với $x > 0$. Bằng cách đặt $z(x) = [y(x)]^{-1}$, phương trình trở thành phương trình vi phân tuyến tính cấp một. Nghiệm riêng $y(x)$ thỏa mãn điều kiện ban đầu $y(1) = -1$ có tiệm cận đứng tại điểm $x > 0$ bằng:"
   },
   {
     "id": "q_superhard_type4_05",
@@ -31767,7 +31786,8 @@
       "Căng não",
       "Fourier",
       "Truyền nhiệt"
-    ]
+    ],
+    "question_text": "Xét bài toán biên phương trình truyền nhiệt trên thanh đồng chất độ dài $L = \\pi$: $\\frac{\\partial u}{\\partial t} = 2 \\frac{\\partial^2 u}{\\partial x^2}$ với $x \\in (0, \\pi), t > 0$, điều kiện biên $u(0, t) = u(\\pi, t) = 0$ và nhiệt độ ban đầu $u(x, 0) = 3\\sin x - 5\\sin 2x$. Nhiệt độ tại điểm chính giữa thanh $x = \\frac{\\pi}{2}$ tại thời điểm $t = 1$ bằng:"
   },
   {
     "id": "q_superhard_type5_01",
@@ -31827,7 +31847,8 @@
       "Căng não",
       "Kirchhoff",
       "Cây khung"
-    ]
+    ],
+    "question_text": "Theo Định lý Ma trận Cây Kirchhoff (Kirchhoff's Matrix-Tree Theorem), số cây khung khác nhau của một đồ thị đơn vô hướng liên thông bằng định thức của một ma trận con đại số bất kỳ thu được bằng cách xóa một hàng và một cột tương ứng của ma trận Laplacian $L = D - A$. Cho đồ thị bánh xe $W_4$ gồm 1 đỉnh trục ở giữa nối với chu trình 4 đỉnh bên ngoài (tổng cộng 5 đỉnh, 8 cạnh). Số lượng cây khung khác nhau của đồ thị $W_4$ bằng:"
   },
   {
     "id": "q_superhard_type5_02",
@@ -31887,7 +31908,8 @@
       "Căng não",
       "Ma trận kề",
       "Đường đi đồ thị"
-    ]
+    ],
+    "question_text": "Cho đồ thị tam giác $K_3$ có ma trận kề $A = \\begin{pmatrix} 0 & 1 & 1 \\\\ 1 & 0 & 1 \\\\ 1 & 1 & 0 \\end{pmatrix}$. Theo định lý ma trận kề, phần tử $(A^k)_{ij}$ biểu diễn số đường đi độ dài $k$ từ đỉnh $i$ đến đỉnh $j$. Số đường đi khép kín độ dài 4 xuất phát từ đỉnh 1 và quay trở lại đỉnh 1 ($(A^4)_{11}$) bằng:"
   },
   {
     "id": "q_superhard_type5_03",
@@ -31947,7 +31969,8 @@
       "Căng não",
       "Hitting Time",
       "Đồ thị sao"
-    ]
+    ],
+    "question_text": "Xét một con bọ di chuyển ngẫu nhiên trên đồ thị hình sao $S_4$ gồm 1 đỉnh tâm $C$ và 4 đỉnh lá $L_1, L_2, L_3, L_4$. Từ mỗi đỉnh lá, con bọ chỉ có thể bước đến tâm $C$ với xác suất 1. Từ tâm $C$, con bọ bước đều sang một trong 4 đỉnh lá với xác suất $\\frac{1}{4}$. Số bước di chuyển kỳ vọng để con bọ đi từ đỉnh lá $L_1$ lần đầu tiên đến được một đỉnh lá mục tiêu cụ thể $L_2$ (Hitting time $h(L_1, L_2)$) bằng:"
   },
   {
     "id": "q_superhard_type5_04",
@@ -32007,7 +32030,8 @@
       "Căng não",
       "Cayley",
       "Đồ thị hai phía"
-    ]
+    ],
+    "question_text": "Số lượng cây khung khác nhau của đồ thị hai phía đầy đủ $K_{2, 3}$ (gồm 2 đỉnh ở phần thứ nhất và 3 đỉnh ở phần thứ hai, có đầy đủ $2 \\times 3 = 6$ cạnh nối giữa hai phần) bằng:"
   },
   {
     "id": "q_superhard_type5_05",
@@ -32067,6 +32091,142 @@
       "Căng não",
       "Spectral Gap",
       "Markov"
+    ],
+    "question_text": "Xét ma trận xác suất chuyển của bước đi ngẫu nhiên trên đồ thị chu trình 3 đỉnh $C_3$: $P = \\begin{pmatrix} 0 & 1/2 & 1/2 \\\\ 1/2 & 0 & 1/2 \\\\ 1/2 & 1/2 & 0 \\end{pmatrix}$. Tốc độ hội tụ của phân phối xác suất về phân phối đều $\\pi = (1/3, 1/3, 1/3)$ được quyết định bởi khoảng cách phổ (spectral gap) $\\gamma = 1 - |\\lambda_2|$, trong đó $\\lambda_2$ là giá trị riêng có giá trị tuyệt đối lớn thứ hai của $P$. Giá trị của khoảng cách phổ $\\gamma$ bằng:"
+  },
+  {
+    "id": "q_tsa_num_01",
+    "knowledge_id": "kb_tsa_num_01",
+    "type": "single_choice",
+    "subject": "Mathematics",
+    "exam_type": "TSA",
+    "grade": "Toán 11",
+    "topic": "Số học & Đồng dư",
+    "subtopic": "Chữ số tận cùng",
+    "skills": [
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Trung bình",
+    "difficulty_score": 0.65,
+    "cognitive_level": "Thông hiểu",
+    "estimated_time_seconds": 60,
+    "question": "Chữ số tận cùng của lũy thừa \\(2027^{2026}\\) là bao nhiêu?",
+    "question_text": "Chữ số tận cùng của lũy thừa \\(2027^{2026}\\) là bao nhiêu?",
+    "options": [
+      "1",
+      "9",
+      "7",
+      "3"
+    ],
+    "correct_answer": 1,
+    "explanation": "<h4>💡 Bản chất toán học & Phương pháp giải</h4>Chữ số tận cùng của \\(2027^{2026}\\) chính là chữ số tận cùng của \\(7^{2026}\\).<br>Cơ số 7 có chu kỳ chữ số tận cùng theo modulo 10 bằng 4: \\(7^1 \\equiv 7,\\; 7^2 \\equiv 9,\\; 7^3 \\equiv 3,\\; 7^4 \\equiv 1 \\pmod{10}\\).<br>Chia số mũ cho 4: \\(2026 = 4 \\times 506 + 2\\).<br>Do đó \\(2027^{2026} \\equiv 7^2 = 49 \\equiv 9 \\pmod{10}\\). Vậy chữ số tận cùng là <strong>9</strong>.",
+    "common_traps": [
+      "Lấy số mũ chia cho 10 thay vì chia cho chu kỳ 4",
+      "Nhầm số dư 2 của số mũ thành chữ số tận cùng của lũy thừa"
+    ],
+    "misconception_traps": {
+      "0": "Nhầm 2026 chia hết cho 4 dẫn tới chữ số tận cùng là 1",
+      "2": "Lấy nhầm trường hợp số dư của số mũ bằng 1",
+      "3": "Lấy nhầm trường hợp số dư của số mũ bằng 3"
+    }
+  },
+  {
+    "id": "q_tsa_num_02",
+    "knowledge_id": "kb_tsa_num_01",
+    "type": "short_answer",
+    "subject": "Mathematics",
+    "exam_type": "TSA",
+    "grade": "Toán 11",
+    "topic": "Số học & Đồng dư",
+    "subtopic": "Định lý Fermat nhỏ",
+    "skills": [
+      "skill_calculation",
+      "skill_modeling"
+    ],
+    "difficulty": "Khó",
+    "difficulty_score": 0.82,
+    "cognitive_level": "Vận dụng",
+    "estimated_time_seconds": 90,
+    "question": "Tìm phần dư khi chia số \\(3^{100}\\) cho số nguyên tố 13.",
+    "question_text": "Tìm phần dư khi chia số \\(3^{100}\\) cho số nguyên tố 13.",
+    "options": [],
+    "correct_answer": "3",
+    "explanation": "<h4>💡 Bản chất toán học & Phương pháp giải</h4><strong>Cách 1 (Định lý Fermat nhỏ):</strong> Vì 13 là số nguyên tố và \\(\\gcd(3, 13) = 1\\), ta có \\(3^{12} \\equiv 1 \\pmod{13}\\).<br>Phân tích số mũ: \\(100 = 12 \\times 8 + 4\\).<br>Suy ra \\(3^{100} = (3^{12})^8 \\cdot 3^4 \\equiv 1^8 \\cdot 81 = 81 \\pmod{13}\\). Do \\(81 = 13 \\times 6 + 3\\) nên \\(81 \\equiv 3 \\pmod{13}\\).<br><br><strong>Cách 2 (Chu kỳ bậc nhỏ):</strong> Nhận thấy \\(3^3 = 27 = 2 \\times 13 + 1 \\equiv 1 \\pmod{13}\\).<br>Ta có \\(100 = 3 \\times 33 + 1 \\implies 3^{100} = (3^3)^{33} \\cdot 3^1 \\equiv 1^{33} \\cdot 3 = 3 \\pmod{13}\\).<br>Vậy số dư cần tìm là <strong>3</strong>.",
+    "common_traps": [
+      "Chia số mũ 100 cho 13 thay vì chia cho p - 1 = 12"
     ]
+  },
+  {
+    "id": "q_tsa_num_03",
+    "knowledge_id": "kb_tsa_num_01",
+    "type": "true_false_group",
+    "subject": "Mathematics",
+    "exam_type": "TSA",
+    "grade": "Toán 11",
+    "topic": "Số học & Đồng dư",
+    "subtopic": "Tính chất đồng dư thức",
+    "skills": [
+      "skill_reasoning"
+    ],
+    "difficulty": "Khó",
+    "difficulty_score": 0.78,
+    "cognitive_level": "Vận dụng",
+    "estimated_time_seconds": 120,
+    "question": "Xét tính Đúng / Sai của các khẳng định sau về lý thuyết số học và đồng dư thức:",
+    "question_text": "Xét tính Đúng / Sai của các khẳng định sau về lý thuyết số học và đồng dư thức:",
+    "items": [
+      {
+        "label": "a",
+        "text": "Nếu \\(a \\equiv b \\pmod m\\) thì \\(a^k \\equiv b^k \\pmod m\\) với mọi số nguyên dương \\(k\\).",
+        "correct": true
+      },
+      {
+        "label": "b",
+        "text": "Nếu \\(ac \\equiv bc \\pmod m\\) thì luôn suy ra được \\(a \\equiv b \\pmod m\\) với mọi số nguyên \\(c \\ne 0\\).",
+        "correct": false
+      },
+      {
+        "label": "c",
+        "text": "Hai chữ số tận cùng của \\(25^n\\) (với mọi \\(n \\in \\mathbb{Z}^+\\)) luôn là 25.",
+        "correct": true
+      },
+      {
+        "label": "d",
+        "text": "Số dư khi chia đa thức \\(P(x) = x^4 + 1\\) cho nhị thức \\(x - 2\\) là 15.",
+        "correct": false
+      }
+    ],
+    "correct_answer": {
+      "a": true,
+      "b": false,
+      "c": true,
+      "d": false
+    },
+    "explanation": "<h4>💡 Phân tích tính Đúng / Sai:</h4><ul><li><strong>a) ĐÚNG:</strong> Đây là tính chất bảo toàn phép nâng lên lũy thừa nguyên dương của đồng dư thức.</li><li><strong>b) SAI:</strong> Chỉ được giản ước trực tiếp \\(c\\) giữ nguyên modulo \\(m\\) khi \\(\\gcd(c, m) = 1\\). Tổng quát: \\(a \\equiv b \\pmod{m/\\gcd(c,m)}\\). Ví dụ: \\(2 \\times 3 \\equiv 4 \\times 3 \\pmod 6\\), nhưng \\(2 \\not\\equiv 4 \\pmod 6\\).</li><li><strong>c) ĐÚNG:</strong> Bằng quy nạp, \\(25^n \\equiv 25 \\pmod{100}\\) với mọi \\(n \\ge 1\\).</li><li><strong>d) SAI:</strong> Theo định lý Bézout, số dư là \\(P(2) = 2^4 + 1 = 17 \\ne 15\\).</li></ul>"
+  },
+  {
+    "id": "q_tsa_num_04",
+    "knowledge_id": "kb_tsa_num_01",
+    "type": "step_solution",
+    "subject": "Mathematics",
+    "exam_type": "TSA",
+    "grade": "Toán 11",
+    "topic": "Số học & Đa thức",
+    "subtopic": "Phần dư nghiệm kép",
+    "skills": [
+      "skill_modeling",
+      "skill_calculation",
+      "skill_reasoning"
+    ],
+    "difficulty": "Vận dụng cao",
+    "difficulty_score": 0.92,
+    "cognitive_level": "Vận dụng cao",
+    "estimated_time_seconds": 150,
+    "question": "Tìm phần dư khi chia đa thức \\(P(x) = x^{100} + x^{50} + 1\\) cho đa thức bậc hai \\((x - 1)^2\\).",
+    "question_text": "Tìm phần dư khi chia đa thức \\(P(x) = x^{100} + x^{50} + 1\\) cho đa thức bậc hai \\((x - 1)^2\\).",
+    "options": [],
+    "correct_answer": "150x - 147",
+    "explanation": "<h4>💡 Lời giải chi tiết từng bước (Step-by-step)</h4><strong>Bước 1: Thiết lập dạng của phần dư</strong><br>Vì đa thức chia \\((x - 1)^2\\) có bậc 2 nên đa thức dư \\(R(x)\\) có bậc tối đa là 1: Đặt \\(R(x) = Ax + B\\).<br>Ta có đẳng thức phép chia:<br>\\[x^{100} + x^{50} + 1 = Q(x)(x - 1)^2 + Ax + B \\quad (1)\\]<br><strong>Bước 2: Thay nghiệm \\(x = 1\\) vào đẳng thức (1)</strong><br>\\[1^{100} + 1^{50} + 1 = A(1) + B \\implies A + B = 3 \\quad (2)\\]<br><strong>Bước 3: Lấy đạo hàm hai vế của đẳng thức (1) theo \\(x\\)</strong><br>\\[100x^{99} + 50x^{49} = Q'(x)(x - 1)^2 + 2Q(x)(x - 1) + A\\]<br>Thay \\(x = 1\\) vào phương trình đạo hàm:<br>\\[100(1) + 50(1) = A \\implies A = 150\\]<br><strong>Bước 4: Tìm hệ số \\(B\\) và kết luận</strong><br>Từ (2) suy ra \\(B = 3 - 150 = -147\\). Vậy đa thức dư cần tìm là \\(R(x) = 150x - 147\\)."
   }
 ]

@@ -1,23 +1,34 @@
 /**
- * PUMKIN Data Repository
- * Fetches JSON files asynchronously with caching, BOM stripping, flexible schema detection,
- * and zero-latency local fallback support (guaranteeing data never disappears).
+ * PUMKIN.DEV DATA REPOSITORY & RESILIENCE LAYER
+ * Automatically handles schema variations, UTF-8 BOM, and memory fallbacks
  */
-const DataRepository = (function() {
-    
-    // In-memory cache
+(function(window) {
+    'use strict';
+
     const cache = {
         questions: null,
         knowledge: null,
         exams: null
     };
 
-    /**
-     * Helper to get fallback data from memory/window
-     */
+    function normalizeQuestions(list) {
+        if (!Array.isArray(list)) return list;
+        list.forEach(q => {
+            if (q) {
+                const text = q.question_text || q.question || q.content || "";
+                q.question_text = text;
+                q.question = text;
+            }
+        });
+        return list;
+    }
+
     function getFallback(resourceName) {
-        if (typeof window !== 'undefined' && window.PUMKIN_FALLBACK_DATA && window.PUMKIN_FALLBACK_DATA[resourceName]) {
-            return window.PUMKIN_FALLBACK_DATA[resourceName];
+        if (typeof window !== 'undefined' && window.PUMKIN_FALLBACK_DATA) {
+            if (window.PUMKIN_FALLBACK_DATA[resourceName] && Array.isArray(window.PUMKIN_FALLBACK_DATA[resourceName])) {
+                const data = window.PUMKIN_FALLBACK_DATA[resourceName];
+                return resourceName === 'questions' ? normalizeQuestions(data) : data;
+            }
         }
         if (resourceName === 'knowledge') {
             if (typeof PUMKIN_DEFAULT_KNOWLEDGE !== 'undefined' && Array.isArray(PUMKIN_DEFAULT_KNOWLEDGE) && PUMKIN_DEFAULT_KNOWLEDGE.length > 0) {
@@ -26,21 +37,19 @@ const DataRepository = (function() {
             if (typeof PUMKIN_KNOWLEDGE_BASE !== 'undefined' && Array.isArray(PUMKIN_KNOWLEDGE_BASE) && PUMKIN_KNOWLEDGE_BASE.length > 0) {
                 return PUMKIN_KNOWLEDGE_BASE;
             }
-        }
-        if (resourceName === 'exams') {
+        } else if (resourceName === 'exams') {
             if (typeof PUMKIN_DEFAULT_EXAMS !== 'undefined' && Array.isArray(PUMKIN_DEFAULT_EXAMS) && PUMKIN_DEFAULT_EXAMS.length > 0) {
                 return PUMKIN_DEFAULT_EXAMS;
             }
             if (typeof PUMKIN_EXAMS_DATABASE !== 'undefined' && Array.isArray(PUMKIN_EXAMS_DATABASE) && PUMKIN_EXAMS_DATABASE.length > 0) {
                 return PUMKIN_EXAMS_DATABASE;
             }
-        }
-        if (resourceName === 'questions') {
+        } else if (resourceName === 'questions') {
             if (typeof PUMKIN_DEFAULT_QUESTIONS !== 'undefined' && Array.isArray(PUMKIN_DEFAULT_QUESTIONS) && PUMKIN_DEFAULT_QUESTIONS.length > 0) {
-                return PUMKIN_DEFAULT_QUESTIONS;
+                return normalizeQuestions(PUMKIN_DEFAULT_QUESTIONS);
             }
             if (typeof PUMKIN_QUESTIONS_DATABASE !== 'undefined' && Array.isArray(PUMKIN_QUESTIONS_DATABASE) && PUMKIN_QUESTIONS_DATABASE.length > 0) {
-                return PUMKIN_QUESTIONS_DATABASE;
+                return normalizeQuestions(PUMKIN_QUESTIONS_DATABASE);
             }
         }
         return [];
@@ -80,11 +89,18 @@ const DataRepository = (function() {
                 if (fb.length > 0) resultData = fb;
             }
 
+            if (resourceName === 'questions') {
+                normalizeQuestions(resultData);
+            }
+
             cache[resourceName] = resultData;
             return resultData;
         } catch (error) {
             console.warn(`[DataRepository] Network fetch failed for ${resourceName} (${error.message}). Activating local fallback...`);
             const fallbackData = getFallback(resourceName);
+            if (resourceName === 'questions') {
+                normalizeQuestions(fallbackData);
+            }
             cache[resourceName] = fallbackData;
             return fallbackData;
         }
@@ -100,33 +116,32 @@ const DataRepository = (function() {
                 fetchResource('data/knowledge/all.json', 'knowledge'),
                 fetchResource('data/exams/all.json', 'exams')
             ]);
-            
-            if (loadingOverlay) loadingOverlay.style.display = 'none';
 
+            console.log(`[DataRepository] Successfully loaded: ${knowledge.length} articles, ${exams.length} exams, ${questions.length} questions.`);
             return { questions, knowledge, exams };
-        } catch (error) {
-            console.error("[DataRepository] Unexpected error in loadAllData:", error);
-            const loadingOverlay = document.getElementById('global-loading-overlay');
-            if (loadingOverlay) loadingOverlay.style.display = 'none';
+        } catch (err) {
+            console.error('[DataRepository] Critical error during loadAllData:', err);
             return {
                 questions: getFallback('questions'),
                 knowledge: getFallback('knowledge'),
                 exams: getFallback('exams')
             };
+        } finally {
+            const loadingOverlay = document.getElementById('global-loading-overlay');
+            if (loadingOverlay) loadingOverlay.style.display = 'none';
         }
     }
 
-    return {
+    const DataRepository = {
         loadAllData,
         getQuestions: () => cache.questions || getFallback('questions'),
         getKnowledge: () => cache.knowledge || getFallback('knowledge'),
-        getExams: () => cache.exams || getFallback('exams')
+        getExams: () => cache.exams || getFallback('exams'),
+        fetchResource
     };
-})();
 
-if (typeof window !== 'undefined') {
     window.DataRepository = DataRepository;
-}
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = DataRepository;
-}
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = DataRepository;
+    }
+})(typeof window !== 'undefined' ? window : global);

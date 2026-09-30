@@ -56,7 +56,8 @@
       "0": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích).",
       "2": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "3": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai."
-    }
+    },
+    "question_text": "Tính giới hạn \\(L = \\lim_{x \\to 0} \\frac{e^x - 1 - x}{\\sin^2 x}\\)."
   },
   {
     "id": "q_calc_02",
@@ -115,7 +116,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Nghiệm tổng quát của phương trình vi phân tuyến tính cấp 1: \\(y' + \\frac{1}{x}y = 3x\\) (với \\(x > 0\\)) là:"
   },
   {
     "id": "q_calc_03",
@@ -173,7 +175,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Khai triển Maclaurin đến bậc 4 của hàm số \\(f(x) = \\ln(1 + 2x)\\) là:"
   },
   {
     "id": "q_calc_04",
@@ -231,7 +234,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Tính định thức của ma trận \\(A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 4 & 5 \\\\ 0 & 0 & 6 \\end{pmatrix}\\)."
   },
   {
     "id": "q_calc_05",
@@ -289,7 +293,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Tích phân suy rộng \\(I = \\int_1^{+\\infty} \\frac{1}{x^p} dx\\) hội tụ khi và chỉ khi:"
   },
   {
     "id": "q_calc_06",
@@ -347,7 +352,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Nghiệm tổng quát của phương trình vi phân phân ly biến số \\(y' = 2x y^2\\) (với \\(y \\ne 0\\)) là:"
   },
   {
     "id": "q_calc_07",
@@ -404,7 +410,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Cho ma trận vuông \\(A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\). Ma trận nghịch đảo \\(A^{-1}\\) là:"
   },
   {
     "id": "q_calc_08",
@@ -462,7 +469,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Hệ phương trình tuyến tính \\(\\begin{cases} x + 2y - z = 1 \\\\ 2x + 5y + z = 5 \\\\ 3x + 7y = 6 \\end{cases}\\) có bao nhiêu nghiệm?"
   },
   {
     "id": "q_calc_09",
@@ -520,7 +528,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Bán kính hội tụ \\(R\\) của chuỗi lũy thừa \\(\\sum_{n=1}^{\\infty} \\frac{(x - 1)^n}{n \\cdot 2^n}\\) bằng:"
   },
   {
     "id": "q_calc_10",
@@ -578,7 +587,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Đạo hàm cấp 100 của hàm số \\(f(x) = \\sin x\\) là:"
   },
   {
     "id": "q_calc_tf_01",
@@ -648,7 +658,8 @@
       "Bậc 2 (Lý thuyết): Kết nối bài toán với định lý hoặc công thức chuẩn trong chương trình tương ứng.",
       "Bậc 3 (Chia nhỏ bước): Thực hiện biến đổi bước đầu tiên để đưa bài toán về dạng phương trình cơ bản.",
       "Bậc 4 (Nút thắt): Hoàn tất phép tính đại số và kiểm tra lại điều kiện nghiệm trước khi kết luận."
-    ]
+    ],
+    "question_text": "Cho chuỗi số \\(S = \\sum_{n=1}^{\\infty} \\frac{(-1)^{n-1}}{n^p}\\) với \\(p\\) là tham số thực. Xét tính đúng / sai của các mệnh đề sau:"
   },
   {
     "id": "q_calc_sa_01",
@@ -696,7 +707,8 @@
       "Bậc 2 (Lý thuyết): Kết nối bài toán với định lý hoặc công thức chuẩn trong chương trình tương ứng.",
       "Bậc 3 (Chia nhỏ bước): Thực hiện biến đổi bước đầu tiên để đưa bài toán về dạng phương trình cơ bản.",
       "Bậc 4 (Nút thắt): Hoàn tất phép tính đại số và kiểm tra lại điều kiện nghiệm trước khi kết luận."
-    ]
+    ],
+    "question_text": "Tính giá trị của tích phân suy rộng loại 1: \\(I = \\int_0^{+\\infty} x e^{-x} dx\\)."
   },
   {
     "id": "q_calc_step_01",
@@ -745,7 +757,8 @@
       "Bậc 2 (Lý thuyết): Kết nối bài toán với định lý hoặc công thức chuẩn trong chương trình tương ứng.",
       "Bậc 3 (Chia nhỏ bước): Thực hiện biến đổi bước đầu tiên để đưa bài toán về dạng phương trình cơ bản.",
       "Bậc 4 (Nút thắt): Hoàn tất phép tính đại số và kiểm tra lại điều kiện nghiệm trước khi kết luận."
-    ]
+    ],
+    "question_text": "Giải phương trình vi phân thuần nhất cấp 2 hệ số hằng: \\(y'' - 5y' + 6y = 0\\) thỏa mãn các điều kiện ban đầu \\(y(0) = 2\\) và \\(y'(0) = 5\\). Hãy trình bày các bước giải và viết nghiệm tường minh."
   },
   {
     "id": "q_calc_11",
@@ -803,7 +816,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Tính giới hạn \\(L = \\lim_{x \\to 0} \\frac{\\tan x - \\sin x}{x^3}\\)."
   },
   {
     "id": "q_calc_12",
@@ -860,7 +874,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Cho ma trận \\(A = \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & -2 \\end{pmatrix}\\). Các giá trị riêng của ma trận A là:"
   },
   {
     "id": "q_calc_13",
@@ -918,7 +933,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Tích phân suy rộng loại 2: \\(I = \\int_0^1 \\frac{1}{\\sqrt{1 - x^2}} dx\\) có giá trị bằng:"
   },
   {
     "id": "q_calc_14",
@@ -977,7 +993,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Chuỗi số \\(\\sum_{n=1}^{\\infty} \\frac{1}{n(n+1)}\\) có tổng bằng:"
   },
   {
     "id": "q_calc_15",
@@ -1035,7 +1052,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Nghiệm của phương trình vi phân \\(y' = 3x^2\\) thỏa mãn điều kiện \\(y(0) = 4\\) là:"
   },
   {
     "id": "q_tsa_54",
@@ -1093,7 +1111,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Một ma trận \\(A\\) vuông cấp 3 có định thức \\(\\det(A) = 3\\). Giá trị của \\(\\det(2A)\\) bằng:"
   },
   {
     "id": "q_calc_16",
@@ -1151,7 +1170,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Nghiệm tổng quát của phương trình vi phân thuần nhất cấp 2: \\(y'' - 4y = 0\\) là:"
   },
   {
     "id": "q_calc_17",
@@ -1209,7 +1229,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Tính giới hạn hai biến \\(L = \\lim_{(x, y) \\to (0, 0)} \\frac{x y}{x^2 + y^2}\\) (hoặc kết luận nếu không tồn tại)."
   },
   {
     "id": "q_calc_18",
@@ -1267,7 +1288,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Hạng của ma trận \\(A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 2 & 4 & 6 \\\\ -1 & -2 & -3 \\end{pmatrix}\\) bằng:"
   },
   {
     "id": "q_calc_19",
@@ -1325,7 +1347,8 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Đạo hàm riêng cấp 1 theo biến x của hàm hai biến \\(f(x, y) = x^3 y^2 + \\sin(x y)\\) là:"
   },
   {
     "id": "q_calc_20",
@@ -1383,6 +1406,7 @@
       "1": "Bẫy nhận thức: Nhầm lẫn dấu hoặc quên nhân/chia hệ số hằng số trong quá trình biến đổi.",
       "2": "Bẫy nhận thức: Quên đối chiếu điều kiện xác định hoặc điều kiện biên, dẫn đến nhận nghiệm ngoại lai.",
       "3": "Bẫy nhận thức: Áp dụng nhầm công thức tương đồng (ví dụ: nhầm công thức đạo hàm sang nguyên hàm, hoặc nhầm giữa diện tích và thể tích)."
-    }
+    },
+    "question_text": "Vết (Trace) của ma trận \\(A = \\begin{pmatrix} 5 & 2 & 1 \\\\ 0 & -3 & 4 \\\\ 1 & 1 & 7 \\end{pmatrix}\\) bằng:"
   }
 ]

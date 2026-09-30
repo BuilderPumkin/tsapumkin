@@ -30735,7 +30735,8 @@
         "Căng não",
         "Markov",
         "Entropy"
-      ]
+      ],
+      "question_text": "Xét xích Markov 2 trạng thái có ma trận chuyển xác suất $P(t) = \\begin{pmatrix} 1 - t & t \\\\ \\frac{1-t}{2} & \\frac{1+t}{2} \\end{pmatrix}$ với tham số điều khiển $t \\in (0, 1)$. Gọi $\\pi(t) = (\\pi_1(t), \\pi_2(t))$ là vector phân phối dừng duy nhất thỏa mãn $\\pi P = \\pi$ và $\\pi_1 + \\pi_2 = 1$. Giá trị của $t \\in (0, 1)$ để hàm entropy nhị phân $H(t) = -\\pi_1(t) \\ln \\pi_1(t) - \\pi_2(t) \\ln \\pi_2(t)$ đạt giá trị lớn nhất là:"
     },
     {
       "id": "q_superhard_type1_02",
@@ -30795,7 +30796,8 @@
         "Căng não",
         "Giá trị riêng",
         "AM-GM"
-      ]
+      ],
+      "question_text": "Cho ma trận đối xứng thực xác định dương $S(t) = \\begin{pmatrix} t & 1 \\\\ 1 & \\frac{4}{t} \\end{pmatrix}$ với $t > 0$. Gọi $\\lambda_1(t) \\ge \\lambda_2(t) > 0$ là hai giá trị riêng của $S(t)$. Giá trị của $t > 0$ để điều kiện số phổ $\\kappa(S) = \\frac{\\lambda_1(t)}{\\lambda_2(t)}$ đạt giá trị nhỏ nhất là:"
     },
     {
       "id": "q_superhard_type1_03",
@@ -30855,7 +30857,8 @@
         "Căng não",
         "Laplacian",
         "Giá trị riêng"
-      ]
+      ],
+      "question_text": "Xét ma trận Laplacian của đồ thị tam giác có trọng số $x > 0$: $L(x) = \\begin{pmatrix} x+1 & -x & -1 \\\\ -x & 2x & -x \\\\ -1 & -x & x+1 \\end{pmatrix}$. Biết rằng các giá trị riêng của $L(x)$ luôn có $\\lambda_1 = 0$, và hai giá trị riêng còn lại thỏa mãn $\\lambda_2(x) \\le \\lambda_3(x)$. Giá trị của $x > 0$ để giá trị riêng Fiedler (độ kết nối đại số) $\\lambda_2(x) = 2$ là:"
     },
     {
       "id": "q_superhard_type1_04",
@@ -30915,7 +30918,8 @@
         "Căng não",
         "Markowitz",
         "Toàn phương"
-      ]
+      ],
+      "question_text": "Một danh mục đầu tư gồm 2 tài sản rủi ro có ma trận hiệp phương sai sai số $\\Sigma = \\begin{pmatrix} 4 & -2 \\\\ -2 & 9 \\end{pmatrix}$. Gọi vector phân bổ tỉ trọng vốn là $w = (w_1, w_2)^T$ với ràng buộc $w_1 + w_2 = 1$ ($w_1, w_2 \\ge 0$). Tỉ trọng vốn $w_1$ đầu tư vào tài sản 1 để phương sai danh mục $\\sigma^2(w) = w^T \\Sigma w$ đạt giá trị nhỏ nhất là:"
     },
     {
       "id": "q_superhard_type1_05",
@@ -30975,7 +30979,8 @@
         "Căng não",
         "Leontief",
         "Đạo hàm"
-      ]
+      ],
+      "question_text": "Trong mô hình kinh tế Input-Output mở Leontief, ma trận tiêu hao trung gian là $A(k) = \\begin{pmatrix} 0.2 & k \\\\ 0.3 & 0.4 \\end{pmatrix}$ với tham số công nghệ $k > 0$. Cho vector cầu cuối $D = \\begin{pmatrix} 100 \\\\ 200 \\end{pmatrix}$. Gọi $X(k) = (I - A(k))^{-1} D = \\begin{pmatrix} X_1(k) \\\\ X_2(k) \\end{pmatrix}$ là tổng sản lượng. Biết rằng điều kiện khả dụng Hawkins-Simon đòi hỏi $\\det(I - A(k)) > 0$. Đạo hàm của tổng sản lượng toàn nền kinh tế $S(k) = X_1(k) + X_2(k)$ tại $k = 0.2$ có giá trị bằng:"
     },
     {
       "id": "q_superhard_type2_01",
@@ -31035,7 +31040,8 @@
         "Căng não",
         "Tích phân kép",
         "Xác suất"
-      ]
+      ],
+      "question_text": "Biến ngẫu nhiên hai chiều $(X, Y)$ có hàm mật độ xác suất đồng thời $f(x, y) = k \\cdot e^{-(x^2 + 4y^2)}$ trên toàn mặt phẳng $\\mathbb{R}^2$. Sau khi chuẩn hóa hàm mật độ ($k = \\frac{2}{\\pi}$), xét miền elip $D_R: x^2 + 4y^2 \\le R^2$. Bán kính tương đương $R > 0$ để xác suất điểm $(X, Y)$ rơi vào bên trong elip $D_R$ đạt đúng $75\\%$ ($P((X,Y) \\in D_R) = 0.75$) là:"
     },
     {
       "id": "q_superhard_type2_02",
@@ -31095,7 +31101,8 @@
         "Căng não",
         "Gauss",
         "Thể tích tròn xoay"
-      ]
+      ],
+      "question_text": "Cho hình phẳng $(H)$ không bị chặn giới hạn bởi đường cong $y = x e^{-x^2/2}$, trục hoành $y = 0$ và đường thẳng $x = 0$ khi $x \\in [0, +\\infty)$. Thể tích khối tròn xoay $V$ sinh ra khi quay hình $(H)$ xung quanh trục hoành $Ox$ bằng:"
     },
     {
       "id": "q_superhard_type2_03",
@@ -31155,7 +31162,8 @@
         "Căng não",
         "Feynman",
         "Leibniz"
-      ]
+      ],
+      "question_text": "Xét tích phân suy rộng phụ thuộc tham số $a > 0$: $I(a) = \\int_0^\\infty \\frac{e^{-x} - e^{-ax}}{x} dx$. Bằng cách lấy đạo hàm dưới dấu tích phân theo quy tắc Leibniz $I'(a) = \\int_0^\\infty \\frac{\\partial}{\\partial a} \\left( \\frac{e^{-x} - e^{-ax}}{x} \\right) dx$, giá trị của $I(5)$ bằng:"
     },
     {
       "id": "q_superhard_type2_04",
@@ -31215,7 +31223,8 @@
         "Căng não",
         "Phân phối mũ",
         "Xác suất liên tục"
-      ]
+      ],
+      "question_text": "Hai máy chủ xử lý tác vụ độc lập có thời gian phản hồi $X$ và $Y$ tuân theo phân phối mũ: $X \\sim \\text{Exp}(\\lambda_1 = 2)$ và $Y \\sim \\text{Exp}(\\lambda_2 = 3)$ với hàm mật độ $f_X(x) = 2e^{-2x}$ ($x > 0$) và $f_Y(y) = 3e^{-3y}$ ($y > 0$). Xác suất vô điều kiện để máy 1 phản hồi nhanh hơn máy 2 ($X < Y$) bằng:"
     },
     {
       "id": "q_superhard_type2_05",
@@ -31275,7 +31284,8 @@
         "Căng não",
         "Chuỗi Basel",
         "Telescoping"
-      ]
+      ],
+      "question_text": "Biết rằng tổng chuỗi Basel kinh điển của Euler là $\\sum_{n=1}^\\infty \\frac{1}{n^2} = \\frac{\\pi^2}{6}$. Giá trị hội tụ của chuỗi số vô hạn $S = \\sum_{n=1}^\\infty \\frac{1}{n^2 (n+1)}$ bằng:"
     },
     {
       "id": "q_superhard_type3_01",
@@ -31335,7 +31345,8 @@
         "Căng não",
         "Oxyz",
         "Cực trị hình học"
-      ]
+      ],
+      "question_text": "Trong không gian $Oxyz$, cho mặt cầu $(S): x^2 + y^2 + z^2 - 2x - 4y + 4 = 0$ và mặt phẳng $(P): 2x - y + 2z + 12 = 0$. Xét hai điểm thay đổi $M \\in (S)$ và $N \\in (P)$. Độ dài đoạn thẳng $MN$ đạt giá trị nhỏ nhất khi điểm $M$ có tọa độ là:"
     },
     {
       "id": "q_superhard_type3_02",
@@ -31395,7 +31406,8 @@
         "Căng não",
         "Oxyz",
         "Cauchy"
-      ]
+      ],
+      "question_text": "Trong không gian $Oxyz$, cho điểm cố định $M(1, 2, 3)$. Mặt phẳng $(\\alpha)$ thay đổi luôn đi qua $M$ và cắt ba tia $Ox, Oy, Oz$ lần lượt tại $A(a, 0, 0), B(0, b, 0), C(0, 0, c)$ với $a, b, c > 0$. Thể tích khối tứ diện $OABC$ đạt giá trị nhỏ nhất bằng:"
     },
     {
       "id": "q_superhard_type3_03",
@@ -31455,7 +31467,8 @@
         "Căng não",
         "Elipsoid",
         "Cauchy-Schwarz"
-      ]
+      ],
+      "question_text": "Trong không gian $Oxyz$, cho mặt elipsoid $(E): \\frac{x^2}{4} + \\frac{y^2}{9} + z^2 = 1$ và mặt phẳng $(P): x + 2y + 2z - 15 = 0$. Khoảng cách nhỏ nhất từ một điểm $M$ bất kỳ thuộc $(E)$ đến mặt phẳng $(P)$ bằng:"
     },
     {
       "id": "q_superhard_type3_04",
@@ -31515,7 +31528,8 @@
         "Căng não",
         "Oxyz",
         "Đường vuông góc chung"
-      ]
+      ],
+      "question_text": "Trong không gian $Oxyz$, cho hai đường thẳng chéo nhau $d_1: \\frac{x-1}{2} = \\frac{y+1}{1} = \\frac{z}{1}$ và $d_2: \\frac{x}{1} = \\frac{y-2}{2} = \\frac{z-1}{-1}$. Gọi $A \\in d_1, B \\in d_2$ là hai điểm sao cho độ dài đoạn $AB$ đạt giá trị nhỏ nhất. Khoảng cách ngắn nhất đó bằng:"
     },
     {
       "id": "q_superhard_type3_05",
@@ -31575,7 +31589,8 @@
         "Căng não",
         "Mặt nón",
         "Conic"
-      ]
+      ],
+      "question_text": "Trong không gian $Oxyz$, cho mặt nón tròn xoay đỉnh $O$ có phương trình $z = \\sqrt{x^2 + y^2}$ ($z \\ge 0$, góc ở đỉnh $90^\\circ$). Mặt phẳng $(Q): z = x + 2$ cắt mặt nón theo một đường conic. Đường conic này là một:"
     },
     {
       "id": "q_superhard_type4_01",
@@ -31635,7 +31650,8 @@
         "Căng não",
         "Vi phân cấp 2",
         "Số phức"
-      ]
+      ],
+      "question_text": "Xét bài toán dao động tắt dần mô tả bởi phương trình vi phân cấp hai: $y''(t) + 2y'(t) + 5y(t) = 0$ với điều kiện ban đầu $y(0) = 0, y'(0) = 2$. Bằng phương pháp số phức nghiệm đặc trưng $\\lambda = -1 \\pm 2i$, giá trị lớn nhất của li độ $y(t)$ khi $t \\ge 0$ đạt được tại thời điểm $t$ bằng:"
     },
     {
       "id": "q_superhard_type4_02",
@@ -31695,7 +31711,8 @@
         "Căng não",
         "RLC",
         "Cộng hưởng"
-      ]
+      ],
+      "question_text": "Mạch điện RLC nối tiếp có điện cảm $L = 0.2\\text{ H}$, điện dung $C = 50\\,\\mu\\text{F} = 5 \\times 10^{-5}\\text{ F}$ và điện trở $R = 20\\,\\Omega$, chịu kích thích bởi điện áp xoay chiều $u(t) = U_0 \\cos(\\omega t)$. Trở kháng phức của mạch là $Z(\\omega) = R + i\\left(\\omega L - \\frac{1}{\\omega C}\\right)$. Tần số góc $\\omega > 0$ để biên độ dòng điện $I_0(\\omega) = \\frac{U_0}{|Z(\\omega)|}$ đạt giá trị lớn nhất (hiện tượng cộng hưởng) bằng:"
     },
     {
       "id": "q_superhard_type4_03",
@@ -31755,7 +31772,8 @@
         "Căng não",
         "Euler-Cauchy",
         "Nghiệm kép"
-      ]
+      ],
+      "question_text": "Xét phương trình vi phân thuần nhất Euler-Cauchy: $x^2 y''(x) - 3x y'(x) + 4y(x) = 0$ với $x > 0$. Bằng cách thử nghiệm dạng $y = x^r$, phương trình đặc trưng có nghiệm kép $r$. Nghiệm riêng $y(x)$ thỏa mãn điều kiện ban đầu $y(1) = 2$ và $y'(1) = 5$ là:"
     },
     {
       "id": "q_superhard_type4_04",
@@ -31815,7 +31833,8 @@
         "Căng não",
         "Bernoulli",
         "Tiệm cận"
-      ]
+      ],
+      "question_text": "Xét phương trình vi phân phi tuyến Bernoulli: $y'(x) + \\frac{1}{x} y(x) = x [y(x)]^2$ với $x > 0$. Bằng cách đặt $z(x) = [y(x)]^{-1}$, phương trình trở thành phương trình vi phân tuyến tính cấp một. Nghiệm riêng $y(x)$ thỏa mãn điều kiện ban đầu $y(1) = -1$ có tiệm cận đứng tại điểm $x > 0$ bằng:"
     },
     {
       "id": "q_superhard_type4_05",
@@ -31875,7 +31894,8 @@
         "Căng não",
         "Fourier",
         "Truyền nhiệt"
-      ]
+      ],
+      "question_text": "Xét bài toán biên phương trình truyền nhiệt trên thanh đồng chất độ dài $L = \\pi$: $\\frac{\\partial u}{\\partial t} = 2 \\frac{\\partial^2 u}{\\partial x^2}$ với $x \\in (0, \\pi), t > 0$, điều kiện biên $u(0, t) = u(\\pi, t) = 0$ và nhiệt độ ban đầu $u(x, 0) = 3\\sin x - 5\\sin 2x$. Nhiệt độ tại điểm chính giữa thanh $x = \\frac{\\pi}{2}$ tại thời điểm $t = 1$ bằng:"
     },
     {
       "id": "q_superhard_type5_01",
@@ -31935,7 +31955,8 @@
         "Căng não",
         "Kirchhoff",
         "Cây khung"
-      ]
+      ],
+      "question_text": "Theo Định lý Ma trận Cây Kirchhoff (Kirchhoff's Matrix-Tree Theorem), số cây khung khác nhau của một đồ thị đơn vô hướng liên thông bằng định thức của một ma trận con đại số bất kỳ thu được bằng cách xóa một hàng và một cột tương ứng của ma trận Laplacian $L = D - A$. Cho đồ thị bánh xe $W_4$ gồm 1 đỉnh trục ở giữa nối với chu trình 4 đỉnh bên ngoài (tổng cộng 5 đỉnh, 8 cạnh). Số lượng cây khung khác nhau của đồ thị $W_4$ bằng:"
     },
     {
       "id": "q_superhard_type5_02",
@@ -31995,7 +32016,8 @@
         "Căng não",
         "Ma trận kề",
         "Đường đi đồ thị"
-      ]
+      ],
+      "question_text": "Cho đồ thị tam giác $K_3$ có ma trận kề $A = \\begin{pmatrix} 0 & 1 & 1 \\\\ 1 & 0 & 1 \\\\ 1 & 1 & 0 \\end{pmatrix}$. Theo định lý ma trận kề, phần tử $(A^k)_{ij}$ biểu diễn số đường đi độ dài $k$ từ đỉnh $i$ đến đỉnh $j$. Số đường đi khép kín độ dài 4 xuất phát từ đỉnh 1 và quay trở lại đỉnh 1 ($(A^4)_{11}$) bằng:"
     },
     {
       "id": "q_superhard_type5_03",
@@ -32055,7 +32077,8 @@
         "Căng não",
         "Hitting Time",
         "Đồ thị sao"
-      ]
+      ],
+      "question_text": "Xét một con bọ di chuyển ngẫu nhiên trên đồ thị hình sao $S_4$ gồm 1 đỉnh tâm $C$ và 4 đỉnh lá $L_1, L_2, L_3, L_4$. Từ mỗi đỉnh lá, con bọ chỉ có thể bước đến tâm $C$ với xác suất 1. Từ tâm $C$, con bọ bước đều sang một trong 4 đỉnh lá với xác suất $\\frac{1}{4}$. Số bước di chuyển kỳ vọng để con bọ đi từ đỉnh lá $L_1$ lần đầu tiên đến được một đỉnh lá mục tiêu cụ thể $L_2$ (Hitting time $h(L_1, L_2)$) bằng:"
     },
     {
       "id": "q_superhard_type5_04",
@@ -32115,7 +32138,8 @@
         "Căng não",
         "Cayley",
         "Đồ thị hai phía"
-      ]
+      ],
+      "question_text": "Số lượng cây khung khác nhau của đồ thị hai phía đầy đủ $K_{2, 3}$ (gồm 2 đỉnh ở phần thứ nhất và 3 đỉnh ở phần thứ hai, có đầy đủ $2 \\times 3 = 6$ cạnh nối giữa hai phần) bằng:"
     },
     {
       "id": "q_superhard_type5_05",
@@ -32175,7 +32199,143 @@
         "Căng não",
         "Spectral Gap",
         "Markov"
+      ],
+      "question_text": "Xét ma trận xác suất chuyển của bước đi ngẫu nhiên trên đồ thị chu trình 3 đỉnh $C_3$: $P = \\begin{pmatrix} 0 & 1/2 & 1/2 \\\\ 1/2 & 0 & 1/2 \\\\ 1/2 & 1/2 & 0 \\end{pmatrix}$. Tốc độ hội tụ của phân phối xác suất về phân phối đều $\\pi = (1/3, 1/3, 1/3)$ được quyết định bởi khoảng cách phổ (spectral gap) $\\gamma = 1 - |\\lambda_2|$, trong đó $\\lambda_2$ là giá trị riêng có giá trị tuyệt đối lớn thứ hai của $P$. Giá trị của khoảng cách phổ $\\gamma$ bằng:"
+    },
+    {
+      "id": "q_tsa_num_01",
+      "knowledge_id": "kb_tsa_num_01",
+      "type": "single_choice",
+      "subject": "Mathematics",
+      "exam_type": "TSA",
+      "grade": "Toán 11",
+      "topic": "Số học & Đồng dư",
+      "subtopic": "Chữ số tận cùng",
+      "skills": [
+        "skill_calculation",
+        "skill_reasoning"
+      ],
+      "difficulty": "Trung bình",
+      "difficulty_score": 0.65,
+      "cognitive_level": "Thông hiểu",
+      "estimated_time_seconds": 60,
+      "question": "Chữ số tận cùng của lũy thừa \\(2027^{2026}\\) là bao nhiêu?",
+      "question_text": "Chữ số tận cùng của lũy thừa \\(2027^{2026}\\) là bao nhiêu?",
+      "options": [
+        "1",
+        "9",
+        "7",
+        "3"
+      ],
+      "correct_answer": 1,
+      "explanation": "<h4>💡 Bản chất toán học & Phương pháp giải</h4>Chữ số tận cùng của \\(2027^{2026}\\) chính là chữ số tận cùng của \\(7^{2026}\\).<br>Cơ số 7 có chu kỳ chữ số tận cùng theo modulo 10 bằng 4: \\(7^1 \\equiv 7,\\; 7^2 \\equiv 9,\\; 7^3 \\equiv 3,\\; 7^4 \\equiv 1 \\pmod{10}\\).<br>Chia số mũ cho 4: \\(2026 = 4 \\times 506 + 2\\).<br>Do đó \\(2027^{2026} \\equiv 7^2 = 49 \\equiv 9 \\pmod{10}\\). Vậy chữ số tận cùng là <strong>9</strong>.",
+      "common_traps": [
+        "Lấy số mũ chia cho 10 thay vì chia cho chu kỳ 4",
+        "Nhầm số dư 2 của số mũ thành chữ số tận cùng của lũy thừa"
+      ],
+      "misconception_traps": {
+        "0": "Nhầm 2026 chia hết cho 4 dẫn tới chữ số tận cùng là 1",
+        "2": "Lấy nhầm trường hợp số dư của số mũ bằng 1",
+        "3": "Lấy nhầm trường hợp số dư của số mũ bằng 3"
+      }
+    },
+    {
+      "id": "q_tsa_num_02",
+      "knowledge_id": "kb_tsa_num_01",
+      "type": "short_answer",
+      "subject": "Mathematics",
+      "exam_type": "TSA",
+      "grade": "Toán 11",
+      "topic": "Số học & Đồng dư",
+      "subtopic": "Định lý Fermat nhỏ",
+      "skills": [
+        "skill_calculation",
+        "skill_modeling"
+      ],
+      "difficulty": "Khó",
+      "difficulty_score": 0.82,
+      "cognitive_level": "Vận dụng",
+      "estimated_time_seconds": 90,
+      "question": "Tìm phần dư khi chia số \\(3^{100}\\) cho số nguyên tố 13.",
+      "question_text": "Tìm phần dư khi chia số \\(3^{100}\\) cho số nguyên tố 13.",
+      "options": [],
+      "correct_answer": "3",
+      "explanation": "<h4>💡 Bản chất toán học & Phương pháp giải</h4><strong>Cách 1 (Định lý Fermat nhỏ):</strong> Vì 13 là số nguyên tố và \\(\\gcd(3, 13) = 1\\), ta có \\(3^{12} \\equiv 1 \\pmod{13}\\).<br>Phân tích số mũ: \\(100 = 12 \\times 8 + 4\\).<br>Suy ra \\(3^{100} = (3^{12})^8 \\cdot 3^4 \\equiv 1^8 \\cdot 81 = 81 \\pmod{13}\\). Do \\(81 = 13 \\times 6 + 3\\) nên \\(81 \\equiv 3 \\pmod{13}\\).<br><br><strong>Cách 2 (Chu kỳ bậc nhỏ):</strong> Nhận thấy \\(3^3 = 27 = 2 \\times 13 + 1 \\equiv 1 \\pmod{13}\\).<br>Ta có \\(100 = 3 \\times 33 + 1 \\implies 3^{100} = (3^3)^{33} \\cdot 3^1 \\equiv 1^{33} \\cdot 3 = 3 \\pmod{13}\\).<br>Vậy số dư cần tìm là <strong>3</strong>.",
+      "common_traps": [
+        "Chia số mũ 100 cho 13 thay vì chia cho p - 1 = 12"
       ]
+    },
+    {
+      "id": "q_tsa_num_03",
+      "knowledge_id": "kb_tsa_num_01",
+      "type": "true_false_group",
+      "subject": "Mathematics",
+      "exam_type": "TSA",
+      "grade": "Toán 11",
+      "topic": "Số học & Đồng dư",
+      "subtopic": "Tính chất đồng dư thức",
+      "skills": [
+        "skill_reasoning"
+      ],
+      "difficulty": "Khó",
+      "difficulty_score": 0.78,
+      "cognitive_level": "Vận dụng",
+      "estimated_time_seconds": 120,
+      "question": "Xét tính Đúng / Sai của các khẳng định sau về lý thuyết số học và đồng dư thức:",
+      "question_text": "Xét tính Đúng / Sai của các khẳng định sau về lý thuyết số học và đồng dư thức:",
+      "items": [
+        {
+          "label": "a",
+          "text": "Nếu \\(a \\equiv b \\pmod m\\) thì \\(a^k \\equiv b^k \\pmod m\\) với mọi số nguyên dương \\(k\\).",
+          "correct": true
+        },
+        {
+          "label": "b",
+          "text": "Nếu \\(ac \\equiv bc \\pmod m\\) thì luôn suy ra được \\(a \\equiv b \\pmod m\\) với mọi số nguyên \\(c \\ne 0\\).",
+          "correct": false
+        },
+        {
+          "label": "c",
+          "text": "Hai chữ số tận cùng của \\(25^n\\) (với mọi \\(n \\in \\mathbb{Z}^+\\)) luôn là 25.",
+          "correct": true
+        },
+        {
+          "label": "d",
+          "text": "Số dư khi chia đa thức \\(P(x) = x^4 + 1\\) cho nhị thức \\(x - 2\\) là 15.",
+          "correct": false
+        }
+      ],
+      "correct_answer": {
+        "a": true,
+        "b": false,
+        "c": true,
+        "d": false
+      },
+      "explanation": "<h4>💡 Phân tích tính Đúng / Sai:</h4><ul><li><strong>a) ĐÚNG:</strong> Đây là tính chất bảo toàn phép nâng lên lũy thừa nguyên dương của đồng dư thức.</li><li><strong>b) SAI:</strong> Chỉ được giản ước trực tiếp \\(c\\) giữ nguyên modulo \\(m\\) khi \\(\\gcd(c, m) = 1\\). Tổng quát: \\(a \\equiv b \\pmod{m/\\gcd(c,m)}\\). Ví dụ: \\(2 \\times 3 \\equiv 4 \\times 3 \\pmod 6\\), nhưng \\(2 \\not\\equiv 4 \\pmod 6\\).</li><li><strong>c) ĐÚNG:</strong> Bằng quy nạp, \\(25^n \\equiv 25 \\pmod{100}\\) với mọi \\(n \\ge 1\\).</li><li><strong>d) SAI:</strong> Theo định lý Bézout, số dư là \\(P(2) = 2^4 + 1 = 17 \\ne 15\\).</li></ul>"
+    },
+    {
+      "id": "q_tsa_num_04",
+      "knowledge_id": "kb_tsa_num_01",
+      "type": "step_solution",
+      "subject": "Mathematics",
+      "exam_type": "TSA",
+      "grade": "Toán 11",
+      "topic": "Số học & Đa thức",
+      "subtopic": "Phần dư nghiệm kép",
+      "skills": [
+        "skill_modeling",
+        "skill_calculation",
+        "skill_reasoning"
+      ],
+      "difficulty": "Vận dụng cao",
+      "difficulty_score": 0.92,
+      "cognitive_level": "Vận dụng cao",
+      "estimated_time_seconds": 150,
+      "question": "Tìm phần dư khi chia đa thức \\(P(x) = x^{100} + x^{50} + 1\\) cho đa thức bậc hai \\((x - 1)^2\\).",
+      "question_text": "Tìm phần dư khi chia đa thức \\(P(x) = x^{100} + x^{50} + 1\\) cho đa thức bậc hai \\((x - 1)^2\\).",
+      "options": [],
+      "correct_answer": "150x - 147",
+      "explanation": "<h4>💡 Lời giải chi tiết từng bước (Step-by-step)</h4><strong>Bước 1: Thiết lập dạng của phần dư</strong><br>Vì đa thức chia \\((x - 1)^2\\) có bậc 2 nên đa thức dư \\(R(x)\\) có bậc tối đa là 1: Đặt \\(R(x) = Ax + B\\).<br>Ta có đẳng thức phép chia:<br>\\[x^{100} + x^{50} + 1 = Q(x)(x - 1)^2 + Ax + B \\quad (1)\\]<br><strong>Bước 2: Thay nghiệm \\(x = 1\\) vào đẳng thức (1)</strong><br>\\[1^{100} + 1^{50} + 1 = A(1) + B \\implies A + B = 3 \\quad (2)\\]<br><strong>Bước 3: Lấy đạo hàm hai vế của đẳng thức (1) theo \\(x\\)</strong><br>\\[100x^{99} + 50x^{49} = Q'(x)(x - 1)^2 + 2Q(x)(x - 1) + A\\]<br>Thay \\(x = 1\\) vào phương trình đạo hàm:<br>\\[100(1) + 50(1) = A \\implies A = 150\\]<br><strong>Bước 4: Tìm hệ số \\(B\\) và kết luận</strong><br>Từ (2) suy ra \\(B = 3 - 150 = -147\\). Vậy đa thức dư cần tìm là \\(R(x) = 150x - 147\\)."
     }
   ],
   "exams": [
@@ -34255,6 +34415,9 @@
           "tags": [
             "Tập hợp",
             "Đếm"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -34265,6 +34428,9 @@
           "tags": [
             "Tập hợp",
             "Xác suất"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -34275,6 +34441,9 @@
           "tags": [
             "Số thực",
             "Khoảng đoạn"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         }
       ],
@@ -34332,6 +34501,9 @@
           "tags": [
             "Quy hoạch tuyến tính",
             "Đỉnh đa giác"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -34343,6 +34515,10 @@
             "Bất đẳng thức",
             "AM-GM",
             "Cauchy"
+          ],
+          "constraints": [
+            "Các biến số a, b, c \\ge 0 (không âm)",
+            "Dấu '=' xảy ra khi và chỉ khi a = b = c"
           ]
         },
         {
@@ -34354,6 +34530,10 @@
             "Bất đẳng thức",
             "Bunhiacopxki",
             "Cauchy-Schwarz"
+          ],
+          "constraints": [
+            "Các biến số a, b, c \\ge 0 (không âm)",
+            "Dấu '=' xảy ra khi và chỉ khi a = b = c"
           ]
         }
       ],
@@ -34415,6 +34595,9 @@
           "tags": [
             "Parabol",
             "Cực trị"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34425,6 +34608,9 @@
           "tags": [
             "Viète",
             "Nghiệm"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34436,6 +34622,9 @@
             "Hàm số",
             "Tam thức bậc hai",
             "Biện luận"
+          ],
+          "constraints": [
+            "Bán kính r > 0, Chiều cao h > 0"
           ]
         }
       ],
@@ -34497,6 +34686,9 @@
             "Shoelace",
             "Tọa độ phẳng",
             "Diện tích"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34507,6 +34699,9 @@
           "tags": [
             "Trung tuyến",
             "Hình học"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34517,6 +34712,9 @@
           "tags": [
             "Hệ thức lượng",
             "Định lý Cosin"
+          ],
+          "constraints": [
+            "Mẫu số v(x) \\ne 0 trên tập xác định"
           ]
         },
         {
@@ -34528,6 +34726,9 @@
             "Hệ thức lượng",
             "Định lý Sin",
             "Bán kính ngoại tiếp"
+          ],
+          "constraints": [
+            "Mẫu số v(x) \\ne 0 trên tập xác định"
           ]
         },
         {
@@ -34539,6 +34740,9 @@
             "Hình học",
             "Diện tích",
             "Heron"
+          ],
+          "constraints": [
+            "Bán kính r > 0, Chiều cao h > 0"
           ]
         },
         {
@@ -34549,6 +34753,9 @@
           "tags": [
             "Vectơ",
             "Tích vô hướng"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         }
       ],
@@ -34613,6 +34820,9 @@
           "tags": [
             "Thống kê",
             "Phương sai"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -34623,6 +34833,9 @@
           "tags": [
             "Xác suất",
             "Tổ hợp"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34634,6 +34847,9 @@
             "Thống kê",
             "Tứ phân vị",
             "Ngoại lệ"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         }
       ],
@@ -34690,6 +34906,9 @@
           "tags": [
             "Lượng giác",
             "Hạ bậc"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34701,6 +34920,9 @@
             "Phương trình",
             "Lượng giác",
             "Điều kiện nghiệm"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -34712,6 +34934,9 @@
             "Lượng giác",
             "Cơ bản",
             "Hằng đẳng thức"
+          ],
+          "constraints": [
+            "\\cos x \\ne 0 \\iff x \\ne \\frac{\\pi}{2} + k\\pi \\; (k \\in \\mathbb{Z})"
           ]
         },
         {
@@ -34722,6 +34947,9 @@
           "tags": [
             "Lượng giác",
             "Công thức cộng"
+          ],
+          "constraints": [
+            "\\cos x \\ne 0 \\iff x \\ne \\frac{\\pi}{2} + k\\pi \\; (k \\in \\mathbb{Z})"
           ]
         },
         {
@@ -34732,6 +34960,9 @@
           "tags": [
             "Lượng giác",
             "Nhân đôi"
+          ],
+          "constraints": [
+            "\\cos x \\ne 0 \\iff x \\ne \\frac{\\pi}{2} + k\\pi \\; (k \\in \\mathbb{Z})"
           ]
         },
         {
@@ -34743,6 +34974,9 @@
             "Lượng giác",
             "Nhân ba",
             "Hạ bậc"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34753,6 +34987,9 @@
           "tags": [
             "Lượng giác",
             "Tích thành tổng"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34763,6 +35000,9 @@
           "tags": [
             "Lượng giác",
             "Tổng thành tích"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34774,6 +35014,9 @@
             "Lượng giác",
             "Đổi biến",
             "Weierstrass"
+          ],
+          "constraints": [
+            "\\cos x \\ne 0 \\iff x \\ne \\frac{\\pi}{2} + k\\pi \\; (k \\in \\mathbb{Z})"
           ]
         },
         {
@@ -34785,6 +35028,9 @@
             "Lượng giác",
             "Tính nhanh",
             "Đối xứng"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34796,6 +35042,9 @@
             "Lượng giác",
             "Phương trình",
             "Nghiệm"
+          ],
+          "constraints": [
+            "\\cos x \\ne 0 \\iff x \\ne \\frac{\\pi}{2} + k\\pi \\; (k \\in \\mathbb{Z})"
           ]
         }
       ],
@@ -34866,6 +35115,9 @@
             "Tài chính",
             "Lãi kép",
             "Trả góp"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34876,6 +35128,9 @@
           "tags": [
             "Chuỗi",
             "Cấp số nhân"
+          ],
+          "constraints": [
+            "Công bội q \\ne 1 khi tính tổng n số hạng đầu: S_n = \\frac{u_1(1-q^n)}{1-q}"
           ]
         },
         {
@@ -34886,6 +35141,9 @@
           "tags": [
             "Cấp số cộng",
             "Dãy số"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34896,6 +35154,9 @@
           "tags": [
             "Cấp số nhân",
             "Dãy số"
+          ],
+          "constraints": [
+            "Công bội q \\ne 1 khi tính tổng n số hạng đầu: S_n = \\frac{u_1(1-q^n)}{1-q}"
           ]
         }
       ],
@@ -34957,6 +35218,9 @@
           "tags": [
             "Giới hạn",
             "Lượng giác"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -34967,6 +35231,9 @@
           "tags": [
             "Giới hạn",
             "Số e"
+          ],
+          "constraints": [
+            "Mẫu số v(x) \\ne 0 trên tập xác định"
           ]
         },
         {
@@ -34978,6 +35245,10 @@
             "Giới hạn",
             "Số Euler",
             "Hàm số"
+          ],
+          "constraints": [
+            "Cơ số a > 0, a \\ne 1",
+            "Biểu thức lấy logarit > 0 (dương ngặt)"
           ]
         }
       ],
@@ -35038,6 +35309,9 @@
           "tags": [
             "Đạo hàm",
             "Tiếp tuyến"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -35048,6 +35322,9 @@
           "tags": [
             "Đạo hàm",
             "Hàm hợp"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -35058,6 +35335,9 @@
           "tags": [
             "Đạo hàm",
             "Quy tắc"
+          ],
+          "constraints": [
+            "\\cos x \\ne 0 \\iff x \\ne \\frac{\\pi}{2} + k\\pi \\; (k \\in \\mathbb{Z})"
           ]
         },
         {
@@ -35069,6 +35349,9 @@
             "Đạo hàm",
             "Tính nhanh",
             "Phân thức"
+          ],
+          "constraints": [
+            "Mẫu số v(x) \\ne 0 trên tập xác định"
           ]
         }
       ],
@@ -35130,6 +35413,9 @@
           "tags": [
             "Xác suất",
             "Bayes"
+          ],
+          "constraints": [
+            "Xác suất biến cố điều kiện P(B) > 0"
           ]
         },
         {
@@ -35140,6 +35426,9 @@
           "tags": [
             "Xác suất",
             "Nhân xác suất"
+          ],
+          "constraints": [
+            "Xác suất biến cố điều kiện P(B) > 0"
           ]
         },
         {
@@ -35151,6 +35440,9 @@
             "Tổ hợp",
             "Chỉnh hợp",
             "Nhị thức Newton"
+          ],
+          "constraints": [
+            "Điều kiện: 0 \\le k \\le n với k, n \\in \\mathbb{N}"
           ]
         },
         {
@@ -35161,6 +35453,9 @@
           "tags": [
             "Xác suất",
             "Xác suất toàn phần"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         }
       ],
@@ -35222,6 +35517,10 @@
             "Bất đẳng thức",
             "AM-GM",
             "Tối ưu"
+          ],
+          "constraints": [
+            "Các biến số a, b, c \\ge 0 (không âm)",
+            "Dấu '=' xảy ra khi và chỉ khi a = b = c"
           ]
         },
         {
@@ -35232,6 +35531,9 @@
           "tags": [
             "Khảo sát hàm số",
             "Cực trị"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -35243,6 +35545,10 @@
             "Hàm số",
             "Cực trị",
             "Hàm bậc 3"
+          ],
+          "constraints": [
+            "a \\ne 0",
+            "\\Delta_{y'} = b^2 - 3ac > 0 (phân biệt với \\Delta = b^2 - 4ac của pt bậc 2). Đảm bảo y' = 0 có 2 nghiệm phân biệt."
           ]
         },
         {
@@ -35254,6 +35560,10 @@
             "Hàm số",
             "Cực trị",
             "Hàm trùng phương"
+          ],
+          "constraints": [
+            "a \\ne 0",
+            "Hàm số có 3 cực trị \\iff ab < 0; có đúng 1 cực trị \\iff ab \\ge 0."
           ]
         }
       ],
@@ -35316,6 +35626,9 @@
             "Mũ",
             "Phóng xạ",
             "Ứng dụng"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -35326,6 +35639,10 @@
           "tags": [
             "Logarit",
             "Đổi cơ số"
+          ],
+          "constraints": [
+            "Cơ số a > 0, a \\ne 1",
+            "Biểu thức lấy logarit > 0 (dương ngặt)"
           ]
         },
         {
@@ -35337,6 +35654,10 @@
             "Logarit",
             "Lũy thừa",
             "Quy tắc"
+          ],
+          "constraints": [
+            "Cơ số a > 0, a \\ne 1",
+            "Biểu thức lấy logarit > 0 (dương ngặt)"
           ]
         },
         {
@@ -35348,6 +35669,10 @@
             "Đạo hàm",
             "Hàm mũ",
             "Logarit"
+          ],
+          "constraints": [
+            "Cơ số a > 0, a \\ne 1",
+            "Biểu thức lấy logarit > 0 (dương ngặt)"
           ]
         }
       ],
@@ -35408,6 +35733,10 @@
           "tags": [
             "Tích phân",
             "Từng phần"
+          ],
+          "constraints": [
+            "Cơ số a > 0, a \\ne 1",
+            "Biểu thức lấy logarit > 0 (dương ngặt)"
           ]
         },
         {
@@ -35419,6 +35748,9 @@
             "Tích phân",
             "Thể tích",
             "Tròn xoay"
+          ],
+          "constraints": [
+            "Bán kính r > 0, Chiều cao h > 0"
           ]
         },
         {
@@ -35430,6 +35762,10 @@
             "Nguyên hàm",
             "Tích phân",
             "Bảng chuẩn"
+          ],
+          "constraints": [
+            "Cơ số a > 0, a \\ne 1",
+            "Biểu thức lấy logarit > 0 (dương ngặt)"
           ]
         },
         {
@@ -35441,6 +35777,9 @@
             "Tích phân",
             "Diện tích",
             "Ứng dụng"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         }
       ],
@@ -35506,6 +35845,9 @@
             "Tọa độ Oxyz",
             "Khoảng cách",
             "Mặt phẳng"
+          ],
+          "constraints": [
+            "Vectơ pháp tuyến \\vec{n} = (A, B, C) \\ne \\vec{0} \\iff A^2 + B^2 + C^2 > 0"
           ]
         },
         {
@@ -35517,6 +35859,9 @@
             "Tọa độ Oxyz",
             "Thể tích",
             "Tứ diện"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -35528,6 +35873,9 @@
             "Tọa độ Oxyz",
             "Tích có hướng",
             "Vectơ"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -35539,6 +35887,9 @@
             "Tọa độ Oxyz",
             "Khoảng cách",
             "Đường thẳng chéo nhau"
+          ],
+          "constraints": [
+            "Hai đường thẳng không song song hoặc trùng nhau: [\\vec{u}_1, \\vec{u}_2] \\ne \\vec{0}"
           ]
         },
         {
@@ -35549,6 +35900,9 @@
           "tags": [
             "Tọa độ Oxyz",
             "Mặt cầu"
+          ],
+          "constraints": [
+            "Bán kính r > 0, Chiều cao h > 0"
           ]
         },
         {
@@ -35560,6 +35914,9 @@
             "Hình học không gian",
             "Thể tích",
             "Tròn xoay"
+          ],
+          "constraints": [
+            "Bán kính r > 0, Chiều cao h > 0"
           ]
         }
       ],
@@ -35623,6 +35980,9 @@
             "Thống kê",
             "Ghép nhóm",
             "Tứ phân vị"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -35633,6 +35993,9 @@
           "tags": [
             "Xác suất",
             "Kỳ vọng"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -35644,6 +36007,9 @@
             "Biến ngẫu nhiên",
             "Phương sai",
             "Độ lệch chuẩn"
+          ],
+          "constraints": [
+            "Biểu thức dưới dấu căn bậc hai phải không âm (\\ge 0)"
           ]
         }
       ],
@@ -35704,6 +36070,9 @@
             "Ma trận",
             "Nghịch đảo",
             "Đại số tuyến tính"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -35715,6 +36084,9 @@
             "Đại số tuyến tính",
             "Ma trận nghịch đảo",
             "Định thức"
+          ],
+          "constraints": [
+            "\\det(A) \\ne 0 (Ma trận vuông khả nghịch)"
           ]
         }
       ],
@@ -35771,6 +36143,9 @@
             "Cramer",
             "Định thức",
             "Hệ phương trình"
+          ],
+          "constraints": [
+            "D = \\det(A) \\ne 0 (Định thức ma trận hệ số khác 0)"
           ]
         },
         {
@@ -35782,6 +36157,9 @@
             "Đại số tuyến tính",
             "Định thức",
             "Tính chất"
+          ],
+          "constraints": [
+            "\\det(A) \\ne 0 (Ma trận vuông khả nghịch)"
           ]
         }
       ],
@@ -35839,6 +36217,9 @@
             "Leontief",
             "Kinh tế lượng",
             "Hệ tuyến tính"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         }
       ],
@@ -35894,6 +36275,9 @@
             "Trị riêng",
             "Eigenvalues",
             "ĐSTT"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -35904,6 +36288,9 @@
           "tags": [
             "Trace",
             "Trị riêng"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         }
       ],
@@ -35962,6 +36349,9 @@
             "Markov",
             "Thị phần",
             "Xác suất"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         }
       ],
@@ -36016,6 +36406,9 @@
           "tags": [
             "Giải tích 1",
             "Vô cùng bé"
+          ],
+          "constraints": [
+            "\\cos x \\ne 0 \\iff x \\ne \\frac{\\pi}{2} + k\\pi \\; (k \\in \\mathbb{Z})"
           ]
         },
         {
@@ -36027,6 +36420,10 @@
             "Giải tích 1",
             "Vô cùng bé",
             "Giới hạn"
+          ],
+          "constraints": [
+            "Cơ số a > 0, a \\ne 1",
+            "Biểu thức lấy logarit > 0 (dương ngặt)"
           ]
         }
       ],
@@ -36084,6 +36481,9 @@
           "tags": [
             "Đạo hàm cấp cao",
             "Leibniz"
+          ],
+          "constraints": [
+            "Điều kiện: 0 \\le k \\le n với k, n \\in \\mathbb{N}"
           ]
         },
         {
@@ -36094,6 +36494,9 @@
           "tags": [
             "Maclaurin",
             "Taylor"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -36105,6 +36508,9 @@
             "Giải tích 1",
             "L'Hopital",
             "Đạo hàm"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         },
         {
@@ -36116,6 +36522,10 @@
             "Giải tích 1",
             "Maclaurin",
             "Taylor"
+          ],
+          "constraints": [
+            "Cơ số a > 0, a \\ne 1",
+            "Biểu thức lấy logarit > 0 (dương ngặt)"
           ]
         }
       ],
@@ -36179,6 +36589,9 @@
             "Tích phân suy rộng",
             "Hội tụ",
             "Riemann"
+          ],
+          "constraints": [
+            "Mẫu số của các biểu thức phân số phải khác 0"
           ]
         }
       ],
@@ -36232,6 +36645,9 @@
           "tags": [
             "Chuỗi hàm",
             "Bán kính hội tụ"
+          ],
+          "constraints": [
+            "Khảo sát trên khoảng hội tụ |x - x_0| < R; kiểm tra riêng tại 2 đầu mút"
           ]
         },
         {
@@ -36242,6 +36658,9 @@
           "tags": [
             "Chuỗi số",
             "p-series"
+          ],
+          "constraints": [
+            "Khảo sát trên khoảng hội tụ |x - x_0| < R; kiểm tra riêng tại 2 đầu mút"
           ]
         }
       ],
@@ -36300,6 +36719,9 @@
           "tags": [
             "Vi phân cấp 1",
             "Thừa số tích phân"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         },
         {
@@ -36310,6 +36732,9 @@
           "tags": [
             "Vi phân cấp 2",
             "Phương trình đặc trưng"
+          ],
+          "constraints": [
+            "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
           ]
         }
       ],
@@ -36347,6 +36772,213 @@
       "related_question_ids": [
         "q_calc_05",
         "q_calc_11"
+      ]
+    },
+    {
+      "id": "kb_tsa_num_01",
+      "grade": "Toán 11",
+      "chapter": "Chương 4: Số học, Đồng dư thức & Tư duy Định lượng TSA",
+      "title": "Đồng dư thức, Chữ số tận cùng & Phép chia có dư lũy thừa lớn",
+      "overview": "Chuyên đề toàn diện từ nền tảng cơ bản (tính chất đồng dư, chu kỳ chữ số tận cùng, định lý Bézout) đến kỹ thuật chuyên sâu (định lý Fermat nhỏ, phi hàm Euler, tháp lũy thừa tầng, thặng dư Trung Hoa CRT và đạo hàm tìm dư đa thức).",
+      "theory_markdown": "### 1. Định nghĩa và Tính chất cốt lõi của Đồng dư thức (Cơ bản)\nCho số nguyên dương \\(m \\ge 2\\). Hai số nguyên \\(a\\) và \\(b\\) được gọi là **đồng dư với nhau theo modulo \\(m\\)**, ký hiệu:\n\\[a \\equiv b \\pmod m \\iff (a - b) \\;\\vdots\\; m \\iff a = km + b \\quad (k \\in \\mathbb{Z})\\]\n- **Phép cộng và trừ**: Nếu \\(a \\equiv b \\pmod m\\) và \\(c \\equiv d \\pmod m\\) thì \\(a \\pm c \\equiv b \\pm d \\pmod m\\).\n- **Phép nhân**: Nếu \\(a \\equiv b \\pmod m\\) và \\(c \\equiv d \\pmod m\\) thì \\(a \\cdot c \\equiv b \\cdot d \\pmod m\\).\n- **Nâng lên lũy thừa**: Nếu \\(a \\equiv b \\pmod m\\) thì \\(a^k \\equiv b^k \\pmod m\\) với mọi \\(k \\in \\mathbb{Z}^+\\).\n- **Rút gọn hệ số (Điều kiện biên)**: \\(ac \\equiv bc \\pmod m \\iff a \\equiv b \\pmod{\\frac{m}{\\gcd(c, m)}}\\). Đặc biệt, khi \\(\\gcd(c, m) = 1\\) thì \\(a \\equiv b \\pmod m\\).\n\n### 2. Phương pháp tìm một chữ số tận cùng của \\(a^n\\) (Cơ bản)\nTìm chữ số tận cùng của \\(N = a^n\\) tương đương với việc tìm số dư của \\(N\\) khi chia cho 10: \\(N \\pmod{10}\\).\n- **Nhóm chu kỳ 1 (Chữ số tận cùng là \\(0, 1, 5, 6\\))**: Mọi lũy thừa nguyên dương đều giữ nguyên chữ số tận cùng (\\(0^n \\to 0,\\; 1^n \\to 1,\\; 5^n \\to 5,\\; 6^n \\to 6\\)).\n- **Nhóm chu kỳ 2 (Chữ số tận cùng là \\(4, 9\\))**: \\(4^{2k} \\to 6,\\; 4^{2k+1} \\to 4\\) và \\(9^{2k} \\to 1,\\; 9^{2k+1} \\to 9\\).\n- **Nhóm chu kỳ 4 (Chữ số tận cùng là \\(2, 3, 7, 8\\))**: \\(a^{4k + r} \\equiv a^r \\pmod{10}\\) với \\(r \\in \\{1, 2, 3, 4\\}\\).\n- **Quy tắc giải nhanh**: Lấy số mũ \\(n\\) chia cho 4 tìm số dư \\(r\\) (nếu \\(n \\;\\vdots\\; 4\\) thì lấy \\(r = 4\\)), khi đó chữ số tận cùng của \\(a^n\\) bằng chữ số tận cùng của \\(a^r\\).\n\n### 3. Phương pháp tìm hai chữ số tận cùng của \\(a^n\\) (Cơ bản)\nTìm hai chữ số tận cùng của \\(N = a^n\\) tương đương với việc tìm số dư \\(N \\pmod{100}\\).\n- **Các đuôi bất biến**: Các số tận cùng bằng \\(00, 01, 25, 76\\) khi nâng lên lũy thừa \\(n \\ge 1\\) luôn giữ nguyên 2 chữ số tận cùng (\\(25^n \\equiv 25 \\pmod{100},\\; 76^n \\equiv 76 \\pmod{100}\\)).\n- **Cơ số nguyên tố cùng nhau với 10 (\\(\\gcd(a, 10) = 1\\))**: Luôn có \\(a^{20} \\equiv 01 \\pmod{100}\\). Riêng các số có tận cùng là \\(1, 3, 7, 9\\) thì \\(a^{20k} \\equiv 01 \\pmod{100}\\).\n- **Cơ số chẵn không chia hết cho 5**: Với \\(a\\) chẵn và \\(\\gcd(a, 5) = 1\\), ta có \\(a^{20k} \\equiv 76 \\pmod{100}\\) với mọi \\(k \\ge 1\\).\n\n### 4. Định lý số dư Bézout trong phép chia đa thức (Cơ bản)\n- **Chia cho nhị thức bậc nhất \\((x - a)\\)**: Phần dư của đa thức \\(P(x)\\) khi chia cho \\((x - a)\\) là hằng số \\(R = P(a)\\). Hệ quả: \\(P(x) \\;\\vdots\\; (x - a) \\iff P(a) = 0\\).\n- **Chia cho tam thức bậc hai \\((x - a)(x - b)\\) với \\(a \\ne b\\)**: Gọi đa thức dư là \\(R(x) = Ax + B\\), hệ số \\(A, B\\) là nghiệm của hệ:\n\\[\\begin{cases} Aa + B = P(a) \\\\ Ab + B = P(b) \\end{cases}\\]\n\n### 5. Định lý Fermat nhỏ — Fermat's Little Theorem (Chuyên sâu)\nNếu \\(p\\) là một số nguyên tố và \\(a\\) là số nguyên không chia hết cho \\(p\\) (\\(\\gcd(a, p) = 1\\)), thì:\n\\[a^{p-1} \\equiv 1 \\pmod p\\]\n- **Dạng tổng quát cho mọi số nguyên \\(a\\)**: \\(a^p \\equiv a \\pmod p\\).\n- **Ứng dụng hạ bậc số mũ lớn**: Để tìm \\(a^n \\pmod p\\), ta chia số mũ \\(n\\) cho \\((p - 1)\\) được \\(n = q(p - 1) + r\\), suy ra \\(a^n = (a^{p-1})^q \\cdot a^r \\equiv a^r \\pmod p\\).\n\n### 6. Định lý Euler & Phi hàm Euler (Chuyên sâu)\nMở rộng định lý Fermat cho modulo hợp số \\(m \\ge 2\\). Nếu \\(\\gcd(a, m) = 1\\), ta luôn có:\n\\[a^{\\phi(m)} \\equiv 1 \\pmod m\\]\n- **Công thức tính phi hàm Euler \\(\\phi(m)\\)** (số các số nguyên dương không vượt quá \\(m\\) và nguyên tố cùng nhau với \\(m\\)):\n\\[\\phi(m) = m \\prod_{p \\mid m} \\left(1 - \\frac{1}{p}\\right) = p_1^{k_1 - 1}(p_1 - 1) \\dots p_r^{k_r - 1}(p_r - 1)\\]\n- **Ví dụ trọng tâm**: \\(\\phi(100) = 100\\left(1 - \\frac{1}{2}\\right)\\left(1 - \\frac{1}{5}\\right) = 40 \\implies a^{40} \\equiv 1 \\pmod{100}\\) khi \\(\\gcd(a, 10) = 1\\).\n\n### 7. Định lý Thặng dư Trung Hoa (CRT) & Tháp số mũ (Chuyên sâu)\n- **Định lý Thặng dư Trung Hoa (CRT)**: Cho \\(m_1, m_2, \\dots, m_k\\) đôi một nguyên tố cùng nhau (\\(\\gcd(m_i, m_j) = 1\\) với \\(i \\ne j\\)). Hệ phương trình đồng dư:\n\\[\\begin{cases} x \\equiv a_1 \\pmod{m_1} \\\\ x \\equiv a_2 \\pmod{m_2} \\\\ \\dots \\\\ x \\equiv a_k \\pmod{m_k} \\end{cases}\\]\nluôn có nghiệm duy nhất theo modulo \\(M = m_1 m_2 \\dots m_k\\).\n- **Kỹ thuật hạ Tháp số mũ (Lũy thừa tầng \\(a^{b^c} \\pmod m\\))**: Khi \\(\\gcd(a, m) = 1\\), chu kỳ của cơ số \\(a\\) theo modulo \\(m\\) là \\(\\phi(m)\\). Ta rút gọn số mũ tầng trên theo modulo \\(\\phi(m)\\):\n\\[k = b^c \\pmod{\\phi(m)} \\implies a^{b^c} \\equiv a^k \\pmod m\\]\n\n### 8. Kỹ thuật đạo hàm tìm phần dư chia đa thức cho \\((x - a)^2\\) (Chuyên sâu)\nKhi chia đa thức khả vi \\(P(x)\\) cho \\((x - a)^2\\), phần dư có bậc không quá 1 dạng \\(R(x) = Ax + B\\):\n\\[P(x) = Q(x)(x - a)^2 + Ax + B\\]\n- Lấy đạo hàm hai vế theo \\(x\\): \\(P'(x) = Q'(x)(x - a)^2 + 2Q(x)(x - a) + A\\).\n- Thay \\(x = a\\) vào hai đẳng thức, ta được \\(A = P'(a)\\) và \\(B = P(a) - aP'(a)\\).\n- **Công thức phần dư nghiệm kép**: \\(R(x) = P'(a)(x - a) + P(a)\\).",
+      "formulas": [
+        {
+          "id": "kb_num_01_f1",
+          "name": "Định nghĩa Đồng dư thức",
+          "latex": "a \\equiv b \\pmod m \\iff (a - b) \\;\\vdots\\; m",
+          "desc": "Điều kiện cần và đủ để hai số nguyên có cùng số dư khi chia cho m",
+          "tags": [
+            "Đồng dư",
+            "Số học",
+            "Cơ bản"
+          ],
+          "constraints": [
+            "m \\in \\mathbb{Z}^+, m \\ge 2"
+          ]
+        },
+        {
+          "id": "kb_num_01_f2",
+          "name": "Tính chất Lũy thừa Đồng dư",
+          "latex": "a \\equiv b \\pmod m \\implies a^k \\equiv b^k \\pmod m",
+          "desc": "Bảo toàn số dư qua phép nâng lên lũy thừa nguyên dương",
+          "tags": [
+            "Lũy thừa",
+            "Đồng dư",
+            "Cơ bản"
+          ],
+          "constraints": [
+            "k \\in \\mathbb{Z}^+, m \\ge 2"
+          ]
+        },
+        {
+          "id": "kb_num_01_f3",
+          "name": "Chu kỳ 1 chữ số tận cùng",
+          "latex": "a^{4k+r} \\equiv a^r \\pmod{10} \\quad (r \\in \\{1, 2, 3, 4\\})",
+          "desc": "Chu kỳ lặp chữ số tận cùng của mọi cơ số nguyên có độ dài tối đa là 4",
+          "tags": [
+            "Chữ số tận cùng",
+            "Modulo 10",
+            "Cơ bản"
+          ],
+          "constraints": [
+            "a, k \\in \\mathbb{Z}^+"
+          ]
+        },
+        {
+          "id": "kb_num_01_f4",
+          "name": "Số dư phép chia Đa thức (Định lý Bézout)",
+          "latex": "P(x) = Q(x)(x - a) + R \\implies R = P(a)",
+          "desc": "Số dư khi chia đa thức P(x) cho nhị thức (x - a) bằng giá trị P(a)",
+          "tags": [
+            "Đa thức",
+            "Số dư",
+            "Bézout",
+            "Cơ bản"
+          ],
+          "constraints": [
+            "P(x) là đa thức hệ số thực"
+          ]
+        },
+        {
+          "id": "kb_num_01_f5",
+          "name": "Định lý Fermat nhỏ (Fermat's Little Theorem)",
+          "latex": "a^{p-1} \\equiv 1 \\pmod p \\quad (p \\in \\mathbb{P},\\; \\gcd(a, p) = 1)",
+          "desc": "Hạ bậc số mũ cực lớn khi chia cho số nguyên tố p",
+          "tags": [
+            "Fermat",
+            "Số nguyên tố",
+            "Chuyên sâu"
+          ],
+          "constraints": [
+            "p nguyên tố, \\gcd(a, p) = 1"
+          ]
+        },
+        {
+          "id": "kb_num_01_f6",
+          "name": "Định lý Euler & Phi hàm Euler",
+          "latex": "a^{\\phi(m)} \\equiv 1 \\pmod m, \\quad \\phi(m) = m \\prod_{p \\mid m}\\left(1 - \\frac{1}{p}\\right)",
+          "desc": "Định lý tổng quát hạ bậc số mũ cho modulo hợp số m bất kỳ",
+          "tags": [
+            "Euler",
+            "Phi hàm",
+            "Chuyên sâu"
+          ],
+          "constraints": [
+            "m \\in \\mathbb{Z}^+, \\gcd(a, m) = 1"
+          ]
+        },
+        {
+          "id": "kb_num_01_f7",
+          "name": "Định lý Thặng dư Trung Hoa (CRT)",
+          "latex": "\\begin{cases} x \\equiv a \\pmod{m_1} \\\\ x \\equiv b \\pmod{m_2} \\end{cases} \\implies x \\text{ duy nhất } \\pmod{m_1 m_2}",
+          "desc": "Tách bài toán modulo hợp số thành hệ các modulo nguyên tố cùng nhau",
+          "tags": [
+            "CRT",
+            "Thặng dư Trung Hoa",
+            "Chuyên sâu"
+          ],
+          "constraints": [
+            "\\gcd(m_1, m_2) = 1"
+          ]
+        },
+        {
+          "id": "kb_num_01_f8",
+          "name": "Phần dư chia đa thức cho nghiệm kép",
+          "latex": "P(x) = Q(x)(x - a)^2 + R(x) \\implies R(x) = P'(a)(x - a) + P(a)",
+          "desc": "Ứng dụng đạo hàm tìm nhanh đa thức dư khi chia cho bình phương nhị thức",
+          "tags": [
+            "Đa thức",
+            "Đạo hàm",
+            "Số dư",
+            "Chuyên sâu"
+          ],
+          "constraints": [
+            "P(x) khả vi tại x = a"
+          ]
+        }
+      ],
+      "formula_ids": [
+        "kb_num_01_f1",
+        "kb_num_01_f2",
+        "kb_num_01_f3",
+        "kb_num_01_f4",
+        "kb_num_01_f5",
+        "kb_num_01_f6",
+        "kb_num_01_f7",
+        "kb_num_01_f8"
+      ],
+      "prerequisites": [
+        "kb_toan10_01"
+      ],
+      "related_topics": [
+        "kb_toan11_02",
+        "kb_toan11_04"
+      ],
+      "common_traps": [
+        "Lấy số mũ tầng trên chia trực tiếp cho modulo \\(m\\) thay vì chia cho \\(\\phi(m)\\) khi hạ bậc tháp lũy thừa",
+        "Áp dụng định lý Fermat nhỏ hoặc Euler khi chưa kiểm tra điều kiện nguyên tố cùng nhau \\(\\gcd(a, m) = 1\\)",
+        "Khi chia số mũ \\(n\\) cho chu kỳ 4 mà phép chia hết (\\(n \\;\\vdots\\; 4\\)), học sinh hay thay nhầm số mũ \\(r = 0\\) thay vì \\(r = 4\\)"
+      ],
+      "examples": [
+        {
+          "title": "Ví dụ 1 (Cơ bản): Tìm 1 chữ số tận cùng của tổng lũy thừa",
+          "question": "Tìm chữ số tận cùng của biểu thức \\(S = 2^{2025} + 3^{2026} + 7^{2027}\\).",
+          "solution_steps": [
+            "Bước 1: Tìm chữ số tận cùng tương đương với việc tìm số dư \\(S \\pmod{10}\\). Các cơ số 2, 3, 7 đều có chu kỳ tận cùng bằng 4.",
+            "Bước 2: Phân tích số mũ theo modulo 4: \\(2025 = 4 \\times 506 + 1 \\implies 2^{2025} \\equiv 2^1 = 2 \\pmod{10}\\).",
+            "Bước 3: Tương tự: \\(2026 = 4 \\times 506 + 2 \\implies 3^{2026} \\equiv 3^2 = 9 \\pmod{10}\\); và \\(2027 = 4 \\times 506 + 3 \\implies 7^{2027} \\equiv 7^3 = 343 \\equiv 3 \\pmod{10}\\).",
+            "Bước 4: Cộng các số dư: \\(S \\equiv 2 + 9 + 3 = 14 \\equiv 4 \\pmod{10}\\). Vậy chữ số tận cùng là 4."
+          ],
+          "takeaway": "Tách tổng thành từng lũy thừa riêng biệt, rút gọn số mũ theo chu kỳ 4 rồi cộng các chữ số tận cùng."
+        },
+        {
+          "title": "Ví dụ 2 (Cơ bản): Tìm phần dư phép chia đa thức bằng Định lý Bézout",
+          "question": "Tìm phần dư khi chia đa thức \\(P(x) = x^{2025} - 2x^{2024} + 3x - 1\\) cho nhị thức \\(x - 1\\).",
+          "solution_steps": [
+            "Bước 1: Theo định lý số dư Bézout, khi chia đa thức \\(P(x)\\) cho \\(x - a\\), số dư là hằng số \\(R = P(a)\\).",
+            "Bước 2: Với nhị thức chia \\(x - 1\\), ta thay nghiệm \\(x = 1\\) trực tiếp vào đa thức \\(P(x)\\).",
+            "Bước 3: Tính giá trị: \\(R = P(1) = 1^{2025} - 2(1^{2024}) + 3(1) - 1 = 1 - 2 + 3 - 1 = 1\\).",
+            "Bước 4: Kết luận phần dư của phép chia là \\(R = 1\\)."
+          ],
+          "takeaway": "Không thực hiện phép chia đa thức truyền thống với bậc lớn; thay ngay nghiệm của số chia vào đa thức bị chia."
+        },
+        {
+          "title": "Ví dụ 3 (Chuyên sâu): Tìm 2 chữ số tận cùng bằng Định lý Euler",
+          "question": "Tìm hai chữ số tận cùng của số \\(A = 7^{2026}\\).",
+          "solution_steps": [
+            "Bước 1: Hai chữ số tận cùng của \\(A\\) chính là số dư của \\(A\\) khi chia cho 100: \\(A \\pmod{100}\\).",
+            "Bước 2: Do \\(\\gcd(7, 100) = 1\\), áp dụng định lý Euler với \\(\\phi(100) = 40\\): \\(7^{40} \\equiv 1 \\pmod{100}\\) (hoặc nhận xét nhanh \\(7^4 = 2401 \\equiv 01 \\pmod{100}\\)).",
+            "Bước 3: Chia số mũ 2026 cho 4: \\(2026 = 4 \\times 506 + 2\\).",
+            "Bước 4: Suy ra \\(7^{2026} = (7^4)^{506} \\cdot 7^2 \\equiv 1^{506} \\cdot 49 = 49 \\pmod{100}\\). Vậy hai chữ số tận cùng là 49."
+          ],
+          "takeaway": "Với cơ số 3, 7, 9 khi tìm 2 chữ số tận cùng, luỹ thừa bậc 4 của chúng có tận cùng là 01 hoặc 81, giúp hạ bậc siêu tốc."
+        },
+        {
+          "title": "Ví dụ 4 (Chuyên sâu): Hạ bậc Tháp số mũ lũy thừa tầng",
+          "question": "Tìm số dư khi chia số \\(N = 2^{3^{2025}}\\) cho 11.",
+          "solution_steps": [
+            "Bước 1: Vì 11 là số nguyên tố và \\(\\gcd(2, 11) = 1\\), theo định lý Fermat nhỏ ta có \\(2^{10} \\equiv 1 \\pmod{11}\\).",
+            "Bước 2: Chu kỳ của cơ số 2 theo modulo 11 là 10. Do đó, số mũ tầng trên \\(E = 3^{2025}\\) phải được rút gọn theo modulo 10.",
+            "Bước 3: Xét \\(3^{2025} \\pmod{10}\\): Do \\(2025 = 4 \\times 506 + 1\\) nên \\(3^{2025} \\equiv 3^1 = 3 \\pmod{10}\\), tức \\(3^{2025} = 10k + 3\\).",
+            "Bước 4: Thay vào \\(N\\): \\(N = 2^{10k + 3} = (2^{10})^k \\cdot 2^3 \\equiv 1^k \\cdot 8 = 8 \\pmod{11}\\). Số dư cần tìm là 8."
+          ],
+          "takeaway": "Quy tắc 2 tầng: Rút gọn số mũ tầng trên theo modulo phi(m) trước, sau đó lấy số dư thu được làm số mũ cho cơ số dưới."
+        }
+      ],
+      "applications": "Ứng dụng cốt lõi trong thuật toán mật mã hóa khóa công khai RSA (bảo mật giao dịch ngân hàng, chữ ký số, SSL/HTTPS), hàm băm đồng dư (Hash Table) trong khoa học máy tính và kiểm tra mã định danh ISBN/CCCD.",
+      "drill_tags": [
+        "Đồng dư",
+        "Số học",
+        "TSA",
+        "HSA",
+        "Euler",
+        "Fermat"
+      ],
+      "related_question_ids": [
+        "q_tsa_num_01",
+        "q_tsa_num_02",
+        "q_tsa_num_03",
+        "q_tsa_num_04"
       ]
     }
   ],

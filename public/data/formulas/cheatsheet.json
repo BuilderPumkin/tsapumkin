@@ -1399,5 +1399,143 @@
     "constraints": [
       "Áp dụng trong tập xác định chuẩn của các hàm số thành phần"
     ]
+  },
+  {
+    "id": "kb_num_01_f1",
+    "article_id": "kb_tsa_num_01",
+    "article_title": "Đồng dư thức, Chữ số tận cùng & Phép chia có dư lũy thừa lớn",
+    "grade": "Toán 11",
+    "name": "Định nghĩa Đồng dư thức",
+    "latex": "a \\equiv b \\pmod m \\iff (a - b) \\;\\vdots\\; m",
+    "desc": "Điều kiện cần và đủ để hai số nguyên có cùng số dư khi chia cho m",
+    "tags": [
+      "Đồng dư",
+      "Số học",
+      "Cơ bản"
+    ],
+    "constraints": [
+      "m \\in \\mathbb{Z}^+, m \\ge 2"
+    ]
+  },
+  {
+    "id": "kb_num_01_f2",
+    "article_id": "kb_tsa_num_01",
+    "article_title": "Đồng dư thức, Chữ số tận cùng & Phép chia có dư lũy thừa lớn",
+    "grade": "Toán 11",
+    "name": "Tính chất Lũy thừa Đồng dư",
+    "latex": "a \\equiv b \\pmod m \\implies a^k \\equiv b^k \\pmod m",
+    "desc": "Bảo toàn số dư qua phép nâng lên lũy thừa nguyên dương",
+    "tags": [
+      "Lũy thừa",
+      "Đồng dư",
+      "Cơ bản"
+    ],
+    "constraints": [
+      "k \\in \\mathbb{Z}^+, m \\ge 2"
+    ]
+  },
+  {
+    "id": "kb_num_01_f3",
+    "article_id": "kb_tsa_num_01",
+    "article_title": "Đồng dư thức, Chữ số tận cùng & Phép chia có dư lũy thừa lớn",
+    "grade": "Toán 11",
+    "name": "Chu kỳ 1 chữ số tận cùng",
+    "latex": "a^{4k+r} \\equiv a^r \\pmod{10} \\quad (r \\in \\{1, 2, 3, 4\\})",
+    "desc": "Chu kỳ lặp chữ số tận cùng của mọi cơ số nguyên có độ dài tối đa là 4",
+    "tags": [
+      "Chữ số tận cùng",
+      "Modulo 10",
+      "Cơ bản"
+    ],
+    "constraints": [
+      "a, k \\in \\mathbb{Z}^+"
+    ]
+  },
+  {
+    "id": "kb_num_01_f4",
+    "article_id": "kb_tsa_num_01",
+    "article_title": "Đồng dư thức, Chữ số tận cùng & Phép chia có dư lũy thừa lớn",
+    "grade": "Toán 11",
+    "name": "Số dư phép chia Đa thức (Định lý Bézout)",
+    "latex": "P(x) = Q(x)(x - a) + R \\implies R = P(a)",
+    "desc": "Số dư khi chia đa thức P(x) cho nhị thức (x - a) bằng giá trị P(a)",
+    "tags": [
+      "Đa thức",
+      "Số dư",
+      "Bézout",
+      "Cơ bản"
+    ],
+    "constraints": [
+      "P(x) là đa thức hệ số thực"
+    ]
+  },
+  {
+    "id": "kb_num_01_f5",
+    "article_id": "kb_tsa_num_01",
+    "article_title": "Đồng dư thức, Chữ số tận cùng & Phép chia có dư lũy thừa lớn",
+    "grade": "Toán 11",
+    "name": "Định lý Fermat nhỏ (Fermat's Little Theorem)",
+    "latex": "a^{p-1} \\equiv 1 \\pmod p \\quad (p \\in \\mathbb{P},\\; \\gcd(a, p) = 1)",
+    "desc": "Hạ bậc số mũ cực lớn khi chia cho số nguyên tố p",
+    "tags": [
+      "Fermat",
+      "Số nguyên tố",
+      "Chuyên sâu"
+    ],
+    "constraints": [
+      "p nguyên tố, \\gcd(a, p) = 1"
+    ]
+  },
+  {
+    "id": "kb_num_01_f6",
+    "article_id": "kb_tsa_num_01",
+    "article_title": "Đồng dư thức, Chữ số tận cùng & Phép chia có dư lũy thừa lớn",
+    "grade": "Toán 11",
+    "name": "Định lý Euler & Phi hàm Euler",
+    "latex": "a^{\\phi(m)} \\equiv 1 \\pmod m, \\quad \\phi(m) = m \\prod_{p \\mid m}\\left(1 - \\frac{1}{p}\\right)",
+    "desc": "Định lý tổng quát hạ bậc số mũ cho modulo hợp số m bất kỳ",
+    "tags": [
+      "Euler",
+      "Phi hàm",
+      "Chuyên sâu"
+    ],
+    "constraints": [
+      "m \\in \\mathbb{Z}^+, \\gcd(a, m) = 1"
+    ]
+  },
+  {
+    "id": "kb_num_01_f7",
+    "article_id": "kb_tsa_num_01",
+    "article_title": "Đồng dư thức, Chữ số tận cùng & Phép chia có dư lũy thừa lớn",
+    "grade": "Toán 11",
+    "name": "Định lý Thặng dư Trung Hoa (CRT)",
+    "latex": "\\begin{cases} x \\equiv a \\pmod{m_1} \\\\ x \\equiv b \\pmod{m_2} \\end{cases} \\implies x \\text{ duy nhất } \\pmod{m_1 m_2}",
+    "desc": "Tách bài toán modulo hợp số thành hệ các modulo nguyên tố cùng nhau",
+    "tags": [
+      "CRT",
+      "Thặng dư Trung Hoa",
+      "Chuyên sâu"
+    ],
+    "constraints": [
+      "\\gcd(m_1, m_2) = 1"
+    ]
+  },
+  {
+    "id": "kb_num_01_f8",
+    "article_id": "kb_tsa_num_01",
+    "article_title": "Đồng dư thức, Chữ số tận cùng & Phép chia có dư lũy thừa lớn",
+    "grade": "Toán 11",
+    "name": "Phần dư chia đa thức cho nghiệm kép",
+    "latex": "P(x) = Q(x)(x - a)^2 + R(x) \\implies R(x) = P'(a)(x - a) + P(a)",
+    "desc": "Ứng dụng đạo hàm tìm nhanh đa thức dư khi chia cho bình phương nhị thức",
+    "tags": [
+      "Đa thức",
+      "Đạo hàm",
+      "Số dư",
+      "Chuyên sâu"
+    ],
+    "constraints": [
+      "P(x) khả vi tại x = a"
+    ]
   }
 ]

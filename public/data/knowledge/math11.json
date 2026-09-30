@@ -608,5 +608,212 @@
       "q_hsa_16",
       "q_thpt_09"
     ]
+  },
+  {
+    "id": "kb_tsa_num_01",
+    "grade": "Toán 11",
+    "chapter": "Chương 4: Số học, Đồng dư thức & Tư duy Định lượng TSA",
+    "title": "Đồng dư thức, Chữ số tận cùng & Phép chia có dư lũy thừa lớn",
+    "overview": "Chuyên đề toàn diện từ nền tảng cơ bản (tính chất đồng dư, chu kỳ chữ số tận cùng, định lý Bézout) đến kỹ thuật chuyên sâu (định lý Fermat nhỏ, phi hàm Euler, tháp lũy thừa tầng, thặng dư Trung Hoa CRT và đạo hàm tìm dư đa thức).",
+    "theory_markdown": "### 1. Định nghĩa và Tính chất cốt lõi của Đồng dư thức (Cơ bản)\nCho số nguyên dương \\(m \\ge 2\\). Hai số nguyên \\(a\\) và \\(b\\) được gọi là **đồng dư với nhau theo modulo \\(m\\)**, ký hiệu:\n\\[a \\equiv b \\pmod m \\iff (a - b) \\;\\vdots\\; m \\iff a = km + b \\quad (k \\in \\mathbb{Z})\\]\n- **Phép cộng và trừ**: Nếu \\(a \\equiv b \\pmod m\\) và \\(c \\equiv d \\pmod m\\) thì \\(a \\pm c \\equiv b \\pm d \\pmod m\\).\n- **Phép nhân**: Nếu \\(a \\equiv b \\pmod m\\) và \\(c \\equiv d \\pmod m\\) thì \\(a \\cdot c \\equiv b \\cdot d \\pmod m\\).\n- **Nâng lên lũy thừa**: Nếu \\(a \\equiv b \\pmod m\\) thì \\(a^k \\equiv b^k \\pmod m\\) với mọi \\(k \\in \\mathbb{Z}^+\\).\n- **Rút gọn hệ số (Điều kiện biên)**: \\(ac \\equiv bc \\pmod m \\iff a \\equiv b \\pmod{\\frac{m}{\\gcd(c, m)}}\\). Đặc biệt, khi \\(\\gcd(c, m) = 1\\) thì \\(a \\equiv b \\pmod m\\).\n\n### 2. Phương pháp tìm một chữ số tận cùng của \\(a^n\\) (Cơ bản)\nTìm chữ số tận cùng của \\(N = a^n\\) tương đương với việc tìm số dư của \\(N\\) khi chia cho 10: \\(N \\pmod{10}\\).\n- **Nhóm chu kỳ 1 (Chữ số tận cùng là \\(0, 1, 5, 6\\))**: Mọi lũy thừa nguyên dương đều giữ nguyên chữ số tận cùng (\\(0^n \\to 0,\\; 1^n \\to 1,\\; 5^n \\to 5,\\; 6^n \\to 6\\)).\n- **Nhóm chu kỳ 2 (Chữ số tận cùng là \\(4, 9\\))**: \\(4^{2k} \\to 6,\\; 4^{2k+1} \\to 4\\) và \\(9^{2k} \\to 1,\\; 9^{2k+1} \\to 9\\).\n- **Nhóm chu kỳ 4 (Chữ số tận cùng là \\(2, 3, 7, 8\\))**: \\(a^{4k + r} \\equiv a^r \\pmod{10}\\) với \\(r \\in \\{1, 2, 3, 4\\}\\).\n- **Quy tắc giải nhanh**: Lấy số mũ \\(n\\) chia cho 4 tìm số dư \\(r\\) (nếu \\(n \\;\\vdots\\; 4\\) thì lấy \\(r = 4\\)), khi đó chữ số tận cùng của \\(a^n\\) bằng chữ số tận cùng của \\(a^r\\).\n\n### 3. Phương pháp tìm hai chữ số tận cùng của \\(a^n\\) (Cơ bản)\nTìm hai chữ số tận cùng của \\(N = a^n\\) tương đương với việc tìm số dư \\(N \\pmod{100}\\).\n- **Các đuôi bất biến**: Các số tận cùng bằng \\(00, 01, 25, 76\\) khi nâng lên lũy thừa \\(n \\ge 1\\) luôn giữ nguyên 2 chữ số tận cùng (\\(25^n \\equiv 25 \\pmod{100},\\; 76^n \\equiv 76 \\pmod{100}\\)).\n- **Cơ số nguyên tố cùng nhau với 10 (\\(\\gcd(a, 10) = 1\\))**: Luôn có \\(a^{20} \\equiv 01 \\pmod{100}\\). Riêng các số có tận cùng là \\(1, 3, 7, 9\\) thì \\(a^{20k} \\equiv 01 \\pmod{100}\\).\n- **Cơ số chẵn không chia hết cho 5**: Với \\(a\\) chẵn và \\(\\gcd(a, 5) = 1\\), ta có \\(a^{20k} \\equiv 76 \\pmod{100}\\) với mọi \\(k \\ge 1\\).\n\n### 4. Định lý số dư Bézout trong phép chia đa thức (Cơ bản)\n- **Chia cho nhị thức bậc nhất \\((x - a)\\)**: Phần dư của đa thức \\(P(x)\\) khi chia cho \\((x - a)\\) là hằng số \\(R = P(a)\\). Hệ quả: \\(P(x) \\;\\vdots\\; (x - a) \\iff P(a) = 0\\).\n- **Chia cho tam thức bậc hai \\((x - a)(x - b)\\) với \\(a \\ne b\\)**: Gọi đa thức dư là \\(R(x) = Ax + B\\), hệ số \\(A, B\\) là nghiệm của hệ:\n\\[\\begin{cases} Aa + B = P(a) \\\\ Ab + B = P(b) \\end{cases}\\]\n\n### 5. Định lý Fermat nhỏ — Fermat's Little Theorem (Chuyên sâu)\nNếu \\(p\\) là một số nguyên tố và \\(a\\) là số nguyên không chia hết cho \\(p\\) (\\(\\gcd(a, p) = 1\\)), thì:\n\\[a^{p-1} \\equiv 1 \\pmod p\\]\n- **Dạng tổng quát cho mọi số nguyên \\(a\\)**: \\(a^p \\equiv a \\pmod p\\).\n- **Ứng dụng hạ bậc số mũ lớn**: Để tìm \\(a^n \\pmod p\\), ta chia số mũ \\(n\\) cho \\((p - 1)\\) được \\(n = q(p - 1) + r\\), suy ra \\(a^n = (a^{p-1})^q \\cdot a^r \\equiv a^r \\pmod p\\).\n\n### 6. Định lý Euler & Phi hàm Euler (Chuyên sâu)\nMở rộng định lý Fermat cho modulo hợp số \\(m \\ge 2\\). Nếu \\(\\gcd(a, m) = 1\\), ta luôn có:\n\\[a^{\\phi(m)} \\equiv 1 \\pmod m\\]\n- **Công thức tính phi hàm Euler \\(\\phi(m)\\)** (số các số nguyên dương không vượt quá \\(m\\) và nguyên tố cùng nhau với \\(m\\)):\n\\[\\phi(m) = m \\prod_{p \\mid m} \\left(1 - \\frac{1}{p}\\right) = p_1^{k_1 - 1}(p_1 - 1) \\dots p_r^{k_r - 1}(p_r - 1)\\]\n- **Ví dụ trọng tâm**: \\(\\phi(100) = 100\\left(1 - \\frac{1}{2}\\right)\\left(1 - \\frac{1}{5}\\right) = 40 \\implies a^{40} \\equiv 1 \\pmod{100}\\) khi \\(\\gcd(a, 10) = 1\\).\n\n### 7. Định lý Thặng dư Trung Hoa (CRT) & Tháp số mũ (Chuyên sâu)\n- **Định lý Thặng dư Trung Hoa (CRT)**: Cho \\(m_1, m_2, \\dots, m_k\\) đôi một nguyên tố cùng nhau (\\(\\gcd(m_i, m_j) = 1\\) với \\(i \\ne j\\)). Hệ phương trình đồng dư:\n\\[\\begin{cases} x \\equiv a_1 \\pmod{m_1} \\\\ x \\equiv a_2 \\pmod{m_2} \\\\ \\dots \\\\ x \\equiv a_k \\pmod{m_k} \\end{cases}\\]\nluôn có nghiệm duy nhất theo modulo \\(M = m_1 m_2 \\dots m_k\\).\n- **Kỹ thuật hạ Tháp số mũ (Lũy thừa tầng \\(a^{b^c} \\pmod m\\))**: Khi \\(\\gcd(a, m) = 1\\), chu kỳ của cơ số \\(a\\) theo modulo \\(m\\) là \\(\\phi(m)\\). Ta rút gọn số mũ tầng trên theo modulo \\(\\phi(m)\\):\n\\[k = b^c \\pmod{\\phi(m)} \\implies a^{b^c} \\equiv a^k \\pmod m\\]\n\n### 8. Kỹ thuật đạo hàm tìm phần dư chia đa thức cho \\((x - a)^2\\) (Chuyên sâu)\nKhi chia đa thức khả vi \\(P(x)\\) cho \\((x - a)^2\\), phần dư có bậc không quá 1 dạng \\(R(x) = Ax + B\\):\n\\[P(x) = Q(x)(x - a)^2 + Ax + B\\]\n- Lấy đạo hàm hai vế theo \\(x\\): \\(P'(x) = Q'(x)(x - a)^2 + 2Q(x)(x - a) + A\\).\n- Thay \\(x = a\\) vào hai đẳng thức, ta được \\(A = P'(a)\\) và \\(B = P(a) - aP'(a)\\).\n- **Công thức phần dư nghiệm kép**: \\(R(x) = P'(a)(x - a) + P(a)\\).",
+    "formulas": [
+      {
+        "id": "kb_num_01_f1",
+        "name": "Định nghĩa Đồng dư thức",
+        "latex": "a \\equiv b \\pmod m \\iff (a - b) \\;\\vdots\\; m",
+        "desc": "Điều kiện cần và đủ để hai số nguyên có cùng số dư khi chia cho m",
+        "tags": [
+          "Đồng dư",
+          "Số học",
+          "Cơ bản"
+        ],
+        "constraints": [
+          "m \\in \\mathbb{Z}^+, m \\ge 2"
+        ]
+      },
+      {
+        "id": "kb_num_01_f2",
+        "name": "Tính chất Lũy thừa Đồng dư",
+        "latex": "a \\equiv b \\pmod m \\implies a^k \\equiv b^k \\pmod m",
+        "desc": "Bảo toàn số dư qua phép nâng lên lũy thừa nguyên dương",
+        "tags": [
+          "Lũy thừa",
+          "Đồng dư",
+          "Cơ bản"
+        ],
+        "constraints": [
+          "k \\in \\mathbb{Z}^+, m \\ge 2"
+        ]
+      },
+      {
+        "id": "kb_num_01_f3",
+        "name": "Chu kỳ 1 chữ số tận cùng",
+        "latex": "a^{4k+r} \\equiv a^r \\pmod{10} \\quad (r \\in \\{1, 2, 3, 4\\})",
+        "desc": "Chu kỳ lặp chữ số tận cùng của mọi cơ số nguyên có độ dài tối đa là 4",
+        "tags": [
+          "Chữ số tận cùng",
+          "Modulo 10",
+          "Cơ bản"
+        ],
+        "constraints": [
+          "a, k \\in \\mathbb{Z}^+"
+        ]
+      },
+      {
+        "id": "kb_num_01_f4",
+        "name": "Số dư phép chia Đa thức (Định lý Bézout)",
+        "latex": "P(x) = Q(x)(x - a) + R \\implies R = P(a)",
+        "desc": "Số dư khi chia đa thức P(x) cho nhị thức (x - a) bằng giá trị P(a)",
+        "tags": [
+          "Đa thức",
+          "Số dư",
+          "Bézout",
+          "Cơ bản"
+        ],
+        "constraints": [
+          "P(x) là đa thức hệ số thực"
+        ]
+      },
+      {
+        "id": "kb_num_01_f5",
+        "name": "Định lý Fermat nhỏ (Fermat's Little Theorem)",
+        "latex": "a^{p-1} \\equiv 1 \\pmod p \\quad (p \\in \\mathbb{P},\\; \\gcd(a, p) = 1)",
+        "desc": "Hạ bậc số mũ cực lớn khi chia cho số nguyên tố p",
+        "tags": [
+          "Fermat",
+          "Số nguyên tố",
+          "Chuyên sâu"
+        ],
+        "constraints": [
+          "p nguyên tố, \\gcd(a, p) = 1"
+        ]
+      },
+      {
+        "id": "kb_num_01_f6",
+        "name": "Định lý Euler & Phi hàm Euler",
+        "latex": "a^{\\phi(m)} \\equiv 1 \\pmod m, \\quad \\phi(m) = m \\prod_{p \\mid m}\\left(1 - \\frac{1}{p}\\right)",
+        "desc": "Định lý tổng quát hạ bậc số mũ cho modulo hợp số m bất kỳ",
+        "tags": [
+          "Euler",
+          "Phi hàm",
+          "Chuyên sâu"
+        ],
+        "constraints": [
+          "m \\in \\mathbb{Z}^+, \\gcd(a, m) = 1"
+        ]
+      },
+      {
+        "id": "kb_num_01_f7",
+        "name": "Định lý Thặng dư Trung Hoa (CRT)",
+        "latex": "\\begin{cases} x \\equiv a \\pmod{m_1} \\\\ x \\equiv b \\pmod{m_2} \\end{cases} \\implies x \\text{ duy nhất } \\pmod{m_1 m_2}",
+        "desc": "Tách bài toán modulo hợp số thành hệ các modulo nguyên tố cùng nhau",
+        "tags": [
+          "CRT",
+          "Thặng dư Trung Hoa",
+          "Chuyên sâu"
+        ],
+        "constraints": [
+          "\\gcd(m_1, m_2) = 1"
+        ]
+      },
+      {
+        "id": "kb_num_01_f8",
+        "name": "Phần dư chia đa thức cho nghiệm kép",
+        "latex": "P(x) = Q(x)(x - a)^2 + R(x) \\implies R(x) = P'(a)(x - a) + P(a)",
+        "desc": "Ứng dụng đạo hàm tìm nhanh đa thức dư khi chia cho bình phương nhị thức",
+        "tags": [
+          "Đa thức",
+          "Đạo hàm",
+          "Số dư",
+          "Chuyên sâu"
+        ],
+        "constraints": [
+          "P(x) khả vi tại x = a"
+        ]
+      }
+    ],
+    "formula_ids": [
+      "kb_num_01_f1",
+      "kb_num_01_f2",
+      "kb_num_01_f3",
+      "kb_num_01_f4",
+      "kb_num_01_f5",
+      "kb_num_01_f6",
+      "kb_num_01_f7",
+      "kb_num_01_f8"
+    ],
+    "prerequisites": [
+      "kb_toan10_01"
+    ],
+    "related_topics": [
+      "kb_toan11_02",
+      "kb_toan11_04"
+    ],
+    "common_traps": [
+      "Lấy số mũ tầng trên chia trực tiếp cho modulo \\(m\\) thay vì chia cho \\(\\phi(m)\\) khi hạ bậc tháp lũy thừa",
+      "Áp dụng định lý Fermat nhỏ hoặc Euler khi chưa kiểm tra điều kiện nguyên tố cùng nhau \\(\\gcd(a, m) = 1\\)",
+      "Khi chia số mũ \\(n\\) cho chu kỳ 4 mà phép chia hết (\\(n \\;\\vdots\\; 4\\)), học sinh hay thay nhầm số mũ \\(r = 0\\) thay vì \\(r = 4\\)"
+    ],
+    "examples": [
+      {
+        "title": "Ví dụ 1 (Cơ bản): Tìm 1 chữ số tận cùng của tổng lũy thừa",
+        "question": "Tìm chữ số tận cùng của biểu thức \\(S = 2^{2025} + 3^{2026} + 7^{2027}\\).",
+        "solution_steps": [
+          "Bước 1: Tìm chữ số tận cùng tương đương với việc tìm số dư \\(S \\pmod{10}\\). Các cơ số 2, 3, 7 đều có chu kỳ tận cùng bằng 4.",
+          "Bước 2: Phân tích số mũ theo modulo 4: \\(2025 = 4 \\times 506 + 1 \\implies 2^{2025} \\equiv 2^1 = 2 \\pmod{10}\\).",
+          "Bước 3: Tương tự: \\(2026 = 4 \\times 506 + 2 \\implies 3^{2026} \\equiv 3^2 = 9 \\pmod{10}\\); và \\(2027 = 4 \\times 506 + 3 \\implies 7^{2027} \\equiv 7^3 = 343 \\equiv 3 \\pmod{10}\\).",
+          "Bước 4: Cộng các số dư: \\(S \\equiv 2 + 9 + 3 = 14 \\equiv 4 \\pmod{10}\\). Vậy chữ số tận cùng là 4."
+        ],
+        "takeaway": "Tách tổng thành từng lũy thừa riêng biệt, rút gọn số mũ theo chu kỳ 4 rồi cộng các chữ số tận cùng."
+      },
+      {
+        "title": "Ví dụ 2 (Cơ bản): Tìm phần dư phép chia đa thức bằng Định lý Bézout",
+        "question": "Tìm phần dư khi chia đa thức \\(P(x) = x^{2025} - 2x^{2024} + 3x - 1\\) cho nhị thức \\(x - 1\\).",
+        "solution_steps": [
+          "Bước 1: Theo định lý số dư Bézout, khi chia đa thức \\(P(x)\\) cho \\(x - a\\), số dư là hằng số \\(R = P(a)\\).",
+          "Bước 2: Với nhị thức chia \\(x - 1\\), ta thay nghiệm \\(x = 1\\) trực tiếp vào đa thức \\(P(x)\\).",
+          "Bước 3: Tính giá trị: \\(R = P(1) = 1^{2025} - 2(1^{2024}) + 3(1) - 1 = 1 - 2 + 3 - 1 = 1\\).",
+          "Bước 4: Kết luận phần dư của phép chia là \\(R = 1\\)."
+        ],
+        "takeaway": "Không thực hiện phép chia đa thức truyền thống với bậc lớn; thay ngay nghiệm của số chia vào đa thức bị chia."
+      },
+      {
+        "title": "Ví dụ 3 (Chuyên sâu): Tìm 2 chữ số tận cùng bằng Định lý Euler",
+        "question": "Tìm hai chữ số tận cùng của số \\(A = 7^{2026}\\).",
+        "solution_steps": [
+          "Bước 1: Hai chữ số tận cùng của \\(A\\) chính là số dư của \\(A\\) khi chia cho 100: \\(A \\pmod{100}\\).",
+          "Bước 2: Do \\(\\gcd(7, 100) = 1\\), áp dụng định lý Euler với \\(\\phi(100) = 40\\): \\(7^{40} \\equiv 1 \\pmod{100}\\) (hoặc nhận xét nhanh \\(7^4 = 2401 \\equiv 01 \\pmod{100}\\)).",
+          "Bước 3: Chia số mũ 2026 cho 4: \\(2026 = 4 \\times 506 + 2\\).",
+          "Bước 4: Suy ra \\(7^{2026} = (7^4)^{506} \\cdot 7^2 \\equiv 1^{506} \\cdot 49 = 49 \\pmod{100}\\). Vậy hai chữ số tận cùng là 49."
+        ],
+        "takeaway": "Với cơ số 3, 7, 9 khi tìm 2 chữ số tận cùng, luỹ thừa bậc 4 của chúng có tận cùng là 01 hoặc 81, giúp hạ bậc siêu tốc."
+      },
+      {
+        "title": "Ví dụ 4 (Chuyên sâu): Hạ bậc Tháp số mũ lũy thừa tầng",
+        "question": "Tìm số dư khi chia số \\(N = 2^{3^{2025}}\\) cho 11.",
+        "solution_steps": [
+          "Bước 1: Vì 11 là số nguyên tố và \\(\\gcd(2, 11) = 1\\), theo định lý Fermat nhỏ ta có \\(2^{10} \\equiv 1 \\pmod{11}\\).",
+          "Bước 2: Chu kỳ của cơ số 2 theo modulo 11 là 10. Do đó, số mũ tầng trên \\(E = 3^{2025}\\) phải được rút gọn theo modulo 10.",
+          "Bước 3: Xét \\(3^{2025} \\pmod{10}\\): Do \\(2025 = 4 \\times 506 + 1\\) nên \\(3^{2025} \\equiv 3^1 = 3 \\pmod{10}\\), tức \\(3^{2025} = 10k + 3\\).",
+          "Bước 4: Thay vào \\(N\\): \\(N = 2^{10k + 3} = (2^{10})^k \\cdot 2^3 \\equiv 1^k \\cdot 8 = 8 \\pmod{11}\\). Số dư cần tìm là 8."
+        ],
+        "takeaway": "Quy tắc 2 tầng: Rút gọn số mũ tầng trên theo modulo phi(m) trước, sau đó lấy số dư thu được làm số mũ cho cơ số dưới."
+      }
+    ],
+    "applications": "Ứng dụng cốt lõi trong thuật toán mật mã hóa khóa công khai RSA (bảo mật giao dịch ngân hàng, chữ ký số, SSL/HTTPS), hàm băm đồng dư (Hash Table) trong khoa học máy tính và kiểm tra mã định danh ISBN/CCCD.",
+    "drill_tags": [
+      "Đồng dư",
+      "Số học",
+      "TSA",
+      "HSA",
+      "Euler",
+      "Fermat"
+    ],
+    "related_question_ids": [
+      "q_tsa_num_01",
+      "q_tsa_num_02",
+      "q_tsa_num_03",
+      "q_tsa_num_04"
+    ]
   }
 ]
