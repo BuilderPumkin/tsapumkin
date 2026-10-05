@@ -1,8 +1,17 @@
-# 🎃 PUMKIN TSA (PUMKIN.DEV) — HỆ SINH THÁI KHẢO THÍ TOÁN HỌC & AI TRỢ GIẢNG ĐỘT PHÁ
+```text
+  _____  _    _ __  __ _____  _  _______ _   _      _____  ________      __
+ |  __ \| |  | |  \/  |  __ \| |/ /_   _| \ | |    |  __ \|  ____\ \    / /
+ | |__) | |  | | \  / | |__) | ' /  | | |  \| |    | |  | | |__   \ \  / / 
+ |  ___/| |  | | |\/| |  ___/|  <   | | | . ` |    | |  | |  __|   \ \/ /  
+ | |    | |__| | |  | | |    | . \ _| |_| |\  | _  | |__| | |____   \  /   
+ |_|     \____/|_|  |_|_|    |_|\_\_____|_| \_|(_) |_____/|______|   \/    
+```
+
+# 🎃 PUMKIN.DEV — HỆ SINH THÁI KHẢO THÍ TOÁN HỌC & AI TRỢ GIẢNG ĐỘT PHÁ
 
 > **Nền tảng Luyện thi Thông minh, Thích ứng Cá nhân hóa & Đánh giá Tư duy Thế hệ Mới**  
-> Thiết kế chuẩn mực cho các kỳ thi: **Đánh giá Tư duy (TSA ĐHBK Hà Nội)**, **Đánh giá Năng lực (HSA ĐHQGHN)**, **Tốt nghiệp THPT Quốc gia (Cấu trúc mới nhất Bộ GD&ĐT)** và **Toán Giải tích Đại cương Đại học**.  
-> Bản quyền phát triển độc quyền bởi **PUMKIN.DEV** — Đột phá về Công nghệ Giáo dục (EdTech) & Trí tuệ Nhân tạo Sư phạm.
+> Thiết kế chuẩn mực cho các kỳ thi: **Đánh giá Tư duy (TSA ĐHBK Hà Nội)**, **Đánh giá Năng lực (HSA ĐHQGHN)**, **Tốt nghiệp THPT Quốc gia (Cấu trúc mới nhất Bộ GD&ĐT 2025+)** và **Toán Giải tích Đại cương Đại học**.  
+> Bản quyền phát triển độc quyền bởi **PUMKIN.DEV** — Đột phá về Công nghệ Giáo dục (EdTech), Trí tuệ Nhân tạo Sư phạm & Khảo thí Thích ứng.
 
 ---
 
@@ -11,40 +20,42 @@
 | Tiêu chí Khảo thí & Công nghệ | Các Website Luyện Thi Thông Thường | 🎃 PUMKIN.DEV |
 | :--- | :--- | :--- |
 | **Phương pháp Hỗ trợ AI** | Đưa ngay đáp án hoặc lời giải hoàn chỉnh $\rightarrow$ Học sinh ỉ lại, triệt tiêu tư duy tự học. | **AI Trợ Giảng Socrates 6 bậc gợi mở**: Chỉ khơi gợi hướng đi, đặt câu hỏi phản tư, hướng dẫn từng bước và buộc học sinh tự suy nghĩ. |
-| **Tính Chính xác của AI** | Dễ bị "ảo giác" (Hallucination), giải sai công thức, nhầm dấu, thiếu điều kiện nghiệm. | **Lớp Kiểm định Toán học Tất định (Mathematical Verification Layer)**: Tự động thẩm định điều kiện biên, miền xác định và sai số trước khi AI phản hồi. |
-| **Cơ chế Xáo & Tạo đề** | Ngân hàng đề tĩnh cố định, làm đi làm lại gây học vẹt đáp án $A, B, C, D$. | **Động cơ Sinh đề Tự động Fisher-Yates**: Tự do tùy biến hệ đề, số lượng câu, thời gian và phân bổ độ khó theo tỷ lệ vàng khảo thí. |
+| **Tính Chính xác của AI** | Dễ bị "ảo giác" (Hallucination), giải sai công thức, nhầm dấu, thiếu điều kiện nghiệm. | **Lớp Kiểm định Toán học Tất định (Mathematical Verification Layer)**: Tự động thẩm định điều kiện biên, miền xác định và sai số $\varepsilon \le 10^{-4}$ trước khi AI phản hồi. |
+| **Cơ chế Xáo & Tạo đề** | Ngân hàng đề tĩnh cố định, làm đi làm lại gây học vẹt đáp án $A, B, C, D$. | **Động cơ Sinh đề Tự động Fisher-Yates**: Tùy biến không giới hạn hệ đề, số lượng câu, thời gian và phân bổ độ khó theo tỷ lệ vàng khảo thí. |
 | **Cá nhân hóa Học tập** | Không theo dõi lịch sử lỗi sai; luyện tập cào bằng, không phân hóa. | **Bộ nhớ Tín hiệu Sư phạm (Learning Memory)** với **Thuật toán Suy hao Thời gian (Time Decay $\lambda = 0.977$)**: Tự động sinh đề khắc phục đúng điểm yếu hiện tại. |
 | **Độ khó & Phân loại Học sinh** | Câu hỏi dàn trải, thiếu vắng các bài toán phân loại cao cấp cho học sinh giỏi. | **Chế độ Câu hỏi Siêu khó & Đấu trường Boss**: Kho câu hỏi tích hợp đa phân môn cách ly riêng biệt, dành riêng cho mục tiêu điểm 9+ và Thủ khoa. |
 | **Định dạng Câu hỏi** | Chủ yếu là trắc nghiệm 4 lựa chọn truyền thống $A, B, C, D$. | **Chuẩn hóa toàn diện 4 định dạng thi hiện đại**: Trắc nghiệm 4 lựa chọn, Đúng/Sai chùm 4 ý, Điền đáp số ngắn (kèm Mini Math Pad), và Tự luận theo bước. |
-| **Gamification & Động lực** | Khô khan, chỉ chấm điểm số đơn thuần. | **Hệ thống Cấp độ (Level) & EXP Vô hạn**: Tích lũy kinh nghiệm theo độ khó bài thi, mở khóa các đặc quyền và phân hệ học tập nâng cao. |
+| **Gamification & Động lực** | Khô khan, chỉ chấm điểm số đơn thuần. | **Hệ thống Cấp độ (Level) & EXP Vô hạn**: Tích lũy kinh nghiệm theo độ khó bài thi, nhân đôi/nhân ba EXP, mở khóa các đặc quyền cao cấp. |
 | **Đo lường Hành vi Nhận thức** | Chỉ ghi nhận Đúng / Sai bề nổi. | **Chế độ Học sâu (Deep Learning & Cognitive Tracker)**: Phân tích độ ngập ngừng, tần suất đổi đáp án và khoảng trống biểu diễn đại số - trực quan. |
+| **Đấu trường Trực tiếp** | Chỉ làm bài đơn lẻ một mình, thiếu tương tác cạnh tranh. | **Live Exam Challenge thời gian thực**: Vào phòng bằng mã PIN 6 số, đồng bộ đồng hồ Server, bảng xếp hạng trực tiếp với bí danh ẩn danh. |
 | **Trải nghiệm & Độ tin cậy** | Dễ mất bài làm khi rớt mạng, giao diện chèn quảng cáo rối mắt. | **Kiến trúc Zero Data Loss, Offline-First (PWA)**: Tự động lưu tiến trình liên tục, xuất PDF in ấn chuẩn học thuật kèm Watermark trang trọng. |
 
 ---
 
-## 🚀 CÁC TÍNH NĂNG ĐỘC BẢN — DUY NHẤT TẠI PUMKIN.DEV
+## 🚀 CHI TIẾT TẤT CẢ TÍNH NĂNG ĐỘC BẢN CỦA PUMKIN.DEV
 
 ### 1. 🤖 AI Trợ Giảng Socrates Chuyên Toán (Socratic AI Tutor)
 - **Phương pháp Vấn đáp Sư phạm Socrates**: Thay vì cung cấp ngay đáp án, AI đóng vai trò như một người thầy dẫn đường mẫu mực, dẫn dắt học sinh tự khai phá lời giải theo chu trình: `Hỏi (Ask) → Gợi mở (Hint) → Dẫn dắt (Guide) → Kiểm tra (Verify)`.
 - **Thang Gợi Ý Phân Bậc 6 Cấp Độ (The 6-Level Hint Ladder)**:
-  - **Level 1 (Gợi mở tư duy)**: Đặt câu hỏi định hướng góc nhìn bài toán.
-  - **Level 2 (Nhắc nhớ lý thuyết)**: Khơi gợi lại định lý, tính chất cốt lõi liên quan.
-  - **Level 3 (Công thức mục tiêu)**: Cung cấp công thức toán học cần áp dụng (không thay số hộ).
-  - **Level 4 (Gợi ý bước kế)**: Hướng dẫn thiết lập phương trình hoặc biến đổi bước đầu.
-  - **Level 5 (Giải mẫu một phần)**: Tháo gỡ nút thắt khó nhất và để học sinh tự hoàn thành bước cuối.
-  - **Level 6 (Lời giải toàn vẹn)**: Chỉ mở khi học sinh thực sự bế tắc hoặc khi đã nộp bài chuyển sang chế độ Xem lại lời giải.
-- **Lớp Kiểm Định Toán Học Tất Định (Mathematical Verification Layer)**:
-  - Loại bỏ triệt để hiện tượng AI bịa đặt hoặc ảo giác (Zero Hallucination).
-  - Độc lập kiểm tra điều kiện xác định, điều kiện biên, dấu của bất phương trình và sai số trôi $\varepsilon \le 10^{-4}$ trước khi câu trả lời được hiển thị tới học sinh.
+  - **Level 1 (Nudge - Gợi mở tư duy)**: Đặt câu hỏi định hướng góc nhìn bài toán.
+  - **Level 2 (Concept Reminder - Nhắc nhớ lý thuyết)**: Khơi gợi lại định lý, tính chất cốt lõi liên quan.
+  - **Level 3 (Formula Target - Công thức mục tiêu)**: Cung cấp công thức toán học cần áp dụng (không thay số hộ).
+  - **Level 4 (Next Step Guide - Gợi ý bước kế)**: Hướng dẫn thiết lập phương trình hoặc biến đổi bước đầu.
+  - **Level 5 (Worked Step - Giải mẫu một phần)**: Tháo gỡ nút thắt khó nhất và để học sinh tự hoàn thành bước cuối.
+  - **Level 6 (Complete Solution - Lời giải toàn vẹn)**: Chỉ mở khi học sinh thực sự bế tắc hoặc khi đã nộp bài chuyển sang chế độ Xem lại lời giải.
+- **Lớp Kiểm Định Toán Học Tất Định (Mathematical Verification Layer - Zero Hallucination)**:
+  - Loại bỏ triệt để hiện tượng AI bịa đặt hoặc ảo giác toán học.
+  - Độc lập kiểm tra điều kiện xác định ($v(x) \ne 0, f(x) \ge 0, a > 0, a \ne 1, b > 0$), điều kiện cực trị bậc ba ($\Delta_{y'} = b^2 - 3ac > 0$), nghiệm ngoại lai và sai số trôi $\varepsilon \le 10^{-4}$ trước khi câu trả lời được hiển thị tới học sinh.
 - **Cơ Chế Nhận Thức Bối Cảnh Thi Cử (Exam-Aware Anti-Cheat)**:
   - Trong **Phòng thi tập trung (Focus Exam Mode)**: AI tự động chuyển sang chế độ giám thị, từ chối giải bài hộ hoặc đưa ra gợi ý sâu nhằm bảo đảm tính trung thực tuyệt đối.
   - Trong **Chế độ Luyện tập tự do & Xem lại**: AI mở rộng hỗ trợ giảng giải đa chiều và chỉ ra nguyên nhân sập bẫy nhận thức.
+- **Edge AI Gateway Siêu Tốc**: Tích hợp mô hình Gemini 3.6 Flash qua Serverless Functions, trang bị In-memory Response Cache phản hồi tức thì dưới 10ms đối với các câu hỏi tương đồng.
 
 ---
 
-### 2. 🎲 Động Cơ Xáo Đề Tự Chọn Chuẩn Khảo Thí (Dynamic Exam Generator)
+### 2. 🎲 Động Cơ Xáo Đề Tự Chọn Chuẩn Khảo Thí (Dynamic Fisher-Yates Exam Generator)
 - **Thuật Toán Hoán Vị Fisher-Yates Chuẩn Mực**: Xáo trộn ngẫu nhiên thứ tự câu hỏi và hoán vị khoa học các phương án lựa chọn, loại bỏ hoàn toàn tình trạng học sinh học vẹt thứ tự đáp án.
-- **Tùy Biến Toàn Diện Thông Số Đề Thi**:
+- **Tùy Biến Toàn Diện Mọi Thông Số Đề Thi**:
   - **Hệ đề mục tiêu phong phú**: Chọn lựa giữa Đánh giá Tư duy (TSA), Đánh giá Năng lực (HSA), Tốt nghiệp THPT Quốc gia, Toán Cao cấp hoặc Tổ hợp liên kỳ thi.
   - **Quy mô câu hỏi linh hoạt**: Từ mini-test phản xạ nhanh (10 câu), đề luyện chuyên sâu (20 - 30 câu) đến đề thi chính thức chuẩn mực (40 - 50 câu).
   - **Thời gian tùy biến**: Từ 15 phút rèn tốc độ đến 90 phút thi chuẩn.
@@ -53,7 +64,7 @@
 
 ---
 
-### 3. 🧠 Luyện Đề Thích Ứng Theo Trình Độ Được Đánh Giá (Adaptive Practice & Learning Memory)
+### 3. 🧠 Luyện Đề Thích Ứng Theo Năng Lực Thực Tế (Adaptive Practice & Learning Memory)
 - **Bộ Nhớ Học Tập Tín Hiệu Dài Hạn (Learning Memory Store)**: Không lưu trữ nội dung chat rườm rà, PUMKIN.DEV chỉ lưu trữ các **Tín hiệu sư phạm giá trị (Pedagogical Signals)**: phân môn yếu, tần suất sai lầm, mức độ cần gợi ý trung bình và phản xạ thời gian.
 - **Thuật Toán Suy Hao Thời Gian Thực (Exponential Time Decay)**:
   - Hệ số suy hao $\lambda = 0.977/\text{ngày}$ (chu kỳ bán rã ~30 ngày).
@@ -64,10 +75,9 @@
 
 ---
 
-### 4. 📚 Luyện Đề Theo Dạng Kiến Thức & Chuyên Đề Mục Tiêu (Deep Topic-Based Practice)
+### 4. 📚 Luyện Đề Theo Chuyên Đề & Sổ Tay Kiến Thức Sống (Deep Topic-Based Practice & Handbook 2.0)
 - **Ma Trận Phân Loại Chuyên Đề Đa Tầng**: Học sinh có thể chọn ôn tập riêng lẻ hoặc kết hợp đa chuyên đề:
   - *Khảo sát & Đồ thị hàm số chuyên sâu*
-  - *Số học, Đồng dư thức, Chữ số tận cùng & Phép chia có dư lũy thừa lớn*
   - *Phương trình, Bất phương trình Mũ & Logarit*
   - *Nguyên hàm, Tích phân & Ứng dụng thực tế*
   - *Hình học không gian cổ điển & Hệ tọa độ Oxyz*
@@ -75,17 +85,20 @@
   - *Dãy số, Cấp số cộng, Cấp số nhân & Giới hạn*
   - *Giải tích 1: Giới hạn $\varepsilon$-$\delta$, Tích phân suy rộng, Chuỗi số*
 - **Tích Hợp Sổ Tay Kiến Thức Sống (Interactive Handbook 2.0)**:
-  - Tra cứu 92 công thức toán định dạng KaTeX / MathJax 3 sắc nét, chuẩn mực.
-  - **Bảng đối chiếu phương pháp**: So sánh trực quan giữa *Tư duy bản chất tự luận vs Công thức giải nhanh vs Kỹ thuật Casio*.
-  - **Bảng cảnh báo bẫy nhận thức (Misconception Traps)**: Ngăn ngừa triệt để các sai lầm kinh điển thường gặp trong phòng thi.
+  - Tra cứu công thức toán định dạng KaTeX / MathJax 3 sắc nét, chuẩn mực.
+  - **10 Bảng đối chiếu phương pháp**: So sánh trực quan giữa *Tư duy bản chất tự luận vs Công thức giải nhanh vs Kỹ thuật Casio*.
+  - **12 Bảng truy vết ma trận (Trace Tables)**: Cảnh báo chi tiết các bẫy nhận thức kinh điển (Misconception Traps) giúp học sinh không bao giờ mất điểm oan.
 
 ---
 
-### 5. 🔥 Chế Độ Câu Hỏi Siêu Khó & Đấu Trường Boss (Boss-Level & Ultra-Hard Mode)
+### 5. 🔥 Chế Độ Câu Hỏi Siêu Khó & Đấu Trường Boss (Boss-Level & Ultra-Hard Challenge Mode)
 - **Thử Thách Đỉnh Cao Dành Cho Mục Tiêu 9+ & Thủ Khoa**: Thiết kế chuyên biệt cho những học sinh muốn bứt phá giới hạn tư duy trong các kỳ thi TSA, HSA và Olympic.
-- **Bài Toán Tích Hợp Question DNA Đa Phân Môn**:
-  - Đòi hỏi sự kết hợp đồng thời của nhiều nhánh toán học cao cấp: *Mô hình hóa vi phân $\leftrightarrow$ Bất đẳng thức tích phân Cauchy-Schwarz $\leftrightarrow$ Xích Markov ma trận $\leftrightarrow$ Dãy số tiệm cận $\leftrightarrow$ Đồ thị phổ Laplacian*.
-  - Cấu trúc bài toán mở, đậm chất tư duy giải quyết vấn đề và mô hình hóa thực tiễn.
+- **25 Bài Toán Siêu Khó Tích Hợp Question DNA Đa Phân Môn**:
+  1. *Xích Markov & Ma trận chuyển trạng thái ngẫu nhiên*.
+  2. *Tích phân suy rộng & Bất đẳng thức tích phân Cauchy-Schwarz*.
+  3. *Cực trị hình học Oxyz tích hợp Vector & Mặt cầu*.
+  4. *Phương trình vi phân Euler & Mô hình hóa sinh thái/vật lý*.
+  5. *Đồ thị phổ Laplacian & Đại số tuyến tính tổ hợp*.
 - **Kho Cách Ly Bảo Mật Tuyệt Đối (Strict Isolation Pool)**:
   - Các câu hỏi siêu khó được bảo vệ trong kho lưu trữ riêng.
   - Hệ thống cam kết **tuyệt đối không bao giờ trộn câu hỏi siêu khó vào các chế độ tạo đề cơ bản**, giúp học sinh trung bình - khá yên tâm rèn luyện đúng sức mà không bị ngợp hay hoang mang.
@@ -97,77 +110,74 @@
 - **Cơ Chế Gamification Học Thuật Độc Quyền**: Biến hành trình luyện thi căng thẳng thành trải nghiệm chinh phục đầy hào hứng.
 - **Quy Tắc Tích Lũy Kinh Nghiệm (EXP) Khoa Học**:
   - Hoàn thành bài thi đạt tỷ lệ đúng $>70\%$: Nhận $+1$ EXP (đề $<25$ câu) hoặc $+4$ EXP (đề $\ge 25$ câu).
-  - Tỷ lệ đúng xuất sắc $>95\%$: **Nhân đôi toàn bộ EXP** đạt được.
+  - Tỷ lệ đúng xuất sắc $>95\%$: **Nhân đôi toàn bộ EXP** đạt được ($\times 2$).
   - Thi đấu ở chế độ Khó: Tăng thêm $+50\%$ EXP.
   - Chinh phục chế độ Siêu khó: **Nhân ba ($\times 3$) EXP** khi đạt điểm tuyệt đối $100\%$ (hệ số cộng dồn cực lớn).
-- **Hệ Thống Phân Cấp Lũy Tiến**: Cấp 1 cần 2 EXP, Cấp 2 cần 3 EXP, mỗi cấp tiếp theo yêu cầu tăng $50\%$ EXP lũy tiến, tôn vinh sự kiên trì và tiến bộ thực chất của học sinh.
+- **Hệ Thống Phân Cấp Lũy Tiến**: Cấp 1 cần 2 EXP, Cấp 2 cần 3 EXP, mỗi cấp tiếp theo yêu cầu tăng $50\%$ EXP lũy tiến (làm tròn lên), tôn vinh sự kiên trì và tiến bộ thực chất của học sinh.
 
 ---
 
-### 7. 🔒 Chế Độ Học Sâu Độc Quyền (Deep Learning Mode & Cognitive Tracker)
-- **Cơ Chế Mở Khóa Theo Đẳng Cấp**: Nằm trang trọng tại Kho kiến thức, được bảo vệ bằng cơ chế khóa bảo mật học thuật — chỉ những học sinh đạt **Cấp độ 4 trở lên** mới có thể khai mở chế độ đặc biệt này.
+### 7. 🔒 Chế Độ Học Sâu Độc Quyền & Bộ Theo Dõi Nhận Thức (Deep Learning Mode & Cognitive Router)
+- **Cơ Chế Mở Khóa Theo Đẳng Cấp**: Nằm trang trọng tại Kho kiến thức bên cạnh Sổ tay, được bảo vệ bằng cơ chế khóa bảo mật học thuật — chỉ những học sinh đạt **Cấp độ 4 trở lên** mới có thể khai mở chế độ đặc biệt này.
+- **Hiệu Ứng Thị Giác Ấn Tượng**: Nền đỏ cảnh báo bị khóa bởi 2 dây xích chéo và ổ khóa trọng tâm, đi kèm tooltip `🔒 Yêu cầu cấp 4 để mở khóa`.
 - **Bộ Theo Dõi Nhận Thức Động (Dynamic Cognitive Router)**:
-  - Tự động ghi nhận thời gian ngập ngừng trước khi bấm chọn (hesitation ratio).
-  - Đếm tần suất dao động đổi đáp án (answer flips) để nhận diện vùng kiến thức chưa vững.
+  - Đo lường vi mô (Micro-telemetry): Thời gian ngập ngừng trước hành động đầu (hesitation ratio), tần suất dao động đổi đáp án (answer flips).
   - Phát hiện khoảng trống biểu diễn giữa năng lực đại số và trực giác hình học (representation gap).
-- **Can Thiệp Sư Phạm Tức Thời**: Cung cấp các công cụ tương tác chuyên sâu như Giàn giáo Socratic động, Hộp cát tương tác đồ thị (Visual Sandbox) và Bài tập kỹ nghệ đảo ngược (Reverse Challenge).
+  - Xây dựng Véc-tơ trạng thái tư duy $\vec{S} = \{S_{\text{rigor}}, S_{\text{intuition}}, S_{\text{flexibility}}, S_{\text{mastery}}, \dots\}$.
+- **3 Công Cụ Can Thiệp Sư Phạm Cá Nhân Hóa**:
+  - **PA1: Socratic Scaffold** (Giàn giáo Socratic động 4 bậc tự vấn).
+  - **PA2: Visual Sandbox** (Hộp cát tương tác đồ thị tham số $m$ kéo thanh trượt mượt mà).
+  - **PA3: Reverse Challenge** (Kỹ nghệ đảo ngược - tự thiết kế bài toán và tiêu chí chấm rubric).
 
 ---
 
-### 8. 📋 Chuẩn Hóa Toàn Diện 4 Dạng Câu Hỏi Khảo Thí Mới Nhất
-PUMKIN.DEV là nền tảng tiên phong hỗ trợ trọn vẹn cả 4 định dạng bài thi mới nhất theo quy chế của Bộ Giáo dục & Đào tạo cũng như các Đại học hàng đầu:
+### 8. 🏆 Đấu Trường Thi Đấu Trực Tiếp Thời Gian Thực (Live Exam Challenge)
+- **Tham Gia Bằng Mã PIN 6 Số**: Thí sinh tạo phòng hoặc vào phòng thi đua top nhanh chóng qua mã PIN.
+- **Đồng Bộ Thời Gian Thực Từ Server (Server-Authoritative)**:
+  - Server là nguồn chân lý duy nhất cho thời gian, trạng thái phòng và kết quả chấm điểm.
+  - Khắc phục tuyệt đối tình trạng gian lận chỉnh đồng hồ thiết bị.
+- **Bảng Xếp Hạng Trực Tiếp Ẩn Danh (Live Leaderboard)**:
+  - Cập nhật điểm số và tiến độ theo chu kỳ thời gian thực.
+  - Tự động gán bí danh học thuật ngẫu nhiên (như *Sói Cô Độc*, *Cáo Trắng*, *Gấu Ngủ Nướng*), bảo vệ 100% danh tính học sinh.
+- **Quyền Năng Chủ Phòng (Host Controls)**: Khóa phòng (`Lock`), bắt đầu thi (`Start`), loại người chơi (`Kick`), và kết thúc phòng thi sớm.
+- **Giám Sát Công Bằng Chống Gian Lận**: Ghi nhận sự kiện chuyển tab (window blur / focus audit), từ chối nhận bài thi gửi muộn sau khi hết giờ.
+
+---
+
+### 9. 📋 Chuẩn Hóa Toàn Diện 4 Dạng Câu Hỏi Khảo Thí Mới Nhất (Bộ GD&ĐT 2025+)
+PUMKIN.DEV là nền tảng tiên phong hỗ trợ trọn vẹn cả 4 định dạng bài thi mới nhất:
 
 1. **Trắc Nghiệm 4 Lựa Chọn (`single_choice`)**: Thao tác chọn đáp án siêu tốc bằng chuột hoặc tổ hợp phím tắt `1, 2, 3, 4` / `A, B, C, D`.
 2. **Đúng / Sai Chùm 4 Ý (`true_false_group`)**: Một ngữ cảnh bài toán đi kèm 4 khẳng định $a, b, c, d$. Áp dụng barem chấm điểm chính xác theo quy chế khảo thí quốc gia: Đúng 1 ý = **0.1 điểm**; 2 ý = **0.25 điểm**; 3 ý = **0.5 điểm**; Đúng trọn vẹn 4 ý = **1.0 điểm**.
-3. **Điền Đáp Số Ngắn (`short_answer`)**: Thí sinh tính toán và nhập kết quả số học (phân số, số thập phân, số âm). Tích hợp sẵn **Bàn phím toán học mini (Mini Math Pad)** tối ưu riêng cho màn hình cảm ứng di động.
+3. **Điền Đáp Số Ngắn (`short_answer`)**: Thí sinh tính toán và nhập kết quả số học (phân số, số thập phân, số âm). Tích hợp sẵn **Bàn phím toán học mini (Mini Math Pad)** tối ưu riêng cho màn hình cảm ứng di động, tự động chuẩn hóa dấu phẩy thành dấu chấm và rút gọn phân số.
 4. **Tự Luận Theo Bước (`step_solution`)**: Barem chấm điểm từng bước cho các bài toán tối ưu và mô hình hóa nhiều công đoạn.
 
 ---
 
-### 9. ⚡ Trải Nghiệm Khảo Thí Tiện Ích Đỉnh Cao
+### 10. ⚡ Tiện Ích Khảo Thí Toàn Diện & Trải Nghiệm Đỉnh Cao
 - **Phòng Thi Tập Trung Chống Gian Lận (Focus Exam Player)**: Đồng hồ đếm ngược thông minh cảnh báo thị giác khi sắp hết giờ, giao diện tối giản loại bỏ xao nhãng.
 - **Bảo Vệ Dữ Liệu Tuyệt Đối (Zero Data Loss)**: Mọi thao tác chọn đáp án, đánh dấu cờ (`Flag`) và thời gian làm bài được đồng bộ tức thì vào `localStorage`. Sập nguồn, rớt mạng, vô tình đóng tab hay hết pin đều khôi phục nguyên vẹn 100% khi mở lại.
-- **Xuất Bản Đề & Lời Giải Chuẩn In Ấn PDF (`Ctrl + P`)**: Bộ định dạng `@media print` học thuật chuyên nghiệp, tự động ẩn giao diện thừa, bổ sung Watermark thương hiệu `PUMKIN.DEV` trang nhã cho bản in.
+- **Xuất Bản Đề & Lời Giải Chuẩn In Ấn PDF (`Ctrl + P`)**: Bộ định dạng `@media print` học thuật chuyên nghiệp, tự động ẩn giao diện thừa, bổ sung Watermark thương hiệu `PUMKIN.DEV • KHẢO THÍ TOÁN HỌC CHUẨN HÓA` trang nhã cho bản in.
 - **Kho Đánh Dấu Câu Hỏi Yêu Thích (Bookmarks 2.0)**: Gắn sao `★` lưu lại những câu hỏi tâm đắc hoặc câu bẫy nhận thức để ôn luyện cấp tốc trước giờ thi.
 - **Công Nghệ Offline-First & Ứng Dụng PWA**: Cài đặt trực tiếp lên màn hình điện thoại/máy tính bảng như một ứng dụng độc lập, hoạt động mượt mà ngay cả khi không có kết nối Internet.
-- **Bảo Mật Quyền Riêng Tư (Privacy-First)**: Toàn bộ lịch sử làm bài, điểm số và dữ liệu cá nhân được lưu trữ an toàn trên thiết bị của học sinh. Nền tảng cam kết không thu thập dữ liệu nhạy cảm hay can thiệp trải nghiệm tự do của người dùng.
-
----
-
-## 📁 KIẾN TRÚC & CẤU TRÚC HỆ THỐNG
-```text
-tsapumkin/
-├── public/                       # Toàn bộ tài nguyên ứng dụng Web Client tĩnh (Offline-First SPA)
-│   ├── index.html                # Giao diện chính khảo thí, luyện thi và hệ thống học tập
-│   ├── TSA_do_an.html            # Bản giao diện đồng bộ chuyên sâu Đánh giá Tư duy TSA
-│   ├── manifest.webmanifest      # Cấu hình PWA (cài đặt ứng dụng đa nền tảng)
-│   ├── sw.js                     # Service Worker lưu cache và hỗ trợ hoạt động ngoại tuyến
-│   ├── _headers                  # Header bảo mật và CDN Caching tối ưu
-│   ├── css/                      # Bảng kiểu giao diện (tutor.css, deep_learning.css...)
-│   ├── js/                       # Core engine, Socratic AI, Math Verifier, Deep Learning HUD
-│   │   ├── core/                 # Bộ điều khiển thi, tính điểm, Level/EXP, live challenge
-│   │   ├── data/                 # Fallback offline bundle biên dịch sẵn
-│   │   ├── math/                 # Thư viện xác thực toán học, vẽ hình JSXGraph
-│   │   └── ui/                   # Giao diện gia sư AI, thông báo, hiệu ứng
-│   └── data/                     # Cơ sở dữ liệu học thuật (26 chuyên đề, 44 đề thi, 548+ câu hỏi)
-│       ├── exams/                # Ngân hàng đề thi chuẩn hóa
-│       ├── formulas/             # Sổ tay 92 công thức toán trọng tâm
-│       ├── knowledge/            # 26 chuyên đề kiến thức phân loại theo khối lớp
-│       └── questions/            # Ngân hàng câu hỏi trọn vẹn 4 định dạng
-│
-├── functions/                    # Cloudflare Pages Functions (Serverless Edge AI Gateway)
-│   └── api/
-│       ├── ai.js                 # Edge Gateway kết nối Gemini an toàn, bảo vệ API key
-│       └── health.js             # API giám sát trạng thái hệ thống
-│
-└── wrangler.toml                 # Cấu hình triển khai Cloudflare Pages
-```
+- **Cổng Dữ Liệu Mở Toàn Cầu (Open Data)**: Tải trọn bộ dữ liệu mở `bundle.json`, file tính `questions.csv`, sổ tay `knowledge_handbook.md`, và kiểm định tính toàn vẹn độc lập bằng mã băm SHA-256 (`validate_data.ps1`).
+- **Bảo Mật Quyền Riêng Tư Tuyệt Đối (Privacy-First)**: Toàn bộ lịch sử làm bài, điểm số và dữ liệu cá nhân được lưu trữ an toàn trên thiết bị của học sinh. Nền tảng cam kết không thu thập dữ liệu nhạy cảm hay can thiệp trải nghiệm tự do của người dùng.
 
 ---
 
 <div align="center">
 
+```text
+    ____  __  ____  __ __ ____ _   __      ____  ________      __
+   / __ \/ / / /  |/  / //_// // | / /     / __ \/ ____/\ \    / /
+  / /_/ / / / / /|_/ / ,<  / //  |/ /     / / / / __/    \ \  / / 
+ / ____/ /_/ / /  / / /| |/ // /|  /  _  / /_/ / /___     \ \/ /  
+/_/    \____/_/  /_/_/ |_/___/_/ |_/ (_) \____/_____/      \__/   
+```
+
 **PUMKIN.DEV • NỀN TẢNG KHẢO THÍ TOÁN HỌC & ĐÁNH GIÁ TƯ DUY ĐỘT PHÁ**  
 *Khơi dậy bản lĩnh tư duy — Chinh phục đỉnh cao khảo thí.*
+
+sản phẩm này được tạo bởi pumkin.dev và glacy
 
 </div>
