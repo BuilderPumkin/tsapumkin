@@ -42,23 +42,48 @@ function checkRateLimit(ip) {
     return record.count <= RATE_LIMIT_MAX;
 }
 
-export async function onRequestOptions() {
+function getCorsHeaders(request, env) {
+    const origin = (request && request.headers && request.headers.get("Origin")) || "";
+    const defaultAllowed = [
+        "https://tsapumkin.pages.dev",
+        "https://pumkin.dev",
+        "https://www.pumkin.dev"
+    ];
+    let customAllowed = [];
+    if (env && env.ALLOWED_ORIGINS) {
+        customAllowed = env.ALLOWED_ORIGINS.split(",").map(s => s.trim().toLowerCase());
+    }
+    const allAllowed = [...defaultAllowed, ...customAllowed];
+
+    let matchedOrigin = "https://tsapumkin.pages.dev";
+    if (origin.startsWith("http://localhost:") || origin.startsWith("http://127.0.0.1:") || origin === "http://localhost" || origin === "http://127.0.0.1") {
+        matchedOrigin = origin;
+    } else if (allAllowed.includes(origin.toLowerCase())) {
+        matchedOrigin = origin;
+    } else if (!origin) {
+        matchedOrigin = "*";
+    }
+
+    return {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": matchedOrigin,
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization, x-goog-api-key",
+        "Access-Control-Max-Age": "86400",
+        "Vary": "Origin"
+    };
+}
+
+export async function onRequestOptions(context) {
+    const headers = getCorsHeaders(context && context.request, context && context.env);
     return new Response(null, {
         status: 204,
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "POST, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization, x-goog-api-key",
-            "Access-Control-Max-Age": "86400"
-        }
+        headers
     });
 }
 
 export async function onRequestPost(context) {
-    const corsHeaders = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
-    };
+    const corsHeaders = getCorsHeaders(context.request, context.env);
 
     try {
         const { request, env } = context;
@@ -106,7 +131,7 @@ export async function onRequestPost(context) {
         }
 
         // Jailbreak protection
-        const jailbreakRegex = /(ignore all prior instructions|give me the answer|bỏ qua luật|cho tôi đáp án|đáp án là gì|giải hộ|chọn (a|b|c|d))/i;
+        const jailbreakRegex = /(ignore all prior instructions|give me the answer|bỏ qua (mọi )?(luật|quy tắc|chỉ dẫn)|cho (tôi|em)( biết)? đáp án|đáp án là|giải hộ|chọn (a|b|c|d))/i;
         if (jailbreakRegex.test(userMessage)) {
             return new Response(JSON.stringify({
                 response: {
