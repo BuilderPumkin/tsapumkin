@@ -205,13 +205,7 @@ const PumkinTutorUI = (function() {
         bubble.className = `tutor-bubble ${role}`;
         
         if (role === 'error') {
-            const escapedText = String(text)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;');
-            bubble.innerHTML = `<strong>⚠️ Thông báo AI:</strong> ${escapedText}`;
+            bubble.innerHTML = '<span style="font-size: 16px;">⚙️</span> <span>Tính năng này đang được bảo trì</span>';
         } else {
             bubble.innerText = text;
         }

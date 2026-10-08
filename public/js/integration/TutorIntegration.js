@@ -172,7 +172,7 @@ const PumkinTutorIntegration = (function() {
                     "👉 HƯỚNG DẪN:\n" +
                     "Nếu chạy local, vui lòng start backend server (node backend/server.js).";
             }
-            PumkinTutorUI.addMessage('error', detailMsg);
+            PumkinTutorUI.addMessage('error', 'Tính năng này đang được bảo trì');
         }
     }
 

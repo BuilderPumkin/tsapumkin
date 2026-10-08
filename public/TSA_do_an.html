@@ -5642,6 +5642,151 @@ body.dark-mode .exp-bar-container {
     border-top: 7px solid #2c080d;
 }
 
+
+/* ==========================================================================
+   PERFORMANCE BOOST & EXPANDED UTILITY SCROLLBAR SYSTEM
+   ========================================================================== */
+:root {
+    --scrollbar-size: 11px;
+}
+
+/* 1. THANH TRƯỢT TIỆN ÍCH LỚN HƠN & DỄ TƯƠNG TÁC */
+::-webkit-scrollbar {
+    width: var(--scrollbar-size, 11px);
+    height: var(--scrollbar-size, 11px);
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+    transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* Scrollbars cho các khối tiện ích (Formula, Code, Question Grid, Chat) */
+.formula-math-box::-webkit-scrollbar,
+.formula-latex-box::-webkit-scrollbar,
+.nav-grid-box::-webkit-scrollbar,
+.vsc-chat-stream::-webkit-scrollbar,
+pre::-webkit-scrollbar,
+code::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px !important;
+}
+
+.formula-math-box::-webkit-scrollbar-thumb,
+.formula-latex-box::-webkit-scrollbar-thumb,
+.nav-grid-box::-webkit-scrollbar-thumb,
+.vsc-chat-stream::-webkit-scrollbar-thumb,
+pre::-webkit-scrollbar-thumb,
+code::-webkit-scrollbar-thumb {
+    background: #94a3b8 !important;
+    border-radius: 6px !important;
+    border: 2px solid transparent !important;
+    background-clip: content-box !important;
+}
+
+/* THANH TRƯỢT RANGE SLIDER LỚN HƠN DỄ KÉO */
+input[type="range"], .pdl-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 6px;
+    background: #e2e8f0;
+    outline: none;
+    cursor: pointer;
+    margin: 8px 0;
+}
+
+body.dark-mode input[type="range"], body.dark-mode .pdl-slider {
+    background: #334155;
+}
+
+input[type="range"]::-webkit-slider-thumb, .pdl-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #2563eb;
+    border: 2.5px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover, .pdl-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    background: #1d4ed8;
+}
+
+input[type="range"]::-moz-range-thumb, .pdl-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #2563eb;
+    border: 2.5px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+/* 2. ARTICLE LAYOUT (MỞ RỘNG 100% VÌ ĐÃ BỎ MỤC LỤC) */
+.article-layout {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+}
+
+.article-body {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.article-toc {
+    display: none !important;
+}
+
+/* 3. TỐI ƯU HÓA HIỆU NĂNG WEBSITE (FAST RENDERING ENGINE) */
+.knowledge-grid, .formula-card-grid, .exam-grid, .qbank-list {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 350px;
+}
+
+.formula-card, .knowledge-card, .qbank-card, .exam-card {
+    contain: layout style;
+}
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 </style>
     <script src="js/components/PumkinJSXGraph.js"></script>
     <script src="js/core/KnowledgeGraphSequencer.js"></script>
@@ -5677,7 +5822,7 @@ body.dark-mode .exp-bar-container {
                     Sổ tay công thức
                 </button>
                 <button class="nav-tab" role="tab" aria-selected="false" data-target="library" onclick="PumkinRouter.navigate('library')">
-                    Kho đề thi (<span id="nav-exam-total-count">42</span>)
+                    Kho đề thi
                 </button>
                 <button class="nav-tab" role="tab" aria-selected="false" data-target="live-lobby" onclick="PumkinRouter.navigate('live-lobby')">
                     Live Challenge
@@ -7194,18 +7339,7 @@ body.dark-mode .exp-bar-container {
     </div>
 
     <div class="article-layout">
-        <!-- Sticky TOC -->
-        <div class="article-toc">
-            <h4>📑 Mục lục bài viết</h4>
-            <ul id="article-toc-list">
-                <li><a href="#sec-overview">1. Tổng quan</a></li>
-                <li><a href="#sec-theory">2. Lý thuyết cốt lõi</a></li>
-                <li><a href="#sec-formulas">3. Công thức then chốt</a></li>
-                <li><a href="#sec-examples">4. Ví dụ minh họa</a></li>
-                <li><a href="#sec-applications">5. Ứng dụng thực tiễn</a></li>
-                <li><a href="#sec-practice">6. Bài tập thực chiến</a></li>
-            </ul>
-        </div>
+        
 
         <!-- Article Body -->
         <div class="article-body">

@@ -271,7 +271,7 @@
 }
 
 .vsc-chat-stream::-webkit-scrollbar {
-    width: 6px;
+    width: 10px;
 }
 
 .vsc-chat-stream::-webkit-scrollbar-thumb {
@@ -314,12 +314,18 @@
 }
 
 .tutor-bubble.error {
-    align-self: stretch;
-    background: rgba(244, 67, 54, 0.12);
-    color: #f87171;
-    border: 1px solid rgba(244, 67, 54, 0.3);
-    text-align: left;
-    font-size: 12.5px;
+    align-self: flex-start;
+    background: #374151 !important; /* Nền bong bóng chat màu xám */
+    color: #f3f4f6 !important;
+    border: 1px solid #4b5563 !important;
+    border-left: 3.5px solid #9ca3af !important;
+    border-radius: 8px;
+    font-size: 13.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .tutor-bubble.error strong {
