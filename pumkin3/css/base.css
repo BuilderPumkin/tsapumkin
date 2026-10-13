@@ -1,0 +1,432 @@
+/**
+ * PUMKIN.DEV Academic Design System - Base Stylesheet
+ * Layer: 1 - Base (Tokens, Reset, Typography, Math Primitives, Base Tables)
+ */
+
+        :root {
+            /* Hand-crafted Academic Design System (Pumkin Slate & Terracotta) */
+            --color-bg: #f8f9fa;
+            --color-surface: #ffffff;
+            --color-surface-subtle: #f1f3f5;
+            --color-text: #1a202c;
+            --color-text-muted: #64748b;
+            --color-text-inverse: #ffffff;
+            --color-border: #e2e8f0;
+            --color-border-strong: #cbd5e1;
+            
+            /* Signature Academic Brand Colors */
+            --color-primary: #0f172a;       /* Oxford Navy Slate */
+            --color-primary-hover: #1e293b;
+            --color-primary-light: #334155;
+            --color-primary-bg: #f1f5f9;
+            --color-accent: #ea580c;        /* Warm Pumkin Terracotta */
+            --color-accent-hover: #c2410c;
+            --color-accent-bg: #fff7ed;
+            
+            /* Status & Feedback Tones */
+            --color-success: #0f766e;       /* Deep Forest Emerald */
+            --color-success-bg: #f0fdf4;
+            --color-warning: #b45309;       /* Scholarly Amber */
+            --color-warning-bg: #fffbeb;
+            --color-danger: #b91c1c;        /* Crimson */
+            --color-danger-bg: #fef2f2;
+
+            /* Backward compatibility aliases */
+            --primary: var(--color-primary);
+            --primary-light: var(--color-primary-light);
+            --primary-bg: var(--color-primary-bg);
+            --accent: var(--color-accent);
+            --success: var(--color-success);
+            --success-bg: var(--color-success-bg);
+            --warning: var(--color-warning);
+            --warning-bg: var(--color-warning-bg);
+            --danger: var(--color-danger);
+            --danger-bg: var(--color-danger-bg);
+            --text-main: var(--color-text);
+            --text-muted: var(--color-text-muted);
+            --border-color: var(--color-border);
+            --card-bg: var(--color-surface);
+            --bg-card: var(--card-bg);
+            --card-bg-subtle: var(--color-surface-subtle);
+            --code-bg: #f8fafc;
+            --bg-color: var(--color-bg);
+            --text-color: var(--color-text);
+
+            /* Refined Natural Diffuse Elevation */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 25px -4px rgba(0, 0, 0, 0.08);
+
+            /* Inputs & Forms */
+            --input-bg: #ffffff;
+            --input-border: #cbd5e1;
+            --input-focus-ring: rgba(15, 23, 42, 0.12);
+
+            /* Navigation & Overlays */
+            --nav-bg: rgba(255, 255, 255, 0.94);
+            --nav-border: #e2e8f0;
+            --modal-overlay: rgba(15, 23, 42, 0.6);
+            --scrollbar-thumb: #cbd5e1;
+            --scrollbar-track: transparent;
+            --icon-muted: #94a3b8;
+            /* Utility & Scrollbar Dimensions (Consolidated) */
+            --scrollbar-size: 11px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Plus Jakarta Sans", "Segoe UI", Roboto, sans-serif;
+            line-height: 1.68;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            padding: 0 0 50px 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .wrapper, main, .app-view {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .katex-display {
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            padding: 4px 0;
+        }
+
+        .wrapper {
+            max-width: 1140px;
+            margin: 28px auto 0 auto;
+            background: var(--card-bg);
+            padding: 40px 48px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 4px 16px -2px rgba(0, 0, 0, 0.02);
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        header:not(.pumkin-nav-container) {
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 28px;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: var(--text-main);
+            font-weight: 750;
+            letter-spacing: -0.4px;
+            margin-bottom: 10px;
+            line-height: 1.35;
+        }
+
+        .header-sub {
+            font-size: 15px;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .target-badge {
+    display: inline-block;
+    background: var(--color-surface-subtle);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 5px 14px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+        h2 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h3 {
+            font-size: 16.5px;
+            color: var(--accent);
+            margin-top: 24px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            font-size: 14.5px;
+            color: var(--text-main);
+            margin-top: 15px;
+            margin-bottom: 6px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            font-size: 14.5px;
+            color: var(--text-main);
+        }
+
+        .highlight-keyword {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Callout Box */
+        .callout {
+            background-color: var(--primary-bg);
+            border-left: 4px solid var(--primary);
+            padding: 14px 18px;
+            border-radius: 6px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Formula Card */
+        .formula-card {
+            background-color: #fdfdfd;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .formula-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .formula-condition {
+            font-size: 13px;
+            color: var(--text-muted);
+            background: var(--bg-subtle, #f1f5f9);
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .formula-display {
+            background: var(--code-bg, #ffffff);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+            text-align: center;
+            font-size: 15px;
+            overflow-x: auto;
+        }
+
+        .formula-note {
+            font-size: 13px;
+            color: var(--text-muted, #475569);
+            margin-top: 6px;
+        }
+
+        /* Responsive Table Container System */
+        .table-responsive {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            margin: 18px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg, #ffffff);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .table-responsive::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .table-responsive::-webkit-scrollbar-track {
+            background: var(--bg-subtle, #f1f5f9);
+            border-radius: 4px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        /* Tables inside responsive wrapper */
+        .table-responsive table {
+            margin: 0 !important;
+            border: none !important;
+            border-radius: 0 !important;
+            min-width: 580px;
+        }
+
+        /* Base Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0;
+            font-size: 13.5px;
+            background: var(--card-bg, white);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 14px;
+            font-weight: 600;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            vertical-align: middle;
+            background: var(--card-bg, transparent);
+            color: var(--text-main);
+        }
+
+        tr:nth-child(even) td {
+            background-color: var(--bg-subtle, #f8fafc);
+        }
+
+        tr:hover td {
+            background-color: var(--primary-bg, #f1f5f9);
+        }
+
+        .badge-winner {
+            display: inline-block;
+            background-color: var(--success);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        .badge-thpt {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Examples Box */
+        .example-box {
+            background: var(--card-bg, #ffffff);
+            border: 1px solid var(--border-color, #cbd5e1);
+            border-left: 4px solid var(--success);
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+        }
+
+        .example-header {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .example-problem {
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            background: var(--code-bg, #f8fafc);
+            padding: 12px 14px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color, #e2e8f0);
+        }
+
+        .solution-step {
+            margin-bottom: 8px;
+            font-size: 13.5px;
+        }
+
+        .solution-step-title {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .solution-result {
+            background: var(--success-bg);
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 13.5px;
+        }
+
+        .casio-shortcut {
+            font-family: 'Courier New', Courier, monospace;
+            background: #e2e8f0;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 12.5px;
+        }
+
+        @media (max-width: 768px) {
+            .wrapper {
+                padding: 20px 15px;
+            }
+            table {
+                font-size: 12px;
+            }
+            th, td {
+                padding: 6px 8px;
+            }
+        }
+
+
+/* ==========================================================================
+   PUMKIN.DEV PLATFORM EXTENSIONS - DESIGN SYSTEM & COMPONENTS
+   ========================================================================== */

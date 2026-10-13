@@ -1,0 +1,158 @@
+{
+  "name": "pumkindev-math-open-data",
+  "version": "v2.1.0",
+  "schema_version": "2.0",
+  "title": "PUMKIN.DEV Standardized Math Examination, Skill Graph and Knowledge Open Dataset",
+  "description": "Kho du lieu mo chuan hoa phuc vu khao thi va luyen thi Toan TSA, HSA, THPT, Giai tich 1 voi Question DNA va Do thi Ky nang",
+  "license": "CC BY-NC-SA 4.0",
+  "generated_at": "2026-09-08T16:32:00Z",
+  "maintainer": {
+    "team": "PUMKIN.DEV Education and Open Source Team",
+    "repository": "https://github.com/pumkindev/math-exam-platform"
+  },
+  "stats": {
+    "total_questions": 182,
+    "total_exams": 43,
+    "total_knowledge_articles": 25,
+    "total_formulas": 84,
+    "total_skills": 6,
+    "total_public_files": 25
+  },
+  "schemas": {
+    "question": "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/question.schema.json",
+    "skills": "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/skills.schema.json",
+    "exam": "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/exam.schema.json",
+    "knowledge": "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/knowledge.schema.json",
+    "manifest": "https://raw.githubusercontent.com/pumkindev/math-exam-platform/main/schemas/manifest.schema.json"
+  },
+  "files": {
+    "bundle.json": {
+      "path": "bundle.json",
+      "hash": "afdee72334abc099880d58295389d0784c0bfb832074adf20639f372df877e57",
+      "last_updated": "2026-09-17T06:55:14.158Z"
+    },
+    "CHANGELOG.md": {
+      "path": "CHANGELOG.md",
+      "hash": "9a27f0fffa07b2edb58288ca6053fdac9852503bdf40791b2a938110f1d1902c",
+      "last_updated": "2026-09-17T06:55:14.158Z"
+    },
+    "exams/all.json": {
+      "path": "exams/all.json",
+      "hash": "f37b6725abd4615a74c368076b88f18a9ce3b207113ca8bdcd8a5b554df2a509",
+      "last_updated": "2026-09-17T06:55:14.159Z"
+    },
+    "exams/calculus1.json": {
+      "path": "exams/calculus1.json",
+      "hash": "2b69ce93f84f7ef6c690da6da5299e7a343a8b9f8ce3eb53b054e58418cd9752",
+      "last_updated": "2026-09-17T06:55:14.159Z"
+    },
+    "exams/hsa.json": {
+      "path": "exams/hsa.json",
+      "hash": "0874d5dea6e659084c8cf891979fc65a86929202a034e2e17c337f42e61b12e5",
+      "last_updated": "2026-09-17T06:55:14.159Z"
+    },
+    "exams/thpt.json": {
+      "path": "exams/thpt.json",
+      "hash": "39bc6dac676b3b72b21577d7b2f3ba94d173e6d7a0469ee1f8faf966f88871a0",
+      "last_updated": "2026-09-17T06:55:14.159Z"
+    },
+    "exams/tsa.json": {
+      "path": "exams/tsa.json",
+      "hash": "9d21cc5b1bdad8d11f025bc05f59a97f989fdc89371a20e25c6e8d1c1d718eb0",
+      "last_updated": "2026-09-17T06:55:14.159Z"
+    },
+    "formulas/cheatsheet.json": {
+      "path": "formulas/cheatsheet.json",
+      "hash": "f37aa502eb51efd1d73de2b62eb0a19c1c22b925eae0437dddd24c539ac6212e",
+      "last_updated": "2026-09-17T06:55:14.159Z"
+    },
+    "formulas/cheatsheet.md": {
+      "path": "formulas/cheatsheet.md",
+      "hash": "65e0357811d6b2cde1f1ed3dd8da364e34e4222d40a69a05f86047199e52026b",
+      "last_updated": "2026-09-17T06:55:14.159Z"
+    },
+    "knowledge/advanced_algebra.json": {
+      "path": "knowledge/advanced_algebra.json",
+      "hash": "57a55704d14cea8ac221a8d931d927dc0d238895b6259c427357545350814e77",
+      "last_updated": "2026-09-17T06:55:14.160Z"
+    },
+    "knowledge/all.json": {
+      "path": "knowledge/all.json",
+      "hash": "0fd09e032cc9f5524874bec6f58f19de95f826b6f34594613a32551882b080fa",
+      "last_updated": "2026-09-17T06:55:14.160Z"
+    },
+    "knowledge/calculus1.json": {
+      "path": "knowledge/calculus1.json",
+      "hash": "0d7b63ce5fa2bf7c2a6dd0af5ce17cad3bcdb3da479b85006f208a6db8c7d631",
+      "last_updated": "2026-09-17T06:55:14.160Z"
+    },
+    "knowledge/knowledge_handbook.md": {
+      "path": "knowledge/knowledge_handbook.md",
+      "hash": "750922025450af8f6d6a99e23af386c6b3fd0c59c0305d4bb7dea66fabee1d85",
+      "last_updated": "2026-09-17T06:55:14.160Z"
+    },
+    "knowledge/math10.json": {
+      "path": "knowledge/math10.json",
+      "hash": "fbcd71a2f5e382844cde4da96cbda705fb25a3266b8ee862caa28d016c9b1630",
+      "last_updated": "2026-09-17T06:55:14.160Z"
+    },
+    "knowledge/math11.json": {
+      "path": "knowledge/math11.json",
+      "hash": "40c95dfb3769fd29ec5294925431a19161a5b391bd02729bc23ef255b3d21f2a",
+      "last_updated": "2026-09-17T06:55:14.160Z"
+    },
+    "knowledge/math12.json": {
+      "path": "knowledge/math12.json",
+      "hash": "6a8269605c03dd543ed222b9ed01fdf7ed2797b20459cd0f8cce8f7c49e0f6b7",
+      "last_updated": "2026-09-17T06:55:14.160Z"
+    },
+    "questions/all.json": {
+      "path": "questions/all.json",
+      "hash": "f21ca07c52999411d40dc7388e9a452c03d30b060ca2429a4ddf1d4de7305fc4",
+      "last_updated": "2026-09-17T06:55:14.162Z"
+    },
+    "questions/calculus1.json": {
+      "path": "questions/calculus1.json",
+      "hash": "6ae5e54cae77358033846e470d8bbd3c3ac148ce406addd6861b4885a3e33e03",
+      "last_updated": "2026-09-17T06:55:14.162Z"
+    },
+    "questions/hsa.json": {
+      "path": "questions/hsa.json",
+      "hash": "f1050eecc97256b07412019c238142b45257da8d4338fec75f3a781243830bce",
+      "last_updated": "2026-09-17T06:55:14.163Z"
+    },
+    "questions/questions.csv": {
+      "path": "questions/questions.csv",
+      "hash": "bc0ca0a77a3863baad00a750845f3acb44cf412242283708afdbfd1bb2695194",
+      "last_updated": "2026-09-17T06:55:14.163Z"
+    },
+    "questions/thpt.json": {
+      "path": "questions/thpt.json",
+      "hash": "76806f210f7207ecabb1da126dc6add6534654ef15125d77b8faf8a4fc568690",
+      "last_updated": "2026-09-17T06:55:14.164Z"
+    },
+    "questions/tsa.json": {
+      "path": "questions/tsa.json",
+      "hash": "810ecd92748d9e832783816ca775091e35701fe68ad365613258beac5772bf80",
+      "last_updated": "2026-09-17T06:55:14.164Z"
+    },
+    "README.md": {
+      "path": "README.md",
+      "hash": "05eeba1578c687f299cb39ec08ab974f743607e1dbdf1473959b0640d44e56aa",
+      "last_updated": "2026-09-17T06:55:14.165Z"
+    },
+    "skills/skills.json": {
+      "path": "skills/skills.json",
+      "hash": "c5d8a23c0aa7e995c07ba6d7e8b89ce87ac4eac223825872fa178e569c8a391e",
+      "last_updated": "2026-09-17T06:55:14.165Z"
+    },
+    "taxonomy/topics.json": {
+      "path": "taxonomy/topics.json",
+      "hash": "7780287c54961314c0ce63c04752bc154e00153df17ef7acc53df7b631102d68",
+      "last_updated": "2026-09-17T06:55:14.165Z"
+    }
+  },
+  "publishedAt": "2026-09-16T16:20:41.352Z",
+  "timestamp": "2026-09-17T06:55:14.165Z",
+  "total_files": 25
+}

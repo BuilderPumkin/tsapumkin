@@ -1,0 +1,124 @@
+[
+  {
+    "id": "exam_calc_01",
+    "title": "Giải Tích 1 – Đề Thi Giữa Kỳ Toán Cao Cấp ĐHBK Hà Nội (K68 - 2024)",
+    "type": "Giải tích 1",
+    "exam_format_version": "STANDARD-2025",
+    "year": 2024,
+    "duration_minutes": 60,
+    "question_count": 8,
+    "question_ids": [
+      "q_calc_01",
+      "q_calc_02",
+      "q_calc_tf_01",
+      "q_calc_sa_01",
+      "q_calc_03",
+      "q_calc_04",
+      "q_calc_05",
+      "q_calc_06"
+    ],
+    "difficulty": "Khó",
+    "source": "Viện Toán ứng dụng & Tin học BKHN",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Khảo sát giới hạn vô cùng bé bậc cao, khai triển Maclaurin, công thức Leibniz và tích phân suy rộng loại 1.",
+    "attempts_count": 1520,
+    "sections": [],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_calc_02",
+    "title": "Giải Tích 1 – Đề Thi Cuối Kỳ Giải Tích 1 & Phương Trình Vi Phân (K69 - 2025)",
+    "type": "Giải tích 1",
+    "exam_format_version": "STANDARD-2025",
+    "year": 2025,
+    "duration_minutes": 60,
+    "question_count": 8,
+    "question_ids": [
+      "q_calc_02",
+      "q_calc_03",
+      "q_calc_04",
+      "q_calc_05",
+      "q_calc_06",
+      "q_calc_07",
+      "q_calc_08",
+      "q_calc_09"
+    ],
+    "difficulty": "Khó",
+    "source": "Viện Toán ứng dụng & Tin học BKHN",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi cuối kỳ chuyên sâu: phương trình vi phân tuyến tính cấp 1, phương trình biến số phân ly và chuỗi lũy thừa.",
+    "attempts_count": 1380,
+    "sections": [],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_calc_03",
+    "title": "Đại Số Tuyến Tính – Đề Thi Kết Thúc Học Phần Đại Số Bách Khoa (2025)",
+    "type": "Toán cao cấp",
+    "exam_format_version": "STANDARD-2025",
+    "year": 2025,
+    "duration_minutes": 60,
+    "question_count": 9,
+    "question_ids": [
+      "q_calc_04",
+      "q_calc_07",
+      "q_calc_08",
+      "q_calc_09",
+      "q_calc_10",
+      "q_tsa_03",
+      "q_tsa_04",
+      "q_tsa_12",
+      "q_calc_sa_01"
+    ],
+    "difficulty": "Khó",
+    "source": "Bộ môn Toán Đại học Bách Khoa Hà Nội",
+    "source_type": "official",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Định thức, ma trận nghịch đảo, hạng ma trận, trị riêng, vectơ riêng và mô hình cân bằng Markov.",
+    "attempts_count": 1240,
+    "sections": [],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_calc_04",
+    "title": "Giải Tích 1 – Đề Thi Thử Thách Olympic Toán Sinh Viên Toàn Quốc (2025)",
+    "type": "Giải tích 1",
+    "exam_format_version": "STANDARD-2025",
+    "year": 2025,
+    "duration_minutes": 60,
+    "question_count": 9,
+    "question_ids": [
+      "q_calc_01",
+      "q_calc_03",
+      "q_calc_05",
+      "q_calc_11",
+      "q_calc_12",
+      "q_calc_13",
+      "q_calc_14",
+      "q_calc_15",
+      "q_calc_step_01"
+    ],
+    "difficulty": "Khó",
+    "source": "Hội Toán Học Việt Nam",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi tuyển chọn đội tuyển Olympic Giải tích sinh viên các trường đại học khối kỹ thuật và công nghệ.",
+    "attempts_count": 920,
+    "sections": [],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  }
+]

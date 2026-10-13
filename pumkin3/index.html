@@ -1,0 +1,2312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>PUMKIN.DEV — Nền tảng Khảo thí Toán học & Luyện thi Đánh giá Tư duy</title>
+    <meta name="description" content="Nền tảng khảo thí toán học và luyện thi đánh giá tư duy TSA, HSA, THPT, Giải tích chuyên nghiệp. Tích hợp Gia sư AI Socratic và hệ thống cấp độ EXP.">
+    <link rel="canonical" href="https://tsapumkin.pages.dev/">
+    
+    <!-- OpenGraph Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tsapumkin.pages.dev/">
+    <meta property="og:title" content="PUMKIN.DEV — Nền tảng Khảo thí Toán học & Luyện thi Đánh giá Tư duy">
+    <meta property="og:description" content="Nền tảng khảo thí toán học và luyện thi đánh giá tư duy TSA, HSA, THPT, Giải tích chuyên nghiệp với Gia sư AI Socratic.">
+    <meta property="og:image" content="https://tsapumkin.pages.dev/data/og_preview.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PUMKIN.DEV — Khảo thí Toán học & Đánh giá Tư duy">
+    <meta name="twitter:description" content="Ôn luyện TSA, HSA, THPT, Giải tích với ngân hàng đề thi chuẩn hóa và AI Socratic.">
+
+    <!-- Anti-FOUC Early Theme Initializer -->
+    <script>
+    (function() {
+        try {
+            var saved = localStorage.getItem("pumkin_theme_v3");
+            var theme = saved;
+            if (!theme) {
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                theme = prefersDark ? "dark" : "light";
+            }
+            if (theme === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark");
+                if (document.body) {
+                    document.body.classList.add("dark-mode");
+                } else {
+                    document.addEventListener("DOMContentLoaded", function() {
+                        document.body.classList.add("dark-mode");
+                    });
+                }
+            } else {
+                document.documentElement.setAttribute("data-theme", "light");
+            }
+        } catch(e) {}
+    })();
+    </script>
+
+    <link rel="manifest" href="manifest.webmanifest">
+    <script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("./sw.js").catch(() => {});
+        });
+    }
+    </script>
+    <!-- KaTeX Mathematical Typesetting Engine (Offline-first with CDN fallback) -->
+    <link rel="stylesheet" href="vendor/katex/katex.min.css">
+    <script defer src="vendor/katex/katex.min.js"></script>
+    <script defer src="vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="js/math/PumkinMathRenderer.js"></script>
+    <!-- PUMKIN Academic Modular Design System (Zero-build Vanilla CSS) -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/deep_learning.css">
+    <link rel="stylesheet" href="css/tutor.css">
+    <script src="js/components/PumkinJSXGraph.js"></script>
+    <script src="js/core/KnowledgeGraphSequencer.js"></script>
+    <script src="js/core/PumkinDeepLearningIntegration.js"></script>
+    <script src="js/core/PumkinDiagnosticUI.js"></script>
+    <script src="js/core/PumkinTeacherDashboard.js"></script>
+    <script src="js/core/PumkinLevelSystem.js"></script>
+    <script src="js/core/LiveExamClient.js"></script>
+    <script src="js/data/fallback_bundle.js"></script>
+    <script src="js/repository/DataRepository.js"></script>
+    <script src="js/data/PumkinDefaultData.js"></script>
+    <script src="js/core/PumkinPerf.js"></script>
+    <script src="js/ui/PumkinToast.js"></script>
+    <script src="js/core/PumkinTheme.js"></script>
+    <script src="js/ui/PumkinUI.js"></script>
+    <script src="js/store/PumkinStorage.js"></script>
+    <script src="js/store/PumkinStore.js"></script>
+    <script src="js/core/PumkinRouter.js"></script>
+    <script src="js/core/PumkinAuth.js"></script>
+    <script src="js/core/PumkinBackup.js"></script>
+    <script src="js/features/analytics/PumkinErrorClassifier.js"></script>
+    <script src="js/features/analytics/PumkinSkillProfile.js"></script>
+    <script src="js/features/assessment/PumkinGenerator.js"></script>
+    <script src="js/features/assessment/PumkinBookmarks.js"></script>
+    <script src="js/features/assessment/PumkinLibrary.js"></script>
+    <script src="js/psychometrics/RaschEstimator.js"></script>
+    <script src="js/features/assessment/PumkinScoring.js"></script>
+    <script src="js/features/assessment/PumkinPlayer.js"></script>
+    <script src="js/features/assessment/PumkinSmartPractice.js"></script>
+    <script src="js/features/assessment/PumkinLiveExam.js"></script>
+    <script src="js/features/knowledge/PumkinAdmin.js"></script>
+    <script src="js/features/knowledge/PumkinKnowledge.js"></script>
+    <script src="js/features/knowledge/PumkinFormulas.js"></script>
+    <script src="js/features/knowledge/PumkinQBank.js"></script>
+    <script src="js/features/knowledge/PumkinDataRepo.js"></script>
+    <script src="js/features/analytics/PumkinLearningTrace.js"></script>
+    <script src="js/features/analytics/PumkinRecommendationEngine.js"></script>
+    <script src="js/features/analytics/PumkinAdaptivePractice.js"></script>
+    <script src="js/core/PumkinJourneyManager.js"></script>
+    <script src="js/features/analytics/PumkinAnalytics.js"></script>
+</head>
+<body data-author="PUMKIN.DEV">
+<a href="#main-content" class="skip-to-content">Chuyển đến nội dung chính</a>
+<div id="pumkin-toast-container" class="pumkin-toast-container" role="status" aria-live="polite" aria-label="Thông báo hệ thống"></div>
+
+<header class="pumkin-nav-container" role="banner">
+    <nav class="pumkin-nav" aria-label="Điều hướng chính">
+        <div class="brand-logo" onclick="PumkinRouter.navigate('guide')">
+            <span>🎃 PUMKIN.DEV</span>
+            <span class="brand-badge">TSA ACADEMY</span>
+        </div>
+        
+        <div class="nav-scroll-wrapper">
+            <button class="nav-scroll-arrow nav-scroll-prev" onclick="PumkinUI.scrollNav(-250)" title="Cuộn sang trái" aria-label="Cuộn thanh tab sang trái">‹</button>
+            <div class="nav-links" id="main-nav-links" role="tablist" aria-label="Danh mục trang">
+                <button class="nav-tab active" role="tab" aria-selected="true" data-target="guide" onclick="PumkinRouter.navigate('guide')">
+                    Cẩm nang
+                </button>
+                <button class="nav-tab" role="tab" aria-selected="false" data-target="knowledge" onclick="PumkinRouter.navigate('knowledge')">
+                    Kho kiến thức
+                </button>
+                <button class="nav-tab" role="tab" aria-selected="false" data-target="formulas" onclick="PumkinRouter.navigate('formulas')">
+                    Sổ tay công thức
+                </button>
+                <button class="nav-tab" role="tab" aria-selected="false" data-target="library" onclick="PumkinRouter.navigate('library')">
+                    Kho đề thi
+                </button>
+                <button class="nav-tab" role="tab" aria-selected="false" data-target="live-lobby" onclick="PumkinRouter.navigate('live-lobby')">
+                    Live Challenge
+                </button>
+                <button class="nav-tab" role="tab" aria-selected="false" data-target="qbank" onclick="PumkinRouter.navigate('qbank')">
+                    Ngân hàng câu hỏi
+                </button>
+                <button class="nav-tab" role="tab" aria-selected="false" data-target="generator" onclick="PumkinRouter.navigate('generator')">
+                    Tạo đề thi
+                </button>
+                <button class="nav-tab" role="tab" aria-selected="false" data-target="smart" onclick="PumkinRouter.navigate('smart')">
+                    Luyện thông minh
+                </button>
+                <button class="nav-tab" role="tab" aria-selected="false" data-target="bookmarks" onclick="PumkinRouter.navigate('bookmarks')">
+                    Đã lưu <span id="nav-bookmark-count" class="nav-badge-count" style="display:none;">0</span>
+                </button>
+                <button class="nav-tab" role="tab" aria-selected="false" data-target="dashboard" onclick="PumkinRouter.navigate('dashboard')">
+                    Lộ trình & Năng lực
+                </button>
+                <button id="nav-tab-admin" class="nav-tab" data-target="admin" style="display:none;" onclick="PumkinRouter.navigate('admin')">
+                    Quản trị
+                </button>
+                <button id="nav-tab-data" class="nav-tab" data-target="data" style="display:none;" onclick="PumkinRouter.navigate('data')">
+                    Dữ liệu mở
+                </button>
+            </div>
+            <button class="nav-scroll-arrow nav-scroll-next" onclick="PumkinUI.scrollNav(250)" title="Cuộn sang phải" aria-label="Cuộn thanh tab sang phải">›</button>
+        </div>
+
+        <div class="nav-right-actions">
+            <button class="btn-theme-toggle" id="btn-theme-toggle" onclick="PumkinTheme.toggleTheme()" title="Chuyển chế độ Sáng / Tối" aria-label="Chuyển đổi giao diện sáng và tối">
+                🌙
+            </button>
+            <div id="nav-user-level-badge" class="nav-level-badge" style="display:none; cursor:pointer;" onclick="PumkinAuth.showModal('profile')" title="Bấm để xem tiến trình Cấp độ & EXP"></div>
+            <button class="btn-nav-auth" id="btn-open-auth-modal" onclick="PumkinAuth.showModal()">
+                👤 <span id="nav-user-label">Đăng nhập</span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<main class="wrapper" id="main-content" role="main">
+    <div id="view-guide" class="app-view active">
+    <header>
+        <h1>CẨM NANG TOÀN DIỆN TOÁN HỌC TSA & TOÁN CAO CẤP ỨNG DỤNG</h1>
+        <div class="header-sub">Hệ thống công thức cô đọng, điều kiện chuẩn mực & Phương pháp thực chiến mục tiêu 40/40</div>
+        <div class="target-badge">Kỳ thi Đánh giá Tư duy (TSA) - Đại học Bách khoa Hà Nội</div>
+    </header>
+
+    <!-- SECTION 1: COMPARISON -->
+    <h2>1. BẢNG SO SÁNH CHIẾN LƯỢC: KHI NÀO DÙNG THPT VS. TOÁN CAO CẤP?</h2>
+    <p>Phân tích tốc độ giải bài thi trắc nghiệm nhằm chọn phương pháp ngắn gọn nhất, triệt tiêu các bước biến đổi trung gian không cần thiết:</p>
+
+    <div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 24%;">Dạng toán / Tình huống</th>
+                <th style="width: 25%;">Phương pháp THPT</th>
+                <th style="width: 27%;">Phương pháp Toán Cao Cấp</th>
+                <th style="width: 24%;">Khuyến nghị tối ưu</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="highlight-keyword">1. Khử vô định giới hạn</span> dạng \(0/0, \infty/\infty\) chứa căn phức tạp</td>
+                <td>Nhân liên hợp, quy đồng, phân tích đa thức thành nhân tử (dài, dễ nhầm khi căn bậc 3).</td>
+                <td><strong>Vô cùng bé tương đương / Quy tắc L'Hôpital / Khai triển Maclaurin.</strong></td>
+                <td><span class="badge-winner">CAO CẤP TỐI ƯU</span><br>Triệt tiêu ngay trong 5–10s, bỏ qua liên hợp.</td>
+            </tr>
+            <tr>
+                <td><span class="highlight-keyword">2. Chuyển dịch trạng thái</span> theo chu kỳ (thị phần, thời tiết, sinh học)</td>
+                <td>Lập sơ đồ cây, quy nạp, giải hệ xác suất lồng nhau qua từng bước (dài và rối khi \(n \ge 3\)).</td>
+                <td><strong>Xích Markov:</strong> Vector \(v_n = P^n \cdot v_0\) hoặc giải hệ cân bằng dài hạn \((P - I)\pi = 0\).</td>
+                <td><span class="badge-winner">CAO CẤP TỐI ƯU</span><br>Bấm ma trận Casio \(P^n \cdot v_0\) ra kết quả 20s.</td>
+            </tr>
+            <tr>
+                <td><span class="highlight-keyword">3. Số hạng tổng quát dãy truy hồi</span> \(a_n = c_1 a_{n-1} + c_2 a_{n-2}\)</td>
+                <td>Thêm bớt đưa về cấp số nhân \(a_n + k a_{n-1} = q(a_{n-1} + k a_{n-2})\) (mò \(k\) rất khó).</td>
+                <td><strong>Phương trình đặc trưng:</strong> \(r^2 - c_1 r - c_2 = 0 \implies a_n = A r_1^n + B r_2^n\).</td>
+                <td><span class="badge-winner">CAO CẤP TỐI ƯU</span><br>Quy trình cố định, không cần đoán dạng.</td>
+            </tr>
+            <tr>
+                <td><span class="highlight-keyword">4. Khoảng cách 2 đường chéo nhau</span> trong không gian phức tạp</td>
+                <td>Dựng mặt phẳng phụ song song, kẻ đoạn vuông góc chung (khó nhìn hình, dễ vẽ sai).</td>
+                <td><strong>Tọa độ hóa Oxyz:</strong> \(d = \frac{|[\vec{u}_1, \vec{u}_2] \cdot \vec{M_1 M_2}|}{|[\vec{u}_1, \vec{u}_2]|}\).</td>
+                <td><span class="badge-winner">CAO CẤP TỐI ƯU</span><br>Chuyển hình học thành đại số 100% chuẩn xác.</td>
+            </tr>
+            <tr>
+                <td><span class="highlight-keyword">5. Diện tích đa giác \(n\) đỉnh</span> bất kỳ trên hệ trục Oxy</td>
+                <td>Chia nhỏ đa giác thành nhiều tam giác/hình thang rồi cộng diện tích.</td>
+                <td><strong>Công thức Shoelace:</strong> \(S = \frac{1}{2} \left|\sum (x_i y_{i+1} - x_{i+1} y_i)\right|\).</td>
+                <td><span class="badge-winner">CAO CẤP TỐI ƯU</span><br>Tính một mạch theo tọa độ các đỉnh.</td>
+            </tr>
+            <tr>
+                <td><span class="highlight-keyword">6. Tích phân đối xứng</span> dạng \(\int_a^b \frac{f(x)}{f(x)+f(a+b-x)}dx\)</td>
+                <td>Đổi biến \(t = a + b - x\), chứng minh \(I = I'\) rồi cộng 2 vế (mất 2-3 phút biến đổi).</td>
+                <td><strong>Định lý King:</strong> Kết quả luôn bằng \(\frac{b - a}{2}\).</td>
+                <td><span class="badge-winner">CAO CẤP TỐI ƯU</span><br>Ghi ngay đáp số trong 5 giây.</td>
+            </tr>
+            <tr>
+                <td><span class="highlight-keyword">7. Tích phân từng phần lặp lại</span> \(\int P(x)e^{ax}dx, \int P(x)\cos(ax)dx\)</td>
+                <td>Đặt \(u, dv\) rồi tích phân từng phần 2–3 lần liên tiếp (dễ nhầm dấu trừ).</td>
+                <td><strong>Phương pháp bảng DI (Đường chéo):</strong> Một cột đạo hàm, một cột nguyên hàm.</td>
+                <td><span class="badge-winner">CAO CẤP TỐI ƯU</span><br>Viết kết quả trực tiếp theo đường chéo đan dấu.</td>
+            </tr>
+            <tr>
+                <td><span class="highlight-keyword">8. Tăng trưởng / Phân rã / Làm nguội</span> theo thời gian</td>
+                <td>Học thuộc từng công thức rời rạc cho từng bài.</td>
+                <td><strong>Phương trình vi phân:</strong> \(y' = ky \implies y(t) = y_0 e^{kt}\) hoặc \(T'(t) = -k(T - T_{\text{env}})\).</td>
+                <td><span class="badge-winner">CAO CẤP TỐI ƯU</span><br>Nắm trọn bản chất quy luật tăng trưởng thực tế.</td>
+            </tr>
+            <tr>
+                <td><span class="highlight-keyword">9. Khảo sát cực trị hàm bậc 2, bậc 3</span> cơ bản</td>
+                <td><strong>Tính \(f'(x) = 0\), lập bảng xét dấu đạo hàm trực tiếp.</strong></td>
+                <td>Ma trận Hessian, đạo hàm cấp cao.</td>
+                <td><span class="badge-thpt">THPT TỐI ƯU</span><br>Đạo hàm trực tiếp nhanh và gọn hơn.</td>
+            </tr>
+            <tr>
+                <td><span class="highlight-keyword">10. Cực trị đối xứng 2-3 biến</span>: \(x + y = S\), tìm max \(xy\)</td>
+                <td><strong>BĐT AM-GM (Cauchy):</strong> \(xy \le \frac{(x+y)^2}{4} = \frac{S^2}{4}\).</td>
+                <td>Nhân tử Lagrange (Lập hệ đạo hàm riêng 3 ẩn).</td>
+                <td><span class="badge-thpt">THPT TỐI ƯU</span><br>AM-GM cho kết quả ngay trong 1 dòng.</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <!-- SECTION 2: HIGHER MATH FORMULAS -->
+    <h2>2. TOÁN CAO CẤP ỨNG DỤNG: CÔNG THỨC CHI TIẾT & ĐIỀU KIỆN ÁP DỤNG</h2>
+
+    <!-- 2.1 Linear Algebra -->
+    <h3>2.1. Đại Số Tuyến Tính, Định Thức & Hình Học Tọa Độ Ma Trận</h3>
+
+    <div class="formula-card">
+        <div class="formula-card-title">1. Định Lý Cramer Giải Hệ Phương Trình Tuyến Tính \(n\) Ẩn</div>
+        <div class="formula-condition">Điều kiện: Hệ gồm \(n\) phương trình bậc nhất, \(n\) ẩn số \(A \cdot X = B\) và \(\det(A) \ne 0\).</div>
+        <div class="formula-display">
+            $$x_i = \frac{\det(A_i)}{\det(A)} \quad (i = 1, 2, \dots, n)$$
+        </div>
+        <div class="formula-note">Trong đó \(A_i\) là ma trận thu được từ \(A\) bằng cách thay cột thứ \(i\) bằng cột hệ số tự do \(B\).</div>
+    </div>
+
+    <div class="formula-card">
+        <div class="formula-card-title">2. Công Thức Shoelace (Dây Giày / Gauss Area) Tính Diện Tích Đa Giác</div>
+        <div class="formula-condition">Điều kiện: Đa giác phẳng đơn gồm \(n\) đỉnh \(P_1(x_1,y_1), P_2(x_2,y_2), \dots, P_n(x_n,y_n)\) liệt kê theo thứ tự vòng quanh (quy ước \(P_{n+1} = P_1\)).</div>
+        <div class="formula-display">
+            $$S = \frac{1}{2} \left| \sum_{i=1}^n (x_i y_{i+1} - x_{i+1} y_i) \right| = \frac{1}{2} \left| (x_1 y_2 + x_2 y_3 + \dots + x_n y_1) - (y_1 x_2 + y_2 x_3 + \dots + y_n x_1) \right|$$
+        </div>
+    </div>
+
+    <div class="formula-card">
+        <div class="formula-card-title">3. Thể Tích Khối Hộp & Khối Tứ Diện Bằng Định Thức Cấp 3</div>
+        <div class="formula-condition">Điều kiện: Trong không gian \(Oxyz\), cho 3 vectơ không đồng phẳng hoặc 4 đỉnh \(A, B, C, D\).</div>
+        <div class="formula-display">
+            $$V_{\text{hộp}} = \left| \det(\vec{a}, \vec{b}, \vec{c}) \right| = \left| \begin{vmatrix} a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \\ c_1 & c_2 & c_3 \end{vmatrix} \right| \qquad ; \qquad V_{\text{tứ diện}} = \frac{1}{6} \left| \det(\vec{AB}, \vec{AC}, \vec{AD}) \right|$$
+        </div>
+    </div>
+
+    <div class="formula-card">
+        <div class="formula-card-title">4. Phương Trình Mặt Phẳng Qua 3 Điểm Bằng Định Thức</div>
+        <div class="formula-condition">Điều kiện: 3 điểm \(A(x_1,y_1,z_1), B(x_2,y_2,z_2), C(x_3,y_3,z_3)\) không thẳng hàng.</div>
+        <div class="formula-display">
+            $$\begin{vmatrix} x - x_1 & y - y_1 & z - z_1 \\ x_2 - x_1 & y_2 - y_1 & z_2 - z_1 \\ x_3 - x_1 & y_3 - y_1 & z_3 - z_1 \end{vmatrix} = 0$$
+        </div>
+    </div>
+
+    <!-- 2.2 Taylor / Maclaurin -->
+    <h3>2.2. Khai Triển Taylor, Maclaurin & Bảng Vô Cùng Bé Tương Đương</h3>
+
+    <div class="formula-card">
+        <div class="formula-card-title">1. Khai Triển Taylor Tổng Quát Tại Lân Cận \(x = a\)</div>
+        <div class="formula-condition">Điều kiện: Hàm số \(f(x)\) có đạo hàm đến cấp \(n+1\) liên tục trong lân cận điểm \(a\).</div>
+        <div class="formula-display">
+            $$f(x) = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!} (x - a)^k + R_n(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \dots + \frac{f^{(n)}(a)}{n!}(x-a)^n + R_n(x)$$
+        </div>
+        <div class="formula-note">Phần dư Lagrange: \(R_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!} (x - a)^{n+1}\) với \(\xi\) nằm giữa \(a\) và \(x\).</div>
+    </div>
+
+    <div class="formula-card">
+        <div class="formula-card-title">2. Bảng Vô Cùng Bé Tương Đương Khi \(x \to 0\) (Khử Dạng Vô Định \(0/0\) Siêu Tốc)</div>
+        <div class="formula-condition">Điều kiện: Biểu thức dưới hàm lượng giác, mũ, logarit tiến dần về 0 khi \(x \to x_0\).</div>
+        <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 28%;">Hàm số ban đầu</th>
+                    <th style="width: 32%;">Vô cùng bé tương đương (\(x \to 0\))</th>
+                    <th style="width: 40%;">Khai triển Maclaurin bậc cao</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>\(\sin x\)</td><td>\(x\)</td><td>\(x - \frac{x^3}{6} + \frac{x^5}{120} + O(x^7)\)</td></tr>
+                <tr><td>\(\tan x\)</td><td>\(x\)</td><td>\(x + \frac{x^3}{3} + \frac{2x^5}{15} + O(x^7)\)</td></tr>
+                <tr><td>\(\arcsin x\) / \(\arctan x\)</td><td>\(x\)</td><td>\(\arcsin x = x + \frac{x^3}{6} + O(x^5)\)<br>\(\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} + O(x^7)\)</td></tr>
+                <tr><td>\(e^x - 1\)</td><td>\(x\)</td><td>\(x + \frac{x^2}{2} + \frac{x^3}{6} + O(x^4)\)</td></tr>
+                <tr><td>\(\ln(1 + x)\)</td><td>\(x\)</td><td>\(x - \frac{x^2}{2} + \frac{x^3}{3} + O(x^4)\)</td></tr>
+                <tr><td>\(1 - \cos x\)</td><td>\(\frac{x^2}{2}\)</td><td>\(\frac{x^2}{2} - \frac{x^4}{24} + O(x^6)\)</td></tr>
+                <tr><td>\((1 + x)^\alpha - 1\)</td><td>\(\alpha x\)</td><td>\(\alpha x + \frac{\alpha(\alpha-1)}{2}x^2 + O(x^3)\)</td></tr>
+                <tr><td>\(\sqrt{1 + x} - 1\)</td><td>\(\frac{x}{2}\)</td><td>\(\frac{x}{2} - \frac{x^2}{8} + O(x^3)\)</td></tr>
+                <tr><td>\(\sqrt[3]{1 + x} - 1\)</td><td>\(\frac{x}{3}\)</td><td>\(\frac{x}{3} - \frac{x^2}{9} + O(x^3)\)</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <!-- 2.3 Markov & Recurrence -->
+    <h3>2.3. Dãy Số Truy Hồi & Ma Trận Xích Markov</h3>
+
+    <div class="formula-card">
+        <div class="formula-card-title">1. Phương Trình Truy Hồi Tuyến Tính Thuần Nhất Cấp 2: \(a_n = c_1 a_{n-1} + c_2 a_{n-2}\)</div>
+        <div class="formula-condition">Điều kiện: \(c_2 \ne 0\), biết trước 2 số hạng đầu \(a_0, a_1\) (hoặc \(a_1, a_2\)).</div>
+        <div class="formula-display">
+            $$\text{Phương trình đặc trưng: } r^2 - c_1 r - c_2 = 0$$
+            $$\begin{cases} 
+            \text{2 nghiệm thực phân biệt } r_1 \ne r_2 & \implies a_n = A \cdot r_1^n + B \cdot r_2^n \\ 
+            \text{Nghiệm kép } r_1 = r_2 = r_0 & \implies a_n = (A + B \cdot n) \cdot r_0^n \\
+            \text{2 nghiệm phức liên hợp } r = \rho e^{\pm i \theta} & \implies a_n = \rho^n (A \cos n\theta + B \sin n\theta)
+            \end{cases}$$
+        </div>
+        <div class="formula-note">Hằng số \(A, B\) được xác định duy nhất bằng cách giải hệ phương trình từ các giá trị ban đầu.</div>
+    </div>
+
+    <div class="formula-card">
+        <div class="formula-card-title">2. Xích Markov Rời Rạc & Trạng Thái Cân Bằng Dài Hạn</div>
+        <div class="formula-condition">Điều kiện: Quá trình ngẫu nhiên gồm \(m\) trạng thái với ma trận chuyển \(P = (p_{ij})\) thỏa mãn tổng mỗi cột bằng 1 (\(\sum_i p_{ij} = 1\)).</div>
+        <div class="formula-display">
+            $$\text{Vector trạng thái sau } n \text{ bước: } v_n = P^n \cdot v_0$$
+            $$\text{Vector trạng thái cân bằng dừng } \pi = (\pi_1, \dots, \pi_m)^T \text{ thỏa: } (P - I) \cdot \pi = 0 \quad \text{kèm} \quad \sum_{i=1}^m \pi_i = 1$$
+        </div>
+    </div>
+
+    <!-- 2.4 Differential Equations & Integrals -->
+    <h3>2.4. Phương Trình Vi Phân Ứng Dụng & Giải Tích Tích Phân Nâng Cao</h3>
+
+    <div class="formula-card">
+        <div class="formula-card-title">1. Phương Trình Vi Phân Tuyến Tính Cấp 1 & Biến Số Phân Ly</div>
+        <div class="formula-condition">Điều kiện: Mô hình tăng trưởng dân số, phân rã phóng xạ, quá trình làm nguội nhiệt độ.</div>
+        <div class="formula-display">
+            $$\text{Phân rã / Tăng trưởng Malthus: } \frac{dy}{dt} = k \cdot y \implies y(t) = y_0 \cdot e^{kt}$$
+            $$\text{Định luật làm nguội Newton: } \frac{dT}{dt} = -k(T - T_{\text{env}}) \implies T(t) = T_{\text{env}} + (T_0 - T_{\text{env}}) \cdot e^{-kt}$$
+            $$\text{Phương trình Logistic (giới hạn sức chứa } K\text{): } \frac{dP}{dt} = rP\left(1 - \frac{P}{K}\right) \implies P(t) = \frac{K}{1 + \left(\frac{K - P_0}{P_0}\right)e^{-rt}}$$
+            $$\text{Dạng tuyến tính } y' + P(x)y = Q(x) \implies y = e^{-\int P dx} \left( \int Q(x) e^{\int P dx} dx + C \right)$$
+        </div>
+    </div>
+
+    <div class="formula-card">
+        <div class="formula-card-title">2. Định Lý King (Tích Phân Đối Xứng) & Đạo Hàm Dưới Dấu Tích Phân</div>
+        <div class="formula-condition">Điều kiện: Hàm số \(f(x)\) liên tục trên đoạn \([a, b]\).</div>
+        <div class="formula-display">
+            $$\text{Định lý King: } \int_a^b f(x)\,dx = \int_a^b f(a + b - x)\,dx \implies \int_a^b \frac{f(x)}{f(x) + f(a + b - x)}\,dx = \frac{b - a}{2}$$
+            $$\text{Công thức Leibniz: } \frac{d}{dx} \left[ \int_{u(x)}^{v(x)} f(t)\,dt \right] = f(v(x)) \cdot v'(x) - f(u(x)) \cdot u'(x)$$
+        </div>
+    </div>
+
+    <div class="formula-card">
+        <div class="formula-card-title">3. Tổ Hợp Lặp Euler (Bài Toán Chia Kẹo Euler / Stars and Bars)</div>
+        <div class="formula-condition">Điều kiện: Phân chia \(n\) đồ vật giống nhau cho \(k\) đối tượng phân biệt.</div>
+        <div class="formula-display">
+            $$\text{Số nghiệm nguyên dương } (x_i \ge 1): x_1 + x_2 + \dots + x_k = n \implies N = C_{n - 1}^{k - 1}$$
+            $$\text{Số nghiệm nguyên không âm } (x_i \ge 0): x_1 + x_2 + \dots + x_k = n \implies N = C_{n + k - 1}^{k - 1}$$
+        </div>
+    </div>
+
+    <!-- SECTION 3: 6 TSA PROBLEM TYPES WITH AT LEAST 2 EXAMPLES EACH -->
+    <h2>3. CHUYÊN SÂU 6 DẠNG BÀI ĐẶC THÙ ĐỀ THI TSA (KÈM 2 VÍ DỤ MINH HỌA MỖI DẠNG)</h2>
+
+    <!-- DẠNG 1 -->
+    <h3>DẠNG 1: BÀI TOÁN MÔ HÌNH HÓA TOÁN HỌC & TỐI ƯU HÓA THỰC TẾ</h3>
+    <div class="callout">
+        <div class="callout-title">Quy trình tối ưu 3 bước:</div>
+        1. Thiết lập hàm mục tiêu \(f(x)\) (Chi phí, Thể tích, Lợi nhuận).<br>
+        2. Rút gọn về 1 biến qua các ràng buộc kỹ thuật.<br>
+        3. Dùng <span class="highlight-keyword">BĐT AM-GM</span> (nếu biểu thức dạng tổng-tích đối xứng) hoặc <span class="highlight-keyword">Đạo hàm \(f'(x) = 0\)</span> để tìm cực trị ngay.
+    </div>
+
+    <!-- Example 1.1 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 1.1: Tối ưu hóa chi phí sản xuất bồn nước hình trụ</span>
+            <span class="badge-winner">Đề TSA 2024</span>
+        </div>
+        <div class="example-problem">
+            Một doanh nghiệp dự định sản xuất bồn chứa nước bằng inox hình trụ có nắp đậy với dung tích cố định \(V = 2\pi\text{ m}^3\). Chi phí làm nắp và đáy là 1,5 triệu đồng/\(\text{m}^2\), chi phí làm mặt xung quanh là 1,0 triệu đồng/\(\text{m}^2\). Hãy xác định bán kính đáy \(r\) (theo mét) để tổng chi phí sản xuất bồn là nhỏ nhất.
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 1 (Ràng buộc):</span> Thể tích \(V = \pi r^2 h = 2\pi \implies h = \frac{2}{r^2}\).</div>
+        <div class="solution-step"><span class="solution-step-title">Bước 2 (Thiết lập hàm chi phí):</span> 
+            $$C(r) = 1,5 \cdot (2\pi r^2) + 1,0 \cdot (2\pi r h) = 3\pi r^2 + 2\pi r \left(\frac{2}{r^2}\right) = 3\pi r^2 + \frac{4\pi}{r}$$
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 3 (Tối ưu bằng AM-GM 3 số):</span> Tách \(\frac{4\pi}{r} = \frac{2\pi}{r} + \frac{2\pi}{r}\) để triệt tiêu biến \(r\):
+            $$C(r) = 3\pi r^2 + \frac{2\pi}{r} + \frac{2\pi}{r} \ge 3 \sqrt[3]{(3\pi r^2) \cdot \left(\frac{2\pi}{r}\right) \cdot \left(\frac{2\pi}{r}\right)} = 3\sqrt[3]{12\pi^3}$$
+            Dấu "=" xảy ra khi và chỉ khi: \(3\pi r^2 = \frac{2\pi}{r} \iff r^3 = \frac{2}{3} \iff r = \sqrt[3]{\frac{2}{3}} \approx 0,874\text{ m}\).
+        </div>
+        <div class="solution-result">✓ Kết luận: Bán kính đáy tối ưu là \(r = \sqrt[3]{2/3}\text{ m}\).</div>
+    </div>
+
+    <!-- Example 1.2 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 1.2: Tối ưu hóa lưu lượng dòng chảy của kênh dẫn nước mặt cắt hình thang</span>
+            <span class="badge-winner">Đề TSA 2025</span>
+        </div>
+        <div class="example-problem">
+            Một kênh dẫn nước có mặt cắt ngang là hình thang cân với đáy bé và hai cạnh bên đều có độ dài bằng \(a = 2\text{ m}\). Góc nghiêng giữa cạnh bên và phương ngang là \(\alpha\) (\(0 < \alpha < \frac{\pi}{2}\)). Tìm \(\alpha\) để diện tích mặt cắt ngang \(S(\alpha)\) đạt giá trị lớn nhất (giúp lưu lượng dẫn nước cực đại).
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 1 (Hình học & Biểu diễn diện tích):</span>
+            Chiều cao hình thang: \(h = a \sin \alpha = 2\sin \alpha\).<br>
+            Đáy lớn hình thang: \(B = a + 2a \cos \alpha = 2 + 4\cos \alpha\).<br>
+            Diện tích mặt cắt ngang:
+            $$S(\alpha) = \frac{(B + a) \cdot h}{2} = \frac{(4 + 4\cos \alpha) \cdot 2\sin \alpha}{2} = 4(1 + \cos \alpha)\sin \alpha$$
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 2 (Tìm cực trị bằng đạo hàm):</span>
+            $$S'(\alpha) = 4 \left[ -\sin^2 \alpha + (1 + \cos \alpha)\cos \alpha \right] = 4 \left[ -(1 - \cos^2 \alpha) + \cos \alpha + \cos^2 \alpha \right] = 4(2\cos^2 \alpha + \cos \alpha - 1)$$
+            Đặt \(t = \cos \alpha\) (\(0 < t < 1\)), ta có phương trình:
+            $$2t^2 + t - 1 = 0 \iff (2t - 1)(t + 1) = 0 \implies t = \frac{1}{2} \implies \cos \alpha = \frac{1}{2} \implies \alpha = \frac{\pi}{3} = 60^\circ$$
+        </div>
+        <div class="solution-result">✓ Kết luận: Góc nghiêng tối ưu là \(\alpha = 60^\circ\) (\(\frac{\pi}{3}\)), khi đó \(S_{\max} = 3\sqrt{3}\text{ m}^2\).</div>
+    </div>
+
+    <!-- DẠNG 2 -->
+    <h3>DẠNG 2: BÀI TOÁN XÁC SUẤT CHUYỂN TRẠNG THÁI & MA TRẬN XÍCH MARKOV</h3>
+    <div class="callout">
+        <div class="callout-title">Quy trình giải bằng Casio trong 30 giây:</div>
+        1. Lập ma trận chuyển \(P\) (cột \(j\) chứa xác suất chuyển từ trạng thái \(j\)).<br>
+        2. Nhập \(P\) vào <span class="casio-shortcut">MatA</span>, nhập vector ban đầu \(v_0\) vào <span class="casio-shortcut">MatB</span>.<br>
+        3. Sau \(n\) chu kỳ: bấm <span class="casio-shortcut">MatA^n × MatB</span> ra ngay kết quả.<br>
+        4. Cân bằng dài hạn: giải hệ \((P - I)\pi = 0\) kèm \(\sum \pi_i = 1\).
+    </div>
+
+    <!-- Example 2.1 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 2.1: Chuyển dịch thị phần dịch vụ vận tải công nghệ</span>
+            <span class="badge-winner">Đề TSA 2024</span>
+        </div>
+        <div class="example-problem">
+            Hai công ty gọi xe A và B cạnh tranh tại một đô thị. Ban đầu thị phần của A là 70%, B là 30%. Qua mỗi năm, 80% khách hàng của A tiếp tục dùng A, 20% chuyển sang B; trong khi 60% khách hàng của B tiếp tục dùng B, 40% chuyển sang A. Xác định thị phần của A sau 2 năm và thị phần ổn định lâu dài.
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 1 (Lập mô hình ma trận):</span>
+            $$P = \begin{pmatrix} 0,80 & 0,40 \\ 0,20 & 0,60 \end{pmatrix} \quad ; \quad v_0 = \begin{pmatrix} 0,70 \\ 0,30 \end{pmatrix}$$
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 2 (Tính toán sau 2 năm):</span>
+            $$v_1 = P \cdot v_0 = \begin{pmatrix} 0,80 \cdot 0,70 + 0,40 \cdot 0,30 \\ 0,20 \cdot 0,70 + 0,60 \cdot 0,30 \end{pmatrix} = \begin{pmatrix} 0,68 \\ 0,32 \end{pmatrix}$$
+            $$v_2 = P \cdot v_1 = \begin{pmatrix} 0,80 \cdot 0,68 + 0,40 \cdot 0,32 \\ 0,20 \cdot 0,68 + 0,60 \cdot 0,32 \end{pmatrix} = \begin{pmatrix} 0,672 \\ 0,328 \end{pmatrix} = \begin{pmatrix} 67,2\% \\ 32,8\% \end{pmatrix}$$
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 3 (Thị phần cân bằng dài hạn):</span> Giải hệ \((P - I)\pi = 0\):
+            $$\begin{cases} -0,20\pi_A + 0,40\pi_B = 0 \\ \pi_A + \pi_B = 1 \end{cases} \implies \begin{cases} \pi_A = \frac{0,40}{0,20 + 0,40} = \frac{2}{3} \approx 66,67\% \\ \pi_B = \frac{1}{3} \approx 33,33\% \end{cases}$$
+        </div>
+        <div class="solution-result">✓ Kết luận: Thị phần hãng A sau 2 năm là 67,2%; thị phần ổn định lâu dài là 66,67%.</div>
+    </div>
+
+    <!-- Example 2.2 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 2.2: Dự báo thời tiết 3 trạng thái (Nắng, Mây, Mưa)</span>
+            <span class="badge-winner">Đề TSA 2025</span>
+        </div>
+        <div class="example-problem">
+            Thời tiết mỗi ngày có 3 trạng thái: 1-Nắng, 2-Mây, 3-Mưa. Ma trận chuyển trạng thái sau mỗi ngày là:
+            $$P = \begin{pmatrix} 0,7 & 0,2 & 0,1 \\ 0,2 & 0,6 & 0,3 \\ 0,1 & 0,2 & 0,6 \end{pmatrix}$$
+            Biết ngày thứ Hai là ngày Nắng (\(v_0 = (1, 0, 0)^T\)). Tính xác suất ngày thứ Tư (sau 2 ngày) là ngày Mưa.
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 1 (Tính vector trạng thái ngày thứ Ba - sau 1 ngày):</span>
+            $$v_1 = P \cdot v_0 = \begin{pmatrix} 0,7 \\ 0,2 \\ 0,1 \end{pmatrix}$$
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 2 (Tính vector trạng thái ngày thứ Tư - sau 2 ngày):</span>
+            $$v_2 = P \cdot v_1 = \begin{pmatrix} 0,7(0,7) + 0,2(0,2) + 0,1(0,1) \\ 0,2(0,7) + 0,6(0,2) + 0,3(0,1) \\ 0,1(0,7) + 0,2(0,2) + 0,6(0,1) \end{pmatrix} = \begin{pmatrix} 0,49 + 0,04 + 0,01 \\ 0,14 + 0,12 + 0,03 \\ 0,07 + 0,04 + 0,06 \end{pmatrix} = \begin{pmatrix} 0,54 \\ 0,29 \\ 0,17 \end{pmatrix}$$
+        </div>
+        <div class="solution-result">✓ Kết luận: Xác suất ngày thứ Tư có mưa là \(p = 0,17\) (17%).</div>
+    </div>
+
+    <!-- DẠNG 3 -->
+    <h3>DẠNG 3: BÀI TOÁN LẬP LUẬN THUẬT TOÁN, SƠ ĐỒ KHỐI & VÒNG LẶP PSEUDOCODE</h3>
+    <div class="callout">
+        <div class="callout-title">Kỹ thuật lập bảng trạng thái (Trace Table):</div>
+        • Tạo cột cho từng biến và cột kiểm tra điều kiện rẽ nhánh.<br>
+        • Chạy 3–4 bước đầu để xác định quy luật bất biến (bội số, công sai, chu kỳ).<br>
+        • Lưu ý điều kiện biên dừng vòng lặp (\(<\) hay \(\le\)).
+    </div>
+
+    <!-- Example 3.1 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 3.1: Thuật toán Euclid trừ liên tiếp tìm ƯCLN</span>
+            <span class="badge-winner">Đề TSA 2024</span>
+        </div>
+        <div class="example-problem">
+            Cho đoạn mã giả sau:
+            <div class="formula-display" style="text-align: left; font-family: monospace;">
+                Nhập a = 42, b = 70, Count = 0<br>
+                Khi (a ≠ b) thực hiện:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Count = Count + 1<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Nếu (a > b) thì: a = a - b<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Ngược lại: b = b - a<br>
+                Xuất ra: a, Count
+            </div>
+            Xác định giá trị xuất ra của \(a\) và \(\text{Count}\).
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bảng Trace Table:</span>
+            <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr><th>Vòng lặp (Count)</th><th>Giá trị a</th><th>Giá trị b</th><th>Điều kiện \(a \ne b\)</th><th>Thao tác</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0 (Khởi tạo)</td><td>42</td><td>70</td><td>\(42 \ne 70\) (Đúng)</td><td>Khởi tạo</td></tr>
+                    <tr><td>1</td><td>42</td><td>\(70 - 42 = 28\)</td><td>\(42 \ne 28\) (Đúng)</td><td>\(b = b - a\)</td></tr>
+                    <tr><td>2</td><td>\(42 - 28 = 14\)</td><td>28</td><td>\(14 \ne 28\) (Đúng)</td><td>\(a = a - b\)</td></tr>
+                    <tr><td>3</td><td>14</td><td>\(28 - 14 = 14\)</td><td>\(14 = 14\) (Sai \(\implies\) Dừng)</td><td>\(b = b - a\)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="solution-result">✓ Kết luận: Thuật toán xuất ra \(a = 14\) (chính là \(\text{ƯCLN}(42, 70)\)) và \(\text{Count} = 3\).</div>
+    </div>
+
+    <!-- Example 3.2 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 3.2: Thuật toán tích lũy dồn tìm số mũ thỏa mãn điều kiện</span>
+            <span class="badge-winner">Đề TSA 2025</span>
+        </div>
+        <div class="example-problem">
+            Cho đoạn mã giả sau:
+            <div class="formula-display" style="text-align: left; font-family: monospace;">
+                P = 1, k = 1<br>
+                Khi (P ≤ 1000) thực hiện:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;k = k + 1<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;P = P * 2 + k<br>
+                Xuất ra: k, P
+            </div>
+            Xác định giá trị xuất ra của \(k\) và \(P\) khi thuật toán kết thúc.
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bảng Trace Table chi tiết:</span>
+            <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr><th>Vòng</th><th>k</th><th>P (trước)</th><th>Điều kiện \(P \le 1000\)</th><th>Cập nhật k mới</th><th>Cập nhật P mới (\(P \cdot 2 + k\))</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>1</td><td>1</td><td>\(1 \le 1000\)</td><td>2</td><td>\(1 \cdot 2 + 2 = 4\)</td></tr>
+                    <tr><td>1</td><td>2</td><td>4</td><td>\(4 \le 1000\)</td><td>3</td><td>\(4 \cdot 2 + 3 = 11\)</td></tr>
+                    <tr><td>2</td><td>3</td><td>11</td><td>\(11 \le 1000\)</td><td>4</td><td>\(11 \cdot 2 + 4 = 26\)</td></tr>
+                    <tr><td>3</td><td>4</td><td>26</td><td>\(26 \le 1000\)</td><td>5</td><td>\(26 \cdot 2 + 5 = 57\)</td></tr>
+                    <tr><td>4</td><td>5</td><td>57</td><td>\(57 \le 1000\)</td><td>6</td><td>\(57 \cdot 2 + 6 = 120\)</td></tr>
+                    <tr><td>5</td><td>6</td><td>120</td><td>\(120 \le 1000\)</td><td>7</td><td>\(120 \cdot 2 + 7 = 247\)</td></tr>
+                    <tr><td>6</td><td>7</td><td>247</td><td>\(247 \le 1000\)</td><td>8</td><td>\(247 \cdot 2 + 8 = 502\)</td></tr>
+                    <tr><td>7</td><td>8</td><td>502</td><td>\(502 \le 1000\)</td><td>9</td><td>\(502 \cdot 2 + 9 = 1013\)</td></tr>
+                    <tr><td>8</td><td>9</td><td>1013</td><td>\(1013 \le 1000\) (SAI)</td><td colspan="2">DỪNG THUẬT TOÁN</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="solution-result">✓ Kết luận: Thuật toán xuất ra \(k = 9\) và \(P = 1013\).</div>
+    </div>
+
+    <!-- DẠNG 4 -->
+    <h3>DẠNG 4: TRẮC NGHIỆM ĐÚNG/SAI ĐA Ý (4 MỆNH ĐỀ - CHỐNG MẤT ĐIỂM DÂY CHUYỀN)</h3>
+    <div class="callout">
+        <div class="callout-title">Chiến thuật 4 mệnh đề TSA:</div>
+        • Kiểm tra phản ví dụ để phủ định mệnh đề sai trong 10s.<br>
+        • Ý a, b là nền móng để giải ý c, d.<br>
+        • Điểm tính theo số ý đúng (Đúng 1 ý: 0,1đ; Đúng 2 ý: 0,25đ; Đúng 3 ý: 0,5đ; Đúng 4 ý: 1,0đ).
+    </div>
+
+    <!-- Example 4.1 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 4.1: Khảo sát hàm phân thức bậc 2 trên bậc 1</span>
+            <span class="badge-winner">Đề TSA 2024</span>
+        </div>
+        <div class="example-problem">
+            Cho hàm số \(f(x) = \frac{x^2 - 3x + 6}{x - 1}\). Xét tính đúng/sai của 4 mệnh đề:
+            <br>a) Đồ thị có tiệm cận đứng là \(x = 1\) và tiệm cận xiên là \(y = x - 2\).
+            <br>b) Hai điểm cực trị của đồ thị hàm số nằm về hai phía của trục tung \(Oy\).
+            <br>c) Giá trị cực đại nhỏ hơn giá trị cực tiểu của hàm số.
+            <br>d) Phương trình \(f(x) = m\) có 2 nghiệm phân biệt khi và chỉ khi \(m > 3\) hoặc \(m < -5\).
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Phân tích từng mệnh đề:</span>
+            <br>• <strong>Ý a:</strong> Biến đổi \(f(x) = x - 2 + \frac{4}{x - 1}\). Tiệm cận đứng \(x = 1\), tiệm cận xiên \(y = x - 2\) \(\implies\) <strong style="color:var(--success);">ĐÚNG</strong>.
+            <br>• <strong>Ý b:</strong> \(f'(x) = 1 - \frac{4}{(x-1)^2} = \frac{x^2 - 2x - 3}{(x-1)^2} = 0 \iff x_1 = -1, x_2 = 3\). Tích \(x_1 x_2 = -3 < 0\) nên 2 điểm nằm về 2 phía \(Oy\) \(\implies\) <strong style="color:var(--success);">ĐÚNG</strong>.
+            <br>• <strong>Ý c:</strong> Cực đại tại \(x = -1\) có \(y_{\text{CĐ}} = f(-1) = -5\); Cực tiểu tại \(x = 3\) có \(y_{\text{CT}} = f(3) = 3\). Rõ ràng \(y_{\text{CĐ}} = -5 < y_{\text{CT}} = 3\) \(\implies\) <strong style="color:var(--success);">ĐÚNG</strong>.
+            <br>• <strong>Ý d:</strong> Dựa vào bảng biến thiên, phương trình \(f(x) = m\) cắt đồ thị tại 2 điểm khi \(m > y_{\text{CT}} = 3\) hoặc \(m < y_{\text{CĐ}} = -5\) \(\implies\) <strong style="color:var(--success);">ĐÚNG</strong>.
+        </div>
+        <div class="solution-result">✓ Đáp án: a) ĐÚNG, b) ĐÚNG, c) ĐÚNG, d) ĐÚNG.</div>
+    </div>
+
+    <!-- Example 4.2 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 4.2: Nồng độ thuốc trong máu sau khi tiêm (Mô hình Dược động học)</span>
+            <span class="badge-winner">Đề TSA 2025</span>
+        </div>
+        <div class="example-problem">
+            Nồng độ thuốc \(C(t)\) (đơn vị: mg/L) trong máu của một bệnh nhân sau khi tiêm \(t\) giờ được mô hình hóa bởi hàm số:
+            $$C(t) = 4t \cdot e^{-0,5t} \quad (t \ge 0)$$
+            Xét tính đúng/sai của các mệnh đề sau:
+            <br>a) Sau khi tiêm, nồng độ thuốc trong máu tăng liên tục trong 2 giờ đầu tiên.
+            <br>b) Nồng độ thuốc trong máu đạt giá trị cao nhất bằng \(\frac{8}{e}\text{ mg/L}\).
+            <br>c) Sau thời điểm \(t = 2\) giờ, tốc độ giảm nồng độ thuốc luôn không đổi.
+            <br>d) Nồng độ thuốc giảm xuống dưới 1 mg/L tại thời điểm \(t \ge 8\) giờ.
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Phân tích từng mệnh đề:</span>
+            <br>• <strong>Ý a:</strong> \(C'(t) = 4e^{-0,5t} + 4t(-0,5)e^{-0,5t} = 4(1 - 0,5t)e^{-0,5t} = 2(2 - t)e^{-0,5t}\). Với \(0 \le t < 2\) thì \(C'(t) > 0\) nên hàm tăng \(\implies\) <strong style="color:var(--success);">ĐÚNG</strong>.
+            <br>• <strong>Ý b:</strong> Đạt cực đại tại \(t = 2\): \(C(2) = 4(2)e^{-0,5 \cdot 2} = 8e^{-1} = \frac{8}{e} \approx 2,94\text{ mg/L}\) \(\implies\) <strong style="color:var(--success);">ĐÚNG</strong>.
+            <br>• <strong>Ý c:</strong> Tốc độ giảm là \(-C'(t)\), hàm mũ phi tuyến biến thiên liên tục theo thời gian, không bao giờ là hằng số \(\implies\) <strong style="color:var(--danger);">SAI</strong>.
+            <br>• <strong>Ý d:</strong> Tại \(t = 8\): \(C(8) = 4(8)e^{-4} = 32e^{-4} \approx 32 / 54,6 \approx 0,586 < 1\text{ mg/L}\). Vì với \(t \ge 2\) hàm nghịch biến nên với mọi \(t \ge 8\) thì \(C(t) \le C(8) < 1\text{ mg/L}\) \(\implies\) <strong style="color:var(--success);">ĐÚNG</strong>.
+        </div>
+        <div class="solution-result">✓ Đáp án: a) ĐÚNG, b) ĐÚNG, c) SAI, d) ĐÚNG.</div>
+    </div>
+
+    <!-- DẠNG 5 -->
+    <h3>DẠNG 5: DÃY SỐ TRUY HỒI, QUY LUẬT & TỔ HỢP LẶP EULER</h3>
+    <div class="callout">
+        <div class="callout-title">Công thức giải nhanh:</div>
+        • Dãy \(a_n = c_1 a_{n-1} + c_2 a_{n-2} \implies\) Bấm giải PT bậc 2 \(r^2 - c_1 r - c_2 = 0\).<br>
+        • Chia \(n\) kẹo cho \(k\) người (mỗi người \(\ge 1\)): \(C_{n-1}^{k-1}\); (mỗi người \(\ge 0\)): \(C_{n+k-1}^{k-1}\).
+    </div>
+
+    <!-- Example 5.1 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 5.1: Dãy số truy hồi tuyến tính cấp 2</span>
+            <span class="badge-winner">Đề TSA 2024</span>
+        </div>
+        <div class="example-problem">
+            Dãy số \(\{a_n\}\) thỏa mãn: \(a_1 = 5, a_2 = 13\) và \(a_n = 5a_{n-1} - 6a_{n-2}\) với mọi \(n \ge 3\). Tìm số hạng \(a_{10}\).
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 1 (Phương trình đặc trưng):</span>
+            $$r^2 - 5r + 6 = 0 \iff (r - 2)(r - 3) = 0 \implies r_1 = 2, r_2 = 3$$
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 2 (Nghiệm tổng quát):</span> \(a_n = A \cdot 2^n + B \cdot 3^n\).</div>
+        <div class="solution-step"><span class="solution-step-title">Bước 3 (Xác định hằng số A, B):</span>
+            $$\begin{cases} a_1 = 2A + 3B = 5 \\ a_2 = 4A + 9B = 13 \end{cases} \implies \begin{cases} A = 1 \\ B = 1 \end{cases} \implies a_n = 2^n + 3^n$$
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 4 (Tính \(a_{10}\)):</span>
+            $$a_{10} = 2^{10} + 3^{10} = 1024 + 59049 = 60073$$
+        </div>
+        <div class="solution-result">✓ Kết luận: \(a_{10} = 60073\).</div>
+    </div>
+
+    <!-- Example 5.2 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 5.2: Phân chia đề tài nghiên cứu (Tổ hợp Euler có điều kiện chặn dưới)</span>
+            <span class="badge-winner">Đề TSA 2025</span>
+        </div>
+        <div class="example-problem">
+            Có 15 suất học bổng giống nhau cần trao cho 4 viện đào tạo (Viện 1, Viện 2, Viện 3, Viện 4). Hỏi có bao nhiêu cách phân chia nếu Viện 1 nhận được ít nhất 3 suất, Viện 2 nhận ít nhất 2 suất, Viện 3 và 4 mỗi viện nhận ít nhất 1 suất?
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 1 (Mô hình hóa phương trình):</span>
+            Gọi \(x_1, x_2, x_3, x_4\) là số suất học bổng trao cho 4 viện:
+            $$x_1 + x_2 + x_3 + x_4 = 15 \quad (x_1 \ge 3, x_2 \ge 2, x_3 \ge 1, x_4 \ge 1)$$
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 2 (Đổi biến đưa về dạng chuẩn \(y_i \ge 1\)):</span>
+            Đặt \(x_1 = y_1 + 2\) (với \(y_1 \ge 1 \implies x_1 \ge 3\)), đặt \(x_2 = y_2 + 1\) (với \(y_2 \ge 1 \implies x_2 \ge 2\)). Phương trình trở thành:
+            $$(y_1 + 2) + (y_2 + 1) + x_3 + x_4 = 15 \iff y_1 + y_2 + x_3 + x_4 = 12 \quad (\text{với } y_1, y_2, x_3, x_4 \ge 1)$$
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 3 (Áp dụng công thức chia kẹo Euler):</span>
+            $$N = C_{12 - 1}^{4 - 1} = C_{11}^3 = \frac{11 \cdot 10 \cdot 9}{3 \cdot 2 \cdot 1} = 165 \text{ (cách)}$$
+        </div>
+        <div class="solution-result">✓ Kết luận: Có tất cả 165 cách phân chia thỏa mãn yêu cầu.</div>
+    </div>
+
+    <!-- DẠNG 6 -->
+    <h3>DẠNG 6: HÌNH HỌC TỌA ĐỘ OXYZ & TỌA ĐỘ HÓA BÀI TOÁN THỰC TẾ</h3>
+    <div class="callout">
+        <div class="callout-title">Công thức cốt lõi Oxyz:</div>
+        • Khoảng cách 2 đường chéo nhau: \(d(\Delta_1, \Delta_2) = \frac{|[\vec{u}_1, \vec{u}_2] \cdot \vec{M_1 M_2}|}{|[\vec{u}_1, \vec{u}_2]|}\).<br>
+        • Khoảng cách điểm \(M\) đến đường thẳng \(\Delta\): \(d(M, \Delta) = \frac{|[\vec{u}, \vec{M_0 M}]|}{|\vec{u}|}\).
+    </div>
+
+    <!-- Example 6.1 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 6.1: Khoảng cách ngắn nhất giữa máy bay và trạm kiểm soát không lưu</span>
+            <span class="badge-winner">Đề TSA 2024</span>
+        </div>
+        <div class="example-problem">
+            Trong không gian \(Oxyz\) (đơn vị: km), trạm kiểm soát không lưu đặt tại gốc tọa độ \(O(0,0,0)\). Một máy bay đang bay theo đường thẳng \(d\):
+            $$\begin{cases} x = 12 + 2t \\ y = 9 - t \\ z = 6 + 2t \end{cases} \quad (t \text{ tính theo phút})$$
+            Tính khoảng cách ngắn nhất từ máy bay đến trạm không lưu \(O\).
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 1 (Khoảng cách bình phương theo \(t\)):</span>
+            Vị trí máy bay tại thời điểm \(t\) là \(M(12 + 2t, 9 - t, 6 + 2t)\).
+            $$OM^2(t) = (12 + 2t)^2 + (9 - t)^2 + (6 + 2t)^2 = (4t^2 + 48t + 144) + (t^2 - 18t + 81) + (4t^2 + 24t + 36)$$
+            $$OM^2(t) = 9t^2 + 54t + 261$$
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 2 (Tìm cực tiểu của tam thức bậc hai):</span>
+            Đỉnh parabol tại \(t = -\frac{b}{2a} = -\frac{54}{2 \cdot 9} = -3\text{ (phút)}\).
+            $$OM^2_{\min} = 9(-3)^2 + 54(-3) + 261 = 81 - 162 + 261 = 180 \implies d_{\min} = \sqrt{180} = 6\sqrt{5} \approx 13,42\text{ km}$$
+        </div>
+        <div class="solution-result">✓ Kết luận: Khoảng cách ngắn nhất từ máy bay đến trạm là \(6\sqrt{5}\text{ km}\) (\(\approx 13,42\text{ km}\)).</div>
+    </div>
+
+    <!-- Example 6.2 -->
+    <div class="example-box">
+        <div class="example-header">
+            <span>📝 VÍ DỤ 6.2: Khoảng cách giữa 2 dây cáp treo chéo nhau của cầu dây văng</span>
+            <span class="badge-winner">Đề TSA 2025</span>
+        </div>
+        <div class="example-problem">
+            Trong hệ trục tọa độ \(Oxyz\) (đơn vị: mét), hai dây cáp treo của một cầu dây văng nằm trên hai đường thẳng chéo nhau:
+            $$d_1: \frac{x - 10}{2} = \frac{y - 20}{1} = \frac{z - 30}{2} \qquad ; \qquad d_2: \frac{x + 10}{1} = \frac{y + 10}{2} = \frac{z - 10}{-2}$$
+            Tính khoảng cách ngắn nhất giữa hai dây cáp treo này.
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 1 (Xác định điểm và vectơ chỉ phương):</span>
+            Đường \(d_1\) đi qua \(M_1(10, 20, 30)\) có \(\vec{u}_1 = (2, 1, 2)\).<br>
+            Đường \(d_2\) đi qua \(M_2(-10, -10, 10)\) có \(\vec{u}_2 = (1, 2, -2)\).<br>
+            Vectơ nối 2 điểm: \(\vec{M_1 M_2} = (-20, -30, -20)\).
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 2 (Tích có hướng \([\vec{u}_1, \vec{u}_2]\)):</span>
+            $$[\vec{u}_1, \vec{u}_2] = \begin{pmatrix} 1(-2) - 2(2) \\ 2(1) - 2(-2) \\ 2(2) - 1(1) \end{pmatrix} = \begin{pmatrix} -6 \\ 6 \\ 3 \end{pmatrix}$$
+            Độ dài: \(|[\vec{u}_1, \vec{u}_2]| = \sqrt{(-6)^2 + 6^2 + 3^2} = \sqrt{36 + 36 + 9} = \sqrt{81} = 9\).
+        </div>
+        <div class="solution-step"><span class="solution-step-title">Bước 3 (Tính khoảng cách theo công thức cao cấp):</span>
+            $$d(d_1, d_2) = \frac{|[\vec{u}_1, \vec{u}_2] \cdot \vec{M_1 M_2}|}{|[\vec{u}_1, \vec{u}_2]|} = \frac{|(-6)(-20) + 6(-30) + 3(-20)|}{9} = \frac{|120 - 180 - 60|}{9} = \frac{|-120|}{9} = \frac{40}{3} \approx 13,33\text{ m}$$
+        </div>
+        <div class="solution-result">✓ Kết luận: Khoảng cách giữa 2 dây cáp là \(\frac{40}{3}\text{ m}\) (\(\approx 13,33\text{ m}\)).</div>
+    </div>
+
+    <!-- SECTION 4: CASIO & TIME STRATEGY -->
+    <h2>4. THỦ THUẬT BẤM MÁY CASIO (580VN X / 880BTG) & CHIẾN THUẬT 40/40</h2>
+    
+    <div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">Thao tác mục tiêu</th>
+                <th style="width: 35%;">Casio FX-580VN X</th>
+                <th style="width: 40%;">Casio FX-880BTG</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Lũy thừa ma trận \(P^n\)</strong> (Xích Markov)</td>
+                <td><span class="casio-shortcut">MENU 4 (Matrix)</span> → Nhập MatA → <span class="casio-shortcut">OPTN 3 ^ n</span></td>
+                <td><span class="casio-shortcut">HOME</span> → Matrix → Define MatA → <span class="casio-shortcut">MatA ^ n</span></td>
+            </tr>
+            <tr>
+                <td><strong>Dò tìm GTLN/GTNN (Table)</strong></td>
+                <td><span class="casio-shortcut">MENU 8</span> → Nhập \(f(x)\) → Step = \((b - a)/29\)</td>
+                <td><span class="casio-shortcut">HOME</span> → Table → Nhập \(f(x)\) → Range → Table</td>
+            </tr>
+            <tr>
+                <td><strong>Giải hệ PT 3-4 ẩn</strong></td>
+                <td><span class="casio-shortcut">MENU 9 → 1 (Simul)</span> → Chọn số ẩn 3 hoặc 4</td>
+                <td><span class="casio-shortcut">HOME</span> → Equation → Simul Equation</td>
+            </tr>
+            <tr>
+                <td><strong>Tính tổng chuỗi \(\sum_{i=1}^n\)</strong></td>
+                <td><span class="casio-shortcut">SHIFT + x (ký hiệu \(\sum\))</span></td>
+                <td><span class="casio-shortcut">HOME</span> → Calculate → Catalog → Summation</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout">
+        <div class="callout-title">Chiến lược phân bổ 60 phút - 40 câu hỏi:</div>
+        • <strong>Lượt 1 (35–40 phút):</strong> Xử lý toàn bộ các câu Mức 1 (Tái hiện) và Mức 2 (Suy luận chuẩn). Câu nào đọc quá 1 phút chưa định hình phương pháp \(\implies\) Đánh dấu cờ (Flag) và chuyển câu ngay. Mục tiêu: 25–28 câu đúng tuyệt đối.<br>
+        • <strong>Lượt 2 (20–25 phút):</strong> Giải các câu Đúng/Sai 4 ý, mô hình hóa thực tế, thuật toán bằng các công cụ Toán cao cấp (Markov, Cramer, Shoelace, DI Method).<br>
+        • <strong>Quy tắc vàng:</strong> Không bao giờ bỏ trống bất kỳ câu hỏi nào.
+    </div>
+
+    </div>
+<!-- ==========================================================================
+     PUMKIN.DEV MATH EXAM PLATFORM - VIEW TEMPLATES
+     ========================================================================== -->
+
+<!-- VIEW 2: EXAM LIBRARY -->
+<div id="view-library" class="app-view">
+    <div class="view-header">
+        <div class="view-title-group">
+            <h2>📚 KHO ĐỀ LUYỆN THI CHUẨN HÓA</h2>
+            <p class="view-subtitle">Hệ thống đề thi trắc nghiệm TSA, HSA, THPT & Giải tích 1 có bấm giờ, chấm điểm và giải chi tiết</p>
+        </div>
+        <button class="btn btn-primary" onclick="PumkinRouter.navigate('generator')">
+            ⚡ Tự tạo đề tùy chỉnh
+        </button>
+        <button class="btn btn-tutor-ask" style="margin-left: 10px;" onclick="PumkinTutorIntegration.openFromQuestion('general', 'library')">🤖 Gợi ý lộ trình thi</button>
+    </div>
+
+    <!-- Filter & Search Panel -->
+    <div class="filter-panel">
+        <div class="search-box-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="lib-search-input" class="search-input" oninput="PumkinLibrary.onSearchInput()" placeholder="Tìm kiếm theo tên đề thi, trường ra đề, chủ đề, từ khóa...">
+        </div>
+        
+        <div class="filter-row">
+            <div class="filter-group">
+                <span class="filter-label">Kỳ thi:</span>
+                <div class="filter-pills" id="lib-type-pills">
+                    <span class="filter-pill active" data-type="all" onclick="PumkinLibrary.setTypeFilter('all', this)">Tất cả</span>
+                    <span class="filter-pill" data-type="TSA" onclick="PumkinLibrary.setTypeFilter('TSA', this)">TSA (Bách Khoa)</span>
+                    <span class="filter-pill" data-type="HSA" onclick="PumkinLibrary.setTypeFilter('HSA', this)">HSA (ĐHQGHN)</span>
+                    <span class="filter-pill" data-type="THPT" onclick="PumkinLibrary.setTypeFilter('THPT', this)">THPT Quốc Gia</span>
+                    <span class="filter-pill" data-type="Giải tích 1" onclick="PumkinLibrary.setTypeFilter('Giải tích 1', this)">Giải tích 1</span>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label">Năm:</span>
+                <select id="lib-year-select" class="filter-select" onchange="PumkinLibrary.applyFilters()">
+                    <option value="all">Tất cả năm</option>
+                    <option value="2026">2026</option>
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label">Độ khó:</span>
+                <select id="lib-diff-select" class="filter-select" onchange="PumkinLibrary.applyFilters()">
+                    <option value="all">Tất cả độ khó</option>
+                    <option value="Dễ">Dễ</option>
+                    <option value="Trung bình">Trung bình</option>
+                    <option value="Khó">Khó</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exam Cards Grid -->
+    <div id="exam-cards-grid" class="exam-grid">
+        <!-- Rendered dynamically by PumkinLibrary -->
+    </div>
+</div>
+
+<!-- MODAL: EXAM DETAILS -->
+<div id="exam-detail-modal" role="dialog" aria-modal="true" class="modal-overlay">
+    <div class="modal-content">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+            <span id="modal-exam-type-badge" class="badge-tag badge-tsa">TSA</span>
+            <button class="btn btn-sm btn-outline" onclick="PumkinLibrary.closeModal()">✕</button>
+        </div>
+        <h3 id="modal-exam-title" style="color: var(--primary); font-size: 20px; margin-bottom: 12px; line-height: 1.35;">Tên đề thi</h3>
+        <p id="modal-exam-desc" style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px; line-height: 1.6;">Mô tả đề thi...</p>
+        
+        <div class="modal-info-box" style="border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; border: 1px solid var(--border-color);">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13.5px;">
+                <div>📝 <strong>Số lượng:</strong> <span id="modal-exam-qcount">40 câu</span></div>
+                <div>⏱️ <strong>Thời gian:</strong> <span id="modal-exam-duration">90 phút</span></div>
+                <div>🎯 <strong>Độ khó:</strong> <span id="modal-exam-difficulty">Khó</span></div>
+                <div>🏫 <strong>Nguồn đề:</strong> <span id="modal-exam-source">ĐHBK Hà Nội</span></div>
+            </div>
+        </div>
+
+        <div class="modal-warning-box" style="background: var(--warning-bg); border-left: 4px solid var(--warning); padding: 12px 14px; border-radius: 4px; font-size: 13px; margin-bottom: 24px;">
+            ⚠️ <strong>Quy chế phòng thi:</strong> Đồng hồ sẽ đếm ngược ngay khi bấm bắt đầu. Hệ thống sẽ tự động lưu đáp án và tự động nộp bài khi hết giờ.
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px;">
+            <button class="btn btn-outline" onclick="PumkinLibrary.closeModal()">Đóng</button>
+            <button id="modal-start-exam-btn" class="btn btn-primary btn-lg">🚀 Bắt đầu làm bài</button>
+        </div>
+    </div>
+</div>
+
+<!-- VIEW: LIVE EXAM LOBBY -->
+<div id="view-live-lobby" class="app-view">
+    <div class="live-lobby-card">
+        <h2 style="color: var(--primary, #1e3a8a); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>⚔️</span> <span>Live Exam Challenge</span>
+        </h2>
+        <p style="color: var(--text-muted, #64748b); margin-bottom: 24px; font-size: 14.5px;">
+            Nhập mã PIN 6 chữ số để tham gia phòng thi trực tiếp hoặc tạo phòng mới cho lớp học.
+        </p>
+        
+        <div style="margin-bottom: 24px;">
+            <input type="text" id="live-pin-input" placeholder="000000" style="font-size: 26px; text-align: center; letter-spacing: 6px; padding: 12px 16px; width: 220px; border: 2px solid var(--border-color, #cbd5e1); border-radius: 8px; margin-bottom: 14px; font-weight: 700; font-family: monospace;" maxlength="6">
+            <br>
+            <button class="btn btn-primary" onclick="PumkinLiveExam.joinRoom()" style="font-size: 15px; padding: 10px 28px; font-weight: 600;">
+                🚀 Tham gia phòng thi
+            </button>
+        </div>
+        
+        <div style="border-top: 1px solid var(--border-color, #e2e8f0); padding-top: 20px;">
+            <p style="margin-bottom: 12px; color: var(--text-muted, #64748b); font-size: 13.5px;">Dành cho Giáo viên / Host khảo thí:</p>
+            <button class="btn btn-outline" onclick="PumkinLiveExam.createRoom()">➕ Tạo phòng thi mới</button>
+        </div>
+        
+        <div id="live-lobby-status" style="margin-top: 18px; color: #dc2626; font-weight: 600; display: none;"></div>
+        
+        <!-- Host Controls (hidden by default) -->
+        <div id="live-host-controls" style="display: none; margin-top: 24px; padding: 16px; background: #f0fdf4; border-radius: 8px; border: 1px solid #bbf7d0;">
+            <h4 style="color: #166534; margin-bottom: 12px;">Bảng điều khiển Host - PIN: <span id="live-host-pin-display" style="font-family: monospace; font-size: 18px;"></span></h4>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="PumkinLiveExam.hostStartExam()">▶️ Bắt đầu thi</button>
+                <button class="btn btn-outline" onclick="PumkinLiveExam.hostLockRoom()">🔒 Khóa phòng</button>
+            </div>
+            <div style="margin-top: 12px; font-size: 13.5px; color: #166534;">
+                Trạng thái: <span id="live-host-room-state" style="font-weight: 700;">waiting</span>
+            </div>
+        </div>
+
+        <!-- Participants List -->
+        <div id="live-participants-list" style="margin-top: 24px; text-align: left; max-height: 260px; overflow-y: auto;">
+            <h4 style="margin-bottom: 8px; font-size: 14px; color: var(--text-color, #1e293b);">👥 Thí sinh tham gia:</h4>
+            <ul id="live-participants-ul" style="list-style: none; padding: 0; margin: 0;"></ul>
+        </div>
+    </div>
+</div>
+
+<!-- VIEW 3: EXAM PLAYER (FOCUSED EXAM HALL) -->
+<div id="view-exam-player" class="app-view">
+    <div class="exam-player-container">
+        <!-- Topbar -->
+        <div class="exam-player-topbar">
+            <div class="exam-info-group">
+                <h3 id="player-exam-title">TSA 2025 – Đề số 01</h3>
+                <span id="player-progress-text" class="exam-progress-text">Đang làm: Câu 1 / 40</span>
+            </div>
+
+            <div id="player-timer-badge" class="timer-box timer-normal">
+                <span>⏱️</span>
+                <span id="player-timer-text">90:00</span>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <button id="player-fs-btn" class="btn btn-sm btn-outline" onclick="toggleExamFullscreen()" title="Bật/Tắt chế độ toàn màn hình">⛶ Toàn màn hình</button>
+                <button class="btn btn-danger btn-topbar-submit" onclick="PumkinPlayer.openSubmitConfirm()">🏁 Nộp bài</button>
+            </div>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="player-main-layout">
+            <!-- Question Box -->
+            <div class="player-question-section">
+                <div class="pdl-cockpit-bar" id="pdl-cockpit-bar" style="display: none; padding: 10px; background: var(--bg-alt); border-radius: 6px; margin-bottom: 15px; border: 1px solid var(--border-color);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-weight: 600; font-size: 13px; color: var(--primary);">🧠 Cognitive Cockpit</span>
+                        <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer;">
+                            <input type="checkbox" id="pdl-toggle" checked onchange="window.toggleDeepLearning(this.checked)" style="accent-color: var(--primary);">
+                            <span>Bật Học Sâu</span>
+                        </label>
+                    </div>
+                    <div style="display: flex; gap: 15px; font-size: 12px; color: var(--text-main);">
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 3px;"><span>Mastery</span><span id="pdl-mastery-val">0%</span></div>
+                            <div style="height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;"><div id="pdl-mastery-bar" style="height: 100%; width: 0%; background: #22c55e; transition: width 0.3s;"></div></div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 3px;"><span>Rep Balance (Alg ↔ Vis)</span><span id="pdl-rep-val">50%</span></div>
+                            <div style="height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden; position: relative;">
+                                <div id="pdl-rep-marker" style="position: absolute; top: 0; bottom: 0; width: 4px; background: #3b82f6; left: 50%; transform: translateX(-50%); transition: left 0.3s;"></div>
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 3px;"><span>Focus / Deliberation</span><span id="pdl-focus-val">0%</span></div>
+                            <div style="height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;"><div id="pdl-focus-bar" style="height: 100%; width: 0%; background: #a855f7; transition: width 0.3s;"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-top-meta">
+                    <div class="q-meta-primary-row">
+                        <div class="q-meta-left">
+                            <span id="player-q-badge" class="question-number-badge">CÂU 1 / 40</span>
+                            <span id="player-q-type-container">
+                                <span class="q-type-badge q-type-single">Trắc nghiệm</span>
+                            </span>
+                            <span id="player-q-topic-tag" class="q-topic-title">Giải tích</span>
+                        </div>
+                        <button id="player-flag-btn" class="question-flag-btn" onclick="PumkinPlayer.toggleFlagCurrent()" title="Đánh dấu câu hỏi này để xem lại sau">
+                            <span>⚑</span> <span>Đánh dấu</span>
+                        </button>
+                    </div>
+                    <div id="player-q-dna-row" class="q-meta-dna-row"></div>
+                </div>
+
+                <div id="player-question-text" class="question-body-text">
+                    <!-- Dynamic Question Text with LaTeX -->
+                </div>
+                
+                <div id="player-jsxgraph-container" style="margin-top: 15px; width: 100%; display: flex; justify-content: center;"></div>
+
+                <div id="player-options-container" class="options-container">
+                    <!-- Dynamic Options A, B, C, D / True-False / Short Answer / Step Solution -->
+                </div>
+
+                <div class="pumkin-card-watermark">
+                    <span class="brand-dot"></span> PUMKIN.DEV • NỀN TẢNG KHẢO THÍ TOÁN HỌC CHUẨN HÓA
+                </div>
+
+                <div class="player-bottom-controls">
+                    <button id="player-prev-btn" class="btn btn-outline" onclick="PumkinPlayer.prevQuestion()">
+                        ← Câu trước
+                    </button>
+                    <button class="btn btn-tutor-ask" onclick="PumkinTutorIntegration.openFromCurrentExam()">🤖 Hỏi PUMKIN AI</button>
+                    <button id="player-next-btn" class="btn btn-primary" onclick="PumkinPlayer.nextQuestion()">
+                        Câu tiếp theo →
+                    </button>
+                </div>
+
+                <div class="player-keyboard-guide">
+                    <span>⌨️ <strong>Phím tắt:</strong></span>
+                    <span><span class="kb-chip">1-4</span> / <span class="kb-chip">A-D</span> Chọn đáp án</span>
+                    <span><span class="kb-chip">←</span> / <span class="kb-chip">→</span> Chuyển câu</span>
+                    <span><span class="kb-chip">F</span> Gắn cờ</span>
+                    <span><span class="kb-chip">Esc</span> Đóng hộp thoại</span>
+                </div>
+            </div>
+
+            <!-- Navigator Sidebar -->
+            <div class="player-nav-sidebar">
+                <div class="nav-sidebar-header">
+                    <span>DANH SÁCH CÂU HỎI</span>
+                    <span id="player-answered-count" style="font-size: 12.5px; color: var(--success); font-weight: 600;">0/0</span>
+                </div>
+
+                <div class="nav-legend">
+                    <div class="legend-item"><span class="legend-dot dot-answered"></span> Đã làm</div>
+                    <div class="legend-item"><span class="legend-dot dot-unanswered"></span> Chưa làm</div>
+                    <div class="legend-item"><span class="legend-dot dot-flagged"></span> Đánh dấu</div>
+                    <div class="legend-item"><span class="legend-dot dot-current"></span> Đang xem</div>
+                </div>
+
+                <div id="player-nav-grid" class="nav-grid-box">
+                    <!-- Rendered buttons 1..N -->
+                </div>
+
+                <button class="btn btn-danger sidebar-submit-btn" onclick="PumkinPlayer.openSubmitConfirm()">
+                    🏁 NỘP BÀI THI
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: CONFIRM SUBMIT -->
+<div id="submit-confirm-modal" role="dialog" aria-modal="true" class="modal-overlay">
+    <div class="modal-content">
+        <h3 style="color: var(--primary); font-size: 20px; margin-bottom: 14px;">Xác nhận nộp bài thi?</h3>
+        <p style="color: var(--text-main); font-size: 14.5px; margin-bottom: 18px;">
+            Bạn có chắc chắn muốn kết thúc bài thi và nộp bài ngay bây giờ?
+        </p>
+        <div id="submit-stat-preview" class="modal-info-box" style="border-radius: 8px; padding: 14px; margin-bottom: 24px; font-size: 13.5px; border: 1px solid var(--border-color);">
+            <!-- Live stats: answered vs unanswered count -->
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 12px;">
+            <button class="btn btn-outline" onclick="PumkinPlayer.closeSubmitConfirm()">Tiếp tục làm bài</button>
+            <button class="btn btn-danger" onclick="PumkinPlayer.submitExam(false)">Nộp bài ngay</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: POST-EXAM DIAGNOSTIC (DEEP LEARNING) -->
+<div id="pdl-diagnostic-modal" role="dialog" aria-modal="true" class="modal-overlay">
+    <div class="modal-content" style="max-width: 700px; padding: 25px;">
+        <h3 style="color: var(--primary); font-size: 22px; margin-bottom: 5px; text-align: center;">🎯 Chẩn đoán Năng lực Nhận thức (Học Sâu)</h3>
+        <p style="text-align: center; color: var(--text-muted); font-size: 13px; margin-bottom: 25px;">Dựa trên dữ liệu Cognitive Tracker trong suốt quá trình làm bài.</p>
+        
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; align-items: center;">
+                <canvas id="pdl-radar-chart" width="300" height="300"></canvas>
+                <div id="pdl-radar-confidence" style="font-size: 11px; color: var(--text-muted); margin-top: 10px;">Độ tin cậy dữ liệu: Tính toán...</div>
+            </div>
+            <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 15px;">
+                <div style="background: var(--bg-alt); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 14px; margin-bottom: 8px; color: var(--text-main);">⚠️ Bẫy nhận thức phát hiện</h4>
+                    <ul id="pdl-trap-list" style="font-size: 13px; color: var(--text-main); margin: 0; padding-left: 20px;">
+                        <li>Không phát hiện bẫy. Tuyệt vời!</li>
+                    </ul>
+                </div>
+                <div style="background: var(--bg-alt); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 14px; margin-bottom: 8px; color: var(--text-main);">💡 Gợi ý lộ trình cá nhân hóa</h4>
+                    <p id="pdl-recommendation-text" style="font-size: 13px; color: var(--text-main); line-height: 1.5; margin: 0;">
+                        Đang phân tích dữ liệu...
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; margin-top: 25px;">
+            <button class="btn btn-primary" onclick="document.getElementById('pdl-diagnostic-modal').classList.remove('active')">Đóng & Xem lời giải</button>
+        </div>
+    </div>
+</div>
+
+<!-- VIEW 4: RESULTS & DETAILED REVIEW -->
+<div id="view-result" class="app-view">
+    <div class="view-header">
+        <div class="view-title-group">
+            <h2>📊 KẾT QUẢ BÀI THI & LỜI GIẢI CHI TIẾT</h2>
+            <p id="result-exam-title-sub" class="view-subtitle">TSA 2025 – Đề số 01</p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn btn-outline" onclick="PumkinRouter.navigate('library')">📚 Về kho đề</button>
+            <button id="result-retry-btn" class="btn btn-primary">🔄 Làm lại đề này</button>
+        </div>
+    </div>
+
+    <!-- Result Banner -->
+    <div class="result-header-card">
+        <div class="score-main-display">
+            <div class="score-circle-badge">
+                <span id="result-score-val">0.0</span>
+                <small>/ 40</small>
+            </div>
+            <div>
+                <h3 id="result-grade-msg" style="font-size: 22px; margin-bottom: 6px;">Chúc mừng bạn đã hoàn thành bài thi!</h3>
+                <p id="result-eval-text" style="font-size: 14px; opacity: 0.9; margin: 0;">Đánh giá tổng quan năng lực tư duy toán học của bạn.</p>
+            </div>
+        </div>
+        <div style="text-align: right;">
+            <div style="font-size: 13px; opacity: 0.85;">TỈ LỆ CHÍNH XÁC</div>
+            <div id="result-accuracy-big" style="font-size: 32px; font-weight: 800;">0%</div>
+        </div>
+    </div>
+
+    <!-- LEVEL & EXP REWARD NOTIFICATION CONTAINER -->
+    <div id="result-exp-reward-container"></div>
+
+    <!-- Stats Grid -->
+    <div class="stats-summary-grid">
+        <div class="stat-box">
+            <div id="stat-correct-count" class="stat-box-val" style="color: var(--success);">0</div>
+            <div class="stat-box-label">Số câu đúng</div>
+        </div>
+        <div class="stat-box">
+            <div id="stat-wrong-count" class="stat-box-val" style="color: var(--danger);">0</div>
+            <div class="stat-box-label">Số câu sai</div>
+        </div>
+        <div class="stat-box">
+            <div id="stat-skipped-count" class="stat-box-val" style="color: #64748b;">0</div>
+            <div class="stat-box-label">Bỏ trống</div>
+        </div>
+        <div class="stat-box">
+            <div id="stat-total-time" class="stat-box-val">00:00</div>
+            <div class="stat-box-label">Thời gian làm</div>
+        </div>
+        <div class="stat-box">
+            <div id="stat-avg-time" class="stat-box-val">0s</div>
+            <div class="stat-box-label">TB mỗi câu</div>
+        </div>
+    </div>
+
+    <!-- Topic Breakdown -->
+    <div class="analytics-section">
+        <h3 style="color: var(--primary); font-size: 17px; margin-bottom: 18px; display: flex; align-items: center; gap: 8px;">
+            <span>📈</span> NĂNG LỰC THEO TỪNG CHỦ ĐỀ TOÁN HỌC
+        </h3>
+        <div id="result-topics-breakdown">
+            <!-- Dynamic topic bars -->
+        </div>
+    </div>
+
+    <!-- Step-by-Step Question Review List -->
+    <div style="margin-top: 35px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+            <h3 style="color: var(--primary); font-size: 18px; margin: 0;">📝 LỜI GIẢI CHI TIẾT TỪNG CÂU HỎI</h3>
+            
+            <div class="review-filter-tabs">
+                <button class="filter-pill active" onclick="PumkinScoring.filterReview('all', this)">Tất cả (<span id="rev-cnt-all">0</span>)</button>
+                <button class="filter-pill" onclick="PumkinScoring.filterReview('wrong', this)">Câu sai (<span id="rev-cnt-wrong">0</span>)</button>
+                <button class="filter-pill" onclick="PumkinScoring.filterReview('correct', this)">Câu đúng (<span id="rev-cnt-correct">0</span>)</button>
+                <button class="filter-pill" onclick="PumkinScoring.filterReview('flagged', this)">Đã đánh dấu (<span id="rev-cnt-flagged">0</span>)</button>
+            </div>
+        </div>
+
+        <div id="result-review-questions-list">
+            <!-- Rendered review cards with full step-by-step LaTeX explanations -->
+        </div>
+    </div>
+</div>
+
+<!-- VIEW 5: CUSTOM EXAM GENERATOR -->
+<div id="view-generator" class="app-view">
+    <div class="view-header">
+        <div class="view-title-group">
+            <h2>⚡ TẠO ĐỀ THI TÙY CHỈNH THEO MA TRẬN</h2>
+            <p class="view-subtitle">Hệ thống sinh đề tự động 10 bước: cân bằng độ khó, chủ đề, loại bỏ câu trùng lặp</p>
+        </div>
+    </div>
+
+    <div class="generator-card">
+        <!-- Exam Type -->
+        <div class="form-group">
+            <label class="form-label">1. Chọn loại đề thi mục tiêu:</label>
+            <div class="form-radio-grid" id="gen-type-grid">
+                <div class="radio-pill-card selected" data-val="TSA" onclick="PumkinGenerator.selectPill('gen-type-grid', this)">TSA (Bách Khoa)</div>
+                <div class="radio-pill-card" data-val="HSA" onclick="PumkinGenerator.selectPill('gen-type-grid', this)">HSA (ĐHQGHN)</div>
+                <div class="radio-pill-card" data-val="THPT" onclick="PumkinGenerator.selectPill('gen-type-grid', this)">THPT Quốc Gia</div>
+                <div class="radio-pill-card" data-val="Giải tích 1" onclick="PumkinGenerator.selectPill('gen-type-grid', this)">Giải tích 1</div>
+                <div class="radio-pill-card" data-val="all" onclick="PumkinGenerator.selectPill('gen-type-grid', this)">Tổng hợp</div>
+            </div>
+        </div>
+
+        <!-- Question Count -->
+        <div class="form-group">
+            <label class="form-label">2. Số lượng câu hỏi:</label>
+            <div class="form-radio-grid" id="gen-count-grid">
+                <div class="radio-pill-card" data-val="10" onclick="PumkinGenerator.selectPill('gen-count-grid', this)">10 câu</div>
+                <div class="radio-pill-card selected" data-val="20" onclick="PumkinGenerator.selectPill('gen-count-grid', this)">20 câu</div>
+                <div class="radio-pill-card" data-val="30" onclick="PumkinGenerator.selectPill('gen-count-grid', this)">30 câu</div>
+                <div class="radio-pill-card" data-val="40" onclick="PumkinGenerator.selectPill('gen-count-grid', this)">40 câu</div>
+            </div>
+        </div>
+
+        <!-- Duration -->
+        <div class="form-group">
+            <label class="form-label">3. Thời gian làm bài:</label>
+            <div class="form-radio-grid" id="gen-time-grid">
+                <div class="radio-pill-card" data-val="30" onclick="PumkinGenerator.selectPill('gen-time-grid', this)">30 phút</div>
+                <div class="radio-pill-card selected" data-val="45" onclick="PumkinGenerator.selectPill('gen-time-grid', this)">45 phút</div>
+                <div class="radio-pill-card" data-val="60" onclick="PumkinGenerator.selectPill('gen-time-grid', this)">60 phút</div>
+                <div class="radio-pill-card" data-val="90" onclick="PumkinGenerator.selectPill('gen-time-grid', this)">90 phút</div>
+            </div>
+        </div>
+
+        <!-- Difficulty Profile -->
+        <div class="form-group">
+            <label class="form-label">4. Cấu hình độ khó:</label>
+            <div class="form-radio-grid" id="gen-diff-grid">
+                <div class="radio-pill-card selected" data-val="balanced" onclick="PumkinGenerator.selectPill('gen-diff-grid', this)">Cân bằng (Chuẩn)</div>
+                <div class="radio-pill-card" data-val="Dễ" onclick="PumkinGenerator.selectPill('gen-diff-grid', this)">Cơ bản (Dễ)</div>
+                <div class="radio-pill-card" data-val="Trung bình" onclick="PumkinGenerator.selectPill('gen-diff-grid', this)">Vận dụng (Trung bình)</div>
+                <div class="radio-pill-card" data-val="Khó" onclick="PumkinGenerator.selectPill('gen-diff-grid', this)">Nâng cao (Khó)</div>
+                <div class="radio-pill-card" data-val="Siêu khó" onclick="PumkinGenerator.selectPill('gen-diff-grid', this)" style="border-color: #dc2626; color: #dc2626; font-weight: 700;">🔥 Thử thách Siêu khó (DNA Đột phá)</div>
+            </div>
+        </div>
+
+        <!-- Topics -->
+        <div class="form-group">
+            <label class="form-label">5. Chủ đề kiến thức bao hàm:</label>
+            <div class="checkbox-topic-grid">
+                <label class="checkbox-card"><input type="checkbox" name="gen_topic" value="Đại số" checked> Đại số & Dãy số</label>
+                <label class="checkbox-card"><input type="checkbox" name="gen_topic" value="Giải tích" checked> Giải tích & Tối ưu hóa</label>
+                <label class="checkbox-card"><input type="checkbox" name="gen_topic" value="Hình học" checked> Hình học & Oxyz</label>
+                <label class="checkbox-card"><input type="checkbox" name="gen_topic" value="Xác suất" checked> Xác suất & Thống kê</label>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <button class="btn btn-primary btn-lg" style="width: 100%;" onclick="PumkinGenerator.generateExam()">
+                🚀 Khởi tạo đề & Bắt đầu làm ngay
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- VIEW 6: SMART PRACTICE & ADAPTIVE PRACTICE -->
+<div id="view-smart" class="app-view">
+    <div class="view-header">
+        <div class="view-title-group">
+            <h2>🎯 LUYỆN TẬP THÍCH ỨNG & THÔNG MINH (ADAPTIVE PRACTICE V2)</h2>
+            <p class="view-subtitle">Động cơ thích ứng tự động điều chỉnh độ khó theo thời gian thực (M1 → M4) dựa trên kết quả giải bài</p>
+        </div>
+    </div>
+
+    <div id="adaptive-practice-container" style="margin-bottom: 30px;">
+        <!-- Adaptive Practice Card & Active Question -->
+    </div>
+
+    <div id="smart-practice-content">
+        <!-- Populated dynamically based on history -->
+    </div>
+</div>
+
+<!-- VIEW 7: BOOKMARKS 2.0 -->
+<div id="view-bookmarks" class="app-view">
+    <div class="view-header">
+        <div class="view-title-group">
+            <h2>🔖 CÂU HỎI ĐÃ LƯU ĐỂ ÔN TẬP (BOOKMARKS 2.0)</h2>
+            <p class="view-subtitle">Phân loại câu hỏi theo lý do lưu: Chưa hiểu, Hay sai, Câu hay, Muốn học lại, Câu khó</p>
+        </div>
+        <button class="btn btn-primary" onclick="PumkinBookmarks.practiceSavedQuestions()">
+            📝 Làm đề từ các câu đã lưu
+        </button>
+    </div>
+
+    <div class="review-filter-tabs" style="margin-bottom: 20px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <button class="filter-pill active" onclick="PumkinBookmarks.filterBookmarks('all', this)">Tất cả (<span id="bm-count-all">0</span>)</button>
+        <button class="filter-pill" onclick="PumkinBookmarks.filterBookmarks('chưa hiểu', this)">❓ Chưa hiểu (<span id="bm-count-chuahieu">0</span>)</button>
+        <button class="filter-pill" onclick="PumkinBookmarks.filterBookmarks('hay sai', this)">⚠️ Hay sai (<span id="bm-count-haysai">0</span>)</button>
+        <button class="filter-pill" onclick="PumkinBookmarks.filterBookmarks('câu hay', this)">⭐ Câu hay (<span id="bm-count-cauhay">0</span>)</button>
+        <button class="filter-pill" onclick="PumkinBookmarks.filterBookmarks('muốn học lại', this)">🔄 Muốn học lại (<span id="bm-count-hoclai">0</span>)</button>
+        <button class="filter-pill" onclick="PumkinBookmarks.filterBookmarks('câu khó', this)">🔥 Câu khó (<span id="bm-count-caukho">0</span>)</button>
+    </div>
+
+    <div id="bookmarks-list-container">
+        <!-- Rendered saved questions -->
+    </div>
+</div>
+
+<!-- VIEW 8: DASHBOARD & HISTORY -->
+<div id="view-dashboard" class="app-view">
+    <div class="view-header">
+        <div class="view-title-group">
+            <h2>📈 THỐNG KÊ TIẾN ĐỘ, HỒ SƠ NĂNG LỰC & LỊCH SỬ THI</h2>
+            <p class="view-subtitle">Theo dõi quá trình nâng cao điểm số, độ thuần thục 6 kỹ năng toán học và phân tích nguyên nhân lỗi sai</p>
+        </div>
+        <button class="btn btn-tutor-ask" onclick="PumkinTutorIntegration.openFromQuestion('general', 'dashboard')">🤖 Phân tích năng lực với AI</button>
+    </div>
+
+    <!-- 3-STEP JOURNEY HERO CARD (EXACTLY 1 PRIMARY CTA) -->
+    <div id="dashboard-hero-journey-card"></div>
+
+    <!-- RESOURCE HUB EXPAND/COLLAPSE ACCORDION (ACCESSIBLE IN <= 2 TAPS) -->
+    <div class="resource-hub-toggle-row" style="text-align: center; margin: 24px 0 16px 0;">
+        <button id="btn-toggle-resource-hub" class="btn btn-outline btn-sm" onclick="PumkinJourneyManager.toggleResourceHub()" aria-expanded="false" aria-controls="dashboard-resource-hub" style="font-size: 13px; font-weight: 600; padding: 9px 20px; border-radius: 20px; border: 1px solid var(--border-color, #cbd5e1); background: var(--bg-card, #ffffff); color: var(--text-muted, #64748b); cursor: pointer; transition: all 0.2s ease;">
+            📂 Khám phá thêm (Kho đề, Sổ tay công thức, Báo cáo kỹ năng chi tiết) ▼
+        </button>
+    </div>
+
+    <!-- RESOURCE HUB DRAWER CONTAINER (PRESERVES ALL DOM NODES & EVENT HANDLERS) -->
+    <div id="dashboard-resource-hub" style="display: none;">
+        <div class="stats-summary-grid">
+        <div class="stat-box">
+            <div id="dash-total-exams" class="stat-box-val">0</div>
+            <div class="stat-box-label">Đề đã hoàn thành</div>
+        </div>
+        <div class="stat-box">
+            <div id="dash-total-questions" class="stat-box-val">0</div>
+            <div class="stat-box-label">Câu hỏi đã làm</div>
+        </div>
+        <div class="stat-box">
+            <div id="dash-overall-accuracy" class="stat-box-val" style="color: var(--primary-light);">0%</div>
+            <div class="stat-box-label">Tỉ lệ chính xác TB</div>
+        </div>
+        <div class="stat-box">
+            <div id="dash-total-hours" class="stat-box-val">0h</div>
+            <div class="stat-box-label">Tổng thời gian luyện</div>
+        </div>
+    </div>
+
+    <!-- MATHEMATICS SKILL PROFILE SECTION -->
+    <div class="analytics-section" style="margin-top: 25px; margin-bottom: 25px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
+            <h3 style="color: var(--primary); font-size: 18px; margin: 0; display: flex; align-items: center; gap: 8px;">
+                <span>📊</span> HỒ SƠ NĂNG LỰC TOÁN HỌC (MATHEMATICS SKILL PROFILE)
+            </h3>
+            <span id="skill-trend-badge" style="font-size: 13px; font-weight: 700; background: #eff6ff; color: var(--primary); padding: 4px 12px; border-radius: 16px; border: 1px solid #bfdbfe;">
+                Xu hướng: Ổn định →
+            </span>
+        </div>
+        <div id="dashboard-skill-bars-grid" class="dashboard-skill-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+            <!-- Dynamic skill progress cards -->
+        </div>
+
+        <!-- Strengths, Weaknesses & Error Analysis -->
+        <div class="skill-analysis-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 20px;">
+            <div class="skill-analysis-card">
+                <h4 style="color: var(--success, #059669); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                    <span>💪</span> Điểm mạnh cốt lõi (Strengths)
+                </h4>
+                <div id="skill-strengths-list" style="font-size: 13.5px; color: var(--text-color);">
+                    <!-- List of strong topics -->
+                </div>
+            </div>
+            <div class="skill-analysis-card">
+                <h4 style="color: var(--danger, #dc2626); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                    <span>🎯</span> Lỗ hổng cần khắc phục (Weaknesses)
+                </h4>
+                <div id="skill-weaknesses-list" style="font-size: 13.5px; color: var(--text-color);">
+                    <!-- List of weak topics -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Pattern Breakdown -->
+        <div class="error-breakdown-card">
+            <h4 style="color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                <span>🔍</span> Phân tích bản chất lỗi sai (Error Classification Engine)
+            </h4>
+            <div id="skill-error-distribution" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <!-- Error badges with counts and explanations -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Readiness Gauges -->
+    <div class="readiness-grid">
+        <div class="readiness-card">
+            <div class="readiness-circle" id="gauge-tsa-circle">
+                <span class="readiness-score-text" id="gauge-tsa-text">0%</span>
+            </div>
+            <div>
+                <div style="font-size: 15px; font-weight: 700; color: var(--primary);">Chỉ số Sẵn sàng TSA (Bách Khoa)</div>
+                <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;" id="gauge-tsa-desc">Dựa trên độ chính xác các câu tư duy logic, mô hình hóa và tối ưu</div>
+            </div>
+        </div>
+
+        <div class="readiness-card">
+            <div class="readiness-circle" id="gauge-hsa-circle">
+                <span class="readiness-score-text" id="gauge-hsa-text">0%</span>
+            </div>
+            <div>
+                <div style="font-size: 15px; font-weight: 700; color: var(--primary);">Chỉ số Sẵn sàng HSA (ĐHQGHN)</div>
+                <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;" id="gauge-hsa-desc">Dựa trên các câu định lượng, giải tích Oxyz, lượng giác và cấp số</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Next Best Action Study Path -->
+    <div class="learning-path-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+                <span class="brand-badge" style="margin-bottom: 6px; display: inline-block;">SMART LEARNING PATH (RULE-BASED)</span>
+                <h3 style="color: var(--primary); font-size: 18px; margin: 0;">🎯 Lộ trình Đột phá Điểm số Tiếp theo (Rule-Based Recommendations)</h3>
+            </div>
+            <span id="user-sync-status-badge" class="user-sync-status-badge" style="font-size: 12px; padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border-color, #cbd5e1); color: var(--text-muted);">Khách (Chưa đồng bộ)</span>
+        </div>
+        <p id="learning-path-recommendation-summary" style="font-size: 13.5px; color: var(--text-muted); margin: 10px 0 16px 0;">
+            Hệ thống phân tích lịch sử làm bài để tự động nhận diện lỗ hổng kiến thức và đề xuất chu trình ôn tập tối ưu.
+        </p>
+        <div id="learning-path-step-list" class="learning-path-step-list">
+            <!-- Dynamic steps: Review Theory -> Key Formulas -> 5 Practice Drill Questions -> Retest Exam -->
+        </div>
+    </div>
+
+    <!-- History Table -->
+    <div class="analytics-section">
+        <h3 style="color: var(--primary); font-size: 17px; margin-bottom: 16px;">📜 Lịch sử các lần làm đề gần đây</h3>
+        <div id="dash-history-table-container">
+            <!-- Table of past attempts -->
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- VIEW 9: ADMIN & QUESTION BANK -->
+<div id="view-admin" class="app-view">
+    <div class="view-header">
+        <div class="view-title-group">
+            <h2>⚙️ QUẢN TRỊ HỆ THỐNG & DASHBOARD GIÁO VIÊN</h2>
+            <p class="view-subtitle">Live Classroom Cognitive Heatmap & Sao lưu dữ liệu</p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn btn-outline" onclick="window.PumkinTeacherDashboard.renderDashboard()">📊 Tải lại Heatmap</button>
+            <button class="btn btn-primary" onclick="PumkinAdmin.showAddModal()">➕ Thêm câu hỏi mới</button>
+        </div>
+    </div>
+
+    <!-- TEACHER COGNITIVE DASHBOARD (PHASE 4) -->
+    <div id="teacher-dashboard-section" class="admin-card" style="padding: 20px; margin-bottom: 25px; border-radius: 10px; box-shadow: var(--shadow-sm); display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h3 style="color: var(--primary); font-size: 16px; margin: 0; display: flex; align-items: center; gap: 8px;">
+                <span>🔥</span> LIVE CLASSROOM COGNITIVE HEATMAP
+            </h3>
+            <span id="td-kanonymity-badge" style="font-size: 11px; background: var(--success); color: white; padding: 2px 8px; border-radius: 12px;">k-anonymity: SAFE</span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Dữ liệu đã được ẩn danh tập hợp (k &ge; 5). Phân tích bottleneck và representation gap của toàn bộ cohort.</p>
+        
+        <div id="td-loading-state" style="text-align: center; padding: 20px; color: var(--text-muted);">Đang tải dữ liệu phân tích...</div>
+        <div id="td-empty-state" style="text-align: center; padding: 20px; color: var(--text-muted); display: none;">Không đủ dữ liệu (k < 5) để hiển thị báo cáo.</div>
+
+        <div id="td-content" style="display: none; gap: 20px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+                <h4 style="font-size: 14px; margin-bottom: 10px; color: var(--text-main);">📉 Kỹ năng có Mastery trung bình thấp nhất</h4>
+                <ul id="td-bottlenecks-list" style="margin: 0; padding-left: 20px; font-size: 13px; color: var(--danger);"></ul>
+            </div>
+            <div style="flex: 1; min-width: 300px;">
+                <h4 style="font-size: 14px; margin-bottom: 10px; color: var(--text-main);">⚠️ Bẫy nhận thức phổ biến nhất</h4>
+                <ul id="td-traps-list" style="margin: 0; padding-left: 20px; font-size: 13px; color: #f59e0b;"></ul>
+            </div>
+        </div>
+        
+        <div id="td-heatmap-container" style="margin-top: 25px; display: none;">
+            <h4 style="font-size: 14px; margin-bottom: 10px; color: var(--text-main);">🗺️ Ma trận kỹ năng (Skill Matrix)</h4>
+            <div class="table-responsive" style="margin: 10px 0;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: center;">
+                    <thead>
+                        <tr style="background: var(--bg-alt); color: var(--text-muted);">
+                            <th style="padding: 8px; border: 1px solid var(--border-color); text-align: left;">Skill / Topic</th>
+                            <th style="padding: 8px; border: 1px solid var(--border-color);">Algebraic</th>
+                            <th style="padding: 8px; border: 1px solid var(--border-color);">Geometric</th>
+                            <th style="padding: 8px; border: 1px solid var(--border-color);">Rigor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="td-heatmap-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- PUMKIN_BACKUP_V2 CONTROL PANEL -->
+    <div class="admin-card" style="padding: 20px; margin-bottom: 25px; border-radius: 10px; box-shadow: var(--shadow-sm);">
+        <h3 style="color: var(--primary); font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <span>📦</span> HỆ THỐNG SAO LƯU & KHÔI PHỤC TIÊU CHUẨN (PUMKIN_BACKUP_V2)
+        </h3>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px;">
+            Xuất toàn bộ dữ liệu cá nhân (tiến độ học tập, lịch sử bài thi, Bookmarks 2.0 phân loại và nhật ký giải bài) ra tệp JSON. Cho phép khôi phục an toàn với tùy chọn Hợp nhất (Merge) hoặc Ghi đè (Replace).
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="PumkinBackup.exportBackup()">
+                💾 Xuất Bản Sao Lưu (PUMKIN_BACKUP_V2)
+            </button>
+            <label class="btn btn-outline" style="cursor: pointer; margin: 0; display: inline-flex; align-items: center; gap: 6px;">
+                📥 Nhập Bản Sao Lưu (Khôi phục)
+                <input type="file" accept=".json" style="display: none;" onchange="PumkinBackup.importBackupFile(this)">
+            </label>
+        </div>
+    </div>
+
+    <!-- Admin Stats -->
+    <div class="stats-summary-grid" style="margin-bottom: 25px;">
+        <div class="stat-box">
+            <div id="admin-total-q" class="stat-box-val">0</div>
+            <div class="stat-box-label">Tổng số câu hỏi</div>
+        </div>
+        <div class="stat-box">
+            <div id="admin-tsa-q" class="stat-box-val">0</div>
+            <div class="stat-box-label">Câu hỏi TSA</div>
+        </div>
+        <div class="stat-box">
+            <div id="admin-hsa-q" class="stat-box-val">0</div>
+            <div class="stat-box-label">Câu hỏi HSA</div>
+        </div>
+        <div class="stat-box">
+            <div id="admin-thpt-q" class="stat-box-val">0</div>
+            <div class="stat-box-label">Câu hỏi THPT</div>
+        </div>
+        <div class="stat-box">
+            <div id="admin-calc-q" class="stat-box-val">0</div>
+            <div class="stat-box-label">Giải tích 1</div>
+        </div>
+    </div>
+
+    <!-- Batch Importer -->
+    <div class="analytics-section">
+        <h3 style="color: var(--primary); font-size: 17px; margin-bottom: 12px;">📥 Nhập đề / Câu hỏi hàng loạt (JSON Pipeline)</h3>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 12px;">
+            Dán dữ liệu mảng JSON câu hỏi hoặc tải file lên. Hệ thống sẽ tự động chuẩn hóa, kiểm tra cú pháp LaTeX và phát hiện trùng lặp.
+        </p>
+        <textarea id="admin-import-json" style="width: 100%; height: 160px; font-family: monospace; font-size: 12.5px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 12px;" placeholder='[ { "id": "q_custom_01", "question_text": "...", "options": [...], "correct_answer": 0, "topic": "Đại số", "difficulty": "Trung bình" } ]'></textarea>
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+            <button class="btn btn-outline" onclick="PumkinAdmin.fillSampleJson()">Tải mẫu JSON</button>
+            <button class="btn btn-success" onclick="PumkinAdmin.importJson()">🚀 Tiến hành Import & Kiểm trùng</button>
+        </div>
+    </div>
+
+    <!-- Questions Table in Bank -->
+    <div class="analytics-section">
+        <h3 style="color: var(--primary); font-size: 17px; margin-bottom: 16px;">📋 Danh sách câu hỏi trong ngân hàng</h3>
+        <div id="admin-questions-table-container">
+            <!-- Questions list -->
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================================
+     VIEW: KNOWLEDGE HUB (25 TOPICS ACROSS 5 STREAMS)
+     ========================================================================== -->
+<div id="view-knowledge" class="app-view">
+    <div class="view-header">
+        <div class="view-title-group">
+            <h2>🧠 KHO KIẾN THỨC TOÁN HỌC TOÀN DIỆN</h2>
+            <p class="view-subtitle">25 Chuyên đề chuẩn mực: Tổng quan, Lý thuyết cốt lõi, Công thức, Ví dụ từng bước và Ứng dụng thực tế</p>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <a href="so_tay_kien_thuc.html" target="_blank" class="btn btn-primary" title="Mở trang Sổ tay kiến thức chuyên biệt siêu nhẹ trong tab mới">
+                🚀 Mở Sổ tay độc lập (Tab riêng) ↗
+            </a>
+            <button class="btn btn-outline" onclick="PumkinRouter.navigate('formulas')">
+                📐 Xem Sổ tay công thức
+            </button>
+            <button id="deep-learning-btn" class="btn btn-deep-learning is-locked" onclick="PumkinLevelSystem.handleDeepLearningAccess()">
+                <div class="dl-chains-overlay" id="deep-learning-chains-overlay">
+                    <svg viewBox="0 0 160 40" preserveAspectRatio="none" style="width: 100%; height: 100%; position: absolute; inset: 0;">
+                        <defs>
+                            <linearGradient id="dlSteelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#94a3b8"/>
+                                <stop offset="25%" stop-color="#f8fafc"/>
+                                <stop offset="60%" stop-color="#64748b"/>
+                                <stop offset="100%" stop-color="#334155"/>
+                            </linearGradient>
+                            <filter id="dlChainGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="1.5" stdDeviation="1.2" flood-color="#000000" flood-opacity="0.95"/>
+                            </filter>
+                        </defs>
+                        <!-- DÂY XÍCH 1: Góc trên-trái xuống góc dưới-phải (ĐÈ LÊN CHỮ) -->
+                        <line x1="-5" y1="-5" x2="165" y2="45" stroke="#000000" stroke-width="7.5" stroke-linecap="round" opacity="0.85"/>
+                        <line x1="-5" y1="-5" x2="165" y2="45" stroke="url(#dlSteelGrad)" stroke-width="5.5" stroke-linecap="round" filter="url(#dlChainGlow)"/>
+                        <line x1="-5" y1="-5" x2="165" y2="45" stroke="#0b0f19" stroke-width="2.5" stroke-dasharray="5, 7" stroke-linecap="round"/>
+
+                        <!-- DÂY XÍCH 2: Góc dưới-trái lên góc trên-phải (ĐÈ LÊN CHỮ) -->
+                        <line x1="-5" y1="47" x2="165" y2="-5" stroke="#000000" stroke-width="7.5" stroke-linecap="round" opacity="0.85"/>
+                        <line x1="-5" y1="47" x2="165" y2="-5" stroke="url(#dlSteelGrad)" stroke-width="5.5" stroke-linecap="round" filter="url(#dlChainGlow)"/>
+                        <line x1="-5" y1="47" x2="165" y2="-5" stroke="#0b0f19" stroke-width="2.5" stroke-dasharray="5, 7" stroke-linecap="round"/>
+
+                        <!-- Ổ KHÓA TRỌNG TÂM Ở GIAO ĐIỂM CHÍNH GIỮA (ĐÈ LÊN CHỮ) -->
+                        <g transform="translate(80, 20)" filter="url(#dlChainGlow)">
+                            <path d="M-6 0 V-6.5 A 6 6 0 0 1 6 -6.5 V0" fill="none" stroke="url(#dlSteelGrad)" stroke-width="3" stroke-linecap="round"/>
+                            <rect x="-8.5" y="0" width="17" height="13" rx="2.5" fill="#f59e0b" stroke="#78350f" stroke-width="1.2"/>
+                            <circle cx="0" cy="5" r="1.8" fill="#451a03"/>
+                            <polygon points="-1,5.5 1,5.5 1.2,9 -1.2,9" fill="#451a03"/>
+                        </g>
+                    </svg>
+                </div>
+                <span class="dl-label-container" id="deep-learning-label">Học sâu</span>
+            </button>
+            <!-- BONG BÓNG CHAT CHỈ HIỆN TRÊN CON TRỎ CHUỘT KHI DI VÀO -->
+            <div id="dl-speech-bubble" class="dl-speech-bubble" role="tooltip">🔒 Yêu cầu cấp 4 để mở khóa</div>
+        </div>
+    </div>
+
+    <!-- Stream Filter Tabs -->
+    <div class="knowledge-stream-tabs" id="knowledge-stream-tabs">
+        <button class="stream-tab-btn active" data-stream="all" onclick="PumkinKnowledge.filterStream('all', this)">Tất cả (25 chuyên đề)</button>
+        <button class="stream-tab-btn" data-stream="Toán 10" onclick="PumkinKnowledge.filterStream('Toán 10', this)">Toán 10 (5)</button>
+        <button class="stream-tab-btn" data-stream="Toán 11" onclick="PumkinKnowledge.filterStream('Toán 11', this)">Toán 11 (5)</button>
+        <button class="stream-tab-btn" data-stream="Toán 12" onclick="PumkinKnowledge.filterStream('Toán 12', this)">Toán 12 (5)</button>
+        <button class="stream-tab-btn" data-stream="Toán cao cấp" onclick="PumkinKnowledge.filterStream('Toán cao cấp', this)">Toán cao cấp - ĐSTT (5)</button>
+        <button class="stream-tab-btn" data-stream="Giải tích 1" onclick="PumkinKnowledge.filterStream('Giải tích 1', this)">Giải tích 1 (5)</button>
+    </div>
+
+    <!-- Search Input -->
+    <div class="search-box-wrapper" style="margin-bottom: 24px;">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="knowledge-search-input" class="search-input" oninput="PumkinKnowledge.onSearchInput(this.value)" placeholder="Tìm kiếm chuyên đề, khái niệm, công thức (Định lý Bayes, Shoelace, Ma trận, Taylor, Markov...)">
+    </div>
+
+    <!-- Knowledge Cards Grid -->
+    <div id="knowledge-cards-grid" class="knowledge-grid">
+        <!-- Rendered dynamically by PumkinKnowledge -->
+    </div>
+</div>
+
+<!-- ==========================================================================
+     VIEW: KNOWLEDGE DETAIL READER
+     ========================================================================== -->
+<div id="view-knowledge-detail" class="app-view">
+    <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div style="font-size: 13.5px; color: var(--text-muted);">
+            <a href="javascript:void(0)" onclick="PumkinRouter.navigate('knowledge')" style="color: var(--primary); text-decoration: none; font-weight: 600;">← Quay lại Kho kiến thức</a>
+            <span style="margin: 0 6px;">/</span>
+            <span id="detail-breadcrumb-stream">Toán 12</span>
+            <span style="margin: 0 6px;">/</span>
+            <span id="detail-breadcrumb-title" style="color: var(--text-main); font-weight: 700;">Chuyên đề</span>
+        </div>
+        <button id="btn-drill-from-article" class="btn btn-success" onclick="PumkinKnowledge.startDrillForCurrentArticle()">
+            🎯 Luyện 10 câu trọng tâm chuyên đề này
+        </button>
+        <button class="btn btn-tutor-ask" style="margin-left: 10px;" onclick="PumkinTutorIntegration.openFromQuestion('general', 'knowledge')">🤖 Hỏi PUMKIN AI</button>
+    </div>
+
+    <div class="article-layout">
+        
+
+        <!-- Article Body -->
+        <div class="article-body">
+            <div id="sec-overview" style="margin-bottom: 24px;">
+                <span id="detail-chapter-badge" class="badge-tag badge-tsa" style="margin-bottom: 8px; display: inline-block;">Chương 1</span>
+                <h1 id="detail-article-title" style="color: var(--primary); font-size: 26px; line-height: 1.35; margin: 6px 0 12px 0;">Tiêu đề chuyên đề</h1>
+                <p id="detail-article-overview" style="font-size: 14.5px; color: var(--text-muted); line-height: 1.65; padding: 14px 18px; border-left: 4px solid var(--primary-light); border-radius: 4px; background: var(--code-bg, #f8fafc);">
+                    Tổng quan chuyên đề...
+                </p>
+                <div id="detail-prerequisites-container" style="margin-top: 12px; display: none;">
+                    <div style="font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 6px;">🔗 Kiến thức tiền đề liên quan (Prerequisites Graph):</div>
+                    <div id="detail-prerequisites-chips" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+                </div>
+                <div id="detail-traps-container" style="margin-top: 12px; display: none;">
+                    <!-- Common traps dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Section 2: Theory -->
+            <div id="sec-theory" class="article-section">
+                <div class="article-section-title">📖 1. Lý thuyết trọng tâm & Điều kiện chuẩn mực</div>
+                <div id="detail-theory-content" style="line-height: 1.7; font-size: 14.5px;">
+                    <!-- Content -->
+                </div>
+            </div>
+
+            <!-- Section 3: Formulas -->
+            <div id="sec-formulas" class="article-section">
+                <div class="article-section-title">📐 2. Hệ thống công thức then chốt</div>
+                <div id="detail-formulas-grid" class="formula-card-grid">
+                    <!-- Cards -->
+                </div>
+            </div>
+
+            <!-- Section 4: Examples -->
+            <div id="sec-examples" class="article-section">
+                <div class="article-section-title">📝 3. Ví dụ minh họa có giải từng bước</div>
+                <div id="detail-examples-container">
+                    <!-- Accordions -->
+                </div>
+            </div>
+
+            <!-- Section 5: Applications -->
+            <div id="sec-applications" class="article-section">
+                <div class="article-section-title">🌐 4. Ứng dụng thực tiễn & Mô hình hóa</div>
+                <div id="detail-applications-content" style="border-radius: 8px; padding: 16px 20px; font-size: 14px; line-height: 1.65; border: 1px solid var(--border-color); background: var(--primary-bg, #eff6ff);">
+                    <!-- Applications -->
+                </div>
+            </div>
+
+            <!-- Section 6: Action Link & Tiered Practice Drills -->
+            <div id="sec-practice" class="article-section" style="text-align: center; border: 2px dashed var(--border-color, #cbd5e1); border-radius: 12px; padding: 30px 20px; background: var(--card-bg, #f8fafc);">
+                <h3 style="color: var(--primary); font-size: 18px; margin-bottom: 8px;">🚀 Luyện Tập Chuyên Đề Phân Tầng (Tiered Practice Drills)</h3>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">
+                    Lựa chọn cấp độ luyện tập phù hợp với mục tiêu của bạn từ cơ bản đến vận dụng cao.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                    <button class="btn btn-outline" onclick="PumkinKnowledge.startTieredDrill('basic')">
+                        🌱 Luyện Mức Độ Cơ Bản (10 câu M1-M2)
+                    </button>
+                    <button class="btn btn-warning" onclick="PumkinKnowledge.startTieredDrill('advanced')">
+                        🔥 Luyện Mức Độ Nâng Cao (10 câu M3-M4)
+                    </button>
+                    <button class="btn btn-primary" onclick="PumkinKnowledge.startTieredDrill('all')">
+                        ⚡ Luyện Chọn Lọc Chuyên Đề (10 câu)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================================
+     VIEW: FORMULA CHEATSHEET HANDBOOK
+     ========================================================================== -->
+<div id="view-formulas" class="app-view">
+    <div class="view-header">
+        <div class="view-title-group">
+            <h2>📐 SỔ TAY CÔNG THỨC TOÁN HỌC TRỰC QUAN</h2>
+            <p class="view-subtitle">Tra cứu nhanh toàn bộ công thức thực chiến và phương pháp giải trọng tâm cho mọi kỳ thi</p>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-tutor-ask" style="margin-right: 8px;" onclick="PumkinTutorIntegration.openFromQuestion('general', 'formulas')">🤖 Hỏi AI về công thức</button>
+            <a href="so_tay_kien_thuc.html" target="_blank" class="btn btn-primary" title="Mở trang Sổ tay kiến thức chuyên biệt siêu nhẹ trong tab mới">
+                🚀 Mở Sổ tay độc lập (Tab riêng) ↗
+            </a>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-panel" style="margin-bottom: 24px;">
+        <div class="search-box-wrapper" style="margin-bottom: 12px;">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="formula-search-input" class="search-input" oninput="PumkinFormulas.onSearchInput()" placeholder="Tìm kiếm công thức (Shoelace, Bayes, King, Cramer, Leibniz, Euler, AM-GM...)">
+        </div>
+        <div class="filter-row">
+            <div class="filter-group">
+                <span class="filter-label">Khối:</span>
+                <select id="formula-grade-select" class="filter-select" onchange="PumkinFormulas.applyFilter()">
+                    <option value="all">Tất cả các khối</option>
+                    <option value="Toán 10">Toán 10</option>
+                    <option value="Toán 11">Toán 11</option>
+                    <option value="Toán 12">Toán 12</option>
+                    <option value="Toán cao cấp">Toán cao cấp (ĐSTT)</option>
+                    <option value="Giải tích 1">Giải tích 1</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formula Cards Grid -->
+    <div id="all-formulas-grid" class="formula-card-grid">
+        <!-- Rendered formulas -->
+    </div>
+</div>
+
+<!-- ==========================================================================
+     VIEW: CENTRALIZED QUESTION BANK (> 160 QUESTIONS)
+     ========================================================================== -->
+<div id="view-qbank" class="app-view">
+    <div class="view-header">
+        <div class="view-title-group">
+            <h2>🗂️ NGÂN HÀNG CÂU HỎI CHUẨN HÓA (> 160 CÂU)</h2>
+            <p class="view-subtitle">Khám phá và luyện tập độc lập từng câu hỏi TSA, HSA, THPT và Đại học có lời giải chi tiết</p>
+        </div>
+        <button class="btn btn-primary" onclick="PumkinRouter.navigate('generator')">
+            ⚡ Tạo đề thi từ ngân hàng
+        </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-panel" style="margin-bottom: 20px;">
+        <div class="search-box-wrapper" style="margin-bottom: 12px;">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="qbank-search-input" class="search-input" oninput="PumkinQBank.onSearchInput()" placeholder="Tìm câu hỏi theo từ khóa, công thức, dạng bài...">
+        </div>
+        <div class="filter-row">
+            <div class="filter-group">
+                <span class="filter-label">Kỳ thi:</span>
+                <select id="qbank-exam-filter" class="filter-select" onchange="PumkinQBank.applyFilters()">
+                    <option value="all">Tất cả kỳ thi</option>
+                    <option value="TSA">TSA Bách Khoa</option>
+                    <option value="HSA">HSA ĐHQGHN</option>
+                    <option value="THPT">THPT Quốc Gia</option>
+                    <option value="Giải tích 1">Giải tích 1 / ĐSTT</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Dạng câu:</span>
+                <select id="qbank-type-filter" class="filter-select" onchange="PumkinQBank.applyFilters()">
+                    <option value="all">Tất cả định dạng</option>
+                    <option value="single_choice">Trắc nghiệm 4 lựa chọn</option>
+                    <option value="true_false_group">Đúng / Sai chùm (a-d)</option>
+                    <option value="short_answer">Điền đáp số ngắn</option>
+                    <option value="drag_drop">Kéo thả đáp án vào ô trống</option>
+                    <option value="step_solution">Tự luận đối chiếu barem</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Độ khó:</span>
+                <select id="qbank-diff-filter" class="filter-select" onchange="PumkinQBank.applyFilters()">
+                    <option value="all">Tất cả độ khó</option>
+                    <option value="Dễ">Dễ</option>
+                    <option value="Trung bình">Trung bình</option>
+                    <option value="Khó">Khó</option>
+                    <option value="Rất khó">🔥 Siêu khó (Vận dụng cao)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 16px; font-size: 13.5px; color: var(--text-muted); font-weight: 600;">
+        Hiển thị <span id="qbank-count-label" style="color: var(--primary);">0</span> câu hỏi
+    </div>
+
+    <!-- Questions Container -->
+    <div id="qbank-list-container">
+        <!-- Rendered dynamically -->
+    </div>
+</div>
+
+<!-- ==========================================================================
+     MODAL: USER AUTH (LOGIN / REGISTER / PROFILE)
+     ========================================================================== -->
+<div id="modal-auth" role="dialog" aria-modal="true" class="modal-overlay">
+    <div class="modal-content" style="max-width: 440px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div style="font-weight: 800; font-size: 18px; color: var(--primary);">👤 TÀI KHOẢN HỌC TẬP</div>
+            <button class="btn btn-sm btn-outline" onclick="PumkinAuth.closeModal()">✕</button>
+        </div>
+
+        <!-- Auth Tabs -->
+        <div class="auth-tabs" id="auth-modal-tabs">
+            <button class="auth-tab-btn active" id="tab-btn-login" onclick="PumkinAuth.switchTab('login')">Đăng nhập</button>
+            <button class="auth-tab-btn" id="tab-btn-register" onclick="PumkinAuth.switchTab('register')">Đăng ký mới</button>
+            <button class="auth-tab-btn" id="tab-btn-profile" style="display:none;" onclick="PumkinAuth.switchTab('profile')">Hồ sơ</button>
+        </div>
+
+        <div id="auth-alert" class="auth-alert-box"></div>
+
+        <!-- Login Form -->
+        <form id="form-login" onsubmit="PumkinAuth.handleLogin(event)">
+            <div class="auth-form-group">
+                <label>Tên tài khoản hoặc Gmail:</label>
+                <input type="text" id="login-username" class="auth-form-input" placeholder="Tên đăng nhập hoặc email@gmail.com" required>
+            </div>
+            <div class="auth-form-group">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <label style="margin: 0;">Mật khẩu:</label>
+                    <span onclick="PumkinAuth.togglePassword('login-password')" style="font-size: 12px; color: var(--primary-light); cursor: pointer; user-select: none;">👁️ Hiện/Ẩn</span>
+                </div>
+                <input type="password" id="login-password" class="auth-form-input" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px;">
+                🔐 Đăng nhập ngay
+            </button>
+            <div style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted);">
+                Chưa có tài khoản? <a href="javascript:void(0)" onclick="PumkinAuth.switchTab('register')" style="color: var(--primary); font-weight: 700; text-decoration: none;">Tạo tài khoản miễn phí →</a>
+            </div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="form-register" style="display:none;" onsubmit="PumkinAuth.handleRegister(event)">
+            <div class="auth-form-group">
+                <label>Họ và tên học sinh:</label>
+                <input type="text" id="reg-fullname" class="auth-form-input" placeholder="Ví dụ: Nguyễn Minh Tuấn" required>
+            </div>
+            <div class="auth-form-group">
+                <label>Tên đăng nhập (Username):</label>
+                <input type="text" id="reg-username" class="auth-form-input" placeholder="Từ 3 ký tự (chữ liền, không dấu)" required minlength="3">
+            </div>
+            <div class="auth-form-group">
+                <label>Địa chỉ Gmail (@gmail.com):</label>
+                <input type="email" id="reg-email" class="auth-form-input" placeholder="tenban@gmail.com" required>
+            </div>
+            <div class="auth-form-group">
+                <label>Mục tiêu ôn thi chính:</label>
+                <select id="reg-goal" class="filter-select" style="width: 100%; padding: 10px 12px; border-radius: 6px;">
+                    <option value="TSA">Đánh giá Tư duy TSA (ĐHBK Hà Nội)</option>
+                    <option value="HSA">Đánh giá Năng lực HSA (ĐHQGHN)</option>
+                    <option value="THPT">Tốt nghiệp THPT Quốc Gia môn Toán</option>
+                    <option value="Đại học">Giải tích 1 & Đại số tuyến tính Đại học</option>
+                </select>
+            </div>
+            <div class="auth-form-group">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <label style="margin: 0;">Mật khẩu:</label>
+                    <span onclick="PumkinAuth.togglePassword('reg-password')" style="font-size: 12px; color: var(--primary-light); cursor: pointer; user-select: none;">👁️ Hiện/Ẩn</span>
+                </div>
+                <input type="password" id="reg-password" class="auth-form-input" placeholder="Tối thiểu 6 ký tự" required minlength="6">
+            </div>
+            <div class="auth-form-group">
+                <label>Nhập lại mật khẩu:</label>
+                <input type="password" id="reg-confirm-password" class="auth-form-input" placeholder="Xác nhận lại mật khẩu" required minlength="6">
+            </div>
+            <button type="submit" class="btn btn-success btn-lg" style="width: 100%; margin-top: 10px;">
+                🚀 Tạo tài khoản & Bắt đầu học
+            </button>
+            <div style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted);">
+                Đã có tài khoản? <a href="javascript:void(0)" onclick="PumkinAuth.switchTab('login')" style="color: var(--primary); font-weight: 700; text-decoration: none;">Đăng nhập ngay →</a>
+            </div>
+        </form>
+
+        <!-- Profile Panel (When Logged In) -->
+        <div id="panel-profile" style="display:none;">
+            <div style="text-align: center; padding: 15px 0 20px 0;">
+                <div style="font-size: 48px; margin-bottom: 8px;">🎓</div>
+                <h3 id="profile-fullname-display" style="color: var(--primary); margin: 0 0 4px 0;">Nguyễn Văn A</h3>
+                <div id="profile-username-display" style="font-size: 13px; color: var(--primary-light); font-weight: 600;">@username</div>
+                <div id="profile-email-display" style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">email@gmail.com</div>
+                <div style="margin-top: 8px;">
+                    <span class="badge-tag badge-tsa" id="profile-goal-badge">TSA Bách Khoa</span>
+                </div>
+            </div>
+
+            <!-- LEVEL & EXP STATS CARD -->
+            <div id="profile-level-card-container" style="margin-bottom: 15px;"></div>
+
+            <div style="background: var(--card-bg, #f8fafc); border: 1px solid var(--border-color, #e2e8f0); border-radius: 8px; padding: 14px; margin-bottom: 20px;">
+                <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;">
+                    📅 Ngày tham gia: <strong id="profile-joined-date">Hôm nay</strong>
+                </div>
+                <button class="btn btn-tutor-ask" onclick="PumkinTutorIntegration.openFromQuestion('general', 'profile')">🤖 Hỏi PUMKIN AI</button>
+            </div>
+
+            <button class="btn btn-outline" style="width: 100%; color: #ef4444; border-color: #fca5a5;" onclick="PumkinAuth.handleLogout()">
+                🚪 Đăng xuất tài khoản
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================================
+     VIEW: PUBLIC DATA REPOSITORY & OPEN DATA HUB
+     ========================================================================== -->
+<div id="view-data" class="app-view">
+    <div class="view-header">
+        <div class="view-title-group">
+            <h2>🌐 CỔNG DỮ LIỆU MỞ & PUBLIC RAW DATA REPOSITORY</h2>
+            <p class="view-subtitle">Kho dữ liệu giáo dục Toán học nguyên bản theo chuẩn GitHub Public Repository — Tải về 1-click hoặc gọi API trực tiếp</p>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="PumkinDataRepo.downloadDirect('bundle', 'json')" title="Tải nhanh toàn bộ ngân hàng câu hỏi, đề thi và lý thuyết trong 1 file JSON duy nhất">
+                📥 Tải trọn bộ Bundle (JSON)
+            </button>
+            <button class="btn btn-outline" onclick="PumkinDataRepo.previewData('manifest')" title="Xem chi tiết tệp kê khai và mã băm SHA-256">
+                📋 Xem Manifest & Checksums
+            </button>
+        </div>
+    </div>
+
+    <!-- Health & Statistics Bar -->
+    <div class="data-stats-bar">
+        <div class="data-stat-card">
+            <div class="stat-icon">📦</div>
+            <div class="stat-info">
+                <div class="stat-label">Phiên bản Dataset</div>
+                <div class="stat-value">v1.2.0 <span class="badge-status-ok">● Sẵn sàng</span></div>
+            </div>
+        </div>
+        <div class="data-stat-card">
+            <div class="stat-icon">❓</div>
+            <div class="stat-info">
+                <div class="stat-label">Ngân hàng câu hỏi</div>
+                <div class="stat-value">165 câu chuẩn hóa</div>
+            </div>
+        </div>
+        <div class="data-stat-card">
+            <div class="stat-icon">📚</div>
+            <div class="stat-info">
+                <div class="stat-label">Kho đề thi trắc nghiệm</div>
+                <div class="stat-value">42 đề thi đầy đủ</div>
+            </div>
+        </div>
+        <div class="data-stat-card">
+            <div class="stat-icon">🧠</div>
+            <div class="stat-info">
+                <div class="stat-label">Chuyên đề & Công thức</div>
+                <div class="stat-value">25 bài & 44 KaTeX</div>
+            </div>
+        </div>
+        <div class="data-stat-card">
+            <div class="stat-icon">⚖️</div>
+            <div class="stat-info">
+                <div class="stat-label">Giấy phép dữ liệu mở</div>
+                <div class="stat-value" style="font-size: 13px;">CC BY-NC-SA 4.0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Privacy & Architecture Notice -->
+    <div class="data-privacy-notice">
+        <div class="notice-header">
+            <span>🛡️ NGUYÊN TẮC BẢO MẬT & PHÂN TÁCH 3 LOẠI DỮ LIỆU</span>
+            <span class="badge-tag badge-tsa">Zero-Leak Guarantee</span>
+        </div>
+        <div class="notice-grid">
+            <div class="notice-item">
+                <strong>A. Mã nguồn (Public Source):</strong> Toàn bộ frontend, HTML/CSS/JS được lưu trữ công khai trên GitHub Public Repo và máy chủ tĩnh.
+            </div>
+            <div class="notice-item">
+                <strong>B. Dữ liệu giáo dục (Public Data):</strong> 165 câu hỏi, 42 đề thi, 25 chuyên đề lý thuyết được lưu trong <code>data/</code> với định dạng mở (JSON, CSV, Markdown).
+            </div>
+            <div class="notice-item" style="border-left: 3px solid #10b981; padding-left: 10px;">
+                <strong>C. Dữ liệu học sinh (Private Data):</strong> <span style="color: #10b981; font-weight: 700;">Bảo mật tuyệt đối 100%</span>. Tài khoản, mật khẩu, kết quả thi cá nhân chỉ nằm trong trình duyệt của bạn, không bao giờ xuất bản lên mạng.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: 1-Click Direct Downloads -->
+    <div class="data-section">
+        <div class="section-title-wrap">
+            <h3>📥 1. Danh mục Tải về Trực tiếp (1-Click Downloads)</h3>
+            <p>Hỗ trợ đầy đủ định dạng JSON, CSV (mở trực tiếp bằng Microsoft Excel) và Markdown KaTeX. Hoạt động 100% ngay cả khi chạy offline.</p>
+        </div>
+
+        <div class="data-cards-grid">
+            <!-- Card 1: Bundle -->
+            <div class="dataset-card dataset-card-highlight">
+                <div class="dataset-card-top">
+                    <span class="dataset-badge badge-bundle">⚡ Khuyên dùng</span>
+                    <span class="dataset-format">JSON (510 KB)</span>
+                </div>
+                <h4 class="dataset-title">📦 Trọn bộ Toàn diện (System Bundle)</h4>
+                <p class="dataset-desc">Gói dữ liệu hoàn chỉnh tích hợp tất cả 165 câu hỏi, 42 đề thi, 25 chuyên đề lý thuyết, 44 công thức và cây phân loại trong 1 file duy nhất.</p>
+                <div class="dataset-actions">
+                    <button class="btn btn-primary btn-sm" onclick="PumkinDataRepo.downloadDirect('bundle', 'json')">📥 Tải Bundle JSON</button>
+                    <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.previewData('bundle')">👁️ Xem trước</button>
+                    <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.copyEndpointUrl('bundle.json', this)">📋 Copy Link Raw</button>
+                </div>
+            </div>
+
+            <!-- Card 2: Questions -->
+            <div class="dataset-card">
+                <div class="dataset-card-top">
+                    <span class="dataset-badge badge-q">165 câu hỏi</span>
+                    <span class="dataset-format">JSON & CSV</span>
+                </div>
+                <h4 class="dataset-title">🗂️ Ngân hàng Câu hỏi Thi Chuẩn hóa</h4>
+                <p class="dataset-desc">Đầy đủ 4 dạng câu hỏi (trắc nghiệm 4 lựa chọn, đúng/sai chùm 4 ý, điền đáp số ngắn) kèm lời giải chi tiết và liên kết chuyên đề.</p>
+                <div class="dataset-actions">
+                    <button class="btn btn-primary btn-sm" onclick="PumkinDataRepo.downloadDirect('questions_all', 'json')">📥 Tải JSON (all.json)</button>
+                    <button class="btn btn-success btn-sm" onclick="PumkinDataRepo.downloadDirect('questions_csv', 'csv')">📊 Tải CSV (Excel)</button>
+                    <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.previewData('questions_all')">👁️ Xem trước</button>
+                </div>
+                <div class="sub-downloads">
+                    <span>Tải theo kỳ thi:</span>
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('questions_tsa', 'json')">TSA (62)</a> •
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('questions_hsa', 'json')">HSA (47)</a> •
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('questions_thpt', 'json')">THPT (32)</a> •
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('questions_calc', 'json')">Giải tích 1 (24)</a>
+                </div>
+            </div>
+
+            <!-- Card 3: Exams -->
+            <div class="dataset-card">
+                <div class="dataset-card-top">
+                    <span class="dataset-badge badge-e">42 đề thi</span>
+                    <span class="dataset-format">JSON (44 KB)</span>
+                </div>
+                <h4 class="dataset-title">📚 Kho Đề thi Trắc nghiệm Chuẩn quy chế</h4>
+                <p class="dataset-desc">Cấu trúc đề thi hoàn chỉnh kèm thời gian làm bài, danh sách câu hỏi tham chiếu, ma trận phân bổ độ khó và cơ quan khảo thí.</p>
+                <div class="dataset-actions">
+                    <button class="btn btn-primary btn-sm" onclick="PumkinDataRepo.downloadDirect('exams_all', 'json')">📥 Tải Đề thi (all.json)</button>
+                    <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.previewData('exams_all')">👁️ Xem trước</button>
+                    <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.copyEndpointUrl('exams/all.json', this)">📋 Copy Link Raw</button>
+                </div>
+                <div class="sub-downloads">
+                    <span>Tải theo kỳ thi:</span>
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('exams_tsa', 'json')">12 Đề TSA</a> •
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('exams_hsa', 'json')">12 Đề HSA</a> •
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('exams_thpt', 'json')">14 Đề THPT</a> •
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('exams_calc', 'json')">4 Đề Giải tích 1</a>
+                </div>
+            </div>
+
+            <!-- Card 4: Knowledge -->
+            <div class="dataset-card">
+                <div class="dataset-card-top">
+                    <span class="dataset-badge badge-k">25 chuyên đề</span>
+                    <span class="dataset-format">JSON & Markdown</span>
+                </div>
+                <h4 class="dataset-title">🧠 Sổ tay Kiến thức & Cẩm nang Toàn tập</h4>
+                <p class="dataset-desc">25 bài giảng chuẩn mực từ Toán 10 đến Giải tích 1: Lý thuyết trọng tâm, công thức cốt lõi, ví dụ minh họa từng bước và ứng dụng thực tế.</p>
+                <div class="dataset-actions">
+                    <button class="btn btn-primary btn-sm" onclick="PumkinDataRepo.downloadDirect('knowledge_all', 'json')">📥 Tải JSON (all.json)</button>
+                    <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.downloadDirect('knowledge_md', 'markdown')">📄 Tải Cẩm nang (.md)</button>
+                    <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.previewData('knowledge_all')">👁️ Xem trước</button>
+                </div>
+                <div class="sub-downloads">
+                    <span>Tải theo khối:</span>
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('knowledge_math10', 'json')">Toán 10</a> •
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('knowledge_math11', 'json')">Toán 11</a> •
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('knowledge_math12', 'json')">Toán 12</a> •
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('knowledge_algebra', 'json')">ĐSTT</a> •
+                    <a href="javascript:void(0)" onclick="PumkinDataRepo.downloadDirect('knowledge_calc1', 'json')">Giải tích 1</a>
+                </div>
+            </div>
+
+            <!-- Card 5: Formulas -->
+            <div class="dataset-card">
+                <div class="dataset-card-top">
+                    <span class="dataset-badge badge-f">44 công thức</span>
+                    <span class="dataset-format">JSON & Markdown</span>
+                </div>
+                <h4 class="dataset-title">📐 Bảng Tra cứu Công thức Toán học KaTeX</h4>
+                <p class="dataset-desc">Tuyển tập 44 công thức toán trọng điểm kèm mã KaTeX LaTeX nguyên bản, mô tả ứng dụng và từ khóa tags tìm kiếm nhanh.</p>
+                <div class="dataset-actions">
+                    <button class="btn btn-primary btn-sm" onclick="PumkinDataRepo.downloadDirect('formulas_json', 'json')">📥 Tải JSON Công thức</button>
+                    <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.downloadDirect('formulas_md', 'markdown')">📄 Tải Bảng tra cứu (.md)</button>
+                    <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.previewData('formulas_json')">👁️ Xem trước</button>
+                </div>
+            </div>
+
+            <!-- Card 6: Taxonomy & Manifest -->
+            <div class="dataset-card">
+                <div class="dataset-card-top">
+                    <span class="dataset-badge badge-t">Metadata & Hashes</span>
+                    <span class="dataset-format">JSON</span>
+                </div>
+                <h4 class="dataset-title">🌲 Cây Phân loại Đề mục & Tệp Kê khai</h4>
+                <p class="dataset-desc">Cấu trúc phân cấp các chuyên đề theo khối lớp, dạng bài thi và tệp kê khai <code>manifest.json</code> chứa toàn bộ 22 mã băm SHA-256.</p>
+                <div class="dataset-actions">
+                    <button class="btn btn-primary btn-sm" onclick="PumkinDataRepo.downloadDirect('manifest', 'json')">📥 Tải manifest.json</button>
+                    <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.downloadDirect('taxonomy', 'json')">📥 Tải topics.json</button>
+                    <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.previewData('taxonomy')">👁️ Xem trước</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Raw Endpoint Explorer -->
+    <div class="data-section">
+        <div class="section-title-wrap">
+            <h3>🌐 2. Trình duyệt Điểm cuối Raw (Raw Endpoints Explorer)</h3>
+            <p>Truy xuất dữ liệu trực tiếp qua HTTP GET từ GitHub Raw hoặc mạng nội bộ LAN. Hỗ trợ tiêu đề CORS <code>Access-Control-Allow-Origin: *</code>.</p>
+        </div>
+
+        <!-- Source Selector Tabs -->
+        <div class="endpoint-source-selector">
+            <span style="font-size: 13.5px; font-weight: 600; color: var(--text-muted); margin-right: 8px;">Nguồn URL mẫu:</span>
+            <button class="source-tab-btn active" data-source="local" onclick="PumkinDataRepo.switchSource('local', this)">🖥️ Local / LAN Server</button>
+            <button class="source-tab-btn" data-source="github" onclick="PumkinDataRepo.switchSource('github', this)">🐙 GitHub Raw</button>
+            <button class="source-tab-btn" data-source="cdn" onclick="PumkinDataRepo.switchSource('cdn', this)">⚡ jsDelivr CDN</button>
+        </div>
+
+        <!-- Endpoints Table Container -->
+        <div class="endpoint-table-container">
+            <table class="endpoint-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Tên dữ liệu</th>
+                        <th style="width: 10%;">Định dạng</th>
+                        <th style="width: 45%;">Đường dẫn Raw URL</th>
+                        <th style="width: 20%; text-align: right;">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="endpoint-table-body">
+                    <!-- Populated dynamically by PumkinDataRepo.renderEndpoints() -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Section: Developer API Code Snippets -->
+    <div class="data-section">
+        <div class="section-title-wrap">
+            <h3>💻 3. Hướng dẫn Tích hợp & Mã nguồn Mẫu (Developer API Snippets)</h3>
+            <p>Dễ dàng kết nối kho dữ liệu mở PUMKIN.DEV vào website cá nhân, ứng dụng React/Flutter, hoặc bot Telegram giải toán.</p>
+        </div>
+
+        <div class="code-snippets-wrapper">
+            <div class="code-lang-tabs">
+                <button class="code-lang-tab active" data-lang="js" onclick="PumkinDataRepo.switchCodeTab('js', this)">JavaScript (fetch)</button>
+                <button class="code-lang-tab" data-lang="python" onclick="PumkinDataRepo.switchCodeTab('python', this)">Python (requests)</button>
+                <button class="code-lang-tab" data-lang="curl" onclick="PumkinDataRepo.switchCodeTab('curl', this)">cURL (Bash)</button>
+                <button class="code-lang-tab" data-lang="powershell" onclick="PumkinDataRepo.switchCodeTab('powershell', this)">PowerShell</button>
+            </div>
+            <div class="code-snippet-body">
+                <button class="btn-copy-code" onclick="PumkinDataRepo.copyCodeSnippet(this)">📋 Sao chép mã</button>
+                <pre><code id="api-code-display">// Loading...</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Schemas & Integrity Audit -->
+    <div class="data-section" style="margin-bottom: 30px;">
+        <div class="section-title-wrap">
+            <h3>🛡️ 4. Chuẩn hóa Schema & Kịch bản Kiểm định Tính Toàn vẹn</h3>
+            <p>Mọi bản ghi dữ liệu đều tuân thủ đặc tả JSON Schema Draft 2020-12 và được bảo đảm toàn vẹn bằng thuật toán băm SHA-256.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px;">
+            <div class="schema-card">
+                <h5>📋 Question Schema</h5>
+                <p>Đặc tả cấu trúc câu hỏi 4 dạng, ràng buộc trường, định dạng KaTeX.</p>
+                <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.previewData('schema_question')">Xem question.schema.json</button>
+            </div>
+            <div class="schema-card">
+                <h5>📚 Exam Schema</h5>
+                <p>Đặc tả cấu trúc đề thi, thời gian, câu hỏi tham chiếu, ma trận đề.</p>
+                <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.previewData('schema_exam')">Xem exam.schema.json</button>
+            </div>
+            <div class="schema-card">
+                <h5>🧠 Knowledge Schema</h5>
+                <p>Đặc tả bài học lý thuyết, công thức KaTeX, ví dụ mẫu và ứng dụng.</p>
+                <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.previewData('schema_knowledge')">Xem knowledge.schema.json</button>
+            </div>
+            <div class="schema-card">
+                <h5>📦 Manifest Schema</h5>
+                <p>Đặc tả tệp kê khai metadata, phiên bản, checksums và danh mục tệp.</p>
+                <button class="btn btn-outline btn-sm" onclick="PumkinDataRepo.previewData('schema_manifest')">Xem manifest.schema.json</button>
+            </div>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-weight: 700; color: var(--primary);">Kiểm định tính toàn vẹn độc lập (PowerShell):</span>
+                <span class="badge-status-ok">31 / 31 Tests Passed</span>
+            </div>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 10px;">Chạy lệnh sau tại thư mục gốc của dự án để kiểm định toàn bộ 22 tệp dữ liệu, đảm bảo không có ID trùng lặp và không rò rỉ dữ liệu nhạy cảm:</p>
+            <div style="background: var(--code-bg); padding: 10px 14px; border-radius: 6px; font-family: monospace; font-size: 13px; color: #38bdf8; display: flex; justify-content: space-between; align-items: center;">
+                <span>powershell -ExecutionPolicy Bypass -File .\validate_data.ps1</span>
+                <button class="btn btn-sm btn-outline" onclick="PumkinDataRepo.copyText('powershell -ExecutionPolicy Bypass -File .\\validate_data.ps1', this)">📋 Copy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================================
+     MODAL: DATA & JSON PREVIEW DRAWER
+     ========================================================================== -->
+<div id="data-preview-modal" role="dialog" aria-modal="true" class="modal-overlay">
+    <div class="modal-content" style="max-width: 850px; width: 92%; max-height: 88vh; display: flex; flex-direction: column;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+            <div>
+                <h3 id="preview-modal-title" style="color: var(--primary); font-size: 18px; margin: 0 0 4px 0;">Xem trước Dữ liệu</h3>
+                <p id="preview-modal-subtitle" style="font-size: 13px; color: var(--text-muted); margin: 0;">Định dạng JSON • Dung lượng: -- KB</p>
+            </div>
+            <button class="btn btn-sm btn-outline" onclick="PumkinDataRepo.closePreviewModal()">✕ Đóng</button>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap;">
+            <div style="font-size: 12.5px; color: var(--text-muted);">
+                Hiển thị bản ghi mẫu nguyên bản (Pretty Printed):
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button id="btn-copy-preview-content" class="btn btn-outline btn-sm" onclick="PumkinDataRepo.copyPreviewContent(this)">📋 Sao chép toàn bộ</button>
+                <button id="btn-download-preview-content" class="btn btn-primary btn-sm" onclick="PumkinDataRepo.downloadCurrentPreview()">📥 Tải tệp này</button>
+            </div>
+        </div>
+
+        <div style="flex: 1; overflow: auto; background: var(--code-bg); border: 1px solid var(--border-color); border-radius: 6px; padding: 14px;">
+            <pre id="preview-code-block" style="margin: 0; font-family: 'Consolas', 'Courier New', monospace; font-size: 12.5px; line-height: 1.55; color: var(--text-main); white-space: pre-wrap; word-break: break-all;"></pre>
+        </div>
+    </div>
+</div>
+
+    <footer role="contentinfo" style="text-align: center; margin-top: 50px; padding: 25px 0 10px 0; border-top: 2px dashed var(--border-color, #cbd5e1);">
+        <div style="font-size: 15px; font-weight: 800; color: var(--primary, #1e3a8a); letter-spacing: 1.5px; text-transform: uppercase;">
+            MADE BY PUMKIN.DEV
+        </div>
+        <div style="font-size: 12px; color: var(--text-muted, #64748b); margin-top: 4px;">
+            Hệ thống tài liệu ôn thi Đánh giá Tư duy (TSA) chuẩn hóa 2025 - 2026
+        </div>
+        <div style="font-size: 12px; margin-top: 8px; display: flex; justify-content: center; gap: 16px;">
+            <a href="privacy.html" style="color: var(--primary, #1e3a8a); text-decoration: underline; font-weight: 500;">Chính sách bảo mật</a>
+            <span style="color: var(--text-muted, #94a3b8);">•</span>
+            <a href="terms.html" style="color: var(--primary, #1e3a8a); text-decoration: underline; font-weight: 500;">Điều khoản sử dụng</a>
+        </div>
+    </footer>
+
+</main>
+    <script src="js/core/app.js"></script>
+<!-- AI Tutor Integration -->
+<script src="js/ai/PumkinAiQuota.js?v=4.1"></script>
+<script src="js/ai/TutorContextBuilder.js?v=3.0"></script>
+<script src="js/ui/TutorUI.js?v=3.0"></script>
+<script src="js/integration/TutorIntegration.js?v=3.0"></script>
+</body>
+</html>

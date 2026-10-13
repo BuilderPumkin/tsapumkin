@@ -1,0 +1,676 @@
+[
+  {
+    "id": "exam_thpt_01",
+    "title": "THPT 2025 – Đề Tham Khảo Tốt Nghiệp THPT Quốc Gia Môn Toán",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 12,
+    "question_ids": [
+      "q_thpt_01",
+      "q_thpt_02",
+      "q_thpt_tf_01",
+      "q_thpt_sa_01",
+      "q_thpt_03",
+      "q_thpt_04",
+      "q_thpt_05",
+      "q_thpt_06",
+      "q_thpt_07",
+      "q_thpt_08",
+      "q_hsa_01",
+      "q_hsa_02"
+    ],
+    "difficulty": "Trung bình",
+    "source": "Bộ Giáo dục và Đào tạo",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi toàn diện chương trình lớp 12: khảo sát hàm số, số phức, nguyên hàm tích phân, hình Oxyz và bất phương trình.",
+    "attempts_count": 5850,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 7
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_02",
+    "title": "THPT 2025 – Đề Thi Thử Cụm Các Trường THPT Chuyên Hà Nội",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_01",
+      "q_thpt_02",
+      "q_thpt_04",
+      "q_thpt_06",
+      "q_thpt_08",
+      "q_tsa_14",
+      "q_tsa_20",
+      "q_hsa_06",
+      "q_hsa_08",
+      "q_hsa_11"
+    ],
+    "difficulty": "Khó",
+    "source": "Cụm Trường THPT Chuyên Hà Nội",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi thử có độ phân hóa mạnh từ cụm chuyên Hà Nội: tiệm cận, cực trị hàm hợp, nguyên hàm từng phần và Oxyz.",
+    "attempts_count": 3150,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_03",
+    "title": "THPT 2024 – Đề Thi Chính Thức Tốt Nghiệp THPT Môn Toán (Mã 104)",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2024,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_02",
+      "q_thpt_03",
+      "q_thpt_05",
+      "q_thpt_07",
+      "q_hsa_03",
+      "q_hsa_05",
+      "q_hsa_09",
+      "q_hsa_10",
+      "q_tsa_02",
+      "q_tsa_16"
+    ],
+    "difficulty": "Trung bình",
+    "source": "Bộ Giáo dục và Đào tạo",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi chính thức kỳ thi Tốt nghiệp THPT 2024 mã đề 104 chuẩn hóa mức độ nhận biết, thông hiểu và vận dụng.",
+    "attempts_count": 6600,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_04",
+    "title": "THPT 2026 – Đề Phát Triển Đề Minh Họa Tốt Nghiệp THPT 2026",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2026,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_01",
+      "q_thpt_04",
+      "q_thpt_06",
+      "q_thpt_07",
+      "q_thpt_08",
+      "q_tsa_01",
+      "q_tsa_05",
+      "q_tsa_18",
+      "q_hsa_02",
+      "q_hsa_04"
+    ],
+    "difficulty": "Khó",
+    "source": "Tổ Chuyên Môn Toán PUMKIN.DEV",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi phát triển định hướng Chương trình GDPT mới, tăng cường ứng dụng thực tế và hình học không gian Oxyz.",
+    "attempts_count": 2480,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_05",
+    "title": "THPT 2025 – Đề Thi Thử Chuyên Khoa Học Tự Nhiên Hà Nội (Lần 1)",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_01",
+      "q_thpt_03",
+      "q_thpt_05",
+      "q_thpt_09",
+      "q_thpt_10",
+      "q_thpt_11",
+      "q_thpt_12",
+      "q_thpt_tf_01",
+      "q_thpt_sa_01",
+      "q_thpt_04"
+    ],
+    "difficulty": "Khó",
+    "source": "THPT Chuyên KHTN - ĐHKHTN Hà Nội",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi nổi tiếng với các bài toán vận dụng cao về phương trình logarit chứa tham số và bài toán min-max Oxyz.",
+    "attempts_count": 3820,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_06",
+    "title": "THPT 2025 – Đề Thi Thử Chuyên Đại Học Sư Phạm Hà Nội (Lần 2)",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_02",
+      "q_thpt_04",
+      "q_thpt_06",
+      "q_thpt_13",
+      "q_thpt_14",
+      "q_thpt_15",
+      "q_thpt_16",
+      "q_thpt_tf_01",
+      "q_thpt_sa_01",
+      "q_thpt_07"
+    ],
+    "difficulty": "Khó",
+    "source": "THPT Chuyên ĐH Sư Phạm Hà Nội",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Cấu trúc đề tinh tế, kiểm tra sâu sắc tính liên tục, cực trị hình phẳng và thể tích khối tròn xoay quanh trục Ox.",
+    "attempts_count": 3410,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_07",
+    "title": "THPT 2025 – Đề Thi Thử Chuyên Lê Hồng Phong TP. Hồ Chí Minh",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_01",
+      "q_thpt_07",
+      "q_thpt_08",
+      "q_thpt_17",
+      "q_thpt_18",
+      "q_thpt_19",
+      "q_thpt_20",
+      "q_thpt_tf_01",
+      "q_thpt_sa_01",
+      "q_thpt_05"
+    ],
+    "difficulty": "Khó",
+    "source": "THPT Chuyên Lê Hồng Phong TP.HCM",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi truyền thống miền Nam với các bài toán thực tiễn tối ưu hóa chi phí sản xuất và bài toán lãi suất ngân hàng.",
+    "attempts_count": 2980,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_08",
+    "title": "THPT 2025 – Đề Thi Thử Chuyên Phan Bội Châu Nghệ An",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_03",
+      "q_thpt_05",
+      "q_thpt_08",
+      "q_thpt_21",
+      "q_thpt_22",
+      "q_thpt_23",
+      "q_thpt_24",
+      "q_thpt_tf_01",
+      "q_thpt_sa_01",
+      "q_thpt_02"
+    ],
+    "difficulty": "Khó",
+    "source": "THPT Chuyên Phan Bội Châu Nghệ An",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Tập trung các dạng toán cực trị không gian, mặt cầu ngoại tiếp lăng trụ xiên và kỹ thuật đạo hàm cấp hai.",
+    "attempts_count": 2670,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_09",
+    "title": "THPT 2025 – Đề Thi Thử Chuyên Lam Sơn Thanh Hóa",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_01",
+      "q_thpt_04",
+      "q_thpt_06",
+      "q_thpt_25",
+      "q_thpt_36",
+      "q_thpt_37",
+      "q_thpt_38",
+      "q_thpt_tf_01",
+      "q_thpt_sa_01",
+      "q_thpt_08"
+    ],
+    "difficulty": "Khó",
+    "source": "THPT Chuyên Lam Sơn Thanh Hóa",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi phân hóa rực nét: bất phương trình mũ, nghiệm nguyên của hệ logarit và nguyên hàm từng phần múa cột.",
+    "attempts_count": 2890,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_10",
+    "title": "THPT 2025 – Đề Khảo Sát Chất Lượng Sở GD&ĐT Nam Định",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_02",
+      "q_thpt_03",
+      "q_thpt_07",
+      "q_thpt_39",
+      "q_thpt_40",
+      "q_thpt_21",
+      "q_thpt_22",
+      "q_thpt_tf_01",
+      "q_thpt_sa_01",
+      "q_thpt_06"
+    ],
+    "difficulty": "Trung bình",
+    "source": "Sở GD&ĐT Nam Định",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề khảo sát chuẩn mực cao từ đất học Nam Định, độ chuẩn xác và tính sư phạm của các câu hỏi được đánh giá rất cao.",
+    "attempts_count": 4520,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_11",
+    "title": "THPT 2025 – Đề Khảo Sát Chất Lượng Sở GD&ĐT Nghệ An",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_01",
+      "q_thpt_05",
+      "q_thpt_08",
+      "q_thpt_23",
+      "q_thpt_24",
+      "q_thpt_25",
+      "q_thpt_09",
+      "q_thpt_tf_01",
+      "q_thpt_sa_01",
+      "q_thpt_04"
+    ],
+    "difficulty": "Trung bình",
+    "source": "Sở GD&ĐT Nghệ An",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Cấu trúc đề bám sát đề minh họa, phân bổ đều giữa các chuyên đề lớp 12 và kiến thức trọng tâm lớp 11.",
+    "attempts_count": 4180,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_12",
+    "title": "THPT 2026 – Đề Ôn Luyện Chuyên Đề Cực Trị & Giá Trị Lớn Nhất Nhỏ Nhất",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2026,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_01",
+      "q_thpt_06",
+      "q_thpt_10",
+      "q_thpt_14",
+      "q_thpt_18",
+      "q_thpt_22",
+      "q_thpt_36",
+      "q_thpt_40",
+      "q_thpt_sa_01",
+      "q_thpt_tf_01"
+    ],
+    "difficulty": "Khó",
+    "source": "Tổ Chuyên Môn Toán PUMKIN.DEV",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Rèn luyện chuyên sâu phương pháp đổi biến, đánh giá bất đẳng thức và bảng biến thiên hàm hợp f(u).",
+    "attempts_count": 2150,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_13",
+    "title": "THPT 2026 – Đề Ôn Luyện Chuyên Đề Hình Học Oxyz & Không Gian 3D",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2026,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_02",
+      "q_thpt_07",
+      "q_thpt_11",
+      "q_thpt_15",
+      "q_thpt_19",
+      "q_thpt_23",
+      "q_thpt_37",
+      "q_thpt_21",
+      "q_thpt_sa_01",
+      "q_thpt_tf_01"
+    ],
+    "difficulty": "Khó",
+    "source": "Tổ Chuyên Môn Toán PUMKIN.DEV",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Tập hợp các bài toán vị trí tương đối, khoảng cách từ điểm đến đường thẳng/mặt phẳng và mặt cầu tiếp xúc.",
+    "attempts_count": 1980,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  },
+  {
+    "id": "exam_thpt_14",
+    "title": "THPT 2026 – Đề Thi Thử Tốt Nghiệp THPT Chuẩn Mực 50 Câu Điểm 9+",
+    "type": "THPT",
+    "exam_format_version": "THPT-GDPT-2025",
+    "year": 2026,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_thpt_03",
+      "q_thpt_08",
+      "q_thpt_12",
+      "q_thpt_16",
+      "q_thpt_20",
+      "q_thpt_24",
+      "q_thpt_38",
+      "q_thpt_22",
+      "q_thpt_tf_01",
+      "q_thpt_sa_01"
+    ],
+    "difficulty": "Khó",
+    "source": "Hội Đồng Khảo Thí PUMKIN.DEV",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi thử thách tổng hợp với 10 câu cuối phân hóa cực mạnh, phục vụ thí sinh xét tuyển vào Y Đa Khoa, Bách Khoa, Kinh Tế Quốc Dân.",
+    "attempts_count": 3260,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần I: Câu hỏi trắc nghiệm nhiều phương án",
+        "question_count": 6
+      },
+      {
+        "id": "sec_tf",
+        "title": "Phần II: Câu hỏi trắc nghiệm Đúng / Sai",
+        "question_count": 2
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần III: Câu hỏi trả lời ngắn",
+        "question_count": 2
+      }
+    ],
+    "scoring": {
+      "type": "standard",
+      "max_score": 10
+    }
+  }
+]

@@ -1,0 +1,526 @@
+[
+  {
+    "id": "exam_hsa_01",
+    "title": "HSA 2025 – Đề Thi Định Lượng Toán Học Chuẩn Hóa (Mã 301)",
+    "type": "HSA",
+    "exam_format_version": "HSA-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 12,
+    "question_ids": [
+      "q_hsa_01",
+      "q_hsa_02",
+      "q_hsa_03",
+      "q_hsa_04",
+      "q_hsa_tf_01",
+      "q_hsa_sa_01",
+      "q_hsa_05",
+      "q_hsa_06",
+      "q_hsa_07",
+      "q_hsa_08",
+      "q_hsa_09",
+      "q_hsa_10"
+    ],
+    "difficulty": "Trung bình",
+    "source": "Đại học Quốc gia Hà Nội",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Cấu trúc 50 câu định lượng: Dãy số cấp số cộng, khảo sát cực trị hàm bậc 3, hình chóp tam giác đều và giải tích Oxyz.",
+    "attempts_count": 4120,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 8
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 4
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  },
+  {
+    "id": "exam_hsa_02",
+    "title": "HSA 2025 – Đề Khảo Sát Năng Lực Toán Học (Mã 302)",
+    "type": "HSA",
+    "exam_format_version": "HSA-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 12,
+    "question_ids": [
+      "q_hsa_11",
+      "q_hsa_12",
+      "q_hsa_13",
+      "q_hsa_14",
+      "q_hsa_tf_01",
+      "q_hsa_sa_01",
+      "q_hsa_15",
+      "q_hsa_01",
+      "q_hsa_03",
+      "q_hsa_05",
+      "q_hsa_07",
+      "q_hsa_09"
+    ],
+    "difficulty": "Trung bình",
+    "source": "Đại học Quốc gia Hà Nội",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Bao quát kiến thức lớp 10, 11 và 12: Thống kê ghép nhóm, phép đếm tổ hợp, nhị thức Newton và xác suất cổ điển.",
+    "attempts_count": 3670,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 8
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 4
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  },
+  {
+    "id": "exam_hsa_03",
+    "title": "HSA 2024 – Đề Thi Chính Thức Đánh Giá Năng Lực Đợt 401",
+    "type": "HSA",
+    "exam_format_version": "HSA-2025",
+    "year": 2024,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_hsa_02",
+      "q_hsa_04",
+      "q_hsa_06",
+      "q_hsa_08",
+      "q_hsa_10",
+      "q_hsa_12",
+      "q_hsa_14",
+      "q_hsa_01",
+      "q_hsa_05",
+      "q_hsa_09"
+    ],
+    "difficulty": "Trung bình",
+    "source": "Đại học Quốc gia Hà Nội",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi chính thức đợt thi đầu tiên năm 2024 với hệ thống câu hỏi trắc nghiệm khách quan đa dạng.",
+    "attempts_count": 4890,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 7
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 3
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  },
+  {
+    "id": "exam_hsa_04",
+    "title": "HSA 2024 – Đề Thi Chính Thức Đánh Giá Năng Lực Đợt 402",
+    "type": "HSA",
+    "exam_format_version": "HSA-2025",
+    "year": 2024,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_hsa_03",
+      "q_hsa_05",
+      "q_hsa_07",
+      "q_hsa_09",
+      "q_hsa_11",
+      "q_hsa_13",
+      "q_hsa_15",
+      "q_hsa_02",
+      "q_hsa_06",
+      "q_hsa_10"
+    ],
+    "difficulty": "Trung bình",
+    "source": "Đại học Quốc gia Hà Nội",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Trọng tâm khảo sát hàm số, thể tích lăng trụ đứng, góc giữa hai mặt phẳng và phương trình logarit.",
+    "attempts_count": 4320,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 7
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 3
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  },
+  {
+    "id": "exam_hsa_05",
+    "title": "HSA 2026 – Đề Minh Họa Định Hướng Năng Lực Tư Duy Toán",
+    "type": "HSA",
+    "exam_format_version": "HSA-2026",
+    "year": 2026,
+    "duration_minutes": 75,
+    "question_count": 11,
+    "question_ids": [
+      "q_hsa_01",
+      "q_hsa_04",
+      "q_hsa_07",
+      "q_hsa_10",
+      "q_hsa_12",
+      "q_hsa_tf_01",
+      "q_hsa_14",
+      "q_hsa_15",
+      "q_hsa_sa_01",
+      "q_hsa_02",
+      "q_hsa_08"
+    ],
+    "difficulty": "Khó",
+    "source": "Trung tâm Khảo thí ĐHQGHN",
+    "source_type": "official",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Cập nhật các câu hỏi thực tiễn liên môn Toán - Lý - Địa lý và xử lý bảng biểu dữ liệu thống kê số liệu.",
+    "attempts_count": 2310,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 8
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 3
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  },
+  {
+    "id": "exam_hsa_06",
+    "title": "HSA 2025 – Đề Khảo Sát Đợt 501 Chuyên Đề Số Học & Dãy Số",
+    "type": "HSA",
+    "exam_format_version": "HSA-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_hsa_01",
+      "q_hsa_09",
+      "q_hsa_16",
+      "q_hsa_17",
+      "q_hsa_18",
+      "q_hsa_19",
+      "q_hsa_20",
+      "q_hsa_tf_01",
+      "q_hsa_sa_01",
+      "q_hsa_03"
+    ],
+    "difficulty": "Trung bình",
+    "source": "Đại học Quốc gia Hà Nội",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Rèn luyện chuyên sâu các bài toán số học đồng dư, tính chia hết, cấp số cộng lùi và cấp số nhân tăng trưởng.",
+    "attempts_count": 1980,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 7
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 3
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  },
+  {
+    "id": "exam_hsa_07",
+    "title": "HSA 2025 – Đề Khảo Sát Đợt 502 Chuyên Đề Giải Tích & Khảo Sát Hàm Số",
+    "type": "HSA",
+    "exam_format_version": "HSA-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_hsa_02",
+      "q_hsa_06",
+      "q_hsa_11",
+      "q_hsa_21",
+      "q_hsa_22",
+      "q_hsa_23",
+      "q_hsa_24",
+      "q_hsa_25",
+      "q_hsa_tf_01",
+      "q_hsa_sa_01"
+    ],
+    "difficulty": "Khó",
+    "source": "Đại học Quốc gia Hà Nội",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Tập trung các dạng cực trị chứa tham số m, tương giao đồ thị hàm phân thức và tiệm cận đứng, ngang, xiên.",
+    "attempts_count": 2450,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 7
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 3
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  },
+  {
+    "id": "exam_hsa_08",
+    "title": "HSA 2025 – Đề Khảo Sát Đợt 503 Chuyên Đề Hình Học Không Gian & Oxyz",
+    "type": "HSA",
+    "exam_format_version": "HSA-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_hsa_04",
+      "q_hsa_08",
+      "q_hsa_12",
+      "q_hsa_26",
+      "q_hsa_27",
+      "q_hsa_28",
+      "q_hsa_29",
+      "q_hsa_30",
+      "q_hsa_tf_01",
+      "q_hsa_sa_01"
+    ],
+    "difficulty": "Khó",
+    "source": "Đại học Quốc gia Hà Nội",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Phương pháp gắn hệ trục tọa độ Oxyz vào hình đa diện cổ điển, tính khoảng cách giữa hai đường thẳng chéo nhau.",
+    "attempts_count": 2130,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 7
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 3
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  },
+  {
+    "id": "exam_hsa_09",
+    "title": "HSA 2025 – Đề Khảo Sát Đợt 504 Chuyên Đề Xác Suất & Thống Kê Dữ Liệu",
+    "type": "HSA",
+    "exam_format_version": "HSA-2025",
+    "year": 2025,
+    "duration_minutes": 75,
+    "question_count": 10,
+    "question_ids": [
+      "q_hsa_05",
+      "q_hsa_10",
+      "q_hsa_14",
+      "q_hsa_31",
+      "q_hsa_32",
+      "q_hsa_33",
+      "q_hsa_34",
+      "q_hsa_35",
+      "q_hsa_tf_01",
+      "q_hsa_sa_01"
+    ],
+    "difficulty": "Trung bình",
+    "source": "Đại học Quốc gia Hà Nội",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đọc và phân tích biểu đồ thống kê dân số, tính tứ phân vị dữ liệu ghép nhóm và xác suất chọn ngẫu nhiên.",
+    "attempts_count": 2790,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 7
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 3
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  },
+  {
+    "id": "exam_hsa_10",
+    "title": "HSA 2026 – Đề Thi Thử Đột Phá Điểm 120+ (Đợt A)",
+    "type": "HSA",
+    "exam_format_version": "HSA-2026",
+    "year": 2026,
+    "duration_minutes": 75,
+    "question_count": 11,
+    "question_ids": [
+      "q_hsa_01",
+      "q_hsa_03",
+      "q_hsa_07",
+      "q_hsa_13",
+      "q_hsa_17",
+      "q_hsa_21",
+      "q_hsa_25",
+      "q_hsa_29",
+      "q_hsa_33",
+      "q_hsa_sa_01",
+      "q_hsa_tf_01"
+    ],
+    "difficulty": "Khó",
+    "source": "CLB Học Thuật ĐHQG",
+    "source_type": "official",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề thi phân hóa cao với các câu hỏi tích hợp tư duy toán học và giải quyết tình huống thực tế.",
+    "attempts_count": 1740,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 8
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 3
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  },
+  {
+    "id": "exam_hsa_11",
+    "title": "HSA 2026 – Đề Rèn Luyện Tốc Độ 50 Câu Điền Số Ngắn (Đợt B)",
+    "type": "HSA",
+    "exam_format_version": "HSA-2026",
+    "year": 2026,
+    "duration_minutes": 75,
+    "question_count": 11,
+    "question_ids": [
+      "q_hsa_sa_01",
+      "q_hsa_02",
+      "q_hsa_05",
+      "q_hsa_08",
+      "q_hsa_11",
+      "q_hsa_14",
+      "q_hsa_18",
+      "q_hsa_22",
+      "q_hsa_26",
+      "q_hsa_30",
+      "q_hsa_34"
+    ],
+    "difficulty": "Trung bình",
+    "source": "Tổ Chuyên Môn Toán PUMKIN.DEV",
+    "source_type": "adapted",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Tăng cường các câu hỏi điền số tự do không có gợi ý phương án lựa chọn, chống khoanh bừa hiệu quả.",
+    "attempts_count": 2560,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 8
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 3
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  },
+  {
+    "id": "exam_hsa_12",
+    "title": "HSA 2026 – Đề Tổng Hợp Toàn Diện Định Lượng Kỳ Tuyển Sinh Mới",
+    "type": "HSA",
+    "exam_format_version": "HSA-2026",
+    "year": 2026,
+    "duration_minutes": 75,
+    "question_count": 11,
+    "question_ids": [
+      "q_hsa_03",
+      "q_hsa_06",
+      "q_hsa_09",
+      "q_hsa_12",
+      "q_hsa_15",
+      "q_hsa_19",
+      "q_hsa_23",
+      "q_hsa_27",
+      "q_hsa_31",
+      "q_hsa_35",
+      "q_hsa_tf_01"
+    ],
+    "difficulty": "Khó",
+    "source": "Trung tâm Khảo thí ĐHQGHN",
+    "source_type": "official",
+    "license": "CC BY-NC-SA 4.0",
+    "description": "Đề tổng duyệt toàn bộ ma trận kiến thức định lượng trước ngày thi chính thức của thí sinh ĐHQGHN.",
+    "attempts_count": 3120,
+    "sections": [
+      {
+        "id": "sec_mcq",
+        "title": "Phần 1: Tư duy định lượng trắc nghiệm",
+        "question_count": 8
+      },
+      {
+        "id": "sec_sa",
+        "title": "Phần 2: Điền đáp án số học",
+        "question_count": 3
+      }
+    ],
+    "scoring": {
+      "type": "hsa_raw",
+      "max_score": 50
+    }
+  }
+]

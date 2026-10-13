@@ -32,3 +32,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 scratch/
+
+*.patch
+*.bak
+*.old
+reports/

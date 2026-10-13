@@ -1,11 +1,11 @@
 {
   "name": "pumkin-tsa",
-  "version": "4.1.0",
+  "version": "4.2.0-pumkin3",
   "description": "Nền tảng Khảo thí Toán học & Luyện thi Đánh giá Tư duy TSA PUMKIN.DEV",
   "private": true,
   "scripts": {
     "build": "echo Build complete",
-    "dev": "wrangler pages dev public",
-    "deploy": "wrangler pages deploy public"
+    "dev": "wrangler pages dev pumkin3",
+    "deploy": "wrangler pages deploy pumkin3"
   }
 }

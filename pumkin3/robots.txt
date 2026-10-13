@@ -1,0 +1,15 @@
+# PUMKIN.DEV Search Engine Indexing Policy
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /so_tay_kien_thuc.html
+Allow: /TSA_do_an.html
+Allow: /privacy.html
+Allow: /terms.html
+
+# Disallow Internal APIs and Edge Functions
+Disallow: /api/
+Disallow: /functions/
+
+Sitemap: https://tsapumkin.pages.dev/sitemap.xml
+Sitemap: https://pumkin.dev/sitemap.xml

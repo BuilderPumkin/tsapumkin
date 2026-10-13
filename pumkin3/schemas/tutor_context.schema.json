@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pumkin.dev/schemas/tutor_context.schema.json",
+  "title": "TutorContext",
+  "description": "Canonical context payload for PUMKIN AI Tutor",
+  "type": "object",
+  "properties": {
+    "context_schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "student": {
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "topic_mastery": { "type": "object", "additionalProperties": { "type": "number" } },
+        "skill_mastery": { "type": "object", "additionalProperties": { "type": "number" } },
+        "recurring_errors": { "type": "array", "items": { "type": "string" } },
+        "average_time_seconds": { "type": "number" }
+      },
+      "required": ["user_id"]
+    },
+    "session": {
+      "type": "object",
+      "properties": {
+        "session_id": { "type": "string" },
+        "exam_id": { "type": "string" },
+        "time_elapsed_seconds": { "type": "number" }
+      }
+    },
+    "question": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "text": { "type": "string" },
+        "options": { "type": "array", "items": { "type": "string" } },
+        "correct_value": { "type": "string" },
+        "explanation": { "type": "string" },
+        "topic": { "type": "string" },
+        "skills": { "type": "array", "items": { "type": "string" } },
+        "difficulty": { "type": "string" },
+        "cognitive_level": { "type": "string" },
+        "common_traps": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["id", "text"]
+    },
+    "attempt": {
+      "type": "object",
+      "properties": {
+        "user_answer": { "type": ["string", "null"] },
+        "time_spent_seconds": { "type": "number" },
+        "is_correct": { "type": "boolean" },
+        "error_type": { "type": ["string", "null"] }
+      }
+    },
+    "knowledge": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "theory_markdown": { "type": "string" },
+          "formulas": { "type": "array", "items": { "type": "object" } }
+        },
+        "required": ["id", "title"]
+      }
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question_id": { "type": "string" },
+          "is_correct": { "type": "boolean" },
+          "error_type": { "type": ["string", "null"] },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      },
+      "description": "Last 5 attempts related to this topic/skill"
+    }
+  },
+  "required": ["context_schema_version", "timestamp", "student", "question", "attempt"]
+}
