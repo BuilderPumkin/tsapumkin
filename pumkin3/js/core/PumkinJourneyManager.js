@@ -507,7 +507,87 @@
                 `;
             }
 
-            heroContainer.innerHTML = heroHtml;
+            heroContainer.innerHTML = heroHtml + this.renderQuickShortcuts();
+        },
+
+        /**
+         * Get live record counts for quick shortcuts (or '...' while loading)
+         */
+        getShortcutCounts() {
+            let exams = "...";
+            let formulas = "...";
+            let knowledge = "...";
+
+            if (typeof PumkinStorage !== "undefined") {
+                if (typeof PumkinStorage.getExams === "function") {
+                    const exList = PumkinStorage.getExams();
+                    if (exList && exList.length > 0) exams = exList.length;
+                }
+
+                if (typeof PumkinFormulas !== "undefined" && typeof PumkinFormulas.getFlatFormulas === "function") {
+                    const formList = PumkinFormulas.getFlatFormulas();
+                    if (formList && formList.length > 0) formulas = formList.length;
+                } else if (typeof PumkinStorage.getFormulas === "function") {
+                    const formList = PumkinStorage.getFormulas();
+                    if (formList && formList.length > 0) formulas = formList.length;
+                }
+
+                if (typeof PumkinStorage.getKnowledgeBase === "function") {
+                    const kbList = PumkinStorage.getKnowledgeBase();
+                    if (kbList && kbList.length > 0) knowledge = kbList.length;
+                }
+            }
+            return { exams, formulas, knowledge };
+        },
+
+        /**
+         * Render Quick Utility Strip (Option 1)
+         */
+        renderQuickShortcuts() {
+            const counts = this.getShortcutCounts();
+            return `
+                <div class="dashboard-quick-shortcuts" role="region" aria-label="Lối tắt tiện ích học tập" style="margin: 18px 0 20px 0;">
+                    <div style="font-size: 12.5px; font-weight: 700; color: var(--text-muted, #64748b); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        ⚡ Lối tắt tiện ích tra cứu & luyện thi:
+                    </div>
+                    <div class="quick-shortcuts-grid">
+                        <button class="quick-shortcut-btn" onclick="PumkinRouter.navigate('library')" aria-label="Mở kho đề thi chuẩn hóa">
+                            <span class="shortcut-icon" aria-hidden="true">📚</span>
+                            <div class="shortcut-text">
+                                <span class="shortcut-title">Kho <strong id="shortcut-exam-count">${counts.exams}</strong> đề thi</span>
+                                <span class="shortcut-desc">TSA, HSA, THPT có bấm giờ & lời giải</span>
+                            </div>
+                        </button>
+                        <button class="quick-shortcut-btn" onclick="PumkinRouter.navigate('formulas')" aria-label="Mở sổ tay tra cứu công thức">
+                            <span class="shortcut-icon" aria-hidden="true">📐</span>
+                            <div class="shortcut-text">
+                                <span class="shortcut-title">Sổ tay <strong id="shortcut-formula-count">${counts.formulas}</strong> công thức</span>
+                                <span class="shortcut-desc">Tra cứu nhanh lý thuyết & giải toán</span>
+                            </div>
+                        </button>
+                        <button class="quick-shortcut-btn" onclick="PumkinRouter.navigate('knowledge')" aria-label="Mở kho 27 chuyên đề kiến thức">
+                            <span class="shortcut-icon" aria-hidden="true">🧠</span>
+                            <div class="shortcut-text">
+                                <span class="shortcut-title">Kho <strong id="shortcut-knowledge-count">${counts.knowledge}</strong> chuyên đề</span>
+                                <span class="shortcut-desc">Lý thuyết cốt lõi & ví dụ từng bước</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            `;
+        },
+
+        /**
+         * Dynamically update counts on shortcut cards when data is hydrated
+         */
+        updateShortcutCounts() {
+            const counts = this.getShortcutCounts();
+            const exEl = document.getElementById("shortcut-exam-count");
+            const foEl = document.getElementById("shortcut-formula-count");
+            const knEl = document.getElementById("shortcut-knowledge-count");
+            if (exEl) exEl.textContent = counts.exams;
+            if (foEl) foEl.textContent = counts.formulas;
+            if (knEl) knEl.textContent = counts.knowledge;
         },
 
         /**
