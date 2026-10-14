@@ -8,7 +8,8 @@
     const cache = {
         questions: null,
         knowledge: null,
-        exams: null
+        exams: null,
+        formulas: null
     };
 
     function normalizeQuestions(list) {
@@ -50,6 +51,10 @@
             }
             if (typeof PUMKIN_QUESTIONS_DATABASE !== 'undefined' && Array.isArray(PUMKIN_QUESTIONS_DATABASE) && PUMKIN_QUESTIONS_DATABASE.length > 0) {
                 return normalizeQuestions(PUMKIN_QUESTIONS_DATABASE);
+            }
+        } else if (resourceName === 'formulas') {
+            if (typeof window !== 'undefined' && Array.isArray(window.PUMKIN_DEFAULT_FORMULAS) && window.PUMKIN_DEFAULT_FORMULAS.length > 0) {
+                return window.PUMKIN_DEFAULT_FORMULAS;
             }
         }
         return [];
@@ -108,26 +113,28 @@
 
     async function loadAllData() {
         try {
-            const loadingOverlay = document.getElementById('global-loading-overlay');
+            const loadingOverlay = typeof document !== 'undefined' ? document.getElementById('global-loading-overlay') : null;
             if (loadingOverlay) loadingOverlay.style.display = 'flex';
 
-            const [questions, knowledge, exams] = await Promise.all([
-                fetchResource('data/questions/all.json', 'questions'),
-                fetchResource('data/knowledge/all.json', 'knowledge'),
-                fetchResource('data/exams/all.json', 'exams')
+            const [questions, knowledge, exams, formulas] = await Promise.all([
+                fetchResource('data/questions/all.json?v=3.1.0', 'questions'),
+                fetchResource('data/knowledge/all.json?v=3.1.0', 'knowledge'),
+                fetchResource('data/exams/all.json?v=3.1.0', 'exams'),
+                fetchResource('data/formulas/cheatsheet.json?v=3.1.0', 'formulas')
             ]);
 
-            console.log(`[DataRepository] Successfully loaded: ${knowledge.length} articles, ${exams.length} exams, ${questions.length} questions.`);
-            return { questions, knowledge, exams };
+            console.log(`[DataRepository] Successfully loaded: ${knowledge.length} articles, ${exams.length} exams, ${questions.length} questions, ${formulas.length} formulas.`);
+            return { questions, knowledge, exams, formulas };
         } catch (err) {
             console.error('[DataRepository] Critical error during loadAllData:', err);
             return {
                 questions: getFallback('questions'),
                 knowledge: getFallback('knowledge'),
-                exams: getFallback('exams')
+                exams: getFallback('exams'),
+                formulas: getFallback('formulas')
             };
         } finally {
-            const loadingOverlay = document.getElementById('global-loading-overlay');
+            const loadingOverlay = typeof document !== 'undefined' ? document.getElementById('global-loading-overlay') : null;
             if (loadingOverlay) loadingOverlay.style.display = 'none';
         }
     }
@@ -137,6 +144,7 @@
         getQuestions: () => cache.questions || getFallback('questions'),
         getKnowledge: () => cache.knowledge || getFallback('knowledge'),
         getExams: () => cache.exams || getFallback('exams'),
+        getFormulas: () => cache.formulas || getFallback('formulas'),
         fetchResource
     };
 

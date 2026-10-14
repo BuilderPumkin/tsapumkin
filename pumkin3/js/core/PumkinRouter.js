@@ -63,29 +63,74 @@ const PumkinRouter = {
 
         window.scrollTo({ top: 0, behavior: "instant" });
 
-        // Lazy View Caching: only render if not rendered yet or invalidated
+        // Determine if container is empty or needs rendering
         const isAlreadyRendered = this.renderedViews.has(viewId);
-        if (!isAlreadyRendered) {
-            if (viewId === "knowledge") PumkinKnowledge.render();
-            else if (viewId === "formulas") PumkinFormulas.render();
-            else if (viewId === "library") PumkinLibrary.render();
-            else if (viewId === "qbank") PumkinQBank.render();
-            else if (viewId === "bookmarks") PumkinBookmarks.render();
-            else if (viewId === "dashboard") PumkinDashboard.render();
-            else if (viewId === "smart") PumkinSmartPractice.render();
-            else if (viewId === "admin") PumkinAdmin.render();
-            else if (viewId === "data" && typeof PumkinDataRepo !== "undefined") PumkinDataRepo.render();
+        const isContainerEmpty = this.isViewContainerEmpty(viewId);
 
-            this.renderedViews.add(viewId);
-
-            if (targetEl && window.PumkinMath) {
-                window.PumkinMath.typeset(targetEl);
-            }
+        if (!isAlreadyRendered || isContainerEmpty) {
+            this.renderView(viewId);
         }
 
         if (callback) callback();
+    },
+
+    isViewContainerEmpty(viewId) {
+        if (typeof document === 'undefined') return false;
+        if (viewId === 'library') {
+            const el = document.getElementById('exam-cards-grid');
+            return !el || !el.querySelector('.exam-card');
+        }
+        if (viewId === 'formulas') {
+            const el = document.getElementById('all-formulas-grid');
+            return !el || !el.querySelector('.formula-card');
+        }
+        if (viewId === 'knowledge') {
+            const el = document.getElementById('knowledge-cards-grid');
+            return !el || !el.querySelector('.knowledge-card');
+        }
+        if (viewId === 'qbank') {
+            const el = document.getElementById('qbank-list-container');
+            return !el || !el.querySelector('.qbank-card');
+        }
+        return false;
+    },
+
+    renderView(viewId) {
+        const targetEl = typeof document !== 'undefined' ? document.getElementById("view-" + viewId) : null;
+        if (viewId === "knowledge" && typeof PumkinKnowledge !== "undefined") PumkinKnowledge.render();
+        else if (viewId === "formulas" && typeof PumkinFormulas !== "undefined") PumkinFormulas.render();
+        else if (viewId === "library" && typeof PumkinLibrary !== "undefined") PumkinLibrary.render();
+        else if (viewId === "qbank" && typeof PumkinQBank !== "undefined") PumkinQBank.render();
+        else if (viewId === "bookmarks" && typeof PumkinBookmarks !== "undefined") PumkinBookmarks.render();
+        else if (viewId === "dashboard" && typeof PumkinDashboard !== "undefined") PumkinDashboard.render();
+        else if (viewId === "smart" && typeof PumkinSmartPractice !== "undefined") PumkinSmartPractice.render();
+        else if (viewId === "admin" && typeof PumkinAdmin !== "undefined") PumkinAdmin.render();
+        else if (viewId === "data" && typeof PumkinDataRepo !== "undefined") PumkinDataRepo.render();
+
+        this.renderedViews.add(viewId);
+
+        if (targetEl && window.PumkinMath && typeof window.PumkinMath.typeset === 'function') {
+            window.PumkinMath.typeset(targetEl);
+        }
+    },
+
+    renderCurrentView() {
+        if (this.currentView) {
+            this.renderView(this.currentView);
+        }
     }
 };
+
+// Auto-re-render current view when data is hydrated from network or storage
+if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+    window.addEventListener('pumkin:data-hydrated', () => {
+        PumkinRouter.invalidateView();
+        if (typeof PumkinFormulas !== 'undefined' && typeof PumkinFormulas.invalidateCache === 'function') {
+            PumkinFormulas.invalidateCache();
+        }
+        PumkinRouter.renderCurrentView();
+    });
+}
 
 
     // Primary Namespace

@@ -9,13 +9,19 @@
     window.Pumkin = window.Pumkin || {};
 
 const PumkinStorage = {
-    CURRENT_VERSION: "3.0.0",
+    CURRENT_VERSION: "3.1.0",
+    _isHydrated: false,
     _questionsCache: null,
     _examsCache: null,
     _knowledgeCache: null,
+    _formulasCache: null,
     _knowledgeMap: new Map(),
     _questionsMap: new Map(),
     _examsMap: new Map(),
+
+    isHydrated() {
+        return this._isHydrated;
+    },
 
     safeSetItem(key, value) {
         try {
@@ -45,16 +51,21 @@ const PumkinStorage = {
     },
 
     async init() {
-        // 1. Immediately load fallback data so memory is NEVER empty
+        // 1. Immediately load fallback data synchronously so memory is NEVER empty at t = 0
         if (typeof window !== 'undefined' && window.PUMKIN_FALLBACK_DATA) {
             this._questionsCache = window.PUMKIN_FALLBACK_DATA.questions || [];
             this._examsCache = window.PUMKIN_FALLBACK_DATA.exams || [];
             this._knowledgeCache = window.PUMKIN_FALLBACK_DATA.knowledge || [];
+            this._formulasCache = window.PUMKIN_FALLBACK_DATA.formulas || (window.PUMKIN_DEFAULT_FORMULAS || []);
         } else {
             this._questionsCache = (typeof PUMKIN_DEFAULT_QUESTIONS !== 'undefined') ? PUMKIN_DEFAULT_QUESTIONS : [];
             this._examsCache = (typeof PUMKIN_DEFAULT_EXAMS !== 'undefined') ? PUMKIN_DEFAULT_EXAMS : [];
             this._knowledgeCache = (typeof PUMKIN_DEFAULT_KNOWLEDGE !== 'undefined') ? PUMKIN_DEFAULT_KNOWLEDGE : [];
+            this._formulasCache = (typeof PUMKIN_DEFAULT_FORMULAS !== 'undefined') ? PUMKIN_DEFAULT_FORMULAS : [];
         }
+
+        // Rebuild maps immediately with synchronous fallback data
+        this._rebuildMaps();
 
         // 2. Fetch latest data via DataRepository if available
         try {
@@ -63,6 +74,7 @@ const PumkinStorage = {
                 if (data && data.questions && data.questions.length > 0) this._questionsCache = data.questions;
                 if (data && data.exams && data.exams.length > 0) this._examsCache = data.exams;
                 if (data && data.knowledge && data.knowledge.length > 0) this._knowledgeCache = data.knowledge;
+                if (data && data.formulas && data.formulas.length > 0) this._formulasCache = data.formulas;
             }
         } catch(e) {
             console.warn("[PumkinStorage] Repository fetch failed, retaining robust fallback data", e);
@@ -78,6 +90,9 @@ const PumkinStorage = {
         if (!this._knowledgeCache || this._knowledgeCache.length === 0) {
             this._knowledgeCache = (typeof PUMKIN_DEFAULT_KNOWLEDGE !== 'undefined') ? PUMKIN_DEFAULT_KNOWLEDGE : [];
         }
+        if (!this._formulasCache || this._formulasCache.length === 0) {
+            this._formulasCache = (typeof PUMKIN_DEFAULT_FORMULAS !== 'undefined') ? PUMKIN_DEFAULT_FORMULAS : [];
+        }
 
         try {
             localStorage.setItem("pumkin_questions_v3", JSON.stringify(this._questionsCache));
@@ -85,7 +100,20 @@ const PumkinStorage = {
             localStorage.setItem("pumkin_data_ver", this.CURRENT_VERSION);
         } catch(e) {}
 
+        this._isHydrated = true;
         this._rebuildMaps();
+
+        // 4. Notify the system that data is fully hydrated
+        if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
+            window.dispatchEvent(new CustomEvent('pumkin:data-hydrated', {
+                detail: {
+                    questions: this._questionsCache,
+                    exams: this._examsCache,
+                    knowledge: this._knowledgeCache,
+                    formulas: this._formulasCache
+                }
+            }));
+        }
     },
 
     _rebuildMaps() {
@@ -212,10 +240,45 @@ const PumkinStorage = {
         return this.getKnowledgeBase().find(a => a.id === id) || null;
     },
 
+    getFormulas() {
+        if (this._formulasCache && Array.isArray(this._formulasCache) && this._formulasCache.length > 0) {
+            return this._formulasCache;
+        }
+        if (typeof window !== 'undefined' && window.DataRepository && typeof window.DataRepository.getFormulas === 'function') {
+            const repoF = window.DataRepository.getFormulas();
+            if (Array.isArray(repoF) && repoF.length > 0) {
+                this._formulasCache = repoF;
+                return this._formulasCache;
+            }
+        }
+        if (typeof window !== 'undefined' && Array.isArray(window.PUMKIN_DEFAULT_FORMULAS) && window.PUMKIN_DEFAULT_FORMULAS.length > 0) {
+            this._formulasCache = window.PUMKIN_DEFAULT_FORMULAS;
+            return this._formulasCache;
+        }
+        return [];
+    },
+
+    saveFormulas(arr) {
+        this._formulasCache = arr;
+    },
+
     getBookmarks() {
         try {
             const key = this.getPartitionKey("bookmarks");
-            const raw = JSON.parse(localStorage.getItem(key)) || [];
+            let raw = JSON.parse(localStorage.getItem(key));
+            if (!raw || !Array.isArray(raw) || raw.length === 0) {
+                const legacy = localStorage.getItem("pumkin_bookmarks_v1") || localStorage.getItem("pumkin_bookmarks");
+                if (legacy) {
+                    try {
+                        const parsed = JSON.parse(legacy);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            raw = parsed;
+                            this.safeSetItem(key, JSON.stringify(raw));
+                        }
+                    } catch(e) {}
+                }
+            }
+            raw = Array.isArray(raw) ? raw : [];
             return raw.map(item => (typeof item === "string" ? item : item.id));
         } catch(e) {
             return [];
@@ -300,7 +363,20 @@ const PumkinStorage = {
         if (this._historyCache) return this._historyCache;
         try {
             const key = this.getPartitionKey("history");
-            this._historyCache = JSON.parse(localStorage.getItem(key)) || [];
+            let hist = JSON.parse(localStorage.getItem(key));
+            if (!hist || !Array.isArray(hist) || hist.length === 0) {
+                const legacy = localStorage.getItem("pumkin_history_v2") || localStorage.getItem("pumkin_storage_history") || localStorage.getItem("pumkin_history");
+                if (legacy) {
+                    try {
+                        const parsed = JSON.parse(legacy);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            hist = parsed;
+                            this.safeSetItem(key, JSON.stringify(hist));
+                        }
+                    } catch(e) {}
+                }
+            }
+            this._historyCache = Array.isArray(hist) ? hist : [];
             return this._historyCache;
         } catch(e) {
             return [];
