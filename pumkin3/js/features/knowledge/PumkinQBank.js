@@ -27,12 +27,49 @@ const PumkinQBank = {
         const countLabel = document.getElementById("qbank-count-label");
         if (!container) return;
 
-        const examFilter = document.getElementById("qbank-exam-filter")?.value || "all";
-        const typeFilter = document.getElementById("qbank-type-filter")?.value || "all";
-        const diffFilter = document.getElementById("qbank-diff-filter")?.value || "all";
-        const query = document.getElementById("qbank-search-input")?.value.toLowerCase().trim() || "";
-
         const allQuestions = PumkinStorage.getQuestions();
+
+        // 1. Loading & Error States when dataset is empty
+        if (!allQuestions || allQuestions.length === 0) {
+            if (typeof PumkinStorage !== "undefined" && typeof PumkinStorage.isHydrated === "function" && !PumkinStorage.isHydrated()) {
+                container.innerHTML = `
+                    <div class="pumkin-loading-state" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                        <span style="font-size: 28px; display: block; margin-bottom: 8px;">⏳</span>
+                        <p style="font-size: 15px; margin: 0; font-weight: 500;">Đang nạp ngân hàng câu hỏi...</p>
+                    </div>
+                `;
+                if (countLabel) countLabel.textContent = "0";
+                return;
+            } else {
+                const retryBtnId = "btn-retry-qbank-" + Date.now();
+                container.innerHTML = `
+                    <div class="pumkin-error-state" style="text-align: center; padding: 40px; color: var(--danger, #ef4444);">
+                        <p style="font-size: 15px; margin-bottom: 14px;">⚠️ Không thể nạp ngân hàng câu hỏi từ máy chủ.</p>
+                        <button id="${retryBtnId}" class="btn btn-primary btn-sm" style="min-height: 44px; padding: 10px 24px; border-radius: 8px; font-weight: 600;">
+                            🔄 Thử lại
+                        </button>
+                    </div>
+                `;
+                const retryBtn = document.getElementById(retryBtnId);
+                if (retryBtn) {
+                    retryBtn.addEventListener("click", async () => {
+                        container.innerHTML = `<div class="pumkin-loading-state" style="text-align: center; padding: 40px; color: var(--text-muted);">⏳ Đang thử lại...</div>`;
+                        if (typeof PumkinStorage !== 'undefined') await PumkinStorage.init();
+                        PumkinQBank.applyFilters();
+                    });
+                }
+                if (countLabel) countLabel.textContent = "0";
+                return;
+            }
+        }
+
+        const rawExam = document.getElementById("qbank-exam-filter")?.value ? document.getElementById("qbank-exam-filter").value.trim() : "all";
+        const examFilter = (rawExam === "" || rawExam === "all") ? "all" : rawExam;
+        const rawType = document.getElementById("qbank-type-filter")?.value ? document.getElementById("qbank-type-filter").value.trim() : "all";
+        const typeFilter = (rawType === "" || rawType === "all") ? "all" : rawType;
+        const rawDiff = document.getElementById("qbank-diff-filter")?.value ? document.getElementById("qbank-diff-filter").value.trim() : "all";
+        const diffFilter = (rawDiff === "" || rawDiff === "all") ? "all" : rawDiff;
+        const query = document.getElementById("qbank-search-input")?.value ? document.getElementById("qbank-search-input").value.toLowerCase().trim() : "";
 
         this._currentFiltered = allQuestions.filter(q => {
             if (examFilter !== "all" && q.exam_type !== examFilter) return false;

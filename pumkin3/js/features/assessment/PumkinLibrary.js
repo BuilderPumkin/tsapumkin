@@ -29,17 +29,57 @@ const PumkinLibrary = {
     },
 
     applyFilters() {
-        const query = (document.getElementById("lib-search-input")?.value || "").toLowerCase().trim();
-        const year = document.getElementById("lib-year-select")?.value || "all";
-        const diff = document.getElementById("lib-diff-select")?.value || "all";
+        const container = document.getElementById("exam-cards-grid");
+        if (!container) return;
 
         const allExams = PumkinStorage.getExams();
+
+        // 1. Loading & Error States when dataset is empty
+        if (!allExams || allExams.length === 0) {
+            if (typeof PumkinStorage !== "undefined" && typeof PumkinStorage.isHydrated === "function" && !PumkinStorage.isHydrated()) {
+                container.innerHTML = `
+                    <div class="pumkin-loading-state" style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
+                        <span style="font-size: 28px; display: block; margin-bottom: 8px;">⏳</span>
+                        <p style="font-size: 15px; margin: 0; font-weight: 500;">Đang nạp danh mục đề thi...</p>
+                    </div>
+                `;
+                return;
+            } else {
+                const retryBtnId = "btn-retry-library-" + Date.now();
+                container.innerHTML = `
+                    <div class="pumkin-error-state" style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--danger, #ef4444);">
+                        <p style="font-size: 15px; margin-bottom: 14px;">⚠️ Không thể tải danh sách đề thi từ máy chủ.</p>
+                        <button id="${retryBtnId}" class="btn btn-primary btn-sm" style="min-height: 44px; padding: 10px 24px; border-radius: 8px; font-weight: 600;">
+                            🔄 Thử lại
+                        </button>
+                    </div>
+                `;
+                const retryBtn = document.getElementById(retryBtnId);
+                if (retryBtn) {
+                    retryBtn.addEventListener("click", async () => {
+                        container.innerHTML = `<div class="pumkin-loading-state" style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">⏳ Đang thử lại...</div>`;
+                        if (typeof PumkinStorage !== 'undefined') await PumkinStorage.init();
+                        PumkinLibrary.applyFilters();
+                    });
+                }
+                return;
+            }
+        }
+
+        const query = (document.getElementById("lib-search-input")?.value || "").toLowerCase().trim();
+        const yearEl = document.getElementById("lib-year-select");
+        const diffEl = document.getElementById("lib-diff-select");
+        const rawYear = yearEl && yearEl.value ? yearEl.value.trim() : "all";
+        const year = (rawYear === "" || rawYear === "all") ? "all" : rawYear;
+        const rawDiff = diffEl && diffEl.value ? diffEl.value.trim() : "all";
+        const diff = (rawDiff === "" || rawDiff === "all") ? "all" : rawDiff;
+
         const filtered = allExams.filter(exam => {
             if (this.typeFilter !== "all" && exam.type !== this.typeFilter) return false;
-            if (year !== "all" && exam.year.toString() !== year) return false;
+            if (year !== "all" && String(exam.year || '') !== year) return false;
             if (diff !== "all" && exam.difficulty !== diff) return false;
             if (query) {
-                const matchTitle = exam.title.toLowerCase().includes(query);
+                const matchTitle = exam.title && exam.title.toLowerCase().includes(query);
                 const matchSource = (exam.source || "").toLowerCase().includes(query);
                 const matchDesc = (exam.description || "").toLowerCase().includes(query);
                 if (!matchTitle && !matchSource && !matchDesc) return false;

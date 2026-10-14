@@ -18,13 +18,47 @@ const PumkinKnowledge = {
         if (!grid) return;
 
         const articles = PumkinStorage.getKnowledgeBase();
-        let filtered = articles;
 
-        if (this.currentStream !== "all") {
-            filtered = filtered.filter(a => (a.grade === this.currentStream || a.stream === this.currentStream));
+        // 1. Loading & Error States when dataset is empty
+        if (!articles || articles.length === 0) {
+            if (typeof PumkinStorage !== "undefined" && typeof PumkinStorage.isHydrated === "function" && !PumkinStorage.isHydrated()) {
+                grid.innerHTML = `
+                    <div class="pumkin-loading-state" style="text-align: center; padding: 40px; color: var(--text-muted); grid-column: 1 / -1;">
+                        <span style="font-size: 28px; display: block; margin-bottom: 8px;">⏳</span>
+                        <p style="font-size: 15px; margin: 0; font-weight: 500;">Đang nạp kho chuyên đề kiến thức...</p>
+                    </div>
+                `;
+                return;
+            } else {
+                const retryBtnId = "btn-retry-knowledge-" + Date.now();
+                grid.innerHTML = `
+                    <div class="pumkin-error-state" style="text-align: center; padding: 40px; color: var(--danger, #ef4444); grid-column: 1 / -1;">
+                        <p style="font-size: 15px; margin-bottom: 14px;">⚠️ Không thể tải kho kiến thức từ máy chủ.</p>
+                        <button id="${retryBtnId}" class="btn btn-primary btn-sm" style="min-height: 44px; padding: 10px 24px; border-radius: 8px; font-weight: 600;">
+                            🔄 Thử lại
+                        </button>
+                    </div>
+                `;
+                const retryBtn = document.getElementById(retryBtnId);
+                if (retryBtn) {
+                    retryBtn.addEventListener("click", async () => {
+                        grid.innerHTML = `<div class="pumkin-loading-state" style="text-align: center; padding: 40px; color: var(--text-muted); grid-column: 1 / -1;">⏳ Đang thử lại...</div>`;
+                        if (typeof PumkinStorage !== 'undefined') await PumkinStorage.init();
+                        PumkinKnowledge.render();
+                    });
+                }
+                return;
+            }
         }
 
-        if (this.searchQuery.trim()) {
+        let filtered = articles;
+
+        const rawStream = this.currentStream ? this.currentStream.trim() : "all";
+        if (rawStream !== "" && rawStream !== "all") {
+            filtered = filtered.filter(a => (a.grade === rawStream || a.stream === rawStream));
+        }
+
+        if (this.searchQuery && this.searchQuery.trim()) {
             const q = this.searchQuery.toLowerCase().trim();
             filtered = filtered.filter(a => {
                 const titleMatch = a.title && a.title.toLowerCase().includes(q);
@@ -41,8 +75,8 @@ const PumkinKnowledge = {
 
         if (filtered.length === 0) {
             grid.innerHTML = `
-                <div style="text-align: center; padding: 40px; color: var(--text-muted);">
-                    🔍 Không tìm thấy chuyên đề phù hợp với từ khóa "${this.searchQuery}". Vui lòng thử từ khóa khác!
+                <div style="text-align: center; padding: 40px; color: var(--text-muted); grid-column: 1 / -1;">
+                    🔍 Không tìm thấy chuyên đề phù hợp với từ khóa "${this.searchQuery || ''}". Vui lòng thử từ khóa khác!
                 </div>
             `;
             return;
