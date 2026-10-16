@@ -214,6 +214,6 @@ PUMKIN.DEV là nền tảng tiên phong hỗ trợ trọn vẹn cả 4 định d
 **PUMKIN.DEV • NỀN TẢNG KHẢO THÍ TOÁN HỌC & ĐÁNH GIÁ TƯ DUY ĐỘT PHÁ**  
 *Khơi dậy bản lĩnh tư duy — Chinh phục đỉnh cao khảo thí.*
 
-sản phẩm này được tạo bởi pumkin.dev và glacy
+sản phẩm được tạo bởi pumkin.dev
 
 </div>
