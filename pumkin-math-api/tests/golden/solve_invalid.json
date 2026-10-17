@@ -1,0 +1,25 @@
+[
+  {
+    "description": "Đề bài quá ngắn (ít hơn 3 ký tự)",
+    "payload": {
+      "question_text": "x"
+    },
+    "expected_error": "String should have at least 3 characters"
+  },
+  {
+    "description": "Bậc gợi ý Socratic vượt quá 4",
+    "payload": {
+      "question_text": "Tìm cực trị của hàm số \\(y = x^2\\)",
+      "step_index": 5
+    },
+    "expected_error": "Input should be less than or equal to 4"
+  },
+  {
+    "description": "Chứa trường lạ không được khai báo",
+    "payload": {
+      "question_text": "Tìm cực trị của hàm số \\(y = x^2\\)",
+      "unauthorized_field": "hacker_payload"
+    },
+    "expected_error": "Extra inputs are not permitted"
+  }
+]

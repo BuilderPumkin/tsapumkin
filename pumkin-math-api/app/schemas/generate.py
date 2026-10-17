@@ -1,41 +1,106 @@
 """
 Generate Endpoint Schemas (POST /v1/generate)
-Placeholders for deterministic mathematical question and variant generation.
+Deterministic mathematical problem generation with controlled distractor traps.
 """
 
-from typing import Any
+from enum import StrEnum
 
-from pydantic import BaseModel, Field
+from pydantic import Field
 
-from app.schemas.common import StatusEnum
+from app.schemas.common import BaseResponseEnvelope, StrictBaseModel
 
 
-class GenerateRequest(BaseModel):
-    category: str = Field(..., description="Mã dạng bài toán học cần sinh")
-    difficulty: str | None = Field(
-        default="M2",
+class DifficultyEnum(StrEnum):
+    M1 = "M1"  # Nhận biết
+    M2 = "M2"  # Thông hiểu
+    M3 = "M3"  # Vận dụng
+    M4 = "M4"  # Vận dụng cao
+
+
+class GenerateRequest(StrictBaseModel):
+    """
+    Input payload for deterministic problem generation.
+    Enforces bounds on count, seed, and valid difficulty levels.
+    """
+
+    category: str = Field(
+        ...,
+        min_length=2,
+        max_length=100,
+        description="Mã dạng bài toán học chuẩn (vd: ham_so_cuc_tri_cho_truoc, hinh_hoc_oxyz)",
+    )
+    difficulty: DifficultyEnum = Field(
+        default=DifficultyEnum.M2,
         description=(
-            "Mức độ nhận thức (M1: Nhận biết, M2: Thông hiểu, M3: Vận dụng, M4: Vận dụng cao)"
+            "Độ khó chuẩn hóa: M1 (Nhận biết), M2 (Thông hiểu), M3 (Vận dụng), M4 (Vận dụng cao)"
         ),
     )
-    seed: int | None = Field(default=None, description="Hạt giống sinh ngẫu nhiên tất định")
-
-
-class GeneratedQuestionPayload(BaseModel):
-    question_text: str = Field(..., description="Văn bản câu hỏi sinh ra")
-    options: list[str] | None = Field(default=None, description="Các phương án lựa chọn")
-    correct_answer: Any = Field(..., description="Đáp án chuẩn")
-    distractor_traps: dict[str, str] | None = Field(
-        default=None, description="Mã bẫy cho từng phương án nhiễu"
+    count: int = Field(
+        default=1,
+        ge=1,
+        le=20,
+        description="Số lượng câu hỏi cần sinh (1 đến 20)",
+    )
+    seed: int | None = Field(
+        default=None,
+        ge=0,
+        le=2**31 - 1,
+        description="Hạt giống giả ngẫu nhiên cố định để tái lập kết quả sinh tất định",
     )
 
 
-class GenerateResponse(BaseModel):
-    status: StatusEnum = Field(..., description="Trạng thái sinh câu hỏi")
-    confidence: float = Field(
-        default=1.0, ge=0.0, le=1.0, description="Độ tin cậy của bài toán sinh ra"
+class DistractorItem(StrictBaseModel):
+    """
+    Represents a scientifically designed distractor option based on student misconception traps.
+    """
+
+    option_index: int = Field(..., ge=0, le=5, description="Chỉ số vị trí phương án (0..5)")
+    latex: str = Field(..., description="Nội dung phương án sai định dạng KaTeX")
+    misconceptionId: str = Field(
+        ...,
+        description=(
+            "Mã định danh bẫy nhận thức "
+            "(vd: TRAP_EXTREMA_DELTA_CONFUSION, TRAP_LOG_DOMAIN_IGNORED)"
+        ),
     )
-    method: str = Field(..., description="Phương pháp sinh")
-    question: GeneratedQuestionPayload | None = Field(
-        default=None, description="Dữ liệu câu hỏi được sinh"
+    explanation_vi: str = Field(
+        ...,
+        description="Giải thích nguyên nhân học sinh mắc phải sai lầm này",
     )
+
+
+class GeneratedQuestionItem(StrictBaseModel):
+    """Complete generated question representation."""
+
+    id: str = Field(..., description="Mã định danh duy nhất của câu hỏi được sinh")
+    category: str = Field(..., description="Dạng bài toán học")
+    difficulty: DifficultyEnum = Field(..., description="Độ khó câu hỏi")
+    question_text: str = Field(..., description="Văn bản đề bài kèm công thức KaTeX")
+    options: list[str] = Field(
+        ..., min_length=2, max_length=6, description="Danh sách các phương án lựa chọn"
+    )
+    correct_answer: str = Field(..., description="Nội dung đáp án đúng")
+    correct_index: int = Field(
+        ..., ge=0, le=5, description="Chỉ số vị trí của đáp án đúng trong mảng options"
+    )
+    distractors: list[DistractorItem] = Field(
+        default_factory=list,
+        description="Danh sách các phương án nhiễu kèm mã bẫy nhận thức",
+    )
+    explanation_vi: str = Field(..., description="Lời giải chi tiết bằng tiếng Việt")
+
+
+class GenerateResultPayload(StrictBaseModel):
+    """Specific result payload for question generation."""
+
+    count: int = Field(..., ge=1, description="Số lượng câu hỏi đã sinh thành công")
+    questions: list[GeneratedQuestionItem] = Field(
+        ...,
+        description="Danh sách các câu hỏi toán học hoàn chỉnh",
+    )
+
+
+class GenerateResponse(BaseResponseEnvelope[GenerateResultPayload]):
+    """Standardized envelope response for POST /v1/generate."""
+
+    pass

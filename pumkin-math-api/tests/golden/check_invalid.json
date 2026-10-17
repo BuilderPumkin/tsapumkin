@@ -1,0 +1,29 @@
+[
+  {
+    "description": "Thiếu trường bắt buộc canonical_answer",
+    "payload": {
+      "student_answer": "x = 1",
+      "answer_type": "expression"
+    },
+    "expected_error": "Field required"
+  },
+  {
+    "description": "Kiểu đáp án answer_type không hợp lệ",
+    "payload": {
+      "canonical_answer": "x = 1",
+      "student_answer": "x = 1",
+      "answer_type": "invalid_magic_type"
+    },
+    "expected_error": "Input should be 'number', 'expression', 'interval', 'set', 'matrix', 'boolean_group' or 'multiple_choice'"
+  },
+  {
+    "description": "Chứa trường lạ không cho phép (extra forbid)",
+    "payload": {
+      "canonical_answer": "x = 1",
+      "student_answer": "x = 1",
+      "answer_type": "expression",
+      "sql_injection": "' OR 1=1 --"
+    },
+    "expected_error": "Extra inputs are not permitted"
+  }
+]

@@ -1,17 +1,100 @@
-from app.schemas.check import CheckRequest, CheckResponse
-from app.schemas.common import ErrorDetail, HealthResponse, StandardErrorResponse, StatusEnum
-from app.schemas.generate import GenerateRequest, GenerateResponse
-from app.schemas.solve import SolveRequest, SolveResponse
+from app.schemas.check import (
+    AnswerTypeEnum,
+    CheckRequest,
+    CheckResponse,
+    CheckResultPayload,
+    CheckVerdictEnum,
+)
+from app.schemas.common import (
+    BaseResponseEnvelope,
+    ConfidenceInfo,
+    ConfidenceLevel,
+    ConfidenceMethod,
+    ErrorDetail,
+    HealthResponse,
+    StatusEnum,
+    StepItem,
+    StrictBaseModel,
+)
+from app.schemas.dsl import (
+    AlgebraicEquationDSL,
+    AsymptoteDSL,
+    BaseDSL,
+    BasicDerivativeDSL,
+    CombinatoricsProbabilityDSL,
+    DifferentialEquationDSL,
+    ExponentialLogDSL,
+    ExtremaDSL,
+    GeometryOxyzDSL,
+    IntegralDSL,
+    LimitSequenceDSL,
+    LinearAlgebraDSL,
+    MathProblemDSL,
+    MinMaxIntervalDSL,
+    MonotonicityDSL,
+    OtherFunctionDSL,
+    ParameterMDSL,
+    RealWorldOptimizationDSL,
+    UnsupportedProblemDSL,
+    VariationTableDSL,
+)
+from app.schemas.generate import (
+    DifficultyEnum,
+    DistractorItem,
+    GeneratedQuestionItem,
+    GenerateRequest,
+    GenerateResponse,
+    GenerateResultPayload,
+)
+from app.schemas.solve import SolveRequest, SolveResponse, SolveResultPayload
 
 __all__ = [
+    # Common & Envelope
+    "StrictBaseModel",
     "StatusEnum",
+    "ConfidenceLevel",
+    "ConfidenceMethod",
+    "ConfidenceInfo",
+    "StepItem",
     "ErrorDetail",
-    "StandardErrorResponse",
+    "BaseResponseEnvelope",
     "HealthResponse",
+    # DSL
+    "BaseDSL",
+    "MonotonicityDSL",
+    "BasicDerivativeDSL",
+    "ExtremaDSL",
+    "MinMaxIntervalDSL",
+    "ParameterMDSL",
+    "RealWorldOptimizationDSL",
+    "VariationTableDSL",
+    "AsymptoteDSL",
+    "OtherFunctionDSL",
+    "IntegralDSL",
+    "ExponentialLogDSL",
+    "LimitSequenceDSL",
+    "LinearAlgebraDSL",
+    "DifferentialEquationDSL",
+    "AlgebraicEquationDSL",
+    "GeometryOxyzDSL",
+    "CombinatoricsProbabilityDSL",
+    "UnsupportedProblemDSL",
+    "MathProblemDSL",
+    # Solve
     "SolveRequest",
+    "SolveResultPayload",
     "SolveResponse",
+    # Check
+    "AnswerTypeEnum",
+    "CheckVerdictEnum",
     "CheckRequest",
+    "CheckResultPayload",
     "CheckResponse",
+    # Generate
+    "DifficultyEnum",
+    "DistractorItem",
+    "GeneratedQuestionItem",
     "GenerateRequest",
+    "GenerateResultPayload",
     "GenerateResponse",
 ]

@@ -67,11 +67,13 @@ def test_solve_valid_api_key_returns_501(client, valid_auth_headers):
     assert response.status_code == 501
 
     data = response.json()
-    assert data["status"] == "not_implemented"
-    assert data["confidence"] == 0.0
-    assert data["method"] == "unimplemented"
+    assert data["schema_version"] == "1.0.0"
+    assert "trace_id" in data
+    assert data["status"] == "error"
+    assert data["confidence"]["level"] == "low"
+    assert data["confidence"]["method"] == "symbolic"
     assert data["error"]["code"] == "NOT_IMPLEMENTED"
-    assert "chưa được cài đặt" in data["error"]["message"]
+    assert "chưa được cài đặt" in data["error"]["message_vi"]
 
 
 @pytest.mark.unit
@@ -79,16 +81,22 @@ def test_check_valid_api_key_returns_501(client, valid_auth_headers):
     """
     Calling /v1/check with a valid key returns 501 Not Implemented with standard error schema.
     """
-    payload = {"question_id": "q_sample_01", "student_answer": "x = 1"}
+    payload = {
+        "canonical_answer": "x = 1",
+        "student_answer": "x = 1",
+        "answer_type": "expression",
+    }
     response = client.post("/v1/check", json=payload, headers=valid_auth_headers)
     assert response.status_code == 501
 
     data = response.json()
-    assert data["status"] == "not_implemented"
-    assert data["confidence"] == 0.0
-    assert data["method"] == "unimplemented"
+    assert data["schema_version"] == "1.0.0"
+    assert "trace_id" in data
+    assert data["status"] == "error"
+    assert data["confidence"]["level"] == "low"
+    assert data["confidence"]["method"] == "symbolic"
     assert data["error"]["code"] == "NOT_IMPLEMENTED"
-    assert "chưa được cài đặt" in data["error"]["message"]
+    assert "chưa được cài đặt" in data["error"]["message_vi"]
 
 
 @pytest.mark.unit
@@ -101,8 +109,10 @@ def test_generate_valid_api_key_returns_501(client, valid_auth_headers):
     assert response.status_code == 501
 
     data = response.json()
-    assert data["status"] == "not_implemented"
-    assert data["confidence"] == 0.0
-    assert data["method"] == "unimplemented"
+    assert data["schema_version"] == "1.0.0"
+    assert "trace_id" in data
+    assert data["status"] == "error"
+    assert data["confidence"]["level"] == "low"
+    assert data["confidence"]["method"] == "symbolic"
     assert data["error"]["code"] == "NOT_IMPLEMENTED"
-    assert "chưa được cài đặt" in data["error"]["message"]
+    assert "chưa được cài đặt" in data["error"]["message_vi"]
