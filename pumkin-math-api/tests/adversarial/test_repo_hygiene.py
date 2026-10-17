@@ -133,3 +133,35 @@ def test_no_100_percent_in_display_strings():
                 violations.append(f"{py_file.name}:{line_no}: {line.strip()}")
 
     assert not violations, f"Found unallowed '100%' in app display strings: {violations}"
+
+
+@pytest.mark.adversarial
+def test_no_forbidden_code_execution_functions_in_app():
+    """
+    Ensure eval(), exec(), sympify(), and parse_expr() are strictly absent
+    from the production parsing and execution layer (app/).
+    Only direct SymPy AST instantiation is permitted.
+    """
+    forbidden_calls = [
+        re.compile(r"\beval\s*\("),
+        re.compile(r"\bexec\s*\("),
+        re.compile(r"\bsympify\s*\("),
+        re.compile(r"\bparse_expr\s*\("),
+    ]
+    violations = []
+
+    for py_file in APP_DIR.rglob("*.py"):
+        content = py_file.read_text(encoding="utf-8")
+        for line_no, line in enumerate(content.splitlines(), start=1):
+            # Skip comments and docstrings
+            stripped = line.strip()
+            if stripped.startswith("#") or stripped.startswith("*"):
+                continue
+            for pattern in forbidden_calls:
+                if pattern.search(line):
+                    # Check if line is not within a string literal blacklist or comment
+                    if "FORBIDDEN_PATTERNS" in line or "SECURITY_VIOLATION" in line:
+                        continue
+                    violations.append(f"{py_file.name}:{line_no}: {line.strip()}")
+
+    assert not violations, f"Found forbidden execution function calls in app/: {violations}"
