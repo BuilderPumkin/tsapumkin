@@ -9,6 +9,7 @@ from pydantic import Field
 
 from app.schemas.common import BaseResponseEnvelope, StrictBaseModel
 from app.schemas.dsl import MathProblemDSL
+from app.schemas.traps import MisconceptionTrapEnum
 
 
 class AnswerTypeEnum(StrEnum):
@@ -19,6 +20,8 @@ class AnswerTypeEnum(StrEnum):
     MATRIX = "matrix"
     BOOLEAN_GROUP = "boolean_group"
     MULTIPLE_CHOICE = "multiple_choice"
+    DRAG_DROP = "drag_drop"
+    STEP_SOLUTION = "step_solution"
 
 
 class CheckVerdictEnum(StrEnum):
@@ -62,7 +65,10 @@ class CheckRequest(StrictBaseModel):
     )
     answer_type: AnswerTypeEnum = Field(
         ...,
-        description="Kiểu dữ liệu của đáp án (number, expression, interval, set...)",
+        description=(
+            "Kiểu dữ liệu của đáp án (number, expression, interval, set, "
+            "drag_drop, step_solution...)"
+        ),
     )
     step_index: int | None = Field(
         default=None,
@@ -87,13 +93,28 @@ class CheckResultPayload(StrictBaseModel):
             "Cờ logic boolean (True nếu đúng/khác dạng, False nếu sai, None nếu không xác định)"
         ),
     )
+    canonical_answer: str = Field(
+        ...,
+        description="Đáp án chuẩn trích xuất từ ngân hàng đề hoặc đề bài gốc",
+    )
+    cas_answer: str | None = Field(
+        default=None,
+        description="Đáp án do SymPy CAS tính toán độc lập (nếu giải được tất định)",
+    )
+    conflict: bool = Field(
+        default=False,
+        description=(
+            "Cờ đánh dấu có sự mâu thuẫn giữa đáp án ngân hàng gốc và kết quả tính của CAS. "
+            "Khi conflict=True, verdict bắt buộc là cannot_determine và KHÔNG trừ điểm học sinh."
+        ),
+    )
     feedback_vi: str = Field(
         ...,
         description="Nhận xét phản hồi sư phạm bằng tiếng Việt",
     )
-    detected_misconception_id: str | None = Field(
+    detected_misconception_id: MisconceptionTrapEnum | None = Field(
         default=None,
-        description="Mã bẫy nhận thức phát hiện được (vd: TRAP_EXTREMA_DELTA_CONFUSION)",
+        description="Mã bẫy nhận thức chuẩn GEMINI.md phát hiện được nếu học sinh làm sai",
     )
     canonical_latex: str = Field(
         ...,

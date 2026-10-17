@@ -16,6 +16,9 @@ markers = [
     "golden: Verified benchmark golden tests",
     "adversarial: Security and attack vector tests",
 ]
+filterwarnings = [
+    "ignore:.*Using `httpx` with `starlette.testclient` is deprecated.*:Warning",
+]
 
 [tool.ruff]
 line-length = 100

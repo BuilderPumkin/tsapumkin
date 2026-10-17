@@ -9,10 +9,21 @@
 
 ## 1. Nguyên Tắc Thiết Kế Hợp Đồng (Contract Design Principles)
 
-Hợp đồng dữ liệu này quy định cấu trúc giao tiếp giữa **Cloudflare Pages Gateway** (Client-side proxy) và **FastAPI Microservice**, tuân thủ 3 nguyên tắc bất khả xâm phạm:
+Hợp đồng dữ liệu này quy định cấu trúc giao tiếp giữa **Cloudflare Pages Gateway** (Client-side proxy giữ secret) và **FastAPI Microservice**, tuân thủ 3 nguyên tắc bất khả xâm phạm:
 1. **Toàn vẹn kiểu dữ liệu (Strict Typing):** Mọi schema đều được kiểm tra chặt chẽ bằng Pydantic v2. Mọi trường lạ (extra fields) đều bị **từ chối ngay lập tức** (`extra="forbid"`).
 2. **Phiên bản hóa tường minh (Explicit Versioning):** Mọi endpoint nghiệp vụ đều mang tiền tố `/v1/`. Mọi phản hồi đều chứa trường `schema_version: "1.0.0"` và `trace_id` (UUIDv4) để phục vụ giám sát và truy vết sự cố.
 3. **Cấu trúc bao đóng thống nhất (Standardized Response Envelope):** Mọi kết quả trả về từ `/v1/solve`, `/v1/check`, `/v1/generate` đều được bọc trong cấu trúc phong bì `BaseResponseEnvelope`.
+
+### 1.1. Quy tắc quản lý phiên bản SemVer cho `schema_version`
+Trường `schema_version` tuân thủ nguyên tắc Semantic Versioning (`MAJOR.MINOR.PATCH`):
+- **MAJOR bump (vd: `1.0.0` $\rightarrow$ `2.0.0`):** Khi có thay đổi phá vỡ tương thích (breaking changes) với client cũ:
+  - Xóa bỏ hoặc đổi tên một trường trong Request hoặc Response.
+  - Thay đổi kiểu dữ liệu của một trường (vd: chuyển từ chuỗi sang đối tượng).
+  - Bổ sung trường bắt buộc mới trong Request payload.
+- **MINOR bump (vd: `1.0.0` $\rightarrow$ `1.1.0`):** Khi bổ sung tính năng nhưng bảo toàn tương thích ngược (backwards-compatible):
+  - Bổ sung trường tùy chọn (`optional` / có giá trị mặc định) trong Request hoặc Response.
+  - Bổ sung giá trị mới vào Enum mà client có thể xử lý an toàn bằng fallback.
+- **PATCH bump (vd: `1.0.0` $\rightarrow$ `1.0.1`):** Khi có chỉnh sửa tài liệu, sửa lỗi nhỏ về định dạng hoặc cập nhật mô tả sư phạm mà không thay đổi bất kỳ trường hay kiểu dữ liệu nào.
 
 ---
 
@@ -35,15 +46,16 @@ Hợp đồng dữ liệu này quy định cấu trúc giao tiếp giữa **Clou
 > **NGHIÊM CẤM HIỂN THỊ CỤM TỪ "CHÍNH XÁC 100%" TRÊN GIAO DIỆN:**
 > Nền tảng học thuật PUMKIN.DEV coi việc tuyên bố "chính xác 100%" là phi khoa học và phản sư phạm. Mọi kết luận toán học hiển thị cho học sinh đều phải minh bạch về phương pháp kiểm chứng (`method: symbolic | numeric | consensus`) và mức độ tin cậy (`confidence.level`).
 
-### 3.2. Bảng ánh xạ trạng thái sang Huy hiệu giao diện (Status to UI Badge)
-Giao diện người dùng căn cứ vào trường `status` trong phong bì phản hồi để hiển thị huy hiệu chẩn đoán tương ứng:
+### 3.2. Bảng ánh xạ trạng thái & phương pháp sang Huy hiệu giao diện (Status to UI Badge)
+Giao diện người dùng căn cứ vào kết hợp giữa trường `status` và `confidence.method` trong phong bì phản hồi để hiển thị huy hiệu chẩn đoán tương ứng:
 
-| Trạng thái (`status`) | Tên huy hiệu giao diện (UI Badge Label) | Màu sắc hiển thị | Ý nghĩa sư phạm & Hành vi giao diện |
-| :--- | :--- | :---: | :--- |
-| **`verified`** | **"Đã kiểm chứng bằng máy đại số"** | Xanh lá (Green) | Kết quả đã được bộ giải tất định SymPy tính toán, vượt qua kiểm chứng chéo điều kiện biên và tập xác định. Được tính điểm bình thường. |
-| **`needs_review`** | **"Cần kiểm tra lại"** | Vàng cam (Amber) | Phát hiện mâu thuẫn giữa CAS và đáp án lưu trữ, hoặc bước giải chứa yếu tố mơ hồ. **TUYỆT ĐỐI KHÔNG TRỪ ĐIỂM HỌC SINH**; bảo lưu trạng thái để giáo viên thẩm định tay. |
-| **`unsupported`** | **"Chưa kiểm chứng"** | Xám (Gray) | Dạng bài nằm ngoài phạm vi giải đại số tất định (hình học không gian cổ điển, phụ thuộc hình vẽ, tư duy mã giả). Hướng dẫn học sinh xem lời giải chi tiết. |
-| **`error`** | **Thông báo lỗi chi tiết** | Đỏ (Red) | Lỗi cú pháp DSL, timeout quá thời gian xử lý, hoặc ngoại lệ runtime. Hiển thị thông điệp từ trường `error.message_vi`. |
+| Trạng thái (`status`) | Phương pháp kiểm chứng (`confidence.method`) | Tên huy hiệu giao diện (UI Badge Label) | Màu sắc | Ý nghĩa sư phạm & Hành vi giao diện |
+| :--- | :--- | :--- | :---: | :--- |
+| **`verified`** | `symbolic` hoặc `numeric` | **"Đã kiểm chứng bằng máy đại số"** | Xanh lá (Green) | Kết quả đã được SymPy CAS giải tích hoặc tính toán số học tất định, vượt qua thẩm định điều kiện biên. Được tính điểm bình thường. |
+| **`verified`** | `consensus` | **"Đã kiểm chứng bằng đồng thuận đa phương pháp"** | Xanh dương (Blue) | Kết quả đạt được nhờ sự thống nhất giữa nhiều phương pháp kiểm chứng chéo (Multi-Agent Consensus / CAS + Numeric Dual-Verification). Được tính điểm bình thường. |
+| **`needs_review`** | Bất kỳ | **"Cần kiểm tra lại"** | Vàng cam (Amber) | Phát hiện mâu thuẫn giữa CAS và đáp án gốc (`conflict == true`), hoặc bước giải mơ hồ. **TUYỆT ĐỐI KHÔNG TRỪ ĐIỂM HỌC SINH**; bảo lưu kết quả để giáo viên thẩm định tay. |
+| **`unsupported`** | Bất kỳ | **"Chưa kiểm chứng"** | Xám (Gray) | Dạng bài nằm ngoài phạm vi giải tự động (phụ thuộc hình vẽ, hình học cổ điển, drag-drop...). Hệ thống giữ nguyên điểm, hướng dẫn học sinh xem bài giải chi tiết. |
+| **`error`** | Bất kỳ | **Thông báo lỗi chi tiết** | Đỏ (Red) | Lỗi cú pháp DSL, timeout quá thời gian xử lý, hoặc ngoại lệ runtime. Hiển thị thông điệp từ trường `error.message_vi`. |
 
 ---
 
@@ -61,6 +73,7 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
     "method": "symbolic",
     "score": 0.98
   },
+  "unsupported_reason": null,
   "restate_vi": "Tìm các điểm cực trị của hàm số bậc ba \\(y = x^3 - 3x\\)",
   "result": { ... },
   "steps": [
@@ -80,25 +93,64 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
 }
 ```
 
-### Các trường trong phong bì:
-- `schema_version` *(string, bắt buộc)*: Cố định `"1.0.0"`.
-- `trace_id` *(string UUIDv4, bắt buộc)*: Mã truy vết phiên làm việc.
-- `status` *(enum, bắt buộc)*: `verified` | `needs_review` | `unsupported` | `error`.
-- `confidence` *(object, bắt buộc)*:
-  - `level` *(string)*: `high` | `medium` | `low`.
-  - `method` *(string)*: `symbolic` (tính toán giải tích SymPy) | `numeric` (xấp xỉ số học) | `consensus` (đồng thuận đa phương pháp).
-  - `score` *(float 0.0 - 1.0, tùy chọn)*: Điểm số tin cậy định lượng.
-- `restate_vi` *(string, tùy chọn)*: Đề bài đã chuẩn hóa bằng tiếng Việt.
-- `result` *(object, tùy chọn)*: Payload nghiệp vụ của từng endpoint (chi tiết bên dưới).
-- `steps` *(array object, mặc định `[]`)*: Danh sách các bước giải trung gian kèm KaTeX và giải thích tiếng Việt.
-- `warnings` *(array string, mặc định `[]`)*: Cảnh báo toán học (phân kỳ, chia cho 0, thu hẹp miền xác định).
-- `error` *(object hoặc null)*: Chứa `code` và `message_vi` khi `status == "error"`.
+### 4.1. Quy tắc bất biến bắt buộc (Envelope Model Validators)
+Lớp `BaseResponseEnvelope` được bảo vệ bằng Pydantic `model_validator(mode="after")` nhằm ngăn chặn tuyệt đối tình trạng dữ liệu mâu thuẫn:
+1. **Khi `status == "verified"`:**
+   - Trường `result` BẮT BUỘC khác `null`.
+   - Trường `confidence` BẮT BUỘC hiện diện đầy đủ.
+2. **Khi `status == "error"`:**
+   - Trường `error` BẮT BUỘC khác `null` và chứa `code`, `message_vi`.
+   - Trường `result` BẮT BUỘC phải là `null` (không rò rỉ dữ liệu khi lỗi).
+3. **Khi `status == "unsupported"`:**
+   - Trường `unsupported_reason` BẮT BUỘC hiện diện với mã chuẩn thuộc `UnsupportedReasonEnum`.
 
 ---
 
-## 5. Chi Tiết Từng Endpoint Nghiệp Vụ
+## 5. Danh Mục Lý Do Ngoài Phạm Vi (`unsupported_reason`)
 
-### 5.1. `GET /health` — Kiểm tra trạng thái hệ thống
+Khi hệ thống trả về `status: "unsupported"`, trường `unsupported_reason` mang một trong các giá trị định danh chuẩn:
+
+| Mã định danh lý do | Phân loại | Ý nghĩa học thuật & Hành vi hệ thống |
+| :--- | :---: | :--- |
+| `figure_dependent_hard` | Hình học / Đồ thị | Đề bài bắt buộc học sinh phải quan sát đồ thị, bảng biến thiên vẽ tay hoặc hình chụp không có tọa độ số hóa. Không thể tái lập bằng văn bản. |
+| `figure_dependent_soft` | Hình học / Đồ thị | Đề bài có hình minh họa phụ trợ nhưng có thể giải được nếu phiên âm đầy đủ tọa độ hoặc dạng hàm số. |
+| `complex_numbers` | Đại số | Số phức (dạng bài không thuộc trọng tâm chương trình THPT GDPT 2018 mới / đề thi TSA ĐHQG). |
+| `solid_geometry` | Hình học | Hình học không gian thuần túy cổ điển (tính góc, khoảng cách không gắn hệ tọa độ Oxyz). |
+| `algorithm_or_code` | Tin học & Thuật toán | Dạng bài lập luận mã giả, thuật toán lặp, hoặc bài toán cấu trúc dữ liệu. |
+| `number_theory_modular` | Số học | Phương trình nghiệm nguyên bậc cao, đồng dư thức chuyên sâu ngoài phạm vi toán phổ thông. |
+| `statistics` | Thống kê | Thống kê mô tả số liệu lớn, bảng khảo sát thực nghiệm ngoài phạm vi mô hình hóa tất định. |
+| `interactive_ui_type` | Tương tác UI | Dạng bài kéo thả (`drag_drop`) hoặc điền bước giải (`step_solution`) yêu cầu xử lý đồ họa tương tác. |
+| `out_of_scope` | Mở rộng | Các dạng bài đọc hiểu ngữ văn dài hoặc ngoài danh mục 8 dạng ưu tiên trong `SPEC.md`. |
+
+---
+
+## 6. Giới Hạn Tải Trọng & Độ Dài Dữ Liệu Đầu Vào
+
+Hệ thống áp dụng giới hạn kích thước nhiều tầng để chống tấn công từ chối dịch vụ (DoS) và tràn bộ đệm:
+- **Giới hạn HTTP Body tối đa tại Gateway (Cloudflare Pages Functions / Nginx):** `1 MB` (1,048,576 bytes).
+- **Bảng giới hạn trường chi tiết (Pydantic Field Constraints):**
+
+| Endpoint / Model | Trường dữ liệu | Ràng buộc kỹ thuật | Ghi chú an toàn |
+| :--- | :--- | :---: | :--- |
+| **SolveRequest** | `question_text` | `3` $\le$ len $\le$ `2000` | Ngăn đề bài rỗng hoặc quá dài làm nghẽn LLM Parser |
+| **SolveRequest** | `question_id` | max len `100` | Mã định danh câu hỏi từ ngân hàng |
+| **SolveRequest** | `step_index` | `1` $\le$ val $\le$ `4` | 4 bậc Scaffolding chuẩn sư phạm |
+| **SolveRequest** | `previous_steps` | max `20` phần tử | Giới hạn số lượt tương tác trong một phiên |
+| **SolveRequest** | `previous_steps[i]` | max len `500` | Ngăn học sinh chèn văn bản quá dài vào từng bước |
+| **CheckRequest** | `canonical_answer` | `1` $\le$ len $\le$ `500` | Chuỗi đáp án chuẩn |
+| **CheckRequest** | `student_answer` | `1` $\le$ len $\le$ `500` | Chuỗi đáp án học sinh nhập |
+| **CheckRequest** | `answer_type` | Enum (9 kiểu) | Kiểm tra nghiêm ngặt `AnswerTypeEnum` |
+| **CheckRequest** | `step_index` | `1` $\le$ val $\le$ `20` | Giới hạn số bước giải trong bài tự luận |
+| **GenerateRequest**| `category` | `2` $\le$ len $\le$ `100` | Tên danh mục dạng bài toán học |
+| **GenerateRequest**| `difficulty` | Enum (`M1`..`M4`) | 4 bậc độ khó chuẩn hóa |
+| **GenerateRequest**| `count` | `1` $\le$ val $\le$ `20` | Khống chế số lượng câu sinh trong một lượt |
+| **GenerateRequest**| `seed` | `0` $\le$ val $\le$ `2^31 - 1` | Hạt giống giả ngẫu nhiên cố định |
+
+---
+
+## 7. Chi Tiết Từng Endpoint Nghiệp Vụ
+
+### 7.1. `GET /health` — Kiểm tra trạng thái hệ thống
 - **Xác thực:** Công khai (Không yêu cầu header `X-Pumkin-API-Key`).
 - **Phản hồi 200 OK:**
   ```json
@@ -112,7 +164,7 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
 
 ---
 
-### 5.2. `POST /v1/solve` — Gia sư AI Socratic 4 bậc
+### 7.2. `POST /v1/solve` — Gia sư AI Socratic 4 bậc
 - **Xác thực:** Bắt buộc header `X-Pumkin-API-Key`.
 - **Mục tiêu:** Dẫn dắt tư duy học sinh theo 4 bậc Scaffolding (1: Nudge, 2: Concept, 3: Sub-goal, 4: Worked Step). Tuyệt đối không làm lộ đáp số cuối cùng ở các bậc đầu.
 
@@ -128,12 +180,6 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
   ]
 }
 ```
-- **Ràng buộc đầu vào:**
-  - `question_text`: Bắt buộc, độ dài từ 3 đến 2000 ký tự.
-  - `question_id`: Tùy chọn, tối đa 100 ký tự.
-  - `step_index`: Số nguyên từ 1 đến 4 (mặc định 1).
-  - `previous_steps`: Mảng tối đa 20 phần tử chuỗi.
-  - Cấm trường lạ (`extra="forbid"`).
 
 #### Response Schema Payload (`SolveResultPayload` trong `result`):
 ```json
@@ -146,6 +192,7 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
     "method": "symbolic",
     "score": 0.95
   },
+  "unsupported_reason": null,
   "restate_vi": "Xét tính đơn điệu của hàm số \\(y = x^3 - 3x\\)",
   "result": {
     "scaffolding_step": 1,
@@ -162,9 +209,21 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
 
 ---
 
-### 5.3. `POST /v1/check` — Chấm bài thi & Đánh giá bước giải
+### 7.3. `POST /v1/check` — Chấm bài thi & Đánh giá bước giải
 - **Xác thực:** Bắt buộc header `X-Pumkin-API-Key`.
 - **Mục tiêu:** Kiểm chứng tính đúng đắn của đáp án hoặc bước giải trung gian; đối chiếu tương đương đại số; phát hiện bẫy nhận thức.
+
+#### Kiểu đáp án (`answer_type`):
+Bao gồm 9 kiểu:
+- `number`: Số thực, phân số, số vô tỉ dạng số.
+- `expression`: Biểu thức đại số chứa biến.
+- `interval`: Khoảng, đoạn, nửa khoảng (vd: `[1; 5)`).
+- `set`: Tập hợp rời rạc các phần tử (vd: `{1, 2, 3}`).
+- `matrix`: Ma trận số học 2 chiều.
+- `boolean_group`: Nhóm câu hỏi Đúng/Sai (True/False).
+- `multiple_choice`: Câu hỏi trắc nghiệm 4 phương án đơn.
+- `drag_drop` *(5 câu trong ngân hàng)*: Dạng bài kéo thả ô dữ liệu. Hiện tại trả về `status: "unsupported"` kèm `unsupported_reason: "interactive_ui_type"`. **Hệ thống không trừ điểm học sinh**.
+- `step_solution` *(2 câu trong ngân hàng)*: Dạng bài điền từng bước giải theo sơ đồ logic. Hiện tại trả về `status: "unsupported"` kèm `unsupported_reason: "interactive_ui_type"`. **Hệ thống không trừ điểm học sinh**.
 
 #### Request Schema (`CheckRequest`):
 ```json
@@ -177,12 +236,6 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
   "step_index": null
 }
 ```
-- **Ràng buộc đầu vào:**
-  - `canonical_answer`: Bắt buộc, chuỗi từ 1 đến 500 ký tự.
-  - `student_answer`: Bắt buộc, chuỗi từ 1 đến 500 ký tự.
-  - `answer_type`: Bắt buộc, thuộc 1 trong các giá trị: `number` | `expression` | `interval` | `set` | `matrix` | `boolean_group` | `multiple_choice`.
-  - `step_index`: Tùy chọn, số nguyên từ 1 đến 20.
-  - Cấm trường lạ (`extra="forbid"`).
 
 #### Response Schema Payload (`CheckResultPayload` trong `result`):
 ```json
@@ -195,10 +248,14 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
     "method": "symbolic",
     "score": 1.0
   },
+  "unsupported_reason": null,
   "restate_vi": "Kiểm tra đáp án câu hỏi cực tiểu hàm số",
   "result": {
     "verdict": "correct",
     "is_correct": true,
+    "canonical_answer": "-2",
+    "cas_answer": "-2",
+    "conflict": false,
     "feedback_vi": "Chính xác! Điểm cực tiểu là \\(x = 1\\) và giá trị cực tiểu tương ứng là \\(y(1) = -2\\).",
     "detected_misconception_id": null,
     "canonical_latex": "\\(-2\\)",
@@ -210,17 +267,25 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
 }
 ```
 
-#### Giá trị của `verdict`:
+#### Cơ chế phát hiện mâu thuẫn CAS & Nguyên tắc không trừ điểm:
+Khi SymPy CAS giải ra đáp án khác với `canonical_answer` lưu trong ngân hàng đề:
+- Cờ `conflict` được đặt thành `true`.
+- Trường `cas_answer` chứa kết quả tính toán độc lập của máy đại số.
+- Trường `verdict` BẮT BUỘC gán giá trị `cannot_determine`.
+- Trường `status` trên phong bì BẮT BUỘC là `needs_review`.
+- **QUY TẮC BẤT DI BẤT DỊCH:** Tuyệt đối **KHÔNG ĐƯỢC TRỪ ĐIỂM HỌC SINH** khi xảy ra `conflict`, bảo lưu kết quả để giáo viên thẩm định thủ công.
+
+#### Danh mục giá trị `verdict`:
 1. `correct`: Đáp án trùng khớp hoàn toàn.
 2. `correct_different_form`: Đúng về mặt toán học nhưng biểu diễn ở dạng khác (vd: `\(\frac{1}{\sqrt{2}}\)` và `\(\frac{\sqrt{2}}{2}\)`).
 3. `incorrect`: Sai toán học hoặc rơi vào bẫy nhận thức (trả về mã bẫy tại `detected_misconception_id`).
-4. `cannot_determine`: Hệ thống chưa đủ cơ sở chứng minh hoặc gặp mâu thuẫn CAS $\rightarrow$ **Không được trừ điểm học sinh**.
+4. `cannot_determine`: Hệ thống chưa đủ cơ sở chứng minh hoặc gặp mâu thuẫn CAS $\rightarrow$ **Không trừ điểm học sinh**.
 
 ---
 
-### 5.4. `POST /v1/generate` — Tạo đề & Sinh biến thể câu hỏi
+### 7.4. `POST /v1/generate` — Tạo đề & Sinh biến thể câu hỏi
 - **Xác thực:** Bắt buộc header `X-Pumkin-API-Key`.
-- **Mục tiêu:** Sinh câu hỏi mới tương đương về mặt cấu trúc toán học với nghiệm đẹp, kiểm soát 3 phương án nhiễu theo bẫy nhận thức chuẩn.
+- **Mục tiêu:** Sinh câu hỏi mới tương đương về mặt cấu trúc toán học với nghiệm đẹp, kiểm soát 3 phương án nhiễu theo bẫy nhận thức chuẩn GEMINI.md.
 
 #### Request Schema (`GenerateRequest`):
 ```json
@@ -231,12 +296,6 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
   "seed": 42
 }
 ```
-- **Ràng buộc đầu vào:**
-  - `category`: Bắt buộc, chuỗi từ 2 đến 100 ký tự (thuộc 17 nhóm ưu tiên trong `SPEC.md`).
-  - `difficulty`: Thuộc 1 trong 4 bậc: `M1` (Nhận biết), `M2` (Thông hiểu), `M3` (Vận dụng), `M4` (Vận dụng cao). Mặc định là `M2`.
-  - `count`: Số nguyên từ 1 đến 20 (mặc định 1).
-  - `seed`: Số nguyên không âm ($0 \le \text{seed} < 2^{31}$) phục vụ tái lập tất định.
-  - Cấm trường lạ (`extra="forbid"`).
 
 #### Response Schema Payload (`GenerateResultPayload` trong `result`):
 ```json
@@ -249,6 +308,7 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
     "method": "symbolic",
     "score": 1.0
   },
+  "unsupported_reason": null,
   "restate_vi": "Sinh đề bài mới dạng Cực trị hàm số cho trước",
   "result": {
     "count": 1,
@@ -270,19 +330,19 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
           {
             "option_index": 1,
             "latex": "\\(0\\)",
-            "misconceptionId": "TRAP_EXTREMA_VALUE_CONFUSION",
+            "misconception_id": "TRAP_EXTREMA_DELTA_CONFUSION",
             "explanation_vi": "Học sinh tính nhầm giá trị cực tiểu thay vì giá trị cực đại."
           },
           {
             "option_index": 2,
             "latex": "\\(-1\\)",
-            "misconceptionId": "TRAP_EXTREMA_POINT_VS_VALUE",
-            "explanation_vi": "Học sinh nhầm điểm cực đại x = -1 với giá trị cực đại y."
+            "misconception_id": "TRAP_BOUNDARY_NOT_CHECKED",
+            "explanation_vi": "Học sinh nhầm hoành độ điểm cực đại x = -1 với giá trị cực đại y."
           },
           {
             "option_index": 3,
             "latex": "\\(1\\)",
-            "misconceptionId": "TRAP_EXTREMA_POINT_MIN_VS_MAX",
+            "misconception_id": "TRAP_SIGN_ERROR",
             "explanation_vi": "Học sinh nhầm điểm cực tiểu x = 1 với giá trị cực đại."
           }
         ],
@@ -296,30 +356,49 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
 }
 ```
 
+#### Danh mục Bẫy Nhận Thức Chuẩn (`MisconceptionTrapEnum`):
+Mọi phương án nhiễu sinh ra bắt buộc phải mang mã bẫy thuộc danh mục sau:
+- **Đại số & Giải tích:** `TRAP_LOG_DOMAIN_IGNORED`, `TRAP_RADICAL_DOMAIN_IGNORED`, `TRAP_EXTREMA_DELTA_CONFUSION`, `TRAP_SIGN_ERROR`, `TRAP_INVERSE_OPERATION`, `TRAP_BOUNDARY_NOT_CHECKED`.
+- **Vector & Hình học phẳng:** `TRAP_ANGLE_LINE_VS_VECTOR`, `TRAP_COLLINEAR_ZERO_DIVISION`, `TRAP_CROSS_PRODUCT_IS_SCALAR`.
+- **Không gian Oxyz:** `TRAP_SPHERE_RADIUS_INVALID`, `TRAP_LINE_CANONICAL_ZERO_DENOM`, `TRAP_PLANE_DISTANCE_NO_ABS`.
+- **Tổ hợp & Xác suất:** `TRAP_PERM_COMB_CONFUSION`, `TRAP_PROB_SUM_NOT_DISJOINT`.
+- **Hoán vị bàn tròn:** `TRAP_ROUND_TABLE_NUMBERED_SEATS`, `TRAP_ROUND_TABLE_BLOCK_FACTORIAL`, `TRAP_ROUND_TABLE_ALTERNATING_OVERCOUNT`, `TRAP_ROUND_TABLE_FLIP_SYMMETRY`.
+- **Dự phòng chung:** `TRAP_OTHER`.
+
 ---
 
-## 6. Ngữ Pháp Biểu Diễn Toán Học Trung Gian (MathProblemDSL)
+## 8. Ngữ Pháp Biểu Diễn Toán Học Trung Gian (MathProblemDSL)
 
-Để ngăn chặn hoàn toàn việc thực thi mã động (`eval`/`exec`), LLM Semantic Parser chuyển đổi văn bản câu hỏi sang một trong các cấu trúc DSL có kiểu định danh (`type` discriminator):
+Để ngăn chặn hoàn toàn việc thực thi mã động (`eval`/`exec`), LLM Semantic Parser chuyển đổi văn bản câu hỏi sang một trong các cấu trúc DSL có kiểu định danh (`type` discriminator).
 
-| Phân môn | Giá trị `type` | Các trường cốt lõi của DSL |
-| :--- | :--- | :--- |
-| **Tính đơn điệu** | `ham_so_tinh_don_dieu` | `expression`, `interval` |
-| **Đạo hàm cơ bản** | `ham_so_dao_ham_co_ban` | `expression`, `order` |
-| **Cực trị** | `ham_so_cuc_tri_cho_truoc` | `expression` |
-| **GTLN/GTNN** | `ham_so_gtln_gtnn_doan_khoang` | `expression`, `interval_start`, `interval_end` |
-| **Tham số m** | `ham_so_chua_tham_so_m` | `expression`, `parameter_name`, `condition` |
-| **Tối ưu thực tế** | `ham_so_toan_thuc_te_toi_uu` | `target_function`, `constraints[]`, `goal` |
-| **Bảng biến thiên** | `ham_so_doc_bang_bien_thien` | `derivative_expression`, `intervals_sign[]` |
-| **Tiệm cận** | `ham_so_tiem_can` | `expression` |
-| **Nguyên hàm / Tích phân** | `nguyen_ham_tich_phan` | `integrand`, `lower_bound`, `upper_bound` |
-| **Mũ & Logarit** | `mu_logarit_pt_bpt` | `equation`, `relation` |
-| **Giới hạn & Dãy số** | `gioi_han_day_so` | `expression`, `approaches` |
-| **Đại số tuyến tính** | `dai_so_tuyen_tinh_ma_tran` | `matrices{}`, `operation` |
-| **Phương trình vi phân** | `phuong_trinh_vi_phan` | `equation`, `initial_conditions{}` |
-| **Phương trình đại số** | `phuong_trinh_bat_phuong_trinh_dai_so` | `equation` |
-| **Hình học Oxyz** | `hinh_hoc_oxyz` | `elements{}`, `query_type` |
-| **Tổ hợp & Xác suất** | `to_hop_xac_suat` | `subdomain`, `parameters{}` |
-| **Ngoài phạm vi** | `unsupported` | `reason` |
+> [!NOTE]
+> **Độc lập và Thử nghiệm (`dsl_version: "0.1.0-alpha"`):**
+> Cấu trúc DSL được tách biệt rõ ràng với Hợp đồng giao tiếp ổn định `/v1/*`. Mọi mô hình DSL đều mang trường `dsl_version = "0.1.0-alpha"`. Đây là các định nghĩa khung (placeholders), sẽ được hoàn thiện bộ phân tích AST an toàn ở Prompt 4 và Prompt 5.
 
-*(Chi tiết định nghĩa ngữ pháp AST và Allowlist Parser sẽ được cài đặt hoàn chỉnh ở Prompt 4 và Prompt 5).*
+### 8.1. Bảng đối chiếu 18 Lớp DSL Toán học
+
+| STT | Lớp DSL (Pydantic Model) | Khóa phân biệt (`type`) | Các trường dữ liệu cốt lõi | Trạng thái phạm vi |
+| :---: | :--- | :--- | :--- | :---: |
+| 1 | `MonotonicityDSL` | `ham_so_tinh_don_dieu` | `expression`, `interval` | Trọng tâm |
+| 2 | `BasicDerivativeDSL` | `ham_so_dao_ham_co_ban` | `expression`, `order` | Trọng tâm |
+| 3 | `ExtremaDSL` | `ham_so_cuc_tri_cho_truoc` | `expression` | Trọng tâm |
+| 4 | `MinMaxIntervalDSL` | `ham_so_gtln_gtnn_doan_khoang` | `expression`, `interval_start`, `interval_end` | Trọng tâm |
+| 5 | `ParameterMDSL` | `ham_so_chua_tham_so_m` | `expression`, `parameter_name`, `condition` | Trọng tâm |
+| 6 | `RealWorldOptimizationDSL` | `ham_so_toan_thuc_te_toi_uu` | `target_function`, `constraints[]`, `goal` | Trọng tâm |
+| 7 | `VariationTableDSL` | `ham_so_doc_bang_bien_thien` | `derivative_expression`, `intervals_sign[]` | Trọng tâm |
+| 8 | `AsymptoteDSL` | `ham_so_tiem_can` | `expression` | Trọng tâm |
+| 9 | `OtherFunctionDSL` | `ham_so_dang_khac` | `expression`, `question_subtype` | Trọng tâm |
+| 10 | `IntegralDSL` | `nguyen_ham_tich_phan` | `integrand`, `lower_bound`, `upper_bound` | Trọng tâm |
+| 11 | `ExponentialLogDSL` | `mu_logarit_pt_bpt` | `equation`, `relation` | Trọng tâm |
+| 12 | `LimitSequenceDSL` | `gioi_han_day_so` | `expression`, `approaches` | Trọng tâm |
+| 13 | `LinearAlgebraDSL` | `dai_so_tuyen_tinh_ma_tran` | `matrices{}`, `operation` | Hỗ trợ mở rộng |
+| 14 | `DifferentialEquationDSL` | `phuong_trinh_vi_phan` | `equation`, `initial_conditions{}` | Hỗ trợ mở rộng |
+| 15 | `AlgebraicEquationDSL` | `phuong_trinh_bat_phuong_trinh_dai_so`| `equation` | Hỗ trợ mở rộng |
+| 16 | `GeometryOxyzDSL` | `hinh_hoc_oxyz` | `elements{}`, `query_type` | Trọng tâm |
+| 17 | `CombinatoricsProbabilityDSL`| `to_hop_xac_suat` | `subdomain`, `parameters{}` | Trọng tâm |
+| 18 | `UnsupportedProblemDSL` | `unsupported` | `reason` (thuộc `UnsupportedReasonEnum`) | Ngoài phạm vi |
+
+### 8.2. Khẳng định giới hạn phạm vi (Boundary Confirmation)
+- **Tuyệt đối KHÔNG có lớp DSL cho Số phức:** Dạng bài số phức không được tạo lớp DSL, mà được phân loại trực tiếp sang `UnsupportedProblemDSL(reason="complex_numbers")`.
+- **Tuyệt đối KHÔNG có lớp DSL cho Hình học không gian cổ điển:** Các bài toán hình chóp, hình lăng trụ không gắn trục Oxyz được phân loại sang `UnsupportedProblemDSL(reason="solid_geometry")`.
+- **Các phân môn Đã duyệt ở Prompt 1/1b:** Phương trình vi phân (`phuong_trinh_vi_phan`), Đại số tuyến tính / Ma trận (`dai_so_tuyen_tinh_ma_tran`), Phương trình / Bất phương trình đại số (`phuong_trinh_bat_phuong_trinh_dai_so`) đã được đối chiếu chuẩn xác với ngân hàng câu hỏi.

@@ -5,7 +5,8 @@
       "student_answer": "x = 1",
       "answer_type": "expression"
     },
-    "expected_error": "Field required"
+    "expected_error": "Field required",
+    "expected_error_type": "missing"
   },
   {
     "description": "Kiểu đáp án answer_type không hợp lệ",
@@ -14,7 +15,8 @@
       "student_answer": "x = 1",
       "answer_type": "invalid_magic_type"
     },
-    "expected_error": "Input should be 'number', 'expression', 'interval', 'set', 'matrix', 'boolean_group' or 'multiple_choice'"
+    "expected_error": "Input should be 'number', 'expression', 'interval', 'set', 'matrix', 'boolean_group', 'multiple_choice', 'drag_drop' or 'step_solution'",
+    "expected_error_type": "enum"
   },
   {
     "description": "Chứa trường lạ không cho phép (extra forbid)",
@@ -24,6 +26,7 @@
       "answer_type": "expression",
       "sql_injection": "' OR 1=1 --"
     },
-    "expected_error": "Extra inputs are not permitted"
+    "expected_error": "Extra inputs are not permitted",
+    "expected_error_type": "extra_forbidden"
   }
 ]

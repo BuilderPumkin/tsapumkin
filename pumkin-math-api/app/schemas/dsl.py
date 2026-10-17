@@ -2,18 +2,26 @@
 Domain Specific Language (DSL) Schema Placeholders (Pydantic v2)
 Discriminated union based on the 'type' field covering all mathematical domains in SPEC.md.
 Full AST and validation logic will be implemented in Prompt 5.
+DSL schema is explicitly decoupled from stable API contract via dsl_version = '0.1.0-alpha'.
 """
 
 from typing import Annotated, Literal
 
 from pydantic import Field
 
-from app.schemas.common import StrictBaseModel
+from app.schemas.common import StrictBaseModel, UnsupportedReasonEnum
 
 
 class BaseDSL(StrictBaseModel):
     """Base class for all typed mathematical problem representations."""
 
+    dsl_version: str = Field(
+        default="0.1.0-alpha",
+        description=(
+            "Phiên bản schema thử nghiệm của DSL "
+            "(Prompt 3: experimental, cố định ở Prompt 5)"
+        ),
+    )
     variable: str = Field(default="x", description="Tên biến số chính (mặc định là 'x')")
     domain: str = Field(default="R", description="Tập xác định của bài toán (vd: 'R', '(0; +inf)')")
 
@@ -149,7 +157,9 @@ class CombinatoricsProbabilityDSL(BaseDSL):
 
 class UnsupportedProblemDSL(BaseDSL):
     type: Literal["unsupported"] = "unsupported"
-    reason: str = Field(..., description="Lý do bài toán ngoài phạm vi hỗ trợ tự động")
+    reason: UnsupportedReasonEnum = Field(
+        ..., description="Lý do chuẩn hóa bài toán ngoài phạm vi hỗ trợ tự động"
+    )
 
 
 # Discriminated Union across all mathematical problem representations

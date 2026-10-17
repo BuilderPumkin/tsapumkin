@@ -15,6 +15,7 @@ from app.schemas.common import (
     StatusEnum,
     StepItem,
     StrictBaseModel,
+    UnsupportedReasonEnum,
 )
 from app.schemas.dsl import (
     AlgebraicEquationDSL,
@@ -47,6 +48,7 @@ from app.schemas.generate import (
     GenerateResultPayload,
 )
 from app.schemas.solve import SolveRequest, SolveResponse, SolveResultPayload
+from app.schemas.traps import MisconceptionTrapEnum
 
 __all__ = [
     # Common & Envelope
@@ -55,10 +57,13 @@ __all__ = [
     "ConfidenceLevel",
     "ConfidenceMethod",
     "ConfidenceInfo",
+    "UnsupportedReasonEnum",
     "StepItem",
     "ErrorDetail",
     "BaseResponseEnvelope",
     "HealthResponse",
+    # Traps
+    "MisconceptionTrapEnum",
     # DSL
     "BaseDSL",
     "MonotonicityDSL",

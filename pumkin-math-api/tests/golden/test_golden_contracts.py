@@ -1,7 +1,8 @@
 """
 Golden Contract Tests
 Verifies that all valid golden JSON examples pass Pydantic schema validation,
-and all invalid golden JSON examples are rejected with descriptive error messages.
+and all invalid golden JSON examples are rejected with descriptive error messages
+and exact Pydantic error types.
 """
 
 import json
@@ -32,7 +33,7 @@ def test_solve_valid_golden():
 
 @pytest.mark.golden
 def test_solve_invalid_golden():
-    """Verify each entry in solve_invalid.json is rejected with expected validation error."""
+    """Verify solve_invalid.json entries are rejected with expected error and type."""
     path = GOLDEN_DIR / "solve_invalid.json"
     with open(path, encoding="utf-8") as f:
         cases = json.load(f)
@@ -40,9 +41,13 @@ def test_solve_invalid_golden():
     for case in cases:
         payload = case["payload"]
         expected_error = case["expected_error"]
+        expected_type = case["expected_error_type"]
         with pytest.raises(ValidationError) as exc_info:
             SolveRequest.model_validate(payload)
         assert expected_error in str(exc_info.value), f"Failed on case: {case['description']}"
+        error_types = [e["type"] for e in exc_info.value.errors()]
+        msg = f"Expected error '{expected_type}' not in {error_types} for: {case['description']}"
+        assert expected_type in error_types, msg
 
 
 @pytest.mark.golden
@@ -60,7 +65,7 @@ def test_check_valid_golden():
 
 @pytest.mark.golden
 def test_check_invalid_golden():
-    """Verify each entry in check_invalid.json is rejected with expected validation error."""
+    """Verify check_invalid.json entries are rejected with expected error and type."""
     path = GOLDEN_DIR / "check_invalid.json"
     with open(path, encoding="utf-8") as f:
         cases = json.load(f)
@@ -68,9 +73,13 @@ def test_check_invalid_golden():
     for case in cases:
         payload = case["payload"]
         expected_error = case["expected_error"]
+        expected_type = case["expected_error_type"]
         with pytest.raises(ValidationError) as exc_info:
             CheckRequest.model_validate(payload)
         assert expected_error in str(exc_info.value), f"Failed on case: {case['description']}"
+        error_types = [e["type"] for e in exc_info.value.errors()]
+        msg = f"Expected error '{expected_type}' not in {error_types} for: {case['description']}"
+        assert expected_type in error_types, msg
 
 
 @pytest.mark.golden
@@ -88,7 +97,7 @@ def test_generate_valid_golden():
 
 @pytest.mark.golden
 def test_generate_invalid_golden():
-    """Verify each entry in generate_invalid.json is rejected with expected validation error."""
+    """Verify generate_invalid.json entries are rejected with expected error and type."""
     path = GOLDEN_DIR / "generate_invalid.json"
     with open(path, encoding="utf-8") as f:
         cases = json.load(f)
@@ -96,6 +105,10 @@ def test_generate_invalid_golden():
     for case in cases:
         payload = case["payload"]
         expected_error = case["expected_error"]
+        expected_type = case["expected_error_type"]
         with pytest.raises(ValidationError) as exc_info:
             GenerateRequest.model_validate(payload)
         assert expected_error in str(exc_info.value), f"Failed on case: {case['description']}"
+        error_types = [e["type"] for e in exc_info.value.errors()]
+        msg = f"Expected error '{expected_type}' not in {error_types} for: {case['description']}"
+        assert expected_type in error_types, msg

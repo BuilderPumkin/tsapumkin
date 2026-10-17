@@ -37,3 +37,11 @@ scratch/
 *.bak
 *.old
 reports/
+
+# Python & Testing artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+PUMKIN_DEV_Giai_Phap_Giao_Duc.*

@@ -4,7 +4,8 @@
     "payload": {
       "question_text": "x"
     },
-    "expected_error": "String should have at least 3 characters"
+    "expected_error": "String should have at least 3 characters",
+    "expected_error_type": "string_too_short"
   },
   {
     "description": "Bậc gợi ý Socratic vượt quá 4",
@@ -12,7 +13,8 @@
       "question_text": "Tìm cực trị của hàm số \\(y = x^2\\)",
       "step_index": 5
     },
-    "expected_error": "Input should be less than or equal to 4"
+    "expected_error": "Input should be less than or equal to 4",
+    "expected_error_type": "less_than_equal"
   },
   {
     "description": "Chứa trường lạ không được khai báo",
@@ -20,6 +22,18 @@
       "question_text": "Tìm cực trị của hàm số \\(y = x^2\\)",
       "unauthorized_field": "hacker_payload"
     },
-    "expected_error": "Extra inputs are not permitted"
+    "expected_error": "Extra inputs are not permitted",
+    "expected_error_type": "extra_forbidden"
+  },
+  {
+    "description": "Phần tử trong previous_steps vượt quá 500 ký tự",
+    "payload": {
+      "question_text": "Tìm cực trị của hàm số \\(y = x^2\\)",
+      "previous_steps": [
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus eleifend."
+      ]
+    },
+    "expected_error": "String should have at most 500 characters",
+    "expected_error_type": "string_too_long"
   }
 ]

@@ -31,3 +31,12 @@ def valid_api_key():
 @pytest.fixture
 def valid_auth_headers(valid_api_key):
     return {"X-Pumkin-API-Key": valid_api_key}
+
+
+@pytest.fixture
+def auth_client(client, valid_auth_headers):
+    """
+    TestClient pre-authenticated with valid X-Pumkin-API-Key header.
+    """
+    client.headers.update(valid_auth_headers)
+    return client

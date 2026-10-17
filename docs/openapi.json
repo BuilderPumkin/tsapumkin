@@ -10,6 +10,12 @@
             "title": "Domain",
             "type": "string"
           },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
+            "type": "string"
+          },
           "equation": {
             "description": "Phương trình hoặc bất phương trình đại số",
             "title": "Equation",
@@ -42,7 +48,9 @@
           "set",
           "matrix",
           "boolean_group",
-          "multiple_choice"
+          "multiple_choice",
+          "drag_drop",
+          "step_solution"
         ],
         "title": "AnswerTypeEnum",
         "type": "string"
@@ -54,6 +62,12 @@
             "default": "R",
             "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
             "title": "Domain",
+            "type": "string"
+          },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
             "type": "string"
           },
           "expression": {
@@ -87,6 +101,12 @@
             "default": "R",
             "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
             "title": "Domain",
+            "type": "string"
+          },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
             "type": "string"
           },
           "expression": {
@@ -127,7 +147,7 @@
         "properties": {
           "answer_type": {
             "$ref": "#/components/schemas/AnswerTypeEnum",
-            "description": "Kiểu dữ liệu của đáp án (number, expression, interval, set...)"
+            "description": "Kiểu dữ liệu của đáp án (number, expression, interval, set, drag_drop, step_solution...)"
           },
           "canonical_answer": {
             "description": "Đáp án chuẩn của ngân hàng đề hoặc giáo viên",
@@ -347,6 +367,17 @@
             "title": "Trace Id",
             "type": "string"
           },
+          "unsupported_reason": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UnsupportedReasonEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mã định danh lý do không hỗ trợ (bắt buộc khi status == 'unsupported')"
+          },
           "warnings": {
             "description": "Danh sách cảnh báo toán học (điều kiện biên, phân kỳ, nhánh nghiệm)",
             "items": {
@@ -367,12 +398,17 @@
         "additionalProperties": false,
         "description": "Specific result payload for submission checking.",
         "properties": {
+          "canonical_answer": {
+            "description": "Đáp án chuẩn trích xuất từ ngân hàng đề hoặc đề bài gốc",
+            "title": "Canonical Answer",
+            "type": "string"
+          },
           "canonical_latex": {
             "description": "Đáp án chuẩn định dạng KaTeX chuẩn hóa",
             "title": "Canonical Latex",
             "type": "string"
           },
-          "detected_misconception_id": {
+          "cas_answer": {
             "anyOf": [
               {
                 "type": "string"
@@ -381,8 +417,25 @@
                 "type": "null"
               }
             ],
-            "description": "Mã bẫy nhận thức phát hiện được (vd: TRAP_EXTREMA_DELTA_CONFUSION)",
-            "title": "Detected Misconception Id"
+            "description": "Đáp án do SymPy CAS tính toán độc lập (nếu giải được tất định)",
+            "title": "Cas Answer"
+          },
+          "conflict": {
+            "default": false,
+            "description": "Cờ đánh dấu có sự mâu thuẫn giữa đáp án ngân hàng gốc và kết quả tính của CAS. Khi conflict=True, verdict bắt buộc là cannot_determine và KHÔNG trừ điểm học sinh.",
+            "title": "Conflict",
+            "type": "boolean"
+          },
+          "detected_misconception_id": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MisconceptionTrapEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mã bẫy nhận thức chuẩn GEMINI.md phát hiện được nếu học sinh làm sai"
           },
           "feedback_vi": {
             "description": "Nhận xét phản hồi sư phạm bằng tiếng Việt",
@@ -413,6 +466,7 @@
         },
         "required": [
           "verdict",
+          "canonical_answer",
           "feedback_vi",
           "canonical_latex",
           "student_latex"
@@ -437,6 +491,12 @@
             "default": "R",
             "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
             "title": "Domain",
+            "type": "string"
+          },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
             "type": "string"
           },
           "parameters": {
@@ -547,6 +607,12 @@
             "title": "Domain",
             "type": "string"
           },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
+            "type": "string"
+          },
           "equation": {
             "description": "Phương trình vi phân (vd: y' + P(x)y = Q(x))",
             "title": "Equation",
@@ -603,10 +669,9 @@
             "title": "Latex",
             "type": "string"
           },
-          "misconceptionId": {
-            "description": "Mã định danh bẫy nhận thức (vd: TRAP_EXTREMA_DELTA_CONFUSION, TRAP_LOG_DOMAIN_IGNORED)",
-            "title": "Misconceptionid",
-            "type": "string"
+          "misconception_id": {
+            "$ref": "#/components/schemas/MisconceptionTrapEnum",
+            "description": "Mã định danh bẫy nhận thức chuẩn GEMINI.md (vd: TRAP_EXTREMA_DELTA_CONFUSION, TRAP_LOG_DOMAIN_IGNORED)"
           },
           "option_index": {
             "description": "Chỉ số vị trí phương án (0..5)",
@@ -619,7 +684,7 @@
         "required": [
           "option_index",
           "latex",
-          "misconceptionId",
+          "misconception_id",
           "explanation_vi"
         ],
         "title": "DistractorItem",
@@ -668,6 +733,12 @@
             "title": "Domain",
             "type": "string"
           },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
+            "type": "string"
+          },
           "equation": {
             "description": "Phương trình hoặc bất phương trình mũ/logarit",
             "title": "Equation",
@@ -712,6 +783,12 @@
             "default": "R",
             "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
             "title": "Domain",
+            "type": "string"
+          },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
             "type": "string"
           },
           "expression": {
@@ -848,6 +925,17 @@
             "title": "Trace Id",
             "type": "string"
           },
+          "unsupported_reason": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UnsupportedReasonEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mã định danh lý do không hỗ trợ (bắt buộc khi status == 'unsupported')"
+          },
           "warnings": {
             "description": "Danh sách cảnh báo toán học (điều kiện biên, phân kỳ, nhánh nghiệm)",
             "items": {
@@ -971,6 +1059,12 @@
             "title": "Domain",
             "type": "string"
           },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
+            "type": "string"
+          },
           "elements": {
             "additionalProperties": {
               "additionalProperties": {
@@ -1062,6 +1156,12 @@
             "title": "Domain",
             "type": "string"
           },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
+            "type": "string"
+          },
           "integrand": {
             "description": "Hàm dưới dấu tích phân f(x)",
             "title": "Integrand",
@@ -1125,6 +1225,12 @@
             "title": "Domain",
             "type": "string"
           },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
+            "type": "string"
+          },
           "expression": {
             "description": "Biểu thức dãy số hoặc hàm số cần tính giới hạn",
             "title": "Expression",
@@ -1156,6 +1262,12 @@
             "default": "R",
             "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
             "title": "Domain",
+            "type": "string"
+          },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
             "type": "string"
           },
           "matrices": {
@@ -1206,6 +1318,12 @@
             "title": "Domain",
             "type": "string"
           },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
+            "type": "string"
+          },
           "expression": {
             "description": "Biểu thức hàm số f(x)",
             "title": "Expression",
@@ -1242,6 +1360,31 @@
         "title": "MinMaxIntervalDSL",
         "type": "object"
       },
+      "MisconceptionTrapEnum": {
+        "enum": [
+          "TRAP_LOG_DOMAIN_IGNORED",
+          "TRAP_RADICAL_DOMAIN_IGNORED",
+          "TRAP_EXTREMA_DELTA_CONFUSION",
+          "TRAP_SIGN_ERROR",
+          "TRAP_INVERSE_OPERATION",
+          "TRAP_BOUNDARY_NOT_CHECKED",
+          "TRAP_ANGLE_LINE_VS_VECTOR",
+          "TRAP_COLLINEAR_ZERO_DIVISION",
+          "TRAP_CROSS_PRODUCT_IS_SCALAR",
+          "TRAP_SPHERE_RADIUS_INVALID",
+          "TRAP_LINE_CANONICAL_ZERO_DENOM",
+          "TRAP_PLANE_DISTANCE_NO_ABS",
+          "TRAP_PERM_COMB_CONFUSION",
+          "TRAP_PROB_SUM_NOT_DISJOINT",
+          "TRAP_ROUND_TABLE_NUMBERED_SEATS",
+          "TRAP_ROUND_TABLE_BLOCK_FACTORIAL",
+          "TRAP_ROUND_TABLE_ALTERNATING_OVERCOUNT",
+          "TRAP_ROUND_TABLE_FLIP_SYMMETRY",
+          "TRAP_OTHER"
+        ],
+        "title": "MisconceptionTrapEnum",
+        "type": "string"
+      },
       "MonotonicityDSL": {
         "additionalProperties": false,
         "properties": {
@@ -1249,6 +1392,12 @@
             "default": "R",
             "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
             "title": "Domain",
+            "type": "string"
+          },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
             "type": "string"
           },
           "expression": {
@@ -1296,6 +1445,12 @@
             "title": "Domain",
             "type": "string"
           },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
+            "type": "string"
+          },
           "expression": {
             "description": "Biểu thức hàm số f(x)",
             "title": "Expression",
@@ -1338,6 +1493,12 @@
             "default": "R",
             "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
             "title": "Domain",
+            "type": "string"
+          },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
             "type": "string"
           },
           "expression": {
@@ -1386,6 +1547,12 @@
             "default": "R",
             "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
             "title": "Domain",
+            "type": "string"
+          },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
             "type": "string"
           },
           "goal": {
@@ -1517,8 +1684,9 @@
             "title": "Dsl"
           },
           "previous_steps": {
-            "description": "Lịch sử các bước gợi ý hoặc tương tác trước đó (tối đa 20 mục)",
+            "description": "Lịch sử các bước gợi ý hoặc tương tác trước đó (tối đa 20 mục, mỗi mục tối đa 500 ký tự)",
             "items": {
+              "maxLength": 500,
               "type": "string"
             },
             "maxItems": 20,
@@ -1624,6 +1792,17 @@
             "description": "Mã truy vết duy nhất của request (UUIDv4)",
             "title": "Trace Id",
             "type": "string"
+          },
+          "unsupported_reason": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UnsupportedReasonEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mã định danh lý do không hỗ trợ (bắt buộc khi status == 'unsupported')"
           },
           "warnings": {
             "description": "Danh sách cảnh báo toán học (điều kiện biên, phân kỳ, nhánh nghiệm)",
@@ -1741,10 +1920,15 @@
             "title": "Domain",
             "type": "string"
           },
-          "reason": {
-            "description": "Lý do bài toán ngoài phạm vi hỗ trợ tự động",
-            "title": "Reason",
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
             "type": "string"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/UnsupportedReasonEnum",
+            "description": "Lý do chuẩn hóa bài toán ngoài phạm vi hỗ trợ tự động"
           },
           "type": {
             "const": "unsupported",
@@ -1764,6 +1948,21 @@
         ],
         "title": "UnsupportedProblemDSL",
         "type": "object"
+      },
+      "UnsupportedReasonEnum": {
+        "enum": [
+          "figure_dependent_hard",
+          "figure_dependent_soft",
+          "complex_numbers",
+          "solid_geometry",
+          "algorithm_or_code",
+          "number_theory_modular",
+          "statistics",
+          "interactive_ui_type",
+          "out_of_scope"
+        ],
+        "title": "UnsupportedReasonEnum",
+        "type": "string"
       },
       "ValidationError": {
         "properties": {
@@ -1824,6 +2023,12 @@
             "default": "R",
             "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
             "title": "Domain",
+            "type": "string"
+          },
+          "dsl_version": {
+            "default": "0.1.0-alpha",
+            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
+            "title": "Dsl Version",
             "type": "string"
           },
           "intervals_sign": {

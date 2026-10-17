@@ -4,10 +4,10 @@ Defines envelope responses, confidence metrics, status enums, and strict base co
 """
 
 from enum import StrEnum
-from typing import Any, Generic, TypeVar
+from typing import Any, Generic, Self, TypeVar
 from uuid import uuid4
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 T = TypeVar("T")
 
@@ -40,6 +40,18 @@ class ConfidenceMethod(StrEnum):
     SYMBOLIC = "symbolic"
     NUMERIC = "numeric"
     CONSENSUS = "consensus"
+
+
+class UnsupportedReasonEnum(StrEnum):
+    FIGURE_DEPENDENT_HARD = "figure_dependent_hard"
+    FIGURE_DEPENDENT_SOFT = "figure_dependent_soft"
+    COMPLEX_NUMBERS = "complex_numbers"
+    SOLID_GEOMETRY = "solid_geometry"
+    ALGORITHM_OR_CODE = "algorithm_or_code"
+    NUMBER_THEORY_MODULAR = "number_theory_modular"
+    STATISTICS = "statistics"
+    INTERACTIVE_UI_TYPE = "interactive_ui_type"
+    OUT_OF_SCOPE = "out_of_scope"
 
 
 class ConfidenceInfo(StrictBaseModel):
@@ -90,6 +102,10 @@ class BaseResponseEnvelope(StrictBaseModel, Generic[T]):
     confidence: ConfidenceInfo = Field(
         ..., description="Thông tin mức độ tin cậy và phương pháp kiểm chứng"
     )
+    unsupported_reason: UnsupportedReasonEnum | None = Field(
+        default=None,
+        description="Mã định danh lý do không hỗ trợ (bắt buộc khi status == 'unsupported')",
+    )
     restate_vi: str | None = Field(
         default=None,
         description="Thuật lại đề bài toán học đã chuẩn hóa bằng tiếng Việt",
@@ -110,6 +126,35 @@ class BaseResponseEnvelope(StrictBaseModel, Generic[T]):
         default=None,
         description="Thông tin lỗi chi tiết nếu status == 'error'",
     )
+
+    @model_validator(mode="after")
+    def validate_status_invariants(self) -> Self:
+        """
+        Enforce strict status invariants:
+        - verified: requires confidence and non-None result payload.
+        - error: requires error object and result must be None.
+        - unsupported: requires unsupported_reason.
+        """
+        if self.status == StatusEnum.VERIFIED:
+            if self.result is None:
+                raise ValueError(
+                    "Envelope with status 'verified' must have a non-None result payload."
+                )
+            if self.confidence is None:
+                raise ValueError(
+                    "Envelope with status 'verified' must include confidence information."
+                )
+        elif self.status == StatusEnum.ERROR:
+            if self.error is None:
+                raise ValueError("Envelope with status 'error' must provide an error object.")
+            if self.result is not None:
+                raise ValueError("Envelope with status 'error' must have result=None.")
+        elif self.status == StatusEnum.UNSUPPORTED:
+            if self.unsupported_reason is None:
+                raise ValueError(
+                    "Envelope with status 'unsupported' must provide an unsupported_reason."
+                )
+        return self
 
 
 class HealthResponse(StrictBaseModel):

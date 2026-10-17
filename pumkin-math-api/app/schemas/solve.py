@@ -3,6 +3,8 @@ Solve Endpoint Schemas (POST /v1/solve)
 Socratic AI Tutoring requests and structured envelope responses.
 """
 
+from typing import Annotated
+
 from pydantic import Field
 
 from app.schemas.common import BaseResponseEnvelope, StrictBaseModel
@@ -36,10 +38,13 @@ class SolveRequest(StrictBaseModel):
         le=4,
         description="Bậc gợi ý Socratic (1: Nudge, 2: Concept, 3: Sub-goal, 4: Worked Step)",
     )
-    previous_steps: list[str] = Field(
+    previous_steps: list[Annotated[str, Field(max_length=500)]] = Field(
         default_factory=list,
         max_length=20,
-        description="Lịch sử các bước gợi ý hoặc tương tác trước đó (tối đa 20 mục)",
+        description=(
+            "Lịch sử các bước gợi ý hoặc tương tác trước đó "
+            "(tối đa 20 mục, mỗi mục tối đa 500 ký tự)"
+        ),
     )
 
 

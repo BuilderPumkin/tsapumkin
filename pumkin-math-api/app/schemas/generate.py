@@ -8,6 +8,7 @@ from enum import StrEnum
 from pydantic import Field
 
 from app.schemas.common import BaseResponseEnvelope, StrictBaseModel
+from app.schemas.traps import MisconceptionTrapEnum
 
 
 class DifficultyEnum(StrEnum):
@@ -56,10 +57,10 @@ class DistractorItem(StrictBaseModel):
 
     option_index: int = Field(..., ge=0, le=5, description="Chỉ số vị trí phương án (0..5)")
     latex: str = Field(..., description="Nội dung phương án sai định dạng KaTeX")
-    misconceptionId: str = Field(
+    misconception_id: MisconceptionTrapEnum = Field(
         ...,
         description=(
-            "Mã định danh bẫy nhận thức "
+            "Mã định danh bẫy nhận thức chuẩn GEMINI.md "
             "(vd: TRAP_EXTREMA_DELTA_CONFUSION, TRAP_LOG_DOMAIN_IGNORED)"
         ),
     )
