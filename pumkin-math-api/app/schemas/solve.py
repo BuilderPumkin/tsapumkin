@@ -8,7 +8,6 @@ from typing import Annotated
 from pydantic import Field
 
 from app.schemas.common import BaseResponseEnvelope, StrictBaseModel
-from app.schemas.dsl import MathProblemDSL
 
 
 class SolveRequest(StrictBaseModel):
@@ -27,10 +26,6 @@ class SolveRequest(StrictBaseModel):
         default=None,
         max_length=100,
         description="Mã định danh câu hỏi nếu thuộc ngân hàng đề",
-    )
-    dsl: MathProblemDSL | None = Field(
-        default=None,
-        description="Biểu diễn DSL trung gian của bài toán nếu client đã parse sẵn",
     )
     step_index: int = Field(
         default=1,

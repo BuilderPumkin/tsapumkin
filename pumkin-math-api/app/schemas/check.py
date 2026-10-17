@@ -9,7 +9,6 @@ from typing import Self
 from pydantic import Field, model_validator
 
 from app.schemas.common import BaseResponseEnvelope, StatusEnum, StrictBaseModel
-from app.schemas.dsl import MathProblemDSL
 from app.schemas.traps import MisconceptionTrapEnum
 
 
@@ -42,10 +41,6 @@ class CheckRequest(StrictBaseModel):
         default=None,
         max_length=2000,
         description="Đề bài bằng chữ nếu có",
-    )
-    dsl: MathProblemDSL | None = Field(
-        default=None,
-        description="Cấu trúc DSL trung gian nếu có",
     )
     question_id: str | None = Field(
         default=None,

@@ -37,11 +37,23 @@ Pumkin Math API là microservice độc lập (Python 3.11+, FastAPI, Pydantic v
 [FastAPI Microservice (Pumkin Math API)]
    ├─► [1. Semantic Parser (LLM)] ──────── (Chỉ dịch đề TV sang DSL JSON; TUYỆT ĐỐI KHÔNG TÍNH TOÁN)
    ├─► [2. DSL Allowlist Grammar Parser] ─ (Pydantic v2 schema validation, cấm injection, không eval)
-   ├─► [3. Deterministic Solver (SymPy)] ─ (Thực thi tính toán đại số/giải tích tất định 100%)
+   ├─► [3. Deterministic Solver (SymPy)] ─ (Thực thi tính toán đại số/giải tích bằng bộ giải tất định SymPy CAS)
    ├─► [4. Cross-Verification Engine] ──── (Kiểm chứng chéo nghiệm, điều kiện xác định, kiểm tra bẫy)
    ├─► [5. Conflict & Ambiguity Router] ── (Xử lý mâu thuẫn CAS vs Đáp án gốc; ghi log audit)
    └─► [6. Socratic Pedagogical Formatter]  (Định dạng công thức KaTeX \( ... \), sư phạm 4 bậc)
 ```
+
+### 1.2. Phân Định Vai Trò LLM & Quản Trị Nguồn Parse (Parse Source Governance)
+- **Phạm vi áp dụng "ZERO LLM":** Áp dụng tuyệt đối cho bước Kiểm chứng, Giải toán và Chấm điểm (`Deterministic Solver`, `Cross-Verification`, `Checker`). LLM tuyệt đối không bao giờ được tính toán nghiệm, không đạo hàm, không tích phân, và không tham gia bỏ phiếu chân lý toán học.
+- **Vai trò của LLM ở Prompt 4:** Tại Prompt 4, LLM chỉ đóng vai trò Semantic Parser (dịch đề văn bản tiếng Việt sang cấu trúc JSON DSL trung gian).
+- **Đề xuất ghi nhận nguồn parse (`parse_source`):**
+  - Khi triển khai Prompt 4, hệ thống sẽ bổ sung trường metadata `parse_source: rule | llm | curated_bank`:
+    - `rule`: Được dịch bởi bộ quy tắc regex / AST tất định.
+    - `curated_bank`: Trích xuất trực tiếp từ ngân hàng câu hỏi đã qua biên tập tay của giáo viên.
+    - `llm`: Được dịch bởi mô hình ngôn ngữ lớn (Gemini API).
+- **Quy tắc hạ bậc độ tin cậy đối với nguồn LLM:** Khi `parse_source == 'llm'`, điểm số tin cậy định lượng (`confidence.score`) bắt buộc phải áp dụng hệ số suy giảm (discount factor) hoặc bị giới hạn trần (ví dụ $\le 0.90$), phản ánh rủi ro hiểu sai đề bài của mô hình ngôn ngữ.
+- **Quy trình xác nhận của học sinh qua `restate_vi`:** Giao diện học sinh sẽ hiển thị đề bài đã được diễn giải lại (`restate_vi`) để học sinh chủ động xác nhận: *"Hệ thống hiểu bài toán của bạn là: [restate_vi]. Hãy bấm Xác nhận để tiếp tục nhận gợi ý."* Nếu học sinh nhận thấy diễn giải sai, phiên giải sẽ được hủy mà không trừ quota.
+- **Kế hoạch phiên bản SemVer:** Thay đổi trên sẽ được bổ sung dưới dạng trường tùy chọn (optional field) tại Prompt 4, tạo thành bản nâng cấp MINOR hợp lệ: `schema_version: "1.1.0"`.
 
 ---
 
@@ -164,7 +176,7 @@ Sau khi phân tách và loại trừ các dạng ngoài phạm vi (38 câu Unsup
 
 ### 5.1. Khảo sát Schema thực tế
 - Quét toàn bộ schema 553 câu hỏi đối với các trường liên quan đến hình ảnh (`image`, `figure`, `img`, `url`, `diagram`, `svg`, `attachment`, `photo`, `draw`, `asset`):
-  - **Kết quả: 0 trường hình ảnh.** Ngân hàng câu hỏi PUMKIN.DEV hiện tại lưu trữ 100% dữ liệu dưới dạng văn bản và KaTeX, không có tệp đính kèm nhị phân.
+  - **Kết quả: 0 trường hình ảnh.** Ngân hàng câu hỏi PUMKIN.DEV hiện tại lưu trữ toàn bộ dữ liệu dưới dạng văn bản và KaTeX, không có tệp đính kèm nhị phân.
   - Trường `sandbox_config` (114 câu): Lưu cấu hình tọa độ cho khung tương tác JSXGraph phía client, không phải tệp ảnh.
 
 ### 5.2. Quét văn bản đề bài và phân loại 2 mức độ
@@ -256,7 +268,7 @@ Khi kết quả tính toán tất định của SymPy mâu thuẫn với đáp �
 Mọi phản hồi từ Pumkin Math API bắt buộc phải chứa trường `status` thuộc 1 trong 4 giá trị:
 
 1. **`verified` (Đã kiểm chứng chuẩn xác):**
-   - Đã được SymPy giải thành công và đối chiếu chéo (Cross-verification) vượt qua 100% các điều kiện biên.
+   - Đã được SymPy giải thành công và đối chiếu chéo (Cross-verification) vượt qua toàn bộ các điều kiện biên.
    - `confidence`: $\ge 0.95$.
 2. **`needs_review` (Cần con người xem xét):**
    - Kết quả giải được nhưng còn mâu thuẫn với đáp án gốc, hoặc thuộc nhóm câu hỏi trực quan `SOFT-REVIEW` có nguy cơ hiểu nhầm ngữ cảnh.

@@ -83,6 +83,19 @@ class ErrorDetail(StrictBaseModel):
     )
 
 
+class WarningCode(StrEnum):
+    WARN_SOFT_VISUAL_DEPENDENCY = "WARN_SOFT_VISUAL_DEPENDENCY"
+    WARN_BOUNDARY_RESTRICTION = "WARN_BOUNDARY_RESTRICTION"
+    WARN_MULTIPLE_BRANCHES = "WARN_MULTIPLE_BRANCHES"
+    WARN_NUMERIC_APPROXIMATION = "WARN_NUMERIC_APPROXIMATION"
+    WARN_POTENTIAL_EXTRANEOUS_ROOT = "WARN_POTENTIAL_EXTRANEOUS_ROOT"
+
+
+class WarningItem(StrictBaseModel):
+    code: WarningCode | str = Field(..., description="Mã cảnh báo toán học chuẩn")
+    message_vi: str = Field(..., description="Nội dung cảnh báo sư phạm bằng tiếng Việt")
+
+
 class BaseResponseEnvelope(StrictBaseModel, Generic[T]):
     """
     Standard top-level envelope wrapping every successful or handled API response.
@@ -117,9 +130,9 @@ class BaseResponseEnvelope(StrictBaseModel, Generic[T]):
         default_factory=list,
         description="Danh sách các bước biến đổi trung gian (nếu có)",
     )
-    warnings: list[str] = Field(
+    warnings: list[WarningItem] = Field(
         default_factory=list,
-        description="Danh sách cảnh báo toán học (điều kiện biên, phân kỳ, nhánh nghiệm)",
+        description="Danh sách cảnh báo toán học có cấu trúc (mã chuẩn và lời giải thích)",
     )
     error: ErrorDetail | None = Field(
         default=None,

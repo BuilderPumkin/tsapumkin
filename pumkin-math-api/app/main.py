@@ -7,8 +7,10 @@ import sys
 from uuid import uuid4
 
 import sympy
-from fastapi import Depends, FastAPI, Request, status
+from fastapi import Depends, FastAPI, status
 from fastapi.responses import JSONResponse
+from starlette.datastructures import Headers
+from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from app import __version__
 from app.auth import verify_api_key
@@ -35,34 +37,13 @@ app = FastAPI(
 )
 
 
-@app.middleware("http")
-async def limit_request_body_size(request: Request, call_next):
-    """
-    Application-level safeguard restricting HTTP body payloads to <= 1 MB.
-    Rejects oversized requests with 413 Request Entity Too Large.
-    """
-    content_length = request.headers.get("content-length")
-    if content_length:
-        try:
-            length = int(content_length)
-            if length > MAX_BODY_SIZE_BYTES:
-                return JSONResponse(
-                    status_code=status.HTTP_413_CONTENT_TOO_LARGE,
-                    content={
-                        "code": "PAYLOAD_TOO_LARGE",
-                        "message_vi": (
-                            "Kích thước yêu cầu vượt quá giới hạn tối đa cho phép (1 MB)."
-                        ),
-                        "max_allowed_bytes": MAX_BODY_SIZE_BYTES,
-                    },
-                )
-        except ValueError:
-            pass
-    return await call_next(request)
-
-
-def make_501_not_implemented_response(message_vi: str) -> JSONResponse:
-    """Helper creating standardized BaseResponseEnvelope for 501 Not Implemented."""
+def make_envelope_error_response(
+    status_code: int,
+    code: str,
+    message_vi: str,
+    details: dict | None = None,
+) -> JSONResponse:
+    """Helper creating standardized BaseResponseEnvelope for error status codes."""
     payload = {
         "schema_version": "1.0.0",
         "trace_id": str(uuid4()),
@@ -72,17 +53,135 @@ def make_501_not_implemented_response(message_vi: str) -> JSONResponse:
             "method": ConfidenceMethod.SYMBOLIC,
             "score": 0.0,
         },
+        "unsupported_reason": None,
         "restate_vi": None,
         "result": None,
         "steps": [],
         "warnings": [],
         "error": {
-            "code": "NOT_IMPLEMENTED",
+            "code": code,
             "message_vi": message_vi,
-            "details": None,
+            "details": details,
         },
     }
-    return JSONResponse(status_code=status.HTTP_501_NOT_IMPLEMENTED, content=payload)
+    return JSONResponse(status_code=status_code, content=payload)
+
+
+def make_501_not_implemented_response(message_vi: str) -> JSONResponse:
+    """Helper creating standardized BaseResponseEnvelope for 501 Not Implemented."""
+    return make_envelope_error_response(
+        status_code=status.HTTP_501_NOT_IMPLEMENTED,
+        code="NOT_IMPLEMENTED",
+        message_vi=message_vi,
+    )
+
+
+class BodySizeLimitMiddleware:
+    """
+    Pure ASGI middleware enforcing maximum HTTP request body size (1 MB).
+    - If Content-Length header is present and > 1 MB: rejects with HTTP 413.
+    - If method in (POST, PUT, PATCH):
+      - If Content-Length missing and Transfer-Encoding != chunked:
+        rejects with HTTP 411 Length Required.
+      - If chunked: streams chunks through receive(), accumulates up to 1 MB limit.
+        Rejects with HTTP 413 if exceeded; replays buffer to downstream if within limit.
+    """
+
+    def __init__(self, app: ASGIApp) -> None:
+        self.app = app
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        method = scope.get("method", "")
+        if method in ("POST", "PUT", "PATCH"):
+            headers = Headers(raw=scope.get("headers", []))
+            content_length = headers.get("content-length")
+            transfer_encoding = headers.get("transfer-encoding", "").lower()
+
+            # Case 1: Neither Content-Length nor chunked transfer encoding is provided
+            if content_length is None and "chunked" not in transfer_encoding:
+                response = make_envelope_error_response(
+                    status_code=status.HTTP_411_LENGTH_REQUIRED,
+                    code="LENGTH_REQUIRED",
+                    message_vi=(
+                        "Yêu cầu bắt buộc phải có tiêu đề Content-Length "
+                        "hoặc Transfer-Encoding: chunked."
+                    ),
+                    details={"method": method},
+                )
+                await response(scope, receive, send)
+                return
+
+            # Case 2: Content-Length header is provided
+            if content_length is not None:
+                try:
+                    length = int(content_length)
+                    if length > MAX_BODY_SIZE_BYTES:
+                        response = make_envelope_error_response(
+                            status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+                            code="PAYLOAD_TOO_LARGE",
+                            message_vi=(
+                                "Kích thước yêu cầu vượt quá giới hạn tối đa cho phép (1 MB)."
+                            ),
+                            details={
+                                "max_allowed_bytes": MAX_BODY_SIZE_BYTES,
+                                "received_bytes": length,
+                            },
+                        )
+                        await response(scope, receive, send)
+                        return
+                except ValueError:
+                    response = make_envelope_error_response(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        code="INVALID_CONTENT_LENGTH",
+                        message_vi="Tiêu đề Content-Length không hợp lệ.",
+                    )
+                    await response(scope, receive, send)
+                    return
+
+            # Case 3: Chunked transfer encoding streaming threshold
+            if "chunked" in transfer_encoding:
+                received_bytes = 0
+                chunks: list[bytes] = []
+                more_body = True
+                while more_body:
+                    message = await receive()
+                    chunk = message.get("body", b"")
+                    received_bytes += len(chunk)
+                    if received_bytes > MAX_BODY_SIZE_BYTES:
+                        response = make_envelope_error_response(
+                            status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+                            code="PAYLOAD_TOO_LARGE",
+                            message_vi=(
+                                "Dung lượng dữ liệu chunked vượt quá giới hạn (1 MB)."
+                            ),
+                            details={"max_allowed_bytes": MAX_BODY_SIZE_BYTES},
+                        )
+                        await response(scope, receive, send)
+                        return
+                    chunks.append(chunk)
+                    more_body = message.get("more_body", False)
+
+                full_body = b"".join(chunks)
+                has_sent = False
+
+                async def replay_receive() -> Message:
+                    nonlocal has_sent
+                    if not has_sent:
+                        has_sent = True
+                        return {"type": "http.request", "body": full_body, "more_body": False}
+                    return {"type": "http.request", "body": b"", "more_body": False}
+
+                await self.app(scope, replay_receive, send)
+                return
+
+        await self.app(scope, receive, send)
+
+
+app.add_middleware(BodySizeLimitMiddleware)
 
 
 @app.get(

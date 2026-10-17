@@ -99,5 +99,37 @@ def test_endpoint_responses_contain_no_prohibited_terms(auth_client):
         resp = auth_client.post(path, json=payload)
         text = resp.text
         assert "chính xác 100%" not in text.lower()
+        assert "100% tất định" not in text.lower()
+        assert "tất định 100%" not in text.lower()
+        assert "100%" not in text
         # Ensure no raw unescaped dollar sign in response text
         assert not re.search(r"(?<!\\)\$", text), f"Raw dollar found in response from {path}"
+
+
+@pytest.mark.adversarial
+def test_no_100_percent_in_display_strings():
+    """
+    Ensure '100%' and '100% tất định' do not appear in user-facing display strings,
+    descriptions, or error messages in app code.
+    Allowed only in verified mathematical benchmark statistics or KPI tables.
+    """
+    pattern = re.compile(r"100\s*%", re.IGNORECASE)
+    violations = []
+
+    # Whitelist for permitted statistical files (e.g., benchmark tools outside app)
+    # Inside app/, all strings must avoid claiming 100%
+    for py_file in APP_DIR.rglob("*.py"):
+        content = py_file.read_text(encoding="utf-8")
+        for line_no, line in enumerate(content.splitlines(), start=1):
+            if pattern.search(line):
+                # Allow comments that explicitly forbid 100%
+                lower_line = line.lower()
+                if (
+                    "cấm" in lower_line
+                    or "không tuyên bố" in lower_line
+                    or "nghiêm cấm" in lower_line
+                ):
+                    continue
+                violations.append(f"{py_file.name}:{line_no}: {line.strip()}")
+
+    assert not violations, f"Found unallowed '100%' in app display strings: {violations}"

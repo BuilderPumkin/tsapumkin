@@ -17,6 +17,8 @@ from app.schemas.common import (
     ErrorDetail,
     StatusEnum,
     UnsupportedReasonEnum,
+    WarningCode,
+    WarningItem,
 )
 
 
@@ -133,3 +135,36 @@ def test_envelope_unsupported_missing_reason_raises(base_confidence):
         )
     msg = "Envelope with status 'unsupported' must provide an unsupported_reason"
     assert msg in str(exc_info.value)
+
+
+@pytest.mark.unit
+def test_envelope_with_structured_warnings(base_confidence):
+    """Structured warnings with code and message_vi must be properly validated."""
+    warning = WarningItem(
+        code=WarningCode.WARN_SOFT_VISUAL_DEPENDENCY,
+        message_vi="Đề bài có hình minh họa phụ trợ nhưng công thức toán học đã đầy đủ",
+    )
+    env = BaseResponseEnvelope[dict](
+        status=StatusEnum.VERIFIED,
+        confidence=base_confidence,
+        result={"x": 1},
+        warnings=[warning],
+    )
+    assert len(env.warnings) == 1
+    assert env.warnings[0].code == WarningCode.WARN_SOFT_VISUAL_DEPENDENCY
+    assert "hình minh họa" in env.warnings[0].message_vi
+
+
+@pytest.mark.unit
+def test_envelope_warning_item_rejection():
+    """WarningItem must reject missing fields and unknown extra fields."""
+    with pytest.raises(ValidationError):
+        WarningItem.model_validate({"code": WarningCode.WARN_BOUNDARY_RESTRICTION})
+
+    with pytest.raises(ValidationError):
+        WarningItem.model_validate({
+            "code": WarningCode.WARN_BOUNDARY_RESTRICTION,
+            "message_vi": "Cảnh báo",
+            "extra_field": "disallowed",
+        })
+

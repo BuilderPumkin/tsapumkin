@@ -1,45 +1,6 @@
 {
   "components": {
     "schemas": {
-      "AlgebraicEquationDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "equation": {
-            "description": "Phương trình hoặc bất phương trình đại số",
-            "title": "Equation",
-            "type": "string"
-          },
-          "type": {
-            "const": "phuong_trinh_bat_phuong_trinh_dai_so",
-            "default": "phuong_trinh_bat_phuong_trinh_dai_so",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "equation"
-        ],
-        "title": "AlgebraicEquationDSL",
-        "type": "object"
-      },
       "AnswerTypeEnum": {
         "enum": [
           "number",
@@ -55,92 +16,6 @@
         "title": "AnswerTypeEnum",
         "type": "string"
       },
-      "AsymptoteDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "expression": {
-            "description": "Biểu thức hàm phân thức f(x)",
-            "title": "Expression",
-            "type": "string"
-          },
-          "type": {
-            "const": "ham_so_tiem_can",
-            "default": "ham_so_tiem_can",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "expression"
-        ],
-        "title": "AsymptoteDSL",
-        "type": "object"
-      },
-      "BasicDerivativeDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "expression": {
-            "description": "Hàm số cần tính đạo hàm f(x)",
-            "title": "Expression",
-            "type": "string"
-          },
-          "order": {
-            "default": 1,
-            "description": "Cấp của đạo hàm cần tính",
-            "maximum": 5.0,
-            "minimum": 1.0,
-            "title": "Order",
-            "type": "integer"
-          },
-          "type": {
-            "const": "ham_so_dao_ham_co_ban",
-            "default": "ham_so_dao_ham_co_ban",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "expression"
-        ],
-        "title": "BasicDerivativeDSL",
-        "type": "object"
-      },
       "CheckRequest": {
         "additionalProperties": false,
         "description": "Input payload for student answer or intermediate step checking.\nRequires question text or DSL, canonical answer, student answer, and answer type.",
@@ -155,96 +30,6 @@
             "minLength": 1,
             "title": "Canonical Answer",
             "type": "string"
-          },
-          "dsl": {
-            "anyOf": [
-              {
-                "discriminator": {
-                  "mapping": {
-                    "dai_so_tuyen_tinh_ma_tran": "#/components/schemas/LinearAlgebraDSL",
-                    "gioi_han_day_so": "#/components/schemas/LimitSequenceDSL",
-                    "ham_so_chua_tham_so_m": "#/components/schemas/ParameterMDSL",
-                    "ham_so_cuc_tri_cho_truoc": "#/components/schemas/ExtremaDSL",
-                    "ham_so_dang_khac": "#/components/schemas/OtherFunctionDSL",
-                    "ham_so_dao_ham_co_ban": "#/components/schemas/BasicDerivativeDSL",
-                    "ham_so_doc_bang_bien_thien": "#/components/schemas/VariationTableDSL",
-                    "ham_so_gtln_gtnn_doan_khoang": "#/components/schemas/MinMaxIntervalDSL",
-                    "ham_so_tiem_can": "#/components/schemas/AsymptoteDSL",
-                    "ham_so_tinh_don_dieu": "#/components/schemas/MonotonicityDSL",
-                    "ham_so_toan_thuc_te_toi_uu": "#/components/schemas/RealWorldOptimizationDSL",
-                    "hinh_hoc_oxyz": "#/components/schemas/GeometryOxyzDSL",
-                    "mu_logarit_pt_bpt": "#/components/schemas/ExponentialLogDSL",
-                    "nguyen_ham_tich_phan": "#/components/schemas/IntegralDSL",
-                    "phuong_trinh_bat_phuong_trinh_dai_so": "#/components/schemas/AlgebraicEquationDSL",
-                    "phuong_trinh_vi_phan": "#/components/schemas/DifferentialEquationDSL",
-                    "to_hop_xac_suat": "#/components/schemas/CombinatoricsProbabilityDSL",
-                    "unsupported": "#/components/schemas/UnsupportedProblemDSL"
-                  },
-                  "propertyName": "type"
-                },
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/MonotonicityDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/BasicDerivativeDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ExtremaDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/MinMaxIntervalDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ParameterMDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/RealWorldOptimizationDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/VariationTableDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AsymptoteDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/OtherFunctionDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/IntegralDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ExponentialLogDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/LimitSequenceDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/LinearAlgebraDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DifferentialEquationDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlgebraicEquationDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/GeometryOxyzDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/CombinatoricsProbabilityDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/UnsupportedProblemDSL"
-                  }
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Cấu trúc DSL trung gian nếu có",
-            "title": "Dsl"
           },
           "question_id": {
             "anyOf": [
@@ -379,9 +164,9 @@
             "description": "Mã định danh lý do không hỗ trợ (bắt buộc khi status == 'unsupported')"
           },
           "warnings": {
-            "description": "Danh sách cảnh báo toán học (điều kiện biên, phân kỳ, nhánh nghiệm)",
+            "description": "Danh sách cảnh báo toán học có cấu trúc (mã chuẩn và lời giải thích)",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/WarningItem"
             },
             "title": "Warnings",
             "type": "array"
@@ -484,69 +269,6 @@
         "title": "CheckVerdictEnum",
         "type": "string"
       },
-      "CombinatoricsProbabilityDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "parameters": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            },
-            "description": "Tham số bài toán: n, k, P(A), P(B)...",
-            "title": "Parameters",
-            "type": "object"
-          },
-          "subdomain": {
-            "enum": [
-              "classical_probability",
-              "bayes",
-              "circular_permutation",
-              "combinatorics"
-            ],
-            "title": "Subdomain",
-            "type": "string"
-          },
-          "type": {
-            "const": "to_hop_xac_suat",
-            "default": "to_hop_xac_suat",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "subdomain",
-          "parameters"
-        ],
-        "title": "CombinatoricsProbabilityDSL",
-        "type": "object"
-      },
       "ConfidenceInfo": {
         "additionalProperties": false,
         "properties": {
@@ -597,53 +319,6 @@
         ],
         "title": "ConfidenceMethod",
         "type": "string"
-      },
-      "DifferentialEquationDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "equation": {
-            "description": "Phương trình vi phân (vd: y' + P(x)y = Q(x))",
-            "title": "Equation",
-            "type": "string"
-          },
-          "initial_conditions": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Điều kiện ban đầu (vd: {'y(0)': '1'})",
-            "title": "Initial Conditions",
-            "type": "object"
-          },
-          "type": {
-            "const": "phuong_trinh_vi_phan",
-            "default": "phuong_trinh_vi_phan",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "equation"
-        ],
-        "title": "DifferentialEquationDSL",
-        "type": "object"
       },
       "DifficultyEnum": {
         "enum": [
@@ -722,97 +397,6 @@
           "message_vi"
         ],
         "title": "ErrorDetail",
-        "type": "object"
-      },
-      "ExponentialLogDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "equation": {
-            "description": "Phương trình hoặc bất phương trình mũ/logarit",
-            "title": "Equation",
-            "type": "string"
-          },
-          "relation": {
-            "default": "=",
-            "description": "Toán tử quan hệ",
-            "enum": [
-              "=",
-              "<",
-              "<=",
-              ">",
-              ">="
-            ],
-            "title": "Relation",
-            "type": "string"
-          },
-          "type": {
-            "const": "mu_logarit_pt_bpt",
-            "default": "mu_logarit_pt_bpt",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "equation"
-        ],
-        "title": "ExponentialLogDSL",
-        "type": "object"
-      },
-      "ExtremaDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "expression": {
-            "description": "Biểu thức hàm số f(x)",
-            "title": "Expression",
-            "type": "string"
-          },
-          "type": {
-            "const": "ham_so_cuc_tri_cho_truoc",
-            "default": "ham_so_cuc_tri_cho_truoc",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "expression"
-        ],
-        "title": "ExtremaDSL",
         "type": "object"
       },
       "GenerateRequest": {
@@ -937,9 +521,9 @@
             "description": "Mã định danh lý do không hỗ trợ (bắt buộc khi status == 'unsupported')"
           },
           "warnings": {
-            "description": "Danh sách cảnh báo toán học (điều kiện biên, phân kỳ, nhánh nghiệm)",
+            "description": "Danh sách cảnh báo toán học có cấu trúc (mã chuẩn và lời giải thích)",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/WarningItem"
             },
             "title": "Warnings",
             "type": "array"
@@ -1050,57 +634,6 @@
         "title": "GeneratedQuestionItem",
         "type": "object"
       },
-      "GeometryOxyzDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "elements": {
-            "additionalProperties": {
-              "additionalProperties": {
-                "type": "string"
-              },
-              "type": "object"
-            },
-            "description": "Các đối tượng Oxyz: điểm, mặt phẳng, đường thẳng, mặt cầu",
-            "title": "Elements",
-            "type": "object"
-          },
-          "query_type": {
-            "description": "Yêu cầu: 'khoang_cach', 'goc', 'phuong_trinh_mat_cau'...",
-            "title": "Query Type",
-            "type": "string"
-          },
-          "type": {
-            "const": "hinh_hoc_oxyz",
-            "default": "hinh_hoc_oxyz",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "elements",
-          "query_type"
-        ],
-        "title": "GeometryOxyzDSL",
-        "type": "object"
-      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -1147,219 +680,6 @@
         "title": "HealthResponse",
         "type": "object"
       },
-      "IntegralDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "integrand": {
-            "description": "Hàm dưới dấu tích phân f(x)",
-            "title": "Integrand",
-            "type": "string"
-          },
-          "lower_bound": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Cận dưới (None nếu là nguyên hàm)",
-            "title": "Lower Bound"
-          },
-          "type": {
-            "const": "nguyen_ham_tich_phan",
-            "default": "nguyen_ham_tich_phan",
-            "title": "Type",
-            "type": "string"
-          },
-          "upper_bound": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Cận trên (None nếu là nguyên hàm)",
-            "title": "Upper Bound"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "integrand"
-        ],
-        "title": "IntegralDSL",
-        "type": "object"
-      },
-      "LimitSequenceDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "approaches": {
-            "default": "+oo",
-            "description": "Điểm tới hạn (vd: '0', '+oo', '-oo')",
-            "title": "Approaches",
-            "type": "string"
-          },
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "expression": {
-            "description": "Biểu thức dãy số hoặc hàm số cần tính giới hạn",
-            "title": "Expression",
-            "type": "string"
-          },
-          "type": {
-            "const": "gioi_han_day_so",
-            "default": "gioi_han_day_so",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "expression"
-        ],
-        "title": "LimitSequenceDSL",
-        "type": "object"
-      },
-      "LinearAlgebraDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "matrices": {
-            "additionalProperties": {
-              "items": {
-                "items": {
-                  "type": "number"
-                },
-                "type": "array"
-              },
-              "type": "array"
-            },
-            "description": "Từ điển ma trận và mảng 2 chiều các phần tử",
-            "title": "Matrices",
-            "type": "object"
-          },
-          "operation": {
-            "description": "Phép toán ma trận: 'det', 'inverse', 'rank', 'multiply'...",
-            "title": "Operation",
-            "type": "string"
-          },
-          "type": {
-            "const": "dai_so_tuyen_tinh_ma_tran",
-            "default": "dai_so_tuyen_tinh_ma_tran",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "matrices",
-          "operation"
-        ],
-        "title": "LinearAlgebraDSL",
-        "type": "object"
-      },
-      "MinMaxIntervalDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "expression": {
-            "description": "Biểu thức hàm số f(x)",
-            "title": "Expression",
-            "type": "string"
-          },
-          "interval_end": {
-            "description": "Điểm cuối đoạn [a; b]",
-            "title": "Interval End",
-            "type": "string"
-          },
-          "interval_start": {
-            "description": "Điểm đầu đoạn [a; b]",
-            "title": "Interval Start",
-            "type": "string"
-          },
-          "type": {
-            "const": "ham_so_gtln_gtnn_doan_khoang",
-            "default": "ham_so_gtln_gtnn_doan_khoang",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "expression",
-          "interval_start",
-          "interval_end"
-        ],
-        "title": "MinMaxIntervalDSL",
-        "type": "object"
-      },
       "MisconceptionTrapEnum": {
         "enum": [
           "TRAP_LOG_DOMAIN_IGNORED",
@@ -1385,304 +705,10 @@
         "title": "MisconceptionTrapEnum",
         "type": "string"
       },
-      "MonotonicityDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "expression": {
-            "description": "Biểu thức giải tích của hàm số f(x)",
-            "title": "Expression",
-            "type": "string"
-          },
-          "interval": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Khoảng cần xét tính đồng biến/nghịch biến",
-            "title": "Interval"
-          },
-          "type": {
-            "const": "ham_so_tinh_don_dieu",
-            "default": "ham_so_tinh_don_dieu",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "expression"
-        ],
-        "title": "MonotonicityDSL",
-        "type": "object"
-      },
-      "OtherFunctionDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "expression": {
-            "description": "Biểu thức hàm số f(x)",
-            "title": "Expression",
-            "type": "string"
-          },
-          "question_subtype": {
-            "description": "Phân loại phụ: 'tiep_tuyen', 'tuong_giao'...",
-            "title": "Question Subtype",
-            "type": "string"
-          },
-          "type": {
-            "const": "ham_so_dang_khac",
-            "default": "ham_so_dang_khac",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "expression",
-          "question_subtype"
-        ],
-        "title": "OtherFunctionDSL",
-        "type": "object"
-      },
-      "ParameterMDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "condition": {
-            "description": "Điều kiện của bài toán (vd: '2_cuc_tri', 'dong_bien_tren_R')",
-            "title": "Condition",
-            "type": "string"
-          },
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "expression": {
-            "description": "Biểu thức hàm số chứa tham số f(x, m)",
-            "title": "Expression",
-            "type": "string"
-          },
-          "parameter_name": {
-            "default": "m",
-            "description": "Tên ký hiệu của tham số",
-            "title": "Parameter Name",
-            "type": "string"
-          },
-          "type": {
-            "const": "ham_so_chua_tham_so_m",
-            "default": "ham_so_chua_tham_so_m",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "expression",
-          "condition"
-        ],
-        "title": "ParameterMDSL",
-        "type": "object"
-      },
-      "RealWorldOptimizationDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "constraints": {
-            "description": "Danh sách các ràng buộc thực tế",
-            "items": {
-              "type": "string"
-            },
-            "title": "Constraints",
-            "type": "array"
-          },
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "goal": {
-            "description": "Mục tiêu tối đa hay tối thiểu hóa",
-            "enum": [
-              "maximize",
-              "minimize"
-            ],
-            "title": "Goal",
-            "type": "string"
-          },
-          "target_function": {
-            "description": "Hàm mục tiêu cần tối ưu hóa (chi phí, diện tích...)",
-            "title": "Target Function",
-            "type": "string"
-          },
-          "type": {
-            "const": "ham_so_toan_thuc_te_toi_uu",
-            "default": "ham_so_toan_thuc_te_toi_uu",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "target_function",
-          "goal"
-        ],
-        "title": "RealWorldOptimizationDSL",
-        "type": "object"
-      },
       "SolveRequest": {
         "additionalProperties": false,
         "description": "Input payload for Socratic AI problem solving.\nStrict limits enforced to prevent denial-of-service and injection.",
         "properties": {
-          "dsl": {
-            "anyOf": [
-              {
-                "discriminator": {
-                  "mapping": {
-                    "dai_so_tuyen_tinh_ma_tran": "#/components/schemas/LinearAlgebraDSL",
-                    "gioi_han_day_so": "#/components/schemas/LimitSequenceDSL",
-                    "ham_so_chua_tham_so_m": "#/components/schemas/ParameterMDSL",
-                    "ham_so_cuc_tri_cho_truoc": "#/components/schemas/ExtremaDSL",
-                    "ham_so_dang_khac": "#/components/schemas/OtherFunctionDSL",
-                    "ham_so_dao_ham_co_ban": "#/components/schemas/BasicDerivativeDSL",
-                    "ham_so_doc_bang_bien_thien": "#/components/schemas/VariationTableDSL",
-                    "ham_so_gtln_gtnn_doan_khoang": "#/components/schemas/MinMaxIntervalDSL",
-                    "ham_so_tiem_can": "#/components/schemas/AsymptoteDSL",
-                    "ham_so_tinh_don_dieu": "#/components/schemas/MonotonicityDSL",
-                    "ham_so_toan_thuc_te_toi_uu": "#/components/schemas/RealWorldOptimizationDSL",
-                    "hinh_hoc_oxyz": "#/components/schemas/GeometryOxyzDSL",
-                    "mu_logarit_pt_bpt": "#/components/schemas/ExponentialLogDSL",
-                    "nguyen_ham_tich_phan": "#/components/schemas/IntegralDSL",
-                    "phuong_trinh_bat_phuong_trinh_dai_so": "#/components/schemas/AlgebraicEquationDSL",
-                    "phuong_trinh_vi_phan": "#/components/schemas/DifferentialEquationDSL",
-                    "to_hop_xac_suat": "#/components/schemas/CombinatoricsProbabilityDSL",
-                    "unsupported": "#/components/schemas/UnsupportedProblemDSL"
-                  },
-                  "propertyName": "type"
-                },
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/MonotonicityDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/BasicDerivativeDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ExtremaDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/MinMaxIntervalDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ParameterMDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/RealWorldOptimizationDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/VariationTableDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AsymptoteDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/OtherFunctionDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/IntegralDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ExponentialLogDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/LimitSequenceDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/LinearAlgebraDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DifferentialEquationDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/AlgebraicEquationDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/GeometryOxyzDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/CombinatoricsProbabilityDSL"
-                  },
-                  {
-                    "$ref": "#/components/schemas/UnsupportedProblemDSL"
-                  }
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Biểu diễn DSL trung gian của bài toán nếu client đã parse sẵn",
-            "title": "Dsl"
-          },
           "previous_steps": {
             "description": "Lịch sử các bước gợi ý hoặc tương tác trước đó (tối đa 20 mục, mỗi mục tối đa 500 ký tự)",
             "items": {
@@ -1805,9 +831,9 @@
             "description": "Mã định danh lý do không hỗ trợ (bắt buộc khi status == 'unsupported')"
           },
           "warnings": {
-            "description": "Danh sách cảnh báo toán học (điều kiện biên, phân kỳ, nhánh nghiệm)",
+            "description": "Danh sách cảnh báo toán học có cấu trúc (mã chuẩn và lời giải thích)",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/WarningItem"
             },
             "title": "Warnings",
             "type": "array"
@@ -1911,44 +937,6 @@
         "title": "StepItem",
         "type": "object"
       },
-      "UnsupportedProblemDSL": {
-        "additionalProperties": false,
-        "properties": {
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "reason": {
-            "$ref": "#/components/schemas/UnsupportedReasonEnum",
-            "description": "Lý do chuẩn hóa bài toán ngoài phạm vi hỗ trợ tự động"
-          },
-          "type": {
-            "const": "unsupported",
-            "default": "unsupported",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
-            "type": "string"
-          }
-        },
-        "required": [
-          "reason"
-        ],
-        "title": "UnsupportedProblemDSL",
-        "type": "object"
-      },
       "UnsupportedReasonEnum": {
         "enum": [
           "figure_dependent_hard",
@@ -2003,58 +991,43 @@
         "title": "ValidationError",
         "type": "object"
       },
-      "VariationTableDSL": {
+      "WarningCode": {
+        "enum": [
+          "WARN_SOFT_VISUAL_DEPENDENCY",
+          "WARN_BOUNDARY_RESTRICTION",
+          "WARN_MULTIPLE_BRANCHES",
+          "WARN_NUMERIC_APPROXIMATION",
+          "WARN_POTENTIAL_EXTRANEOUS_ROOT"
+        ],
+        "title": "WarningCode",
+        "type": "string"
+      },
+      "WarningItem": {
         "additionalProperties": false,
         "properties": {
-          "derivative_expression": {
+          "code": {
             "anyOf": [
               {
-                "type": "string"
+                "$ref": "#/components/schemas/WarningCode"
               },
               {
-                "type": "null"
+                "type": "string"
               }
             ],
-            "description": "Công thức f'(x) nếu có",
-            "title": "Derivative Expression"
+            "description": "Mã cảnh báo toán học chuẩn",
+            "title": "Code"
           },
-          "domain": {
-            "default": "R",
-            "description": "Tập xác định của bài toán (vd: 'R', '(0; +inf)')",
-            "title": "Domain",
-            "type": "string"
-          },
-          "dsl_version": {
-            "default": "0.1.0-alpha",
-            "description": "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)",
-            "title": "Dsl Version",
-            "type": "string"
-          },
-          "intervals_sign": {
-            "description": "Dấu của đạo hàm trên các khoảng",
-            "items": {
-              "additionalProperties": {
-                "type": "string"
-              },
-              "type": "object"
-            },
-            "title": "Intervals Sign",
-            "type": "array"
-          },
-          "type": {
-            "const": "ham_so_doc_bang_bien_thien",
-            "default": "ham_so_doc_bang_bien_thien",
-            "title": "Type",
-            "type": "string"
-          },
-          "variable": {
-            "default": "x",
-            "description": "Tên biến số chính (mặc định là 'x')",
-            "title": "Variable",
+          "message_vi": {
+            "description": "Nội dung cảnh báo sư phạm bằng tiếng Việt",
+            "title": "Message Vi",
             "type": "string"
           }
         },
-        "title": "VariationTableDSL",
+        "required": [
+          "code",
+          "message_vi"
+        ],
+        "title": "WarningItem",
         "type": "object"
       }
     }

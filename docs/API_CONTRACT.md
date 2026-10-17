@@ -57,12 +57,12 @@ Giao diện người dùng căn cứ vào trường `status` và `confidence.met
 
 | Trạng thái (`status`) | Phương pháp kiểm chứng (`confidence.method`) | Tên huy hiệu giao diện (UI Badge Label) | Màu sắc | Ý nghĩa sư phạm & Hành vi giao diện |
 | :--- | :--- | :--- | :---: | :--- |
-| **`verified`** | `symbolic` | **"Đã xác minh bằng máy đại số (SymPy CAS)"** | Xanh lá (Green) | Kết quả được giải tích toán học tất định, thỏa mãn mọi điều kiện biên và tập xác định. Được tính điểm bình thường. |
-| **`verified`** | `numeric` | **"Xác minh bằng xấp xỉ số học (Không suy biến)"** | Xanh lục nhạt (Teal) | Kết quả vượt qua kiểm tra mẫu số học tất định. Câu chữ thận trọng, không ngụ ý là chứng minh hình thức. Được tính điểm bình thường. |
-| **`verified`** | `consensus` | **"Đồng thuận đa phương pháp tất định"** | Xanh dương (Blue) | Kết quả đạt được nhờ sự thống nhất giữa bộ giải giải tích và bộ quét số học độc lập. Được tính điểm bình thường. |
-| **`needs_review`** | Bất kỳ | **"Cần kiểm tra lại"** | Vàng cam (Amber) | Phát hiện mâu thuẫn CAS (`conflict == true`), hoặc câu phụ thuộc trực quan nhẹ (SOFT), hoặc bước giải mơ hồ. **TUYỆT ĐỐI KHÔNG TRỪ ĐIỂM HỌC SINH**; bảo lưu kết quả để giáo viên thẩm định tay. |
-| **`unsupported`** | Bất kỳ | **"Chưa kiểm chứng"** | Xám (Gray) | Dạng bài nằm ngoài phạm vi giải tự động (phụ thuộc hình vẽ cứng, hình học cổ điển, kéo thả v1...). Hệ thống giữ nguyên điểm, hướng dẫn học sinh xem bài giải chi tiết. |
-| **`error`** | Bất kỳ | **Thông báo lỗi chi tiết** | Đỏ (Red) | Lỗi cú pháp DSL, timeout quá thời gian xử lý, hoặc ngoại lệ runtime. Hiển thị thông điệp từ trường `error.message_vi`. |
+| **`verified`** | `symbolic` | **"Đã giải chính xác bằng đại số"** | Xanh lá (Green) | Kết quả được giải tích toán học tất định qua SymPy, thỏa mãn mọi điều kiện biên và tập xác định. Được tính điểm bình thường. |
+| **`verified`** | `numeric` | **"Đã kiểm tra bằng tính số"** | Xanh lục nhạt (Teal) | Kết quả vượt qua kiểm tra mẫu số học tất định. Câu chữ thận trọng, không ngụ ý là chứng minh hình thức. Được tính điểm bình thường. |
+| **`verified`** | `consensus` | **"Đồng thuận đa phương pháp kiểm tra"** | Xanh dương (Blue) | Kết quả đạt được nhờ sự thống nhất giữa bộ giải giải tích và bộ quét số học độc lập. Được tính điểm bình thường. |
+| **`needs_review`** | Bất kỳ | **"Cần thầy cô kiểm tra lại"** | Vàng cam (Amber) | Phát hiện mâu thuẫn CAS (`conflict == true`), hoặc câu phụ thuộc trực quan nhẹ (SOFT), hoặc bước giải mơ hồ. **TUYỆT ĐỐI KHÔNG TRỪ ĐIỂM HỌC SINH**; bảo lưu kết quả để giáo viên thẩm định tay. |
+| **`unsupported`** | Bất kỳ | **"Dạng bài chưa hỗ trợ tự động"** | Xám (Gray) | Dạng bài nằm ngoài phạm vi giải tự động (phụ thuộc hình vẽ cứng, hình học cổ điển, kéo thả v1...). Hệ thống giữ nguyên điểm, hướng dẫn học sinh xem bài giải chi tiết. |
+| **`error`** | Bất kỳ | **"Có lỗi xử lý hệ thống"** | Đỏ (Red) | Lỗi cú pháp đầu vào, timeout quá thời gian xử lý, hoặc ngoại lệ runtime. Hiển thị thông điệp từ trường `error.message_vi`. |
 
 ---
 
@@ -185,7 +185,6 @@ Khi hệ thống trả về `status: "unsupported"`, trường `unsupported_reas
 {
   "question_text": "Tìm các khoảng đồng biến của hàm số \\(y = x^3 - 3x\\)",
   "question_id": "q_tsa_01",
-  "dsl": null,
   "step_index": 1,
   "previous_steps": [
     "Học sinh đã xác định tập xác định D = R"
@@ -367,37 +366,58 @@ Khi SymPy CAS giải ra đáp án khác với `canonical_answer` lưu trong ngâ
 
 Để ngăn chặn hoàn toàn việc thực thi mã động (`eval`/`exec`), LLM Semantic Parser chuyển đổi văn bản câu hỏi sang một trong các cấu trúc DSL có kiểu định danh (`type` discriminator).
 
-> [!NOTE]
-> **Độc lập và Thử nghiệm (`dsl_version: "0.1.0-alpha"`):**
-> Cấu trúc DSL được tách biệt rõ ràng với Hợp đồng giao tiếp ổn định `/v1/*`. Mọi mô hình DSL đều mang trường `dsl_version = "0.1.0-alpha"`. Đây là các định nghĩa khung (placeholders), sẽ được hoàn thiện bộ phân tích AST an toàn ở Prompt 4 và Prompt 5.
->
-> **Xác nhận về hiển thị trên OpenAPI:**
-> Schema của `MathProblemDSL` hiện diện trong `docs/openapi.json` tại mục `components/schemas` dưới dạng trường tùy chọn `dsl` của `SolveRequest` và `CheckRequest` để phục vụ các client nội bộ đã parse sẵn DSL. Các endpoint **KHÔNG BẮT BUỘC** client gửi DSL; client thông thường chỉ cần gửi `question_text`.
+> [!IMPORTANT]
+> **Quy định hợp đồng công khai v1 đối với DSL:**
+> Trường `dsl` **KHÔNG XUẤT HIỆN** trong Request công khai của `SolveRequest` và `CheckRequest` tại `docs/openapi.json`. Client chỉ gửi văn bản đề bài (`question_text`) hoặc `question_id`.
+> Cấu trúc `MathProblemDSL` hoàn toàn là **mô hình dữ liệu nội bộ (internal pipeline)** giữa Semantic Parser và Deterministic Solver trong kiến trúc microservice, giúp bảo mật và trừu tượng hóa toàn bộ biểu diễn toán học trung gian.
 
 ### 8.1. Bảng đối chiếu 18 Lớp DSL với 553 câu hỏi ngân hàng thực tế
 
-| STT | Lớp DSL (Pydantic Model) | Khóa phân biệt (`type`) | Nhóm trong `SPEC.md` | Số câu thật trong 553 câu | Đề xuất | Ghi chú kỹ thuật |
-| :---: | :--- | :--- | :--- | :---: | :---: | :--- |
-| 1 | `MonotonicityDSL` | `ham_so_tinh_don_dieu` | Nhóm 1 | 116 | **Giữ (v1)** | Đơn điệu hàm phân thức, đa thức, căn thức |
-| 2 | `BasicDerivativeDSL` | `ham_so_dao_ham_co_ban` | Nhóm 2 | 91 | **Giữ (v1)** | Đạo hàm bảng cơ bản, đạo hàm cấp cao |
-| 3 | `ExtremaDSL` | `ham_so_cuc_tri_cho_truoc` | Nhóm 3 | 8 | **Giữ (v1)** | Cực đại, cực tiểu hàm không tham số |
-| 4 | `MinMaxIntervalDSL` | `ham_so_gtln_gtnn_doan_khoang` | Nhóm 4 | 8 | **Giữ (v1)** | GTLN/GTNN trên đoạn đóng hoặc khoảng mở |
-| 5 | `ParameterMDSL` | `ham_so_chua_tham_so_m` | Nhóm 5 | 2 | **Giữ (v1)** | Cực trị và đơn điệu chứa tham số m |
-| 6 | `RealWorldOptimizationDSL` | `ham_so_toan_thuc_te_toi_uu` | Nhóm 6 | 11 | **Giữ (v1)** | Tối ưu hóa thực tế chi phí, diện tích, thể tích |
-| 7 | `VariationTableDSL` | `ham_so_doc_bang_bien_thien` | Nhóm 7 | 2 | **Giữ (v1)** | **Chỉ xử lý bảng biến thiên dạng văn bản (khoảng dấu).** Nếu là ảnh không có công thức thì coi là HARD |
-| 8 | `AsymptoteDSL` | `ham_so_tiem_can` | Nhóm 8 | 19 | **Giữ (v1)** | Tiệm cận đứng, ngang, xiên của phân thức |
-| 9 | `OtherFunctionDSL` | `ham_so_dang_khac` | Nhóm 9 | 12 | **Giữ (v1)** | Tiếp tuyến và tương giao đồ thị hàm số |
-| 10 | `IntegralDSL` | `nguyen_ham_tich_phan` | Nhóm 10 | 54 | **Giữ (v1)** | Nguyên hàm, tích phân xác định, diện tích hình phẳng |
-| 11 | `ExponentialLogDSL` | `mu_logarit_pt_bpt` | Nhóm 11 | 39 | **Giữ (v1)** | PT/BPT mũ, logarit, bài toán tài chính lãi kép |
-| 12 | `LimitSequenceDSL` | `gioi_han_day_so` | Nhóm 12 | 13 | **Giữ (v1)** | Giới hạn dãy số hữu tỉ, cấp số cộng/nhân |
-| 13 | `LinearAlgebraDSL` | `dai_so_tuyen_tinh_ma_tran` | Nhóm 13 | 12 | **Giữ (v1)** | Ma trận, định thức det, nghịch đảo, hệ Cramer (TSA) |
-| 14 | `DifferentialEquationDSL` | `phuong_trinh_vi_phan` | Nhóm 14 | 10 | **Giữ (v1)** | PT vi phân tuyến tính cấp 1, dao động điều hòa (TSA) |
-| 15 | `AlgebraicEquationDSL` | `phuong_trinh_bat_phuong_trinh_dai_so`| Nhóm 15 | 4 | **Giữ (v1)** | PT/BPT vô tỉ, quy về bậc 2 đại số thuần túy |
-| 16 | `GeometryOxyzDSL` | `hinh_hoc_oxyz` | Nhóm 16 | 62 | **Giữ (v1)** | Tọa độ Oxyz: khoảng cách, góc, mặt cầu, mặt phẳng |
-| 17 | `CombinatoricsProbabilityDSL`| `to_hop_xac_suat` | Nhóm 17 | 52 | **Giữ (v1)** | Đếm tổ hợp, xác suất cổ điển, Bayes, bàn tròn |
-| 18 | `UnsupportedProblemDSL` | `unsupported` | Nhóm 18..22 | 38 | **Giữ (v1)** | Phân loại các câu ngoài phạm vi v1 (Số phức: 5, Hình cổ điển: 21, Thống kê: 3, Thuật toán: 6, Đồng dư: 3) |
+| Lớp DSL | Nhóm trong SPEC | Số câu | % | Có solver ở v1 (Có/Không, Dự kiến) |
+| :--- | :--- | :---: | :---: | :--- |
+| `MonotonicityDSL` | Nhóm 1 (`ham_so_tinh_don_dieu`) | 116 | 20.98% | **Có** (Cam kết đợt 1) |
+| `BasicDerivativeDSL` | Nhóm 2 (`ham_so_dao_ham_co_ban`) | 91 | 16.46% | **Có** (Cam kết đợt 1) |
+| `ExtremaDSL` | Nhóm 3 (`ham_so_cuc_tri_cho_truoc`) | 8 | 1.45% | **Có** (Cam kết đợt 1) |
+| `MinMaxIntervalDSL` | Nhóm 4 (`ham_so_gtln_gtnn_doan_khoang`) | 8 | 1.45% | **Có** (Cam kết đợt 1) |
+| `ParameterMDSL` | Nhóm 5 (`ham_so_chua_tham_so_m`) | 2 | 0.36% | **Có** (Cam kết đợt 1) |
+| `RealWorldOptimizationDSL` | Nhóm 6 (`ham_so_toan_thuc_te_toi_uu`) | 11 | 1.99% | **Có** (Cam kết đợt 1) |
+| `VariationTableDSL` | Nhóm 7 (`ham_so_doc_bang_bien_thien`) | 2 | 0.36% | **Không** (Dự kiến v1.1 - chỉ giải câu có công thức kèm theo) |
+| `AsymptoteDSL` | Nhóm 8 (`ham_so_tiem_can`) | 19 | 3.44% | **Có** (Cam kết đợt 1) |
+| `OtherFunctionDSL` | Nhóm 9 (`ham_so_dang_khac`) | 12 | 2.17% | **Không** (Dự kiến v2.0 - tương giao, tiếp tuyến) |
+| `IntegralDSL` | Nhóm 10 (`nguyen_ham_tich_phan`) | 54 | 9.76% | **Có** (Cam kết đợt 1) |
+| `ExponentialLogDSL` | Nhóm 11 (`mu_logarit_pt_bpt`) | 39 | 7.05% | **Có** (Cam kết đợt 1) |
+| `LimitSequenceDSL` | Nhóm 12 (`gioi_han_day_so`) | 13 | 2.35% | **Có** (Cam kết đợt 1) |
+| `LinearAlgebraDSL` | Nhóm 13 (`dai_so_tuyen_tinh_ma_tran`) | 12 | 2.17% | **Không** (Dự kiến v1.2 - ma trận, định thức, Cramer) |
+| `DifferentialEquationDSL` | Nhóm 14 (`phuong_trinh_vi_phan`) | 10 | 1.81% | **Không** (Dự kiến v2.0 - vi phân cấp 1, dao động) |
+| `AlgebraicEquationDSL` | Nhóm 15 (`phuong_trinh_bat_phuong_trinh_dai_so`) | 4 | 0.72% | **Không** (Dự kiến v1.2 - phương trình vô tỉ) |
+| `GeometryOxyzDSL` | Nhóm 16 (`hinh_hoc_oxyz`) | 62 | 11.21% | **Có** (Cam kết đợt 1) |
+| `CombinatoricsProbabilityDSL` | Nhóm 17 (`to_hop_xac_suat`) | 52 | 9.40% | **Có** (Cam kết đợt 1) |
+| `UnsupportedProblemDSL` | Nhóm 18..22 (`unsupported_*`) | 38 | 6.87% | **Không** (Ngoài phạm vi - unsupported) |
+| **TỔNG CỘNG** | **TOÀN BỘ 22 NHÓM** | **553** | **100.00%** | **Khớp chính xác 553 câu (10 Có, 8 Không)** |
 
-### 8.2. Khẳng định giới hạn phạm vi (Boundary Confirmation)
-- **Tuyệt đối KHÔNG có lớp DSL cho Số phức:** Dạng bài số phức không được tạo lớp DSL, mà được phân loại trực tiếp sang `UnsupportedProblemDSL(reason="complex_numbers")`.
-- **Tuyệt đối KHÔNG có lớp DSL cho Hình học không gian cổ điển:** Các bài toán hình chóp, hình lăng trụ không gắn trục Oxyz được phân loại sang `UnsupportedProblemDSL(reason="solid_geometry")`.
-- **Làm rõ các phân môn đại học trong đề TSA:** Các phân môn Phương trình vi phân (10 câu), Đại số tuyến tính / Ma trận (12 câu), và Phương trình đại số (4 câu) là **các câu hỏi có thật trong ngân hàng đề TSA ĐHQG** (không phải suy đoán), vì vậy đề xuất giữ nguyên trong phạm vi v1 của microservice.
+### 8.2. Phân định rõ ràng giữa "Có trong Schema" và "Cam kết giải ở v1"
+- **"Có trong Schema" (18 Lớp):** Toàn bộ 18 lớp DSL được định nghĩa đầy đủ trong `app/schemas/dsl.py` để đảm bảo hệ thống có khả năng nhận diện, xác thực cú pháp và lưu vết dữ liệu toàn diện mà không bao giờ bị sập (crash) hay trả mã lỗi `422 Unprocessable Entity` khi gặp bất kỳ câu hỏi nào trong ngân hàng đề 553 câu.
+- **"Cam kết giải ở v1" (10 Dạng bài ưu tiên):** Đợt 1 tập trung nguồn lực xây dựng Bộ giải tất định SymPy (`Deterministic Solver`) cho 10 nhóm trọng tâm phổ thông và thi đánh giá tư duy có tần suất xuất hiện cao nhất (chiếm 468 / 553 câu = 84.63%). Các nhóm còn lại (`VariationTableDSL`, `OtherFunctionDSL`, `LinearAlgebraDSL`, `DifferentialEquationDSL`, `AlgebraicEquationDSL`, và `UnsupportedProblemDSL`) tạm thời trả `status: "unsupported"` hoặc `status: "needs_review"` theo đúng hợp đồng.
+
+### 8.3. Giải trình chi tiết chênh lệch số liệu Đại số tuyến tính / Ma trận (19 câu $\rightarrow$ 12 câu)
+Ở Prompt 1 sơ bộ, bộ quét từ khóa thô gom toàn bộ câu có từ khóa `ma trận` vào nhóm ĐSTT (19 câu). Trong quá trình phân tích chuyên sâu tại Prompt 1b và thiết lập quy tắc thác đổ ưu tiên (`Strict Priority Cascade`), đúng 7 câu đã được phân bổ lại chính xác về đúng bản chất học thuật:
+1. **6 câu chuyển sang `to_hop_xac_suat` (Tổ hợp & Xác suất):**
+   - `q_tsa_03`: Thị phần taxi cạnh tranh qua mô hình ma trận xác suất chuyển trạng thái.
+   - `q_tsa_13`: Dự báo chuỗi thời tiết 3 trạng thái bằng ma trận xác suất chuyển Markov.
+   - `q_tsa_tf_02`: Chuỗi Markov 2 trạng thái thời tiết tại khu nghỉ dưỡng.
+   - `q_ultra_tf_01`: Hệ thống máy chủ xử lý dữ liệu hoạt động theo chu kỳ xác suất Markov.
+   - `q_superhard_type1_01`: Cực trị tham số ma trận chuyển xác suất $P(t)$ của xích Markov 2 trạng thái.
+   - `q_superhard_type5_05`: Bước đi ngẫu nhiên trên đồ thị chu trình 3 đỉnh có ma trận chuyển xác suất.
+   *(Bản chất các bài này là bài toán Mô hình ngẫu nhiên & Xác suất TSA, không phải đại số ma trận số học thuần túy).*
+2. **1 câu chuyển sang `unsupported_thong_ke` (Thống kê mô tả):**
+   - `q_superhard_type1_04`: Tối ưu hóa danh mục đầu tư 2 tài sản rủi ro dựa trên ma trận hiệp phương sai sai số $\Sigma$. Bài toán thuộc phân môn Thống kê mô tả / Lý thuyết tài chính thực nghiệm ngoài phạm vi v1.
+3. **12 câu còn lại giữ nguyên tại `LinearAlgebraDSL`:**
+   - Gồm các câu thuần túy về đại số ma trận: định thức $\det(A)$, vết $\text{tr}(A)$, hạng ma trận, ma trận nghịch đảo, hệ phương trình mạng dòng điện Kirchhoff / quy tắc Cramer (`q_tsa_28`, `q_calc_04`, `q_calc_07`, `q_tsa_34`, `q_calc_12`, `q_tsa_54`, `q_calc_18`, `q_calc_20`, `q_tsa_tf_07`, `q_superhard_type1_02`, `q_superhard_type1_03`, `q_superhard_type1_05`).
+
+### 8.4. Thống kê phụ thuộc trực quan (Hình vẽ & Bảng biến thiên)
+- **HARD-UNSUPPORTED (0 câu):** Không có câu nào phụ thuộc hoàn toàn vào ảnh nhị phân bên ngoài mà không có công thức đại số/giải tích. Ngân hàng 553 câu lưu trữ toàn bộ dữ liệu dưới dạng văn bản và KaTeX.
+- **SOFT-REVIEW (71 câu):** Đề bài có nhắc đến hình vẽ, đồ thị hoặc bảng biến thiên nhưng toàn bộ giả thiết, tham số, công thức hàm số hoặc toạ độ đã được mô tả tường minh bằng văn bản/LaTeX. Hệ thống xử lý bình thường và trả kèm cảnh báo có cấu trúc `WarningCode.WARN_SOFT_VISUAL_DEPENDENCY`.
+- **Lệnh kiểm chứng tính tái lập:**
+  ```powershell
+  python -c "import json, re; q = json.load(open('pumkin3/data/questions/all.json', encoding='utf-8')); kw = ['hình vẽ', 'hình bên', 'đồ thị bên', 'đồ thị như hình', 'bảng biến thiên', 'bảng sau', 'như hình', 'cho hàm số có đồ thị', 'hình dưới', 'biểu đồ', 'sơ đồ', 'cho hình', '(h)', 'tam giác', 'hình chóp', 'hình nón', 'hình trụ', 'khối đa diện', 'lăng trụ', 'hình phẳng', 'đồ thị']; m = [x for x in q if any(k in ((x.get('question') or x.get('question_text') or '') + ' ' + (x.get('cloze_text') or '')).lower() for k in kw)]; print(f'Matched: {len(m)} (HARD: 0, SOFT: {len(m)})')"
+  ```

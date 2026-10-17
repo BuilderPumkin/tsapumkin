@@ -40,7 +40,7 @@ def export_openapi():
 
     for target in target_paths:
         os.makedirs(os.path.dirname(target), exist_ok=True)
-        with open(target, "w", encoding="utf-8") as f:
+        with open(target, "w", encoding="utf-8", newline="\n") as f:
             f.write(serialized)
         print(f"[SUCCESS] Đã xuất OpenAPI schema thành công sang: {target}")
 

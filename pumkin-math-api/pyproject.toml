@@ -16,8 +16,8 @@ markers = [
     "golden: Verified benchmark golden tests",
     "adversarial: Security and attack vector tests",
 ]
-# Lý do: Starlette 1.8.0 phát cảnh báo StarletteDeprecationWarning khi dùng TestClient với httpx (thay vì httpx2 chưa GA).
-# Điều kiện gỡ bỏ: Khi Starlette/FastAPI chính thức nâng cấp sang httpx2 hoặc loại bỏ cảnh báo tương thích ngược.
+# Lý do: Starlette 1.8.0 (tại starlette/testclient.py dòng 29-45) cố gắng 'import httpx2 as httpx'; khi thiếu httpx2 sẽ fallback về httpx và phát StarletteDeprecationWarning.
+# Điều kiện gỡ bỏ: Khi Starlette/FastAPI chính thức hoàn thiện chuyển giao dependency hoặc loại bỏ cảnh báo chuyển tiếp này.
 filterwarnings = [
     "ignore:.*Using `httpx` with `starlette.testclient` is deprecated.*:Warning",
 ]

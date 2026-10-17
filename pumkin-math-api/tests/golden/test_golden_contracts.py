@@ -27,8 +27,8 @@ def test_solve_valid_golden():
 
     req = SolveRequest.model_validate(data)
     assert req.question_text.startswith("Tìm các khoảng đồng biến")
-    assert req.dsl is not None
-    assert req.dsl.type == "ham_so_tinh_don_dieu"
+    assert req.question_id == "q_test_monotonicity_01"
+    assert req.step_index == 1
 
 
 @pytest.mark.golden
