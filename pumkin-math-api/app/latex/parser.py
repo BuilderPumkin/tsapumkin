@@ -46,7 +46,13 @@ from sympy import (
     tan,
 )
 
-from app.latex.result import ConstraintType, DomainConstraint, ParseResult, ParseWarning
+from app.latex.result import (
+    ChainedRelation,
+    ConstraintType,
+    DomainConstraint,
+    ParseResult,
+    ParseWarning,
+)
 from app.latex.tokenizer import TokenizerError, tokenize
 from app.latex.tokens import Token, TokenType
 
@@ -551,6 +557,21 @@ class LatexParser:
 
         # Infix and Implicit Multiplication Loop
         while not self.at_end():
+            # Check for physical units attached to current operand
+            if self.current().type == TokenType.UNIT:
+                unit_tok = self.advance()
+                self.metadata["stripped_unit"] = unit_tok.value
+                self.warnings.append(
+                    ParseWarning(
+                        code="WARN_STRIPPED_PHYSICAL_UNIT",
+                        message_vi=(
+                            f"Đã bóc tách đơn vị vật lý '{unit_tok.value}' "
+                            f"ra khỏi biểu thức toán học."
+                        ),
+                    )
+                )
+                continue
+
             # Check for implicit multiplication first
             if self.is_implicit_multiplication_start():
                 if PREC_IMPLICIT_MUL < min_prec:
@@ -646,25 +667,49 @@ class LatexParser:
                 TokenType.GE,
             ):
                 right = self._parse_pratt_expr(PREC_RELATIONAL, depth + 1)
-                lhs_for_new = left.rhs if hasattr(left, "rhs") else left
+                op_symbol = {
+                    TokenType.EQUAL: "=",
+                    TokenType.NEQ: "!=",
+                    TokenType.LT: "<",
+                    TokenType.LE: "<=",
+                    TokenType.GT: ">",
+                    TokenType.GE: ">=",
+                }[op.type]
 
-                if op.type == TokenType.EQUAL:
-                    new_rel = Eq(lhs_for_new, right)
-                elif op.type == TokenType.NEQ:
-                    new_rel = Ne(lhs_for_new, right)
-                elif op.type == TokenType.LT:
-                    new_rel = Lt(lhs_for_new, right)
-                elif op.type == TokenType.LE:
-                    new_rel = Le(lhs_for_new, right)
-                elif op.type == TokenType.GT:
-                    new_rel = Gt(lhs_for_new, right)
-                elif op.type == TokenType.GE:
-                    new_rel = Ge(lhs_for_new, right)
-
-                if hasattr(left, "rhs"):
-                    left = sympy.And(left, new_rel)
+                if isinstance(left, ChainedRelation):
+                    left.expressions.append(right)
+                    left.operators.append(op_symbol)
+                elif hasattr(left, "rhs") and hasattr(left, "lhs"):
+                    first_op = "="
+                    if isinstance(left, sympy.core.relational.Equality):
+                        first_op = "="
+                    elif isinstance(left, sympy.core.relational.Unequality):
+                        first_op = "!="
+                    elif isinstance(left, sympy.core.relational.LessThan):
+                        first_op = "<="
+                    elif isinstance(left, sympy.core.relational.StrictLessThan):
+                        first_op = "<"
+                    elif isinstance(left, sympy.core.relational.GreaterThan):
+                        first_op = ">="
+                    elif isinstance(left, sympy.core.relational.StrictGreaterThan):
+                        first_op = ">"
+                    left = ChainedRelation(
+                        expressions=[left.lhs, left.rhs, right],
+                        operators=[first_op, op_symbol],
+                    )
                 else:
-                    left = new_rel
+                    if op.type == TokenType.EQUAL:
+                        left = Eq(left, right, evaluate=False)
+                    elif op.type == TokenType.NEQ:
+                        left = Ne(left, right, evaluate=False)
+                    elif op.type == TokenType.LT:
+                        left = Lt(left, right, evaluate=False)
+                    elif op.type == TokenType.LE:
+                        left = Le(left, right, evaluate=False)
+                    elif op.type == TokenType.GT:
+                        left = Gt(left, right, evaluate=False)
+                    elif op.type == TokenType.GE:
+                        left = Ge(left, right, evaluate=False)
             elif op.type == TokenType.COMMAND and op.value == "!":
                 if isinstance(left, (int, Integer)) and int(left) > 100:
                     raise ParserError(
@@ -746,34 +791,81 @@ class LatexParser:
             elif name == "e":
                 # In calculus/powers e is Euler's number
                 base_expr = E
-            else:
-                base_expr = Symbol(name)
-
-            # Check for prime marks: f'(x), y'
-            while self.current().type == TokenType.PRIME:
-                self.advance()
-                base_expr = Symbol(f"{base_expr}'")
-
-            # Check for function call: e.g. f(x), g(x), P(x)
-            if (
-                name in ("f", "g", "h", "P", "Q", "u", "v")
-                and self.current().type == TokenType.LPAREN
-            ):
-                self.advance()  # consume '('
-                arg = self._parse_pratt_expr(PREC_NONE, depth + 1)
-                self.expect(TokenType.RPAREN, "Thiếu dấu ngoặc đơn ')' đóng đối số hàm.")
                 self.warnings.append(
                     ParseWarning(
-                        code="WARN_IMPLICIT_FUNCTION_CALL",
+                        code="WARN_EULER_CONSTANT_INTERPRETATION",
                         message_vi=(
-                            f"Ký hiệu '{name}(...)' được xử lý như một hàm chưa biết "
-                            f"(Function) thay vì phép nhân ngầm {name}*(...)."
+                            "Ký hiệu 'e' được hiểu là hằng số Euler (e ≈ 2.71828) thay vì biến số."
                         ),
                     )
                 )
-                if "'" in str(base_expr):
-                    return Derivative(Function(name)(arg), arg)
-                return Function(name)(arg)
+            else:
+                base_expr = Symbol(name)
+
+            # Check for prime marks: f'(x), y', y''(t)
+            prime_count = 0
+            while self.current().type == TokenType.PRIME:
+                self.advance()
+                prime_count += 1
+
+            if prime_count > 0:
+                primes = "'" * prime_count
+                base_expr = Symbol(f"{name}{primes}")
+
+            # Check for function call: e.g. f(x), g(x), P(x), y(t), y'(t), C(x), mu(x), Delta(0.2)
+            KNOWN_FUNCTIONS = {
+                "f",
+                "g",
+                "h",
+                "u",
+                "v",
+                "w",
+                "y",
+                "z",
+                "P",
+                "Q",
+                "C",
+                "H",
+                "I",
+                "N",
+                "R",
+                "S",
+                "V",
+                "mu",
+                "Delta",
+                "n",
+                "u_n",
+            }
+            if self.current().type == TokenType.LPAREN:
+                if name in KNOWN_FUNCTIONS or prime_count > 0:
+                    self.advance()  # consume '('
+                    arg = self._parse_pratt_expr(PREC_NONE, depth + 1)
+                    self.expect(TokenType.RPAREN, "Thiếu dấu ngoặc đơn ')' đóng đối số hàm.")
+                    self.warnings.append(
+                        ParseWarning(
+                            code="WARN_IMPLICIT_FUNCTION_CALL",
+                            message_vi=(
+                                f"Ký hiệu '{name}(...)' được xử lý như một hàm chưa biết "
+                                f"(Function) thay vì phép nhân ngầm {name}*(...)."
+                            ),
+                        )
+                    )
+                    fn = Function(name)(arg)
+                    if prime_count == 1:
+                        return Derivative(fn, arg)
+                    elif prime_count > 1:
+                        return Derivative(fn, (arg, prime_count))
+                    return fn
+                else:
+                    self.warnings.append(
+                        ParseWarning(
+                            code="WARN_AMBIGUOUS_FUNCTION_OR_PRODUCT",
+                            message_vi=(
+                                f"Ký hiệu '{name}(...)' được xử lý như phép nhân "
+                                f"'{name} * (...)' thay vì hàm số '{name}(...)'."
+                            ),
+                        )
+                    )
 
             return base_expr
 
@@ -930,21 +1022,28 @@ class LatexParser:
                     )
                 else:
                     arg = self.parse_primary(depth + 1)
+                    has_arg_factor = False
                     if (
                         self.is_implicit_multiplication_start()
                         and not self._is_function_call_or_trig_command(self.current())
                     ):
                         arg_factor = self._parse_pratt_expr(PREC_IMPLICIT_MUL + 1, depth + 1)
                         arg = Mul(arg, arg_factor)
-                    self.warnings.append(
-                        ParseWarning(
-                            code="WARN_AMBIGUOUS_TRIG_ARGUMENT",
-                            message_vi=(
-                                f"Góc lượng giác không có ngoặc rõ ràng (ví dụ {cmd} 2x), "
-                                f"được hiểu là {cmd}(2x) thay vì {cmd}(2)*x."
-                            ),
+                        has_arg_factor = True
+
+                    if has_arg_factor or (
+                        self.is_implicit_multiplication_start()
+                        and self._is_function_call_or_trig_command(self.current())
+                    ):
+                        self.warnings.append(
+                            ParseWarning(
+                                code="WARN_AMBIGUOUS_TRIG_ARGUMENT",
+                                message_vi=(
+                                    f"Góc lượng giác không có ngoặc rõ ràng (ví dụ {cmd} 2x), "
+                                    f"được hiểu là {cmd}(2x) thay vì {cmd}(2)*x."
+                                ),
+                            )
                         )
-                    )
 
                 # Instantiate SymPy function
                 if func_name == "sin":

@@ -6,7 +6,13 @@ and GEMINI.md domain constraint extraction.
 """
 
 from app.latex.parser import LatexParser, ParserError, parse_latex
-from app.latex.result import ConstraintType, DomainConstraint, ParseResult
+from app.latex.result import (
+    ChainedRelation,
+    ConstraintType,
+    DomainConstraint,
+    ParseResult,
+    ParseWarning,
+)
 from app.latex.tokenizer import TokenizerError, tokenize
 from app.latex.tokens import Token, TokenType
 
@@ -16,6 +22,8 @@ __all__ = [
     "tokenize",
     "TokenizerError",
     "ParseResult",
+    "ParseWarning",
+    "ChainedRelation",
     "DomainConstraint",
     "ConstraintType",
     "LatexParser",

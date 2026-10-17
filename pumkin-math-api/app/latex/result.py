@@ -51,6 +51,40 @@ class ParseWarning(BaseModel):
     )
 
 
+class ChainedRelation(BaseModel):
+    """
+    Represents an un-evaluated chain of relations: expressions[0] op[0] expressions[1] op[1] ...
+    Guarantees that chained equalities or inequalities (e.g. A = B = C or -5 < y < 3)
+    are preserved structurally and NEVER evaluated into boolean True/False.
+    """
+
+    model_config = ConfigDict(arbitrary_types_allowed=True, extra="forbid")
+
+    expressions: list[Any] = Field(
+        ..., description="Danh sách các vế biểu thức trong chuỗi quan hệ"
+    )
+    operators: list[str] = Field(
+        ...,
+        description="Danh sách các toán tử so sánh ('=', '<', '<=', '>', '>=', '!=')",
+    )
+
+    @property
+    def free_symbols(self) -> set[Any]:
+        syms: set[Any] = set()
+        for expr in self.expressions:
+            if hasattr(expr, "free_symbols"):
+                syms.update(expr.free_symbols)
+        return syms
+
+    def __repr__(self) -> str:
+        parts = []
+        for i, expr in enumerate(self.expressions):
+            parts.append(repr(expr))
+            if i < len(self.operators):
+                parts.append(self.operators[i])
+        return "ChainedRelation(" + " ".join(parts) + ")"
+
+
 class ParseResult(BaseModel):
     """
     Deterministic result of parsing a LaTeX mathematical string.

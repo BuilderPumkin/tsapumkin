@@ -1,0 +1,24 @@
+{
+  "total_questions": 553,
+  "questions_with_stem": 382,
+  "stem_passed": 247,
+  "stem_pass_pct": 0.6465968586387435,
+  "questions_zero_stem": 171,
+  "total_snippets_raw": 3010,
+  "total_snippets_unique": 2217,
+  "snippets_passed": 2262,
+  "snippet_pass_pct": 0.7514950166112957,
+  "snippets_with_warnings": 588,
+  "warning_counts": {
+    "WARN_STRIPPED_PHYSICAL_UNIT": 183,
+    "WARN_IMPLICIT_FUNCTION_CALL": 312,
+    "WARN_DECIMAL_COMMA_USED": 43,
+    "WARN_STRIPPED_LABEL_PREFIX": 29,
+    "WARN_EULER_CONSTANT_INTERPRETATION": 77,
+    "WARN_AMBIGUOUS_FUNCTION_OR_PRODUCT": 66,
+    "WARN_POWER_IMPLICIT_MUL": 42,
+    "WARN_AMBIGUOUS_TRIG_ARGUMENT": 11,
+    "WARN_AMBIGUOUS_LOG_SCOPE": 12
+  },
+  "failed_count": 748
+}

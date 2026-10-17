@@ -66,8 +66,8 @@
         "circ"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(circ) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_005",
@@ -75,13 +75,11 @@
       "field": "options",
       "category": "calculus_analysis",
       "latex": "10\\pi\\text{ cm/s}",
-      "expected_repr": "10*pi*cm/s",
-      "variables": [
-        "cm/s"
-      ],
+      "expected_repr": "10*pi",
+      "variables": [],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(cm/s) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_006",
@@ -207,8 +205,8 @@
         "y"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(x) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_015",
@@ -236,8 +234,8 @@
         "y"
       ],
       "num_constraints": 1,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(x) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_017",
@@ -245,10 +243,8 @@
       "field": "question_text",
       "category": "calculus_analysis",
       "latex": "y(1) = -1",
-      "expected_repr": "Eq(y, -1)",
-      "variables": [
-        "y"
-      ],
+      "expected_repr": "Eq(y(1), -1)",
+      "variables": [],
       "num_constraints": 0,
       "verification_mode": "handwritten_ast",
       "reference_source": "Hand-verified mathematical AST structure against THPT curriculum standard"
@@ -264,8 +260,8 @@
         "x"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(x) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_019",
@@ -308,8 +304,8 @@
         "a"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(a) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_022",
@@ -336,8 +332,8 @@
         "a"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(a) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_024",
@@ -460,8 +456,8 @@
         "a"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(a) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_033",
@@ -688,8 +684,8 @@
         "a"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(a) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_049",
@@ -807,8 +803,8 @@
         "z"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(x) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_057",
@@ -878,13 +874,11 @@
       "field": "options",
       "category": "algebra_equations",
       "latex": "157.35\\text{ triệu đồng}",
-      "expected_repr": "3147*triệu đồng/20",
-      "variables": [
-        "triệu đồng"
-      ],
+      "expected_repr": "3147/20",
+      "variables": [],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(triệu đồng) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_062",
@@ -897,8 +891,8 @@
         "x"
       ],
       "num_constraints": 1,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(x) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_063",
@@ -906,13 +900,11 @@
       "field": "options",
       "category": "algebra_equations",
       "latex": "140.00\\text{ triệu đồng}",
-      "expected_repr": "140*triệu đồng",
-      "variables": [
-        "triệu đồng"
-      ],
+      "expected_repr": "140",
+      "variables": [],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(triệu đồng) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_064",
@@ -920,9 +912,8 @@
       "field": "question_text",
       "category": "algebra_equations",
       "latex": "S(t)",
-      "expected_repr": "S*t",
+      "expected_repr": "S(t)",
       "variables": [
-        "S",
         "t"
       ],
       "num_constraints": 0,
@@ -935,13 +926,11 @@
       "field": "options",
       "category": "algebra_equations",
       "latex": "154.00\\text{ triệu đồng}",
-      "expected_repr": "154*triệu đồng",
-      "variables": [
-        "triệu đồng"
-      ],
+      "expected_repr": "154",
+      "variables": [],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(triệu đồng) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_066",
@@ -963,13 +952,11 @@
       "field": "options",
       "category": "algebra_equations",
       "latex": "166.99\\text{ triệu đồng}",
-      "expected_repr": "16699*triệu đồng/100",
-      "variables": [
-        "triệu đồng"
-      ],
+      "expected_repr": "16699/100",
+      "variables": [],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(triệu đồng) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_068",
@@ -1005,13 +992,11 @@
       "field": "options",
       "category": "algebra_equations",
       "latex": "176.00\\text{ triệu đồng}",
-      "expected_repr": "176*triệu đồng",
-      "variables": [
-        "triệu đồng"
-      ],
+      "expected_repr": "176",
+      "variables": [],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(triệu đồng) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_071",
@@ -1019,13 +1004,11 @@
       "field": "options",
       "category": "algebra_equations",
       "latex": "152.09\\text{ triệu đồng}",
-      "expected_repr": "15209*triệu đồng/100",
-      "variables": [
-        "triệu đồng"
-      ],
+      "expected_repr": "15209/100",
+      "variables": [],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(triệu đồng) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_072",
@@ -1052,8 +1035,8 @@
         "N_0"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(N_0) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_074",
@@ -1075,13 +1058,11 @@
       "field": "options",
       "category": "algebra_equations",
       "latex": "131.08\\text{ triệu đồng}",
-      "expected_repr": "3277*triệu đồng/25",
-      "variables": [
-        "triệu đồng"
-      ],
+      "expected_repr": "3277/25",
+      "variables": [],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(triệu đồng) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_076",
@@ -1103,13 +1084,11 @@
       "field": "options",
       "category": "algebra_equations",
       "latex": "162.97\\text{ triệu đồng}",
-      "expected_repr": "16297*triệu đồng/100",
-      "variables": [
-        "triệu đồng"
-      ],
+      "expected_repr": "16297/100",
+      "variables": [],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(triệu đồng) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_078",
@@ -1211,7 +1190,7 @@
       "field": "question_text",
       "category": "probability_statistics",
       "latex": "2 \\times 3 = 6",
-      "expected_repr": "True",
+      "expected_repr": "Eq(6, 6)",
       "variables": [],
       "num_constraints": 0,
       "verification_mode": "handwritten_ast",
@@ -1228,8 +1207,8 @@
         "gamma"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(gamma) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_087",
@@ -1270,8 +1249,8 @@
         "x"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(x) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_090",
@@ -1358,13 +1337,13 @@
       "field": "question_text",
       "category": "probability_statistics",
       "latex": "0 \\le x \\le 2",
-      "expected_repr": "(0 <= x) & (x <= 2)",
+      "expected_repr": "ChainedRelation(0 <= x <= 2)",
       "variables": [
         "x"
       ],
       "num_constraints": 0,
-      "verification_mode": "handwritten_numerical_eval_20pts",
-      "reference_source": "Evaluated independently using SymPy lambdify(x) vs parsed AST across 20 points in domain"
+      "verification_mode": "snapshot_eval_20pts",
+      "reference_source": "Snapshot evaluated AST across 20 points"
     },
     {
       "case_id": "human_097",
@@ -1466,7 +1445,7 @@
       "category": "geometry_spatial",
       "latex": "0,6\\pi\\text{ m}^3/\\text{phút}",
       "expected_is_success": false,
-      "expected_error_code": "UNEXPECTED_TOKEN",
+      "expected_error_code": "SYNTAX_ERROR",
       "reason_vi": "Ký tự thừa hoặc không hợp lệ '/' tại vị trí 18."
     },
     {

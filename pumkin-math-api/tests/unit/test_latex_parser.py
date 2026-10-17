@@ -5,10 +5,9 @@ semantic ambiguity resolutions, and edge/abnormal cases.
 Zero eval, zero exec, zero sympify.
 """
 
-import sympy
-from sympy import Abs, Eq, Integral, Limit, Lt, Rational, Sum, Symbol, cos, exp, pi, sin
+from sympy import Abs, Eq, Integral, Limit, Rational, Sum, Symbol, cos, exp, pi, sin
 
-from app.latex import ConstraintType, parse_latex
+from app.latex import ChainedRelation, ConstraintType, parse_latex
 
 
 class TestSemanticAmbiguities:
@@ -193,7 +192,9 @@ class TestChainedRelationsAndGeometryLabels:
         res = parse_latex(r"0 < x < 5")
         x = Symbol("x")
         assert res.is_success is True
-        assert res.expr == sympy.And(Lt(0, x), Lt(x, 5))
+        assert isinstance(res.expr, ChainedRelation)
+        assert res.expr.expressions == [0, x, 5]
+        assert res.expr.operators == ["<", "<"]
 
     def test_geometry_line_prefix(self):
         res = parse_latex(r"d_1: 2x - y + 3 = 0")

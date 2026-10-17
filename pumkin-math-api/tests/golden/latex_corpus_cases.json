@@ -11,9 +11,8 @@
   {
     "qid": "q_tsa_01",
     "latex": "C(r) = 1,5(2\\pi r^2) + 1,0(2\\pi r h) = 3\\pi r^2 + \\frac{4\\pi}{r}",
-    "expected_repr": "Eq(C*r, 2*pi*h*r + 3*pi*r**2) & Eq(2*pi*h*r + 3*pi*r**2, 3*pi*r**2 + 4*pi/r)",
+    "expected_repr": "ChainedRelation(C(r) = 2*pi*h*r + 3*pi*r**2 = 3*pi*r**2 + 4*pi/r)",
     "variables": [
-      "C",
       "h",
       "r"
     ],
@@ -76,7 +75,7 @@
   {
     "qid": "q_tsa_02",
     "latex": "0 < \\alpha < \\frac{\\pi}{2}",
-    "expected_repr": "(0 < alpha) & (alpha < pi/2)",
+    "expected_repr": "ChainedRelation(0 < alpha < pi/2)",
     "variables": [
       "alpha"
     ],
@@ -85,9 +84,8 @@
   {
     "qid": "q_tsa_02",
     "latex": "S(\\alpha)",
-    "expected_repr": "S*alpha",
+    "expected_repr": "S(alpha)",
     "variables": [
-      "S",
       "alpha"
     ],
     "num_constraints": 0
@@ -115,10 +113,9 @@
   {
     "qid": "q_tsa_02",
     "latex": "S(\\alpha) = \\frac{(B+a)h}{2} = 4(1+\\cos\\alpha)\\sin\\alpha",
-    "expected_repr": "Eq(S*alpha, h*(B + a)/2) & Eq(h*(B + a)/2, (4*cos(alpha) + 4)*sin(alpha))",
+    "expected_repr": "ChainedRelation(S(alpha) = h*(B + a)/2 = (4*cos(alpha) + 4)*sin(alpha))",
     "variables": [
       "B",
-      "S",
       "a",
       "alpha",
       "h"
@@ -128,9 +125,8 @@
   {
     "qid": "q_tsa_02",
     "latex": "S'(\\alpha) = 4(2\\cos^2\\alpha + \\cos\\alpha - 1) = 0",
-    "expected_repr": "Eq(8*cos(alpha)**2 + 4*cos(alpha) - 4, 0) & Eq(S'*alpha, 8*cos(alpha)**2 + 4*cos(alpha) - 4)",
+    "expected_repr": "ChainedRelation(Derivative(S(alpha), alpha) = 8*cos(alpha)**2 + 4*cos(alpha) - 4 = 0)",
     "variables": [
-      "S'",
       "alpha"
     ],
     "num_constraints": 0
@@ -269,7 +265,7 @@
   {
     "qid": "q_tsa_05",
     "latex": "OM^2(t) = (12+2t)^2 + (9-t)^2 + (6+2t)^2 = 9t^2 + 54t + 261",
-    "expected_repr": "Eq(M**2*O*t, (9 - t)**2 + (2*t + 6)**2 + (2*t + 12)**2) & Eq((9 - t)**2 + (2*t + 6)**2 + (2*t + 12)**2, 9*t**2 + 54*t + 261)",
+    "expected_repr": "ChainedRelation(M**2*O*t = (9 - t)**2 + (2*t + 6)**2 + (2*t + 12)**2 = 9*t**2 + 54*t + 261)",
     "variables": [
       "M",
       "O",
@@ -280,7 +276,7 @@
   {
     "qid": "q_tsa_05",
     "latex": "t = -54/18 = -3",
-    "expected_repr": "Eq(t, -3)",
+    "expected_repr": "ChainedRelation(t = -3 = -3)",
     "variables": [
       "t"
     ],
@@ -317,7 +313,7 @@
   {
     "qid": "q_tsa_06",
     "latex": "d_1: \\frac{x - 10}{2} = \\frac{y - 20}{1} = \\frac{z - 30}{2}",
-    "expected_repr": "Eq(x/2 - 5, y - 20) & Eq(y - 20, z/2 - 15)",
+    "expected_repr": "ChainedRelation(x/2 - 5 = y - 20 = z/2 - 15)",
     "variables": [
       "x",
       "y",
@@ -328,7 +324,7 @@
   {
     "qid": "q_tsa_06",
     "latex": "d_2: \\frac{x + 10}{1} = \\frac{y + 10}{2} = \\frac{z - 10}{-2}",
-    "expected_repr": "Eq(x + 10, y/2 + 5) & Eq(y/2 + 5, 5 - z/2)",
+    "expected_repr": "ChainedRelation(x + 10 = y/2 + 5 = 5 - z/2)",
     "variables": [
       "x",
       "y",
@@ -357,7 +353,7 @@
   {
     "qid": "q_tsa_06",
     "latex": "d = 120 / 9 = 40/3\\text{ m}",
-    "expected_repr": "Eq(d, 40/3)",
+    "expected_repr": "ChainedRelation(d = 40/3 = 40/3)",
     "variables": [
       "d"
     ],
@@ -394,9 +390,8 @@
   {
     "qid": "q_tsa_09",
     "latex": "C(t)",
-    "expected_repr": "C*t",
+    "expected_repr": "C(t)",
     "variables": [
-      "C",
       "t"
     ],
     "num_constraints": 0
@@ -404,9 +399,8 @@
   {
     "qid": "q_tsa_09",
     "latex": "C(t) = 4t \\cdot e^{-0,5t}",
-    "expected_repr": "Eq(C*t, 4*t*exp(-t/2))",
+    "expected_repr": "Eq(C(t), 4*t*exp(-t/2))",
     "variables": [
-      "C",
       "t"
     ],
     "num_constraints": 0
@@ -423,7 +417,7 @@
   {
     "qid": "q_tsa_10",
     "latex": "y_1 + y_2 + x_3 + x_4 = 15 - 2 - 1 = 12",
-    "expected_repr": "Eq(x_3 + x_4 + y_1 + y_2, 12)",
+    "expected_repr": "ChainedRelation(x_3 + x_4 + y_1 + y_2 = 12 = 12)",
     "variables": [
       "x_3",
       "x_4",
@@ -435,8 +429,10 @@
   {
     "qid": "q_tsa_10",
     "latex": "C_{12 - 1}^{4 - 1} = C_{11}^3 = 165",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(C_11**3 = C_11**3 = 165)",
+    "variables": [
+      "C_11"
+    ],
     "num_constraints": 0
   },
   {
@@ -451,8 +447,12 @@
   {
     "qid": "q_tsa_12",
     "latex": "I = \\frac{b - a}{2} = \\frac{\\pi/2 - 0}{2} = \\frac{\\pi}{4}",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(I = -a/2 + b/2 = pi/4 = pi/4)",
+    "variables": [
+      "I",
+      "a",
+      "b"
+    ],
     "num_constraints": 0
   },
   {
@@ -499,9 +499,9 @@
   {
     "qid": "q_tsa_14",
     "latex": "y_{\\text{CĐ}}",
-    "expected_repr": "y_CĐ",
+    "expected_repr": "y_CD",
     "variables": [
-      "y_CĐ"
+      "y_CD"
     ],
     "num_constraints": 0
   },
@@ -535,16 +535,16 @@
   {
     "qid": "q_tsa_14",
     "latex": "y_{\\text{CĐ}} = f(-1) = -5",
-    "expected_repr": "Eq(y_CĐ, f(-1)) & Eq(f(-1), -5)",
+    "expected_repr": "ChainedRelation(y_CD = f(-1) = -5)",
     "variables": [
-      "y_CĐ"
+      "y_CD"
     ],
     "num_constraints": 0
   },
   {
     "qid": "q_tsa_14",
     "latex": "y_{\\text{CT}} = f(3) = 3",
-    "expected_repr": "Eq(y_CT, f(3)) & Eq(f(3), 3)",
+    "expected_repr": "ChainedRelation(y_CT = f(3) = 3)",
     "variables": [
       "y_CT"
     ],
@@ -553,29 +553,41 @@
   {
     "qid": "q_tsa_14",
     "latex": "y_{\\text{CĐ}} = -5 < y_{\\text{CT}} = 3",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(y_CD = -5 < y_CT = 3)",
+    "variables": [
+      "y_CD",
+      "y_CT"
+    ],
     "num_constraints": 0
   },
   {
     "qid": "q_tsa_14",
     "latex": "y_{\\text{CĐ}} = 3 > y_{\\text{CT}} = -5",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(y_CD = 3 > y_CT = -5)",
+    "variables": [
+      "y_CD",
+      "y_CT"
+    ],
     "num_constraints": 0
   },
   {
     "qid": "q_tsa_14",
     "latex": "y_{\\text{CĐ}} = 5 > y_{\\text{CT}} = -3",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(y_CD = 5 > y_CT = -3)",
+    "variables": [
+      "y_CD",
+      "y_CT"
+    ],
     "num_constraints": 0
   },
   {
     "qid": "q_tsa_14",
     "latex": "y_{\\text{CĐ}} = -3 < y_{\\text{CT}} = 5",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(y_CD = -3 < y_CT = 5)",
+    "variables": [
+      "y_CD",
+      "y_CT"
+    ],
     "num_constraints": 0
   },
   {
@@ -666,9 +678,8 @@
   {
     "qid": "q_tsa_16",
     "latex": "C(x) = 2x^2 + 40x",
-    "expected_repr": "Eq(C*x, 2*x**2 + 40*x)",
+    "expected_repr": "Eq(C(x), 2*x**2 + 40*x)",
     "variables": [
-      "C",
       "x"
     ],
     "num_constraints": 0
@@ -676,14 +687,16 @@
   {
     "qid": "q_tsa_16",
     "latex": "\\pi(x) = R(x) - C(x) = 120x - (2x^2 + 40x) = -2x^2 + 80x",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(pi*x = -C(x) + R(x) = -2*x**2 + 80*x = -2*x**2 + 80*x)",
+    "variables": [
+      "x"
+    ],
     "num_constraints": 0
   },
   {
     "qid": "q_tsa_16",
     "latex": "a = -2 < 0",
-    "expected_repr": "Eq(a, -2)",
+    "expected_repr": "ChainedRelation(a = -2 < 0)",
     "variables": [
       "a"
     ],
@@ -700,17 +713,17 @@
   },
   {
     "qid": "q_tsa_17",
-    "latex": "P(\\text{Hỏng cả 3}) = 0,05^3 = 0,000125",
-    "expected_repr": "Eq(P(Hỏng cả 3), 1/8000)",
+    "latex": "P = 1 - 0,000125 = 0,999875",
+    "expected_repr": "ChainedRelation(P = 7999/8000 = 7999/8000)",
     "variables": [
-      "Hỏng cả 3"
+      "P"
     ],
     "num_constraints": 0
   },
   {
     "qid": "q_tsa_17",
     "latex": "P = 1 - 0,000125 = 0,999875",
-    "expected_repr": "Eq(P, 7999/8000)",
+    "expected_repr": "ChainedRelation(P = 7999/8000 = 7999/8000)",
     "variables": [
       "P"
     ],
@@ -739,14 +752,14 @@
   {
     "qid": "q_tsa_18",
     "latex": "|1(2) + 2(-1) + 2(2)| = |2 - 2 + 4| = 4",
-    "expected_repr": "False",
+    "expected_repr": "ChainedRelation(4 = 4 = 4)",
     "variables": [],
     "num_constraints": 0
   },
   {
     "qid": "q_tsa_18",
     "latex": "|\\vec{u}_1| = \\sqrt{1+4+4} = 3",
-    "expected_repr": "Eq(Abs(vec_u_1), 3)",
+    "expected_repr": "ChainedRelation(Abs(vec_u_1) = 3 = 3)",
     "variables": [
       "vec_u_1"
     ],
@@ -755,7 +768,7 @@
   {
     "qid": "q_tsa_18",
     "latex": "|\\vec{u}_2| = \\sqrt{4+1+4} = 3",
-    "expected_repr": "Eq(Abs(vec_u_2), 3)",
+    "expected_repr": "ChainedRelation(Abs(vec_u_2) = 3 = 3)",
     "variables": [
       "vec_u_2"
     ],
@@ -764,7 +777,7 @@
   {
     "qid": "q_tsa_18",
     "latex": "\\cos\\theta = \\frac{4}{3 \\cdot 3} = \\frac{4}{9}",
-    "expected_repr": "Eq(cos(theta), 4/9)",
+    "expected_repr": "ChainedRelation(cos(theta) = 4/9 = 4/9)",
     "variables": [
       "theta"
     ],
@@ -918,9 +931,8 @@
   {
     "qid": "q_tsa_22",
     "latex": "N(t) = \\frac{50}{1 + 9e^{-0,4t}}",
-    "expected_repr": "Eq(N*t, 50/(1 + 9*exp(-2*t/5)))",
+    "expected_repr": "Eq(N(t), 50/(1 + 9*exp(-2*t/5)))",
     "variables": [
-      "N",
       "t"
     ],
     "num_constraints": 1
@@ -928,9 +940,8 @@
   {
     "qid": "q_tsa_22",
     "latex": "N'(t)",
-    "expected_repr": "N'*t",
+    "expected_repr": "Derivative(N(t), t)",
     "variables": [
-      "N'",
       "t"
     ],
     "num_constraints": 0
@@ -938,9 +949,8 @@
   {
     "qid": "q_tsa_25",
     "latex": "H(\\omega) = \\frac{1}{\\sqrt{1 + \\omega^4}}",
-    "expected_repr": "Eq(H*omega, 1/sqrt(omega**4 + 1))",
+    "expected_repr": "Eq(H(omega), 1/sqrt(omega**4 + 1))",
     "variables": [
-      "H",
       "omega"
     ],
     "num_constraints": 2
@@ -957,9 +967,8 @@
   {
     "qid": "q_tsa_25",
     "latex": "|H(\\omega_c)|^2 = 1/2",
-    "expected_repr": "Eq(Abs(H*omega_c)**2, 1/2)",
+    "expected_repr": "Eq(Abs(H(omega_c))**2, 1/2)",
     "variables": [
-      "H",
       "omega_c"
     ],
     "num_constraints": 0
@@ -1026,10 +1035,9 @@
   {
     "qid": "q_tsa_28",
     "latex": "\\text{tr}(A) = 5",
-    "expected_repr": "Eq(A*tr, 5)",
+    "expected_repr": "Eq(A, 5)",
     "variables": [
-      "A",
-      "tr"
+      "A"
     ],
     "num_constraints": 0
   },
@@ -1112,21 +1120,29 @@
   {
     "qid": "q_hsa_01",
     "latex": "u_8 = u_1 \\cdot q^7 = 3 \\cdot 2^7 = 3 \\cdot 128 = 384",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(u_8 = q**7*u_1 = 384 = 384 = 384)",
+    "variables": [
+      "q",
+      "u_1",
+      "u_8"
+    ],
     "num_constraints": 0
   },
   {
     "qid": "q_hsa_02",
     "latex": "P(\\bar{A}) = \\frac{C_4^3}{C_{10}^3} = \\frac{4}{120} = \\frac{1}{30}",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(P(bar_A) = C_4**3/C_10**3 = 1/30 = 1/30)",
+    "variables": [
+      "C_10",
+      "C_4",
+      "bar_A"
+    ],
     "num_constraints": 1
   },
   {
     "qid": "q_hsa_02",
     "latex": "1 - 1/30 = 29/30",
-    "expected_repr": "True",
+    "expected_repr": "Eq(29/30, 29/30)",
     "variables": [],
     "num_constraints": 0
   },
@@ -1315,7 +1331,7 @@
   {
     "qid": "q_hsa_05",
     "latex": "u_{20} = -2 + 19 \\cdot 5 = -2 + 95 = 93",
-    "expected_repr": "Eq(u_20, 93)",
+    "expected_repr": "ChainedRelation(u_20 = 93 = 93 = 93)",
     "variables": [
       "u_20"
     ],
@@ -1334,8 +1350,10 @@
   {
     "qid": "q_hsa_06",
     "latex": "(2\\sin x + 3\\cos x)^2 \\le (2^2 + 3^2)(\\sin^2 x + \\cos^2 x) = 13 \\cdot 1 = 13",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation((2*sin(x) + 3*cos(x))**2 <= 13*sin(x)**2 + 13*cos(x)**2 = 13 = 13)",
+    "variables": [
+      "x"
+    ],
     "num_constraints": 0
   },
   {
@@ -1392,7 +1410,7 @@
   {
     "qid": "q_hsa_09",
     "latex": "V = S \\cdot h = \\frac{a^3\\sqrt{3}}{4}",
-    "expected_repr": "Eq(V, S*h) & Eq(S*h, sqrt(3)*a**3/4)",
+    "expected_repr": "ChainedRelation(V = S*h = sqrt(3)*a**3/4)",
     "variables": [
       "S",
       "V",
@@ -1440,7 +1458,7 @@
   {
     "qid": "q_hsa_10",
     "latex": "A_{10}^3 = 10 \\cdot 9 \\cdot 8 = 720",
-    "expected_repr": "Eq(A_10**3, 720)",
+    "expected_repr": "ChainedRelation(A_10**3 = 720 = 720)",
     "variables": [
       "A_10"
     ],
@@ -1469,7 +1487,7 @@
   {
     "qid": "q_hsa_11",
     "latex": "t = 2^x > 0",
-    "expected_repr": "Eq(t, 2**x) & (2**x > 0)",
+    "expected_repr": "ChainedRelation(t = 2**x > 0)",
     "variables": [
       "t",
       "x"
@@ -1479,7 +1497,7 @@
   {
     "qid": "q_hsa_11",
     "latex": "b - a = 2 - 0 = 2",
-    "expected_repr": "Eq(-a + b, 2)",
+    "expected_repr": "ChainedRelation(-a + b = 2 = 2)",
     "variables": [
       "a",
       "b"
@@ -1704,8 +1722,11 @@
   {
     "qid": "q_hsa_tf_01",
     "latex": "n(\\Omega) = C_9^3 = \\frac{9 \\cdot 8 \\cdot 7}{6} = 84",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(n(Omega) = C_9**3 = 84 = 84)",
+    "variables": [
+      "C_9",
+      "Omega"
+    ],
     "num_constraints": 0
   },
   {
@@ -1720,7 +1741,7 @@
   {
     "qid": "q_hsa_tf_01",
     "latex": "P = 10/84 = 5/42",
-    "expected_repr": "Eq(P, 5/42)",
+    "expected_repr": "ChainedRelation(P = 5/42 = 5/42)",
     "variables": [
       "P"
     ],
@@ -1729,7 +1750,7 @@
   {
     "qid": "q_hsa_tf_01",
     "latex": "C_5^3 + C_4^3 = 10 + 4 = 14",
-    "expected_repr": "Eq(C_4**3 + C_5**3, 14)",
+    "expected_repr": "ChainedRelation(C_4**3 + C_5**3 = 14 = 14)",
     "variables": [
       "C_4",
       "C_5"
@@ -1739,14 +1760,14 @@
   {
     "qid": "q_hsa_tf_01",
     "latex": "84 - 14 = 70",
-    "expected_repr": "True",
+    "expected_repr": "Eq(70, 70)",
     "variables": [],
     "num_constraints": 0
   },
   {
     "qid": "q_hsa_tf_01",
     "latex": "C_5^2 \\cdot C_4^1 = 10 \\cdot 4 = 40",
-    "expected_repr": "Eq(C_4*C_5**2, 40)",
+    "expected_repr": "ChainedRelation(C_4*C_5**2 = 40 = 40)",
     "variables": [
       "C_4",
       "C_5"
@@ -1756,7 +1777,7 @@
   {
     "qid": "q_hsa_tf_01",
     "latex": "P = 40/84 = 10/21",
-    "expected_repr": "Eq(P, 10/21)",
+    "expected_repr": "ChainedRelation(P = 10/21 = 10/21)",
     "variables": [
       "P"
     ],
@@ -1765,11 +1786,10 @@
   {
     "qid": "q_hsa_tf_01",
     "latex": "n(\\Omega) = C_9^3 = 84",
-    "expected_repr": "Eq(C_9**3, 84) & Eq(Omega*n, C_9**3)",
+    "expected_repr": "ChainedRelation(n(Omega) = C_9**3 = 84)",
     "variables": [
       "C_9",
-      "Omega",
-      "n"
+      "Omega"
     ],
     "num_constraints": 0
   },
@@ -1820,8 +1840,11 @@
   {
     "qid": "q_thpt_02",
     "latex": "|z| = \\frac{|3 - 4i|}{|1 + 2i|} = \\frac{5}{\\sqrt{5}} = \\sqrt{5}",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(Abs(z) = Abs(4*i - 3)/Abs(2*i + 1) = sqrt(5) = sqrt(5))",
+    "variables": [
+      "i",
+      "z"
+    ],
     "num_constraints": 1
   },
   {
@@ -1854,7 +1877,7 @@
   {
     "qid": "q_thpt_03",
     "latex": "R = \\sqrt{25} = 5",
-    "expected_repr": "Eq(R, 5)",
+    "expected_repr": "ChainedRelation(R = 5 = 5)",
     "variables": [
       "R"
     ],
@@ -1921,7 +1944,7 @@
   {
     "qid": "q_thpt_05",
     "latex": "2/1 = 2",
-    "expected_repr": "True",
+    "expected_repr": "Eq(2, 2)",
     "variables": [],
     "num_constraints": 0
   },
@@ -1984,8 +2007,11 @@
   {
     "qid": "q_thpt_06",
     "latex": "S = \\int_0^2 (2x - x^2)dx = \\left[ x^2 - \\frac{x^3}{3} \\right]_0^2 = 4 - \\frac{8}{3} = \\frac{4}{3}",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(S = Integral(-x**2 + 2*x, (x, 0, 2)) = -x**3/3 + x**2_0**2 = 4/3 = 4/3)",
+    "variables": [
+      "-x**3/3 + x**2_0",
+      "S"
+    ],
     "num_constraints": 0
   },
   {
@@ -2021,7 +2047,7 @@
   {
     "qid": "q_thpt_07",
     "latex": "0,5 < 1",
-    "expected_repr": "True",
+    "expected_repr": "1/2 < 1",
     "variables": [],
     "num_constraints": 0
   },
@@ -2048,7 +2074,7 @@
   {
     "qid": "q_thpt_08",
     "latex": "\\frac{x - 1}{2} = \\frac{y - 2}{-1} = \\frac{z + 1}{3}",
-    "expected_repr": "Eq(2 - y, z/3 + 1/3) & Eq(x/2 - 1/2, 2 - y)",
+    "expected_repr": "ChainedRelation(x/2 - 1/2 = 2 - y = z/3 + 1/3)",
     "variables": [
       "x",
       "y",
@@ -2059,7 +2085,7 @@
   {
     "qid": "q_thpt_08",
     "latex": "\\frac{x + 1}{2} = \\frac{y + 2}{-1} = \\frac{z - 1}{3}",
-    "expected_repr": "Eq(x/2 + 1/2, -y - 2) & Eq(-y - 2, z/3 - 1/3)",
+    "expected_repr": "ChainedRelation(x/2 + 1/2 = -y - 2 = z/3 - 1/3)",
     "variables": [
       "x",
       "y",
@@ -2070,7 +2096,7 @@
   {
     "qid": "q_thpt_08",
     "latex": "\\frac{x - 1}{2} = \\frac{y - 2}{1} = \\frac{z + 1}{3}",
-    "expected_repr": "Eq(x/2 - 1/2, y - 2) & Eq(y - 2, z/3 + 1/3)",
+    "expected_repr": "ChainedRelation(x/2 - 1/2 = y - 2 = z/3 + 1/3)",
     "variables": [
       "x",
       "y",
@@ -2081,7 +2107,7 @@
   {
     "qid": "q_thpt_08",
     "latex": "\\frac{x - 1}{1} = \\frac{y - 2}{2} = \\frac{z + 1}{-1}",
-    "expected_repr": "Eq(x - 1, y/2 - 1) & Eq(y/2 - 1, -z - 1)",
+    "expected_repr": "ChainedRelation(x - 1 = y/2 - 1 = -z - 1)",
     "variables": [
       "x",
       "y",
@@ -2220,8 +2246,11 @@
   {
     "qid": "q_thpt_tf_01",
     "latex": "d = \\frac{14}{3} < R = 5",
-    "expected_repr": "False",
-    "variables": [],
+    "expected_repr": "ChainedRelation(d = 14/3 < R = 5)",
+    "variables": [
+      "R",
+      "d"
+    ],
     "num_constraints": 0
   },
   {

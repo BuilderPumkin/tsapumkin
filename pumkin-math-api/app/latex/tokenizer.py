@@ -31,7 +31,8 @@ FORBIDDEN_PATTERNS = [
     r"(?<!\\)\blambda\b",
 ]
 
-# Physical units commonly appended in Vietnamese THPT math (e.g. \text{ m}^3, \text{cm})
+# Physical units commonly appended in Vietnamese THPT math
+# (e.g. \text{ m}^3, \text{cm}, \text{ triệu đồng})
 PHYSICAL_UNITS = {
     "m",
     "cm",
@@ -43,20 +44,57 @@ PHYSICAL_UNITS = {
     "m^3",
     "cm^3",
     "l",
+    "lít",
+    "lit",
     "ml",
     "kg",
     "g",
     "s",
-    "h",
-    "phút",
     "giây",
+    "phút",
+    "h",
     "giờ",
     "đ",
     "đồng",
+    "triệu đồng",
+    "nghìn đồng",
+    "tỷ đồng",
+    "triệu",
+    "nghìn",
+    "tỷ",
+    "tr",
     "rad",
+    "rad/s",
     "m/s",
+    "cm/s",
     "km/h",
+    "m/phút",
+    "vòng/phút",
+    "mg/L",
+    "A",
+    "F",
+    "H",
+    "V",
 }
+
+# Standard mathematical labels and subscripts permitted in \text or \mathrm
+ALLOWED_MATH_TEXT = {
+    "max": "max",
+    "min": "min",
+    "const": "const",
+    "in": "in",
+    "out": "out",
+    "CT": "CT",
+    "ct": "ct",
+    "CĐ": "CD",
+    "cđ": "cd",
+    "CD": "CD",
+    "cd": "cd",
+    "đáy": "day",
+    "day": "day",
+    "Exp": "Exp",
+}
+
 
 # Supported LaTeX function commands
 MATH_FUNCTIONS = {
@@ -232,11 +270,25 @@ def tokenize(latex_str: str, max_length: int = 2000, max_tokens: int = 500) -> l
                     i += m_unit_exp.end()
                 tokens.append(Token(TokenType.UNIT, unit_val, i, 1, i + 1))
                 continue
-            # If text is an identifier (e.g. CĐ, CT, max, min, const), emit as IDENT
-            if text_val:
-                tokens.append(Token(TokenType.IDENT, text_val, i, 1, i + 1))
+            # If text is an allowed identifier/label (e.g. CĐ, CT, max, min, const), emit as IDENT
+            if cleaned_unit in ALLOWED_MATH_TEXT:
+                tokens.append(Token(TokenType.IDENT, ALLOWED_MATH_TEXT[cleaned_unit], i, 1, i + 1))
                 i += m_text.end()
                 continue
+            # Single ASCII variable inside \mathrm / \text (e.g. \mathrm{x}, \mathrm{y})
+            if len(cleaned_unit) == 1 and cleaned_unit.isascii() and cleaned_unit.isalpha():
+                tokens.append(Token(TokenType.IDENT, cleaned_unit, i, 1, i + 1))
+                i += m_text.end()
+                continue
+
+            raise TokenizerError(
+                "UNSUPPORTED_SYNTAX",
+                (
+                    f"Văn bản '\\{m_text.group(1)}{{{text_val}}}' "
+                    f"không phải là đơn vị hoặc ký hiệu toán học hợp lệ."
+                ),
+                pos=i,
+            )
 
         # 5. Numbers: unbraced single digit for \frac or ^ / _
         if ch.isdigit() and (unbraced_frac_args > 0 or unbraced_sub_exp > 0):
@@ -630,7 +682,7 @@ def tokenize(latex_str: str, max_length: int = 2000, max_tokens: int = 500) -> l
             continue
 
         # 9. Single Latin letters as variables: x, y, z, t, m, a, b, c, k, etc.
-        if ch.isalpha():
+        if ch.isalpha() and ch.isascii():
             if unbraced_frac_args > 0:
                 unbraced_frac_args -= 1
             unbraced_sub_exp = 0
