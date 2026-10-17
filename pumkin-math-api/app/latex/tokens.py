@@ -47,6 +47,7 @@ class TokenType(StrEnum):
     PRIME = "PRIME"  # ', '
     TO = "TO"  # \to, \rightarrow
     DIFF = "DIFF"  # dx, dt, du, dr, etc.
+    UNIT = "UNIT"  # Physical units (e.g. cm^3, m, kg)
 
     EOF = "EOF"
 
@@ -58,6 +59,9 @@ class Token:
     pos: int  # 0-indexed character offset
     line: int  # 1-indexed line
     col: int  # 1-indexed column
+    hint: str | None = None
 
     def __repr__(self) -> str:
+        if self.hint:
+            return f"Token({self.type.value}, {self.value!r}, hint={self.hint!r}, pos={self.pos})"
         return f"Token({self.type.value}, {self.value!r}, pos={self.pos})"

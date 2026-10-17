@@ -1,267 +1,543 @@
 #!/usr/bin/env python3
 """
-LaTeX Corpus Extractor & Benchmark Tool for Pumkin Math API
-Extracts all real LaTeX mathematical expressions from data/questions/all.json,
+LaTeX Corpus Extractor & Comprehensive Benchmark Engine for Pumkin Math API
+Extracts all real LaTeX mathematical expressions from pumkin3/data/questions/all.json,
 runs the handcrafted parser on the entire corpus, and produces:
-- Parse success rate (% and counts)
-- Top 20 most frequent unsupported LaTeX constructs (with counts)
-- 10 suspicious / misparsed / edge-case samples from the bank
+- Parse success rate (% and counts) overall, by field, and by SPEC category
+- Breakdown by error_code
+- Top 20 ROOT CAUSE unsupported constructs table
+- Detailed root cause analysis of other_non_standard_syntax (with 10 question_id samples)
+- Question-level parse rate (% of questions where all question_text snippets parse successfully)
+- 10 Suspicious / subtle interpretation cases sampled from successful parses (seed=42)
+- Deterministic output saved to docs/latex_corpus_benchmark.json
 """
 
+import hashlib
 import json
 import os
+import random
 import re
 import sys
-from collections import Counter
-from dataclasses import dataclass
+from collections import Counter, defaultdict
 from typing import Any
 
-# Add pumkin-math-api to Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "pumkin-math-api"))
-from app.latex import parse_latex, ParseResult
-
 # Ensure UTF-8 output on Windows console
-if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+if sys.platform == "win32" and sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-POSSIBLE_PATHS = [
-    "data/questions/all.json",
-    "public/data/questions/all.json",
-    "../data/questions/all.json",
-    "pumkin3/data/questions/all.json",
-    os.path.join(os.path.dirname(__file__), "..", "public", "data", "questions", "all.json"),
-    os.path.join(os.path.dirname(__file__), "..", "..", "data", "questions", "all.json"),
-]
+# Add pumkin-math-api and workspace root to Python path
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, ".."))
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "pumkin-math-api"))
+sys.path.insert(0, PROJECT_ROOT)
+
+from app.latex import ParseResult, parse_latex
+from tools.classify_questions import classify_question_v2
+
+# Canonical dataset path pinned to pumkin3/data/questions/all.json
+CANONICAL_QUESTIONS_PATH = os.path.join(PROJECT_ROOT, "pumkin3", "data", "questions", "all.json")
+EXPECTED_NORMALIZED_SHA256 = "ced7e7ffe5038be54f8e4867a881962aa24dd843d9f1713a51d9ca4dab01d560"
+EXPECTED_QUESTION_COUNT = 553
 
 
-def find_questions_file() -> str:
-    for p in POSSIBLE_PATHS:
-        if os.path.exists(p):
-            return os.path.abspath(p)
-    raise FileNotFoundError(
-        "Could not locate data/questions/all.json in any expected workspace path."
-    )
+def verify_canonical_data_source() -> tuple[str, str, int]:
+    """Verifies that the canonical questions file exists and matches the verified hash and count."""
+    if not os.path.exists(CANONICAL_QUESTIONS_PATH):
+        raise FileNotFoundError(f"Canonical questions file not found at: {CANONICAL_QUESTIONS_PATH}")
+
+    with open(CANONICAL_QUESTIONS_PATH, "rb") as f:
+        raw_bytes = f.read()
+
+    norm_bytes = raw_bytes.replace(b"\r\n", b"\n")
+    sha256_hash = hashlib.sha256(norm_bytes).hexdigest()
+
+    data = json.loads(norm_bytes.decode("utf-8"))
+    count = len(data)
+
+    if count != EXPECTED_QUESTION_COUNT:
+        raise ValueError(
+            f"Question count mismatch: expected {EXPECTED_QUESTION_COUNT}, got {count}"
+        )
+    if sha256_hash != EXPECTED_NORMALIZED_SHA256:
+        raise ValueError(
+            f"Normalized SHA-256 mismatch:\n  Expected: {EXPECTED_NORMALIZED_SHA256}\n  Got:      {sha256_hash}"
+        )
+
+    return CANONICAL_QUESTIONS_PATH, sha256_hash, count
 
 
-def extract_latex_snippets(data: list[dict[str, Any]]) -> list[tuple[str, str]]:
+def extract_raw_math_snippets(text: str) -> list[str]:
     """
-    Extracts (question_id, snippet) pairs from all text fields in questions.
-    Respects delimiter priorities ($$ before $, \\[ before \\( ).
+    Extracts LaTeX snippets from a raw text string respecting delimiter precedence:
+    $$...$$ > \\[...\\] > \\(...\\) > $...$.
     """
-    snippets: list[tuple[str, str]] = []
+    if not text:
+        return []
 
-    double_dollar_pattern = re.compile(r"\$\$(.*?)\$\$", re.DOTALL)
-    display_pattern = re.compile(r"\\\[(.*?)\\\]", re.DOTALL)
-    inline_pattern = re.compile(r"\\\((.*?)\\\)", re.DOTALL)
-    dollar_pattern = re.compile(r"(?<!\\)\$(?!\$)(.*?)(?<!\\)\$", re.DOTALL)
+    snippets: list[str] = []
+    p_dollar2 = re.compile(r"\$\$(.*?)\$\$", re.DOTALL)
+    p_bracket = re.compile(r"\\\[(.*?)\\\]", re.DOTALL)
+    p_paren = re.compile(r"\\\((.*?)\\\)", re.DOTALL)
+    p_dollar1 = re.compile(r"(?<!\\)\$(?!\$)(.*?)(?<!\\)\$", re.DOTALL)
 
-    for q in data:
-        qid = q.get("id", "unknown")
-        texts: list[str] = []
+    for m in p_dollar2.finditer(text):
+        s = m.group(1).strip()
+        if s:
+            snippets.append(s)
+    cleaned = p_dollar2.sub("", text)
 
-        for field in ("question", "question_text", "cloze_text", "explanation", "explanation_vi", "correct_answer"):
-            v = q.get(field)
-            if isinstance(v, str):
-                texts.append(v)
+    for m in p_bracket.finditer(cleaned):
+        s = m.group(1).strip()
+        if s:
+            snippets.append(s)
+    cleaned = p_bracket.sub("", cleaned)
 
-        for opt in (q.get("options") or []):
-            if isinstance(opt, str):
-                texts.append(opt)
+    for m in p_paren.finditer(cleaned):
+        s = m.group(1).strip()
+        if s:
+            snippets.append(s)
+    cleaned = p_paren.sub("", cleaned)
 
-        for it in (q.get("items") or []):
-            if isinstance(it, dict):
-                for val in it.values():
-                    if isinstance(val, str):
-                        texts.append(val)
-            elif isinstance(it, str):
-                texts.append(it)
-
-        for text in texts:
-            if not text:
-                continue
-
-            # 1. Double dollar $$ ... $$
-            for m in double_dollar_pattern.finditer(text):
-                s = m.group(1).strip()
-                if s:
-                    snippets.append((qid, s))
-            cleaned = double_dollar_pattern.sub("", text)
-
-            # 2. Display LaTeX \[ ... \]
-            for m in display_pattern.finditer(cleaned):
-                s = m.group(1).strip()
-                if s:
-                    snippets.append((qid, s))
-            cleaned = display_pattern.sub("", cleaned)
-
-            # 3. Inline LaTeX \( ... \)
-            for m in inline_pattern.finditer(cleaned):
-                s = m.group(1).strip()
-                if s:
-                    snippets.append((qid, s))
-            cleaned = inline_pattern.sub("", cleaned)
-
-            # 4. Single dollar $ ... $
-            for m in dollar_pattern.finditer(cleaned):
-                s = m.group(1).strip()
-                if s:
-                    snippets.append((qid, s))
+    for m in p_dollar1.finditer(cleaned):
+        s = m.group(1).strip()
+        if s:
+            snippets.append(s)
 
     return snippets
 
 
+def determine_root_cause(snippet: str, res: ParseResult) -> str:
+    r"""
+    Identifies the EXACT root cause of a parse failure.
+    Ensures supported commands (\frac, \pi, \sqrt, \cdot, etc.) are never falsely blamed.
+    """
+    msg = res.reason_vi or ""
+    code = res.error_code or "UNKNOWN"
+
+    # 1. Check for specific unsupported LaTeX commands in the error reason
+    m_unsupp = re.search(r"Lệnh LaTeX '(\\[a-zA-Z]+)'", msg)
+    if m_unsupp:
+        return m_unsupp.group(1)
+
+    # 2. Check for environments (\begin{...})
+    m_env = re.search(r"\\begin\{([a-zA-Z]+)\}", snippet)
+    if m_env:
+        return f"\\begin{{{m_env.group(1)}}}"
+
+    # 3. Check for coordinates or intervals containing semicolons: (1; 2; 3) or [a; b)
+    if ";" in snippet:
+        return "semicolon_coordinate_or_interval"
+
+    # 4. Check for comma-separated lists, vectors, or point coordinates: O(0, 0), a_1 = 5, a_2 = 13
+    if "," in snippet and ("(" in snippet or "=" in snippet):
+        return "comma_list_or_coordinate_tuple"
+
+    # 5. Check for Vietnamese text mistakenly placed inside math delimiters
+    if re.search(r"[\u00C0-\u1EF9]", snippet):
+        return "vietnamese_text_in_math"
+
+    # 6. Check for unclosed / unbalanced delimiters in the source question
+    if snippet.count("(") != snippet.count(")"):
+        return "unclosed_parentheses_in_source"
+    if snippet.count("{") != snippet.count("}"):
+        return "unclosed_braces_in_source"
+    if snippet.count("[") != snippet.count("]"):
+        return "unclosed_brackets_in_source"
+    if snippet.count("|") % 2 != 0:
+        return "unclosed_pipe_delimiter"
+
+    # 7. Check for percentage symbol inside math delimiter
+    if r"\%" in snippet or "%" in snippet:
+        return "percentage_symbol_in_math"
+
+    # 8. Known mathematical symbols not supported in v1
+    for sym in [
+        r"\iff",
+        r"\implies",
+        r"\Rightarrow",
+        r"\Leftrightarrow",
+        r"\in",
+        r"\notin",
+        r"\cap",
+        r"\cup",
+        r"\subset",
+        r"\mathbb",
+        r"\approx",
+        r"\pm",
+        r"\mp",
+        r"\dots",
+        r"\ldots",
+        r"\cdots",
+        r"\parallel",
+        r"\perp",
+        r"\equiv",
+        r"\sim",
+        r"\det",
+        r"\forall",
+        r"\exists",
+    ]:
+        if sym in snippet:
+            return sym
+
+    # 9. Resource limits exceeded
+    if code == "RESOURCE_LIMIT_EXCEEDED":
+        return "resource_limit_exceeded"
+
+    # 10. Fallback: structured syntax error message
+    if code == "EMPTY_INPUT" or code == "EMPTY_EXPRESSION":
+        return "empty_expression"
+
+    return f"syntax_error: {msg[:50]}"
+
+
 def run_benchmark() -> dict[str, Any]:
-    q_file = find_questions_file()
-    print(f"Loading questions from: {q_file}")
+    q_file, sha256_hash, q_count = verify_canonical_data_source()
+    print("=" * 70)
+    print("PUMKIN MATH API - LATEX CORPUS BENCHMARK (PROMPT 4)")
+    print(f"Canonical Data Source: {q_file}")
+    print(f"Normalized SHA-256:    {sha256_hash}")
+    print(f"Total Questions:       {q_count}")
+    print("=" * 70)
+
     with open(q_file, "r", encoding="utf-8") as f:
         questions = json.load(f)
 
-    all_snippets = extract_latex_snippets(questions)
-    total_raw = len(all_snippets)
+    # 1. Extraction: collect all snippets with metadata
+    all_snippets: list[dict[str, Any]] = []
+    question_stem_snippets: dict[str, list[str]] = defaultdict(list)
+    question_categories: dict[str, str] = {}
 
-    # Group by unique snippet
-    unique_snippets: dict[str, list[str]] = {}
-    for qid, s in all_snippets:
-        if s not in unique_snippets:
-            unique_snippets[s] = []
-        unique_snippets[s].append(qid)
+    for q in questions:
+        qid = q.get("id", "unknown")
+        cat = classify_question_v2(q)
+        question_categories[qid] = cat
 
-    total_unique = len(unique_snippets)
-    print(f"Total extracted snippets: {total_raw}")
-    print(f"Total unique snippets: {total_unique}")
+        # Field: question_text
+        qt = q.get("question_text") or q.get("question") or ""
+        for s in extract_raw_math_snippets(qt):
+            all_snippets.append({"qid": qid, "field": "question_text", "category": cat, "snippet": s})
+            question_stem_snippets[qid].append(s)
 
-    success_snippets: list[tuple[str, ParseResult]] = []
-    failed_snippets: list[tuple[str, ParseResult]] = []
+        # Field: options
+        for opt in (q.get("options") or []):
+            if isinstance(opt, str):
+                for s in extract_raw_math_snippets(opt):
+                    all_snippets.append({"qid": qid, "field": "options", "category": cat, "snippet": s})
 
-    unsupported_constructs_counter: Counter = Counter()
-    unsupported_reasons_counter: Counter = Counter()
+        # Field: explanation
+        exp = q.get("explanation") or q.get("explanation_vi") or ""
+        for s in extract_raw_math_snippets(exp):
+            all_snippets.append({"qid": qid, "field": "explanation", "category": cat, "snippet": s})
 
-    cmd_regex = re.compile(r"\\[a-zA-Z]+")
+    total_occurrences = len(all_snippets)
 
-    for snippet, qids in unique_snippets.items():
-        res = parse_latex(snippet)
-        if res.is_success:
-            success_snippets.append((snippet, res))
+    # Group by unique snippet string
+    unique_snippets_map: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for item in all_snippets:
+        unique_snippets_map[item["snippet"]].append(item)
+
+    total_unique = len(unique_snippets_map)
+
+    # 2. Parsing and Evaluation
+    parsed_cache: dict[str, ParseResult] = {}
+    for snippet in unique_snippets_map:
+        parsed_cache[snippet] = parse_latex(snippet)
+
+    # Overall Success Metrics
+    unique_success_count = sum(1 for res in parsed_cache.values() if res.is_success)
+    unique_failed_count = total_unique - unique_success_count
+    unique_success_rate = (unique_success_count / total_unique) * 100.0
+
+    occurrence_success_count = sum(
+        1 for item in all_snippets if parsed_cache[item["snippet"]].is_success
+    )
+    occurrence_success_rate = (occurrence_success_count / total_occurrences) * 100.0
+
+    # 3. Breakdown by Field
+    field_stats: dict[str, dict[str, Any]] = {}
+    for fld in ("question_text", "options", "explanation"):
+        fld_items = [it for it in all_snippets if it["field"] == fld]
+        fld_total = len(fld_items)
+        fld_succ = sum(1 for it in fld_items if parsed_cache[it["snippet"]].is_success)
+        fld_rate = (fld_succ / fld_total * 100.0) if fld_total > 0 else 0.0
+        field_stats[fld] = {
+            "total_occurrences": fld_total,
+            "success_occurrences": fld_succ,
+            "failed_occurrences": fld_total - fld_succ,
+            "success_rate_percent": round(fld_rate, 2),
+        }
+
+    # 4. Breakdown by SPEC Category
+    cat_stats: dict[str, dict[str, Any]] = {}
+    all_cats = sorted(set(question_categories.values()))
+    for cat in all_cats:
+        cat_items = [it for it in all_snippets if it["category"] == cat]
+        cat_total = len(cat_items)
+        cat_succ = sum(1 for it in cat_items if parsed_cache[it["snippet"]].is_success)
+        cat_rate = (cat_succ / cat_total * 100.0) if cat_total > 0 else 0.0
+        cat_stats[cat] = {
+            "total_occurrences": cat_total,
+            "success_occurrences": cat_succ,
+            "failed_occurrences": cat_total - cat_succ,
+            "success_rate_percent": round(cat_rate, 2),
+        }
+
+    # 5. Breakdown by Error Code
+    error_code_counter: Counter = Counter()
+    for item in all_snippets:
+        res = parsed_cache[item["snippet"]]
+        if not res.is_success:
+            error_code_counter[res.error_code or "UNKNOWN"] += 1
+
+    error_code_stats = dict(error_code_counter.most_common())
+
+    # 6. Top 20 Root Cause Unsupported Constructs
+    root_cause_counter: Counter = Counter()
+    for item in all_snippets:
+        snippet = item["snippet"]
+        res = parsed_cache[snippet]
+        if not res.is_success:
+            rc = determine_root_cause(snippet, res)
+            root_cause_counter[rc] += 1
+
+    top_20_root_causes = []
+    total_failures = total_occurrences - occurrence_success_count
+    for rank, (cause, cnt) in enumerate(root_cause_counter.most_common(20), start=1):
+        top_20_root_causes.append({
+            "rank": rank,
+            "root_cause": cause,
+            "occurrence_count": cnt,
+            "percent_of_failures": round((cnt / total_failures * 100.0), 2) if total_failures > 0 else 0.0,
+        })
+
+    # 7. Detailed Analysis of "other_non_standard_syntax"
+    # Extract 10 concrete samples from comma lists, point coordinates, percentages
+    other_syntax_samples: list[dict[str, Any]] = []
+    seen_other_snippets = set()
+    for item in all_snippets:
+        s = item["snippet"]
+        res = parsed_cache[s]
+        if not res.is_success:
+            rc = determine_root_cause(s, res)
+            if rc in ("comma_list_or_coordinate_tuple", "percentage_symbol_in_math") and s not in seen_other_snippets:
+                seen_other_snippets.add(s)
+                other_syntax_samples.append({
+                    "question_id": item["qid"],
+                    "category": item["category"],
+                    "latex": s,
+                    "error_code": res.error_code,
+                    "reason_vi": res.reason_vi,
+                    "syntax_pattern": "Point coordinate tuple O(x,y,z) or comma-separated equation list",
+                })
+                if len(other_syntax_samples) >= 10:
+                    break
+
+    # 8. Question-Level Parse Rate (all question_text snippets parsable)
+    question_level_parsable: dict[str, bool] = {}
+    cat_question_totals: Counter = Counter()
+    cat_question_parsable: Counter = Counter()
+
+    for qid, cat in question_categories.items():
+        stems = question_stem_snippets.get(qid, [])
+        cat_question_totals[cat] += 1
+        if not stems:
+            # Questions without math delimiters in stem
+            question_level_parsable[qid] = True
+            cat_question_parsable[cat] += 1
         else:
-            failed_snippets.append((snippet, res))
-            unsupported_reasons_counter[res.error_code or "UNKNOWN"] += len(qids)
+            all_ok = all(parsed_cache[s].is_success for s in stems)
+            question_level_parsable[qid] = all_ok
+            if all_ok:
+                cat_question_parsable[cat] += 1
 
-            # Identify unsupported commands
-            cmds = cmd_regex.findall(snippet)
-            if cmds:
-                for c in set(cmds):
-                    unsupported_constructs_counter[c] += len(qids)
-            else:
-                # Syntax error or non-command structure
-                if "{" in snippet or "}" in snippet:
-                    unsupported_constructs_counter["unmatched_braces"] += len(qids)
-                elif re.search(r"[\u00C0-\u1EF9]", snippet):
-                    unsupported_constructs_counter["vietnamese_words_in_math"] += len(qids)
-                elif "&" in snippet:
-                    unsupported_constructs_counter["tabular_alignment_&"] += len(qids)
-                else:
-                    unsupported_constructs_counter["other_non_standard_syntax"] += len(qids)
+    total_stem_parsable = sum(1 for ok in question_level_parsable.values() if ok)
+    question_stem_success_rate = (total_stem_parsable / q_count) * 100.0
 
-    success_rate = (len(success_snippets) / total_unique) * 100.0
+    question_rate_by_cat: dict[str, dict[str, Any]] = {}
+    for cat in all_cats:
+        tot = cat_question_totals[cat]
+        par = cat_question_parsable[cat]
+        rate = (par / tot * 100.0) if tot > 0 else 0.0
+        question_rate_by_cat[cat] = {
+            "total_questions": tot,
+            "fully_parsable_stem_questions": par,
+            "stem_parse_rate_percent": round(rate, 2),
+        }
 
-    # Top 20 unsupported constructs
-    top_20_unsupported = unsupported_constructs_counter.most_common(20)
+    # 9. Ten Suspicious / Subtle Interpretations Sampled with seed=42
+    random.seed(42)
+    successful_unique_snippets = [s for s, res in parsed_cache.items() if res.is_success]
+    sampled_120 = random.sample(successful_unique_snippets, min(120, len(successful_unique_snippets)))
 
-    # Detect 10 suspicious / edge cases
-    suspicious_cases: list[dict[str, Any]] = []
+    suspicious_candidates: list[dict[str, Any]] = []
+    for s in sampled_120:
+        res = parsed_cache[s]
+        items = unique_snippets_map[s]
+        qid = items[0]["qid"]
+        expr_str = str(res.expr)
+        warn_codes = [w.code for w in res.warnings]
 
-    for snippet, res in failed_snippets:
-        qids = unique_snippets[snippet]
-        # 1. Vietnamese words inside math delimiters
-        if re.search(r"[\u00C0-\u1EF9]", snippet) and len(suspicious_cases) < 3:
-            suspicious_cases.append({
-                "type": "VIETNAMESE_WORDS_IN_MATH_DELIMITER",
-                "snippet": snippet,
-                "qids": qids,
-                "error_code": res.error_code,
-                "reason_vi": res.reason_vi,
-                "note": "Tác giả đề đặt cả từ tiếng Việt hoặc câu văn vào trong dấu math $...$ hoặc \\(...\\)."
+        # Case 1: Trig argument without parens
+        if "WARN_AMBIGUOUS_TRIG_ARGUMENT" in warn_codes and len(suspicious_candidates) < 10:
+            suspicious_candidates.append({
+                "question_id": qid,
+                "latex": s,
+                "parsed_expr": expr_str,
+                "intended_meaning": "Hàm lượng giác với đối số đơn thức (ví dụ sin(2x) thay vì sin(2)*x)",
+                "rationale": "Parser tự động gộp đơn thức làm góc lượng giác; đã phát cảnh báo WARN_AMBIGUOUS_TRIG_ARGUMENT.",
             })
 
-        # 2. Typos in LaTeX commands
-        if re.search(r"\\(farc|frca|sqtr|lamda|infin|dotts)", snippet) and len(suspicious_cases) < 5:
-            suspicious_cases.append({
-                "type": "LATEX_COMMAND_TYPO",
-                "snippet": snippet,
-                "qids": qids,
-                "error_code": res.error_code,
-                "reason_vi": res.reason_vi,
-                "note": "Lỗi chính tả lệnh LaTeX trong dữ liệu gốc của ngân hàng đề."
+        # Case 2: Unknown function call
+        if "WARN_IMPLICIT_FUNCTION_CALL" in warn_codes and len(suspicious_candidates) < 10:
+            suspicious_candidates.append({
+                "question_id": qid,
+                "latex": s,
+                "parsed_expr": expr_str,
+                "intended_meaning": "Hàm toán học trừu tượng f(x) hoặc g(x)",
+                "rationale": "Parser tạo SymPy Function thay vì phép nhân ngầm; đã phát cảnh báo WARN_IMPLICIT_FUNCTION_CALL.",
             })
 
-        # 3. Unmatched or broken delimiters
-        if (snippet.count("{") != snippet.count("}") or snippet.count("(") != snippet.count(")")) and len(suspicious_cases) < 7:
-            suspicious_cases.append({
-                "type": "UNBALANCED_DELIMITERS",
-                "snippet": snippet,
-                "qids": qids,
-                "error_code": res.error_code,
-                "reason_vi": res.reason_vi,
-                "note": "Ngoặc nhọn hoặc ngoặc đơn không đóng mở cân xứng trong ngân hàng câu hỏi."
+        # Case 3: Stripped geometry label
+        if "WARN_STRIPPED_LABEL_PREFIX" in warn_codes and len(suspicious_candidates) < 10:
+            lbl = res.metadata.get("stripped_label")
+            suspicious_candidates.append({
+                "question_id": qid,
+                "latex": s,
+                "parsed_expr": expr_str,
+                "intended_meaning": f"Phương trình hình học của đường thẳng/mặt phẳng có tiền tố nhãn {lbl}:",
+                "rationale": "Tiền tố hình học bị bóc tách khỏi phương trình; lưu trong metadata và cảnh báo WARN_STRIPPED_LABEL_PREFIX.",
             })
 
-        # 4. Multi-letter vectors e.g. \vec{AB}
-        if re.search(r"\\vec\{[A-Z]{2,}\}", snippet) and len(suspicious_cases) < 9:
-            suspicious_cases.append({
-                "type": "SEGMENT_VECTOR_NOTATION",
-                "snippet": snippet,
-                "qids": qids,
-                "error_code": res.error_code,
-                "reason_vi": res.reason_vi,
-                "note": "Vector đoạn thẳng hai điểm hoa như \\vec{AB}, \\vec{MN} (thuộc phạm vi hình học Oxyz v2)."
+        # Case 4: Stripped physical unit
+        if "WARN_STRIPPED_PHYSICAL_UNIT" in warn_codes and len(suspicious_candidates) < 10:
+            unit = res.metadata.get("stripped_unit")
+            suspicious_candidates.append({
+                "question_id": qid,
+                "latex": s,
+                "parsed_expr": expr_str,
+                "intended_meaning": f"Biểu thức mang đơn vị đo lường vật lý ({unit})",
+                "rationale": "Đơn vị được bóc tách an toàn để phục vụ giải toán đại số thuần túy; lưu trong metadata['stripped_unit'].",
             })
 
-        # 5. Logic / set operators
-        if any(tok in snippet for tok in (r"\iff", r"\implies", r"\in", r"\forall")) and len(suspicious_cases) < 10:
-            suspicious_cases.append({
-                "type": "LOGICAL_STATEMENT_IN_SNIPPET",
-                "snippet": snippet,
-                "qids": qids,
-                "error_code": res.error_code,
-                "reason_vi": res.reason_vi,
-                "note": "Mệnh đề logic / quan hệ tập hợp (không phải biểu thức giải tích đơn trị)."
+        # Case 5: Decimal comma converted
+        if "WARN_DECIMAL_COMMA_USED" in warn_codes and len(suspicious_candidates) < 10:
+            suspicious_candidates.append({
+                "question_id": qid,
+                "latex": s,
+                "parsed_expr": expr_str,
+                "intended_meaning": "Số thập phân viết theo quy ước Việt Nam bằng dấu phẩy",
+                "rationale": "Đã chuẩn hóa sang Rational hoặc float dấu chấm; cảnh báo WARN_DECIMAL_COMMA_USED.",
             })
+
+        # Case 6: Power implicit multiplication
+        if "WARN_POWER_IMPLICIT_MUL" in warn_codes and len(suspicious_candidates) < 10:
+            suspicious_candidates.append({
+                "question_id": qid,
+                "latex": s,
+                "parsed_expr": expr_str,
+                "intended_meaning": "Lũy thừa nhân ngầm với biến tiếp theo: (2^x)*y",
+                "rationale": "Không nhầm lẫn với số mũ tích 2^{xy}; cảnh báo WARN_POWER_IMPLICIT_MUL.",
+            })
+
+        # Case 7: Logarithm scope addition
+        if "WARN_AMBIGUOUS_LOG_SCOPE" in warn_codes and len(suspicious_candidates) < 10:
+            suspicious_candidates.append({
+                "question_id": qid,
+                "latex": s,
+                "parsed_expr": expr_str,
+                "intended_meaning": "Phép cộng sau biểu thức logarit: (log_a x) + b",
+                "rationale": "Quy tắc độ ưu tiên kết thúc đối số log trước dấu cộng; cảnh báo WARN_AMBIGUOUS_LOG_SCOPE.",
+            })
+
+        # Case 8: Logarithm power argument
+        if "WARN_AMBIGUOUS_LOG_ARGUMENT" in warn_codes and len(suspicious_candidates) < 10:
+            suspicious_candidates.append({
+                "question_id": qid,
+                "latex": s,
+                "parsed_expr": expr_str,
+                "intended_meaning": "Đối số logarit là một lũy thừa: ln(x^2)",
+                "rationale": "Lũy thừa gắn với biến x trước hàm ln; cảnh báo WARN_AMBIGUOUS_LOG_ARGUMENT.",
+            })
+
+        # Case 9: Unbraced fraction multiplication
+        if "WARN_AMBIGUOUS_FRACTION_MULTIPLICATION" in warn_codes and len(suspicious_candidates) < 10:
+            suspicious_candidates.append({
+                "question_id": qid,
+                "latex": s,
+                "parsed_expr": expr_str,
+                "intended_meaning": "Phân số không ngoặc nhân với biến: (1/2)*x",
+                "rationale": "Phân số đơn ký tự \\frac12 được đóng gói trước khi nhân x; cảnh báo WARN_AMBIGUOUS_FRACTION_MULTIPLICATION.",
+            })
+
+    # Fill remaining slots up to 10 if needed from other interesting expressions
+    if len(suspicious_candidates) < 10:
+        for s in sampled_120:
+            res = parsed_cache[s]
+            items = unique_snippets_map[s]
+            qid = items[0]["qid"]
+            expr_str = str(res.expr)
+            if any(cand["latex"] == s for cand in suspicious_candidates):
+                continue
+            if len(res.constraints) > 0 and len(suspicious_candidates) < 10:
+                suspicious_candidates.append({
+                    "question_id": qid,
+                    "latex": s,
+                    "parsed_expr": expr_str,
+                    "intended_meaning": "Biểu thức có điều kiện xác định biên bắt buộc (mẫu != 0, log > 0, căn >= 0)",
+                    "rationale": f"Parser trích xuất thành công {len(res.constraints)} điều kiện xác định toán học.",
+                })
 
     report = {
-        "summary": {
-            "total_extracted_raw": total_raw,
-            "total_unique": total_unique,
-            "success_count": len(success_snippets),
-            "success_rate_percent": round(success_rate, 2),
-            "failed_count": len(failed_snippets),
-            "failed_rate_percent": round(100.0 - success_rate, 2),
+        "metadata": {
+            "canonical_data_source": q_file,
+            "normalized_sha256": sha256_hash,
+            "total_questions": q_count,
+            "total_occurrences": total_occurrences,
+            "total_unique_snippets": total_unique,
+            "random_seed": 42,
         },
-        "top_20_unsupported_constructs": [
-            {"construct": c, "occurrences_in_bank": count}
-            for c, count in top_20_unsupported
-        ],
-        "unsupported_reasons_breakdown": dict(unsupported_reasons_counter.most_common(10)),
-        "ten_suspicious_or_edge_cases": suspicious_cases[:10]
+        "overall_metrics": {
+            "unique_snippets": {
+                "total": total_unique,
+                "success": unique_success_count,
+                "failed": unique_failed_count,
+                "success_rate_percent": round(unique_success_rate, 2),
+            },
+            "occurrences": {
+                "total": total_occurrences,
+                "success": occurrence_success_count,
+                "failed": total_occurrences - occurrence_success_count,
+                "success_rate_percent": round(occurrence_success_rate, 2),
+            },
+            "question_stem_success": {
+                "total_questions": q_count,
+                "fully_parsable_stem_questions": total_stem_parsable,
+                "success_rate_percent": round(question_stem_success_rate, 2),
+            },
+        },
+        "breakdown_by_field": field_stats,
+        "breakdown_by_category": cat_stats,
+        "breakdown_by_error_code": error_code_stats,
+        "top_20_root_causes": top_20_root_causes,
+        "other_non_standard_syntax_samples": other_syntax_samples,
+        "question_stem_rate_by_category": question_rate_by_cat,
+        "ten_suspicious_interpretation_cases": suspicious_candidates[:10],
     }
 
-    # Save to docs/latex_corpus_benchmark.json
-    out_dir = os.path.join(os.path.dirname(__file__), "..", "docs")
-    os.makedirs(out_dir, exist_ok=True)
-    out_path = os.path.join(out_dir, "latex_corpus_benchmark.json")
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(report, f, ensure_ascii=False, indent=2)
+    # Write out deterministic JSON benchmark report
+    benchmark_output_path = os.path.join(PROJECT_ROOT, "docs", "latex_corpus_benchmark.json")
+    with open(benchmark_output_path, "w", encoding="utf-8") as f:
+        json.dump(report, f, ensure_ascii=False, indent=2, sort_keys=True)
 
-    print("\n" + "=" * 60)
-    print("           PUMKIN MATH API - LATEX CORPUS BENCHMARK")
-    print("=" * 60)
-    print(f"Tổng số chuỗi LaTeX trích xuất:       {total_raw}")
-    print(f"Tổng số chuỗi duy nhất:                 {total_unique}")
-    print(f"Dịch thành công sang SymPy AST:         {len(success_snippets)} ({success_rate:.2f}%)")
-    print(f"Cấu trúc không hỗ trợ / Lỗi cú pháp:   {len(failed_snippets)} ({100.0 - success_rate:.2f}%)")
-    print("\n--- TOP 20 CẤU TRÚC KHÔNG HỖ TRỢ PHỔ BIẾN NHẤT ---")
-    for idx, (c, count) in enumerate(top_20_unsupported, 1):
-        print(f" {idx:2d}. {c:<25} : {count:4d} lượt xuất hiện")
-    print(f"\nBáo cáo chi tiết đã lưu vào: {os.path.abspath(out_path)}")
+    with open(benchmark_output_path, "rb") as f:
+        bench_sha256 = hashlib.sha256(f.read()).hexdigest()
+
+    print("\nBenchmark completed successfully!")
+    print(f"Report written to: {benchmark_output_path}")
+    print(f"Report SHA-256:    {bench_sha256}")
+    print(f"Unique Parse Rate: {unique_success_rate:.2f}% ({unique_success_count}/{total_unique})")
+    print(f"Stem Parse Rate:   {question_stem_success_rate:.2f}% ({total_stem_parsable}/{q_count})")
+    print("=" * 70)
 
     return report
 

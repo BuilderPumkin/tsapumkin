@@ -54,6 +54,8 @@ PHYSICAL_UNITS = {
     "đ",
     "đồng",
     "rad",
+    "m/s",
+    "km/h",
 }
 
 # Supported LaTeX function commands
@@ -215,17 +217,20 @@ def tokenize(latex_str: str, max_length: int = 2000, max_tokens: int = 500) -> l
             unbraced_sub_exp = 0
             text_val = m_text.group(2).strip()
             cleaned_unit = text_val.lstrip()
-            # If it's a recognized unit (or trailing unit), skip it and any
-            # attached unit power (^2, ^3)
+            # If it's a recognized unit (or trailing unit), emit as UNIT token
+            # along with any attached unit power (^2, ^3)
             if (
                 cleaned_unit in PHYSICAL_UNITS
                 or cleaned_unit.startswith("m^")
                 or cleaned_unit.startswith("cm^")
             ):
+                unit_val = cleaned_unit
                 i += m_text.end()
                 m_unit_exp = re.match(r"^\^(\d+|\{\d+\})", s[i:])
                 if m_unit_exp:
+                    unit_val += m_unit_exp.group(0)
                     i += m_unit_exp.end()
+                tokens.append(Token(TokenType.UNIT, unit_val, i, 1, i + 1))
                 continue
             # If text is an identifier (e.g. CĐ, CT, max, min, const), emit as IDENT
             if text_val:
@@ -243,34 +248,87 @@ def tokenize(latex_str: str, max_length: int = 2000, max_tokens: int = 500) -> l
             i += 1
             continue
 
+        # 5.0 Vietnamese thousands separator: \d{1,3}(\.\d{3}){2,} or \d{2,}\.000
+        # e.g. 1.000.000 or 10.000, 50.000
+        m_vn_thousand = re.match(r"^(\d{1,3}(?:\.\d{3}){2,}|\d{2,}\.000)\b", s[i:])
+        if m_vn_thousand:
+            raw_str = m_vn_thousand.group(1)
+            digits_only = re.sub(r"\D", "", raw_str)
+            if len(digits_only) > 100:
+                raise TokenizerError(
+                    "RESOURCE_LIMIT_EXCEEDED",
+                    (
+                        f"Độ dài chuỗi số ({len(digits_only)} chữ số) "
+                        f"vượt quá giới hạn an toàn tối đa (100 chữ số)."
+                    ),
+                    pos=i,
+                )
+            unbraced_frac_args = 0
+            unbraced_sub_exp = 0
+            tokens.append(
+                Token(TokenType.NUMBER, digits_only, i, 1, i + 1, hint="thousands_separator")
+            )
+            i += m_vn_thousand.end()
+            continue
+
         # 5.1 Vietnamese decimal comma with braces: \d+\{,\}\d+
         m_vn_brace = re.match(r"^(\d+)\{,\}(\d+)", s[i:])
         if m_vn_brace:
+            raw_digits = m_vn_brace.group(1) + m_vn_brace.group(2)
+            if len(raw_digits) > 100:
+                raise TokenizerError(
+                    "RESOURCE_LIMIT_EXCEEDED",
+                    (
+                        f"Độ dài chuỗi số ({len(raw_digits)} chữ số) "
+                        f"vượt quá giới hạn an toàn tối đa (100 chữ số)."
+                    ),
+                    pos=i,
+                )
             unbraced_frac_args = 0
             unbraced_sub_exp = 0
             val = f"{m_vn_brace.group(1)}.{m_vn_brace.group(2)}"
-            tokens.append(Token(TokenType.NUMBER, val, i, 1, i + 1))
+            tokens.append(Token(TokenType.NUMBER, val, i, 1, i + 1, hint="decimal_comma"))
             i += m_vn_brace.end()
             continue
 
         # 5.2 Vietnamese decimal comma direct: \d+,\d+
         # Note: Must ensure not followed by another comma or list-like pattern
         m_vn_comma = re.match(r"^(\d+),(\d+)(?!\d*,)", s[i:])
-        # Verify decimal number: e.g. 1,5 or 0,25. (In coordinate (1, 2) there is space)
         if m_vn_comma:
+            raw_digits = m_vn_comma.group(1) + m_vn_comma.group(2)
+            if len(raw_digits) > 100:
+                raise TokenizerError(
+                    "RESOURCE_LIMIT_EXCEEDED",
+                    (
+                        f"Độ dài chuỗi số ({len(raw_digits)} chữ số) "
+                        f"vượt quá giới hạn an toàn tối đa (100 chữ số)."
+                    ),
+                    pos=i,
+                )
             unbraced_frac_args = 0
             unbraced_sub_exp = 0
             val = f"{m_vn_comma.group(1)}.{m_vn_comma.group(2)}"
-            tokens.append(Token(TokenType.NUMBER, val, i, 1, i + 1))
+            tokens.append(Token(TokenType.NUMBER, val, i, 1, i + 1, hint="decimal_comma"))
             i += m_vn_comma.end()
             continue
 
         # 5.3 Standard floating point or integer: \d+(\.\d+)?
         m_num = re.match(r"^(\d+(\.\d+)?)", s[i:])
         if m_num:
+            num_str = m_num.group(1)
+            digits_only = re.sub(r"\D", "", num_str)
+            if len(digits_only) > 100:
+                raise TokenizerError(
+                    "RESOURCE_LIMIT_EXCEEDED",
+                    (
+                        f"Độ dài chuỗi số ({len(digits_only)} chữ số) "
+                        f"vượt quá giới hạn an toàn tối đa (100 chữ số)."
+                    ),
+                    pos=i,
+                )
             unbraced_frac_args = 0
             unbraced_sub_exp = 0
-            tokens.append(Token(TokenType.NUMBER, m_num.group(1), i, 1, i + 1))
+            tokens.append(Token(TokenType.NUMBER, num_str, i, 1, i + 1))
             i += m_num.end()
             continue
 
@@ -411,6 +469,17 @@ def tokenize(latex_str: str, max_length: int = 2000, max_tokens: int = 500) -> l
                 tokens.append(Token(TokenType.IDENT, cmd[1:], i, 1, i + 1))
                 i += m_cmd.end()
                 continue
+
+            # Explicit rejection of \approx: not an exact equality
+            if cmd == r"\approx":
+                raise TokenizerError(
+                    "UNSUPPORTED_SYNTAX",
+                    (
+                        "Ký hiệu xấp xỉ '\\approx' không phải là đẳng thức chính xác "
+                        "trong toán học hình thức THPT."
+                    ),
+                    pos=i,
+                )
 
             # Any other unknown command -> raise descriptive unsupported error
             raise TokenizerError(

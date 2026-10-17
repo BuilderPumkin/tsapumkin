@@ -46,7 +46,7 @@ from sympy import (
     tan,
 )
 
-from app.latex.result import ConstraintType, DomainConstraint, ParseResult
+from app.latex.result import ConstraintType, DomainConstraint, ParseResult, ParseWarning
 from app.latex.tokenizer import TokenizerError, tokenize
 from app.latex.tokens import Token, TokenType
 
@@ -84,8 +84,56 @@ class LatexParser:
         self.raw_latex = raw_latex
         self.max_depth = max_depth
         self.constraints: list[DomainConstraint] = []
+        self.warnings: list[ParseWarning] = []
+        self.metadata: dict[str, Any] = {}
         self._seen_constraint_keys: set[str] = set()
         self.abs_depth = 0
+        self._unparenthesized_log = False
+
+    def _check_power_safety(self, base_expr: Any, exp_expr: Any, pos: int) -> None:
+        """Enforces mathematical resource boundaries on powers to prevent memory blowout."""
+        # Check large base with large exponent: e.g. 2027^2026 or a^b with b > 1000
+        if isinstance(base_expr, (int, Integer)) and isinstance(exp_expr, (int, Integer)):
+            int_base = abs(int(base_expr))
+            int_exp = int(exp_expr)
+            if int_base > 1:
+                if int_exp > 1000:
+                    raise ParserError(
+                        "RESOURCE_LIMIT_EXCEEDED",
+                        (
+                            f"Lũy thừa {base_expr}^{exp_expr} với số mũ vượt quá "
+                            f"giới hạn an toàn tối đa (1000)."
+                        ),
+                        pos=pos,
+                    )
+                # Composite magnitude estimate: bit_length * log10(2) * exponent
+                est_digits = int_base.bit_length() * 0.30103 * int_exp
+                if est_digits > 4000:
+                    raise ParserError(
+                        "RESOURCE_LIMIT_EXCEEDED",
+                        (
+                            f"Lũy thừa có bậc độ lớn dự kiến ({int(est_digits)} chữ số) "
+                            f"vượt quá giới hạn an toàn tối đa (4000 chữ số)."
+                        ),
+                        pos=pos,
+                    )
+        # Check power towers (nested Pow in exp)
+        if isinstance(exp_expr, Pow):
+            if isinstance(exp_expr.exp, (int, Integer)) and int(exp_expr.exp) > 2:
+                raise ParserError(
+                    "RESOURCE_LIMIT_EXCEEDED",
+                    "Lũy thừa tầng (power tower) vượt quá giới hạn an toàn tính toán.",
+                    pos=pos,
+                )
+        if hasattr(exp_expr, "has") and exp_expr.has(Pow):
+            for p in exp_expr.atoms(Pow):
+                if isinstance(p.base, (int, Integer)) and isinstance(p.exp, (int, Integer)):
+                    if abs(int(p.base)) > 1 and int(p.exp) > 10:
+                        raise ParserError(
+                            "RESOURCE_LIMIT_EXCEEDED",
+                            "Lũy thừa tầng làm bùng nổ số mũ vượt quá giới hạn an toàn.",
+                            pos=pos,
+                        )
 
     def current(self) -> Token:
         if self.pos < len(self.tokens):
@@ -315,6 +363,11 @@ class LatexParser:
         ):
             return False
 
+        # Consecutive numbers without an operator are NOT implicit multiplication (e.g. '5 10')
+        prev = self.tokens[self.pos - 1] if self.pos > 0 else None
+        if prev and prev.type == TokenType.NUMBER and tok.type == TokenType.NUMBER:
+            return False
+
         # Tokens that CAN start an operand in implicit multiplication:
         # NUMBER, IDENT, LPAREN, LBRACE, PIPE, or expression COMMANDs
         if tok.type in (
@@ -354,6 +407,27 @@ class LatexParser:
 
         return False
 
+    def _is_function_call_or_trig_command(self, tok: Token) -> bool:
+        """Checks if a token represents the start of a function call or trig/log command."""
+        if tok.type == TokenType.COMMAND and tok.value in (
+            r"\sin",
+            r"\cos",
+            r"\tan",
+            r"\cot",
+            r"\arcsin",
+            r"\arccos",
+            r"\arctan",
+            r"\arccot",
+            r"\ln",
+            r"\log",
+            r"\lg",
+            r"\exp",
+        ):
+            return True
+        if tok.type == TokenType.IDENT and self.peek().type == TokenType.LPAREN:
+            return True
+        return False
+
     # -------------------------------------------------------------------------
     # Core Parser Methods
     # -------------------------------------------------------------------------
@@ -368,7 +442,15 @@ class LatexParser:
             and self.tokens[self.pos + 2].type == TokenType.RPAREN
             and self.tokens[self.pos + 3].type == TokenType.COLON
         ):
+            lbl = f"({self.tokens[self.pos + 1].value})"
             self.pos += 4
+            self.metadata["stripped_label"] = lbl
+            self.warnings.append(
+                ParseWarning(
+                    code="WARN_STRIPPED_LABEL_PREFIX",
+                    message_vi=f"Đã bóc tách nhãn hình học '{lbl}:' ra khỏi biểu thức toán học.",
+                )
+            )
             return
 
         # Case 2: d_1: or P_2:
@@ -379,7 +461,15 @@ class LatexParser:
             and self.tokens[self.pos + 2].type == TokenType.NUMBER
             and self.tokens[self.pos + 3].type == TokenType.COLON
         ):
+            lbl = f"{self.tokens[self.pos].value}_{self.tokens[self.pos + 2].value}"
             self.pos += 4
+            self.metadata["stripped_label"] = lbl
+            self.warnings.append(
+                ParseWarning(
+                    code="WARN_STRIPPED_LABEL_PREFIX",
+                    message_vi=f"Đã bóc tách nhãn hình học '{lbl}:' ra khỏi biểu thức toán học.",
+                )
+            )
             return
 
         # Case 3: d: or P:
@@ -388,7 +478,15 @@ class LatexParser:
             and self.tokens[self.pos].type == TokenType.IDENT
             and self.tokens[self.pos + 1].type == TokenType.COLON
         ):
+            lbl = self.tokens[self.pos].value
             self.pos += 2
+            self.metadata["stripped_label"] = lbl
+            self.warnings.append(
+                ParseWarning(
+                    code="WARN_STRIPPED_LABEL_PREFIX",
+                    message_vi=f"Đã bóc tách nhãn hình học '{lbl}:' ra khỏi biểu thức toán học.",
+                )
+            )
             return
 
     def parse(self) -> Any:
@@ -402,6 +500,19 @@ class LatexParser:
         self.skip_label_prefix()
 
         expr = self._parse_pratt_expr(PREC_NONE, depth=0)
+
+        # Consume trailing physical unit if present (e.g. 15\pi \text{ cm}^3)
+        if not self.at_end() and self.current().type == TokenType.UNIT:
+            unit_tok = self.advance()
+            self.metadata["stripped_unit"] = unit_tok.value
+            self.warnings.append(
+                ParseWarning(
+                    code="WARN_STRIPPED_PHYSICAL_UNIT",
+                    message_vi=(
+                        f"Đã bóc tách đơn vị vật lý '{unit_tok.value}' ra khỏi biểu thức toán học."
+                    ),
+                )
+            )
 
         if not self.at_end():
             tok = self.current()
@@ -444,6 +555,17 @@ class LatexParser:
             if self.is_implicit_multiplication_start():
                 if PREC_IMPLICIT_MUL < min_prec:
                     break
+                # Ambiguity warning: 2^x y -> (2^x)*y
+                if isinstance(left, Pow) or (hasattr(left, "is_Pow") and left.is_Pow):
+                    self.warnings.append(
+                        ParseWarning(
+                            code="WARN_POWER_IMPLICIT_MUL",
+                            message_vi=(
+                                "Phép nhân ngầm sau lũy thừa (ví dụ 2^x y) "
+                                "được hiểu là (2^x)*y chứ không phải 2^{xy}."
+                            ),
+                        )
+                    )
                 right = self._parse_pratt_expr(PREC_IMPLICIT_MUL + 1, depth + 1)
                 left = Mul(left, right)
                 continue
@@ -456,12 +578,38 @@ class LatexParser:
             self.advance()  # consume operator
 
             if op.type == TokenType.PLUS:
+                # Ambiguity warning: \log_2 x + 1 -> (\log_2 x) + 1
+                if self._unparenthesized_log:
+                    self.warnings.append(
+                        ParseWarning(
+                            code="WARN_AMBIGUOUS_LOG_SCOPE",
+                            message_vi=(
+                                "Biểu thức logarit theo sau bởi phép cộng không ngoặc "
+                                "(ví dụ \\log_2 x + 1), được hiểu là (\\log_2 x) + 1 "
+                                "thay vì \\log_2(x+1)."
+                            ),
+                        )
+                    )
+                self._unparenthesized_log = False
                 right = self._parse_pratt_expr(PREC_ADD, depth + 1)
                 left = Add(left, right)
             elif op.type == TokenType.MINUS:
+                if self._unparenthesized_log:
+                    self.warnings.append(
+                        ParseWarning(
+                            code="WARN_AMBIGUOUS_LOG_SCOPE",
+                            message_vi=(
+                                "Biểu thức logarit theo sau bởi phép trừ không ngoặc "
+                                "(ví dụ \\log_2 x - 1), được hiểu là (\\log_2 x) - 1 "
+                                "thay vì \\log_2(x-1)."
+                            ),
+                        )
+                    )
+                self._unparenthesized_log = False
                 right = self._parse_pratt_expr(PREC_ADD, depth + 1)
                 left = Add(left, Mul(Integer(-1), right))
             elif op.type == TokenType.STAR:
+                self._unparenthesized_log = False
                 right = self._parse_pratt_expr(PREC_MUL, depth + 1)
                 left = Mul(left, right)
             elif op.type == TokenType.SLASH:
@@ -477,6 +625,7 @@ class LatexParser:
                     self.expect(TokenType.RBRACE, "Thiếu dấu ngoặc nhọn '}' đóng số mũ.")
                 else:
                     right = self._parse_pratt_expr(PREC_EXP - 1, depth + 1)
+                self._check_power_safety(left, right, pos=op.pos)
                 left = Pow(left, right)
             elif op.type == TokenType.UNDERSCORE:
                 # Subscript: x_1 or x_{i+1}
@@ -517,6 +666,12 @@ class LatexParser:
                 else:
                     left = new_rel
             elif op.type == TokenType.COMMAND and op.value == "!":
+                if isinstance(left, (int, Integer)) and int(left) > 100:
+                    raise ParserError(
+                        "RESOURCE_LIMIT_EXCEEDED",
+                        f"Giai thừa {left}! vượt quá giới hạn an toàn cho phép (tối đa 100!).",
+                        pos=op.pos,
+                    )
                 left = factorial(left)
             elif op.type == TokenType.PRIME:
                 left = Symbol(f"{left}'")
@@ -537,9 +692,42 @@ class LatexParser:
 
         tok = self.current()
 
+        # 0. Physical Units (if encountered in operand position)
+        if tok.type == TokenType.UNIT:
+            self.advance()
+            self.metadata["stripped_unit"] = tok.value
+            self.warnings.append(
+                ParseWarning(
+                    code="WARN_STRIPPED_PHYSICAL_UNIT",
+                    message_vi=(
+                        f"Đã bóc tách đơn vị vật lý '{tok.value}' ra khỏi biểu thức toán học."
+                    ),
+                )
+            )
+            return self.parse_primary(depth)
+
         # 1. Numbers
         if tok.type == TokenType.NUMBER:
             self.advance()
+            if tok.hint == "decimal_comma":
+                self.warnings.append(
+                    ParseWarning(
+                        code="WARN_DECIMAL_COMMA_USED",
+                        message_vi=(
+                            f"Đã chuyển đổi số thập phân dấu phẩy '{tok.value}' sang dấu chấm."
+                        ),
+                    )
+                )
+            elif tok.hint == "thousands_separator":
+                self.warnings.append(
+                    ParseWarning(
+                        code="WARN_THOUSANDS_SEPARATOR_USED",
+                        message_vi=(
+                            f"Đã chuyển đổi dấu chấm phân cách hàng nghìn "
+                            f"sang số nguyên {tok.value}."
+                        ),
+                    )
+                )
             if "." in tok.value:
                 # Exact rational for floating point / decimal representations
                 return Rational(tok.value)
@@ -574,6 +762,15 @@ class LatexParser:
                 self.advance()  # consume '('
                 arg = self._parse_pratt_expr(PREC_NONE, depth + 1)
                 self.expect(TokenType.RPAREN, "Thiếu dấu ngoặc đơn ')' đóng đối số hàm.")
+                self.warnings.append(
+                    ParseWarning(
+                        code="WARN_IMPLICIT_FUNCTION_CALL",
+                        message_vi=(
+                            f"Ký hiệu '{name}(...)' được xử lý như một hàm chưa biết "
+                            f"(Function) thay vì phép nhân ngầm {name}*(...)."
+                        ),
+                    )
+                )
                 if "'" in str(base_expr):
                     return Derivative(Function(name)(arg), arg)
                 return Function(name)(arg)
@@ -614,12 +811,14 @@ class LatexParser:
 
             # 4.1 Fractions: \frac{u}{v} or \frac12
             if cmd == r"\frac":
+                is_unbraced = False
                 # Numerator
                 if self.current().type == TokenType.LBRACE:
                     self.advance()
                     num = self._parse_pratt_expr(PREC_NONE, depth + 1)
                     self.expect(TokenType.RBRACE, "Thiếu dấu ngoặc nhọn '}' đóng tử số phân thức.")
                 else:
+                    is_unbraced = True
                     num = self.parse_primary(depth + 1)
 
                 # Denominator
@@ -628,7 +827,19 @@ class LatexParser:
                     den = self._parse_pratt_expr(PREC_NONE, depth + 1)
                     self.expect(TokenType.RBRACE, "Thiếu dấu ngoặc nhọn '}' đóng mẫu số phân thức.")
                 else:
+                    is_unbraced = True
                     den = self.parse_primary(depth + 1)
+
+                if is_unbraced and self.is_implicit_multiplication_start():
+                    self.warnings.append(
+                        ParseWarning(
+                            code="WARN_AMBIGUOUS_FRACTION_MULTIPLICATION",
+                            message_vi=(
+                                "Phân số không ngoặc theo sau bởi biến (ví dụ \\frac12x) "
+                                "được hiểu là (1/2)*x thay vì 1/(2x)."
+                            ),
+                        )
+                    )
 
                 if den == 0:
                     raise ParserError(
@@ -647,6 +858,12 @@ class LatexParser:
                     self.advance()
                     index_expr = self._parse_pratt_expr(PREC_NONE, depth + 1)
                     self.expect(TokenType.RBRACKET, "Thiếu dấu ngoặc vuông ']' đóng bậc căn thức.")
+                    if isinstance(index_expr, (int, Integer)) and int(index_expr) > 100:
+                        raise ParserError(
+                            "RESOURCE_LIMIT_EXCEEDED",
+                            f"Căn bậc {index_expr} vượt quá giới hạn an toàn (tối đa căn bậc 100).",
+                            pos=tok.pos,
+                        )
                 else:
                     index_expr = Integer(2)
 
@@ -713,6 +930,21 @@ class LatexParser:
                     )
                 else:
                     arg = self.parse_primary(depth + 1)
+                    if (
+                        self.is_implicit_multiplication_start()
+                        and not self._is_function_call_or_trig_command(self.current())
+                    ):
+                        arg_factor = self._parse_pratt_expr(PREC_IMPLICIT_MUL + 1, depth + 1)
+                        arg = Mul(arg, arg_factor)
+                    self.warnings.append(
+                        ParseWarning(
+                            code="WARN_AMBIGUOUS_TRIG_ARGUMENT",
+                            message_vi=(
+                                f"Góc lượng giác không có ngoặc rõ ràng (ví dụ {cmd} 2x), "
+                                f"được hiểu là {cmd}(2x) thay vì {cmd}(2)*x."
+                            ),
+                        )
+                    )
 
                 # Instantiate SymPy function
                 if func_name == "sin":
@@ -763,7 +995,22 @@ class LatexParser:
                     arg = self._parse_pratt_expr(PREC_NONE, depth + 1)
                     self.expect(TokenType.RBRACE, "Thiếu dấu ngoặc nhọn '}' đóng đối số hàm ln.")
                 else:
+                    self._unparenthesized_log = True
                     arg = self.parse_primary(depth + 1)
+                    if self.current().type == TokenType.CARET:
+                        self.advance()
+                        pow_val = self._parse_pratt_expr(PREC_EXP, depth + 1)
+                        self._check_power_safety(arg, pow_val, pos=tok.pos)
+                        arg = Pow(arg, pow_val)
+                        self.warnings.append(
+                            ParseWarning(
+                                code="WARN_AMBIGUOUS_LOG_ARGUMENT",
+                                message_vi=(
+                                    "Biểu thức logarit không có ngoặc ngoài lũy thừa "
+                                    "(ví dụ \\ln x^2), được hiểu là \\ln(x^2) thay vì (\\ln x)^2."
+                                ),
+                            )
+                        )
 
                 self.add_log_constraints(arg)
                 res = ln(arg)
@@ -794,7 +1041,23 @@ class LatexParser:
                     arg = self._parse_pratt_expr(PREC_NONE, depth + 1)
                     self.expect(TokenType.RBRACE, "Thiếu dấu ngoặc nhọn '}' đóng đối số logarit.")
                 else:
+                    self._unparenthesized_log = True
                     arg = self.parse_primary(depth + 1)
+                    if self.current().type == TokenType.CARET:
+                        self.advance()
+                        pow_val = self._parse_pratt_expr(PREC_EXP, depth + 1)
+                        self._check_power_safety(arg, pow_val, pos=tok.pos)
+                        arg = Pow(arg, pow_val)
+                        self.warnings.append(
+                            ParseWarning(
+                                code="WARN_AMBIGUOUS_LOG_ARGUMENT",
+                                message_vi=(
+                                    "Biểu thức logarit không có ngoặc ngoài lũy thừa "
+                                    "(ví dụ \\log x^2), được hiểu là \\log(x^2) "
+                                    "thay vì (\\log x)^2."
+                                ),
+                            )
+                        )
 
                 self.add_log_constraints(arg, base_expr)
                 if base_expr is not None:
@@ -899,6 +1162,20 @@ class LatexParser:
                 else:
                     upper_b = self.parse_primary(depth + 1)
 
+                if (
+                    isinstance(lower_b, (int, Integer))
+                    and isinstance(upper_b, (int, Integer))
+                    and int(upper_b) - int(lower_b) > 100000
+                ):
+                    raise ParserError(
+                        "RESOURCE_LIMIT_EXCEEDED",
+                        (
+                            f"Khoảng biến thiên tổng ({int(upper_b) - int(lower_b)}) "
+                            f"vượt quá giới hạn an toàn (100000)."
+                        ),
+                        pos=tok.pos,
+                    )
+
                 body = self._parse_pratt_expr(PREC_MUL, depth + 1)
                 return Sum(body, (k_sym, lower_b, upper_b))
 
@@ -919,6 +1196,13 @@ class LatexParser:
                 self.expect(
                     TokenType.RBRACE, "Thiếu dấu ngoặc nhọn '}' đóng tham số thứ hai của \\binom."
                 )
+
+                if isinstance(n_expr, (int, Integer)) and int(n_expr) > 10000:
+                    raise ParserError(
+                        "RESOURCE_LIMIT_EXCEEDED",
+                        f"Số phần tử tổ hợp n={n_expr} vượt quá giới hạn an toàn (10000).",
+                        pos=tok.pos,
+                    )
 
                 return binomial(n_expr, k_expr)
 
@@ -990,6 +1274,8 @@ def parse_latex(latex_str: str) -> ParseResult:
             constraints=parser.constraints,
             variables=variables,
             latex_normalized=norm_latex,
+            warnings=parser.warnings,
+            metadata=parser.metadata,
         )
 
     except TokenizerError as e:
@@ -999,6 +1285,22 @@ def parse_latex(latex_str: str) -> ParseResult:
     except ParserError as e:
         return ParseResult(
             is_success=False, error_code=e.code, reason_vi=e.message_vi, error_position=e.pos + 1
+        )
+    except (ValueError, OverflowError) as e:
+        if "limit" in str(e).lower() or "overflow" in str(e).lower():
+            return ParseResult(
+                is_success=False,
+                error_code="RESOURCE_LIMIT_EXCEEDED",
+                reason_vi=(
+                    "Giá trị tính toán hoặc độ dài chữ số vượt quá giới hạn an toàn của hệ thống."
+                ),
+                error_position=None,
+            )
+        return ParseResult(
+            is_success=False,
+            error_code="SYNTAX_ERROR",
+            reason_vi=f"Lỗi giá trị cú pháp toán học: {str(e)}",
+            error_position=None,
         )
     except Exception as e:
         return ParseResult(

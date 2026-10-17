@@ -1355,7 +1355,7 @@
   {
     "qid": "q_hsa_08",
     "latex": "\\cos 2x - 3\\cos x + 2 = 0",
-    "expected_repr": "Eq(x*cos(2) - 3*cos(x) + 2, 0)",
+    "expected_repr": "Eq(-3*cos(x) + cos(2*x) + 2, 0)",
     "variables": [
       "x"
     ],

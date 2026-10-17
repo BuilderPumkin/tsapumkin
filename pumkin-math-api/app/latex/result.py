@@ -1,7 +1,8 @@
 """
-LaTeX Parsing Result and Mathematical Domain Constraints
-Defines structured result envelopes and domain constraints
-(denominators != 0, roots >= 0, logs > 0).
+LaTeX Parsing Result, Domain Constraints, and Heuristic Tracking
+Defines structured result envelopes, domain constraints
+(denominators != 0, roots >= 0, logs > 0), and explicit warnings
+for semantic ambiguities and applied heuristics.
 """
 
 from enum import StrEnum
@@ -36,10 +37,24 @@ class DomainConstraint(BaseModel):
     message_vi: str = Field(..., description="Giải thích ý nghĩa điều kiện bằng tiếng Việt")
 
 
+class ParseWarning(BaseModel):
+    """
+    Structured warning emitted when semantic ambiguity or heuristic resolution is applied.
+    Enforces the NO GUESSING policy: the caller is explicitly notified of any interpretation.
+    """
+
+    model_config = ConfigDict(arbitrary_types_allowed=True, extra="forbid")
+
+    code: str = Field(..., description="Mã cảnh báo chuẩn hóa (ví dụ WARN_AMBIGUOUS_TRIG_ARGUMENT)")
+    message_vi: str = Field(
+        ..., description="Mô tả nguyên nhân nhập nhằng hoặc heuristic bằng tiếng Việt"
+    )
+
+
 class ParseResult(BaseModel):
     """
     Deterministic result of parsing a LaTeX mathematical string.
-    Contains either a valid SymPy expression with extracted domain constraints,
+    Contains either a valid SymPy expression with extracted domain constraints and warnings,
     or a descriptive unsupported / syntax error.
     """
 
@@ -54,6 +69,16 @@ class ParseResult(BaseModel):
     variables: list[str] = Field(
         default_factory=list,
         description="Danh sách các biến số xuất hiện trong biểu thức (sắp xếp tăng dần)",
+    )
+    warnings: list[ParseWarning] = Field(
+        default_factory=list,
+        description="Danh sách các cảnh báo nhập nhằng ngữ nghĩa hoặc heuristic đã áp dụng",
+    )
+    metadata: dict[str, Any] = Field(
+        default_factory=dict,
+        description=(
+            "Metadata lưu vết thông tin phụ (đơn vị đo lường đã bóc tách, nhãn hình học, v.v.)"
+        ),
     )
     error_code: str | None = Field(default=None, description="Mã định danh lỗi nếu không dịch được")
     reason_vi: str | None = Field(
