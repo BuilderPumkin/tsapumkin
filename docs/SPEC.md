@@ -175,14 +175,14 @@ Quét toàn bộ văn bản đề bài bằng bộ từ khóa trực quan: *"hì
   2. **`SOFT-REVIEW` (71 câu):** Các câu có nhắc đến hình học/bảng biểu/đồ thị nhưng toàn bộ giả thiết, tham số, công thức hàm số (ví dụ $y = f(x)$, $f'(x) = (x-1)^2(x+2)(x-3)^3$), hoặc kích thước hình học (hình trụ dung tích $V = 2\pi$, hình chóp cạnh đáy 4 chiều cao 6) đều đã được mô tả đầy đủ bằng văn bản và LaTeX.
 
 ### 5.3. Quy tắc xử lý đầu vào trong SPEC
-- **Đối với câu HARD-UNSUPPORTED:** Hệ thống tự động trả về `status: "unsupported"`, `confidence: 0.0`, `method: "visual_dependency_filter"`, từ chối giải quyết tất định.
-- **Đối với câu SOFT-REVIEW:** Hệ thống xử lý qua bộ giải SymPy bình thường, nhưng gán cờ `visual_context: true`. Nếu quá trình giải gặp bất kỳ độ lệch hoặc mơ hồ nào về mặt quy ước chiều không gian/nhánh đồ thị, hệ thống lập tức hạ trạng thái về `status: "needs_review"` và không được kết luận võ đoán.
+- **Đối với câu HARD-UNSUPPORTED:** Hệ thống tự động trả về `status: "unsupported"`, `unsupported_reason: "figure_dependent_hard"`, từ chối giải quyết tất định do thiếu dữ kiện văn bản.
+- **Đối với câu SOFT-REVIEW:** Hệ thống xử lý qua bộ giải SymPy bình thường, nhưng gán `status: "needs_review"` kèm cảnh báo chuyên biệt `warnings: ["WARN_SOFT_VISUAL_DEPENDENCY: Đề bài có hình minh họa phụ trợ, cần đối chiếu với đồ thị gốc"]`. Tuyệt đối KHÔNG đưa vào `unsupported_reason` vì đề bài vẫn chứa đầy đủ công thức giải tích.
 
 ---
 
 ## 6. Chính Sách Phạm Vi Ngoài (Out-of-Scope Policy)
 
-Theo quyết định đã chốt tại **Phần 4 của Phản hồi Prompt 1**:
+Theo quyết định đã chốt tại **Phần 4 của Phản hồi Prompt 1** và chuẩn hóa hợp đồng:
 
 1. **Loại Số phức khỏi phạm vi hỗ trợ (`unsupported_so_phuc` - 5 câu):**
    - **Lý do:** Số phức trong đề thi TSA/HSA thường liên quan đến tập hợp điểm biểu diễn hình học trên mặt phẳng phức Gauss hoặc quỹ tích cực trị môđun $|z - z_0| = R$. Đợt 1 tập trung tối ưu bộ giải giải tích số thực $\mathbb{R}$ và hình học không gian $Oxyz$.
@@ -195,6 +195,10 @@ Theo quyết định đã chốt tại **Phần 4 của Phản hồi Prompt 1**:
    - **Lý do:** Đọc hiểu mã giả, mô phỏng thuật toán Bubble Sort, đường đi liên thông đồ thị.
 5. **Số học & Đồng dư thức (`unsupported_so_hoc_dong_du` - 3 câu):**
    - **Lý do:** Định lý Fermat nhỏ, tìm chữ số tận cùng của lũy thừa lớn, phân tích modulo.
+6. **Dạng bài tương tác kéo thả (`drag_drop` - 5 câu) và điền bước giải (`step_solution` - 2 câu):**
+   - **Lý do v1:** Dạng bài đòi hỏi mô hình tương tác UI đặc thù (ghép nối thẻ dữ liệu, đồ thị node bước giải). Bộ giải đại số v1 tập trung vào đối chiếu biểu thức, tập nghiệm và số thực.
+   - **Hành vi v1:** Trả về `status: "unsupported"` kèm `unsupported_reason: "interactive_ui_type"`. Tuyệt đối không trừ điểm học sinh.
+   - **Điều kiện xem xét lại ở v2:** Sẽ được đưa vào hỗ trợ ở v2 khi hệ thống triển khai bộ so khớp cây AST bước giải (Step AST Matcher) và mô-đun chấm tương tác.
 
 ---
 

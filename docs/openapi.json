@@ -1952,7 +1952,6 @@
       "UnsupportedReasonEnum": {
         "enum": [
           "figure_dependent_hard",
-          "figure_dependent_soft",
           "complex_numbers",
           "solid_geometry",
           "algorithm_or_code",

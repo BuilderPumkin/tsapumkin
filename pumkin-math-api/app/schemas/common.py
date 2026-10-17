@@ -44,7 +44,6 @@ class ConfidenceMethod(StrEnum):
 
 class UnsupportedReasonEnum(StrEnum):
     FIGURE_DEPENDENT_HARD = "figure_dependent_hard"
-    FIGURE_DEPENDENT_SOFT = "figure_dependent_soft"
     COMPLEX_NUMBERS = "complex_numbers"
     SOLID_GEOMETRY = "solid_geometry"
     ALGORITHM_OR_CODE = "algorithm_or_code"

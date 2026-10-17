@@ -7,7 +7,7 @@ import sys
 from uuid import uuid4
 
 import sympy
-from fastapi import Depends, FastAPI, status
+from fastapi import Depends, FastAPI, Request, status
 from fastapi.responses import JSONResponse
 
 from app import __version__
@@ -22,6 +22,9 @@ from app.schemas.common import (
 from app.schemas.generate import GenerateRequest, GenerateResponse
 from app.schemas.solve import SolveRequest, SolveResponse
 
+# 1 MB body size threshold enforced at application layer
+MAX_BODY_SIZE_BYTES = 1024 * 1024
+
 app = FastAPI(
     title="Pumkin Math API",
     description="Microservice tính toán tất định và kiểm định toán học cho PUMKIN.DEV",
@@ -30,6 +33,32 @@ app = FastAPI(
     redoc_url="/redoc",
     openapi_url="/openapi.json",
 )
+
+
+@app.middleware("http")
+async def limit_request_body_size(request: Request, call_next):
+    """
+    Application-level safeguard restricting HTTP body payloads to <= 1 MB.
+    Rejects oversized requests with 413 Request Entity Too Large.
+    """
+    content_length = request.headers.get("content-length")
+    if content_length:
+        try:
+            length = int(content_length)
+            if length > MAX_BODY_SIZE_BYTES:
+                return JSONResponse(
+                    status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+                    content={
+                        "code": "PAYLOAD_TOO_LARGE",
+                        "message_vi": (
+                            "Kích thước yêu cầu vượt quá giới hạn tối đa cho phép (1 MB)."
+                        ),
+                        "max_allowed_bytes": MAX_BODY_SIZE_BYTES,
+                    },
+                )
+        except ValueError:
+            pass
+    return await call_next(request)
 
 
 def make_501_not_implemented_response(message_vi: str) -> JSONResponse:

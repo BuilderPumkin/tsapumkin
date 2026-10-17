@@ -4,10 +4,11 @@ Student submission evaluation and intermediate step validation.
 """
 
 from enum import StrEnum
+from typing import Self
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
-from app.schemas.common import BaseResponseEnvelope, StrictBaseModel
+from app.schemas.common import BaseResponseEnvelope, StatusEnum, StrictBaseModel
 from app.schemas.dsl import MathProblemDSL
 from app.schemas.traps import MisconceptionTrapEnum
 
@@ -125,8 +126,29 @@ class CheckResultPayload(StrictBaseModel):
         description="Đáp án học sinh định dạng KaTeX chuẩn hóa",
     )
 
+    @model_validator(mode="after")
+    def validate_conflict_verdict(self) -> Self:
+        """Enforce: when conflict is True, verdict must be cannot_determine."""
+        if self.conflict and self.verdict != CheckVerdictEnum.CANNOT_DETERMINE:
+            raise ValueError(
+                "When conflict is True (CAS disagrees with canonical answer), "
+                "verdict must be 'cannot_determine' and no penalty is applied."
+            )
+        return self
+
 
 class CheckResponse(BaseResponseEnvelope[CheckResultPayload]):
     """Standardized envelope response for POST /v1/check."""
 
-    pass
+    @model_validator(mode="after")
+    def validate_conflict_envelope_status(self) -> Self:
+        """
+        Enforce: when CheckResultPayload has conflict=True, envelope status must be needs_review.
+        """
+        if self.result is not None and self.result.conflict:
+            if self.status != StatusEnum.NEEDS_REVIEW:
+                raise ValueError(
+                    "When CheckResultPayload has conflict=True, "
+                    "envelope status must be 'needs_review'."
+                )
+        return self

@@ -46,15 +46,22 @@ Trường `schema_version` tuân thủ nguyên tắc Semantic Versioning (`MAJOR
 > **NGHIÊM CẤM HIỂN THỊ CỤM TỪ "CHÍNH XÁC 100%" TRÊN GIAO DIỆN:**
 > Nền tảng học thuật PUMKIN.DEV coi việc tuyên bố "chính xác 100%" là phi khoa học và phản sư phạm. Mọi kết luận toán học hiển thị cho học sinh đều phải minh bạch về phương pháp kiểm chứng (`method: symbolic | numeric | consensus`) và mức độ tin cậy (`confidence.level`).
 
-### 3.2. Bảng ánh xạ trạng thái & phương pháp sang Huy hiệu giao diện (Status to UI Badge)
-Giao diện người dùng căn cứ vào kết hợp giữa trường `status` và `confidence.method` trong phong bì phản hồi để hiển thị huy hiệu chẩn đoán tương ứng:
+### 3.2. Định nghĩa chính xác phương pháp kiểm chứng (`confidence.method`)
+Hệ thống xác định tường minh vai trò của các phương pháp:
+- **`symbolic`:** Tính toán thuần túy đại số giải tích bằng bộ giải tất định SymPy CAS. **TUYỆT ĐỐI KHÔNG CÓ SỰ THAM GIA CỦA LLM** trong vòng lặp tính toán.
+- **`numeric`:** Xác minh bằng xấp xỉ số học, lấy mẫu nghiệm và số học khoảng (Interval Arithmetic). **TUYỆT ĐỐI KHÔNG CÓ LLM**. Phương pháp này kiểm chứng tính hợp lý của nghiệm nhưng **KHÔNG NGỤ Ý ĐÃ CHỨNG MINH HÌNH THỨC TOÁN HỌC**.
+- **`consensus`:** Sự đồng thuận giữa nhiều phương pháp kiểm chứng tất định độc lập (vd: kết hợp tính toán giải tích SymPy với quét mẫu số học nhiều điểm biên). **TUYỆT ĐỐI KHÔNG DÙNG LLM ĐỂ BỎ PHIẾU ĐỒNG THUẬN**. Nếu có LLM tham gia thì kết quả KHÔNG được mang nhãn verified.
+
+### 3.3. Bảng ánh xạ trạng thái & phương pháp sang Huy hiệu giao diện
+Giao diện người dùng căn cứ vào trường `status` và `confidence.method` trong phong bì phản hồi để hiển thị huy hiệu chẩn đoán tương ứng:
 
 | Trạng thái (`status`) | Phương pháp kiểm chứng (`confidence.method`) | Tên huy hiệu giao diện (UI Badge Label) | Màu sắc | Ý nghĩa sư phạm & Hành vi giao diện |
 | :--- | :--- | :--- | :---: | :--- |
-| **`verified`** | `symbolic` hoặc `numeric` | **"Đã kiểm chứng bằng máy đại số"** | Xanh lá (Green) | Kết quả đã được SymPy CAS giải tích hoặc tính toán số học tất định, vượt qua thẩm định điều kiện biên. Được tính điểm bình thường. |
-| **`verified`** | `consensus` | **"Đã kiểm chứng bằng đồng thuận đa phương pháp"** | Xanh dương (Blue) | Kết quả đạt được nhờ sự thống nhất giữa nhiều phương pháp kiểm chứng chéo (Multi-Agent Consensus / CAS + Numeric Dual-Verification). Được tính điểm bình thường. |
-| **`needs_review`** | Bất kỳ | **"Cần kiểm tra lại"** | Vàng cam (Amber) | Phát hiện mâu thuẫn giữa CAS và đáp án gốc (`conflict == true`), hoặc bước giải mơ hồ. **TUYỆT ĐỐI KHÔNG TRỪ ĐIỂM HỌC SINH**; bảo lưu kết quả để giáo viên thẩm định tay. |
-| **`unsupported`** | Bất kỳ | **"Chưa kiểm chứng"** | Xám (Gray) | Dạng bài nằm ngoài phạm vi giải tự động (phụ thuộc hình vẽ, hình học cổ điển, drag-drop...). Hệ thống giữ nguyên điểm, hướng dẫn học sinh xem bài giải chi tiết. |
+| **`verified`** | `symbolic` | **"Đã xác minh bằng máy đại số (SymPy CAS)"** | Xanh lá (Green) | Kết quả được giải tích toán học tất định, thỏa mãn mọi điều kiện biên và tập xác định. Được tính điểm bình thường. |
+| **`verified`** | `numeric` | **"Xác minh bằng xấp xỉ số học (Không suy biến)"** | Xanh lục nhạt (Teal) | Kết quả vượt qua kiểm tra mẫu số học tất định. Câu chữ thận trọng, không ngụ ý là chứng minh hình thức. Được tính điểm bình thường. |
+| **`verified`** | `consensus` | **"Đồng thuận đa phương pháp tất định"** | Xanh dương (Blue) | Kết quả đạt được nhờ sự thống nhất giữa bộ giải giải tích và bộ quét số học độc lập. Được tính điểm bình thường. |
+| **`needs_review`** | Bất kỳ | **"Cần kiểm tra lại"** | Vàng cam (Amber) | Phát hiện mâu thuẫn CAS (`conflict == true`), hoặc câu phụ thuộc trực quan nhẹ (SOFT), hoặc bước giải mơ hồ. **TUYỆT ĐỐI KHÔNG TRỪ ĐIỂM HỌC SINH**; bảo lưu kết quả để giáo viên thẩm định tay. |
+| **`unsupported`** | Bất kỳ | **"Chưa kiểm chứng"** | Xám (Gray) | Dạng bài nằm ngoài phạm vi giải tự động (phụ thuộc hình vẽ cứng, hình học cổ điển, kéo thả v1...). Hệ thống giữ nguyên điểm, hướng dẫn học sinh xem bài giải chi tiết. |
 | **`error`** | Bất kỳ | **Thông báo lỗi chi tiết** | Đỏ (Red) | Lỗi cú pháp DSL, timeout quá thời gian xử lý, hoặc ngoại lệ runtime. Hiển thị thông điệp từ trường `error.message_vi`. |
 
 ---
@@ -113,7 +120,6 @@ Khi hệ thống trả về `status: "unsupported"`, trường `unsupported_reas
 | Mã định danh lý do | Phân loại | Ý nghĩa học thuật & Hành vi hệ thống |
 | :--- | :---: | :--- |
 | `figure_dependent_hard` | Hình học / Đồ thị | Đề bài bắt buộc học sinh phải quan sát đồ thị, bảng biến thiên vẽ tay hoặc hình chụp không có tọa độ số hóa. Không thể tái lập bằng văn bản. |
-| `figure_dependent_soft` | Hình học / Đồ thị | Đề bài có hình minh họa phụ trợ nhưng có thể giải được nếu phiên âm đầy đủ tọa độ hoặc dạng hàm số. |
 | `complex_numbers` | Đại số | Số phức (dạng bài không thuộc trọng tâm chương trình THPT GDPT 2018 mới / đề thi TSA ĐHQG). |
 | `solid_geometry` | Hình học | Hình học không gian thuần túy cổ điển (tính góc, khoảng cách không gắn hệ tọa độ Oxyz). |
 | `algorithm_or_code` | Tin học & Thuật toán | Dạng bài lập luận mã giả, thuật toán lặp, hoặc bài toán cấu trúc dữ liệu. |
@@ -122,13 +128,19 @@ Khi hệ thống trả về `status: "unsupported"`, trường `unsupported_reas
 | `interactive_ui_type` | Tương tác UI | Dạng bài kéo thả (`drag_drop`) hoặc điền bước giải (`step_solution`) yêu cầu xử lý đồ họa tương tác. |
 | `out_of_scope` | Mở rộng | Các dạng bài đọc hiểu ngữ văn dài hoặc ngoài danh mục 8 dạng ưu tiên trong `SPEC.md`. |
 
+> [!NOTE]
+> **Quy định về câu hỏi có hình vẽ phụ trợ (SOFT Visual Dependency):**
+> Các câu hỏi có hình minh họa nhưng dữ kiện văn bản và công thức giải tích đã cung cấp đầy đủ (SOFT) **KHÔNG ĐƯA VÀO unsupported_reason**. Hệ thống tiến hành giải bình thường và trả về `status: "needs_review"` kèm cảnh báo chuyên biệt `warnings: ["WARN_SOFT_VISUAL_DEPENDENCY: Đề bài có hình minh họa phụ trợ, cần đối chiếu với đồ thị gốc"]`.
+
 ---
 
-## 6. Giới Hạn Tải Trọng & Độ Dài Dữ Liệu Đầu Vào
+## 6. Giới Hạn Tải Trọng & Phân Định Trách Nhiệm Thực Thi
 
-Hệ thống áp dụng giới hạn kích thước nhiều tầng để chống tấn công từ chối dịch vụ (DoS) và tràn bộ đệm:
-- **Giới hạn HTTP Body tối đa tại Gateway (Cloudflare Pages Functions / Nginx):** `1 MB` (1,048,576 bytes).
-- **Bảng giới hạn trường chi tiết (Pydantic Field Constraints):**
+### 6.1. Phân định trách nhiệm thực thi (Enforcement Responsibility)
+- **Tầng Cổng Gateway (Cloudflare Pages Functions / Nginx):** Chịu trách nhiệm thực thi vòng ngoài tại biên mạng (Edge Network) trong môi trường Production. Gateway kiểm tra header `Content-Length` và ngắt kết nối ngay nếu payload vượt quá `1 MB` trước khi forward về backend FastAPI.
+- **Tầng Ứng Dụng (FastAPI Middleware `limit_request_body_size`):** Đã được cài đặt trực tiếp trong `app/main.py` để đóng vai trò phòng thủ chiều sâu (Defense-in-Depth) trong môi trường phát triển cục bộ và bảo vệ trực tiếp microservice nếu request vượt qua gateway. Bất kỳ request nào có `Content-Length > 1,048,576 bytes` đều bị từ chối ngay với mã lỗi `HTTP 413 Payload Too Large`.
+
+### 6.2. Bảng giới hạn trường chi tiết (Pydantic Field Constraints)
 
 | Endpoint / Model | Trường dữ liệu | Ràng buộc kỹ thuật | Ghi chú an toàn |
 | :--- | :--- | :---: | :--- |
@@ -222,8 +234,8 @@ Bao gồm 9 kiểu:
 - `matrix`: Ma trận số học 2 chiều.
 - `boolean_group`: Nhóm câu hỏi Đúng/Sai (True/False).
 - `multiple_choice`: Câu hỏi trắc nghiệm 4 phương án đơn.
-- `drag_drop` *(5 câu trong ngân hàng)*: Dạng bài kéo thả ô dữ liệu. Hiện tại trả về `status: "unsupported"` kèm `unsupported_reason: "interactive_ui_type"`. **Hệ thống không trừ điểm học sinh**.
-- `step_solution` *(2 câu trong ngân hàng)*: Dạng bài điền từng bước giải theo sơ đồ logic. Hiện tại trả về `status: "unsupported"` kèm `unsupported_reason: "interactive_ui_type"`. **Hệ thống không trừ điểm học sinh**.
+- `drag_drop` *(5 câu trong ngân hàng)*: Dạng bài kéo thả ô dữ liệu. Quyết định phạm vi v1: trả về `status: "unsupported"` kèm `unsupported_reason: "interactive_ui_type"`. Sẽ xem xét lại ở v2 khi có module kéo thả tương tác. **Hệ thống không trừ điểm học sinh**.
+- `step_solution` *(2 câu trong ngân hàng)*: Dạng bài điền từng bước giải theo sơ đồ logic. Quyết định phạm vi v1: trả về `status: "unsupported"` kèm `unsupported_reason: "interactive_ui_type"`. Sẽ xem xét lại ở v2 khi có bộ so khớp cây AST bước giải. **Hệ thống không trừ điểm học sinh**.
 
 #### Request Schema (`CheckRequest`):
 ```json
@@ -267,25 +279,18 @@ Bao gồm 9 kiểu:
 }
 ```
 
-#### Cơ chế phát hiện mâu thuẫn CAS & Nguyên tắc không trừ điểm:
+#### Cơ chế phát hiện mâu thuẫn CAS & Ràng buộc Validator:
 Khi SymPy CAS giải ra đáp án khác với `canonical_answer` lưu trong ngân hàng đề:
 - Cờ `conflict` được đặt thành `true`.
 - Trường `cas_answer` chứa kết quả tính toán độc lập của máy đại số.
-- Trường `verdict` BẮT BUỘC gán giá trị `cannot_determine`.
-- Trường `status` trên phong bì BẮT BUỘC là `needs_review`.
+- **Ràng buộc Pydantic Validator:** Khi `conflict == true`, trường `verdict` BẮT BUỘC phải là `cannot_determine` và `status` phong bì BẮT BUỘC là `needs_review` (nếu không sẽ bị validator từ chối ngay lập tức).
 - **QUY TẮC BẤT DI BẤT DỊCH:** Tuyệt đối **KHÔNG ĐƯỢC TRỪ ĐIỂM HỌC SINH** khi xảy ra `conflict`, bảo lưu kết quả để giáo viên thẩm định thủ công.
-
-#### Danh mục giá trị `verdict`:
-1. `correct`: Đáp án trùng khớp hoàn toàn.
-2. `correct_different_form`: Đúng về mặt toán học nhưng biểu diễn ở dạng khác (vd: `\(\frac{1}{\sqrt{2}}\)` và `\(\frac{\sqrt{2}}{2}\)`).
-3. `incorrect`: Sai toán học hoặc rơi vào bẫy nhận thức (trả về mã bẫy tại `detected_misconception_id`).
-4. `cannot_determine`: Hệ thống chưa đủ cơ sở chứng minh hoặc gặp mâu thuẫn CAS $\rightarrow$ **Không trừ điểm học sinh**.
 
 ---
 
 ### 7.4. `POST /v1/generate` — Tạo đề & Sinh biến thể câu hỏi
 - **Xác thực:** Bắt buộc header `X-Pumkin-API-Key`.
-- **Mục tiêu:** Sinh câu hỏi mới tương đương về mặt cấu trúc toán học với nghiệm đẹp, kiểm soát 3 phương án nhiễu theo bẫy nhận thức chuẩn GEMINI.md.
+- **Mục tiêu:** Sinh câu hỏi mới tương đương về mặt cấu trúc toán học với nghiệm đẹp, kiểm soát 3 phương án nhiễu theo bẫy nhận thức chuẩn `GEMINI.md`.
 
 #### Request Schema (`GenerateRequest`):
 ```json
@@ -356,15 +361,6 @@ Khi SymPy CAS giải ra đáp án khác với `canonical_answer` lưu trong ngâ
 }
 ```
 
-#### Danh mục Bẫy Nhận Thức Chuẩn (`MisconceptionTrapEnum`):
-Mọi phương án nhiễu sinh ra bắt buộc phải mang mã bẫy thuộc danh mục sau:
-- **Đại số & Giải tích:** `TRAP_LOG_DOMAIN_IGNORED`, `TRAP_RADICAL_DOMAIN_IGNORED`, `TRAP_EXTREMA_DELTA_CONFUSION`, `TRAP_SIGN_ERROR`, `TRAP_INVERSE_OPERATION`, `TRAP_BOUNDARY_NOT_CHECKED`.
-- **Vector & Hình học phẳng:** `TRAP_ANGLE_LINE_VS_VECTOR`, `TRAP_COLLINEAR_ZERO_DIVISION`, `TRAP_CROSS_PRODUCT_IS_SCALAR`.
-- **Không gian Oxyz:** `TRAP_SPHERE_RADIUS_INVALID`, `TRAP_LINE_CANONICAL_ZERO_DENOM`, `TRAP_PLANE_DISTANCE_NO_ABS`.
-- **Tổ hợp & Xác suất:** `TRAP_PERM_COMB_CONFUSION`, `TRAP_PROB_SUM_NOT_DISJOINT`.
-- **Hoán vị bàn tròn:** `TRAP_ROUND_TABLE_NUMBERED_SEATS`, `TRAP_ROUND_TABLE_BLOCK_FACTORIAL`, `TRAP_ROUND_TABLE_ALTERNATING_OVERCOUNT`, `TRAP_ROUND_TABLE_FLIP_SYMMETRY`.
-- **Dự phòng chung:** `TRAP_OTHER`.
-
 ---
 
 ## 8. Ngữ Pháp Biểu Diễn Toán Học Trung Gian (MathProblemDSL)
@@ -374,31 +370,34 @@ Mọi phương án nhiễu sinh ra bắt buộc phải mang mã bẫy thuộc da
 > [!NOTE]
 > **Độc lập và Thử nghiệm (`dsl_version: "0.1.0-alpha"`):**
 > Cấu trúc DSL được tách biệt rõ ràng với Hợp đồng giao tiếp ổn định `/v1/*`. Mọi mô hình DSL đều mang trường `dsl_version = "0.1.0-alpha"`. Đây là các định nghĩa khung (placeholders), sẽ được hoàn thiện bộ phân tích AST an toàn ở Prompt 4 và Prompt 5.
+>
+> **Xác nhận về hiển thị trên OpenAPI:**
+> Schema của `MathProblemDSL` hiện diện trong `docs/openapi.json` tại mục `components/schemas` dưới dạng trường tùy chọn `dsl` của `SolveRequest` và `CheckRequest` để phục vụ các client nội bộ đã parse sẵn DSL. Các endpoint **KHÔNG BẮT BUỘC** client gửi DSL; client thông thường chỉ cần gửi `question_text`.
 
-### 8.1. Bảng đối chiếu 18 Lớp DSL Toán học
+### 8.1. Bảng đối chiếu 18 Lớp DSL với 553 câu hỏi ngân hàng thực tế
 
-| STT | Lớp DSL (Pydantic Model) | Khóa phân biệt (`type`) | Các trường dữ liệu cốt lõi | Trạng thái phạm vi |
-| :---: | :--- | :--- | :--- | :---: |
-| 1 | `MonotonicityDSL` | `ham_so_tinh_don_dieu` | `expression`, `interval` | Trọng tâm |
-| 2 | `BasicDerivativeDSL` | `ham_so_dao_ham_co_ban` | `expression`, `order` | Trọng tâm |
-| 3 | `ExtremaDSL` | `ham_so_cuc_tri_cho_truoc` | `expression` | Trọng tâm |
-| 4 | `MinMaxIntervalDSL` | `ham_so_gtln_gtnn_doan_khoang` | `expression`, `interval_start`, `interval_end` | Trọng tâm |
-| 5 | `ParameterMDSL` | `ham_so_chua_tham_so_m` | `expression`, `parameter_name`, `condition` | Trọng tâm |
-| 6 | `RealWorldOptimizationDSL` | `ham_so_toan_thuc_te_toi_uu` | `target_function`, `constraints[]`, `goal` | Trọng tâm |
-| 7 | `VariationTableDSL` | `ham_so_doc_bang_bien_thien` | `derivative_expression`, `intervals_sign[]` | Trọng tâm |
-| 8 | `AsymptoteDSL` | `ham_so_tiem_can` | `expression` | Trọng tâm |
-| 9 | `OtherFunctionDSL` | `ham_so_dang_khac` | `expression`, `question_subtype` | Trọng tâm |
-| 10 | `IntegralDSL` | `nguyen_ham_tich_phan` | `integrand`, `lower_bound`, `upper_bound` | Trọng tâm |
-| 11 | `ExponentialLogDSL` | `mu_logarit_pt_bpt` | `equation`, `relation` | Trọng tâm |
-| 12 | `LimitSequenceDSL` | `gioi_han_day_so` | `expression`, `approaches` | Trọng tâm |
-| 13 | `LinearAlgebraDSL` | `dai_so_tuyen_tinh_ma_tran` | `matrices{}`, `operation` | Hỗ trợ mở rộng |
-| 14 | `DifferentialEquationDSL` | `phuong_trinh_vi_phan` | `equation`, `initial_conditions{}` | Hỗ trợ mở rộng |
-| 15 | `AlgebraicEquationDSL` | `phuong_trinh_bat_phuong_trinh_dai_so`| `equation` | Hỗ trợ mở rộng |
-| 16 | `GeometryOxyzDSL` | `hinh_hoc_oxyz` | `elements{}`, `query_type` | Trọng tâm |
-| 17 | `CombinatoricsProbabilityDSL`| `to_hop_xac_suat` | `subdomain`, `parameters{}` | Trọng tâm |
-| 18 | `UnsupportedProblemDSL` | `unsupported` | `reason` (thuộc `UnsupportedReasonEnum`) | Ngoài phạm vi |
+| STT | Lớp DSL (Pydantic Model) | Khóa phân biệt (`type`) | Nhóm trong `SPEC.md` | Số câu thật trong 553 câu | Đề xuất | Ghi chú kỹ thuật |
+| :---: | :--- | :--- | :--- | :---: | :---: | :--- |
+| 1 | `MonotonicityDSL` | `ham_so_tinh_don_dieu` | Nhóm 1 | 116 | **Giữ (v1)** | Đơn điệu hàm phân thức, đa thức, căn thức |
+| 2 | `BasicDerivativeDSL` | `ham_so_dao_ham_co_ban` | Nhóm 2 | 91 | **Giữ (v1)** | Đạo hàm bảng cơ bản, đạo hàm cấp cao |
+| 3 | `ExtremaDSL` | `ham_so_cuc_tri_cho_truoc` | Nhóm 3 | 8 | **Giữ (v1)** | Cực đại, cực tiểu hàm không tham số |
+| 4 | `MinMaxIntervalDSL` | `ham_so_gtln_gtnn_doan_khoang` | Nhóm 4 | 8 | **Giữ (v1)** | GTLN/GTNN trên đoạn đóng hoặc khoảng mở |
+| 5 | `ParameterMDSL` | `ham_so_chua_tham_so_m` | Nhóm 5 | 2 | **Giữ (v1)** | Cực trị và đơn điệu chứa tham số m |
+| 6 | `RealWorldOptimizationDSL` | `ham_so_toan_thuc_te_toi_uu` | Nhóm 6 | 11 | **Giữ (v1)** | Tối ưu hóa thực tế chi phí, diện tích, thể tích |
+| 7 | `VariationTableDSL` | `ham_so_doc_bang_bien_thien` | Nhóm 7 | 2 | **Giữ (v1)** | **Chỉ xử lý bảng biến thiên dạng văn bản (khoảng dấu).** Nếu là ảnh không có công thức thì coi là HARD |
+| 8 | `AsymptoteDSL` | `ham_so_tiem_can` | Nhóm 8 | 19 | **Giữ (v1)** | Tiệm cận đứng, ngang, xiên của phân thức |
+| 9 | `OtherFunctionDSL` | `ham_so_dang_khac` | Nhóm 9 | 12 | **Giữ (v1)** | Tiếp tuyến và tương giao đồ thị hàm số |
+| 10 | `IntegralDSL` | `nguyen_ham_tich_phan` | Nhóm 10 | 54 | **Giữ (v1)** | Nguyên hàm, tích phân xác định, diện tích hình phẳng |
+| 11 | `ExponentialLogDSL` | `mu_logarit_pt_bpt` | Nhóm 11 | 39 | **Giữ (v1)** | PT/BPT mũ, logarit, bài toán tài chính lãi kép |
+| 12 | `LimitSequenceDSL` | `gioi_han_day_so` | Nhóm 12 | 13 | **Giữ (v1)** | Giới hạn dãy số hữu tỉ, cấp số cộng/nhân |
+| 13 | `LinearAlgebraDSL` | `dai_so_tuyen_tinh_ma_tran` | Nhóm 13 | 12 | **Giữ (v1)** | Ma trận, định thức det, nghịch đảo, hệ Cramer (TSA) |
+| 14 | `DifferentialEquationDSL` | `phuong_trinh_vi_phan` | Nhóm 14 | 10 | **Giữ (v1)** | PT vi phân tuyến tính cấp 1, dao động điều hòa (TSA) |
+| 15 | `AlgebraicEquationDSL` | `phuong_trinh_bat_phuong_trinh_dai_so`| Nhóm 15 | 4 | **Giữ (v1)** | PT/BPT vô tỉ, quy về bậc 2 đại số thuần túy |
+| 16 | `GeometryOxyzDSL` | `hinh_hoc_oxyz` | Nhóm 16 | 62 | **Giữ (v1)** | Tọa độ Oxyz: khoảng cách, góc, mặt cầu, mặt phẳng |
+| 17 | `CombinatoricsProbabilityDSL`| `to_hop_xac_suat` | Nhóm 17 | 52 | **Giữ (v1)** | Đếm tổ hợp, xác suất cổ điển, Bayes, bàn tròn |
+| 18 | `UnsupportedProblemDSL` | `unsupported` | Nhóm 18..22 | 38 | **Giữ (v1)** | Phân loại các câu ngoài phạm vi v1 (Số phức: 5, Hình cổ điển: 21, Thống kê: 3, Thuật toán: 6, Đồng dư: 3) |
 
 ### 8.2. Khẳng định giới hạn phạm vi (Boundary Confirmation)
 - **Tuyệt đối KHÔNG có lớp DSL cho Số phức:** Dạng bài số phức không được tạo lớp DSL, mà được phân loại trực tiếp sang `UnsupportedProblemDSL(reason="complex_numbers")`.
 - **Tuyệt đối KHÔNG có lớp DSL cho Hình học không gian cổ điển:** Các bài toán hình chóp, hình lăng trụ không gắn trục Oxyz được phân loại sang `UnsupportedProblemDSL(reason="solid_geometry")`.
-- **Các phân môn Đã duyệt ở Prompt 1/1b:** Phương trình vi phân (`phuong_trinh_vi_phan`), Đại số tuyến tính / Ma trận (`dai_so_tuyen_tinh_ma_tran`), Phương trình / Bất phương trình đại số (`phuong_trinh_bat_phuong_trinh_dai_so`) đã được đối chiếu chuẩn xác với ngân hàng câu hỏi.
+- **Làm rõ các phân môn đại học trong đề TSA:** Các phân môn Phương trình vi phân (10 câu), Đại số tuyến tính / Ma trận (12 câu), và Phương trình đại số (4 câu) là **các câu hỏi có thật trong ngân hàng đề TSA ĐHQG** (không phải suy đoán), vì vậy đề xuất giữ nguyên trong phạm vi v1 của microservice.

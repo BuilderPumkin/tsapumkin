@@ -55,6 +55,20 @@ def test_envelope_verified_missing_result_raises(base_confidence):
 
 
 @pytest.mark.unit
+def test_envelope_verified_missing_confidence_raises():
+    """Verified status without confidence must fail validation."""
+    with pytest.raises(ValidationError) as exc_info:
+        BaseResponseEnvelope[dict].model_validate(
+            {
+                "status": "verified",
+                "result": {"answer": "x = 2"},
+            }
+        )
+    error_fields = [e["loc"][0] for e in exc_info.value.errors()]
+    assert "confidence" in error_fields
+
+
+@pytest.mark.unit
 def test_envelope_error_valid(base_confidence):
     """Error status with error object and result=None must succeed."""
     env = BaseResponseEnvelope[dict](
