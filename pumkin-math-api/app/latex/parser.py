@@ -95,6 +95,12 @@ class LatexParser:
         self._seen_constraint_keys: set[str] = set()
         self.abs_depth = 0
         self._unparenthesized_log = False
+        # Collect contextual functions used in formula (e.g. y'(t) implies y is a function)
+        self.contextual_functions: set[str] = set()
+        for i, t in enumerate(self.tokens):
+            if t.type == TokenType.IDENT and i + 1 < len(self.tokens):
+                if self.tokens[i + 1].type == TokenType.PRIME:
+                    self.contextual_functions.add(t.value)
 
     def _check_power_safety(self, base_expr: Any, exp_expr: Any, pos: int) -> None:
         """Enforces mathematical resource boundaries on powers to prevent memory blowout."""
@@ -145,6 +151,50 @@ class LatexParser:
         if self.pos < len(self.tokens):
             return self.tokens[self.pos]
         return self.tokens[-1]
+
+    def _is_lhs_function_def(self) -> bool:
+        """
+        Determines if the current identifier followed by '(' is the sole left-hand side
+        of an explicit definition equation (e.g. C(x) = ..., N(t) = ..., H(p) = ...).
+        Must start at the beginning of the side (not preceded by binary operators).
+        """
+        if self.current().type != TokenType.LPAREN:
+            return False
+
+        # Must not be preceded by binary operators or expressions (e.g. R(x) - C(x) or |H(...)|)
+        before_ident_idx = self.pos - 2
+        if before_ident_idx >= 0:
+            prev_tok = self.tokens[before_ident_idx]
+            if prev_tok.type not in (
+                TokenType.EQUAL,
+                TokenType.NEQ,
+                TokenType.LT,
+                TokenType.LE,
+                TokenType.GT,
+                TokenType.GE,
+                TokenType.COLON,
+            ):
+                return False
+
+        paren_depth = 0
+        for i in range(self.pos, len(self.tokens)):
+            t = self.tokens[i]
+            if t.type == TokenType.LPAREN:
+                paren_depth += 1
+            elif t.type == TokenType.RPAREN:
+                paren_depth -= 1
+                if paren_depth == 0:
+                    next_idx = i + 1
+                    while (
+                        next_idx < len(self.tokens)
+                        and self.tokens[next_idx].type == TokenType.PRIME
+                    ):
+                        next_idx += 1
+                    return (
+                        next_idx < len(self.tokens)
+                        and self.tokens[next_idx].type == TokenType.EQUAL
+                    )
+        return False
 
     def peek(self, offset: int = 1) -> Token:
         idx = self.pos + offset
@@ -639,6 +689,16 @@ class LatexParser:
                 self.add_denominator_constraint(right)
                 left = left / right
             elif op.type == TokenType.CARET:
+                # Check for combinatorics/permutation rejection (e.g. C_5^2, A_9^4, C_n^k, A_n^k)
+                if isinstance(left, Symbol) and left.name.startswith(("C_", "A_")):
+                    raise ParserError(
+                        "UNSUPPORTED_SYNTAX",
+                        (
+                            f"Ký hiệu tổ hợp/chỉnh hợp '{left}^{{...}}' chưa được hỗ trợ AST; "
+                            "bị từ chối an toàn để tránh tính sai lũy thừa."
+                        ),
+                        pos=op.pos,
+                    )
                 # Exponentiation is right-associative: op_prec - 1
                 if self.current().type == TokenType.LBRACE:
                     self.advance()
@@ -783,6 +843,26 @@ class LatexParser:
             self.advance()
             name = tok.value
 
+            # Micro prefix attached to unit check (e.g. \mu\text{F}, \mu\text{m})
+            if name == "mu" and (
+                self.current().type == TokenType.UNIT
+                or (
+                    self.current().type == TokenType.IDENT
+                    and self.current().value
+                    in ("m", "s", "A", "V", "F", "Hz", "J", "W", "N", "Pa", "mol")
+                )
+            ):
+                unit_str = self.current().value
+                raise ParserError(
+                    "UNSUPPORTED_SYNTAX",
+                    (
+                        f"Ký hiệu '\\mu' đi liền sau bởi đơn vị vật lý '{unit_str}' là tiền tố "
+                        "đo lường micro (10^-6), không phải biến số toán học; từ chối an toàn "
+                        "do parser thuần toán không hỗ trợ tiền tố đơn vị vật lý."
+                    ),
+                    pos=tok.pos,
+                )
+
             # Mathematical constants
             if name == "pi":
                 base_expr = pi
@@ -812,32 +892,17 @@ class LatexParser:
                 primes = "'" * prime_count
                 base_expr = Symbol(f"{name}{primes}")
 
-            # Check for function call: e.g. f(x), g(x), P(x), y(t), y'(t), C(x), mu(x), Delta(0.2)
-            KNOWN_FUNCTIONS = {
-                "f",
-                "g",
-                "h",
-                "u",
-                "v",
-                "w",
-                "y",
-                "z",
-                "P",
-                "Q",
-                "C",
-                "H",
-                "I",
-                "N",
-                "R",
-                "S",
-                "V",
-                "mu",
-                "Delta",
-                "n",
-                "u_n",
-            }
+            # Function vs Product disambiguation:
+            # - Approved strict function symbols: {f, g, h, P, n}
+            # - Prime derivatives: y'(t), y''(t), f'(x)
+            # - Explicit definition equations on LHS: C(x) = ..., N(t) = ..., H(p) = ...
+            STRICT_KNOWN_FUNCTIONS = {"f", "g", "h", "P", "n"}
+            is_strict_func = name in STRICT_KNOWN_FUNCTIONS or name in self.contextual_functions
+            is_prime_func = prime_count > 0
+            is_lhs_def = self._is_lhs_function_def() if name not in ("pi", "e") else False
+
             if self.current().type == TokenType.LPAREN:
-                if name in KNOWN_FUNCTIONS or prime_count > 0:
+                if is_strict_func or is_prime_func or is_lhs_def:
                     self.advance()  # consume '('
                     arg = self._parse_pratt_expr(PREC_NONE, depth + 1)
                     self.expect(TokenType.RPAREN, "Thiếu dấu ngoặc đơn ')' đóng đối số hàm.")
@@ -1337,6 +1402,62 @@ class LatexParser:
         )
 
 
+def _extract_raw_sides(raw_latex: str) -> list[str]:
+    """
+    Splits a mathematical relation into raw side strings without algebraic evaluation,
+    preserving exact intermediate steps (e.g. '10 \\times 4' and '40').
+    """
+    sides = []
+    current_side = []
+    brace_depth = paren_depth = bracket_depth = 0
+    i = 0
+    while i < len(raw_latex):
+        ch = raw_latex[i]
+        if ch == "{":
+            brace_depth += 1
+        elif ch == "}":
+            if brace_depth > 0:
+                brace_depth -= 1
+        elif ch == "(":
+            paren_depth += 1
+        elif ch == ")":
+            if paren_depth > 0:
+                paren_depth -= 1
+        elif ch == "[":
+            bracket_depth += 1
+        elif ch == "]":
+            if bracket_depth > 0:
+                bracket_depth -= 1
+        elif brace_depth == 0 and paren_depth == 0 and bracket_depth == 0:
+            if ch in ("=", "<", ">"):
+                sides.append("".join(current_side).strip())
+                current_side = []
+                if i + 1 < len(raw_latex) and raw_latex[i + 1] == "=":
+                    i += 1
+                i += 1
+                continue
+            elif ch == "!" and i + 1 < len(raw_latex) and raw_latex[i + 1] == "=":
+                sides.append("".join(current_side).strip())
+                current_side = []
+                i += 2
+                continue
+            elif raw_latex[i:].startswith(r"\le") or raw_latex[i:].startswith(r"\ge"):
+                sides.append("".join(current_side).strip())
+                current_side = []
+                i += 3
+                continue
+            elif raw_latex[i:].startswith(r"\neq"):
+                sides.append("".join(current_side).strip())
+                current_side = []
+                i += 4
+                continue
+        current_side.append(ch)
+        i += 1
+    if current_side:
+        sides.append("".join(current_side).strip())
+    return [s for s in sides if s]
+
+
 def parse_latex(latex_str: str) -> ParseResult:
     """
     Safely parses a high school mathematics LaTeX string into a SymPy expression
@@ -1355,6 +1476,13 @@ def parse_latex(latex_str: str) -> ParseResult:
         tokens = tokenize(latex_str)
         parser = LatexParser(tokens, raw_latex=latex_str)
         expr = parser.parse()
+
+        # Preserve raw sides of relations to prevent losing intermediate calculation steps
+        raw_sides = _extract_raw_sides(latex_str)
+        if len(raw_sides) > 1:
+            parser.metadata["raw_sides"] = raw_sides
+            if isinstance(expr, ChainedRelation):
+                expr.raw_sides = raw_sides
 
         # Extract free variables sorted alphabetically
         variables: list[str] = []

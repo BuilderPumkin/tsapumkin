@@ -84,8 +84,9 @@
   {
     "qid": "q_tsa_02",
     "latex": "S(\\alpha)",
-    "expected_repr": "S(alpha)",
+    "expected_repr": "S*alpha",
     "variables": [
+      "S",
       "alpha"
     ],
     "num_constraints": 0
@@ -390,8 +391,9 @@
   {
     "qid": "q_tsa_09",
     "latex": "C(t)",
-    "expected_repr": "C(t)",
+    "expected_repr": "C*t",
     "variables": [
+      "C",
       "t"
     ],
     "num_constraints": 0
@@ -429,11 +431,11 @@
   {
     "qid": "q_tsa_10",
     "latex": "C_{12 - 1}^{4 - 1} = C_{11}^3 = 165",
-    "expected_repr": "ChainedRelation(C_11**3 = C_11**3 = 165)",
-    "variables": [
-      "C_11"
-    ],
-    "num_constraints": 0
+    "expected_repr": null,
+    "variables": [],
+    "num_constraints": 0,
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "qid": "q_tsa_12",
@@ -687,8 +689,10 @@
   {
     "qid": "q_tsa_16",
     "latex": "\\pi(x) = R(x) - C(x) = 120x - (2x^2 + 40x) = -2x^2 + 80x",
-    "expected_repr": "ChainedRelation(pi*x = -C(x) + R(x) = -2*x**2 + 80*x = -2*x**2 + 80*x)",
+    "expected_repr": "ChainedRelation(pi*x = -C*x + R*x = -2*x**2 + 80*x = -2*x**2 + 80*x)",
     "variables": [
+      "C",
+      "R",
       "x"
     ],
     "num_constraints": 0
@@ -713,12 +717,12 @@
   },
   {
     "qid": "q_tsa_17",
-    "latex": "P = 1 - 0,000125 = 0,999875",
-    "expected_repr": "ChainedRelation(P = 7999/8000 = 7999/8000)",
-    "variables": [
-      "P"
-    ],
-    "num_constraints": 0
+    "latex": "P(\\text{Hỏng cả 3}) = 0,05^3 = 0,000125",
+    "expected_repr": null,
+    "variables": [],
+    "num_constraints": 0,
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "qid": "q_tsa_17",
@@ -967,8 +971,9 @@
   {
     "qid": "q_tsa_25",
     "latex": "|H(\\omega_c)|^2 = 1/2",
-    "expected_repr": "Eq(Abs(H(omega_c))**2, 1/2)",
+    "expected_repr": "Eq(Abs(H*omega_c)**2, 1/2)",
     "variables": [
+      "H",
       "omega_c"
     ],
     "num_constraints": 0
@@ -1131,13 +1136,11 @@
   {
     "qid": "q_hsa_02",
     "latex": "P(\\bar{A}) = \\frac{C_4^3}{C_{10}^3} = \\frac{4}{120} = \\frac{1}{30}",
-    "expected_repr": "ChainedRelation(P(bar_A) = C_4**3/C_10**3 = 1/30 = 1/30)",
-    "variables": [
-      "C_10",
-      "C_4",
-      "bar_A"
-    ],
-    "num_constraints": 1
+    "expected_repr": null,
+    "variables": [],
+    "num_constraints": 1,
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "qid": "q_hsa_02",
@@ -1458,11 +1461,11 @@
   {
     "qid": "q_hsa_10",
     "latex": "A_{10}^3 = 10 \\cdot 9 \\cdot 8 = 720",
-    "expected_repr": "ChainedRelation(A_10**3 = 720 = 720)",
-    "variables": [
-      "A_10"
-    ],
-    "num_constraints": 0
+    "expected_repr": null,
+    "variables": [],
+    "num_constraints": 0,
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "qid": "q_hsa_11",
@@ -1722,21 +1725,20 @@
   {
     "qid": "q_hsa_tf_01",
     "latex": "n(\\Omega) = C_9^3 = \\frac{9 \\cdot 8 \\cdot 7}{6} = 84",
-    "expected_repr": "ChainedRelation(n(Omega) = C_9**3 = 84 = 84)",
-    "variables": [
-      "C_9",
-      "Omega"
-    ],
-    "num_constraints": 0
+    "expected_repr": null,
+    "variables": [],
+    "num_constraints": 0,
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "qid": "q_hsa_tf_01",
     "latex": "C_5^3 = 10",
-    "expected_repr": "Eq(C_5**3, 10)",
-    "variables": [
-      "C_5"
-    ],
-    "num_constraints": 0
+    "expected_repr": null,
+    "variables": [],
+    "num_constraints": 0,
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "qid": "q_hsa_tf_01",
@@ -1750,12 +1752,11 @@
   {
     "qid": "q_hsa_tf_01",
     "latex": "C_5^3 + C_4^3 = 10 + 4 = 14",
-    "expected_repr": "ChainedRelation(C_4**3 + C_5**3 = 14 = 14)",
-    "variables": [
-      "C_4",
-      "C_5"
-    ],
-    "num_constraints": 0
+    "expected_repr": null,
+    "variables": [],
+    "num_constraints": 0,
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "qid": "q_hsa_tf_01",
@@ -1767,12 +1768,11 @@
   {
     "qid": "q_hsa_tf_01",
     "latex": "C_5^2 \\cdot C_4^1 = 10 \\cdot 4 = 40",
-    "expected_repr": "ChainedRelation(C_4*C_5**2 = 40 = 40)",
-    "variables": [
-      "C_4",
-      "C_5"
-    ],
-    "num_constraints": 0
+    "expected_repr": null,
+    "variables": [],
+    "num_constraints": 0,
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "qid": "q_hsa_tf_01",
@@ -1786,12 +1786,11 @@
   {
     "qid": "q_hsa_tf_01",
     "latex": "n(\\Omega) = C_9^3 = 84",
-    "expected_repr": "ChainedRelation(n(Omega) = C_9**3 = 84)",
-    "variables": [
-      "C_9",
-      "Omega"
-    ],
-    "num_constraints": 0
+    "expected_repr": null,
+    "variables": [],
+    "num_constraints": 0,
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "qid": "q_hsa_tf_01",

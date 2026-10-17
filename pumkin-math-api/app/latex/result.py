@@ -67,6 +67,10 @@ class ChainedRelation(BaseModel):
         ...,
         description="Danh sách các toán tử so sánh ('=', '<', '<=', '>', '>=', '!=')",
     )
+    raw_sides: list[str] = Field(
+        default_factory=list,
+        description="Chuỗi LaTeX gốc của từng vế nhằm giữ nguyên bước trung gian không bị rút gọn",
+    )
 
     @property
     def free_symbols(self) -> set[Any]:

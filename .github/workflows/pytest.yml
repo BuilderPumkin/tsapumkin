@@ -8,12 +8,14 @@ on:
     paths:
       - 'pumkin-math-api/**'
       - '.github/workflows/pytest.yml'
+      - 'tools/**'
   pull_request:
     branches:
       - main
     paths:
       - 'pumkin-math-api/**'
       - '.github/workflows/pytest.yml'
+      - 'tools/**'
 
 jobs:
   test:

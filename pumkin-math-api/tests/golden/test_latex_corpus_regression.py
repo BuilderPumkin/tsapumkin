@@ -41,6 +41,12 @@ def test_real_latex_snippet(case):
 
     res = parse_latex(latex_str)
 
+    if case.get("expected_rejection"):
+        assert res.is_success is False, f"Expected rejection for '{latex_str}', but got success"
+        if "expected_error_code" in case:
+            assert res.error_code == case["expected_error_code"]
+        return
+
     assert res.is_success is True, f"Failed parsing: {latex_str} | Reason: {res.reason_vi}"
     assert repr(res.expr) == expected_repr, (
         f"Mismatch for '{latex_str}':\n  Got:      {repr(res.expr)}\n  Expected: {expected_repr}"

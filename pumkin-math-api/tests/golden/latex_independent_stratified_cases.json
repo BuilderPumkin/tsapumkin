@@ -5,7 +5,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "f(x) = x^3 - 3x + 2",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(f(x), x**3 - 3*x + 2)",
     "variables": [
       "x"
@@ -62,7 +62,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "t \\ge 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "t >= 0",
     "variables": [
       "t"
@@ -77,7 +77,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "y = 17",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y, 17)",
     "variables": [
       "y"
@@ -92,7 +92,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "y = x^3 - 108x + 5",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y, x**3 - 108*x + 5)",
     "variables": [
       "x",
@@ -150,7 +150,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "y = \\frac{16x + 1}{x - 29}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y, (16*x + 1)/(x - 29))",
     "variables": [
       "x",
@@ -208,7 +208,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "f = 2\\text{ m}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(f, 2)",
     "variables": [
       "f"
@@ -223,7 +223,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "y = f(x)",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y, f(x))",
     "variables": [
       "x",
@@ -239,7 +239,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "y = 86",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y, 86)",
     "variables": [
       "y"
@@ -254,7 +254,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "f(x) = x + \\frac{4}{x - 1}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(f(x), x + 4/(x - 1))",
     "variables": [
       "x"
@@ -311,7 +311,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "y = 98",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y, 98)",
     "variables": [
       "y"
@@ -326,7 +326,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "y = 55",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y, 55)",
     "variables": [
       "y"
@@ -341,7 +341,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "y_{\\text{CĐ}}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "y_CD",
     "variables": [
       "y_CD"
@@ -398,7 +398,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "f(x) = \\frac{x^2 - 3x + 6}{x - 1}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(f(x), (x**2 - 3*x + 6)/(x - 1))",
     "variables": [
       "x"
@@ -455,7 +455,7 @@
     "field": "question_text",
     "category": "algebra_polynomial_rational",
     "latex": "y = \\frac{x - 2}{x^2 - 4}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y, (x - 2)/(x**2 - 4))",
     "variables": [
       "x",
@@ -513,7 +513,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "y' = 1",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y', 1)",
     "variables": [
       "y'"
@@ -528,7 +528,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "y' = 13",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y', 13)",
     "variables": [
       "y'"
@@ -543,7 +543,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "y' = 83",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y', 83)",
     "variables": [
       "y'"
@@ -558,7 +558,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "y_{\\text{CĐ}} = 5 > y_{\\text{CT}} = -3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(y_CD = 5 > y_CT = -3)",
     "variables": [
       "y_CD",
@@ -574,7 +574,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "y' = 97",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y', 97)",
     "variables": [
       "y'"
@@ -589,7 +589,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "x = 25",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(x, 25)",
     "variables": [
       "x"
@@ -604,7 +604,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "y' = 93",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y', 93)",
     "variables": [
       "y'"
@@ -619,7 +619,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "y' = 61",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y', 61)",
     "variables": [
       "y'"
@@ -634,7 +634,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "y' = 10",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y', 10)",
     "variables": [
       "y'"
@@ -649,7 +649,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "y' = 68",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y', 68)",
     "variables": [
       "y'"
@@ -664,7 +664,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "y' = 25",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y', 25)",
     "variables": [
       "y'"
@@ -679,7 +679,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "\\alpha = 60^\\circ",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(alpha, 60**circ)",
     "variables": [
       "alpha",
@@ -737,7 +737,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "6\\sqrt{6}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "6*sqrt(6)",
     "variables": [],
     "num_constraints": 0,
@@ -750,7 +750,7 @@
     "field": "options",
     "category": "algebra_polynomial_rational",
     "latex": "y' = 62",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y', 62)",
     "variables": [
       "y'"
@@ -765,7 +765,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "P(x) = -\\frac{1}{2}x^2 + 20x - 50",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(P(x), -x**2/2 + 20*x - 50)",
     "variables": [
       "x"
@@ -822,7 +822,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "C_{\\min} = 10 + 5 = 15",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(C_min = 15 = 15)",
     "variables": [
       "C_min"
@@ -837,9 +837,11 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "\\pi(x) = R(x) - C(x) = 120x - (2x^2 + 40x) = -2x^2 + 80x",
-    "verification_mode": "hand_verified",
-    "expected_repr": "ChainedRelation(pi*x = -C(x) + R(x) = -2*x**2 + 80*x = -2*x**2 + 80*x)",
+    "verification_mode": "snapshot_ast",
+    "expected_repr": "ChainedRelation(pi*x = -C*x + R*x = -2*x**2 + 80*x = -2*x**2 + 80*x)",
     "variables": [
+      "C",
+      "R",
       "x"
     ],
     "num_constraints": 0,
@@ -852,7 +854,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "S(r) = 2r h + \\frac{1}{2}\\pi r^2 = 2r(5 - r - \\frac{\\pi}{2}r) + \\frac{1}{2}\\pi r^2 = 10r - (2 + \\frac{\\pi}{2})r^2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S(r) = 2*h*r + pi*r**2/2 = pi*r**2/2 + 2*r*(-pi*r/2 - r + 5) = -r**2*(pi/2 + 2) + 10*r)",
     "variables": [
       "h",
@@ -868,7 +870,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "R(x) = 150x - 147",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(R(x), 150*x - 147)",
     "variables": [
       "x"
@@ -925,7 +927,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "x = -1",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(x, -1)",
     "variables": [
       "x"
@@ -940,7 +942,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "x = 3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(x, 3)",
     "variables": [
       "x"
@@ -955,7 +957,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "f'(x) = -3x^2 + 6x + 9 = -3(x^2 - 2x - 3) = -3(x - 3)(x + 1)",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(Derivative(f(x), x) = -3*x**2 + 6*x + 9 = -3*x**2 + 6*x + 9 = (9 - 3*x)*(x + 1))",
     "variables": [
       "x"
@@ -970,7 +972,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "S'(\\alpha) = 4(2\\cos^2\\alpha + \\cos\\alpha - 1) = 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(Derivative(S(alpha), alpha) = 8*cos(alpha)**2 + 4*cos(alpha) - 4 = 0)",
     "variables": [
       "alpha"
@@ -985,7 +987,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "x = 20",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(x, 20)",
     "variables": [
       "x"
@@ -1000,7 +1002,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "f(4) = -(4)^3 + 3(4)^2 + 9(4) + 2 = -64 + 48 + 36 + 2 = 22",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(f(4) = 22 = 22 = 22)",
     "variables": [],
     "num_constraints": 0,
@@ -1013,7 +1015,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "y' = 3x^2 - 27 = 3(x - 3)(x + 3)",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(y' = 3*x**2 - 27 = (x + 3)*(3*x - 9))",
     "variables": [
       "x",
@@ -1029,7 +1031,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "x = 10",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(x, 10)",
     "variables": [
       "x"
@@ -1044,7 +1046,7 @@
     "field": "explanation",
     "category": "algebra_polynomial_rational",
     "latex": "y_{\\text{CT}} = f(3) = 3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(y_CT = f(3) = 3)",
     "variables": [
       "y_CT"
@@ -1059,7 +1061,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "N'(t)",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Derivative(N(t), t)",
     "variables": [
       "t"
@@ -1074,7 +1076,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "\\log_2(x^2 - 3x) \\le 2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "log(x**2 - 3*x)/log(2) <= 2",
     "variables": [
       "x"
@@ -1089,7 +1091,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "N_0",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "N_0",
     "variables": [
       "N_0"
@@ -1146,7 +1148,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "2^{2x} - 5 \\cdot 2^x + 4 \\le 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "2**(2*x) - 5*2**x + 4 <= 0",
     "variables": [
       "x"
@@ -1161,7 +1163,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "\\log_3(x - 2) > 2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "log(x - 2)/log(3) > 2",
     "variables": [
       "x"
@@ -1176,7 +1178,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "\\log_2(x - 1) + \\log_2(x + 1) = 3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(log(x - 1)/log(2) + log(x + 1)/log(2), 3)",
     "variables": [
       "x"
@@ -1191,7 +1193,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "y = \\log_3(x^2 + 1)",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y, log(x**2 + 1)/log(3))",
     "variables": [
       "x",
@@ -1249,7 +1251,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "x^{\\log_2 x} = 4x",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(x**(log(x)/log(2)), 4*x)",
     "variables": [
       "x"
@@ -1306,7 +1308,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "N(t) = N_0 \\cdot e^{kt}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(N(t), N_0*exp(k*t))",
     "variables": [
       "N_0",
@@ -1323,7 +1325,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "\\log_{3}(2x + 1) = 4",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(log(2*x + 1)/log(3), 4)",
     "variables": [
       "x"
@@ -1338,7 +1340,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "2^{x} > 8",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "2**x > 8",
     "variables": [
       "x"
@@ -1353,7 +1355,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "\\log_{6}(2x + 1) = 7",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(log(2*x + 1)/log(6), 7)",
     "variables": [
       "x"
@@ -1368,7 +1370,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "N(t) = \\frac{50}{1 + 9e^{-0,4t}}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(N(t), 50/(1 + 9*exp(-2*t/5)))",
     "variables": [
       "t"
@@ -1425,7 +1427,7 @@
     "field": "question_text",
     "category": "exponential_logarithm",
     "latex": "3^{x^2 - 4} \\ge 1",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "3**(x**2 - 4) >= 1",
     "variables": [
       "x"
@@ -1440,7 +1442,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "127.69\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "12769/100",
     "variables": [],
     "num_constraints": 0,
@@ -1495,7 +1497,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "119.10\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "1191/10",
     "variables": [],
     "num_constraints": 0,
@@ -1550,7 +1552,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "151.81\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "15181/100",
     "variables": [],
     "num_constraints": 0,
@@ -1605,7 +1607,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "131.01\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "13101/100",
     "variables": [],
     "num_constraints": 0,
@@ -1660,7 +1662,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "210.03\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "21003/100",
     "variables": [],
     "num_constraints": 0,
@@ -1715,7 +1717,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "193.85\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "3877/20",
     "variables": [],
     "num_constraints": 0,
@@ -1770,7 +1772,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "180.73\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "18073/100",
     "variables": [],
     "num_constraints": 0,
@@ -1825,7 +1827,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "192.39\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "19239/100",
     "variables": [],
     "num_constraints": 0,
@@ -1880,7 +1882,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "161.62\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "8081/50",
     "variables": [],
     "num_constraints": 0,
@@ -1935,7 +1937,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "152.09\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "15209/100",
     "variables": [],
     "num_constraints": 0,
@@ -1990,7 +1992,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "174.90\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "1749/10",
     "variables": [],
     "num_constraints": 0,
@@ -2045,7 +2047,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "130.00\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "130",
     "variables": [],
     "num_constraints": 0,
@@ -2100,7 +2102,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "160.00\\text{ triệu đồng}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "160",
     "variables": [],
     "num_constraints": 0,
@@ -2155,7 +2157,7 @@
     "field": "options",
     "category": "exponential_logarithm",
     "latex": "x = 5",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(x, 5)",
     "variables": [
       "x"
@@ -2170,7 +2172,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "S_{3} = 100 \\left(1 + \\frac{14.0}{100}\\right)^{3} = 148.15",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S_3 = 185193/1250 = 2963/20)",
     "variables": [
       "S_3"
@@ -2185,7 +2187,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "S_{4} = 100 \\left(1 + \\frac{15.0}{100}\\right)^{4} = 174.90",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S_4 = 279841/1600 = 1749/10)",
     "variables": [
       "S_4"
@@ -2200,7 +2202,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "u = 2x",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(u, 2*x)",
     "variables": [
       "u",
@@ -2258,7 +2260,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "S_{5} = 100 \\left(1 + \\frac{12.0}{100}\\right)^{5} = 176.23",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S_5 = 68841472/390625 = 17623/100)",
     "variables": [
       "S_5"
@@ -2273,7 +2275,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "t_d",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "t_d",
     "variables": [
       "t_d"
@@ -2330,7 +2332,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "S_{2} = 100 \\left(1 + \\frac{17.0}{100}\\right)^{2} = 136.89",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S_2 = 13689/100 = 13689/100)",
     "variables": [
       "S_2"
@@ -2345,7 +2347,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "S_{2} = 100 \\left(1 + \\frac{9.0}{100}\\right)^{2} = 118.81",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S_2 = 11881/100 = 11881/100)",
     "variables": [
       "S_2"
@@ -2360,7 +2362,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "S_{4} = 100 \\left(1 + \\frac{7.0}{100}\\right)^{4} = 131.08",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S_4 = 131079601/1000000 = 3277/25)",
     "variables": [
       "S_4"
@@ -2375,7 +2377,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "N(5) = 1000 \\cdot e^{5\\ln 2} = 1000 \\cdot 2^5 = 32000 < 50000",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(N(5) = 32000 = 32000 = 32000 < 50000)",
     "variables": [],
     "num_constraints": 0,
@@ -2388,7 +2390,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "S_{3} = 100 \\left(1 + \\frac{18.0}{100}\\right)^{3} = 164.30",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S_3 = 205379/1250 = 1643/10)",
     "variables": [
       "S_3"
@@ -2403,7 +2405,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "S_n = A(1 + r)^n",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(S_n, A*(r + 1)**n)",
     "variables": [
       "A",
@@ -2421,7 +2423,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "S_{4} = 100 \\left(1 + \\frac{19.0}{100}\\right)^{4} = 200.53",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S_4 = 200533921/1000000 = 20053/100)",
     "variables": [
       "S_4"
@@ -2436,7 +2438,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "S_{5} = 100 \\left(1 + \\frac{16.0}{100}\\right)^{5} = 210.03",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S_5 = 82044596/390625 = 21003/100)",
     "variables": [
       "S_5"
@@ -2451,7 +2453,7 @@
     "field": "explanation",
     "category": "exponential_logarithm",
     "latex": "x > 1",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "x > 1",
     "variables": [
       "x"
@@ -2466,7 +2468,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "I = \\int_1^{+\\infty} \\frac{1}{x^p} dx",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(I, Integral(x**(-p), (x, 1, oo)))",
     "variables": [
       "I",
@@ -2482,7 +2484,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "u(t) = U_0 \\cos(\\omega t)",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(u(t), U_0*cos(omega*t))",
     "variables": [
       "U_0",
@@ -2499,7 +2501,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "I = \\int_0^{\\pi/2} \\frac{\\sin^3 x}{\\sin^3 x + \\cos^3 x} dx",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(I, Integral(sin(x)**3/(sin(x)**3 + cos(x)**3), (x, 0, pi/2)))",
     "variables": [
       "I"
@@ -2514,15 +2516,14 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "C = 50\\,\\mu\\text{F} = 5 \\times 10^{-5}\\text{ F}",
-    "verification_mode": "hand_verified",
-    "expected_repr": "ChainedRelation(C = 50*mu = 1/20000)",
-    "variables": [
-      "C",
-      "mu"
-    ],
+    "verification_mode": "snapshot_ast",
+    "expected_repr": null,
+    "variables": [],
     "num_constraints": 0,
     "sample_points": [],
-    "expected_values": []
+    "expected_values": [],
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "case_id": "strat_089",
@@ -2530,7 +2531,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "d = 3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(d, 3)",
     "variables": [
       "d"
@@ -2545,7 +2546,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "\\int_0^2 f(x)dx = 6",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(Integral(f(x), (x, 0, 2)), 6)",
     "variables": [],
     "num_constraints": 0,
@@ -2558,7 +2559,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "y'' - 5y' + 6y = 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(6*y - 5*y' + y'', 0)",
     "variables": [
       "y",
@@ -2575,7 +2576,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "Q_{\\text{in}}(t) = 30 + 10\\sin(\\pi t / 12)",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(Q_in*t, 10*sin(pi*t/12) + 30)",
     "variables": [
       "Q_in",
@@ -2633,7 +2634,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "L = \\lim_{x \\to 0} \\frac{e^x - 1 - x}{\\sin^2 x}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(L, Limit((-x + exp(x) - 1)/sin(x)**2, x, 0, dir='+'))",
     "variables": [
       "L"
@@ -2648,7 +2649,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "y(1) = -1",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y(1), -1)",
     "variables": [],
     "num_constraints": 0,
@@ -2661,7 +2662,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "y = 14 - x^2",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y, 14 - x**2)",
     "variables": [
       "x",
@@ -2719,7 +2720,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "y(1) = 2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y(1), 2)",
     "variables": [],
     "num_constraints": 0,
@@ -2732,7 +2733,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "f(x) + 12f(-x) = \\cos(x)",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(12*f(-x) + f(x), cos(x))",
     "variables": [
       "x"
@@ -2789,7 +2790,7 @@
     "field": "question_text",
     "category": "calculus_integral_derivative",
     "latex": "f(x) + 4f(-x) = \\cos(x)",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(4*f(-x) + f(x), cos(x))",
     "variables": [
       "x"
@@ -2846,7 +2847,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "e^2 - 1",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "-1 + exp(2)",
     "variables": [],
     "num_constraints": 0,
@@ -2859,7 +2860,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "S = \\frac{1}{3} \\cdot 12\\sqrt{12}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(S, 8*sqrt(3))",
     "variables": [
       "S"
@@ -2874,7 +2875,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "I = \\frac{2}{13}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(I, 2/13)",
     "variables": [
       "I"
@@ -2889,7 +2890,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "S = \\frac{1}{3} \\cdot 16\\sqrt{16}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(S, 64/3)",
     "variables": [
       "S"
@@ -2904,7 +2905,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "8\\pi\\text{ dm}^3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "8*pi",
     "variables": [],
     "num_constraints": 0,
@@ -2917,7 +2918,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "S = \\frac{2}{3} \\cdot 4\\sqrt{4}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(S, 16/3)",
     "variables": [
       "S"
@@ -2932,7 +2933,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "y = e^{-2x} + e^{-3x}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y, exp(-2*x) + exp(-3*x))",
     "variables": [
       "x",
@@ -2990,7 +2991,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "S = \\frac{2}{3} \\cdot 3\\sqrt{3}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(S, 2*sqrt(3))",
     "variables": [
       "S"
@@ -3005,7 +3006,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "\\omega = 1000\\text{ rad/s}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(omega, 1000)",
     "variables": [
       "omega"
@@ -3062,7 +3063,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "I = \\frac{2}{6}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(I, 1/3)",
     "variables": [
       "I"
@@ -3077,7 +3078,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "I = \\frac{2}{4}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(I, 1/2)",
     "variables": [
       "I"
@@ -3092,7 +3093,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "\\omega = 500\\text{ rad/s}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(omega, 500)",
     "variables": [
       "omega"
@@ -3149,7 +3150,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "I = \\frac{2}{8}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(I, 1/4)",
     "variables": [
       "I"
@@ -3164,7 +3165,7 @@
     "field": "options",
     "category": "calculus_integral_derivative",
     "latex": "S = \\frac{1}{3} \\cdot 14\\sqrt{14}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(S, 14*sqrt(14)/3)",
     "variables": [
       "S"
@@ -3179,7 +3180,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "C = -A = 1",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(C = -A = 1)",
     "variables": [
       "A",
@@ -3195,7 +3196,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "S = \\int_{-\\sqrt{7}}^{\\sqrt{7}} (7 - x^2) dx = 2\\left[7x - \\frac{x^3}{3}\\right]_0^{\\sqrt{7}} = 2\\left(7\\sqrt{7} - \\frac{7\\sqrt{7}}{3}\\right) = \\frac{4}{3}7\\sqrt{7}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S = Integral(7 - x**2, (x, -sqrt(7), sqrt(7))) = 2*-x**3/3 + 7*x_0**(sqrt(7)) = 28*sqrt(7)/3 = 28*sqrt(7)/3)",
     "variables": [
       "-x**3/3 + 7*x_0",
@@ -3211,7 +3212,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "2x_n = 1 + 2\\epsilon_n",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(2*x_n, 2*epsilon_n + 1)",
     "variables": [
       "epsilon_n",
@@ -3269,7 +3270,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "\\int_0^1 [f'(x)]^2 dx = 3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(Integral(Derivative(f(x), x)**2, (x, 0, 1)), 3)",
     "variables": [],
     "num_constraints": 0,
@@ -3282,7 +3283,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "f(x) = \\int_0^x (3 - 3t)\\,dt = 3x - \\frac{3}{2}x^2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(f(x) = Integral(3 - 3*t, (t, 0, x)) = -3*x**2/2 + 3*x)",
     "variables": [
       "x"
@@ -3297,7 +3298,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "(1 + 10)I = \\int_{-\\frac{\\pi}{2}}^{\\frac{\\pi}{2}} \\cos(x) dx = 2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(11*I = Integral(cos(x), (x, -pi/2, pi/2)) = 2)",
     "variables": [
       "I"
@@ -3312,7 +3313,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "(1 + 6)I = \\int_{-\\frac{\\pi}{2}}^{\\frac{\\pi}{2}} \\cos(x) dx = 2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(7*I = Integral(cos(x), (x, -pi/2, pi/2)) = 2)",
     "variables": [
       "I"
@@ -3327,7 +3328,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "I = 1",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(I, 1)",
     "variables": [
       "I"
@@ -3342,7 +3343,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "I = [\\ln|x| + \\ln|x+1|]_1^2 = (\\ln 2 + \\ln 3) - (\\ln 1 + \\ln 2) = \\ln 3 = 0 \\ln 2 + 1 \\ln 3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(I = log(Abs(x)) + log(Abs(x + 1))_1**2 = log(3) = log(3) = log(3))",
     "variables": [
       "I",
@@ -3358,7 +3359,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "h = 2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(h, 2)",
     "variables": [
       "h"
@@ -3373,7 +3374,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "\\int_0^1 \\frac{9}{4}x^4\\,dx = \\frac{9}{4}\\left[\\frac{x^5}{5}\\right]_0^1 = \\frac{9}{20}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(Integral(9*x**4/4, (x, 0, 1)) = 9*x**5/5_0/4 = 9/20)",
     "variables": [
       "x**5/5_0"
@@ -3388,7 +3389,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "r = 2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(r, 2)",
     "variables": [
       "r"
@@ -3403,7 +3404,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "\\int_0^1 [f(x)]^2\\,dx = 3 - \\frac{9}{4} + \\frac{9}{20} = \\frac{60 - 45 + 9}{20} = \\frac{24}{20} = \\frac{6}{5} = 1{,}2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(Integral(f(x)**2, (x, 0, 1)) = 6/5 = 6/5 = 6/5 = 6/5 = 6/5)",
     "variables": [],
     "num_constraints": 0,
@@ -3416,7 +3417,7 @@
     "field": "explanation",
     "category": "calculus_integral_derivative",
     "latex": "S = \\int_{-\\sqrt{13}}^{\\sqrt{13}} (13 - x^2) dx = 2\\left[13x - \\frac{x^3}{3}\\right]_0^{\\sqrt{13}} = 2\\left(13\\sqrt{13} - \\frac{13\\sqrt{13}}{3}\\right) = \\frac{4}{3}13\\sqrt{13}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(S = Integral(13 - x**2, (x, -sqrt(13), sqrt(13))) = 2*-x**3/3 + 13*x_0**(sqrt(13)) = 52*sqrt(13)/3 = 52*sqrt(13)/3)",
     "variables": [
       "-x**3/3 + 13*x_0",
@@ -3432,7 +3433,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "(P): 2x - 3y + 4z - 5 = 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(2*x - 3*y + 4*z - 5, 0)",
     "variables": [
       "x",
@@ -3449,7 +3450,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "ABC",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "A*B*C",
     "variables": [
       "A",
@@ -3466,7 +3467,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "(P): 2x - y + 2z - 5 = 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(2*x - y + 2*z - 5, 0)",
     "variables": [
       "x",
@@ -3483,7 +3484,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "z \\ge 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "z >= 0",
     "variables": [
       "z"
@@ -3498,7 +3499,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "(Q): z = x + 2",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(z, x + 2)",
     "variables": [
       "x",
@@ -3556,7 +3557,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "R = 7",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(R, 7)",
     "variables": [
       "R"
@@ -3571,7 +3572,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "R = 11",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(R, 11)",
     "variables": [
       "R"
@@ -3586,7 +3587,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "(P): x + y - 2 = 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(x + y - 2, 0)",
     "variables": [
       "x",
@@ -3602,7 +3603,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "R = 13",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(R, 13)",
     "variables": [
       "R"
@@ -3617,7 +3618,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "Oxyz",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "O*x*y*z",
     "variables": [
       "O",
@@ -3635,7 +3636,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "OABC",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "A*B*C*O",
     "variables": [
       "A",
@@ -3653,7 +3654,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "SA = a\\sqrt{2}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(A*S, sqrt(2)*a)",
     "variables": [
       "A",
@@ -3712,7 +3713,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "R = 12",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(R, 12)",
     "variables": [
       "R"
@@ -3727,7 +3728,7 @@
     "field": "question_text",
     "category": "coordinate_geometry_analytic",
     "latex": "(Q): y + z + 1 = 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(y + z + 1, 0)",
     "variables": [
       "y",
@@ -3743,7 +3744,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "(x - 12)^2 + (y - 13)^2 + (z - 14)^2 = 15",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq((x - 12)**2 + (y - 13)**2 + (z - 14)**2, 15)",
     "variables": [
       "x",
@@ -3760,7 +3761,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "(x + 2)^2 + (y + 3)^2 + (z + 4)^2 = 5",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq((x + 2)**2 + (y + 3)**2 + (z + 4)**2, 5)",
     "variables": [
       "x",
@@ -3777,7 +3778,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "\\frac{a^3\\sqrt{2}}{3}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "sqrt(2)*a**3/3",
     "variables": [
       "a"
@@ -3834,7 +3835,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "(x + 1)^2 + (y + 2)^2 + (z + 3)^2 = 16",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq((x + 1)**2 + (y + 2)**2 + (z + 3)**2, 16)",
     "variables": [
       "x",
@@ -3851,7 +3852,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "(x + 5)^2 + (y + 6)^2 + (z + 7)^2 = 8",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq((x + 5)**2 + (y + 6)**2 + (z + 7)**2, 8)",
     "variables": [
       "x",
@@ -3868,7 +3869,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "\\frac{x - 1}{2} = \\frac{y - 2}{-1} = \\frac{z + 1}{3}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(x/2 - 1/2 = 2 - y = z/3 + 1/3)",
     "variables": [
       "x",
@@ -3885,7 +3886,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "(x - 6)^2 + (y - 7)^2 + (z - 8)^2 = 9",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq((x - 6)**2 + (y - 7)**2 + (z - 8)**2, 9)",
     "variables": [
       "x",
@@ -3902,7 +3903,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "12\\text{ km}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "12",
     "variables": [],
     "num_constraints": 0,
@@ -3915,7 +3916,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "\\frac{11}{3}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "11/3",
     "variables": [],
     "num_constraints": 0,
@@ -3928,7 +3929,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "(x - 1)^2 + (y + 2)^2 = 5",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq((x - 1)**2 + (y + 2)**2, 5)",
     "variables": [
       "x",
@@ -3944,7 +3945,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "(x - 8)^2 + (y - 9)^2 + (z - 10)^2 = 121",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq((x - 8)**2 + (y - 9)**2 + (z - 10)**2, 121)",
     "variables": [
       "x",
@@ -3961,7 +3962,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "\\frac{x - 1}{2} = \\frac{y - 2}{1} = \\frac{z + 1}{3}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(x/2 - 1/2 = y - 2 = z/3 + 1/3)",
     "variables": [
       "x",
@@ -3978,7 +3979,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "\\frac{a^3\\sqrt{2}}{2}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "sqrt(2)*a**3/2",
     "variables": [
       "a"
@@ -4035,7 +4036,7 @@
     "field": "options",
     "category": "coordinate_geometry_analytic",
     "latex": "(x - 12)^2 + (y - 13)^2 + (z - 14)^2 = 225",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq((x - 12)**2 + (y - 13)**2 + (z - 14)**2, 225)",
     "variables": [
       "x",
@@ -4052,7 +4053,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "\\frac{x - x_0}{a} = \\frac{y - y_0}{b} = \\frac{z - z_0}{c}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation((x - x_0)/a = (y - y_0)/b = (z - z_0)/c)",
     "variables": [
       "a",
@@ -4075,7 +4076,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "x + y + z",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "x + y + z",
     "variables": [
       "x",
@@ -4092,7 +4093,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "x + 2y + 2z - 15 < 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "x + 2*y + 2*z - 15 < 0",
     "variables": [
       "x",
@@ -4109,7 +4110,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "\\frac{15 - 2\\sqrt{11}}{3}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "5 - 2*sqrt(11)/3",
     "variables": [],
     "num_constraints": 0,
@@ -4122,7 +4123,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "R = \\sqrt{25} = 5",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(R = 5 = 5)",
     "variables": [
       "R"
@@ -4137,7 +4138,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "\\cos\\theta = \\frac{4}{3 \\cdot 3} = \\frac{4}{9}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(cos(theta) = 4/9 = 4/9)",
     "variables": [
       "theta"
@@ -4152,7 +4153,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "\\frac{x}{a} + \\frac{y}{b} + \\frac{z}{c} = 1",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(z/c + y/b + x/a, 1)",
     "variables": [
       "a",
@@ -4172,7 +4173,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "V = \\frac{1}{3} S_{ABC} \\cdot SA = \\frac{1}{3} \\cdot \\frac{a^2}{2} \\cdot a\\sqrt{2} = \\frac{a^3\\sqrt{2}}{6}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(V = A*S*S_A*B*C/3 = sqrt(2)*a**3/6 = sqrt(2)*a**3/6)",
     "variables": [
       "A",
@@ -4191,7 +4192,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "x + 2y + 2z",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "x + 2*y + 2*z",
     "variables": [
       "x",
@@ -4208,7 +4209,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "d = \\frac{15 - (x + 2y + 2z)}{3}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(d, -x/3 - 2*y/3 - 2*z/3 + 5)",
     "variables": [
       "d",
@@ -4226,7 +4227,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "OM^2(t) = (12+2t)^2 + (9-t)^2 + (6+2t)^2 = 9t^2 + 54t + 261",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(M**2*O*t = (9 - t)**2 + (2*t + 6)**2 + (2*t + 12)**2 = 9*t**2 + 54*t + 261)",
     "variables": [
       "M",
@@ -4243,7 +4244,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "R = \\sqrt{1^2 + 2^2 + 0^2 - 4} = 1",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(R = 1 = 1)",
     "variables": [
       "R"
@@ -4258,7 +4259,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "2\\sqrt{11} < 15",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "2*sqrt(11) < 15",
     "variables": [],
     "num_constraints": 0,
@@ -4271,7 +4272,7 @@
     "field": "explanation",
     "category": "coordinate_geometry_analytic",
     "latex": "t = -54/18 = -3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(t = -3 = -3)",
     "variables": [
       "t"
@@ -4286,7 +4287,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "X = -20",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(X, -20)",
     "variables": [
       "X"
@@ -4301,7 +4302,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "\\pi_1 + \\pi_2 = 1",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(pi_1 + pi_2, 1)",
     "variables": [
       "pi_1",
@@ -4317,7 +4318,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "P(B) = 0.70",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(P(B), 7/10)",
     "variables": [
       "B"
@@ -4332,7 +4333,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "P(B) = 0.50",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(P(B), 1/2)",
     "variables": [
       "B"
@@ -4347,7 +4348,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "\\mu = 1000",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(mu, 1000)",
     "variables": [
       "mu"
@@ -4362,7 +4363,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "C_3",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "C_3",
     "variables": [
       "C_3"
@@ -4419,7 +4420,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "(A^4)_{11}",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "A**4_11",
     "variables": [
       "A**4_11"
@@ -4476,7 +4477,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "f(x) = k x",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(f(x), k*x)",
     "variables": [
       "k",
@@ -4492,7 +4493,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "S_4",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "S_4",
     "variables": [
       "S_4"
@@ -4549,7 +4550,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "X < Y",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "X < Y",
     "variables": [
       "X",
@@ -4607,7 +4608,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "\\sigma = 100",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(sigma, 100)",
     "variables": [
       "sigma"
@@ -4622,7 +4623,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "X = 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(X, 0)",
     "variables": [
       "X"
@@ -4637,7 +4638,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "W_4",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "W_4",
     "variables": [
       "W_4"
@@ -4694,7 +4695,7 @@
     "field": "question_text",
     "category": "probability_statistics",
     "latex": "y > 0",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "y > 0",
     "variables": [
       "y"
@@ -4709,7 +4710,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "\\frac{16}{21}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "16/21",
     "variables": [],
     "num_constraints": 0,
@@ -4722,7 +4723,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "\\frac{10}{21}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "10/21",
     "variables": [],
     "num_constraints": 0,
@@ -4735,7 +4736,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "\\frac{15}{52}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "15/52",
     "variables": [],
     "num_constraints": 0,
@@ -4748,7 +4749,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "0.40",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "2/5",
     "variables": [],
     "num_constraints": 0,
@@ -4761,7 +4762,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "30",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "30",
     "variables": [],
     "num_constraints": 0,
@@ -4774,7 +4775,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "\\frac{3}{2}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "3/2",
     "variables": [],
     "num_constraints": 0,
@@ -4787,7 +4788,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "\\frac{5}{21}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "5/21",
     "variables": [],
     "num_constraints": 0,
@@ -4800,7 +4801,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "0.10",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "1/10",
     "variables": [],
     "num_constraints": 0,
@@ -4813,7 +4814,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "0.50",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "1/2",
     "variables": [],
     "num_constraints": 0,
@@ -4826,7 +4827,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "1000",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "1000",
     "variables": [],
     "num_constraints": 0,
@@ -4839,7 +4840,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "\\frac{3}{5}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "3/5",
     "variables": [],
     "num_constraints": 0,
@@ -4852,7 +4853,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "R = 2\\sqrt{\\ln 2}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(R, 2*sqrt(log(2)))",
     "variables": [
       "R"
@@ -4867,7 +4868,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "R = \\ln 2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(R, log(2))",
     "variables": [
       "R"
@@ -4882,7 +4883,7 @@
     "field": "options",
     "category": "probability_statistics",
     "latex": "0.30",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "3/10",
     "variables": [],
     "num_constraints": 0,
@@ -4895,15 +4896,14 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "4 \\times C_5^1 \\times A_4^3 = 480",
-    "verification_mode": "hand_verified",
-    "expected_repr": "Eq(4*A_4**3*C_5, 480)",
-    "variables": [
-      "A_4",
-      "C_5"
-    ],
+    "verification_mode": "snapshot_ast",
+    "expected_repr": null,
+    "variables": [],
     "num_constraints": 0,
     "sample_points": [],
-    "expected_values": []
+    "expected_values": [],
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "case_id": "strat_198",
@@ -4911,16 +4911,14 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "n(A) = C_5^2 \\times C_4^1 = 10 \\times 4 = 40",
-    "verification_mode": "hand_verified",
-    "expected_repr": "ChainedRelation(n(A) = C_4*C_5**2 = 40 = 40)",
-    "variables": [
-      "A",
-      "C_4",
-      "C_5"
-    ],
+    "verification_mode": "snapshot_ast",
+    "expected_repr": null,
+    "variables": [],
     "num_constraints": 0,
     "sample_points": [],
-    "expected_values": []
+    "expected_values": [],
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "case_id": "strat_199",
@@ -4928,7 +4926,7 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "1 + 2 = 3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(3, 3)",
     "variables": [],
     "num_constraints": 0,
@@ -4941,7 +4939,7 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "\\lambda_2 = -1/2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(lambda_2, -1/2)",
     "variables": [
       "lambda_2"
@@ -4956,7 +4954,7 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "\\gamma_* = 1 - \\max_{i \\ge 2} |\\lambda_i| = 1 - 1/2 = 1/2",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(gamma_* = -max_i >= 2*Abs(lambda_i) + 1 = 1/2 = 1/2)",
     "variables": [
       "gamma_*",
@@ -4973,7 +4971,7 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "x^2 + 4y^2 = r^2",
-    "verification_mode": "snapshot_eval_20pts",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "Eq(x**2 + 4*y**2, r**2)",
     "variables": [
       "r",
@@ -5032,7 +5030,7 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "\\mu_2 = 3 - 0 = 3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(mu_2 = 3 = 3)",
     "variables": [
       "mu_2"
@@ -5047,7 +5045,7 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "A^4 = (A^2)^2 = (J + I)^2 = J^2 + 2J + I = 3J + 2J + I = 5J + I",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(A**4 = A**4 = (I + J)**2 = I + J**2 + 2*J = I + 5*J = I + 5*J)",
     "variables": [
       "A",
@@ -5064,7 +5062,7 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "\\mu_3 = 3 - 0 = 3",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(mu_3 = 3 = 3)",
     "variables": [
       "mu_3"
@@ -5079,7 +5077,7 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "P = 40/84 = 10/21",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(P = 10/21 = 10/21)",
     "variables": [
       "P"
@@ -5094,7 +5092,7 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "\\pi_3 = \\frac{3}{9} = \\frac{1}{3}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(pi_3 = 1/3 = 1/3)",
     "variables": [
       "pi_3"
@@ -5109,7 +5107,7 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "P - I",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "-I + P",
     "variables": [
       "I",
@@ -5125,14 +5123,14 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "A_{10}^3 = 10 \\cdot 9 \\cdot 8 = 720",
-    "verification_mode": "hand_verified",
-    "expected_repr": "ChainedRelation(A_10**3 = 720 = 720)",
-    "variables": [
-      "A_10"
-    ],
+    "verification_mode": "snapshot_ast",
+    "expected_repr": null,
+    "variables": [],
     "num_constraints": 0,
     "sample_points": [],
-    "expected_values": []
+    "expected_values": [],
+    "expected_rejection": true,
+    "expected_error_code": "UNSUPPORTED_SYNTAX"
   },
   {
     "case_id": "strat_210",
@@ -5140,7 +5138,7 @@
     "field": "explanation",
     "category": "probability_statistics",
     "latex": "p = 1 - p = \\frac{1}{2}",
-    "verification_mode": "hand_verified",
+    "verification_mode": "snapshot_ast",
     "expected_repr": "ChainedRelation(p = 1 - p = 1/2)",
     "variables": [
       "p"

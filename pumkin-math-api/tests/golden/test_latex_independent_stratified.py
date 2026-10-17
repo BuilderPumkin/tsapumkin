@@ -54,6 +54,12 @@ def test_independent_stratified_snippet(case: dict[str, Any]):
 
     res = parse_latex(latex_str)
 
+    if case.get("expected_rejection"):
+        assert res.is_success is False, f"Expected rejection for '{latex_str}', but got success"
+        if "expected_error_code" in case:
+            assert res.error_code == case["expected_error_code"]
+        return
+
     assert res.is_success is True, f"Failed parsing: {latex_str!r} | Reason: {res.reason_vi}"
     msg_mismatch = (
         f"Repr mismatch for '{latex_str}':\n"
@@ -67,7 +73,7 @@ def test_independent_stratified_snippet(case: dict[str, Any]):
     )
 
     # Multi-point numerical evaluation (>= 20 points)
-    if mode == "numerical_eval_20pts":
+    if mode in ("numerical_eval_20pts", "snapshot_eval_20pts"):
         points = case["sample_points"]
         expected_values = case["expected_values"]
         assert len(points) == 20, "Must test exactly 20 sample points"
