@@ -1,6 +1,6 @@
-{
-  "name": "PUMKIN.DEV - Nền tảng Khảo thí & Dữ liệu Giáo dục",
-  "short_name": "PUMKIN.DEV",
+﻿{
+  "name": "MathEval - Nền tảng Khảo thí & Dữ liệu Giáo dục",
+  "short_name": "MathEval",
   "description": "Nền tảng khảo thí chuẩn hóa TSA, HSA, THPT và cẩm nang toán học mã nguồn mở",
   "start_url": "./index.html",
   "display": "standalone",
@@ -15,3 +15,4 @@
     }
   ]
 }
+

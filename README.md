@@ -1,4 +1,4 @@
-```text
+﻿```text
   _____  _    _ __  __ _____  _  _______ _   _      _____  ________      __
  |  __ \| |  | |  \/  |  __ \| |/ /_   _| \ | |    |  __ \|  ____\ \    / /
  | |__) | |  | | \  / | |__) | ' /  | | |  \| |    | |  | | |__   \ \  / / 
@@ -7,7 +7,7 @@
  |_|     \____/|_|  |_|_|    |_|\_\_____|_| \_|(_) |_____/|______|   \/    
 ```
 
-# 🎃 PUMKIN.DEV — HỆ SINH THÁI KHẢO THÍ TOÁN HỌC THÔNG MINH, ADAPTIVE EDTECH & AI TRỢ GIẢNG ĐỘT PHÁ
+# 🎃 MathEval — HỆ SINH THÁI KHẢO THÍ TOÁN HỌC THÔNG MINH, ADAPTIVE EDTECH & AI TRỢ GIẢNG ĐỘT PHÁ
 
 > **Nền tảng Luyện thi Cá nhân hóa Thích ứng, Khảo thí Tự động & Đánh giá Tư duy Thế hệ Mới**  
 > Thiết kế chuẩn mực cho các kỳ thi: **Đánh giá Tư duy (TSA ĐHBK Hà Nội)**, **Đánh giá Năng lực (HSA ĐHQGHN)**, **Tốt nghiệp THPT Quốc gia (Cấu trúc mới nhất Bộ GD&ĐT 2025+)** và **Toán Giải tích Đại cương Đại học**.  
@@ -15,9 +15,9 @@
 
 ---
 
-## 💎 BẢNG SO SÁNH: PUMKIN.DEV vs. CÁC NỀN TẢNG LUYỆN THI THÔNG THƯỜNG
+## 💎 BẢNG SO SÁNH: MathEval vs. CÁC NỀN TẢNG LUYỆN THI THÔNG THƯỜNG
 
-| Tiêu chí Khảo thí & Công nghệ | Các Website Luyện Thi Thông Thường | 🎃 PUMKIN.DEV |
+| Tiêu chí Khảo thí & Công nghệ | Các Website Luyện Thi Thông Thường | 🎃 MathEval (PUMKIN.DEV) |
 | :--- | :--- | :--- |
 | **Phương pháp Hỗ trợ AI** | Đưa ngay đáp án hoặc lời giải hoàn chỉnh $\rightarrow$ Học sinh ỉ lại, triệt tiêu tư duy tự học. | **AI Trợ Giảng Socrates 6 bậc gợi mở**: Chỉ khơi gợi hướng đi, đặt câu hỏi phản tư, hướng dẫn từng bước và buộc học sinh tự suy nghĩ. |
 | **Xác thực Toán học & Độ chính xác** | Dễ bị "ảo giác" (Hallucination), giải sai công thức, nhầm dấu, thiếu điều kiện nghiệm. | **Lớp Kiểm định Toán học Tất định & Hệ thống CAS (Computer Algebra System)**: Tự động thẩm định tập xác định, tương đương đại số 5 điểm mẫu ngẫu nhiên và từng bước biến đổi phương trình trước khi AI phản hồi. |
@@ -35,7 +35,7 @@
 
 ---
 
-## 🚀 CHI TIẾT TẤT CẢ NĂNG LỰC & TÍNH NĂNG NỔI TRỘI CỦA PUMKIN.DEV
+## 🚀 CHI TIẾT TẤT CẢ NĂNG LỰC & TÍNH NĂNG NỔI TRỘI CỦA MathEval
 
 ### 1. 🤖 AI Trợ Giảng Socrates Chuyên Toán & Hệ Thống CAS Kiểm Định Tất Định
 - **Phương pháp Vấn đáp Sư phạm Socrates**: Thay vì cung cấp ngay đáp án, AI đóng vai trò như một người thầy dẫn đường mẫu mực, dẫn dắt học sinh tự khai phá lời giải theo chu trình: `Hỏi (Ask) → Gợi mở (Hint) → Dẫn dắt (Guide) → Kiểm tra (Verify)`.
@@ -71,29 +71,30 @@
 
 ---
 
-### 3. 📊 Đồ Thị Toán Học Tương Tác Trực Quan JSXGraph (Visual Math Sandbox)
-- **Đồ Thị Declarative Tương Tác An Toàn (`PumkinJSXGraph`)**:
-  - Nhúng công nghệ JSXGraph 1.6+ với cơ chế cấu hình JSON tĩnh nghiêm ngặt (chống tấn công XSS / script injection từ nội dung câu hỏi).
-  - Tải lười (Lazy-loading) theo nhu cầu thực tế, không gây gánh nặng dung lượng lên trang khởi động.
-- **Thanh Trượt Tham Số $m$ Thời Gian Thực**:
-  - Cho phép học sinh kéo thanh trượt biến thiên tham số $m$ (được tối ưu với cơ chế Debounce chống giật lag).
-  - Trực quan hóa đường cong hàm bậc 3, hàm phân thức, tương giao đồ thị, tiếp tuyến và các mô hình cực trị hình học không gian Oxyz chuyển động trực quan, giúp phát triển trực giác toán học sâu sắc.
+### 3. 📈 Trực Quan Hóa Đồ Thị Tương Tác JSXGraph & Hộp Cát Hình Học
+- **JSXGraph Declarative Sandbox (`PumkinJSXGraph.js`)**:
+  - Tích hợp động cơ đồ thị tương tác nhẹ, tối ưu cho cả máy tính lẫn màn hình cảm ứng di động.
+  - Cho phép học sinh kéo thanh trượt tham số $m$, quan sát biến thiên hàm số, tiếp tuyến, cực trị và tiệm cận thời gian thực.
+  - Hỗ trợ mô hình hóa hình học không gian Oxyz, mặt cầu, mặt phẳng và quỹ đạo chuyển động.
+- **Tải Lười Thông Minh (Lazy-Loading) & Cách Ly An Toàn**:
+  - Thành phần đồ thị chỉ được khởi tạo khi học sinh cuộn tới câu hỏi tương ứng, không gây cản trở tốc độ tải trang ban đầu.
+  - Cấu hình đồ thị hoàn toàn bằng JSON Declarative, cách ly độc lập, không thực thi mã độc.
 
 ---
 
-### 4. 🎲 Động Cơ Xáo Đề Tự Chọn Chuẩn Khảo Thí (Dynamic Fisher-Yates Exam Generator)
-- **Thuật Toán Hoán Vị Fisher-Yates Chuẩn Mực**: Xáo trộn ngẫu nhiên thứ tự câu hỏi và hoán vị khoa học các phương án lựa chọn, loại bỏ hoàn toàn tình trạng học sinh học vẹt thứ tự đáp án.
-- **Tùy Biến Toàn Diện Mọi Thông Số Đề Thi**:
-  - **Hệ đề mục tiêu phong phú**: Chọn lựa giữa Đánh giá Tư duy (TSA), Đánh giá Năng lực (HSA), Tốt nghiệp THPT Quốc gia, Toán Cao cấp hoặc Tổ hợp liên kỳ thi.
-  - **Quy mô câu hỏi linh hoạt**: Từ mini-test phản xạ nhanh (10 câu), đề luyện chuyên sâu (20 - 30 câu) đến đề thi chính thức chuẩn mực (40 - 50 câu).
-  - **Thời gian tùy biến**: Từ 15 phút rèn tốc độ đến 90 phút thi chuẩn.
+### 4. 🎲 Động Cơ Sinh Đề Tự Động Thông Minh (Fisher-Yates Dynamic Generator)
+- **Tùy Biến Đề Thi Không Giới Hạn**:
+  - Lựa chọn theo từng kỳ thi mục tiêu: **TSA Bách Khoa** (Tư duy toán học định lượng), **HSA ĐHQGHN**, **Tốt nghiệp THPT**, hoặc **Toán Đại học (Giải tích 1)**.
+  - Điều chỉnh linh hoạt số lượng câu hỏi ($5$ đến $50$ câu) và thời lượng làm bài ($5$ đến $120$ phút).
+  - Thuật toán **Fisher-Yates Shuffle** xáo trộn ngẫu nhiên câu hỏi và hoán vị các phương án $A, B, C, D$ mà vẫn bảo toàn tính duy nhất của đáp án đúng.
+- **Cân Bằng Ma Trận Nhận Thức Tự Động**:
   - **Cấu hình độ khó theo tỷ lệ vàng**: Chọn chế độ *Dễ*, *Trung bình*, *Khó*, hoặc cấu hình **Cân bằng (Balanced)** chuẩn khảo thí ($25\%$ Dễ — $50\%$ Trung bình — $25\%$ Khó).
 - **Cơ Chế Fallback Thông Minh**: Tự động bù đắp câu hỏi từ các phân môn tương thích nếu chuyên đề lựa chọn quá hẹp, đảm bảo đề sinh ra luôn đạt độ cân đối hoàn hảo về cả số lượng lẫn thời gian.
 
 ---
 
 ### 5. 🧠 Luyện Đề Thích Ứng Theo Năng Lực Thực Tế (Adaptive Practice & Learning Memory)
-- **Bộ Nhớ Học Tập Tín Hiệu Dài Hạn (Learning Memory Store)**: Không lưu trữ nội dung chat rườm rà, PUMKIN.DEV chỉ lưu trữ các **Tín hiệu sư phạm giá trị (Pedagogical Signals)**: phân môn yếu, tần suất sai lầm, mức độ cần gợi ý trung bình và phản xạ thời gian.
+- **Bộ Nhớ Học Tập Tín Hiệu Dài Hạn (Learning Memory Store)**: Không lưu trữ nội dung chat rườm rà, MathEval chỉ lưu trữ các **Tín hiệu sư phạm giá trị (Pedagogical Signals)**: phân môn yếu, tần suất sai lầm, mức độ cần gợi ý trung bình và phản xạ thời gian.
 - **Thuật Toán Suy Hao Thời Gian Thực (Exponential Time Decay)**:
   - Hệ số suy hao $\lambda = 0.977/\text{ngày}$ (chu kỳ bán rã ~30 ngày).
   - Các sai sót từ nhiều tuần trước sẽ tự động giảm trọng số, nhường quyền ưu tiên cho các lỗ hổng kiến thức trong 7 ngày gần nhất, phản ánh trung thực năng lực hiện tại của học sinh.
@@ -124,14 +125,11 @@
 - **Thử Thách Đỉnh Cao Dành Cho Mục Tiêu 9+ & Thủ Khoa**: Thiết kế chuyên biệt cho những học sinh muốn bứt phá giới hạn tư duy trong các kỳ thi TSA, HSA và Olympic.
 - **25 Bài Toán Siêu Khó Tích Hợp Question DNA Đa Phân Môn**:
   1. *Xích Markov & Ma trận chuyển trạng thái ngẫu nhiên*.
-  2. *Tích phân suy rộng & Bất đẳng thức tích phân Cauchy-Schwarz*.
-  3. *Cực trị hình học Oxyz tích hợp Vector & Mặt cầu*.
-  4. *Phương trình vi phân Euler & Mô hình hóa sinh thái/vật lý*.
-  5. *Đồ thị phổ Laplacian & Đại số tuyến tính tổ hợp*.
-- **Kho Cách Ly Bảo Mật Tuyệt Đối (Strict Isolation Pool)**:
-  - Các câu hỏi siêu khó được bảo vệ trong kho lưu trữ riêng.
-  - Hệ thống cam kết **tuyệt đối không bao giờ trộn câu hỏi siêu khó vào các chế độ tạo đề cơ bản**, giúp học sinh trung bình - khá yên tâm rèn luyện đúng sức mà không bị ngợp hay hoang mang.
-  - Chỉ kích hoạt khi học sinh chủ động lựa chọn độ khó **"Siêu khó"** trong Trình tạo đề!
+  2. *Định lý Bayes & Suy diễn xác suất hậu nghiệm*.
+  3. *Tích phân suy rộng loại 1, loại 2*.
+  4. *Chuỗi số & Chuỗi lũy thừa Taylor-Maclaurin*.
+  5. *Cực trị hàm nhiều biến & Nhân tử Lagrange*.
+- **Giao Diện Thi Đấu Cách Ly Độc Lập**: Đồng hồ đếm ngược áp lực cao, không có hỗ trợ gợi ý sơ cấp, kiểm tra trọn vẹn bản lĩnh tư duy độc lập.
 
 ---
 
@@ -139,9 +137,8 @@
 - **Cơ Chế Gamification Học Thuật Độc Quyền**: Biến hành trình luyện thi căng thẳng thành trải nghiệm chinh phục đầy hào hứng.
 - **Quy Tắc Tích Lũy Kinh Nghiệm (EXP) Khoa Học**:
   - Hoàn thành bài thi đạt tỷ lệ đúng $>70\%$: Nhận $+1$ EXP (đề $<25$ câu) hoặc $+4$ EXP (đề $\ge 25$ câu).
-  - Tỷ lệ đúng xuất sắc $>95\%$: **Nhân đôi toàn bộ EXP** đạt được ($\times 2$).
-  - Thi đấu ở chế độ Khó: Tăng thêm $+50\%$ EXP.
-  - Chinh phục chế độ Siêu khó: **Nhân ba ($\times 3$) EXP** khi đạt điểm tuyệt đối $100\%$ (hệ số cộng dồn cực lớn).
+  - Tỷ lệ đúng $\ge 90\%$: Nhận $+2$ EXP (đề $<25$ câu) hoặc $+8$ EXP (đề $\ge 25$ câu).
+  - Hoàn thành chế độ Boss Arena siêu khó: Thưởng nóng $+12$ EXP.
 - **Hệ Thống Phân Cấp Lũy Tiến**: Cấp 1 cần 2 EXP, Cấp 2 cần 3 EXP, mỗi cấp tiếp theo yêu cầu tăng $50\%$ EXP lũy tiến (làm tròn lên), tôn vinh sự kiên trì và tiến bộ thực chất của học sinh.
 
 ---
@@ -164,9 +161,9 @@
 - **Tham Gia Bằng Mã PIN 6 Số**: Thí sinh tạo phòng hoặc vào phòng thi đua top nhanh chóng qua mã PIN.
 - **Đồng Bộ Thời Gian Thực Từ Server (Server-Authoritative)**:
   - Server là nguồn chân lý duy nhất cho thời gian, trạng thái phòng và kết quả chấm điểm.
-  - Khắc phục tuyệt đối tình trạng gian lận chỉnh đồng hồ thiết bị.
+  - Tự động hiệu chỉnh lệch giờ (Clock Skew) giữa các thiết bị thí sinh.
 - **Bảng Xếp Hạng Trực Tiếp Ẩn Danh (Live Leaderboard)**:
-  - Cập nhật điểm số và tiến độ theo chu kỳ thời gian thực.
+  - Cập nhật thứ hạng tức thì sau mỗi câu nộp bài.
   - Tự động gán bí danh học thuật ngẫu nhiên (như *Sói Cô Độc*, *Cáo Trắng*, *Gấu Ngủ Nướng*), bảo vệ 100% danh tính học sinh.
 - **Quyền Năng Chủ Phòng (Host Controls)**: Khóa phòng (`Lock`), bắt đầu thi (`Start`), loại người chơi (`Kick`), và kết thúc phòng thi sớm.
 - **Giám Sát Công Bằng Chống Gian Lận**: Ghi nhận sự kiện chuyển tab (window blur / focus audit), từ chối nhận bài thi gửi muộn sau khi hết giờ.
@@ -181,7 +178,7 @@
 ---
 
 ### 12. 📋 Chuẩn Hóa Toàn Diện 4 Dạng Câu Hỏi Khảo Thí Mới Nhất (Bộ GD&ĐT 2025+)
-PUMKIN.DEV là nền tảng tiên phong hỗ trợ trọn vẹn cả 4 định dạng bài thi mới nhất:
+MathEval là nền tảng tiên phong hỗ trợ trọn vẹn cả 4 định dạng bài thi mới nhất:
 
 1. **Trắc Nghiệm 4 Lựa Chọn (`single_choice`)**: Thao tác chọn đáp án siêu tốc bằng chuột hoặc tổ hợp phím tắt `1, 2, 3, 4` / `A, B, C, D`.
 2. **Đúng / Sai Chùm 4 Ý (`true_false_group`)**: Một ngữ cảnh bài toán đi kèm 4 khẳng định $a, b, c, d$. Áp dụng barem chấm điểm chính xác theo quy chế khảo thí quốc gia: Đúng 1 ý = **0.1 điểm**; 2 ý = **0.25 điểm**; 3 ý = **0.5 điểm**; Đúng trọn vẹn 4 ý = **1.0 điểm**.
@@ -211,7 +208,7 @@ PUMKIN.DEV là nền tảng tiên phong hỗ trợ trọn vẹn cả 4 định d
 /_/    \____/_/  /_/_/ |_/___/_/ |_/ (_) \____/_____/      \__/   
 ```
 
-**PUMKIN.DEV • NỀN TẢNG KHẢO THÍ TOÁN HỌC & ĐÁNH GIÁ TƯ DUY ĐỘT PHÁ**  
+**MathEval • NỀN TẢNG KHẢO THÍ TOÁN HỌC & ĐÁNH GIÁ TƯ DUY ĐỘT PHÁ**  
 *Khơi dậy bản lĩnh tư duy — Chinh phục đỉnh cao khảo thí.*
 
 sản phẩm được tạo bởi pumkin.dev

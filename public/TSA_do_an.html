@@ -1,23 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1e3a8a">
-    <title>PUMKIN.DEV — Nền tảng Khảo thí Toán học & Luyện thi Đánh giá Tư duy</title>
+    <title>MathEval — Nền tảng Khảo thí Toán học & Luyện thi Đánh giá Tư duy</title>
     <meta name="description" content="Nền tảng khảo thí toán học và luyện thi đánh giá tư duy TSA, HSA, THPT, Giải tích chuyên nghiệp. Tích hợp Gia sư AI Socratic và hệ thống cấp độ EXP.">
     <link rel="canonical" href="https://tsapumkin.pages.dev/">
     
     <!-- OpenGraph Metadata -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tsapumkin.pages.dev/">
-    <meta property="og:title" content="PUMKIN.DEV — Nền tảng Khảo thí Toán học & Luyện thi Đánh giá Tư duy">
+    <meta property="og:title" content="MathEval — Nền tảng Khảo thí Toán học & Luyện thi Đánh giá Tư duy">
     <meta property="og:description" content="Nền tảng khảo thí toán học và luyện thi đánh giá tư duy TSA, HSA, THPT, Giải tích chuyên nghiệp với Gia sư AI Socratic.">
     <meta property="og:image" content="https://tsapumkin.pages.dev/data/og_preview.png">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PUMKIN.DEV — Khảo thí Toán học & Đánh giá Tư duy">
+    <meta name="twitter:title" content="MathEval — Khảo thí Toán học & Đánh giá Tư duy">
     <meta name="twitter:description" content="Ôn luyện TSA, HSA, THPT, Giải tích với ngân hàng đề thi chuẩn hóa và AI Socratic.">
 
     <!-- Anti-FOUC Early Theme Initializer -->
@@ -2505,7 +2505,7 @@ body.dark-mode .drag-item-card.is-placed {
         padding: 0 !important;
     }
     body::before {
-        content: "PUMKIN.DEV • NỀN TẢNG KHẢO THÍ & DỮ LIỆU TOÁN HỌC CHUẨN HÓA (BẢN IN PDF)";
+        content: "MathEval • NỀN TẢNG KHẢO THÍ & DỮ LIỆU TOÁN HỌC CHUẨN HÓA (BẢN IN PDF)";
         display: block;
         text-align: center;
         font-weight: bold;
@@ -5805,8 +5805,8 @@ input[type="range"]::-moz-range-thumb, .pdl-slider::-moz-range-thumb {
 <header class="pumkin-nav-container" role="banner">
     <nav class="pumkin-nav" aria-label="Điều hướng chính">
         <div class="brand-logo" onclick="PumkinRouter.navigate('guide')">
-            <span>🎃 PUMKIN.DEV</span>
-            <span class="brand-badge">TSA ACADEMY</span>
+            <span>📐 MathEval</span>
+            <span class="brand-badge">PUMKIN.DEV</span>
         </div>
         
         <div class="nav-scroll-wrapper">
@@ -6696,7 +6696,7 @@ input[type="range"]::-moz-range-thumb, .pdl-slider::-moz-range-thumb {
                 </div>
 
                 <div class="pumkin-card-watermark">
-                    <span class="brand-dot"></span> PUMKIN.DEV • NỀN TẢNG KHẢO THÍ TOÁN HỌC CHUẨN HÓA
+                    <span class="brand-dot"></span> MathEval • NỀN TẢNG KHẢO THÍ TOÁN HỌC CHUẨN HÓA
                 </div>
 
                 <div class="player-bottom-controls">
@@ -7868,7 +7868,7 @@ input[type="range"]::-moz-range-thumb, .pdl-slider::-moz-range-thumb {
     <div class="data-section">
         <div class="section-title-wrap">
             <h3>💻 3. Hướng dẫn Tích hợp & Mã nguồn Mẫu (Developer API Snippets)</h3>
-            <p>Dễ dàng kết nối kho dữ liệu mở PUMKIN.DEV vào website cá nhân, ứng dụng React/Flutter, hoặc bot Telegram giải toán.</p>
+            <p>Dễ dàng kết nối kho dữ liệu mở MathEval vào website cá nhân, ứng dụng React/Flutter, hoặc bot Telegram giải toán.</p>
         </div>
 
         <div class="code-snippets-wrapper">
@@ -7960,7 +7960,7 @@ input[type="range"]::-moz-range-thumb, .pdl-slider::-moz-range-thumb {
 
     <footer role="contentinfo" style="text-align: center; margin-top: 50px; padding: 25px 0 10px 0; border-top: 2px dashed var(--border-color, #cbd5e1);">
         <div style="font-size: 15px; font-weight: 800; color: var(--primary, #1e3a8a); letter-spacing: 1.5px; text-transform: uppercase;">
-            MADE BY PUMKIN.DEV
+            MADE BY MathEval
         </div>
         <div style="font-size: 12px; color: var(--text-muted, #64748b); margin-top: 4px;">
             Hệ thống tài liệu ôn thi Đánh giá Tư duy (TSA) chuẩn hóa 2025 - 2026
@@ -8570,7 +8570,7 @@ const PumkinLibrary = {
         document.getElementById("modal-exam-qcount").textContent = `${qCount} câu hỏi`;
         document.getElementById("modal-exam-duration").textContent = `${exam.duration_minutes} phút`;
         document.getElementById("modal-exam-difficulty").textContent = exam.difficulty;
-        document.getElementById("modal-exam-source").textContent = exam.source || "PUMKIN.DEV";
+        document.getElementById("modal-exam-source").textContent = exam.source || "MathEval";
 
         const startBtn = document.getElementById("modal-start-exam-btn");
         startBtn.onclick = () => {
@@ -9974,7 +9974,7 @@ const PumkinScoring = {
                     </div>
 
                     <div class="pumkin-card-watermark">
-                        <span class="brand-dot"></span> PUMKIN.DEV • NỀN TẢNG KHẢO THÍ TOÁN HỌC CHUẨN HÓA
+                        <span class="brand-dot"></span> MathEval • NỀN TẢNG KHẢO THÍ TOÁN HỌC CHUẨN HÓA
                     </div>
                 </div>
             `;
@@ -10147,7 +10147,7 @@ const PumkinGenerator = {
             duration_minutes: durationMin,
             questions: selectedQuestions,
             difficulty: isUltraHardMode ? 'Siêu khó' : (diffProfile === 'balanced' ? 'Cân bằng' : diffProfile),
-            source: isUltraHardMode ? "Trình tạo đề Đột phá PUMKIN.DEV (Thử thách Đỉnh cao)" : "Tạo tự động từ Ngân hàng PUMKIN.DEV",
+            source: isUltraHardMode ? "Trình tạo đề Đột phá MathEval (Thử thách Đỉnh cao)" : "Tạo tự động từ Ngân hàng PUMKIN.DEV",
             description: isUltraHardMode
                 ? `Bộ đề thử thách đỉnh cao tích hợp đa tầng Question DNA (Giải tích vi phân, Xích Markov ma trận, Tích phân Cauchy-Schwarz, Dãy số siêu việt tiệm cận).`
                 : `Đề luyện tập sinh tự động bám sát cấu trúc các chủ đề: ${checkedTopics.join(", ")}.`
@@ -10253,7 +10253,7 @@ const PumkinSmartPractice = {
             duration_minutes: 30,
             questions: drillQuestions.slice(0, 15),
             difficulty: "Cân bằng",
-            source: "AI Adaptive Engine - PUMKIN.DEV",
+            source: "AI Adaptive Engine - MathEval",
             description: "Gồm các câu hỏi bạn từng trả lời sai và các dạng bài thuộc chủ đề cần củng cố."
         };
 
@@ -12398,14 +12398,14 @@ const PumkinDataRepo = {
                 return {
                     name: "pumkindev-math-open-data",
                     version: "v1.2.0",
-                    title: "PUMKIN.DEV Standardized Math Examination & Knowledge Open Dataset",
+                    title: "MathEval Standardized Math Examination & Knowledge Open Dataset",
                     license: "CC BY-NC-SA 4.0",
                     stats: {
                         total_questions: questions.length,
                         total_exams: exams.length,
                         total_knowledge_articles: knowledge.length
                     },
-                    maintainer: "PUMKIN.DEV Team"
+                    maintainer: "MathEval Team"
                 };
             case "questions_all":
                 return questions;
@@ -12511,7 +12511,7 @@ const PumkinDataRepo = {
 
     generateKnowledgeMarkdown() {
         const knowledge = typeof PUMKIN_KNOWLEDGE_BASE !== "undefined" ? PUMKIN_KNOWLEDGE_BASE : [];
-        let md = "# PUMKIN.DEV - CẨM NANG TOÁN HỌC TOÀN TẬP\n\n";
+        let md = "# MathEval - CẨM NANG TOÁN HỌC TOÀN TẬP\n\n";
         md += "> Tuyển tập 25 chuyên đề lý thuyết, 44 công thức KaTeX và bài tập giải chi tiết.\n\n---\n\n";
         knowledge.forEach((k, idx) => {
             md += "## " + (idx + 1) + ". " + k.grade + ": " + k.title + "\n\n";
@@ -12531,7 +12531,7 @@ const PumkinDataRepo = {
 
     generateFormulasMarkdown() {
         const formulas = this.getDataByKey("formulas_json");
-        let md = "# PUMKIN.DEV - BẢNG TRA CỨU CÔNG THỨC TOÁN HỌC\n\n";
+        let md = "# MathEval - BẢNG TRA CỨU CÔNG THỨC TOÁN HỌC\n\n";
         md += "> 44 công thức toán học cốt lõi ôn thi TSA, HSA, THPT, Giải tích 1.\n\n";
         formulas.forEach(f => {
             md += "### " + f.name + " (" + f.grade + ")\n\n";
@@ -13738,6 +13738,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 <script src="js/integration/TutorIntegration.js?v=3.0"></script>
 </body>
 </html>
+
+
 
 
 
