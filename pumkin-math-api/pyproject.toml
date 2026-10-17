@@ -1,0 +1,36 @@
+[project]
+name = "pumkin-math-api"
+version = "0.1.0"
+description = "Deterministic Computer Algebra & Verification Service for PUMKIN.DEV"
+readme = "README.md"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+addopts = "-v --strict-markers"
+markers = [
+    "unit: Quick unit tests",
+    "golden: Verified benchmark golden tests",
+    "adversarial: Security and attack vector tests",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = [
+    "B008", # do not perform function calls in argument defaults (FastAPI Depends idiom)
+]
