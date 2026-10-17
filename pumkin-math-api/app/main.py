@@ -155,9 +155,7 @@ class BodySizeLimitMiddleware:
                         response = make_envelope_error_response(
                             status_code=status.HTTP_413_CONTENT_TOO_LARGE,
                             code="PAYLOAD_TOO_LARGE",
-                            message_vi=(
-                                "Dung lượng dữ liệu chunked vượt quá giới hạn (1 MB)."
-                            ),
+                            message_vi=("Dung lượng dữ liệu chunked vượt quá giới hạn (1 MB)."),
                             details={"max_allowed_bytes": MAX_BODY_SIZE_BYTES},
                         )
                         await response(scope, receive, send)

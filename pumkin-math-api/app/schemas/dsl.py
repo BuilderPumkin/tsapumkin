@@ -18,8 +18,7 @@ class BaseDSL(StrictBaseModel):
     dsl_version: str = Field(
         default="0.1.0-alpha",
         description=(
-            "Phiên bản schema thử nghiệm của DSL "
-            "(Prompt 3: experimental, cố định ở Prompt 5)"
+            "Phiên bản schema thử nghiệm của DSL (Prompt 3: experimental, cố định ở Prompt 5)"
         ),
     )
     variable: str = Field(default="x", description="Tên biến số chính (mặc định là 'x')")

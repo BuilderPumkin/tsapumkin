@@ -69,6 +69,7 @@ def test_chunked_transfer_exceeding_1mb_rejected_with_413(auth_client):
     Streaming chunked payload exceeding 1 MB must be aborted with HTTP 413
     and a valid envelope.
     """
+
     def chunk_generator():
         # Yield 11 chunks of 100 KB = 1.1 MB > 1 MB
         for _ in range(11):

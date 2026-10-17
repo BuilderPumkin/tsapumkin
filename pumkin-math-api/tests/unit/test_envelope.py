@@ -162,9 +162,10 @@ def test_envelope_warning_item_rejection():
         WarningItem.model_validate({"code": WarningCode.WARN_BOUNDARY_RESTRICTION})
 
     with pytest.raises(ValidationError):
-        WarningItem.model_validate({
-            "code": WarningCode.WARN_BOUNDARY_RESTRICTION,
-            "message_vi": "Cảnh báo",
-            "extra_field": "disallowed",
-        })
-
+        WarningItem.model_validate(
+            {
+                "code": WarningCode.WARN_BOUNDARY_RESTRICTION,
+                "message_vi": "Cảnh báo",
+                "extra_field": "disallowed",
+            }
+        )

@@ -23,9 +23,9 @@ def test_distractor_item_rejects_invalid_misconception_id():
             explanation_vi="Bẫy không tồn tại trong danh mục",
         )
     errors = exc_info.value.errors()
-    assert any(
-        e["type"] == "enum" and "misconception_id" in e["loc"] for e in errors
-    ), f"Expected enum error on misconception_id, got: {errors}"
+    assert any(e["type"] == "enum" and "misconception_id" in e["loc"] for e in errors), (
+        f"Expected enum error on misconception_id, got: {errors}"
+    )
 
 
 @pytest.mark.unit
@@ -44,6 +44,6 @@ def test_check_result_rejects_invalid_detected_misconception_id():
             student_latex="\\(x = -2\\)",
         )
     errors = exc_info.value.errors()
-    assert any(
-        e["type"] == "enum" and "detected_misconception_id" in e["loc"] for e in errors
-    ), f"Expected enum error on detected_misconception_id, got: {errors}"
+    assert any(e["type"] == "enum" and "detected_misconception_id" in e["loc"] for e in errors), (
+        f"Expected enum error on detected_misconception_id, got: {errors}"
+    )
