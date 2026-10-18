@@ -49,15 +49,16 @@ def test_security_headers_present_on_all_responses(auth_client):
 @pytest.mark.adversarial
 def test_cors_allowed_and_disallowed_origins(auth_client):
     """Verify CORS middleware permits configured domains and blocks unauthorized domains."""
-    # 1. Allowed domain
-    resp_allowed = auth_client.options(
-        "/health",
-        headers={
-            "Origin": "https://pumkin.dev",
-            "Access-Control-Request-Method": "GET",
-        },
-    )
-    assert resp_allowed.headers.get("access-control-allow-origin") == "https://pumkin.dev"
+    # 1. Allowed domains
+    for domain in ("https://pumkin.dev", "https://tsapumkin.pages.dev"):
+        resp_allowed = auth_client.options(
+            "/health",
+            headers={
+                "Origin": domain,
+                "Access-Control-Request-Method": "GET",
+            },
+        )
+        assert resp_allowed.headers.get("access-control-allow-origin") == domain
 
     # 2. Disallowed external domain
     resp_disallowed = auth_client.options(

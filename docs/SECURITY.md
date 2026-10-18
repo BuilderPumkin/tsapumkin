@@ -42,7 +42,7 @@ Tất cả các tham số bảo vệ đều được cấu hình linh hoạt qua
 | `PUMKIN_MAX_QUEUE_SIZE` | `20` | Yêu cầu | Dung lượng trần của hàng đợi chờ xử lý. Tràn hàng đợi trả về HTTP 503 (`SERVICE_OVERLOADED`) kèm tiêu đề `Retry-After: 5`. |
 | `PUMKIN_RATE_LIMIT_KEY_PER_MIN` | `60` | Yêu cầu / phút | Hạn mức tần suất theo mỗi khóa API (Sliding Window 60 giây). Quá hạn trả về HTTP 429 (`RATE_LIMIT_EXCEEDED`). |
 | `PUMKIN_RATE_LIMIT_IP_PER_MIN` | `120` | Yêu cầu / phút | Hạn mức tần suất theo mỗi địa chỉ IP (hoặc client gateway). Quá hạn trả về HTTP 429. |
-| `PUMKIN_CORS_ALLOWED_ORIGINS` | Danh sách chuẩn | Chuỗi URL | Danh sách domain được phép gọi API (mặc định: `https://pumkin.dev`, `https://app.pumkin.dev`, `http://localhost:3000`, `http://localhost:5173`). |
+| `PUMKIN_CORS_ALLOWED_ORIGINS` | Danh sách chuẩn | Chuỗi URL | Danh sách domain được phép gọi API (mặc định: `https://pumkin.dev`, `https://app.pumkin.dev`, `https://tsapumkin.pages.dev`, `http://localhost:3000`, `http://localhost:5173`). |
 
 ---
 

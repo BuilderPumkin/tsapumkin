@@ -198,6 +198,7 @@ class BodySizeLimitMiddleware:
 DEFAULT_CORS_ORIGINS = [
     "https://pumkin.dev",
     "https://app.pumkin.dev",
+    "https://tsapumkin.pages.dev",
     "http://localhost:3000",
     "http://localhost:5173",
 ]
