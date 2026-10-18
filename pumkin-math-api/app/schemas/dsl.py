@@ -311,6 +311,34 @@ class SequenceProgressionDSL(BaseDSL):
     )
 
 
+class PlanarAreaDSL(BaseDSL):
+    type: Literal[
+        "ung_dung_tich_phan_dien_tich_hinh_phang",
+        "dien_tich_hinh_phang",
+        "tich_phan_dien_tich",
+    ] = "ung_dung_tich_phan_dien_tich_hinh_phang"
+    curve1: str = Field(
+        ...,
+        description="Đường cong thứ nhất f(x) dạng LaTeX (vd: 'x^2', '2 - x^2')",
+    )
+    curve2: str = Field(
+        default="0",
+        description="Đường cong thứ hai g(x) dạng LaTeX (mặc định '0' cho trục Ox)",
+    )
+    lower_bound: str | None = Field(
+        default=None,
+        description="Cận dưới x = a (None nếu tự tìm qua hoành độ giao điểm)",
+    )
+    upper_bound: str | None = Field(
+        default=None,
+        description="Cận trên x = b (None nếu tự tìm qua hoành độ giao điểm)",
+    )
+    variable: str = Field(
+        default="x",
+        description="Biến số tích phân ('x' hoặc 'y')",
+    )
+
+
 class UnsupportedProblemDSL(BaseDSL):
     type: Literal["unsupported"] = "unsupported"
     reason: UnsupportedReasonEnum = Field(
@@ -339,6 +367,7 @@ MathProblemDSL = Annotated[
     | CombinatoricsProbabilityDSL
     | LastDigitDSL
     | SequenceProgressionDSL
+    | PlanarAreaDSL
     | UnsupportedProblemDSL,
     Field(discriminator="type"),
 ]

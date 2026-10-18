@@ -37,6 +37,7 @@ from app.schemas.dsl import (
     MonotonicityDSL,
     OtherFunctionDSL,
     ParameterMDSL,
+    PlanarAreaDSL,
     RealWorldOptimizationDSL,
     SequenceProgressionDSL,
     UnsupportedProblemDSL,
@@ -52,6 +53,7 @@ from app.schemas.generate import (
 )
 from app.schemas.integral import IntegralResult
 from app.schemas.last_digit import LastDigitResult
+from app.schemas.planar_area import PlanarAreaResult
 from app.schemas.sequence import SequenceProgressionResult
 from app.schemas.solve import SolveRequest, SolveResponse, SolveResultPayload
 from app.schemas.traps import MisconceptionTrapEnum
@@ -95,6 +97,8 @@ __all__ = [
     "LastDigitResult",
     "SequenceProgressionDSL",
     "SequenceProgressionResult",
+    "PlanarAreaDSL",
+    "PlanarAreaResult",
     "UnsupportedProblemDSL",
     "MathProblemDSL",
     # Solve

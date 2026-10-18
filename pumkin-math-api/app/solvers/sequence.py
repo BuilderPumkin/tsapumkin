@@ -94,9 +94,7 @@ def _solve_ap_system(equations: list[str]) -> tuple[sp.Expr | None, sp.Expr | No
         right_parsed = parse_latex(right.strip()).expr
         if left_parsed is None or right_parsed is None:
             return None, None
-        sp_eqs.append(
-            sp.Eq(_replace_ap_symbols(left_parsed), _replace_ap_symbols(right_parsed))
-        )
+        sp_eqs.append(sp.Eq(_replace_ap_symbols(left_parsed), _replace_ap_symbols(right_parsed)))
 
     sol = sp.solve(sp_eqs, (u1, d), dict=True)
     if not sol:
@@ -134,9 +132,7 @@ def _solve_gp_system(
         right_parsed = parse_latex(right.strip()).expr
         if left_parsed is None or right_parsed is None:
             return None, None
-        sp_eqs.append(
-            sp.Eq(_replace_gp_symbols(left_parsed), _replace_gp_symbols(right_parsed))
-        )
+        sp_eqs.append(sp.Eq(_replace_gp_symbols(left_parsed), _replace_gp_symbols(right_parsed)))
 
     sols = sp.solve(sp_eqs, (u1, q), dict=True)
     if not sols:
