@@ -1,0 +1,176 @@
+[
+  {
+    "question_id": "q_hsa_46",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "he_thuc_luong_tam_giac_vector",
+      "operation": "triangle_area_heron",
+      "a": "5",
+      "b": "6",
+      "c": "7",
+      "restate_vi": "Tính diện tích tam giác ABC có ba cạnh a = 5, b = 6, c = 7 theo công thức Heron."
+    },
+    "expected_canonical_raw": "6*sqrt(6)"
+  },
+  {
+    "question_id": "q_trig_vec_01_heron_345",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "he_thuc_luong_tam_giac_vector",
+      "operation": "triangle_area_heron",
+      "a": "3",
+      "b": "4",
+      "c": "5",
+      "restate_vi": "Tính diện tích tam giác vuông có ba cạnh 3, 4, 5."
+    },
+    "expected_canonical_raw": "6"
+  },
+  {
+    "question_id": "q_trig_vec_02_circumradius_345",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "he_thuc_luong_tam_giac_vector",
+      "operation": "circumradius_R",
+      "a": "3",
+      "b": "4",
+      "c": "5",
+      "restate_vi": "Tính bán kính đường tròn ngoại tiếp R của tam giác có 3 cạnh 3, 4, 5."
+    },
+    "expected_canonical_raw": "5/2"
+  },
+  {
+    "question_id": "q_trig_vec_03_inradius_345",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "he_thuc_luong_tam_giac_vector",
+      "operation": "inradius_r",
+      "a": "3",
+      "b": "4",
+      "c": "5",
+      "restate_vi": "Tính bán kính đường tròn nội tiếp r của tam giác có 3 cạnh 3, 4, 5."
+    },
+    "expected_canonical_raw": "1"
+  },
+  {
+    "question_id": "q_trig_vec_04_side_law_cosines",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "he_thuc_luong_tam_giac_vector",
+      "operation": "side_from_cos",
+      "b": "5",
+      "c": "8",
+      "angle_A": "60 deg",
+      "restate_vi": "Tính cạnh a của tam giác biết b = 5, c = 8 và góc A = 60 độ."
+    },
+    "expected_canonical_raw": "7"
+  },
+  {
+    "question_id": "q_trig_vec_05_dot_product",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "vector_oxy",
+      "operation": "vector_dot_product",
+      "u": ["1", "2"],
+      "v": ["3", "-1"],
+      "restate_vi": "Tính tích vô hướng của hai vectơ u = (1, 2) và v = (3, -1)."
+    },
+    "expected_canonical_raw": "1"
+  },
+  {
+    "question_id": "q_trig_vec_06_magnitude",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "vector_oxy",
+      "operation": "vector_magnitude",
+      "u": ["3", "4"],
+      "restate_vi": "Tính độ dài vectơ u = (3, 4)."
+    },
+    "expected_canonical_raw": "5"
+  },
+  {
+    "question_id": "q_trig_vec_07_param_orthogonal",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "vector_oxy",
+      "operation": "vector_solve_parameter",
+      "u": ["m", "2"],
+      "v": ["3", "-1"],
+      "condition": "orthogonal",
+      "param_name": "m",
+      "restate_vi": "Tìm tham số m để hai vectơ u = (m, 2) và v = (3, -1) vuông góc."
+    },
+    "expected_canonical_raw": "2/3"
+  },
+  {
+    "question_id": "q_trig_vec_08_param_collinear",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "vector_oxy",
+      "operation": "vector_solve_parameter",
+      "u": ["m", "2"],
+      "v": ["6", "4"],
+      "condition": "collinear",
+      "param_name": "m",
+      "restate_vi": "Tìm tham số m để hai vectơ u = (m, 2) và v = (6, 4) cùng phương."
+    },
+    "expected_canonical_raw": "3"
+  },
+  {
+    "question_id": "q_trig_vec_09_linear_combination",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "vector_oxy",
+      "operation": "vector_add_sub",
+      "u": ["1", "2"],
+      "v": ["3", "-1"],
+      "k1": "2",
+      "k2": "-1",
+      "restate_vi": "Tính tọa độ vectơ w = 2u - v với u = (1, 2) và v = (3, -1)."
+    },
+    "expected_canonical_raw": "(-1, 5)"
+  },
+  {
+    "question_id": "q_tsa_18",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "out_of_scope",
+    "evaluation_type": "unsupported",
+    "dsl": {
+      "type": "unsupported",
+      "reason": "solid_geometry",
+      "restate_vi": "Bài toán góc giữa hai vectơ trong không gian Oxyz thuộc chuyên đề Hình học Oxyz, ngoài phạm vi vectơ mặt phẳng Oxy."
+    },
+    "expected_canonical_raw": "out_of_scope"
+  },
+  {
+    "question_id": "q_hsa_09",
+    "topic": "he_thuc_luong_tam_giac_vector",
+    "classification": "out_of_scope",
+    "evaluation_type": "unsupported",
+    "dsl": {
+      "type": "unsupported",
+      "reason": "solid_geometry",
+      "restate_vi": "Thể tích khối lăng trụ đứng tam giác đều ngoài phạm vi hệ thức lượng tam giác phẳng."
+    },
+    "expected_canonical_raw": "out_of_scope"
+  }
+]

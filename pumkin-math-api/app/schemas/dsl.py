@@ -279,6 +279,60 @@ class TrigonometricDSL(BaseDSL):
     )
 
 
+class TriangleVectorDSL(BaseDSL):
+    type: Literal[
+        "he_thuc_luong_tam_giac_vector",
+        "tam_giac_vector",
+        "he_thuc_luong_tam_giac",
+        "vector_oxy",
+    ] = "he_thuc_luong_tam_giac_vector"
+    operation: Literal[
+        # Triangle operations
+        "triangle_area_heron",
+        "triangle_solve",
+        "circumradius_R",
+        "inradius_r",
+        "median_length",
+        "cos_angle",
+        "side_from_cos",
+        # Vector operations
+        "vector_magnitude",
+        "vector_add_sub",
+        "vector_dot_product",
+        "vector_angle",
+        "vector_collinear",
+        "vector_orthogonal",
+        "vector_solve_parameter",
+        "triangle_centroid",
+        "vector_ab",
+    ] = Field(
+        ...,
+        description="Phép toán: 'triangle_area_heron', 'circumradius_R', 'vector_dot_product'...",
+    )
+    # Triangle parameters
+    a: str | None = Field(default=None, description="Cạnh a (BC) (vd: '5', 'sqrt(3)')")
+    b: str | None = Field(default=None, description="Cạnh b (CA) (vd: '6', '4')")
+    c: str | None = Field(default=None, description="Cạnh c (AB) (vd: '7', '5')")
+    angle_A: str | None = Field(default=None, description="Góc A (vd: 'pi/3', '60')")
+    angle_B: str | None = Field(default=None, description="Góc B (vd: 'pi/4', '45')")
+    angle_C: str | None = Field(default=None, description="Góc C (vd: 'pi/2', '90')")
+
+    # Vector parameters (2D coordinates [x, y])
+    u: list[str] | None = Field(default=None, description="Tọa độ vector u [x, y]")
+    v: list[str] | None = Field(default=None, description="Tọa độ vector v [x, y]")
+    k1: str | None = Field(default="1", description="Hệ số nhân k1 cho vector u")
+    k2: str | None = Field(default="1", description="Hệ số nhân k2 cho vector v")
+
+    # Points A, B, C coordinates
+    point_A: list[str] | None = Field(default=None, description="Tọa độ điểm A [x, y]")
+    point_B: list[str] | None = Field(default=None, description="Tọa độ điểm B [x, y]")
+    point_C: list[str] | None = Field(default=None, description="Tọa độ điểm C [x, y]")
+
+    # Parameter for solving
+    param_name: str = Field(default="m", description="Tên tham số cần tìm ('m', 'k')")
+    condition: str | None = Field(default=None, description="Điều kiện ('orthogonal', 'collinear')")
+
+
 class DifferentialEquationDSL(BaseDSL):
     type: Literal["phuong_trinh_vi_phan"] = "phuong_trinh_vi_phan"
     equation: str = Field(..., description="Phương trình vi phân (vd: y' + P(x)y = Q(x))")
@@ -479,6 +533,7 @@ MathProblemDSL = Annotated[
     | SequenceProgressionDSL
     | PlanarAreaDSL
     | TrigonometricDSL
+    | TriangleVectorDSL
     | UnsupportedProblemDSL,
     Field(discriminator="type"),
 ]

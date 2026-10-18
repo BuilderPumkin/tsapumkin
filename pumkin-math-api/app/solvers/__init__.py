@@ -9,6 +9,7 @@ from app.solvers.matrix_algebra import solve_matrix_algebra
 from app.solvers.planar_area import solve_planar_area
 from app.solvers.registry import SOLVER_REGISTRY, get_solver, register_solver, solve_dsl
 from app.solvers.sequence import solve_sequence_progression
+from app.solvers.triangle_vector import solve_triangle_vector
 from app.solvers.trigonometric import solve_trigonometric
 
 __all__ = [
@@ -21,5 +22,6 @@ __all__ = [
     "solve_matrix_algebra",
     "solve_planar_area",
     "solve_sequence_progression",
+    "solve_triangle_vector",
     "solve_trigonometric",
 ]
