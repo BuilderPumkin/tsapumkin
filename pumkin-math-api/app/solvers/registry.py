@@ -40,6 +40,19 @@ def solve_dsl(dsl: BaseDSL) -> BaseResponseEnvelope[Any]:
     """
     Central dispatch function to solve any typed DSL problem using registered solvers.
     """
+    if dsl.type == "unsupported":
+        reason = getattr(dsl, "reason", None)
+        return BaseResponseEnvelope(
+            status=StatusEnum.UNSUPPORTED,
+            unsupported_reason=reason,
+            confidence=ConfidenceInfo(
+                level=ConfidenceLevel.LOW,
+                method=ConfidenceMethod.SYMBOLIC,
+                score=0.0,
+            ),
+            restate_vi=getattr(dsl, "restate_vi", None),
+        )
+
     solver = get_solver(dsl.type)
     if solver is None:
         return BaseResponseEnvelope(

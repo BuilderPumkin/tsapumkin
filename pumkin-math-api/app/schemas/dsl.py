@@ -203,6 +203,36 @@ class CombinatoricsProbabilityDSL(BaseDSL):
     )
 
 
+class LastDigitDSL(BaseDSL):
+    type: Literal[
+        "tim_chu_so_tan_cung_luy_thua_lon",
+        "chu_so_tan_cung_luy_thua",
+    ] = "tim_chu_so_tan_cung_luy_thua_lon"
+    base: str = Field(
+        ...,
+        description="Cơ số của lũy thừa dạng số nguyên hoặc biểu thức (vd: '2027', '7')",
+    )
+    exponent: str = Field(
+        ...,
+        description="Số mũ của lũy thừa (vd: '2026', '9^9', '100')",
+    )
+    tower_exponent: str | None = Field(
+        default=None,
+        description="Số mũ cấp 2 nếu là tháp lũy thừa a^{b^c} (None nếu là lũy thừa đơn)",
+    )
+    modulus_digits: int = Field(
+        default=1,
+        ge=1,
+        le=5,
+        description="Số lượng chữ số tận cùng cần tìm (1: mod 10; 2: mod 100...)",
+    )
+    modulo: int | None = Field(
+        default=None,
+        ge=2,
+        description="Modulo tùy chọn nếu là bài toán đồng dư tổng quát a^b mod m",
+    )
+
+
 class UnsupportedProblemDSL(BaseDSL):
     type: Literal["unsupported"] = "unsupported"
     reason: UnsupportedReasonEnum = Field(
@@ -229,6 +259,7 @@ MathProblemDSL = Annotated[
     | AlgebraicEquationDSL
     | GeometryOxyzDSL
     | CombinatoricsProbabilityDSL
+    | LastDigitDSL
     | UnsupportedProblemDSL,
     Field(discriminator="type"),
 ]

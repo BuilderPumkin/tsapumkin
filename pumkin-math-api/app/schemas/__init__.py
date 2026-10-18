@@ -29,6 +29,7 @@ from app.schemas.dsl import (
     GeometryOxyzDSL,
     IntegralDSL,
     IntegralInitialCondition,
+    LastDigitDSL,
     LimitSequenceDSL,
     LinearAlgebraDSL,
     MathProblemDSL,
@@ -49,6 +50,7 @@ from app.schemas.generate import (
     GenerateResultPayload,
 )
 from app.schemas.integral import IntegralResult
+from app.schemas.last_digit import LastDigitResult
 from app.schemas.solve import SolveRequest, SolveResponse, SolveResultPayload
 from app.schemas.traps import MisconceptionTrapEnum
 
@@ -87,6 +89,8 @@ __all__ = [
     "AlgebraicEquationDSL",
     "GeometryOxyzDSL",
     "CombinatoricsProbabilityDSL",
+    "LastDigitDSL",
+    "LastDigitResult",
     "UnsupportedProblemDSL",
     "MathProblemDSL",
     # Solve
