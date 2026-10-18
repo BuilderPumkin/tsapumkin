@@ -234,6 +234,51 @@ class MatrixAlgebraDSL(BaseDSL):
     )
 
 
+class TrigonometricDSL(BaseDSL):
+    type: Literal[
+        "ham_so_luong_giac_phuong_trinh",
+        "phuong_trinh_luong_giac",
+        "luong_giac",
+    ] = "ham_so_luong_giac_phuong_trinh"
+    operation: Literal[
+        "solve_equation",
+        "count_roots_interval",
+        "find_roots_interval",
+        "sum_roots_interval",
+        "max_min",
+        "period",
+        "domain",
+        "general_solution",
+    ] = Field(
+        default="solve_equation",
+        description="Phép toán: 'solve_equation', 'count_roots_interval', 'max_min', 'period'...",
+    )
+    equation: str | None = Field(
+        default=None,
+        description="Phương trình lượng giác (vd: 'cos(2x) - 3cos(x) + 2 = 0')",
+    )
+    expression: str | None = Field(
+        default=None,
+        description="Biểu thức lượng giác f(x) (vd: '2*sin(x) + 3*cos(x)')",
+    )
+    interval: str | None = Field(
+        default=None,
+        description="Đoạn xét nghiệm [a, b] (vd: '[0, 2*pi]')",
+    )
+    interval_start: str | None = Field(
+        default=None,
+        description="Cận đầu của đoạn xét nghiệm [a, b] (vd: '0', '-pi')",
+    )
+    interval_end: str | None = Field(
+        default=None,
+        description="Cận cuối của đoạn xét nghiệm [a, b] (vd: '2*pi', 'pi')",
+    )
+    variable: str = Field(
+        default="x",
+        description="Biến số chính ('x', 't')",
+    )
+
+
 class DifferentialEquationDSL(BaseDSL):
     type: Literal["phuong_trinh_vi_phan"] = "phuong_trinh_vi_phan"
     equation: str = Field(..., description="Phương trình vi phân (vd: y' + P(x)y = Q(x))")
@@ -433,6 +478,7 @@ MathProblemDSL = Annotated[
     | LastDigitDSL
     | SequenceProgressionDSL
     | PlanarAreaDSL
+    | TrigonometricDSL
     | UnsupportedProblemDSL,
     Field(discriminator="type"),
 ]

@@ -41,6 +41,7 @@ from app.schemas.dsl import (
     PlanarAreaDSL,
     RealWorldOptimizationDSL,
     SequenceProgressionDSL,
+    TrigonometricDSL,
     UnsupportedProblemDSL,
     VariationTableDSL,
 )
@@ -59,6 +60,7 @@ from app.schemas.planar_area import PlanarAreaResult
 from app.schemas.sequence import SequenceProgressionResult
 from app.schemas.solve import SolveRequest, SolveResponse, SolveResultPayload
 from app.schemas.traps import MisconceptionTrapEnum
+from app.schemas.trigonometric import TrigonometricResult
 
 __all__ = [
     # Common & Envelope
@@ -103,6 +105,8 @@ __all__ = [
     "SequenceProgressionResult",
     "PlanarAreaDSL",
     "PlanarAreaResult",
+    "TrigonometricDSL",
+    "TrigonometricResult",
     "UnsupportedProblemDSL",
     "MathProblemDSL",
     # Solve

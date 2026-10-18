@@ -1,0 +1,172 @@
+[
+  {
+    "question_id": "q_hsa_08",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "ham_so_luong_giac_phuong_trinh",
+      "operation": "count_roots_interval",
+      "equation": "\\cos(2x) - 3\\cos(x) + 2 = 0",
+      "interval": "[0, 2\\pi]",
+      "variable": "x",
+      "restate_vi": "Tìm số nghiệm của phương trình cos(2x) - 3cos(x) + 2 = 0 trên đoạn [0, 2pi]."
+    },
+    "expected_canonical_raw": "4"
+  },
+  {
+    "question_id": "q_hsa_06",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "ham_so_luong_giac_phuong_trinh",
+      "operation": "max_min",
+      "expression": "2\\sin(x) + 3\\cos(x)",
+      "variable": "x",
+      "restate_vi": "Tìm giá trị lớn nhất của hàm số y = 2sin(x) + 3cos(x)."
+    },
+    "expected_canonical_raw": "sqrt(13)"
+  },
+  {
+    "question_id": "q_trig_01_sin_half",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "ham_so_luong_giac_phuong_trinh",
+      "operation": "count_roots_interval",
+      "equation": "\\sin(x) - 1/2 = 0",
+      "interval": "[0, 2\\pi]",
+      "variable": "x",
+      "restate_vi": "Tìm số nghiệm của phương trình sin(x) = 1/2 trên đoạn [0, 2pi]."
+    },
+    "expected_canonical_raw": "2"
+  },
+  {
+    "question_id": "q_trig_02_cos_zero",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "ham_so_luong_giac_phuong_trinh",
+      "operation": "count_roots_interval",
+      "equation": "\\cos(x) = 0",
+      "interval": "[0, 2\\pi]",
+      "variable": "x",
+      "restate_vi": "Tìm số nghiệm của phương trình cos(x) = 0 trên đoạn [0, 2pi]."
+    },
+    "expected_canonical_raw": "2"
+  },
+  {
+    "question_id": "q_trig_03_tan_one",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "ham_so_luong_giac_phuong_trinh",
+      "operation": "count_roots_interval",
+      "equation": "\\tan(x) = 1",
+      "interval": "[0, 2\\pi]",
+      "variable": "x",
+      "restate_vi": "Tìm số nghiệm của phương trình tan(x) = 1 trên đoạn [0, 2pi]."
+    },
+    "expected_canonical_raw": "2"
+  },
+  {
+    "question_id": "q_trig_04_quadratic",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "ham_so_luong_giac_phuong_trinh",
+      "operation": "count_roots_interval",
+      "equation": "2\\sin^2(x) - 3\\sin(x) + 1 = 0",
+      "interval": "[0, 2\\pi]",
+      "variable": "x",
+      "restate_vi": "Tìm số nghiệm của phương trình 2sin^2(x) - 3sin(x) + 1 = 0 trên đoạn [0, 2pi]."
+    },
+    "expected_canonical_raw": "3"
+  },
+  {
+    "question_id": "q_trig_05_period_sin2x",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "ham_so_luong_giac_phuong_trinh",
+      "operation": "period",
+      "expression": "\\sin(2x)",
+      "variable": "x",
+      "restate_vi": "Tìm chu kỳ tuần hoàn cơ sở của hàm số y = sin(2x)."
+    },
+    "expected_canonical_raw": "pi"
+  },
+  {
+    "question_id": "q_trig_06_period_cos3x",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "ham_so_luong_giac_phuong_trinh",
+      "operation": "period",
+      "expression": "\\cos(3x)",
+      "variable": "x",
+      "restate_vi": "Tìm chu kỳ tuần hoàn cơ sở của hàm số y = cos(3x)."
+    },
+    "expected_canonical_raw": "2*pi/3"
+  },
+  {
+    "question_id": "q_trig_07_max_symmetric",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "ham_so_luong_giac_phuong_trinh",
+      "operation": "max_min",
+      "expression": "\\sin(x) + \\cos(x)",
+      "variable": "x",
+      "restate_vi": "Tìm giá trị lớn nhất của hàm số y = sin(x) + cos(x)."
+    },
+    "expected_canonical_raw": "sqrt(2)"
+  },
+  {
+    "question_id": "q_trig_08_empty_set",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "ham_so_luong_giac_phuong_trinh",
+      "operation": "count_roots_interval",
+      "equation": "\\sin(x) = 2",
+      "interval": "[0, 2\\pi]",
+      "variable": "x",
+      "restate_vi": "Tìm số nghiệm của phương trình sin(x) = 2 trên đoạn [0, 2pi]."
+    },
+    "expected_canonical_raw": "0"
+  },
+  {
+    "question_id": "q_calc_10",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "out_of_scope",
+    "evaluation_type": "unsupported",
+    "dsl": {
+      "type": "unsupported",
+      "reason": "out_of_scope",
+      "restate_vi": "Đạo hàm cấp cao n=100 ngoài phạm vi hàm số và phương trình lượng giác cơ bản."
+    },
+    "expected_canonical_raw": "out_of_scope"
+  },
+  {
+    "question_id": "q_calc_01",
+    "topic": "ham_so_luong_giac_phuong_trinh",
+    "classification": "out_of_scope",
+    "evaluation_type": "unsupported",
+    "dsl": {
+      "type": "unsupported",
+      "reason": "out_of_scope",
+      "restate_vi": "Tính giới hạn chứa hàm lượng giác thuộc chuyên đề Giới hạn, ngoài phạm vi phương trình lượng giác."
+    },
+    "expected_canonical_raw": "out_of_scope"
+  }
+]
