@@ -233,6 +233,84 @@ class LastDigitDSL(BaseDSL):
     )
 
 
+class SequenceProgressionDSL(BaseDSL):
+    type: Literal[
+        "day_so_cap_so_cong_cap_so_nhan",
+        "cap_so_cong_cap_so_nhan",
+        "cap_so_cong",
+        "cap_so_nhan",
+        "day_so",
+    ] = "day_so_cap_so_cong_cap_so_nhan"
+    progression_type: Literal[
+        "arithmetic",
+        "geometric",
+        "linear_recurrence",
+        "general_term",
+    ] = Field(
+        ...,
+        description="Phân loại dãy: 'arithmetic', 'geometric', 'linear_recurrence', 'general_term'",
+    )
+    target: Literal[
+        "nth_term",
+        "sum_n",
+        "infinite_sum",
+        "find_index",
+        "common_difference",
+        "common_ratio",
+        "first_term",
+        "general_formula",
+    ] = Field(
+        ...,
+        description="Đại lượng cần tìm: 'nth_term', 'sum_n', 'infinite_sum', 'find_index'...",
+    )
+    u1: str | None = Field(
+        default=None,
+        description="Số hạng đầu u_1 (vd: '3', '-2', '4')",
+    )
+    u2: str | None = Field(
+        default=None,
+        description="Số hạng thứ hai u_2 nếu có (dùng cho truy hồi cấp 2)",
+    )
+    d: str | None = Field(
+        default=None,
+        description="Công sai d của cấp số cộng (vd: '5', '3')",
+    )
+    q: str | None = Field(
+        default=None,
+        description="Công bội q của cấp số nhân (vd: '2', '1/2')",
+    )
+    n: int | str | None = Field(
+        default=None,
+        description="Chỉ số n cần tính (vd: 8, 20, 10)",
+    )
+    target_value: str | None = Field(
+        default=None,
+        description="Giá trị đã biết của u_n hoặc S_n khi tìm chỉ số n",
+    )
+    recurrence_coeffs: list[str] | None = Field(
+        default=None,
+        description="Hệ số của hệ thức truy hồi tuyến tính [a, b]",
+    )
+    recurrence_order: int | None = Field(
+        default=None,
+        ge=1,
+        le=2,
+        description="Cấp của hệ thức truy hồi (1 hoặc 2)",
+    )
+    general_term_formula: str | None = Field(
+        default=None,
+        description="Công thức tường minh u_n theo biến n (vd: '(2*n - 1)/(n + 1)')",
+    )
+    equations: list[str] | None = Field(
+        default=None,
+        description="Hệ phương trình liên hệ giữa các số hạng",
+    )
+    positive_terms_only: bool = Field(
+        default=False,
+        description="Ràng buộc tất cả các số hạng là số dương",
+    )
+
+
 class UnsupportedProblemDSL(BaseDSL):
     type: Literal["unsupported"] = "unsupported"
     reason: UnsupportedReasonEnum = Field(
@@ -260,6 +338,7 @@ MathProblemDSL = Annotated[
     | GeometryOxyzDSL
     | CombinatoricsProbabilityDSL
     | LastDigitDSL
+    | SequenceProgressionDSL
     | UnsupportedProblemDSL,
     Field(discriminator="type"),
 ]

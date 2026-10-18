@@ -38,6 +38,7 @@ from app.schemas.dsl import (
     OtherFunctionDSL,
     ParameterMDSL,
     RealWorldOptimizationDSL,
+    SequenceProgressionDSL,
     UnsupportedProblemDSL,
     VariationTableDSL,
 )
@@ -51,6 +52,7 @@ from app.schemas.generate import (
 )
 from app.schemas.integral import IntegralResult
 from app.schemas.last_digit import LastDigitResult
+from app.schemas.sequence import SequenceProgressionResult
 from app.schemas.solve import SolveRequest, SolveResponse, SolveResultPayload
 from app.schemas.traps import MisconceptionTrapEnum
 
@@ -91,6 +93,8 @@ __all__ = [
     "CombinatoricsProbabilityDSL",
     "LastDigitDSL",
     "LastDigitResult",
+    "SequenceProgressionDSL",
+    "SequenceProgressionResult",
     "UnsupportedProblemDSL",
     "MathProblemDSL",
     # Solve

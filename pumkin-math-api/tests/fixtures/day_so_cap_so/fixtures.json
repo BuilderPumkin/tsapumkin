@@ -1,0 +1,201 @@
+[
+  {
+    "question_id": "q_tsa_04",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "day_so_cap_so_cong_cap_so_nhan",
+      "progression_type": "linear_recurrence",
+      "target": "nth_term",
+      "u1": "5",
+      "u2": "13",
+      "recurrence_coeffs": ["5", "-6"],
+      "n": 10,
+      "restate_vi": "Cho dãy số {a_n} thỏa mãn a_1 = 5, a_2 = 13 và a_n = 5a_{n-1} - 6a_{n-2} với mọi n >= 3. Tìm a_10."
+    },
+    "expected_canonical_raw": "60073"
+  },
+  {
+    "question_id": "q_hsa_01",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "cap_so_nhan",
+      "progression_type": "geometric",
+      "target": "nth_term",
+      "u1": "3",
+      "q": "2",
+      "n": 8,
+      "restate_vi": "Cho cấp số nhân (u_n) có số hạng đầu u_1 = 3 và công bội q = 2. Tìm u_8."
+    },
+    "expected_canonical_raw": "384"
+  },
+  {
+    "question_id": "q_hsa_05",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "cap_so_cong",
+      "progression_type": "arithmetic",
+      "target": "nth_term",
+      "u1": "-2",
+      "d": "5",
+      "n": 20,
+      "restate_vi": "Cho cấp số cộng (u_n) có số hạng đầu u_1 = -2 và công sai d = 5. Tìm u_20."
+    },
+    "expected_canonical_raw": "93"
+  },
+  {
+    "question_id": "q_hsa_23",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "cap_so_cong",
+      "progression_type": "arithmetic",
+      "target": "sum_n",
+      "u1": "4",
+      "d": "3",
+      "n": 10,
+      "restate_vi": "Cho cấp số cộng (u_n) có số hạng đầu u_1 = 4 và công sai d = 3. Tính tổng 10 số hạng đầu S_10."
+    },
+    "expected_canonical_raw": "175"
+  },
+  {
+    "question_id": "q_var_seq_01",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "cap_so_cong",
+      "progression_type": "arithmetic",
+      "target": "common_difference",
+      "equations": ["u_1 = 3", "u_15 = 45"],
+      "restate_vi": "Tìm công sai d của cấp số cộng có u_1 = 3 và u_15 = 45."
+    },
+    "expected_canonical_raw": "3"
+  },
+  {
+    "question_id": "q_var_seq_02",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "cap_so_cong",
+      "progression_type": "arithmetic",
+      "target": "first_term",
+      "u1": "3",
+      "d": "4",
+      "restate_vi": "Tìm số hạng đầu u_1 của cấp số cộng."
+    },
+    "expected_canonical_raw": "3"
+  },
+  {
+    "question_id": "q_var_seq_03",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "cap_so_cong",
+      "progression_type": "arithmetic",
+      "target": "find_index",
+      "u1": "5",
+      "d": "2",
+      "target_value": "41",
+      "restate_vi": "Cho cấp số cộng có u_1 = 5, d = 2. Hỏi 41 là số hạng thứ mấy?"
+    },
+    "expected_canonical_raw": "19"
+  },
+  {
+    "question_id": "q_var_seq_04",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "cap_so_nhan",
+      "progression_type": "geometric",
+      "target": "sum_n",
+      "u1": "1",
+      "q": "3",
+      "n": 5,
+      "restate_vi": "Tính tổng 5 số hạng đầu tiên của cấp số nhân có u_1 = 1, q = 3."
+    },
+    "expected_canonical_raw": "121"
+  },
+  {
+    "question_id": "q_var_seq_05",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "cap_so_nhan",
+      "progression_type": "geometric",
+      "target": "infinite_sum",
+      "u1": "4",
+      "q": "1/3",
+      "restate_vi": "Tính tổng của cấp số nhân lùi vô hạn có u_1 = 4, q = 1/3."
+    },
+    "expected_canonical_raw": "6"
+  },
+  {
+    "question_id": "q_var_seq_06",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "cap_so_nhan",
+      "progression_type": "geometric",
+      "target": "common_ratio",
+      "equations": ["u_4 - u_2 = 72", "u_5 - u_3 = 144"],
+      "positive_terms_only": true,
+      "restate_vi": "Cho cấp số nhân các số hạng dương thỏa u_4 - u_2 = 72 và u_5 - u_3 = 144. Tìm công bội q."
+    },
+    "expected_canonical_raw": "2"
+  },
+  {
+    "question_id": "q_var_seq_07",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "day_so",
+      "progression_type": "linear_recurrence",
+      "target": "nth_term",
+      "u1": "2",
+      "recurrence_coeffs": ["3", "-2"],
+      "n": 4,
+      "restate_vi": "Cho dãy số u_1 = 2, u_n = 3u_{n-1} - 2. Tìm u_4."
+    },
+    "expected_canonical_raw": "28"
+  },
+  {
+    "question_id": "q_var_seq_08",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "day_so",
+      "progression_type": "general_term",
+      "target": "nth_term",
+      "general_term_formula": "(3*n - 1)/(2*n + 1)",
+      "n": 5,
+      "restate_vi": "Cho dãy số u_n = (3n - 1)/(2n + 1). Tìm u_5."
+    },
+    "expected_canonical_raw": "14/11"
+  },
+  {
+    "question_id": "q_var_seq_09",
+    "topic": "day_so_cap_so_cong_cap_so_nhan",
+    "classification": "out_of_scope",
+    "evaluation_type": "unsupported",
+    "dsl": {
+      "type": "unsupported",
+      "reason": "out_of_scope",
+      "restate_vi": "Dãy số phi tuyến phi giải tích ngoài phạm vi hỗ trợ tự động."
+    },
+    "expected_canonical_raw": "out_of_scope"
+  }
+]
