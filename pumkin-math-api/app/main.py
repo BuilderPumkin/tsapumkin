@@ -15,6 +15,7 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 from app import __version__
 from app.auth import verify_api_key
 from app.checker import check_student_submission
+from app.parser import parse_and_solve_with_consensus
 from app.schemas.check import CheckRequest, CheckResponse
 from app.schemas.common import (
     ConfidenceLevel,
@@ -203,7 +204,10 @@ async def health_check():
     "/v1/solve",
     response_model=SolveResponse,
     responses={
-        501: {"model": SolveResponse, "description": "Chức năng chưa được cài đặt"},
+        200: {
+            "model": SolveResponse,
+            "description": "Kết quả giải toán và gợi ý sư phạm Socratic",
+        },
         401: {"description": "Chưa xác thực hoặc khóa không hợp lệ"},
     },
     tags=["Core"],
@@ -212,14 +216,13 @@ async def health_check():
 async def solve_endpoint(
     request: SolveRequest,
     _auth: str = Depends(verify_api_key),
-):
+) -> SolveResponse:
     """
     Socratic solver endpoint.
-    Returns 501 Not Implemented during initial scaffold phase.
+    Translates Vietnamese natural-language problem to DSL using consensus mechanism
+    and evaluates via deterministic CAS solvers.
     """
-    return make_501_not_implemented_response(
-        "Chức năng Gia sư AI (/v1/solve) chưa được cài đặt (sẽ xây dựng ở Prompt tiếp theo)."
-    )
+    return await parse_and_solve_with_consensus(request)
 
 
 @app.post(

@@ -30,11 +30,11 @@ def test_request_body_exceeding_1mb_rejected_with_413(auth_client):
 def test_request_body_within_1mb_not_rejected_with_413(auth_client):
     """
     Submitting a payload within the 1 MB limit must proceed past the middleware
-    (and return 501 for uninstalled route, NOT 413).
+    (and return 200 for implemented route, NOT 413).
     """
     normal_payload = {"question_text": "Tìm cực trị của hàm số \\(y = x^2\\)"}
     response = auth_client.post("/v1/solve", json=normal_payload)
-    assert response.status_code == 501
+    assert response.status_code == 200
 
 
 @pytest.mark.adversarial
@@ -105,5 +105,5 @@ def test_chunked_transfer_within_1mb_succeeds(auth_client):
         content=small_chunks(),
         headers={"Transfer-Encoding": "chunked", "Content-Type": "application/json"},
     )
-    # Passed middleware, reached solve_endpoint which returns 501
-    assert response.status_code == 501
+    # Passed middleware, reached solve_endpoint which returns 200
+    assert response.status_code == 200

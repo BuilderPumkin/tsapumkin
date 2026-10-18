@@ -1215,7 +1215,7 @@
     },
     "/v1/solve": {
       "post": {
-        "description": "Socratic solver endpoint.\nReturns 501 Not Implemented during initial scaffold phase.",
+        "description": "Socratic solver endpoint.\nTranslates Vietnamese natural-language problem to DSL using consensus mechanism\nand evaluates via deterministic CAS solvers.",
         "operationId": "solve_endpoint_v1_solve_post",
         "parameters": [
           {
@@ -1254,7 +1254,7 @@
                 }
               }
             },
-            "description": "Successful Response"
+            "description": "Kết quả giải toán và gợi ý sư phạm Socratic"
           },
           "401": {
             "description": "Chưa xác thực hoặc khóa không hợp lệ"
@@ -1268,16 +1268,6 @@
               }
             },
             "description": "Validation Error"
-          },
-          "501": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SolveResponse"
-                }
-              }
-            },
-            "description": "Chức năng chưa được cài đặt"
           }
         },
         "summary": "Gia sư AI giải toán Socratic 4 bậc",
