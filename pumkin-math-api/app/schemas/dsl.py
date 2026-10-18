@@ -170,6 +170,70 @@ class LinearAlgebraDSL(BaseDSL):
     )
 
 
+class MatrixAlgebraDSL(BaseDSL):
+    type: Literal[
+        "dai_so_ma_tran_dinh_thuc",
+        "dinh_thuc_ma_tran",
+        "dai_so_ma_tran",
+        "matrix_algebra",
+    ] = "dai_so_ma_tran_dinh_thuc"
+    operation: Literal[
+        "det",
+        "determinant",
+        "inverse",
+        "rank",
+        "trace",
+        "transpose",
+        "multiply",
+        "add",
+        "subtract",
+        "scale",
+        "det_scaled",
+        "solve_system",
+        "eigenvalues",
+        "solve_parameter",
+    ] = Field(
+        ...,
+        description="Phép toán ma trận: 'det', 'inverse', 'rank', 'trace', 'solve_system'...",
+    )
+    matrix: list[list[str | int | float]] | str | None = Field(
+        default=None,
+        description="Ma trận chính A dạng mảng 2 chiều hoặc chuỗi LaTeX",
+    )
+    matrix_b: list[list[str | int | float]] | list[str | int | float] | str | None = Field(
+        default=None,
+        description="Ma trận B hoặc vector b cho phép toán 2 ngôi / hệ phương trình",
+    )
+    scalar: str | int | float | None = Field(
+        default=None,
+        description="Hệ số vô hướng k (vd: '2', 2)",
+    )
+    matrix_size: int | None = Field(
+        default=None,
+        description="Cấp n của ma trận vuông khi không cho ma trận tường minh (vd: 3)",
+    )
+    det_a: str | int | float | None = Field(
+        default=None,
+        description="Giá trị định thức det(A) cho trước",
+    )
+    trace_a: str | int | float | None = Field(
+        default=None,
+        description="Giá trị vết tr(A) cho trước",
+    )
+    parameter: str | None = Field(
+        default=None,
+        description="Tham số thực cần tìm trong ma trận (vd: 'm')",
+    )
+    target_value: str | None = Field(
+        default=None,
+        description="Giá trị mục tiêu của phương trình (vd: '0' khi det(A)=0)",
+    )
+    unknowns: list[str] | None = Field(
+        default=None,
+        description="Danh sách ký hiệu ẩn số của hệ phương trình (vd: ['I_1', 'I_2', 'I_3'])",
+    )
+
+
 class DifferentialEquationDSL(BaseDSL):
     type: Literal["phuong_trinh_vi_phan"] = "phuong_trinh_vi_phan"
     equation: str = Field(..., description="Phương trình vi phân (vd: y' + P(x)y = Q(x))")
@@ -361,6 +425,7 @@ MathProblemDSL = Annotated[
     | ExponentialLogDSL
     | LimitSequenceDSL
     | LinearAlgebraDSL
+    | MatrixAlgebraDSL
     | DifferentialEquationDSL
     | AlgebraicEquationDSL
     | GeometryOxyzDSL

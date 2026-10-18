@@ -33,6 +33,7 @@ from app.schemas.dsl import (
     LimitSequenceDSL,
     LinearAlgebraDSL,
     MathProblemDSL,
+    MatrixAlgebraDSL,
     MinMaxIntervalDSL,
     MonotonicityDSL,
     OtherFunctionDSL,
@@ -53,6 +54,7 @@ from app.schemas.generate import (
 )
 from app.schemas.integral import IntegralResult
 from app.schemas.last_digit import LastDigitResult
+from app.schemas.matrix_algebra import MatrixAlgebraResult
 from app.schemas.planar_area import PlanarAreaResult
 from app.schemas.sequence import SequenceProgressionResult
 from app.schemas.solve import SolveRequest, SolveResponse, SolveResultPayload
@@ -89,6 +91,8 @@ __all__ = [
     "ExponentialLogDSL",
     "LimitSequenceDSL",
     "LinearAlgebraDSL",
+    "MatrixAlgebraDSL",
+    "MatrixAlgebraResult",
     "DifferentialEquationDSL",
     "AlgebraicEquationDSL",
     "GeometryOxyzDSL",
