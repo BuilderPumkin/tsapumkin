@@ -41,6 +41,28 @@ class SolveRequest(StrictBaseModel):
             "(tối đa 20 mục, mỗi mục tối đa 500 ký tự)"
         ),
     )
+    misconception_id: str | None = Field(
+        default=None,
+        max_length=100,
+        description="Mã bẫy nhận thức nếu phát hiện được từ bước chấm của học sinh",
+    )
+
+
+class HintItem(StrictBaseModel):
+    """Socratic scaffolding hint item."""
+
+    level: int = Field(
+        ...,
+        ge=1,
+        le=4,
+        description="Bậc gợi ý Socratic (1: Nudge, 2: Concept, 3: Sub-goal, 4: Worked Step)",
+    )
+    title_vi: str = Field(..., description="Tiêu đề phân bậc sư phạm")
+    content_vi: str = Field(..., description="Nội dung sư phạm hướng dẫn")
+    latex_hint: str | None = Field(
+        default=None,
+        description="Công thức gợi ý toán học định dạng KaTeX \\( ... \\) hoặc \\[ ... \\]",
+    )
 
 
 class SolveResultPayload(StrictBaseModel):
@@ -59,6 +81,18 @@ class SolveResultPayload(StrictBaseModel):
     is_final_step: bool = Field(
         default=False,
         description="Đánh dấu đây có phải bước cuối cùng trước khi học sinh tự kết luận",
+    )
+    hints: list[HintItem] = Field(
+        default_factory=list,
+        description="Danh sách các bậc gợi ý Socratic (Nudge, Concept, Sub-goal, Worked Step)",
+    )
+    pedagogy_mode: str = Field(
+        default="template",
+        description="Phương thức sinh lời giải: 'template' hoặc 'llm_verified'",
+    )
+    misconception_feedback: str | None = Field(
+        default=None,
+        description="Lời nhắc sư phạm khích lệ khi phát hiện bẫy nhận thức của học sinh",
     )
 
 

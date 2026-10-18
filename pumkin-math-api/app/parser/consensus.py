@@ -24,6 +24,7 @@ from app.checker.normalizer import strip_latex_wrappers
 from app.parser.budget import global_budget_tracker
 from app.parser.cache import compute_problem_hash, global_problem_cache
 from app.parser.llm_client import LLMClient, LLMResponse, get_llm_client
+from app.pedagogy.engine import generate_pedagogical_guidance
 from app.schemas.common import (
     BaseResponseEnvelope,
     ConfidenceInfo,
@@ -331,16 +332,11 @@ async def parse_and_solve_with_consensus(
                             )
                         )
 
-            result_payload = SolveResultPayload(
-                scaffolding_step=request.step_index,
-                guidance_vi=(
-                    "Đã tìm thấy bài toán trong bộ nhớ đệm và giải tất định bằng CAS."
-                    if final_status == StatusEnum.VERIFIED
-                    else "Bài toán trong cache cần xem xét lại do không khớp phương án."
-                ),
-                latex_hint=steps[0].latex if steps else None,
-                subgoal_completed=final_status == StatusEnum.VERIFIED,
-                is_final_step=True,
+            final_steps, result_payload = await generate_pedagogical_guidance(
+                request=request,
+                dsl=cached_dsl,
+                solver_envelope=cached_env,
+                client=llm,
             )
 
             conf_lvl = (
@@ -354,7 +350,7 @@ async def parse_and_solve_with_consensus(
                     score=1.0,
                 ),
                 restate_vi=restate_str,
-                steps=steps,
+                steps=final_steps,
                 result=result_payload,
                 warnings=warnings,
             )
@@ -484,17 +480,27 @@ async def parse_and_solve_with_consensus(
     if final_status == StatusEnum.VERIFIED and winning_sample.dsl_dict:
         global_problem_cache.set(prob_hash, winning_sample.dsl_dict)
 
-    result_payload = SolveResultPayload(
-        scaffolding_step=request.step_index,
-        guidance_vi=(
-            "Đã dịch đề và giải tất định thành công bằng CAS."
-            if final_status == StatusEnum.VERIFIED
-            else "Bài toán cần xem xét lại do có sự bất đồng hoặc chưa khớp phương án."
-        ),
-        latex_hint=steps[0].latex if steps else None,
-        subgoal_completed=final_status == StatusEnum.VERIFIED,
-        is_final_step=True,
-    )
+    # 8. Socratic Pedagogical Scaffolding & Verification
+    if winning_sample.solver_envelope:
+        final_steps, result_payload = await generate_pedagogical_guidance(
+            request=request,
+            dsl=winning_sample.dsl,
+            solver_envelope=winning_sample.solver_envelope,
+            client=llm,
+        )
+    else:
+        final_steps = steps
+        result_payload = SolveResultPayload(
+            scaffolding_step=request.step_index,
+            guidance_vi=(
+                "Đã dịch đề và giải tất định thành công bằng CAS."
+                if final_status == StatusEnum.VERIFIED
+                else "Bài toán cần xem xét lại do có sự bất đồng hoặc chưa khớp phương án."
+            ),
+            latex_hint=steps[0].latex if steps else None,
+            subgoal_completed=final_status == StatusEnum.VERIFIED,
+            is_final_step=True,
+        )
 
     return SolveResponse(
         status=final_status,
@@ -504,7 +510,7 @@ async def parse_and_solve_with_consensus(
             score=score,
         ),
         restate_vi=restate_str,
-        steps=steps,
+        steps=final_steps,
         result=result_payload,
         warnings=warnings,
     )

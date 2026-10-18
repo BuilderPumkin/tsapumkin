@@ -680,6 +680,48 @@
         "title": "HealthResponse",
         "type": "object"
       },
+      "HintItem": {
+        "additionalProperties": false,
+        "description": "Socratic scaffolding hint item.",
+        "properties": {
+          "content_vi": {
+            "description": "Nội dung sư phạm hướng dẫn",
+            "title": "Content Vi",
+            "type": "string"
+          },
+          "latex_hint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Công thức gợi ý toán học định dạng KaTeX \\( ... \\) hoặc \\[ ... \\]",
+            "title": "Latex Hint"
+          },
+          "level": {
+            "description": "Bậc gợi ý Socratic (1: Nudge, 2: Concept, 3: Sub-goal, 4: Worked Step)",
+            "maximum": 4.0,
+            "minimum": 1.0,
+            "title": "Level",
+            "type": "integer"
+          },
+          "title_vi": {
+            "description": "Tiêu đề phân bậc sư phạm",
+            "title": "Title Vi",
+            "type": "string"
+          }
+        },
+        "required": [
+          "level",
+          "title_vi",
+          "content_vi"
+        ],
+        "title": "HintItem",
+        "type": "object"
+      },
       "MisconceptionTrapEnum": {
         "enum": [
           "TRAP_LOG_DOMAIN_IGNORED",
@@ -709,6 +751,19 @@
         "additionalProperties": false,
         "description": "Input payload for Socratic AI problem solving.\nStrict limits enforced to prevent denial-of-service and injection.",
         "properties": {
+          "misconception_id": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mã bẫy nhận thức nếu phát hiện được từ bước chấm của học sinh",
+            "title": "Misconception Id"
+          },
           "previous_steps": {
             "description": "Lịch sử các bước gợi ý hoặc tương tác trước đó (tối đa 20 mục, mỗi mục tối đa 500 ký tự)",
             "items": {
@@ -855,6 +910,14 @@
             "title": "Guidance Vi",
             "type": "string"
           },
+          "hints": {
+            "description": "Danh sách các bậc gợi ý Socratic (Nudge, Concept, Sub-goal, Worked Step)",
+            "items": {
+              "$ref": "#/components/schemas/HintItem"
+            },
+            "title": "Hints",
+            "type": "array"
+          },
           "is_final_step": {
             "default": false,
             "description": "Đánh dấu đây có phải bước cuối cùng trước khi học sinh tự kết luận",
@@ -872,6 +935,24 @@
             ],
             "description": "Gợi ý công thức toán học định dạng KaTeX \\( ... \\) hoặc \\[ ... \\]",
             "title": "Latex Hint"
+          },
+          "misconception_feedback": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Lời nhắc sư phạm khích lệ khi phát hiện bẫy nhận thức của học sinh",
+            "title": "Misconception Feedback"
+          },
+          "pedagogy_mode": {
+            "default": "template",
+            "description": "Phương thức sinh lời giải: 'template' hoặc 'llm_verified'",
+            "title": "Pedagogy Mode",
+            "type": "string"
           },
           "scaffolding_step": {
             "description": "Bậc gợi ý hiện tại",

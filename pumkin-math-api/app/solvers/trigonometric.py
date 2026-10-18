@@ -24,6 +24,7 @@ from app.schemas.common import (
     ErrorDetail,
     StatusEnum,
     StepItem,
+    UnsupportedReasonEnum,
     WarningItem,
 )
 from app.schemas.dsl import TrigonometricDSL
@@ -295,7 +296,7 @@ def _solve_trig_equation(
                 method=ConfidenceMethod.SYMBOLIC,
                 score=0.0,
             ),
-            unsupported_reason="transcendental_trig_equation",
+            unsupported_reason=UnsupportedReasonEnum.OUT_OF_SCOPE,
             error=ErrorDetail(
                 code="CONDITION_SET_UNSOLVED",
                 message_vi="SymPy không thể tìm nghiệm giải tích hữu hạn cho phương trình.",

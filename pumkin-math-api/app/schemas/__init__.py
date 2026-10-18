@@ -60,7 +60,7 @@ from app.schemas.last_digit import LastDigitResult
 from app.schemas.matrix_algebra import MatrixAlgebraResult
 from app.schemas.planar_area import PlanarAreaResult
 from app.schemas.sequence import SequenceProgressionResult
-from app.schemas.solve import SolveRequest, SolveResponse, SolveResultPayload
+from app.schemas.solve import HintItem, SolveRequest, SolveResponse, SolveResultPayload
 from app.schemas.traps import MisconceptionTrapEnum
 from app.schemas.triangle_vector import TriangleVectorResult
 from app.schemas.trigonometric import TrigonometricResult
@@ -116,6 +116,7 @@ __all__ = [
     "UnsupportedProblemDSL",
     "MathProblemDSL",
     # Solve
+    "HintItem",
     "SolveRequest",
     "SolveResultPayload",
     "SolveResponse",
