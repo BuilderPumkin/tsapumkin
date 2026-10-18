@@ -60,6 +60,16 @@ def sanitize_and_validate_question_text(text: str) -> str:
             },
         )
 
+    if not text.strip():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={
+                "status": "error",
+                "code": "EMPTY_QUESTION_TEXT",
+                "message": "Nội dung đề bài không được để trống.",
+            },
+        )
+
     # 1. Check for null bytes and prohibited control characters
     if FORBIDDEN_CONTROL_CHARS.search(text):
         raise HTTPException(
