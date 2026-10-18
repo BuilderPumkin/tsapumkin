@@ -25,6 +25,7 @@ from app.parser.budget import global_budget_tracker
 from app.parser.cache import compute_problem_hash, global_problem_cache
 from app.parser.llm_client import LLMClient, LLMResponse, get_llm_client
 from app.pedagogy.engine import generate_pedagogical_guidance
+from app.sandbox import SandboxMemoryError, SandboxTimeoutError, run_in_sandbox
 from app.schemas.common import (
     BaseResponseEnvelope,
     ConfidenceInfo,
@@ -177,9 +178,9 @@ async def _translate_single_sample_with_retry(
                 llm_response=resp,
             )
 
-    # Run CAS Solver on validated DSL
+    # Run CAS Solver on validated DSL via process sandbox
     try:
-        solver_env = solve_dsl(dsl_obj)
+        solver_env = run_in_sandbox(solve_dsl, args=(dsl_obj,))
         val_str = None
         if solver_env.result is not None:
             val_str = extract_computed_value_string(solver_env.result)
@@ -199,6 +200,26 @@ async def _translate_single_sample_with_retry(
             solver_envelope=solver_env,
             computed_value_str=val_str,
             error_message=err_msg,
+            llm_response=resp,
+        )
+    except SandboxTimeoutError as time_err:
+        return SampleOutcome(
+            sample_index=sample_idx,
+            dsl=dsl_obj,
+            dsl_dict=content,
+            solver_envelope=None,
+            computed_value_str=None,
+            error_message=f"TIMEOUT: {time_err.message_vi}",
+            llm_response=resp,
+        )
+    except SandboxMemoryError as mem_err:
+        return SampleOutcome(
+            sample_index=sample_idx,
+            dsl=dsl_obj,
+            dsl_dict=content,
+            solver_envelope=None,
+            computed_value_str=None,
+            error_message=f"MEMORY_LIMIT_EXCEEDED: {mem_err.message_vi}",
             llm_response=resp,
         )
     except Exception as solve_err:
@@ -294,7 +315,7 @@ async def parse_and_solve_with_consensus(
     if cached_dsl_dict is not None:
         try:
             cached_dsl = math_problem_adapter.validate_python(cached_dsl_dict)
-            cached_env = solve_dsl(cached_dsl)
+            cached_env = run_in_sandbox(solve_dsl, args=(cached_dsl,))
             restate_str = getattr(cached_dsl, "restate_vi", None) or prob_text
             steps = cached_env.steps if cached_env else []
             computed_val_str = (
@@ -375,15 +396,31 @@ async def parse_and_solve_with_consensus(
     if not valid_outcomes:
         # All samples failed translation or solver execution
         err_reasons = [o.error_message or "Unknown error" for o in outcomes]
+        timeout_errs = [e for e in err_reasons if "TIMEOUT" in e]
+        mem_errs = [e for e in err_reasons if "MEMORY_LIMIT_EXCEEDED" in e]
+
+        if timeout_errs:
+            warn_code = "TIMEOUT"
+            warn_msg = f"Quá trình tính toán bị quá thời gian cho phép: {timeout_errs[0]}"
+            guidance = "Bài toán có biểu thức quá phức tạp khiến bộ giải bị quá thời gian cho phép."
+        elif mem_errs:
+            warn_code = "MEMORY_LIMIT_EXCEEDED"
+            warn_msg = f"Quá trình tính toán vượt quá giới hạn bộ nhớ: {mem_errs[0]}"
+            guidance = "Bài toán vượt quá giới hạn bộ nhớ tính toán cho phép."
+        else:
+            warn_code = "TRANSLATION_SCHEMA_FAILED"
+            warn_msg = f"Toàn bộ {num_samples} lượt dịch đề thất bại: {err_reasons[0]}"
+            guidance = "Hệ thống không thể chuyển đổi đề bài sang dạng toán hỗ trợ hợp lệ."
+
         result_payload = SolveResultPayload(
             scaffolding_step=request.step_index,
-            guidance_vi="Hệ thống không thể chuyển đổi đề bài sang dạng toán hỗ trợ hợp lệ.",
+            guidance_vi=guidance,
             latex_hint=None,
             subgoal_completed=False,
             is_final_step=False,
         )
         return SolveResponse(
-            status=StatusEnum.NEEDS_REVIEW,
+            status=StatusEnum.ERROR if (timeout_errs or mem_errs) else StatusEnum.NEEDS_REVIEW,
             confidence=ConfidenceInfo(
                 level=ConfidenceLevel.LOW,
                 method=ConfidenceMethod.CONSENSUS,
@@ -394,8 +431,8 @@ async def parse_and_solve_with_consensus(
             result=result_payload,
             warnings=[
                 WarningItem(
-                    code="TRANSLATION_SCHEMA_FAILED",
-                    message_vi=f"Toàn bộ {num_samples} lượt dịch đề thất bại: {err_reasons[0]}",
+                    code=warn_code,
+                    message_vi=warn_msg,
                 )
             ],
         )

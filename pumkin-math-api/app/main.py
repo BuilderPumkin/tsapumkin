@@ -3,11 +3,13 @@ Pumkin Math API - Main Application Entrypoint
 FastAPI application defining health check and core math endpoints with Pydantic v2 schemas.
 """
 
+import os
 import sys
 from uuid import uuid4
 
 import sympy
 from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.datastructures import Headers
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
@@ -17,6 +19,11 @@ from app.auth import verify_api_key
 from app.checker import check_student_submission
 from app.generator import generate_questions
 from app.parser import parse_and_solve_with_consensus
+from app.sandbox import (
+    SandboxMemoryError,
+    SandboxTimeoutError,
+    run_in_sandbox_async,
+)
 from app.schemas.check import CheckRequest, CheckResponse
 from app.schemas.common import (
     ConfidenceInfo,
@@ -27,6 +34,11 @@ from app.schemas.common import (
 )
 from app.schemas.generate import GenerateRequest, GenerateResponse
 from app.schemas.solve import SolveRequest, SolveResponse
+from app.security import (
+    SecurityHeadersMiddleware,
+    global_concurrency_limiter,
+    sanitize_and_validate_question_text,
+)
 
 # 1 MB body size threshold enforced at application layer
 MAX_BODY_SIZE_BYTES = 1024 * 1024
@@ -183,6 +195,29 @@ class BodySizeLimitMiddleware:
         await self.app(scope, receive, send)
 
 
+DEFAULT_CORS_ORIGINS = [
+    "https://pumkin.dev",
+    "https://app.pumkin.dev",
+    "http://localhost:3000",
+    "http://localhost:5173",
+]
+
+
+def get_cors_allowed_origins() -> list[str]:
+    raw = os.getenv("PUMKIN_CORS_ALLOWED_ORIGINS", "")
+    if raw.strip():
+        return [origin.strip() for origin in raw.split(",") if origin.strip()]
+    return DEFAULT_CORS_ORIGINS
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=get_cors_allowed_origins(),
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
+)
+app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(BodySizeLimitMiddleware)
 
 
@@ -224,7 +259,24 @@ async def solve_endpoint(
     Translates Vietnamese natural-language problem to DSL using consensus mechanism
     and evaluates via deterministic CAS solvers.
     """
-    return await parse_and_solve_with_consensus(request)
+    sanitize_and_validate_question_text(request.question_text)
+    async with global_concurrency_limiter.limit_concurrency():
+        try:
+            return await parse_and_solve_with_consensus(request)
+        except SandboxTimeoutError as exc:
+            return make_envelope_error_response(
+                status_code=status.HTTP_504_GATEWAY_TIMEOUT,
+                code="TIMEOUT",
+                message_vi=exc.message_vi,
+                details=exc.details,
+            )
+        except SandboxMemoryError as exc:
+            return make_envelope_error_response(
+                status_code=status.HTTP_507_INSUFFICIENT_STORAGE,
+                code="MEMORY_LIMIT_EXCEEDED",
+                message_vi=exc.message_vi,
+                details=exc.details,
+            )
 
 
 @app.post(
@@ -246,7 +298,28 @@ async def check_endpoint(
     Evaluates student answer or intermediate step transformation with sequential
     symbolic and numeric pipeline.
     """
-    return check_student_submission(request)
+    if request.student_answer:
+        sanitize_and_validate_question_text(request.student_answer)
+    if request.canonical_answer:
+        sanitize_and_validate_question_text(request.canonical_answer)
+
+    async with global_concurrency_limiter.limit_concurrency():
+        try:
+            return await run_in_sandbox_async(check_student_submission, args=(request,))
+        except SandboxTimeoutError as exc:
+            return make_envelope_error_response(
+                status_code=status.HTTP_504_GATEWAY_TIMEOUT,
+                code="TIMEOUT",
+                message_vi=exc.message_vi,
+                details=exc.details,
+            )
+        except SandboxMemoryError as exc:
+            return make_envelope_error_response(
+                status_code=status.HTTP_507_INSUFFICIENT_STORAGE,
+                code="MEMORY_LIMIT_EXCEEDED",
+                message_vi=exc.message_vi,
+                details=exc.details,
+            )
 
 
 @app.post(
@@ -266,20 +339,28 @@ async def generate_endpoint(
     Deterministic question generator endpoint with circle verification
     and misconception-driven distractors.
     """
-    try:
-        payload = await generate_questions(request)
-    except ValueError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(exc),
-        ) from exc
-    return GenerateResponse(
-        status=StatusEnum.VERIFIED if payload.count > 0 else StatusEnum.UNSUPPORTED,
-        confidence=ConfidenceInfo(
-            level=ConfidenceLevel.HIGH if payload.count > 0 else ConfidenceLevel.LOW,
-            method=ConfidenceMethod.SYMBOLIC,
-            score=1.0 if payload.count > 0 else 0.0,
-        ),
-        restate_vi=f"Sinh {payload.count} câu hỏi toán học dạng '{request.category}'",
-        result=payload,
-    )
+    async with global_concurrency_limiter.limit_concurrency():
+        try:
+            payload = await generate_questions(request)
+        except ValueError as exc:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=str(exc),
+            ) from exc
+        except SandboxTimeoutError as exc:
+            return make_envelope_error_response(
+                status_code=status.HTTP_504_GATEWAY_TIMEOUT,
+                code="TIMEOUT",
+                message_vi=exc.message_vi,
+                details=exc.details,
+            )
+        return GenerateResponse(
+            status=StatusEnum.VERIFIED if payload.count > 0 else StatusEnum.UNSUPPORTED,
+            confidence=ConfidenceInfo(
+                level=ConfidenceLevel.HIGH if payload.count > 0 else ConfidenceLevel.LOW,
+                method=ConfidenceMethod.SYMBOLIC,
+                score=1.0 if payload.count > 0 else 0.0,
+            ),
+            restate_vi=f"Sinh {payload.count} câu hỏi toán học dạng '{request.category}'",
+            result=payload,
+        )

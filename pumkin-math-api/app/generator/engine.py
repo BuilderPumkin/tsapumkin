@@ -15,6 +15,7 @@ from app.generator.llm_rephraser import is_llm_rephrase_enabled, rephrase_questi
 from app.generator.templates.registry import get_templates_for_category
 from app.schemas.common import StatusEnum
 from app.schemas.generate import (
+    DifficultyEnum,
     DistractorItem,
     GeneratedQuestionItem,
     GenerateRequest,
