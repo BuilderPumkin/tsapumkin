@@ -48,6 +48,10 @@ class GenerateRequest(StrictBaseModel):
         le=2**31 - 1,
         description="Hạt giống giả ngẫu nhiên cố định để tái lập kết quả sinh tất định",
     )
+    use_llm: bool = Field(
+        default=False,
+        description="Tùy chọn dùng LLM để diễn đạt lại lời văn đề (vẫn giữ nguyên số liệu)",
+    )
 
 
 class DistractorItem(StrictBaseModel):
@@ -89,6 +93,19 @@ class GeneratedQuestionItem(StrictBaseModel):
         description="Danh sách các phương án nhiễu kèm mã bẫy nhận thức",
     )
     explanation_vi: str = Field(..., description="Lời giải chi tiết bằng tiếng Việt")
+    topic: str | None = Field(default=None, description="Chủ đề toán học phân loại")
+    subtopic: str | None = Field(default=None, description="Chuyên đề chi tiết")
+    skills: list[str] = Field(default_factory=list, description="Kỹ năng toán học cần đánh giá")
+    difficulty_score: float | None = Field(
+        default=None,
+        description="Điểm độ khó ước lượng theo quy tắc (Rule-based, chưa phải hiệu chuẩn Rasch)",
+    )
+    socratic_hints: list[str] = Field(
+        default_factory=list, description="Thang gợi ý Socratic 4 bậc"
+    )
+    hash: str | None = Field(
+        default=None, description="Mã băm SHA-256 đề bài chuẩn hóa phục vụ khử trùng lặp"
+    )
 
 
 class GenerateResultPayload(StrictBaseModel):

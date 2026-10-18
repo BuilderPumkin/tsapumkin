@@ -96,19 +96,17 @@ def test_check_valid_api_key_returns_200_verified(client, valid_auth_headers):
 
 
 @pytest.mark.unit
-def test_generate_valid_api_key_returns_501(client, valid_auth_headers):
+def test_generate_valid_api_key_returns_200_verified(client, valid_auth_headers):
     """
-    Calling /v1/generate with a valid key returns 501 Not Implemented with standard error schema.
+    Calling /v1/generate with a valid key returns 200 OK with standard verified schema.
     """
-    payload = {"category": "ham_so_cuc_tri_cho_truoc", "difficulty": "M2"}
+    payload = {"category": "dai_so_ma_tran_dinh_thuc", "count": 1, "difficulty": "M2"}
     response = client.post("/v1/generate", json=payload, headers=valid_auth_headers)
-    assert response.status_code == 501
+    assert response.status_code == 200
 
     data = response.json()
     assert data["schema_version"] == "1.0.0"
     assert "trace_id" in data
-    assert data["status"] == "error"
-    assert data["confidence"]["level"] == "low"
-    assert data["confidence"]["method"] == "symbolic"
-    assert data["error"]["code"] == "NOT_IMPLEMENTED"
-    assert "chưa được cài đặt" in data["error"]["message_vi"]
+    assert data["status"] == "verified"
+    assert data["result"]["count"] == 1
+    assert len(data["result"]["questions"]) == 1

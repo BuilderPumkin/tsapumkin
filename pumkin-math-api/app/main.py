@@ -7,7 +7,7 @@ import sys
 from uuid import uuid4
 
 import sympy
-from fastapi import Depends, FastAPI, status
+from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.responses import JSONResponse
 from starlette.datastructures import Headers
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
@@ -15,9 +15,11 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 from app import __version__
 from app.auth import verify_api_key
 from app.checker import check_student_submission
+from app.generator import generate_questions
 from app.parser import parse_and_solve_with_consensus
 from app.schemas.check import CheckRequest, CheckResponse
 from app.schemas.common import (
+    ConfidenceInfo,
     ConfidenceLevel,
     ConfidenceMethod,
     HealthResponse,
@@ -251,7 +253,6 @@ async def check_endpoint(
     "/v1/generate",
     response_model=GenerateResponse,
     responses={
-        501: {"model": GenerateResponse, "description": "Chức năng chưa được cài đặt"},
         401: {"description": "Chưa xác thực hoặc khóa không hợp lệ"},
     },
     tags=["Core"],
@@ -260,11 +261,25 @@ async def check_endpoint(
 async def generate_endpoint(
     request: GenerateRequest,
     _auth: str = Depends(verify_api_key),
-):
+) -> GenerateResponse:
     """
-    Question generator endpoint.
-    Returns 501 Not Implemented during initial scaffold phase.
+    Deterministic question generator endpoint with circle verification
+    and misconception-driven distractors.
     """
-    return make_501_not_implemented_response(
-        "Chức năng Tạo đề (/v1/generate) chưa được cài đặt (sẽ xây dựng ở Prompt tiếp theo)."
+    try:
+        payload = await generate_questions(request)
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(exc),
+        ) from exc
+    return GenerateResponse(
+        status=StatusEnum.VERIFIED if payload.count > 0 else StatusEnum.UNSUPPORTED,
+        confidence=ConfidenceInfo(
+            level=ConfidenceLevel.HIGH if payload.count > 0 else ConfidenceLevel.LOW,
+            method=ConfidenceMethod.SYMBOLIC,
+            score=1.0 if payload.count > 0 else 0.0,
+        ),
+        restate_vi=f"Sinh {payload.count} câu hỏi toán học dạng '{request.category}'",
+        result=payload,
     )

@@ -1,28 +1,29 @@
 """
-Unit Tests for 501 Not Implemented Envelopes
-Proves that the remaining scaffolded endpoint (/v1/generate) returns 501 status code
-with a fully compliant BaseResponseEnvelope structure.
+Unit Tests for Endpoints Status
+Proves that all core endpoints (/v1/solve, /v1/check, /v1/generate) are implemented
+and no longer return 501 Not Implemented.
 """
 
 import pytest
 
-from app.schemas.common import BaseResponseEnvelope, StatusEnum
-
 
 @pytest.mark.unit
-def test_generate_returns_501_valid_envelope(auth_client):
-    """POST /v1/generate must return HTTP 501 with a valid BaseResponseEnvelope."""
-    payload = {
-        "category": "ham_so_cuc_tri_cho_truoc",
-        "count": 1,
-        "difficulty": "M2",
-    }
-    response = auth_client.post("/v1/generate", json=payload)
-    assert response.status_code == 501
-    data = response.json()
+def test_all_core_endpoints_implemented_no_501(auth_client):
+    """Core endpoints must be implemented and return HTTP status != 501."""
+    # /v1/check
+    resp_check = auth_client.post(
+        "/v1/check",
+        json={
+            "canonical_answer": "x = 1",
+            "student_answer": "x = 1",
+            "answer_type": "expression",
+        },
+    )
+    assert resp_check.status_code == 200
 
-    envelope = BaseResponseEnvelope.model_validate(data)
-    assert envelope.status == StatusEnum.ERROR
-    assert envelope.error is not None
-    assert envelope.error.code == "NOT_IMPLEMENTED"
-    assert envelope.result is None
+    # /v1/generate
+    resp_gen = auth_client.post(
+        "/v1/generate",
+        json={"category": "dai_so_ma_tran_dinh_thuc", "count": 1, "difficulty": "M2"},
+    )
+    assert resp_gen.status_code == 200

@@ -436,6 +436,12 @@
             ],
             "description": "Hạt giống giả ngẫu nhiên cố định để tái lập kết quả sinh tất định",
             "title": "Seed"
+          },
+          "use_llm": {
+            "default": false,
+            "description": "Tùy chọn dùng LLM để diễn đạt lại lời văn đề (vẫn giữ nguyên số liệu)",
+            "title": "Use Llm",
+            "type": "boolean"
           }
         },
         "required": [
@@ -587,6 +593,18 @@
             "$ref": "#/components/schemas/DifficultyEnum",
             "description": "Độ khó câu hỏi"
           },
+          "difficulty_score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Điểm độ khó ước lượng theo quy tắc (Rule-based, chưa phải hiệu chuẩn Rasch)",
+            "title": "Difficulty Score"
+          },
           "distractors": {
             "description": "Danh sách các phương án nhiễu kèm mã bẫy nhận thức",
             "items": {
@@ -599,6 +617,18 @@
             "description": "Lời giải chi tiết bằng tiếng Việt",
             "title": "Explanation Vi",
             "type": "string"
+          },
+          "hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Mã băm SHA-256 đề bài chuẩn hóa phục vụ khử trùng lặp",
+            "title": "Hash"
           },
           "id": {
             "description": "Mã định danh duy nhất của câu hỏi được sinh",
@@ -619,6 +649,46 @@
             "description": "Văn bản đề bài kèm công thức KaTeX",
             "title": "Question Text",
             "type": "string"
+          },
+          "skills": {
+            "description": "Kỹ năng toán học cần đánh giá",
+            "items": {
+              "type": "string"
+            },
+            "title": "Skills",
+            "type": "array"
+          },
+          "socratic_hints": {
+            "description": "Thang gợi ý Socratic 4 bậc",
+            "items": {
+              "type": "string"
+            },
+            "title": "Socratic Hints",
+            "type": "array"
+          },
+          "subtopic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Chuyên đề chi tiết",
+            "title": "Subtopic"
+          },
+          "topic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Chủ đề toán học phân loại",
+            "title": "Topic"
           }
         },
         "required": [
@@ -742,6 +812,31 @@
           "TRAP_ROUND_TABLE_BLOCK_FACTORIAL",
           "TRAP_ROUND_TABLE_ALTERNATING_OVERCOUNT",
           "TRAP_ROUND_TABLE_FLIP_SYMMETRY",
+          "MIS_SIGN_FLIP_EQUATION",
+          "MIS_DISTRIBUTIVE_MULTIPLICATION",
+          "MIS_SQUARE_BINOMIAL_MISSING_2AB",
+          "MIS_RADICAL_SUM_CONFUSION",
+          "MIS_RADICAL_DOMAIN_IGNORED",
+          "MIS_LOG_DOMAIN_IGNORED",
+          "MIS_LOG_SUM_PRODUCT_CONFUSION",
+          "MIS_DERIVATIVE_PRODUCT_RULE",
+          "MIS_DERIVATIVE_QUOTIENT_SIGN",
+          "MIS_DELTA_DISCRIMINANT_CONFUSION",
+          "MIS_EXTREMA_POINT_VS_VALUE",
+          "MIS_ROOT_LOSS_DIVISION",
+          "MIS_SPURIOUS_ROOT_SQUARING",
+          "MIS_ANGLE_LINE_VS_VECTOR",
+          "MIS_SPHERE_RADIUS_INVALID",
+          "MIS_PLANE_DISTANCE_NO_ABS",
+          "MIS_LINE_CANONICAL_ZERO_DENOM",
+          "MIS_CROSS_PRODUCT_IS_SCALAR",
+          "MIS_COLLINEAR_ZERO_DIVISION",
+          "MIS_PERM_COMB_CONFUSION",
+          "MIS_ROUND_TABLE_NUMBERED_SEATS",
+          "MIS_ROUND_TABLE_BLOCK_FACTORIAL",
+          "MIS_ROUND_TABLE_ALTERNATING_OVERCOUNT",
+          "MIS_ROUND_TABLE_FLIP_SYMMETRY",
+          "MIS_PROB_SUM_NOT_DISJOINT",
           "TRAP_OTHER"
         ],
         "title": "MisconceptionTrapEnum",
@@ -1223,7 +1318,7 @@
     },
     "/v1/generate": {
       "post": {
-        "description": "Question generator endpoint.\nReturns 501 Not Implemented during initial scaffold phase.",
+        "description": "Deterministic question generator endpoint with circle verification\nand misconception-driven distractors.",
         "operationId": "generate_endpoint_v1_generate_post",
         "parameters": [
           {
@@ -1276,16 +1371,6 @@
               }
             },
             "description": "Validation Error"
-          },
-          "501": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenerateResponse"
-                }
-              }
-            },
-            "description": "Chức năng chưa được cài đặt"
           }
         },
         "summary": "Tạo đề & Sinh biến thể câu hỏi tương đương",
