@@ -54,6 +54,7 @@ from app.schemas.generate import (
     GenerateResponse,
     GenerateResultPayload,
 )
+from app.schemas.geometry_oxyz import GeometryOxyzResult
 from app.schemas.integral import IntegralResult
 from app.schemas.last_digit import LastDigitResult
 from app.schemas.matrix_algebra import MatrixAlgebraResult
@@ -100,6 +101,7 @@ __all__ = [
     "DifferentialEquationDSL",
     "AlgebraicEquationDSL",
     "GeometryOxyzDSL",
+    "GeometryOxyzResult",
     "CombinatoricsProbabilityDSL",
     "LastDigitDSL",
     "LastDigitResult",

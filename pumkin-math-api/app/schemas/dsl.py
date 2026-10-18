@@ -5,7 +5,7 @@ Full AST and validation logic will be implemented in Prompt 5.
 DSL schema is explicitly decoupled from stable API contract via dsl_version = '0.1.0-alpha'.
 """
 
-from typing import Annotated, Literal, Self
+from typing import Annotated, Any, Literal, Self
 
 from pydantic import Field, model_validator
 
@@ -347,13 +347,96 @@ class AlgebraicEquationDSL(BaseDSL):
 
 
 class GeometryOxyzDSL(BaseDSL):
-    type: Literal["hinh_hoc_oxyz"] = "hinh_hoc_oxyz"
-    elements: dict[str, dict[str, str]] = Field(
-        ..., description="Các đối tượng Oxyz: điểm, mặt phẳng, đường thẳng, mặt cầu"
+    type: Literal[
+        "phuong_phap_toa_do_hoa_oxyz_thuan_tuy",
+        "hinh_hoc_oxyz",
+        "oxyz",
+        "geometry_oxyz",
+    ] = "phuong_phap_toa_do_hoa_oxyz_thuan_tuy"
+    operation: str = Field(
+        ...,
+        description=(
+            "Phép toán Oxyz cần thực hiện (vd: 'plane_normal_vector', 'distance_point_to_plane')"
+        ),
     )
-    query_type: str = Field(
-        ..., description="Yêu cầu: 'khoang_cach', 'goc', 'phuong_trinh_mat_cau'..."
+
+    # Points in 3D: [x, y, z]
+    point_A: list[str] | None = Field(default=None, description="Tọa độ điểm A [x, y, z]")
+    point_B: list[str] | None = Field(default=None, description="Tọa độ điểm B [x, y, z]")
+    point_C: list[str] | None = Field(default=None, description="Tọa độ điểm C [x, y, z]")
+    point_M: list[str] | None = Field(default=None, description="Tọa độ điểm M [x, y, z]")
+    point_I: list[str] | None = Field(default=None, description="Tọa độ tâm mặt cầu I [x, y, z]")
+
+    # Vectors in 3D: [x, y, z]
+    vector_u: list[str] | None = Field(default=None, description="Tọa độ vector u [x, y, z]")
+    vector_v: list[str] | None = Field(default=None, description="Tọa độ vector v [x, y, z]")
+    vector_n: list[str] | None = Field(default=None, description="Vectơ pháp tuyến n [A, B, C]")
+
+    # Planes
+    plane_P: str | None = Field(
+        default=None,
+        description="Phương trình mặt phẳng (P) (vd: '2*x - y + 2*z - 5 = 0')",
     )
+    plane_Q: str | None = Field(
+        default=None,
+        description="Phương trình mặt phẳng (Q) (vd: '2*x - y + 2*z + 7 = 0')",
+    )
+    plane_coeffs: list[str] | None = Field(
+        default=None,
+        description="Hệ số của mặt phẳng [A, B, C, D] (Ax + By + Cz + D = 0)",
+    )
+    plane_coeffs_Q: list[str] | None = Field(
+        default=None,
+        description="Hệ số của mặt phẳng thứ hai [A, B, C, D]",
+    )
+
+    # Lines
+    line_d: str | None = Field(
+        default=None,
+        description="Phương trình đường thẳng d (vd: '(x-3)/1 = (y+1)/(-2) = z/4')",
+    )
+    line_d1: str | None = Field(default=None, description="Phương trình đường thẳng d1")
+    line_d2: str | None = Field(default=None, description="Phương trình đường thẳng d2")
+    line_point: list[str] | None = Field(
+        default=None, description="Điểm đi qua của đường thẳng [x0, y0, z0]"
+    )
+    line_direction: list[str] | None = Field(
+        default=None, description="Vectơ chỉ phương của đường thẳng [a, b, c]"
+    )
+    line_point_2: list[str] | None = Field(
+        default=None, description="Điểm đi qua của đường thẳng thứ hai"
+    )
+    line_direction_2: list[str] | None = Field(
+        default=None, description="Vectơ chỉ phương của đường thẳng thứ hai"
+    )
+
+    # Sphere
+    sphere_equation: str | None = Field(
+        default=None,
+        description=(
+            "Phương trình mặt cầu (S) (vd: '(x-1)^2 + (y+2)^2 + (z-3)^2 = 25' hoặc"
+            " 'x^2 + y^2 + z^2 - 2*x - 4*y + 4 = 0')"
+        ),
+    )
+    radius: str | None = Field(default=None, description="Bán kính mặt cầu R (vd: '5', '3')")
+
+    # Backward compatibility & flexible elements
+    elements: dict[str, Any] | None = Field(
+        default=None,
+        description="Các đối tượng Oxyz dạng từ điển (tùy chọn mở rộng)",
+    )
+    query_type: str | None = Field(
+        default=None,
+        description="Bí danh tương đương với operation (hỗ trợ tương thích ngược)",
+    )
+
+    @model_validator(mode="before")
+    @classmethod
+    def sync_query_type_operation(cls, values: Any) -> Any:
+        if isinstance(values, dict):
+            if "query_type" in values and "operation" not in values:
+                values["operation"] = values["query_type"]
+        return values
 
 
 class CombinatoricsProbabilityDSL(BaseDSL):
