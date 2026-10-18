@@ -14,6 +14,7 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
 from app import __version__
 from app.auth import verify_api_key
+from app.checker import check_student_submission
 from app.schemas.check import CheckRequest, CheckResponse
 from app.schemas.common import (
     ConfidenceLevel,
@@ -225,7 +226,7 @@ async def solve_endpoint(
     "/v1/check",
     response_model=CheckResponse,
     responses={
-        501: {"model": CheckResponse, "description": "Chức năng chưa được cài đặt"},
+        200: {"model": CheckResponse, "description": "Kết quả chấm bài và đánh giá bước giải"},
         401: {"description": "Chưa xác thực hoặc khóa không hợp lệ"},
     },
     tags=["Core"],
@@ -234,14 +235,13 @@ async def solve_endpoint(
 async def check_endpoint(
     request: CheckRequest,
     _auth: str = Depends(verify_api_key),
-):
+) -> CheckResponse:
     """
     Submission checker endpoint.
-    Returns 501 Not Implemented during initial scaffold phase.
+    Evaluates student answer or intermediate step transformation with sequential
+    symbolic and numeric pipeline.
     """
-    return make_501_not_implemented_response(
-        "Chức năng Chấm bài (/v1/check) chưa được cài đặt (sẽ xây dựng ở Prompt tiếp theo)."
-    )
+    return check_student_submission(request)
 
 
 @app.post(

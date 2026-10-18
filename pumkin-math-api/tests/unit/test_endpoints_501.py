@@ -30,25 +30,6 @@ def test_solve_returns_501_valid_envelope(auth_client):
 
 
 @pytest.mark.unit
-def test_check_returns_501_valid_envelope(auth_client):
-    """POST /v1/check must return HTTP 501 with a valid BaseResponseEnvelope."""
-    payload = {
-        "canonical_answer": "x = 2",
-        "student_answer": "2",
-        "answer_type": "number",
-    }
-    response = auth_client.post("/v1/check", json=payload)
-    assert response.status_code == 501
-    data = response.json()
-
-    envelope = BaseResponseEnvelope.model_validate(data)
-    assert envelope.status == StatusEnum.ERROR
-    assert envelope.error is not None
-    assert envelope.error.code == "NOT_IMPLEMENTED"
-    assert envelope.result is None
-
-
-@pytest.mark.unit
 def test_generate_returns_501_valid_envelope(auth_client):
     """POST /v1/generate must return HTTP 501 with a valid BaseResponseEnvelope."""
     payload = {

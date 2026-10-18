@@ -1079,7 +1079,7 @@
     },
     "/v1/check": {
       "post": {
-        "description": "Submission checker endpoint.\nReturns 501 Not Implemented during initial scaffold phase.",
+        "description": "Submission checker endpoint.\nEvaluates student answer or intermediate step transformation with sequential\nsymbolic and numeric pipeline.",
         "operationId": "check_endpoint_v1_check_post",
         "parameters": [
           {
@@ -1118,7 +1118,7 @@
                 }
               }
             },
-            "description": "Successful Response"
+            "description": "Kết quả chấm bài và đánh giá bước giải"
           },
           "401": {
             "description": "Chưa xác thực hoặc khóa không hợp lệ"
@@ -1132,16 +1132,6 @@
               }
             },
             "description": "Validation Error"
-          },
-          "501": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CheckResponse"
-                }
-              }
-            },
-            "description": "Chức năng chưa được cài đặt"
           }
         },
         "summary": "Chấm bài thi & Đánh giá bước giải",
