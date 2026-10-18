@@ -927,6 +927,18 @@
             "description": "Giải thích ý nghĩa bước biến đổi bằng tiếng Việt",
             "title": "Note Vi",
             "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Giá trị biểu thức hoặc kết quả trung gian dạng chuỗi",
+            "title": "Value"
           }
         },
         "required": [
@@ -997,7 +1009,11 @@
           "WARN_BOUNDARY_RESTRICTION",
           "WARN_MULTIPLE_BRANCHES",
           "WARN_NUMERIC_APPROXIMATION",
-          "WARN_POTENTIAL_EXTRANEOUS_ROOT"
+          "WARN_POTENTIAL_EXTRANEOUS_ROOT",
+          "WARN_SINGULARITY_IN_INTERVAL",
+          "WARN_IMPROPER_INTEGRAL",
+          "WARN_FLIPPED_BOUNDS",
+          "WARN_DIVERGENT_INTEGRAL"
         ],
         "title": "WarningCode",
         "type": "string"

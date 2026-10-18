@@ -28,6 +28,7 @@ from app.schemas.dsl import (
     ExtremaDSL,
     GeometryOxyzDSL,
     IntegralDSL,
+    IntegralInitialCondition,
     LimitSequenceDSL,
     LinearAlgebraDSL,
     MathProblemDSL,
@@ -47,6 +48,7 @@ from app.schemas.generate import (
     GenerateResponse,
     GenerateResultPayload,
 )
+from app.schemas.integral import IntegralResult
 from app.schemas.solve import SolveRequest, SolveResponse, SolveResultPayload
 from app.schemas.traps import MisconceptionTrapEnum
 
@@ -76,6 +78,8 @@ __all__ = [
     "AsymptoteDSL",
     "OtherFunctionDSL",
     "IntegralDSL",
+    "IntegralInitialCondition",
+    "IntegralResult",
     "ExponentialLogDSL",
     "LimitSequenceDSL",
     "LinearAlgebraDSL",

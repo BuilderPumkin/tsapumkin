@@ -5,9 +5,9 @@ Full AST and validation logic will be implemented in Prompt 5.
 DSL schema is explicitly decoupled from stable API contract via dsl_version = '0.1.0-alpha'.
 """
 
-from typing import Annotated, Literal
+from typing import Annotated, Literal, Self
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from app.schemas.common import StrictBaseModel, UnsupportedReasonEnum
 
@@ -23,6 +23,10 @@ class BaseDSL(StrictBaseModel):
     )
     variable: str = Field(default="x", description="Tên biến số chính (mặc định là 'x')")
     domain: str = Field(default="R", description="Tập xác định của bài toán (vd: 'R', '(0; +inf)')")
+    restate_vi: str | None = Field(
+        default=None,
+        description="Thuật lại đề bài toán học đã chuẩn hóa bằng tiếng Việt",
+    )
 
 
 class MonotonicityDSL(BaseDSL):
@@ -92,11 +96,56 @@ class OtherFunctionDSL(BaseDSL):
     question_subtype: str = Field(..., description="Phân loại phụ: 'tiep_tuyen', 'tuong_giao'...")
 
 
+class IntegralInitialCondition(StrictBaseModel):
+    point: str = Field(..., description="Điểm x0 của điều kiện F(x0) = y0")
+    value: str = Field(..., description="Giá trị y0 của F(x0)")
+
+
 class IntegralDSL(BaseDSL):
     type: Literal["nguyen_ham_tich_phan"] = "nguyen_ham_tich_phan"
-    integrand: str = Field(..., description="Hàm dưới dấu tích phân f(x)")
-    lower_bound: str | None = Field(default=None, description="Cận dưới (None nếu là nguyên hàm)")
-    upper_bound: str | None = Field(default=None, description="Cận trên (None nếu là nguyên hàm)")
+    integrand: str = Field(
+        ...,
+        description="Biểu thức giải tích dưới dấu tích phân f(x) dạng LaTeX",
+    )
+    lower_bound: str | None = Field(
+        default=None,
+        description="Cận dưới a dạng LaTeX (None nếu là nguyên hàm bất định)",
+    )
+    upper_bound: str | None = Field(
+        default=None,
+        description="Cận trên b dạng LaTeX (None nếu là nguyên hàm bất định)",
+    )
+    initial_condition: IntegralInitialCondition | None = Field(
+        default=None,
+        description="Điều kiện ban đầu F(x0) = y0 để tìm hằng số tích phân C",
+    )
+    method_hint: Literal["direct", "substitution", "by_parts"] | None = Field(
+        default=None,
+        description="Gợi ý phương pháp tính: 'direct', 'substitution', 'by_parts'",
+    )
+    substitution: str | None = Field(
+        default=None,
+        description="Biểu thức đổi biến u = u(x) nếu có",
+    )
+    by_parts_u: str | None = Field(
+        default=None,
+        description="Thành phần u(x) khi tích phân từng phần nếu có",
+    )
+    by_parts_dv: str | None = Field(
+        default=None,
+        description="Thành phần dv(x) khi tích phân từng phần nếu có",
+    )
+
+    @model_validator(mode="after")
+    def validate_bounds_pair(self) -> Self:
+        has_lower = self.lower_bound is not None and self.lower_bound.strip() != ""
+        has_upper = self.upper_bound is not None and self.upper_bound.strip() != ""
+        if has_lower != has_upper:
+            raise ValueError(
+                "Tích phân xác định yêu cầu cả cận dưới (lower_bound) và cận trên (upper_bound). "
+                "Đối với nguyên hàm, vui lòng để trống cả hai cận."
+            )
+        return self
 
 
 class ExponentialLogDSL(BaseDSL):

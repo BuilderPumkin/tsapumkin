@@ -72,6 +72,10 @@ class StepItem(StrictBaseModel):
         ..., description="Công thức toán chuẩn KaTeX dạng \\( ... \\) hoặc \\[ ... \\]"
     )
     note_vi: str = Field(..., description="Giải thích ý nghĩa bước biến đổi bằng tiếng Việt")
+    value: str | None = Field(
+        default=None,
+        description="Giá trị biểu thức hoặc kết quả trung gian dạng chuỗi",
+    )
 
 
 class ErrorDetail(StrictBaseModel):
@@ -89,6 +93,10 @@ class WarningCode(StrEnum):
     WARN_MULTIPLE_BRANCHES = "WARN_MULTIPLE_BRANCHES"
     WARN_NUMERIC_APPROXIMATION = "WARN_NUMERIC_APPROXIMATION"
     WARN_POTENTIAL_EXTRANEOUS_ROOT = "WARN_POTENTIAL_EXTRANEOUS_ROOT"
+    WARN_SINGULARITY_IN_INTERVAL = "WARN_SINGULARITY_IN_INTERVAL"
+    WARN_IMPROPER_INTEGRAL = "WARN_IMPROPER_INTEGRAL"
+    WARN_FLIPPED_BOUNDS = "WARN_FLIPPED_BOUNDS"
+    WARN_DIVERGENT_INTEGRAL = "WARN_DIVERGENT_INTEGRAL"
 
 
 class WarningItem(StrictBaseModel):
