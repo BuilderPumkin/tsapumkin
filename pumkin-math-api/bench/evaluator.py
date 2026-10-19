@@ -343,22 +343,19 @@ def classify_discrepancy(
     is_suspected_bank_error: bool = False,
 ) -> str:
     """
-    Classifies benchmark outcome into 3 standard discrepancy categories:
+    Classifies benchmark outcome into standard discrepancy categories:
     - 'none': correct answer or clean handling
     - 'system_error': solver crash, timeout, or uncaught exception
-    - 'suspected_ground_truth_error': solver is verified/mathematically sound, but bank key is flawed
+    - 'needs_review': CAS output conflicts with question key (recorded for teacher review)
     - 'out_of_scope': question belongs to unsupported domain
     """
     if not is_supported or status == "unsupported":
         return "out_of_scope"
 
-    if is_suspected_bank_error:
-        return "suspected_ground_truth_error"
-
     if status in ("error", "failed"):
         return "system_error"
 
-    if status == "verified" and not is_correct:
-        return "system_error"
+    if not is_correct or status == "needs_review":
+        return "needs_review"
 
     return "none"

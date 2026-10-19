@@ -47,7 +47,16 @@ def evaluate_quality_gate(
             f"REGRESSION [Confident-Incorrect]: Số ca sai-mà-tự-tin tăng từ {base_ci} lên {curr_ci} ca (Mục tiêu bắt buộc: <= {base_ci})."
         )
 
-    # 2. Accuracy on Supported Questions
+    # 2. Count-based Regression on Solved Questions (Item 8)
+    base_correct = baseline.get("correct_count", 69)
+    curr_correct = current_results.get("correct_count", 0)
+    if curr_correct < base_correct:
+        violations.append(
+            f"REGRESSION [Solved Count]: Số câu giải đúng bị giảm từ {base_correct} xuống {curr_correct} câu "
+            f"({base_correct - curr_correct} câu bị hồi quy!)."
+        )
+
+    # 3. Accuracy on Supported Questions
     base_acc = baseline.get("accuracy_on_supported", 0.0)
     curr_acc = current_results.get("accuracy_on_supported", 0.0)
     if curr_acc < (base_acc - max_accuracy_drop):
@@ -56,7 +65,7 @@ def evaluate_quality_gate(
             f"(vượt quá biên độ suy giảm cho phép {max_accuracy_drop * 100:.1f}%)."
         )
 
-    # 3. Question Coverage
+    # 4. Question Coverage
     base_sup = baseline.get("supported_count", 0)
     curr_sup = current_results.get("supported_count", 0)
     if curr_sup < base_sup:
@@ -64,7 +73,7 @@ def evaluate_quality_gate(
             f"REGRESSION [Coverage]: Số câu hỏi được hỗ trợ giảm từ {base_sup} xuống {curr_sup} câu."
         )
 
-    # 4. Adversarial Security Pass Rate
+    # 5. Adversarial Security Pass Rate (Hard Gate)
     curr_adv_rate = current_results.get("adversarial_pass_rate", 1.0)
     curr_adv_blocked = current_results.get("adversarial_blocked_count", 0)
     total_adv = current_results.get("adversarial_items_total", 0)
@@ -74,7 +83,14 @@ def evaluate_quality_gate(
             f"({total_adv - curr_adv_blocked} ca tấn công bị lọt lưới!)."
         )
 
-    # 5. Latency p95
+    # 6. System Errors (Hard Gate)
+    curr_sys_err = current_results.get("system_error_count", 0)
+    if curr_sys_err > 0:
+        violations.append(
+            f"SYSTEM REGRESSION [System Errors]: Ghi nhận {curr_sys_err} lỗi hệ thống (crash/timeout unhandled)."
+        )
+
+    # 7. Latency p95
     curr_p95 = current_results.get("latency_p95_ms", 0.0)
     if curr_p95 > max_latency_p95_ms:
         violations.append(

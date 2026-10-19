@@ -76,7 +76,7 @@ def main() -> int:
         include_adversarial=not args.no_adversarial,
     )
 
-    json_path, report_path, suspected_path = export_benchmark_results(summary, results)
+    json_path, report_path, needs_review_path, csv_path = export_benchmark_results(summary, results)
 
     print("\n--- BENCHMARK RESULTS SUMMARY ---")
     print(
@@ -85,22 +85,23 @@ def main() -> int:
     print(f"Supported Questions:         {summary.supported_count}")
     print(f"Correct Answers:             {summary.correct_count}")
     print(f"Accuracy on Supported:       {summary.accuracy_on_supported * 100:.2f}%")
-    print(f"End-to-End Accuracy:         {summary.end_to_end_accuracy * 100:.2f}%")
+    print(f"Solver-given-DSL Accuracy:   {summary.end_to_end_accuracy * 100:.2f}%")
     print(f"Confident Incorrect (SAI):   {summary.confident_incorrect_count}")
-    print(f"Suspected Bank Key Errors:   {summary.suspected_ground_truth_errors_count}")
+    print(f"Needs Review (CAS vs Key):   {summary.needs_review_count}")
     print(f"System / Solver Errors:      {summary.system_error_count}")
     print(
         f"Adversarial Block Rate:      {summary.adversarial_pass_rate * 100:.2f}% ({summary.adversarial_blocked_count}/{summary.adversarial_items_total})"
     )
     print(
-        f"Latency p50 / p95:           {summary.latency_p50_ms:.2f} ms / {summary.latency_p95_ms:.2f} ms"
+        f"Latency p50 / p95 (Solved):  {summary.latency_p50_ms:.2f} ms / {summary.latency_p95_ms:.2f} ms"
     )
     print(f"Total Cost USD:              ${summary.total_cost_usd:.4f}")
 
     print("\n--- ARTIFACTS EXPORTED ---")
     print(f"JSON Results:                {json_path}")
     print(f"Markdown Report:             {report_path}")
-    print(f"Suspected Bank Issues:       {suspected_path}")
+    print(f"Needs Review Cases:          {needs_review_path}")
+    print(f"Per-Case CSV:                {csv_path}")
 
     if args.save_baseline:
         baseline_path = Path(__file__).resolve().parent / "baseline.json"

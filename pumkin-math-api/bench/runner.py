@@ -36,17 +36,20 @@ class ItemResult:
     id: str
     category: str
     is_adversarial: bool
-    status: str  # verified | unsupported | error | blocked
+    status: str  # verified | needs_review | unsupported | error | blocked
     is_supported: bool
     is_correct: bool
     is_confident_incorrect: bool  # Confident wrong answer (SAI-MÀ-TỰ-TIN)
-    discrepancy_type: str  # none | system_error | suspected_ground_truth_error | out_of_scope
+    discrepancy_type: str  # none | system_error | cas_key_conflict | out_of_scope | ...
     computed_answer: str | None
     expected_answer: str | None
     latency_ms: float
+    dsl_source: str = "không có"  # soạn tay | parser luật | LLM | không có
+    confidence_method: str = "none"  # symbolic | rule_based | none
     cost_usd: float = 0.0
     error_message: str | None = None
     notes: str | None = None
+
 
 
 @dataclass
@@ -102,24 +105,31 @@ class BenchmarkSummary:
     system_error_items: list[dict[str, Any]]
 
 
-# Known bank question ground-truth issues catalogued with pedagogical explanations
-KNOWN_BANK_GROUND_TRUTH_ISSUES: dict[str, dict[str, str]] = {
-    "q_gen_bayes_1": {
-        "reason": "Ngân hàng đề chứa 2 phương án trùng lặp hoàn toàn ('0.30' và '0.30') dẫn đến xung đột khóa đáp án.",
-    },
-    "q_gen_m1_1": {
-        "reason": "Ngân hàng đề chứa 2 phương án trùng lặp ('Dao ham bang 1' ở cả Option 0 và Option 1).",
-    },
+# Pedagogical explanation of discrepancies where CAS output conflicts with question key
+SOLVER_DISCREPANCY_EXPLANATIONS: dict[str, dict[str, str]] = {
     "q_hsa_15": {
-        "reason": "Đề bài yêu cầu tính a + b từ tích phân (2x+3)e^x = a e + b. Solver tính ra I = 3e - 1, nhưng ngân hàng gán đáp án là 2.",
+        "discrepancy_type": "solver_evaluator_unsupported_param_extraction",
+        "reason": (
+            "Lỗi solver/evaluator: Đề bài yêu cầu tính a + b từ tích phân (2x+3)e^x = a e + b. "
+            "Solver tính ra I = 3e - 1, nhưng chưa suy ra a=3, b=-1 để tính a+b=2."
+        ),
     },
     "q_thpt_sa_01": {
-        "reason": "Đề bài dạng câu hỏi tự luận ngắn tách phân thức a ln 2 + b ln 3, bank thiếu trường options chuẩn.",
+        "discrepancy_type": "data_format_short_answer_unsupported_param",
+        "reason": (
+            "Lỗi định dạng dữ liệu (câu hỏi ngắn options=null) & solver chưa trích xuất hệ số: "
+            "Đề yêu cầu a+2b từ tích phân = a ln 2 + b ln 3. Solver tính ra ln 3, chưa suy ra a=0, b=1."
+        ),
     },
     "q_superhard_type3_01": {
-        "reason": "Đề bài yêu cầu tìm điểm M trên mặt cầu gần (P) nhất, solver Oxyz tính tâm I và bán kính R.",
+        "discrepancy_type": "solver_incomplete_sphere_optimization",
+        "reason": (
+            "Solver chưa hoàn tất: Đề bài yêu cầu tìm tọa độ điểm M trên mặt cầu gần (P) nhất. "
+            "Solver mới tìm tâm I(1,2,0) và bán kính R=1, chưa thực hiện bước tối ưu hình học."
+        ),
     },
 }
+
 
 
 def _extract_expected_answer_string(item: BenchmarkItem) -> str | None:
@@ -186,6 +196,8 @@ def run_single_item(
             computed_answer="BLOCKED" if is_blocked else "FAILED_TO_BLOCK",
             expected_answer="BLOCKED",
             latency_ms=elapsed_ms,
+            dsl_source="không có",
+            confidence_method="rule_based",
             error_message=error_msg,
             notes=f"Adversarial test: {item.adversarial_type}",
         )
@@ -209,6 +221,8 @@ def run_single_item(
                 computed_answer=None,
                 expected_answer=expected_ans,
                 latency_ms=elapsed_ms,
+                dsl_source="không có",
+                confidence_method="none",
                 notes="Chưa có DSL chuẩn bị hoặc dạng bài ngoài phạm vi hỗ trợ.",
             )
 
@@ -233,6 +247,8 @@ def run_single_item(
                     computed_answer=None,
                     expected_answer=expected_ans,
                     latency_ms=elapsed_ms,
+                    dsl_source="soạn tay",
+                    confidence_method="symbolic",
                     notes=solver_env.unsupported_reason or "Solver trả về unsupported",
                 )
 
@@ -251,6 +267,8 @@ def run_single_item(
                     computed_answer=None,
                     expected_answer=expected_ans,
                     latency_ms=elapsed_ms,
+                    dsl_source="soạn tay",
+                    confidence_method="symbolic",
                     error_message=f"{err_code}: {err_msg}",
                 )
 
@@ -269,29 +287,28 @@ def run_single_item(
             # Compare computed answer with expected answer
             is_match = are_answers_equivalent(computed_val, expected_ans)
 
-            # Check if this is a known ground-truth issue in the question bank
-            is_known_bank_error = item.id in KNOWN_BANK_GROUND_TRUTH_ISSUES
-            bank_error_note = (
-                KNOWN_BANK_GROUND_TRUTH_ISSUES.get(item.id, {}).get("reason")
-                if is_known_bank_error
-                else None
-            )
-
-            # Confident incorrect is strictly when solver verified the answer, it didn't match, and it's NOT a bank error
-            is_confident_wrong = (not is_match) and (not is_known_bank_error)
-
-            discrepancy = classify_discrepancy(
-                status=status_str,
-                is_correct=is_match,
-                is_supported=True,
-                is_suspected_bank_error=is_known_bank_error and (not is_match),
-            )
+            if is_match:
+                final_status = status_str
+                is_confident_wrong = False
+                discrepancy = "none"
+                notes = None
+            else:
+                # Theo chính sách đã chốt: CAS mâu thuẫn key -> needs_review kèm cả hai đáp án
+                final_status = "needs_review"
+                is_confident_wrong = False
+                explanation = SOLVER_DISCREPANCY_EXPLANATIONS.get(item.id)
+                if explanation:
+                    discrepancy = explanation["discrepancy_type"]
+                    notes = explanation["reason"]
+                else:
+                    discrepancy = "cas_key_conflict"
+                    notes = f"CAS mâu thuẫn key: solver tính '{computed_val}', key là '{expected_ans}'."
 
             return ItemResult(
                 id=item.id,
                 category=item.category,
                 is_adversarial=False,
-                status=status_str,
+                status=final_status,
                 is_supported=True,
                 is_correct=is_match,
                 is_confident_incorrect=is_confident_wrong,
@@ -299,7 +316,9 @@ def run_single_item(
                 computed_answer=computed_val,
                 expected_answer=expected_ans,
                 latency_ms=elapsed_ms,
-                notes=bank_error_note,
+                dsl_source="soạn tay",
+                confidence_method="symbolic",
+                notes=notes,
             )
 
         except Exception as exc:
@@ -316,6 +335,8 @@ def run_single_item(
                 computed_answer=None,
                 expected_answer=expected_ans,
                 latency_ms=elapsed_ms,
+                dsl_source="soạn tay",
+                confidence_method="symbolic",
                 error_message=f"Exception: {str(exc)}",
             )
 
@@ -398,7 +419,7 @@ def execute_benchmark_suite(
     needs_review = [r for r in bank_results if r.status == "needs_review"]
     system_errors = [r for r in bank_results if r.discrepancy_type == "system_error"]
     suspected_errors = [
-        r for r in bank_results if r.discrepancy_type == "suspected_ground_truth_error"
+        r for r in bank_results if r.status == "needs_review"
     ]
 
     adv_blocked = [r for r in adv_results if r.is_correct]
@@ -407,10 +428,11 @@ def execute_benchmark_suite(
 
     coverage_rate = (supported_count / total_bank) if total_bank > 0 else 0.0
     acc_supported = (correct_count / supported_count) if supported_count > 0 else 0.0
-    acc_e2e = (correct_count / total_bank) if total_bank > 0 else 0.0
+    acc_solver_given_dsl = (correct_count / total_bank) if total_bank > 0 else 0.0
 
-    all_latencies = [r.latency_ms for r in results]
-    p50, p90, p95, mean_lat, max_lat = compute_percentiles(all_latencies)
+    # Item 6: Measure latency ONLY for solved items (not unsupported)
+    solved_latencies = [r.latency_ms for r in bank_results if r.is_supported]
+    p50, p90, p95, mean_lat, max_lat = compute_percentiles(solved_latencies)
 
     # Compute category metrics
     category_metrics: dict[str, CategoryMetrics] = {}
@@ -426,7 +448,7 @@ def execute_benchmark_suite(
         c_cov = (c_sup / c_tot) if c_tot > 0 else 0.0
         c_acc_sup = (c_cor / c_sup) if c_sup > 0 else 0.0
         c_acc_tot = (c_cor / c_tot) if c_tot > 0 else 0.0
-        c_lats = [r.latency_ms for r in cat_res]
+        c_lats = [r.latency_ms for r in cat_res if r.is_supported] or [0.0]
         c_p50, _, c_p95, _, _ = compute_percentiles(c_lats)
 
         category_metrics[cat] = CategoryMetrics(
@@ -466,7 +488,7 @@ def execute_benchmark_suite(
         adversarial_pass_rate=round(adv_pass_rate, 4),
         coverage_rate=round(coverage_rate, 4),
         accuracy_on_supported=round(acc_supported, 4),
-        end_to_end_accuracy=round(acc_e2e, 4),
+        end_to_end_accuracy=round(acc_solver_given_dsl, 4),
         total_cost_usd=0.0,
         cost_per_request_usd=0.0,
         latency_p50_ms=p50,
