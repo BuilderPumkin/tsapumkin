@@ -67,6 +67,7 @@
     <link rel="stylesheet" href="css/responsive.css?v=3.1.0">
     <link rel="stylesheet" href="css/deep_learning.css?v=3.1.0">
     <link rel="stylesheet" href="css/tutor.css?v=3.1.0">
+    <link rel="stylesheet" href="css/math_solver.css?v=4.2.0">
     <script src="js/components/PumkinJSXGraph.js?v=3.1.0"></script>
     <script src="js/core/KnowledgeGraphSequencer.js?v=3.1.0"></script>
     <script src="js/core/PumkinDeepLearningIntegration.js?v=3.1.0"></script>
@@ -106,6 +107,8 @@
     <script src="js/features/analytics/PumkinAdaptivePractice.js?v=3.1.0"></script>
     <script src="js/core/PumkinJourneyManager.js?v=3.1.0"></script>
     <script src="js/features/analytics/PumkinAnalytics.js?v=3.1.0"></script>
+    <script src="js/math/PumkinMathAPIClient.js?v=4.2.0"></script>
+    <script src="js/ui/PumkinMathSolverUI.js?v=4.2.0"></script>
 </head>
 <body data-author="PUMKIN.DEV">
 <a href="#main-content" class="skip-to-content">Chuyển đến nội dung chính</a>
@@ -138,6 +141,9 @@
                 </button>
                 <button class="nav-tab" role="tab" aria-selected="false" data-target="qbank" onclick="PumkinRouter.navigate('qbank')">
                     Ngân hàng câu hỏi
+                </button>
+                <button class="nav-tab" role="tab" aria-selected="false" data-target="math-solver" onclick="PumkinRouter.navigate('math-solver')">
+                    🧮 Giải toán CAS
                 </button>
                 <button class="nav-tab" role="tab" aria-selected="false" data-target="generator" onclick="PumkinRouter.navigate('generator')">
                     Tạo đề thi
@@ -1963,6 +1969,11 @@
         </div>
     </div>
 </div>
+
+<!-- ==========================================================================
+     VIEW: PUMKIN CAS MATH SOLVER & VERIFICATION ENGINE
+     ========================================================================== -->
+<div id="view-math-solver" class="app-view" role="tabpanel" aria-label="Bộ giải toán CAS & Kiểm định tự động"></div>
 
 <!-- ==========================================================================
      VIEW: PUBLIC DATA REPOSITORY & OPEN DATA HUB

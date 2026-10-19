@@ -1,0 +1,503 @@
+/**
+ * PUMKIN.DEV Academic Architecture
+ * Stylesheet: math_solver.css
+ * Features: High-contrast WCAG 2.1 AA, Mobile Touch Target >= 44px, Keyboard Focus Rings
+ */
+
+/* Container and Layout */
+.math-solver-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 16px 60px 16px;
+    font-family: inherit;
+    color: var(--text-main, #0f172a);
+}
+
+.math-solver-header {
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--border-color, #e2e8f0);
+    padding-bottom: 16px;
+}
+
+.math-solver-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary, #1e3a8a);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 6px 0;
+}
+
+.math-solver-subtitle {
+    font-size: 14px;
+    color: var(--text-muted, #64748b);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Feature Flag Banner */
+.math-beta-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #1e40af;
+}
+
+/* Tab Navigation */
+.math-tabs-nav {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.math-tab-btn {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted, #64748b);
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.math-tab-btn:hover {
+    color: var(--primary, #1e3a8a);
+    background: #f8fafc;
+}
+
+.math-tab-btn.active {
+    color: var(--primary, #1e3a8a);
+    border-bottom-color: var(--primary, #1e3a8a);
+    background: transparent;
+}
+
+.math-tab-btn:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: -2px;
+}
+
+/* Input Card & Quick Samples */
+.math-card {
+    background: var(--bg-card, #ffffff);
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+}
+
+.math-textarea-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-main, #0f172a);
+    margin-bottom: 8px;
+}
+
+.math-textarea {
+    width: 100%;
+    min-height: 110px;
+    padding: 12px;
+    border: 1.5px solid var(--border-color, #cbd5e1);
+    border-radius: 8px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    background: #ffffff;
+    color: #0f172a;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.math-textarea:focus {
+    border-color: var(--primary, #1e3a8a);
+    outline: 2px solid rgba(30, 58, 138, 0.2);
+}
+
+.math-textarea:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 1px;
+}
+
+/* Quick Sample Chips */
+.math-samples-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 18px 0;
+    align-items: center;
+}
+
+.math-samples-label {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text-muted, #64748b);
+    margin-right: 4px;
+}
+
+.math-chip-btn {
+    min-height: 44px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #f1f5f9;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.math-chip-btn:hover {
+    background: #e2e8f0;
+    color: var(--primary, #1e3a8a);
+}
+
+.math-chip-btn:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Action Bar */
+.math-actions-bar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn-math-primary {
+    min-height: 44px;
+    min-width: 140px;
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: 700;
+    background: var(--primary, #1e3a8a);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-math-primary:hover:not(:disabled) {
+    background: #172554;
+    transform: translateY(-1px);
+}
+
+.btn-math-primary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-math-primary:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.btn-math-primary:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+.btn-math-clear {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    background: transparent;
+    color: var(--text-muted, #64748b);
+    border: 1px solid var(--border-color, #cbd5e1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-math-clear:hover {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+.btn-math-clear:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Status Badges */
+.pumkin-math-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.pumkin-math-badge.badge-verified {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1.5px solid #a7f3d0;
+}
+
+.pumkin-math-badge.badge-needs-review {
+    background: #fffbeb;
+    color: #92400e;
+    border: 1.5px solid #fde68a;
+}
+
+.pumkin-math-badge.badge-unsupported {
+    background: #f8fafc;
+    color: #334155;
+    border: 1.5px solid #cbd5e1;
+}
+
+/* Restate VI Banner */
+.math-restate-banner {
+    background: #f0fdf4;
+    border-left: 4px solid #16a34a;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+}
+
+.restate-label {
+    font-weight: 700;
+    color: #15803d;
+    margin-right: 6px;
+}
+
+.restate-content {
+    color: #0f172a;
+}
+
+/* Results & Steps Card */
+.math-result-card {
+    background: #ffffff;
+    border: 1.5px solid var(--border-color, #e2e8f0);
+    border-radius: 10px;
+    padding: 22px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.math-result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.math-final-answer-box {
+    background: #f8fafc;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.math-final-answer-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary, #1e3a8a);
+}
+
+.math-final-answer-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+/* Step-by-Step Reasoning Traces */
+.math-steps-list {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.math-step-item {
+    background: #fafafa;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 14px 16px;
+    transition: border-color 0.2s ease;
+}
+
+.math-step-item:hover {
+    border-color: #cbd5e1;
+}
+
+.math-step-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--primary, #1e3a8a);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.math-step-content {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #1e293b;
+}
+
+/* Loading & Cold-Start Indicator */
+.math-loading-state {
+    padding: 32px 20px;
+    text-align: center;
+    background: #f8fafc;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.math-spinner {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    border: 3.5px solid #e2e8f0;
+    border-top-color: var(--primary, #1e3a8a);
+    border-radius: 50%;
+    animation: math-spin 0.8s linear infinite;
+    margin-bottom: 12px;
+}
+
+@keyframes math-spin {
+    to { transform: rotate(360deg); }
+}
+
+.math-loading-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary, #1e3a8a);
+    margin-bottom: 6px;
+}
+
+.math-loading-desc {
+    font-size: 13.5px;
+    color: var(--text-muted, #64748b);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Error & Graceful Degradation State */
+.math-error-state {
+    padding: 22px;
+    background: #fef2f2;
+    border: 1.5px solid #fecaca;
+    border-radius: 10px;
+    margin-top: 20px;
+    color: #991b1b;
+}
+
+.math-error-title {
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.math-error-msg {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.btn-math-retry {
+    min-height: 44px;
+    min-width: 120px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    background: #dc2626;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 1px 3px rgba(220, 38, 38, 0.2);
+    transition: background 0.15s ease;
+}
+
+.btn-math-retry:hover {
+    background: #b91c1c;
+}
+
+.btn-math-retry:focus-visible {
+    outline: 3px solid #ef4444;
+    outline-offset: 2px;
+}
+
+/* Meta telemetry */
+.math-meta-telemetry {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted, #64748b);
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .math-actions-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-math-primary, .btn-math-clear {
+        width: 100%;
+    }
+
+    .math-final-answer-box {
+        flex-direction: column;
+        gap: 4px;
+    }
+}

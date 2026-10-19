@@ -92,6 +92,10 @@ const PumkinRouter = {
             const el = document.getElementById('qbank-list-container');
             return !el || !el.querySelector('.qbank-card');
         }
+        if (viewId === 'math-solver') {
+            const el = document.getElementById('view-math-solver');
+            return !el || !el.querySelector('.math-solver-container');
+        }
         return false;
     },
 
@@ -106,6 +110,7 @@ const PumkinRouter = {
         else if (viewId === "smart" && typeof PumkinSmartPractice !== "undefined") PumkinSmartPractice.render();
         else if (viewId === "admin" && typeof PumkinAdmin !== "undefined") PumkinAdmin.render();
         else if (viewId === "data" && typeof PumkinDataRepo !== "undefined") PumkinDataRepo.render();
+        else if (viewId === "math-solver" && typeof PumkinMathSolverUI !== "undefined") PumkinMathSolverUI.render();
 
         this.renderedViews.add(viewId);
 

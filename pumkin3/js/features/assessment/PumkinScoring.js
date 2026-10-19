@@ -576,8 +576,9 @@ const PumkinScoring = {
                             <span class="question-number-badge">CÂU ${qIdx + 1}</span>
                             <span style="font-size: 12.5px; color: var(--text-muted); margin-left: 8px;">${q.topic} • ${q.difficulty}</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                             ${badgeHtml}
+                            <button class="btn btn-sm btn-cas-verify" data-qid="${q.id}" title="Kiểm chứng bằng máy đại số CAS tất định">🔬 Kiểm chứng CAS</button>
                             <button class="btn btn-sm btn-tutor-ask" onclick="PumkinTutorIntegration.openFromQuestion('${q.id}', '${res.exam_id || 'exam'}')">🤖 Hỏi AI</button>
                             <button class="btn btn-sm btn-outline" onclick="PumkinScoring.toggleSaveQuestion('${q.id}', this)">
                                 ${isSaved ? '★ Đã lưu' : '☆ Lưu câu này'}
@@ -599,6 +600,8 @@ const PumkinScoring = {
                             ${q.explanation || 'Đang cập nhật lời giải chi tiết cho câu hỏi này.'}
                         </div>
                     </div>
+
+                    <div id="cas-verification-slot-${q.id}" class="cas-verification-slot" style="display:none;"></div>
 
                     <div class="pumkin-card-watermark">
                         <span class="brand-dot"></span> PUMKIN.DEV • NỀN TẢNG KHẢO THÍ TOÁN HỌC CHUẨN HÓA
@@ -629,6 +632,15 @@ const PumkinScoring = {
             }
         }
 
+        // Bind CAS Verification buttons strictly using addEventListener (NO inline onclick)
+        container.querySelectorAll('.btn-cas-verify:not([data-bound])').forEach(btn => {
+            btn.setAttribute('data-bound', 'true');
+            btn.addEventListener('click', (e) => {
+                const qid = e.currentTarget.dataset.qid;
+                PumkinScoring.verifyQuestionWithCAS(qid, e.currentTarget);
+            });
+        });
+
         if (filteredIndices.length > this._reviewDisplayLimit) {
             const remaining = filteredIndices.length - this._reviewDisplayLimit;
             const loadMoreDiv = document.createElement("div");
@@ -649,10 +661,146 @@ const PumkinScoring = {
         this.renderReviewSlice(true);
     },
 
-        toggleSaveQuestion(qId, btnEl) {
+    toggleSaveQuestion(qId, btnEl) {
         const added = PumkinStorage.toggleBookmark(qId);
         if (btnEl) {
             btnEl.textContent = added ? "★ Đã lưu" : "☆ Lưu câu này";
+        }
+    },
+
+    /**
+     * Verifies a bank question via PumkinMathAPIClient with graceful degradation
+     */
+    async verifyQuestionWithCAS(qid, btnEl) {
+        const slot = document.getElementById(`cas-verification-slot-${qid}`);
+        if (!slot) return;
+
+        // If already rendered, toggle display
+        if (slot.dataset.loaded === 'true') {
+            slot.style.display = (slot.style.display === 'none') ? 'block' : 'none';
+            return;
+        }
+
+        const question = (this.currentResult && this.currentResult.questions)
+            ? this.currentResult.questions.find(q => q.id === qid)
+            : (typeof PumkinStorage !== 'undefined' ? PumkinStorage.getQuestionById(qid) : null);
+
+        if (!question) return;
+
+        slot.style.display = 'block';
+        slot.dataset.loaded = 'true';
+        slot.innerHTML = `
+            <div class="math-loading-state" style="padding: 16px; margin: 10px 0;">
+                <div class="math-spinner" style="width: 24px; height: 24px; border-width: 2.5px;"></div>
+                <div style="font-size: 13.5px; font-weight: 700; color: var(--primary, #1e3a8a);">Đang kiểm chứng bằng máy đại số CAS...</div>
+            </div>
+        `;
+
+        if (!window.Pumkin.MathAPIClient) {
+            slot.innerHTML = `<div style="font-size: 13px; color: var(--text-muted); padding: 8px;">Mô-đun kiểm chứng CAS chưa sẵn sàng.</div>`;
+            return;
+        }
+
+        const payload = {
+            question_id: question.id,
+            question_text: question.question_text || question.question || question.content || ''
+        };
+
+        const res = await window.Pumkin.MathAPIClient.solve(payload);
+
+        if (!res.success) {
+            // Graceful Fallback to bank data
+            const fallback = window.Pumkin.MathAPIClient.getFallbackBankSolution(qid);
+            slot.innerHTML = `
+                <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 14px; margin-top: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+                        <span style="font-weight: 700; font-size: 13.5px; color: #334155;">KẾT QUẢ KIỂM CHỨNG</span>
+                        <span class="pumkin-math-badge badge-unsupported" style="font-size: 12px; padding: 4px 10px;">
+                            <span>ℹ️</span> <span>Chưa kiểm chứng (Ngoại tuyến)</span>
+                        </span>
+                    </div>
+                    <p style="font-size: 13px; color: #475569; margin: 0 0 10px 0; line-height: 1.5;">
+                        ${fallback.notes}
+                    </p>
+                    <div id="cas-retry-slot-${qid}"></div>
+                </div>
+            `;
+            const retrySlot = slot.querySelector(`#cas-retry-slot-${qid}`);
+            if (retrySlot) {
+                const retryBtn = document.createElement('button');
+                retryBtn.className = 'btn-math-retry';
+                retryBtn.style.padding = '6px 14px';
+                retryBtn.style.fontSize = '12.5px';
+                retryBtn.innerHTML = '<span>🔄</span><span>Thử lại kết nối CAS</span>';
+                retryBtn.addEventListener('click', () => {
+                    slot.dataset.loaded = 'false';
+                    this.verifyQuestionWithCAS(qid, btnEl);
+                });
+                retrySlot.appendChild(retryBtn);
+            }
+            return;
+        }
+
+        const data = res.data || {};
+        const status = data.status || 'unsupported';
+        let badgeClass = 'badge-unsupported';
+        let badgeText = 'Chưa kiểm chứng';
+        let badgeIcon = 'ℹ️';
+
+        if (status === 'verified') {
+            badgeClass = 'badge-verified';
+            badgeText = 'Đã kiểm chứng bằng máy đại số';
+            badgeIcon = '🛡️';
+        } else if (status === 'needs_review') {
+            badgeClass = 'badge-needs-review';
+            badgeText = 'Cần kiểm tra lại';
+            badgeIcon = '⚠️';
+        }
+
+        const restateHtml = data.restate_vi ? `
+            <div class="math-restate-banner" style="margin: 8px 0; font-size: 13px; padding: 8px 12px;">
+                <span class="restate-label">Hệ thống hiểu đề là:</span>
+                <span class="restate-content">${data.restate_vi}</span>
+            </div>
+        ` : '';
+
+        const stepsHtml = (data.steps && data.steps.length > 0) ? `
+            <div style="font-size: 12.5px; font-weight: 700; color: var(--primary, #1e3a8a); margin: 8px 0 4px 0;">
+                CÁC BƯỚC BIẾN ĐỔI KÝ HIỆU:
+            </div>
+            <div class="math-steps-list" style="gap: 6px;">
+                ${data.steps.map((st, i) => `
+                    <div class="math-step-item" style="padding: 8px 12px; font-size: 13px;">
+                        <span style="font-weight: 700; color: var(--primary, #1e3a8a);">Bước ${i+1}: ${st.title || ''}</span>
+                        <div style="margin-top: 4px;">${st.content || st.expression || ''}</div>
+                    </div>
+                `).join('')}
+            </div>
+        ` : '';
+
+        slot.innerHTML = `
+            <div style="background: #ffffff; border: 1.5px solid var(--border-color, #e2e8f0); border-radius: 8px; padding: 14px; margin-top: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+                    <span style="font-weight: 800; font-size: 13.5px; color: var(--primary, #1e3a8a);">KẾT QUẢ TÍNH TOÁN CAS</span>
+                    <span class="pumkin-math-badge ${badgeClass}" style="font-size: 12px; padding: 4px 10px;">
+                        <span>${badgeIcon}</span> <span>${badgeText}</span>
+                    </span>
+                </div>
+                ${restateHtml}
+                <div style="font-size: 13.5px; margin: 8px 0;">
+                    <strong>Đáp số CAS:</strong> <code>${data.computed_answer || data.answer || 'N/A'}</code>
+                </div>
+                ${stepsHtml}
+                <div style="font-size: 11px; color: var(--text-muted, #64748b); margin-top: 8px;">
+                    Độ trễ: ${res.latency_ms} ms • Cache: ${res.cache_status}
+                </div>
+            </div>
+        `;
+
+        if (window.Pumkin && window.Pumkin.Math && typeof window.Pumkin.Math.renderElement === 'function') {
+            window.Pumkin.Math.renderElement(slot);
+        } else if (window.PumkinMath && typeof window.PumkinMath.typeset === 'function') {
+            window.PumkinMath.typeset(slot);
         }
     }
 };
