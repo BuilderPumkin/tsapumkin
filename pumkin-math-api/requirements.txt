@@ -42,3 +42,4 @@ pygments==2.21.0
 colorama==0.4.6
 ruff==0.17.1
 pip-audit>=2.7.3
+setuptools>=83.0.0
