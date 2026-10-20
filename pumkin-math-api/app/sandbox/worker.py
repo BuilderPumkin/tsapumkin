@@ -30,6 +30,13 @@ def execute_in_child(
     """
     Entrypoint executed inside the spawned child process.
     """
+    # 0. On POSIX, detach child process into its own process group to isolate signals
+    if sys.platform != "win32":
+        try:
+            os.setpgrp()
+        except Exception:
+            pass
+
     # 1. Enforce isolated temporary directory
     os.environ["TMPDIR"] = temp_dir
     os.environ["TEMP"] = temp_dir
