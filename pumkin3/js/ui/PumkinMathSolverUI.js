@@ -33,51 +33,67 @@
 
     /**
      * Standard Badge Descriptor Generator
-     * Strictly maps confidence.method and status to academic labels
+     * Strictly conforms to API_CONTRACT.md (Section 3.2 & 3.3):
+     * - symbolic: "Đã giải chính xác bằng đại số (SymPy)"
+     * - numeric: "Đã kiểm tra bằng tính số"
+     * - consensus: "Đồng thuận đa phương pháp kiểm tra"
+     * - LLM involvement (llm_consensus, llm_assisted, llm_parsed): NEVER labeled "Đã kiểm chứng"!
+     *   Uses cautious label: "Gợi ý qua mô hình ngôn ngữ (Chưa kiểm chứng)"
+     * - needs_review: "Cần thầy cô kiểm tra lại"
+     * - unsupported: "Dạng bài chưa hỗ trợ tự động"
      */
     function getBadgeDescriptor(status, confidence) {
         const method = (confidence && confidence.method) ? confidence.method : 'unknown';
+        const isLlmAssisted = Boolean(
+            (confidence && (confidence.llm_assisted || confidence.llm_parsed)) ||
+            method === 'llm_consensus' ||
+            method === 'llm'
+        );
+
+        // Academic Governance: Results with LLM involvement MUST NEVER be labeled "verified"
+        if (isLlmAssisted) {
+            return {
+                className: 'badge-needs-review',
+                text: 'Gợi ý qua mô hình ngôn ngữ (Chưa kiểm chứng)',
+                icon: '🤖'
+            };
+        }
+
         if (status === 'verified') {
             if (method === 'symbolic') {
                 return {
                     className: 'badge-verified',
-                    text: 'Đã kiểm chứng bằng máy đại số (SymPy)',
+                    text: 'Đã giải chính xác bằng đại số (SymPy)',
                     icon: '🛡️'
-                };
-            } else if (method === 'rule_based') {
-                return {
-                    className: 'badge-verified',
-                    text: 'Đã kiểm chứng bằng quy tắc tất định',
-                    icon: '🛡️'
-                };
-            } else if (method === 'llm_consensus') {
-                return {
-                    className: 'badge-verified',
-                    text: 'Đã đồng thuận đa mẫu (LLM)',
-                    icon: '🤝'
                 };
             } else if (method === 'numeric') {
                 return {
                     className: 'badge-verified',
-                    text: 'Đã kiểm chứng xấp xỉ số',
+                    text: 'Đã kiểm tra bằng tính số',
                     icon: '🔢'
+                };
+            } else if (method === 'consensus') {
+                return {
+                    className: 'badge-verified',
+                    text: 'Đồng thuận đa phương pháp kiểm tra',
+                    icon: '🤝'
                 };
             }
             return {
                 className: 'badge-verified',
-                text: 'Đã kiểm chứng',
+                text: 'Đã kiểm chứng hình thức',
                 icon: '🛡️'
             };
         } else if (status === 'needs_review') {
             return {
                 className: 'badge-needs-review',
-                text: 'Cần kiểm tra lại',
+                text: 'Cần thầy cô kiểm tra lại',
                 icon: '⚠️'
             };
         }
         return {
             className: 'badge-unsupported',
-            text: 'Chưa kiểm chứng (Ngoài phạm vi CAS)',
+            text: 'Dạng bài chưa hỗ trợ tự động',
             icon: 'ℹ️'
         };
     }

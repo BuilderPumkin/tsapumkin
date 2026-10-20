@@ -8,7 +8,7 @@
     'use strict';
     window.Pumkin = window.Pumkin || {};
 
-// Rule-Based Deterministic Engine with Abstract Interfaces for Future AI
+// Rule-Based 100% Deterministic Engine with Abstract Interfaces for Future AI
 class RecommendationProvider {
     recommendNextAction(profile) { throw new Error("Not implemented"); }
 }

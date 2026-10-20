@@ -164,7 +164,7 @@
   - Tự động hiệu chỉnh lệch giờ (Clock Skew) giữa các thiết bị thí sinh.
 - **Bảng Xếp Hạng Trực Tiếp Ẩn Danh (Live Leaderboard)**:
   - Cập nhật thứ hạng tức thì sau mỗi câu nộp bài.
-  - Tự động gán bí danh học thuật ngẫu nhiên (như *Sói Cô Độc*, *Cáo Trắng*, *Gấu Ngủ Nướng*), bảo vệ trọn vẹn danh tính học sinh.
+  - Tự động gán bí danh học thuật ngẫu nhiên (như *Sói Cô Độc*, *Cáo Trắng*, *Gấu Ngủ Nướng*), bảo vệ 100% danh tính học sinh.
 - **Quyền Năng Chủ Phòng (Host Controls)**: Khóa phòng (`Lock`), bắt đầu thi (`Start`), loại người chơi (`Kick`), và kết thúc phòng thi sớm.
 - **Giám Sát Công Bằng Chống Gian Lận**: Ghi nhận sự kiện chuyển tab (window blur / focus audit), từ chối nhận bài thi gửi muộn sau khi hết giờ.
 
@@ -189,7 +189,7 @@ MathEval là nền tảng tiên phong hỗ trợ trọn vẹn cả 4 định d�
 
 ### 13. 💎 Tiện Ích Khảo Thí Toàn Diện & Trải Nghiệm Đỉnh Cao
 - **Phòng Thi Tập Trung Chống Gian Lận (Focus Exam Player)**: Đồng hồ đếm ngược thông minh cảnh báo thị giác khi sắp hết giờ, giao diện tối giản loại bỏ xao nhãng.
-- **Bảo Vệ Dữ Liệu Tuyệt Đối (Zero Data Loss)**: Mọi thao tác chọn đáp án, đánh dấu cờ (`Flag`) và thời gian làm bài được đồng bộ tức thì vào `localStorage`. Sập nguồn, rớt mạng, vô tình đóng tab hay hết pin đều khôi phục nguyên vẹn khi mở lại.
+- **Bảo Vệ Dữ Liệu Tuyệt Đối (Zero Data Loss)**: Mọi thao tác chọn đáp án, đánh dấu cờ (`Flag`) và thời gian làm bài được đồng bộ tức thì vào `localStorage`. Sập nguồn, rớt mạng, vô tình đóng tab hay hết pin đều khôi phục nguyên vẹn 100% khi mở lại.
 - **Xuất Bản Đề & Lời Giải Chuẩn In Ấn PDF (`Ctrl + P`)**: Bộ định dạng `@media print` học thuật chuyên nghiệp, tự động ẩn giao diện thừa, bổ sung Watermark thương hiệu `PUMKIN.DEV • KHẢO THÍ TOÁN HỌC CHUẨN HÓA` trang nhã cho bản in.
 - **Kho Đánh Dấu Câu Hỏi Yêu Thích (Bookmarks 2.0)**: Gắn sao `★` lưu lại những câu hỏi tâm đắc hoặc câu bẫy nhận thức để ôn luyện cấp tốc trước giờ thi.
 - **Công Nghệ Offline-First & Ứng Dụng PWA**: Cài đặt trực tiếp lên màn hình điện thoại/máy tính bảng như một ứng dụng độc lập, hoạt động mượt mà ngay cả khi không có kết nối Internet.

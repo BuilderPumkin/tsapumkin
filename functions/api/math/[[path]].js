@@ -64,7 +64,7 @@ function getCorsHeaders(request, env) {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": matchedOrigin,
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With, X-Pumkin-Tester-Id, X-Pumkin-User-Id, X-Pumkin-Tester-Token",
         "Access-Control-Max-Age": "86400",
         "Vary": "Origin"
     };
@@ -258,12 +258,41 @@ export async function onRequest(context = {}) {
         );
     }
 
+    // 1. Server-Side Production Feature Flag & Allowlist Check
+    const reqHost = requestUrl.hostname ? requestUrl.hostname.toLowerCase() : "";
+    const isProdEnv = (env && env.ENVIRONMENT === "production") ||
+                      reqHost === "tsapumkin.pages.dev" ||
+                      reqHost === "pumkin.dev" ||
+                      reqHost === "www.pumkin.dev";
+    const isPublicEnabled = env && (env.FEATURE_MATH_API_ENABLED === "true" || env.FEATURE_MATH_API_PUBLIC === "true");
+
+    if (isProdEnv && !isPublicEnabled) {
+        const rawAllowlist = (env && env.MATH_ALLOWLIST) ? String(env.MATH_ALLOWLIST) : "";
+        const allowlist = rawAllowlist.split(",").map(s => s.trim().toLowerCase()).filter(Boolean);
+        const clientId = (
+            request.headers.get("X-Pumkin-Tester-Id") ||
+            request.headers.get("X-Pumkin-User-Id") ||
+            request.headers.get("X-Pumkin-Tester-Token") ||
+            ""
+        ).trim().toLowerCase();
+
+        const isAuthorized = Boolean(clientId && allowlist.includes(clientId));
+        if (!isAuthorized) {
+            return makeErrorResponse(
+                403,
+                "FORBIDDEN_BETA_ACCESS",
+                "Tính năng Giải toán CAS đang trong giai đoạn thử nghiệm nội bộ. Quyền truy cập bị từ chối do danh tính chưa thuộc MATH_ALLOWLIST.",
+                corsHeaders
+            );
+        }
+    }
+
     // Extract Client IP
     const clientIp = request.headers.get("CF-Connecting-IP") ||
                      request.headers.get("X-Forwarded-For") ||
                      "unknown_client";
 
-    // 1. Enforce Rate Limiting
+    // 2. Enforce Rate Limiting
     const isRateAllowed = await enforceRateLimit(clientIp, env);
     if (!isRateAllowed) {
         return makeErrorResponse(

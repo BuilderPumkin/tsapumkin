@@ -64,7 +64,7 @@ async function runTests() {
         });
         const resSlash = await onRequest({
             request: reqSlash,
-            env: { MATH_API_URL: 'https://backend.example.com' },
+            env: { MATH_API_URL: 'https://backend.example.com', FEATURE_MATH_API_ENABLED: 'true' },
             params: { path: ['solve', ''] }
         });
         assert(resSlash.status === 200, 'Trailing slash /solve/ handled cleanly');
@@ -77,7 +77,7 @@ async function runTests() {
         });
         const resUpper = await onRequest({
             request: reqUpper,
-            env: { MATH_API_URL: 'https://backend.example.com' },
+            env: { MATH_API_URL: 'https://backend.example.com', FEATURE_MATH_API_ENABLED: 'true' },
             params: { path: ['SOLVE'] }
         });
         assert(resUpper.status === 200, 'Uppercase route SOLVE normalized and accepted');
@@ -101,7 +101,7 @@ async function runTests() {
         });
         const resQuery = await onRequest({
             request: reqQuery,
-            env: { MATH_API_URL: 'https://backend.example.com' },
+            env: { MATH_API_URL: 'https://backend.example.com', FEATURE_MATH_API_ENABLED: 'true' },
             params: { path: ['solve'] }
         });
         assert(resQuery.status === 200, 'Request with query string handled cleanly');
@@ -134,7 +134,8 @@ async function runTests() {
             request: reqShield,
             env: {
                 MATH_API_URL: 'https://backend.example.com',
-                MATH_API_KEY: 'internal_gateway_key'
+                MATH_API_KEY: 'internal_gateway_key',
+                FEATURE_MATH_API_ENABLED: 'true'
             },
             params: { path: ['solve'] }
         });
@@ -168,7 +169,7 @@ async function runTests() {
         });
         const res64K = await onRequest({
             request: req64K,
-            env: { MATH_API_URL: 'https://backend.example.com' },
+            env: { MATH_API_URL: 'https://backend.example.com', FEATURE_MATH_API_ENABLED: 'true' },
             params: { path: ['solve'] }
         });
         assert(res64K.status === 200, 'Body of exactly 64 KB (65,536 bytes) is ACCEPTED');
@@ -187,7 +188,7 @@ async function runTests() {
         });
         const resOver64K = await onRequest({
             request: reqOver64K,
-            env: {},
+            env: { FEATURE_MATH_API_ENABLED: 'true' },
             params: { path: ['solve'] }
         });
         assert(resOver64K.status === 413, 'Body of 64 KB + 1 byte (65,537 bytes) REJECTED with HTTP 413');
@@ -200,7 +201,7 @@ async function runTests() {
         });
         const resChunkedOver = await onRequest({
             request: reqChunkedOver,
-            env: {},
+            env: { FEATURE_MATH_API_ENABLED: 'true' },
             params: { path: ['solve'] }
         });
         assert(resChunkedOver.status === 413, 'Chunked body without Content-Length > 64KB REJECTED with HTTP 413');
@@ -236,6 +237,7 @@ async function runTests() {
         const mockKV = new Map();
         const fakeEnv = {
             MATH_API_URL: 'https://backend.example.com',
+            FEATURE_MATH_API_ENABLED: 'true',
             MATH_KV: {
                 get: async (k) => mockKV.get(k) || null,
                 put: async (k, v) => mockKV.set(k, v)
@@ -319,6 +321,103 @@ async function runTests() {
         const jsonWake = await resWake.json();
         assert(jsonWake.backend_health === 'reachable', 'Backend was pinged and marked reachable');
         assert(wakeCalled === true, 'Backend /health ping was executed for pre-warming');
+
+        globalThis.fetch = originalFetch;
+    }
+
+    // 8. Server-Side Allowlist Access Control (Prompt 12 Vòng 2)
+    {
+        const originalFetch = globalThis.fetch;
+        globalThis.fetch = async () => {
+            return new Response(JSON.stringify({ status: 'verified', computed_answer: '2' }), { status: 200 });
+        };
+
+        const prodEnv = {
+            ENVIRONMENT: 'production',
+            MATH_API_URL: 'https://backend.example.com',
+            MATH_ALLOWLIST: 'teacher_alpha,admin_tester,user_456'
+        };
+
+        // Case 8A: Production request with NO tester ID -> Rejection with HTTP 403
+        const reqNoId = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.8.1' },
+            body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
+        });
+        const resNoId = await onRequest({
+            request: reqNoId,
+            env: prodEnv,
+            params: { path: ['solve'] }
+        });
+        assert(resNoId.status === 403, 'Production request without tester ID blocked with HTTP 403');
+        const resNoIdJson = await resNoId.json();
+        assert(resNoIdJson.error.code === 'FORBIDDEN_BETA_ACCESS', 'Error code is FORBIDDEN_BETA_ACCESS');
+
+        // Case 8B: Production request with UNAUTHORIZED student ID -> Rejection with HTTP 403
+        const reqBadId = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: {
+                'CF-Connecting-IP': '10.0.8.2',
+                'X-Pumkin-Tester-Id': 'student_unauthorized'
+            },
+            body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
+        });
+        const resBadId = await onRequest({
+            request: reqBadId,
+            env: prodEnv,
+            params: { path: ['solve'] }
+        });
+        assert(resBadId.status === 403, 'Unauthorized student blocked with HTTP 403');
+
+        // Case 8C: Production request with AUTHORIZED ID in MATH_ALLOWLIST -> Passes with HTTP 200
+        const reqGoodId = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: {
+                'CF-Connecting-IP': '10.0.8.3',
+                'X-Pumkin-Tester-Id': 'teacher_alpha'
+            },
+            body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
+        });
+        const resGoodId = await onRequest({
+            request: reqGoodId,
+            env: prodEnv,
+            params: { path: ['solve'] }
+        });
+        assert(resGoodId.status === 200, 'Authorized tester in MATH_ALLOWLIST accepted with HTTP 200');
+
+        // Case 8D: Production request when FEATURE_MATH_API_ENABLED = "true" -> Public access allowed (HTTP 200)
+        const publicEnv = {
+            ...prodEnv,
+            FEATURE_MATH_API_ENABLED: 'true'
+        };
+        const reqPublic = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.8.4' },
+            body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
+        });
+        const resPublic = await onRequest({
+            request: reqPublic,
+            env: publicEnv,
+            params: { path: ['solve'] }
+        });
+        assert(resPublic.status === 200, 'Public request passes when FEATURE_MATH_API_ENABLED is true');
+
+        // Case 8E: Preview deployment (non-production) -> Passes without allowlist (HTTP 200)
+        const previewEnv = {
+            ENVIRONMENT: 'preview',
+            MATH_API_URL: 'https://backend.example.com'
+        };
+        const reqPreview = new Request('https://pr-123.tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.8.5' },
+            body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
+        });
+        const resPreview = await onRequest({
+            request: reqPreview,
+            env: previewEnv,
+            params: { path: ['solve'] }
+        });
+        assert(resPreview.status === 200, 'Preview deployment allows tester requests with HTTP 200');
 
         globalThis.fetch = originalFetch;
     }

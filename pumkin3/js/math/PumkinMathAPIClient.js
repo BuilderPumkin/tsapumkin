@@ -161,13 +161,21 @@
 
             const startTime = performance.now();
 
+            const currentUser = (window.Pumkin && window.Pumkin.Auth && window.Pumkin.Auth.currentUser)
+                ? window.Pumkin.Auth.currentUser
+                : ((typeof PumkinAuth !== 'undefined') ? PumkinAuth.currentUser : null);
+            const testerId = (currentUser && (currentUser.id || currentUser.username)) || '';
+
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                ...(testerId ? { 'X-Pumkin-Tester-Id': String(testerId) } : {})
+            };
+
             try {
                 const response = await fetch(url, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
+                    headers: headers,
                     body: typeof payload === 'string' ? payload : JSON.stringify(payload),
                     signal: options.signal || controller.signal
                 });

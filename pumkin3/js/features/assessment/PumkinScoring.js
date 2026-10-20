@@ -767,28 +767,38 @@ const PumkinScoring = {
         const data = res.data || {};
         const status = data.status || 'unsupported';
         const confMethod = (data.confidence && data.confidence.method) ? data.confidence.method : '';
+        const isLlmAssisted = Boolean(
+            (data.confidence && (data.confidence.llm_assisted || data.confidence.llm_parsed)) ||
+            confMethod === 'llm_consensus' ||
+            confMethod === 'llm'
+        );
+
         let badgeClass = 'badge-unsupported';
-        let badgeText = 'Chưa kiểm chứng (Ngoài phạm vi CAS)';
+        let badgeText = 'Dạng bài chưa hỗ trợ tự động';
         let badgeIcon = 'ℹ️';
 
-        if (status === 'verified') {
+        if (isLlmAssisted) {
+            badgeClass = 'badge-needs-review';
+            badgeText = 'Gợi ý qua mô hình ngôn ngữ (Chưa kiểm chứng)';
+            badgeIcon = '🤖';
+        } else if (status === 'verified') {
             badgeClass = 'badge-verified';
             if (confMethod === 'symbolic') {
-                badgeText = 'Đã kiểm chứng bằng máy đại số (SymPy)';
+                badgeText = 'Đã giải chính xác bằng đại số (SymPy)';
                 badgeIcon = '🛡️';
-            } else if (confMethod === 'rule_based') {
-                badgeText = 'Đã kiểm chứng bằng quy tắc tất định';
-                badgeIcon = '🛡️';
-            } else if (confMethod === 'llm_consensus') {
-                badgeText = 'Đã đồng thuận đa mẫu (LLM)';
+            } else if (confMethod === 'numeric') {
+                badgeText = 'Đã kiểm tra bằng tính số';
+                badgeIcon = '🔢';
+            } else if (confMethod === 'consensus') {
+                badgeText = 'Đồng thuận đa phương pháp kiểm tra';
                 badgeIcon = '🤝';
             } else {
-                badgeText = 'Đã kiểm chứng';
+                badgeText = 'Đã kiểm chứng hình thức';
                 badgeIcon = '🛡️';
             }
         } else if (status === 'needs_review') {
             badgeClass = 'badge-needs-review';
-            badgeText = 'Cần kiểm tra lại';
+            badgeText = 'Cần thầy cô kiểm tra lại';
             badgeIcon = '⚠️';
         }
 
