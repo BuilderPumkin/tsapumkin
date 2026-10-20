@@ -2,7 +2,7 @@
  * Comprehensive Test Suite for Cloudflare Pages Math Gateway Function
  * Path: functions/api/math/[[path]].js
  */
-import { onRequest, buildCacheKeyInput, sha256Hex } from '../functions/api/math/[[path]].js';
+import { onRequest, buildCacheKeyInput, sha256Hex, timingSafeEqualToken } from '../functions/api/math/[[path]].js';
 
 let passed = 0;
 let failed = 0;
@@ -325,20 +325,31 @@ async function runTests() {
         globalThis.fetch = originalFetch;
     }
 
-    // 8. Server-Side Allowlist Access Control (Prompt 12 Vòng 2)
+    // 8. Server-Side Random Token Allowlist Access Control (Prompt 12 Vòng 3)
     {
         const originalFetch = globalThis.fetch;
         globalThis.fetch = async () => {
             return new Response(JSON.stringify({ status: 'verified', computed_answer: '2' }), { status: 200 });
         };
 
+        const secretTokenAlpha = 'sec_tok_alpha_9f83b2e1a4c7d056e92b814a3f7890bc';
+        const secretTokenBeta  = 'sec_tok_beta_3d71e5a9b2c8f041d63e905a8b1234ef';
+
+        // 8.0 Constant-time timingSafeEqualToken unit verification
+        const isMatch = await timingSafeEqualToken(secretTokenAlpha, secretTokenAlpha);
+        assert(isMatch === true, 'Constant-time comparison succeeds on identical tokens');
+        const isMismatch = await timingSafeEqualToken(secretTokenAlpha, secretTokenBeta);
+        assert(isMismatch === false, 'Constant-time comparison rejects different tokens');
+        const isLengthDiff = await timingSafeEqualToken('short_tok', secretTokenAlpha);
+        assert(isLengthDiff === false, 'Constant-time comparison safely handles length differences via SHA-256');
+
         const prodEnv = {
             ENVIRONMENT: 'production',
             MATH_API_URL: 'https://backend.example.com',
-            MATH_ALLOWLIST: 'teacher_alpha,admin_tester,user_456'
+            MATH_TESTER_TOKENS: `${secretTokenAlpha},${secretTokenBeta}`
         };
 
-        // Case 8A: Production request with NO tester ID -> Rejection with HTTP 403
+        // Case 8A: Production request with NO tester token -> Rejection with HTTP 403
         const reqNoId = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
             headers: { 'CF-Connecting-IP': '10.0.8.1' },
@@ -349,16 +360,16 @@ async function runTests() {
             env: prodEnv,
             params: { path: ['solve'] }
         });
-        assert(resNoId.status === 403, 'Production request without tester ID blocked with HTTP 403');
+        assert(resNoId.status === 403, 'Production request without tester token blocked with HTTP 403');
         const resNoIdJson = await resNoId.json();
         assert(resNoIdJson.error.code === 'FORBIDDEN_BETA_ACCESS', 'Error code is FORBIDDEN_BETA_ACCESS');
 
-        // Case 8B: Production request with UNAUTHORIZED student ID -> Rejection with HTTP 403
+        // Case 8B: Production request with GUESSABLE/UNAUTHORIZED ID -> Rejection with HTTP 403
         const reqBadId = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
             headers: {
                 'CF-Connecting-IP': '10.0.8.2',
-                'X-Pumkin-Tester-Id': 'student_unauthorized'
+                'X-Pumkin-Tester-Token': 'guessable_email_or_teacher_id'
             },
             body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
         });
@@ -367,14 +378,14 @@ async function runTests() {
             env: prodEnv,
             params: { path: ['solve'] }
         });
-        assert(resBadId.status === 403, 'Unauthorized student blocked with HTTP 403');
+        assert(resBadId.status === 403, 'Unauthorized guessable ID blocked with HTTP 403');
 
-        // Case 8C: Production request with AUTHORIZED ID in MATH_ALLOWLIST -> Passes with HTTP 200
+        // Case 8C: Production request with AUTHORIZED HIGH-ENTROPY TOKEN -> Passes with HTTP 200
         const reqGoodId = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
             headers: {
                 'CF-Connecting-IP': '10.0.8.3',
-                'X-Pumkin-Tester-Id': 'teacher_alpha'
+                'X-Pumkin-Tester-Token': secretTokenAlpha
             },
             body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
         });
@@ -383,7 +394,7 @@ async function runTests() {
             env: prodEnv,
             params: { path: ['solve'] }
         });
-        assert(resGoodId.status === 200, 'Authorized tester in MATH_ALLOWLIST accepted with HTTP 200');
+        assert(resGoodId.status === 200, 'Authorized high-entropy token accepted with HTTP 200');
 
         // Case 8D: Production request when FEATURE_MATH_API_ENABLED = "true" -> Public access allowed (HTTP 200)
         const publicEnv = {

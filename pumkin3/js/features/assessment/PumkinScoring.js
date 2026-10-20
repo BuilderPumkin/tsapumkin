@@ -784,13 +784,13 @@ const PumkinScoring = {
         } else if (status === 'verified') {
             badgeClass = 'badge-verified';
             if (confMethod === 'symbolic') {
-                badgeText = 'Đã giải chính xác bằng đại số (SymPy)';
+                badgeText = 'Đã xác minh bằng máy đại số';
                 badgeIcon = '🛡️';
             } else if (confMethod === 'numeric') {
                 badgeText = 'Đã kiểm tra bằng tính số';
                 badgeIcon = '🔢';
             } else if (confMethod === 'consensus') {
-                badgeText = 'Đồng thuận đa phương pháp kiểm tra';
+                badgeText = 'Đồng thuận đối chiếu (Đại số & Số học)';
                 badgeIcon = '🤝';
             } else {
                 badgeText = 'Đã kiểm chứng hình thức';

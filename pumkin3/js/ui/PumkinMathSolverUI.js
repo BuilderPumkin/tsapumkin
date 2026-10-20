@@ -63,7 +63,7 @@
             if (method === 'symbolic') {
                 return {
                     className: 'badge-verified',
-                    text: 'Đã giải chính xác bằng đại số (SymPy)',
+                    text: 'Đã xác minh bằng máy đại số',
                     icon: '🛡️'
                 };
             } else if (method === 'numeric') {
@@ -75,7 +75,7 @@
             } else if (method === 'consensus') {
                 return {
                     className: 'badge-verified',
-                    text: 'Đồng thuận đa phương pháp kiểm tra',
+                    text: 'Đồng thuận đối chiếu (Đại số & Số học)',
                     icon: '🤝'
                 };
             }

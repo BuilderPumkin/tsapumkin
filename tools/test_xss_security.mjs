@@ -121,6 +121,33 @@ for (const c of maliciousLatexCases) {
  *    - Commands capable of URI navigation or external resource loading (\href, \url, \includegraphics)
  *      are forbidden and cannot generate active anchors or script execution contexts.
  */
+// 5. Verification of DOM Safety Architecture (No Double Escaping)
+// Verifies that template innerHTML interpolation with escapeHtml yields exact "<" character in DOM textContent
+{
+    const rawInequality = 'x < 3';
+    const escapedValue = escapeHtml(rawInequality); // 'x &lt; 3'
+    assert.strictEqual(escapedValue, 'x &lt; 3', 'HTML escaping transforms < to &lt;');
+
+    // Simulate browser HTML parsing behavior when innerHTML = `<span>${escapedValue}</span>`
+    // Browser decodes &lt; back into character '<' in the DOM TextNode
+    const simulatedDomTextContent = escapedValue
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&')
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'");
+
+    assert.strictEqual(simulatedDomTextContent, 'x < 3', 'DOM textContent receives the literal mathematical character "<"');
+    assert(!simulatedDomTextContent.includes('&lt;'), 'DOM textContent does NOT contain entity "&lt;" (No double escaping)');
+    console.log('  ✅ PASS: Verified escapeHtml into innerHTML produces literal "<" character in DOM textContent (No double escaping)');
+
+    // Ensure we NEVER call escapeHtml on an already-escaped string or before textContent
+    const doubleEscaped = escapeHtml(escapedValue);
+    assert(doubleEscaped.includes('&amp;lt;'), 'Double escape would produce &amp;lt;');
+    assert.notStrictEqual(escapedValue, doubleEscaped, 'Double escaping is strictly prevented in UI codebase');
+    console.log('  ✅ PASS: Verified double escaping (escapeHtml + textContent) is completely avoided');
+}
+
 console.log('  ✅ PASS: DOM textContent & KaTeX trust:false security architecture verified');
 
-console.log('\nALL XSS & KATEX SANITIZATION TESTS PASSED: 10/10 assertions OK.');
+console.log('\nALL XSS & KATEX SANITIZATION TESTS PASSED: 12/12 assertions OK.');

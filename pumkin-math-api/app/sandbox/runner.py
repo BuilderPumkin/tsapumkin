@@ -79,9 +79,14 @@ def _terminate_process_tree(pid: int) -> None:
         try:
             import signal
 
-            # Send SIGKILL to the process group if available, else process
+            my_pgrp = os.getpgrp()
             pgid = os.getpgid(pid)
-            os.killpg(pgid, signal.SIGKILL)
+            # CRITICAL: Only killpg if the child is in its OWN detached process group!
+            # If pgid matches our own process group, killpg would terminate pytest and the CI runner!
+            if pgid != my_pgrp and pgid > 0:
+                os.killpg(pgid, signal.SIGKILL)
+            else:
+                os.kill(pid, signal.SIGKILL)
         except Exception:
             try:
                 import signal

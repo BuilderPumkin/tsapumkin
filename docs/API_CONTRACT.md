@@ -50,16 +50,19 @@ Trường `schema_version` tuân thủ nguyên tắc Semantic Versioning (`MAJOR
 Hệ thống xác định tường minh vai trò của các phương pháp:
 - **`symbolic`:** Tính toán thuần túy đại số giải tích bằng bộ giải tất định SymPy CAS. **TUYỆT ĐỐI KHÔNG CÓ SỰ THAM GIA CỦA LLM** trong vòng lặp tính toán.
 - **`numeric`:** Xác minh bằng xấp xỉ số học, lấy mẫu nghiệm và số học khoảng (Interval Arithmetic). **TUYỆT ĐỐI KHÔNG CÓ LLM**. Phương pháp này kiểm chứng tính hợp lý của nghiệm nhưng **KHÔNG NGỤ Ý ĐÃ CHỨNG MINH HÌNH THỨC TOÁN HỌC**.
-- **`consensus`:** Sự đồng thuận giữa nhiều phương pháp kiểm chứng tất định độc lập (vd: kết hợp tính toán giải tích SymPy với quét mẫu số học nhiều điểm biên). **TUYỆT ĐỐI KHÔNG DÙNG LLM ĐỂ BỎ PHIẾU ĐỒNG THUẬN**. Nếu có LLM tham gia thì kết quả KHÔNG được mang nhãn verified.
+- **`consensus` (Đồng thuận đối chiếu):** Kết quả đạt được khi có sự thống nhất hoàn toàn giữa ít nhất hai phương pháp toán học độc lập:
+  1. *Đối chiếu giải tích - số học:* Kết quả giải tích biểu tượng (SymPy) trùng khớp hoàn toàn với kiểm tra mẫu số học (Numeric sampling) trên toàn miền xác định.
+  2. *Đối chiếu đa phiên bản DSL:* Trong bộ dịch ngữ nghĩa (Semantic Parser), nhiều lượt sinh DSL độc lập khi đưa vào bộ giải CAS tất định đều cho ra cùng một kết quả duy nhất.
+  **TUYỆT ĐỐI KHÔNG DÙNG LLM ĐỂ TỰ BỎ PHIẾU ĐỒNG THUẬN NẾU KHÔNG QUA MÁY ĐẠI SỐ CAS.** Nếu có LLM tham gia mà chưa kiểm chứng được qua CAS, kết quả KHÔNG được mang nhãn `verified`.
 
 ### 3.3. Bảng ánh xạ trạng thái & phương pháp sang Huy hiệu giao diện
 Giao diện người dùng căn cứ vào trường `status` và `confidence.method` trong phong bì phản hồi để hiển thị huy hiệu chẩn đoán tương ứng:
 
 | Trạng thái (`status`) | Phương pháp kiểm chứng (`confidence.method`) | Tên huy hiệu giao diện (UI Badge Label) | Màu sắc | Ý nghĩa sư phạm & Hành vi giao diện |
 | :--- | :--- | :--- | :---: | :--- |
-| **`verified`** | `symbolic` | **"Đã giải chính xác bằng đại số"** | Xanh lá (Green) | Kết quả được giải tích toán học tất định qua SymPy, thỏa mãn mọi điều kiện biên và tập xác định. Được tính điểm bình thường. |
+| **`verified`** | `symbolic` | **"Đã xác minh bằng máy đại số"** | Xanh lá (Green) | Kết quả được giải tích toán học tất định qua SymPy, thỏa mãn mọi điều kiện biên và tập xác định. Được tính điểm bình thường. |
 | **`verified`** | `numeric` | **"Đã kiểm tra bằng tính số"** | Xanh lục nhạt (Teal) | Kết quả vượt qua kiểm tra mẫu số học tất định. Câu chữ thận trọng, không ngụ ý là chứng minh hình thức. Được tính điểm bình thường. |
-| **`verified`** | `consensus` | **"Đồng thuận đa phương pháp kiểm tra"** | Xanh dương (Blue) | Kết quả đạt được nhờ sự thống nhất giữa bộ giải giải tích và bộ quét số học độc lập. Được tính điểm bình thường. |
+| **`verified`** | `consensus` | **"Đồng thuận đối chiếu (Đại số & Số học)"** | Xanh dương (Blue) | Kết quả đạt được nhờ sự thống nhất giữa bộ giải giải tích và bộ quét số học độc lập. Được tính điểm bình thường. |
 | **`needs_review`** | Bất kỳ | **"Cần thầy cô kiểm tra lại"** | Vàng cam (Amber) | Phát hiện mâu thuẫn CAS (`conflict == true`), hoặc câu phụ thuộc trực quan nhẹ (SOFT), hoặc bước giải mơ hồ. **TUYỆT ĐỐI KHÔNG TRỪ ĐIỂM HỌC SINH**; bảo lưu kết quả để giáo viên thẩm định tay. |
 | **`unsupported`** | Bất kỳ | **"Dạng bài chưa hỗ trợ tự động"** | Xám (Gray) | Dạng bài nằm ngoài phạm vi giải tự động (phụ thuộc hình vẽ cứng, hình học cổ điển, kéo thả v1...). Hệ thống giữ nguyên điểm, hướng dẫn học sinh xem bài giải chi tiết. |
 | **`error`** | Bất kỳ | **"Có lỗi xử lý hệ thống"** | Đỏ (Red) | Lỗi cú pháp đầu vào, timeout quá thời gian xử lý, hoặc ngoại lệ runtime. Hiển thị thông điệp từ trường `error.message_vi`. |
