@@ -1,8 +1,0 @@
-{
-  "question_id": "q_test_check_01",
-  "question_text": "Giải phương trình \\(2x - 4 = 0\\)",
-  "canonical_answer": "x = 2",
-  "student_answer": "2",
-  "answer_type": "number",
-  "step_index": 1
-}

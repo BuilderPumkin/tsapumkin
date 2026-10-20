@@ -1,6 +1,0 @@
-# Enforce LF endings across repository
-* text=auto eol=lf
-*.json text eol=lf
-*.py text eol=lf
-*.md text eol=lf
-docs/openapi.json text eol=lf
