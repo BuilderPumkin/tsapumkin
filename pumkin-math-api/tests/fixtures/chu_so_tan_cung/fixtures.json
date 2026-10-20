@@ -1,0 +1,203 @@
+[
+  {
+    "question_id": "q_tsa_num_01",
+    "question_text": "Chữ số tận cùng của lũy thừa \\(2027^{2026}\\) là bao nhiêu?",
+    "dsl": {
+      "type": "tim_chu_so_tan_cung_luy_thua_lon",
+      "base": "2027",
+      "exponent": "2026",
+      "modulus_digits": 1,
+      "restate_vi": "Tìm chữ số tận cùng của lũy thừa 2027^{2026}."
+    },
+    "expected_status": "verified",
+    "expected_canonical_index": 1,
+    "expected_canonical_raw": "9",
+    "evaluation_type": "option_match",
+    "classification": "match",
+    "notes": "Câu hỏi chuẩn từ ngân hàng đề all.json, chu kỳ 4, số mũ dư 2 => tận cùng là 9, khớp option 1."
+  },
+  {
+    "question_id": "q_tsa_num_02",
+    "question_text": "Tìm phần dư khi chia số \\(3^{100}\\) cho số nguyên tố 13.",
+    "dsl": {
+      "type": "tim_chu_so_tan_cung_luy_thua_lon",
+      "base": "3",
+      "exponent": "100",
+      "modulo": 13,
+      "restate_vi": "Tìm phần dư khi chia 3^{100} cho 13."
+    },
+    "expected_status": "verified",
+    "expected_canonical_index": null,
+    "expected_canonical_raw": "3",
+    "evaluation_type": "direct_value",
+    "classification": "match",
+    "notes": "Câu hỏi chuẩn từ ngân hàng đề all.json, theo định lý Fermat nhỏ chu kỳ 3 => 3^{100} mod 13 = 3."
+  },
+  {
+    "question_id": "q_tsa_num_03",
+    "question_text": "Xét tính Đúng / Sai của các khẳng định sau về lý thuyết số học và đồng dư thức:",
+    "dsl": {
+      "type": "unsupported",
+      "reason": "interactive_ui_type",
+      "restate_vi": "Câu hỏi lý thuyết Đúng/Sai về tính chất đồng dư thức."
+    },
+    "expected_status": "unsupported",
+    "expected_canonical_index": null,
+    "expected_canonical_raw": "{'a': True, 'b': False, 'c': True, 'd': False}",
+    "evaluation_type": "out_of_scope",
+    "classification": "out_of_scope",
+    "notes": "Câu hỏi lý thuyết Đúng/Sai 4 ý; ngoài phạm vi solver tính toán chữ số tận cùng của lũy thừa cụ thể."
+  },
+  {
+    "question_id": "q_tsa_num_04",
+    "question_text": "Tìm phần dư khi chia đa thức P(x) = x^{100} + x^{50} + 1 cho (x - 1)^2.",
+    "dsl": {
+      "type": "unsupported",
+      "reason": "out_of_scope",
+      "restate_vi": "Tìm phần dư của phép chia đa thức đại số."
+    },
+    "expected_status": "unsupported",
+    "expected_canonical_index": null,
+    "expected_canonical_raw": "150x - 147",
+    "evaluation_type": "out_of_scope",
+    "classification": "out_of_scope",
+    "notes": "Phép chia đa thức đại số P(x)/(x-1)^2; ngoài phạm vi solver số học đồng dư số nguyên."
+  },
+  {
+    "question_id": "q_var_last_digit_01",
+    "question_text": "Tìm chữ số tận cùng của lũy thừa 2^{2024}.",
+    "dsl": {
+      "type": "tim_chu_so_tan_cung_luy_thua_lon",
+      "base": "2",
+      "exponent": "2024",
+      "modulus_digits": 1,
+      "restate_vi": "Tìm chữ số tận cùng của 2^{2024}."
+    },
+    "expected_status": "verified",
+    "expected_canonical_index": null,
+    "expected_canonical_raw": "6",
+    "evaluation_type": "direct_value",
+    "classification": "match",
+    "notes": "Bẫy số mũ chia hết cho chu kỳ 4: 2024 mod 4 = 0 => chữ số tận cùng là 6 (phần tử thứ 4, không phải 2^0=1)."
+  },
+  {
+    "question_id": "q_var_last_digit_02",
+    "question_text": "Tìm chữ số tận cùng của lũy thừa 3^{2025}.",
+    "dsl": {
+      "type": "tim_chu_so_tan_cung_luy_thua_lon",
+      "base": "3",
+      "exponent": "2025",
+      "modulus_digits": 1,
+      "restate_vi": "Tìm chữ số tận cùng của 3^{2025}."
+    },
+    "expected_status": "verified",
+    "expected_canonical_index": null,
+    "expected_canonical_raw": "3",
+    "evaluation_type": "direct_value",
+    "classification": "match",
+    "notes": "Chu kỳ 4, 2025 mod 4 = 1 => 3^1 = 3."
+  },
+  {
+    "question_id": "q_var_last_digit_03",
+    "question_text": "Tìm chữ số tận cùng của lũy thừa 4^{2024}.",
+    "dsl": {
+      "type": "tim_chu_so_tan_cung_luy_thua_lon",
+      "base": "4",
+      "exponent": "2024",
+      "modulus_digits": 1,
+      "restate_vi": "Tìm chữ số tận cùng của 4^{2024}."
+    },
+    "expected_status": "verified",
+    "expected_canonical_index": null,
+    "expected_canonical_raw": "6",
+    "evaluation_type": "direct_value",
+    "classification": "match",
+    "notes": "Cơ số 4 có chu kỳ 2, số mũ chẵn => tận cùng là 6."
+  },
+  {
+    "question_id": "q_var_last_digit_04",
+    "question_text": "Tìm chữ số tận cùng của lũy thừa 9^{2025}.",
+    "dsl": {
+      "type": "tim_chu_so_tan_cung_luy_thua_lon",
+      "base": "9",
+      "exponent": "2025",
+      "modulus_digits": 1,
+      "restate_vi": "Tìm chữ số tận cùng của 9^{2025}."
+    },
+    "expected_status": "verified",
+    "expected_canonical_index": null,
+    "expected_canonical_raw": "9",
+    "evaluation_type": "direct_value",
+    "classification": "match",
+    "notes": "Cơ số 9 có chu kỳ 2, số mũ lẻ => tận cùng là 9."
+  },
+  {
+    "question_id": "q_var_last_digit_05",
+    "question_text": "Tìm chữ số tận cùng của lũy thừa 8^{2024}.",
+    "dsl": {
+      "type": "tim_chu_so_tan_cung_luy_thua_lon",
+      "base": "8",
+      "exponent": "2024",
+      "modulus_digits": 1,
+      "restate_vi": "Tìm chữ số tận cùng của 8^{2024}."
+    },
+    "expected_status": "verified",
+    "expected_canonical_index": null,
+    "expected_canonical_raw": "6",
+    "evaluation_type": "direct_value",
+    "classification": "match",
+    "notes": "Cơ số 8 chu kỳ 4: [8, 4, 2, 6]. 2024 mod 4 = 0 => tận cùng là 6."
+  },
+  {
+    "question_id": "q_var_last_digit_06",
+    "question_text": "Tìm chữ số tận cùng của tháp lũy thừa 7^{9^9}.",
+    "dsl": {
+      "type": "tim_chu_so_tan_cung_luy_thua_lon",
+      "base": "7",
+      "exponent": "9",
+      "tower_exponent": "9",
+      "modulus_digits": 1,
+      "restate_vi": "Tìm chữ số tận cùng của tháp lũy thừa 7^(9^9)."
+    },
+    "expected_status": "verified",
+    "expected_canonical_index": null,
+    "expected_canonical_raw": "7",
+    "evaluation_type": "direct_value",
+    "classification": "match",
+    "notes": "Tháp lũy thừa: 9^9 mod 4 = 1 => 7^1 mod 10 = 7."
+  },
+  {
+    "question_id": "q_var_last_digit_07",
+    "question_text": "Tìm hai chữ số tận cùng của lũy thừa 2^{100}.",
+    "dsl": {
+      "type": "tim_chu_so_tan_cung_luy_thua_lon",
+      "base": "2",
+      "exponent": "100",
+      "modulus_digits": 2,
+      "restate_vi": "Tìm hai chữ số tận cùng của 2^{100}."
+    },
+    "expected_status": "verified",
+    "expected_canonical_index": null,
+    "expected_canonical_raw": "76",
+    "evaluation_type": "direct_value",
+    "classification": "match",
+    "notes": "Hai chữ số tận cùng mod 100: 2^{100} mod 100 = 76."
+  },
+  {
+    "question_id": "q_var_last_digit_08",
+    "question_text": "Tìm hai chữ số tận cùng của lũy thừa 7^4.",
+    "dsl": {
+      "type": "tim_chu_so_tan_cung_luy_thua_lon",
+      "base": "7",
+      "exponent": "4",
+      "modulus_digits": 2,
+      "restate_vi": "Tìm hai chữ số tận cùng của 7^4."
+    },
+    "expected_status": "verified",
+    "expected_canonical_index": null,
+    "expected_canonical_raw": "01",
+    "evaluation_type": "direct_value",
+    "classification": "match",
+    "notes": "7^4 = 2401 mod 100 = 01 (bảo toàn chữ số 0 đứng trước)."
+  }
+]

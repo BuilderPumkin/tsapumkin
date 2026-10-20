@@ -1,0 +1,157 @@
+[
+  {
+    "question_id": "q_thpt_06",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "ung_dung_tich_phan_dien_tich_hinh_phang",
+      "curve1": "x^2",
+      "curve2": "2x",
+      "restate_vi": "Tính diện tích hình phẳng giới hạn bởi parabol y = x^2 và đường thẳng y = 2x."
+    },
+    "expected_canonical_raw": "4/3"
+  },
+  {
+    "question_id": "q_gen_area_1",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "dien_tich_hinh_phang",
+      "curve1": "2 - x^2",
+      "curve2": "0",
+      "restate_vi": "Tính diện tích S của hình phẳng giới hạn bởi đồ thị y = 2 - x^2 và trục Ox."
+    },
+    "expected_canonical_raw": "8*sqrt(2)/3"
+  },
+  {
+    "question_id": "q_gen_area_2",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "dien_tich_hinh_phang",
+      "curve1": "3 - x^2",
+      "curve2": "0",
+      "restate_vi": "Tính diện tích S của hình phẳng giới hạn bởi đồ thị y = 3 - x^2 và trục Ox."
+    },
+    "expected_canonical_raw": "4*sqrt(3)"
+  },
+  {
+    "question_id": "q_gen_area_3",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "dien_tich_hinh_phang",
+      "curve1": "4 - x^2",
+      "curve2": "0",
+      "restate_vi": "Tính diện tích S của hình phẳng giới hạn bởi đồ thị y = 4 - x^2 và trục Ox."
+    },
+    "expected_canonical_raw": "32/3"
+  },
+  {
+    "question_id": "q_gen_area_4",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "dien_tich_hinh_phang",
+      "curve1": "5 - x^2",
+      "curve2": "0",
+      "restate_vi": "Tính diện tích S của hình phẳng giới hạn bởi đồ thị y = 5 - x^2 và trục Ox."
+    },
+    "expected_canonical_raw": "20*sqrt(5)/3"
+  },
+  {
+    "question_id": "q_gen_area_5",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "dien_tich_hinh_phang",
+      "curve1": "6 - x^2",
+      "curve2": "0",
+      "restate_vi": "Tính diện tích S của hình phẳng giới hạn bởi đồ thị y = 6 - x^2 và trục Ox."
+    },
+    "expected_canonical_raw": "8*sqrt(6)"
+  },
+  {
+    "question_id": "q_gen_area_6",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "dien_tich_hinh_phang",
+      "curve1": "7 - x^2",
+      "curve2": "0",
+      "restate_vi": "Tính diện tích S của hình phẳng giới hạn bởi đồ thị y = 7 - x^2 và trục Ox."
+    },
+    "expected_canonical_raw": "28*sqrt(7)/3"
+  },
+  {
+    "question_id": "q_gen_area_7",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "dien_tich_hinh_phang",
+      "curve1": "8 - x^2",
+      "curve2": "0",
+      "restate_vi": "Tính diện tích S của hình phẳng giới hạn bởi đồ thị y = 8 - x^2 và trục Ox."
+    },
+    "expected_canonical_raw": "64*sqrt(2)/3"
+  },
+  {
+    "question_id": "q_gen_area_8",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "dien_tich_hinh_phang",
+      "curve1": "9 - x^2",
+      "curve2": "0",
+      "restate_vi": "Tính diện tích S của hình phẳng giới hạn bởi đồ thị y = 9 - x^2 và trục Ox."
+    },
+    "expected_canonical_raw": "36"
+  },
+  {
+    "question_id": "q_gen_area_9",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "dien_tich_hinh_phang",
+      "curve1": "10 - x^2",
+      "curve2": "0",
+      "restate_vi": "Tính diện tích S của hình phẳng giới hạn bởi đồ thị y = 10 - x^2 và trục Ox."
+    },
+    "expected_canonical_raw": "40*sqrt(10)/3"
+  },
+  {
+    "question_id": "q_gen_area_10",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "in_scope",
+    "evaluation_type": "exact_match",
+    "dsl": {
+      "type": "dien_tich_hinh_phang",
+      "curve1": "11 - x^2",
+      "curve2": "0",
+      "restate_vi": "Tính diện tích S của hình phẳng giới hạn bởi đồ thị y = 11 - x^2 và trục Ox."
+    },
+    "expected_canonical_raw": "44*sqrt(11)/3"
+  },
+  {
+    "question_id": "q_ultra_sa_01",
+    "topic": "ung_dung_tich_phan_dien_tich_hinh_phang",
+    "classification": "out_of_scope",
+    "evaluation_type": "unsupported",
+    "dsl": {
+      "type": "unsupported",
+      "reason": "out_of_scope",
+      "restate_vi": "Bài toán biến phân tích phân Cauchy-Schwarz kết hợp thể tích tròn xoay ngoài phạm vi hỗ trợ tự động."
+    },
+    "expected_canonical_raw": "out_of_scope"
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "description": "Số lượng câu hỏi sinh ra vượt quá 20",
+    "payload": {
+      "category": "ham_so_cuc_tri_cho_truoc",
+      "count": 50
+    },
+    "expected_error": "Input should be less than or equal to 20",
+    "expected_error_type": "less_than_equal"
+  },
+  {
+    "description": "Độ khó không thuộc danh mục chuẩn M1..M4",
+    "payload": {
+      "category": "ham_so_cuc_tri_cho_truoc",
+      "difficulty": "M99"
+    },
+    "expected_error": "Input should be 'M1', 'M2', 'M3' or 'M4'",
+    "expected_error_type": "enum"
+  },
+  {
+    "description": "Chứa trường lạ không cho phép",
+    "payload": {
+      "category": "ham_so_cuc_tri_cho_truoc",
+      "malicious_code": "import os; os.system('ls')"
+    },
+    "expected_error": "Extra inputs are not permitted",
+    "expected_error_type": "extra_forbidden"
+  }
+]

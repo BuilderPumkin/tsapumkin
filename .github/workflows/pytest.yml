@@ -1,0 +1,51 @@
+name: CI - Pumkin Math API Test Suite
+
+on:
+  push:
+    branches:
+      - main
+      - feature/**
+    paths:
+      - 'pumkin-math-api/**'
+      - '.github/workflows/pytest.yml'
+      - 'tools/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'pumkin-math-api/**'
+      - '.github/workflows/pytest.yml'
+      - 'tools/**'
+
+jobs:
+  test:
+    name: Run Pytest & Linting
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: pumkin-math-api
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: pumkin-math-api/requirements.txt
+
+      - name: Install Pinned Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint with Ruff
+        run: |
+          ruff check app/ tests/
+
+      - name: Run Pytest Suite
+        run: |
+          pytest -v

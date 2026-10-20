@@ -1,0 +1,578 @@
+{
+  "breakdown_by_category": {
+    "dai_so_tuyen_tinh_ma_tran": {
+      "failed_occurrences": 55,
+      "success_occurrences": 74,
+      "success_rate_percent": 57.36,
+      "total_occurrences": 129
+    },
+    "gioi_han_day_so": {
+      "failed_occurrences": 33,
+      "success_occurrences": 97,
+      "success_rate_percent": 74.62,
+      "total_occurrences": 130
+    },
+    "ham_so_chua_tham_so_m": {
+      "failed_occurrences": 2,
+      "success_occurrences": 4,
+      "success_rate_percent": 66.67,
+      "total_occurrences": 6
+    },
+    "ham_so_cuc_tri_cho_truoc": {
+      "failed_occurrences": 7,
+      "success_occurrences": 61,
+      "success_rate_percent": 89.71,
+      "total_occurrences": 68
+    },
+    "ham_so_dang_khac": {
+      "failed_occurrences": 20,
+      "success_occurrences": 38,
+      "success_rate_percent": 65.52,
+      "total_occurrences": 58
+    },
+    "ham_so_dao_ham_co_ban": {
+      "failed_occurrences": 0,
+      "success_occurrences": 365,
+      "success_rate_percent": 100.0,
+      "total_occurrences": 365
+    },
+    "ham_so_doc_bang_bien_thien": {
+      "failed_occurrences": 5,
+      "success_occurrences": 10,
+      "success_rate_percent": 66.67,
+      "total_occurrences": 15
+    },
+    "ham_so_gtln_gtnn_doan_khoang": {
+      "failed_occurrences": 8,
+      "success_occurrences": 36,
+      "success_rate_percent": 81.82,
+      "total_occurrences": 44
+    },
+    "ham_so_tiem_can": {
+      "failed_occurrences": 108,
+      "success_occurrences": 46,
+      "success_rate_percent": 29.87,
+      "total_occurrences": 154
+    },
+    "ham_so_tinh_don_dieu": {
+      "failed_occurrences": 4,
+      "success_occurrences": 1,
+      "success_rate_percent": 20.0,
+      "total_occurrences": 5
+    },
+    "ham_so_toan_thuc_te_toi_uu": {
+      "failed_occurrences": 6,
+      "success_occurrences": 39,
+      "success_rate_percent": 86.67,
+      "total_occurrences": 45
+    },
+    "hinh_hoc_oxyz": {
+      "failed_occurrences": 155,
+      "success_occurrences": 329,
+      "success_rate_percent": 67.98,
+      "total_occurrences": 484
+    },
+    "mu_logarit_pt_bpt": {
+      "failed_occurrences": 60,
+      "success_occurrences": 159,
+      "success_rate_percent": 72.6,
+      "total_occurrences": 219
+    },
+    "nguyen_ham_tich_phan": {
+      "failed_occurrences": 58,
+      "success_occurrences": 502,
+      "success_rate_percent": 89.64,
+      "total_occurrences": 560
+    },
+    "phuong_trinh_bat_phuong_trinh_dai_so": {
+      "failed_occurrences": 13,
+      "success_occurrences": 6,
+      "success_rate_percent": 31.58,
+      "total_occurrences": 19
+    },
+    "phuong_trinh_vi_phan": {
+      "failed_occurrences": 27,
+      "success_occurrences": 104,
+      "success_rate_percent": 79.39,
+      "total_occurrences": 131
+    },
+    "to_hop_xac_suat": {
+      "failed_occurrences": 146,
+      "success_occurrences": 405,
+      "success_rate_percent": 73.5,
+      "total_occurrences": 551
+    },
+    "unsupported_hinh_khong_gian_co_dien": {
+      "failed_occurrences": 12,
+      "success_occurrences": 129,
+      "success_rate_percent": 91.49,
+      "total_occurrences": 141
+    },
+    "unsupported_so_hoc_dong_du": {
+      "failed_occurrences": 16,
+      "success_occurrences": 8,
+      "success_rate_percent": 33.33,
+      "total_occurrences": 24
+    },
+    "unsupported_so_phuc": {
+      "failed_occurrences": 7,
+      "success_occurrences": 33,
+      "success_rate_percent": 82.5,
+      "total_occurrences": 40
+    },
+    "unsupported_thong_ke": {
+      "failed_occurrences": 4,
+      "success_occurrences": 12,
+      "success_rate_percent": 75.0,
+      "total_occurrences": 16
+    },
+    "unsupported_thuat_toan_do_thi": {
+      "failed_occurrences": 2,
+      "success_occurrences": 0,
+      "success_rate_percent": 0.0,
+      "total_occurrences": 2
+    }
+  },
+  "breakdown_by_error_code": {
+    "RESOURCE_LIMIT_EXCEEDED": 3,
+    "SYNTAX_ERROR": 352,
+    "UNEXPECTED_ERROR": 7,
+    "UNEXPECTED_TOKEN": 46,
+    "UNSUPPORTED_SYNTAX": 340
+  },
+  "breakdown_by_field": {
+    "explanation": {
+      "failed_occurrences": 409,
+      "success_occurrences": 755,
+      "success_rate_percent": 64.86,
+      "total_occurrences": 1164
+    },
+    "options": {
+      "failed_occurrences": 141,
+      "success_occurrences": 979,
+      "success_rate_percent": 87.41,
+      "total_occurrences": 1120
+    },
+    "question_text": {
+      "failed_occurrences": 198,
+      "success_occurrences": 724,
+      "success_rate_percent": 78.52,
+      "total_occurrences": 922
+    }
+  },
+  "metadata": {
+    "canonical_data_source": "C:\\Users\\ADMIN\\Downloads\\hoctap\\PUMKIN2\\pumkin3\\data\\questions\\all.json",
+    "normalized_sha256": "ced7e7ffe5038be54f8e4867a881962aa24dd843d9f1713a51d9ca4dab01d560",
+    "random_seed": 42,
+    "total_occurrences": 3206,
+    "total_questions": 553,
+    "total_unique_snippets": 2259
+  },
+  "other_non_standard_syntax_samples": [
+    {
+      "category": "gioi_han_day_so",
+      "error_code": "UNEXPECTED_TOKEN",
+      "latex": "a_1 = 5, a_2 = 13",
+      "question_id": "q_tsa_04",
+      "reason_vi": "Ký tự thừa hoặc không hợp lệ ',' tại vị trí 8.",
+      "syntax_pattern": "Point coordinate tuple O(x,y,z) or comma-separated equation list"
+    },
+    {
+      "category": "hinh_hoc_oxyz",
+      "error_code": "SYNTAX_ERROR",
+      "latex": "O(0,0,0)",
+      "question_id": "q_tsa_05",
+      "reason_vi": "Thiếu dấu ngoặc đơn ')' đóng.",
+      "syntax_pattern": "Point coordinate tuple O(x,y,z) or comma-separated equation list"
+    },
+    {
+      "category": "hinh_hoc_oxyz",
+      "error_code": "SYNTAX_ERROR",
+      "latex": "M(12+2t, 9-t, 6+2t)",
+      "question_id": "q_tsa_05",
+      "reason_vi": "Thiếu dấu ngoặc đơn ')' đóng.",
+      "syntax_pattern": "Point coordinate tuple O(x,y,z) or comma-separated equation list"
+    },
+    {
+      "category": "hinh_hoc_oxyz",
+      "error_code": "SYNTAX_ERROR",
+      "latex": "M_1(10,20,30)",
+      "question_id": "q_tsa_06",
+      "reason_vi": "Thiếu dấu ngoặc đơn ')' đóng.",
+      "syntax_pattern": "Point coordinate tuple O(x,y,z) or comma-separated equation list"
+    },
+    {
+      "category": "hinh_hoc_oxyz",
+      "error_code": "SYNTAX_ERROR",
+      "latex": "\\vec{u}_1 = (2,1,2)",
+      "question_id": "q_tsa_06",
+      "reason_vi": "Thiếu dấu ngoặc đơn ')' đóng.",
+      "syntax_pattern": "Point coordinate tuple O(x,y,z) or comma-separated equation list"
+    },
+    {
+      "category": "hinh_hoc_oxyz",
+      "error_code": "SYNTAX_ERROR",
+      "latex": "M_2(-10,-10,10)",
+      "question_id": "q_tsa_06",
+      "reason_vi": "Thiếu dấu ngoặc đơn ')' đóng.",
+      "syntax_pattern": "Point coordinate tuple O(x,y,z) or comma-separated equation list"
+    },
+    {
+      "category": "hinh_hoc_oxyz",
+      "error_code": "SYNTAX_ERROR",
+      "latex": "\\vec{u}_2 = (1,2,-2)",
+      "question_id": "q_tsa_06",
+      "reason_vi": "Thiếu dấu ngoặc đơn ')' đóng.",
+      "syntax_pattern": "Point coordinate tuple O(x,y,z) or comma-separated equation list"
+    },
+    {
+      "category": "hinh_hoc_oxyz",
+      "error_code": "SYNTAX_ERROR",
+      "latex": "\\vec{M_1 M_2} = (-20, -30, -20)",
+      "question_id": "q_tsa_06",
+      "reason_vi": "Thiếu dấu ngoặc đơn ')' đóng.",
+      "syntax_pattern": "Point coordinate tuple O(x,y,z) or comma-separated equation list"
+    },
+    {
+      "category": "hinh_hoc_oxyz",
+      "error_code": "SYNTAX_ERROR",
+      "latex": "[\\vec{u}_1, \\vec{u}_2] = (-6, 6, 3)",
+      "question_id": "q_tsa_06",
+      "reason_vi": "Thiếu dấu ngoặc vuông ']' đóng.",
+      "syntax_pattern": "Point coordinate tuple O(x,y,z) or comma-separated equation list"
+    },
+    {
+      "category": "hinh_hoc_oxyz",
+      "error_code": "SYNTAX_ERROR",
+      "latex": "|[\\vec{u}_1, \\vec{u}_2] \\cdot \\vec{M_1 M_2}| = |(-6)(-20) + 6(-30) + 3(-20)| = |-120| = 120",
+      "question_id": "q_tsa_06",
+      "reason_vi": "Thiếu dấu ngoặc vuông ']' đóng.",
+      "syntax_pattern": "Point coordinate tuple O(x,y,z) or comma-separated equation list"
+    }
+  ],
+  "overall_metrics": {
+    "occurrences": {
+      "failed": 748,
+      "success": 2458,
+      "success_rate_percent": 76.67,
+      "total": 3206
+    },
+    "question_stem_success": {
+      "fully_parsable_stem_questions": 419,
+      "success_rate_percent": 75.77,
+      "total_questions": 553
+    },
+    "unique_snippets": {
+      "failed": 625,
+      "success": 1634,
+      "success_rate_percent": 72.33,
+      "total": 2259
+    }
+  },
+  "question_stem_rate_by_category": {
+    "dai_so_tuyen_tinh_ma_tran": {
+      "fully_parsable_stem_questions": 0,
+      "stem_parse_rate_percent": 0.0,
+      "total_questions": 12
+    },
+    "gioi_han_day_so": {
+      "fully_parsable_stem_questions": 11,
+      "stem_parse_rate_percent": 84.62,
+      "total_questions": 13
+    },
+    "ham_so_chua_tham_so_m": {
+      "fully_parsable_stem_questions": 0,
+      "stem_parse_rate_percent": 0.0,
+      "total_questions": 2
+    },
+    "ham_so_cuc_tri_cho_truoc": {
+      "fully_parsable_stem_questions": 8,
+      "stem_parse_rate_percent": 100.0,
+      "total_questions": 8
+    },
+    "ham_so_dang_khac": {
+      "fully_parsable_stem_questions": 7,
+      "stem_parse_rate_percent": 58.33,
+      "total_questions": 12
+    },
+    "ham_so_dao_ham_co_ban": {
+      "fully_parsable_stem_questions": 91,
+      "stem_parse_rate_percent": 100.0,
+      "total_questions": 91
+    },
+    "ham_so_doc_bang_bien_thien": {
+      "fully_parsable_stem_questions": 2,
+      "stem_parse_rate_percent": 100.0,
+      "total_questions": 2
+    },
+    "ham_so_gtln_gtnn_doan_khoang": {
+      "fully_parsable_stem_questions": 4,
+      "stem_parse_rate_percent": 50.0,
+      "total_questions": 8
+    },
+    "ham_so_tiem_can": {
+      "fully_parsable_stem_questions": 18,
+      "stem_parse_rate_percent": 94.74,
+      "total_questions": 19
+    },
+    "ham_so_tinh_don_dieu": {
+      "fully_parsable_stem_questions": 116,
+      "stem_parse_rate_percent": 100.0,
+      "total_questions": 116
+    },
+    "ham_so_toan_thuc_te_toi_uu": {
+      "fully_parsable_stem_questions": 9,
+      "stem_parse_rate_percent": 81.82,
+      "total_questions": 11
+    },
+    "hinh_hoc_oxyz": {
+      "fully_parsable_stem_questions": 32,
+      "stem_parse_rate_percent": 51.61,
+      "total_questions": 62
+    },
+    "mu_logarit_pt_bpt": {
+      "fully_parsable_stem_questions": 23,
+      "stem_parse_rate_percent": 58.97,
+      "total_questions": 39
+    },
+    "nguyen_ham_tich_phan": {
+      "fully_parsable_stem_questions": 33,
+      "stem_parse_rate_percent": 61.11,
+      "total_questions": 54
+    },
+    "phuong_trinh_bat_phuong_trinh_dai_so": {
+      "fully_parsable_stem_questions": 3,
+      "stem_parse_rate_percent": 75.0,
+      "total_questions": 4
+    },
+    "phuong_trinh_vi_phan": {
+      "fully_parsable_stem_questions": 9,
+      "stem_parse_rate_percent": 90.0,
+      "total_questions": 10
+    },
+    "to_hop_xac_suat": {
+      "fully_parsable_stem_questions": 23,
+      "stem_parse_rate_percent": 44.23,
+      "total_questions": 52
+    },
+    "unsupported_hinh_khong_gian_co_dien": {
+      "fully_parsable_stem_questions": 17,
+      "stem_parse_rate_percent": 80.95,
+      "total_questions": 21
+    },
+    "unsupported_so_hoc_dong_du": {
+      "fully_parsable_stem_questions": 2,
+      "stem_parse_rate_percent": 66.67,
+      "total_questions": 3
+    },
+    "unsupported_so_phuc": {
+      "fully_parsable_stem_questions": 4,
+      "stem_parse_rate_percent": 80.0,
+      "total_questions": 5
+    },
+    "unsupported_thong_ke": {
+      "fully_parsable_stem_questions": 2,
+      "stem_parse_rate_percent": 66.67,
+      "total_questions": 3
+    },
+    "unsupported_thuat_toan_do_thi": {
+      "fully_parsable_stem_questions": 5,
+      "stem_parse_rate_percent": 83.33,
+      "total_questions": 6
+    }
+  },
+  "ten_suspicious_interpretation_cases": [
+    {
+      "intended_meaning": "Hàm lượng giác với đối số đơn thức (ví dụ sin(2x) thay vì sin(2)*x)",
+      "latex": "I = \\int_0^{\\pi/2} \\frac{\\sin^3 x}{\\sin^3 x + \\cos^3 x} dx",
+      "parsed_expr": "Eq(I, Integral(sin(x)**3/(sin(x)**3 + cos(x)**3), (x, 0, pi/2)))",
+      "question_id": "q_tsa_12",
+      "rationale": "Parser tự động gộp đơn thức làm góc lượng giác; đã phát cảnh báo WARN_AMBIGUOUS_TRIG_ARGUMENT."
+    },
+    {
+      "intended_meaning": "Phép cộng sau biểu thức logarit: (log_a x) + b",
+      "latex": "y'(x) = 2x(C_1 + C_2 \\ln x) + x^2 \\cdot \\frac{C_2}{x} = 2x(C_1 + C_2 \\ln x) + C_2 x",
+      "parsed_expr": "Eq(x*y', C_2*x + 2*x*(C_1 + C_2*log(x)))",
+      "question_id": "q_superhard_type4_03",
+      "rationale": "Quy tắc độ ưu tiên kết thúc đối số log trước dấu cộng; cảnh báo WARN_AMBIGUOUS_LOG_SCOPE."
+    },
+    {
+      "intended_meaning": "Phương trình hình học của đường thẳng/mặt phẳng có tiền tố nhãn (P):",
+      "latex": "(P): 2x - 2y + z + 11 = 0",
+      "parsed_expr": "Eq(2*x - 2*y + z + 11, 0)",
+      "question_id": "q_hsa_12",
+      "rationale": "Tiền tố hình học bị bóc tách khỏi phương trình; lưu trong metadata và cảnh báo WARN_STRIPPED_LABEL_PREFIX."
+    },
+    {
+      "intended_meaning": "Hàm toán học trừu tượng f(x) hoặc g(x)",
+      "latex": "P(x) = x \\cdot (25 - C(x)) = 25x - \\frac{x^2}{2} - 50 - 5x = 20x - \\frac{x^2}{2} - 50",
+      "parsed_expr": "False",
+      "question_id": "q_tsa_tf_03",
+      "rationale": "Parser tạo SymPy Function thay vì phép nhân ngầm; đã phát cảnh báo WARN_IMPLICIT_FUNCTION_CALL."
+    },
+    {
+      "intended_meaning": "Lũy thừa nhân ngầm với biến tiếp theo: (2^x)*y",
+      "latex": "a^3\\sqrt{3}",
+      "parsed_expr": "sqrt(3)*a**3",
+      "question_id": "q_hsa_32",
+      "rationale": "Không nhầm lẫn với số mũ tích 2^{xy}; cảnh báo WARN_POWER_IMPLICIT_MUL."
+    },
+    {
+      "intended_meaning": "Phương trình hình học của đường thẳng/mặt phẳng có tiền tố nhãn (Q):",
+      "latex": "(Q): z - x - 2 = 0",
+      "parsed_expr": "Eq(-x + z - 2, 0)",
+      "question_id": "q_superhard_type3_05",
+      "rationale": "Tiền tố hình học bị bóc tách khỏi phương trình; lưu trong metadata và cảnh báo WARN_STRIPPED_LABEL_PREFIX."
+    },
+    {
+      "intended_meaning": "Phương trình hình học của đường thẳng/mặt phẳng có tiền tố nhãn (P):",
+      "latex": "(P): x + 2y + 2z - 15 = 0",
+      "parsed_expr": "Eq(x + 2*y + 2*z - 15, 0)",
+      "question_id": "q_superhard_type3_03",
+      "rationale": "Tiền tố hình học bị bóc tách khỏi phương trình; lưu trong metadata và cảnh báo WARN_STRIPPED_LABEL_PREFIX."
+    },
+    {
+      "intended_meaning": "Biểu thức mang đơn vị đo lường vật lý (cm)",
+      "latex": "r = 7\\text{ cm}",
+      "parsed_expr": "Eq(r, 7)",
+      "question_id": "q_gen_tronxoay_5",
+      "rationale": "Đơn vị được bóc tách an toàn để phục vụ giải toán đại số thuần túy; lưu trong metadata['stripped_unit']."
+    },
+    {
+      "intended_meaning": "Hàm toán học trừu tượng f(x) hoặc g(x)",
+      "latex": "\\left(\\int u(x)v(x)dx\\right)^2 \\le \\int u^2(x)dx \\cdot \\int v^2(x)dx",
+      "parsed_expr": "Integral(u(x)*v(x), x)**2 <= Integral(u**2*x, x)*Integral(v**2*x, x)",
+      "question_id": "q_ultra_sa_01",
+      "rationale": "Parser tạo SymPy Function thay vì phép nhân ngầm; đã phát cảnh báo WARN_IMPLICIT_FUNCTION_CALL."
+    },
+    {
+      "intended_meaning": "Lũy thừa nhân ngầm với biến tiếp theo: (2^x)*y",
+      "latex": "\\left(\\int u(x)v(x)dx\\right)^2 \\le \\int u^2(x)dx \\cdot \\int v^2(x)dx",
+      "parsed_expr": "Integral(u(x)*v(x), x)**2 <= Integral(u**2*x, x)*Integral(v**2*x, x)",
+      "question_id": "q_ultra_sa_01",
+      "rationale": "Không nhầm lẫn với số mũ tích 2^{xy}; cảnh báo WARN_POWER_IMPLICIT_MUL."
+    }
+  ],
+  "top_20_root_causes": [
+    {
+      "occurrence_count": 168,
+      "percent_of_failures": 22.46,
+      "rank": 1,
+      "root_cause": "semicolon_coordinate_or_interval"
+    },
+    {
+      "occurrence_count": 152,
+      "percent_of_failures": 20.32,
+      "rank": 2,
+      "root_cause": "comma_list_or_coordinate_tuple"
+    },
+    {
+      "occurrence_count": 78,
+      "percent_of_failures": 10.43,
+      "rank": 3,
+      "root_cause": "\\iff"
+    },
+    {
+      "occurrence_count": 49,
+      "percent_of_failures": 6.55,
+      "rank": 4,
+      "root_cause": "\\implies"
+    },
+    {
+      "occurrence_count": 39,
+      "percent_of_failures": 5.21,
+      "rank": 5,
+      "root_cause": "\\cap"
+    },
+    {
+      "occurrence_count": 36,
+      "percent_of_failures": 4.81,
+      "rank": 6,
+      "root_cause": "\\begin"
+    },
+    {
+      "occurrence_count": 23,
+      "percent_of_failures": 3.07,
+      "rank": 7,
+      "root_cause": "\\in"
+    },
+    {
+      "occurrence_count": 19,
+      "percent_of_failures": 2.54,
+      "rank": 8,
+      "root_cause": "\\mathbb"
+    },
+    {
+      "occurrence_count": 19,
+      "percent_of_failures": 2.54,
+      "rank": 9,
+      "root_cause": "percentage_symbol_in_math"
+    },
+    {
+      "occurrence_count": 18,
+      "percent_of_failures": 2.41,
+      "rank": 10,
+      "root_cause": "unclosed_pipe_delimiter"
+    },
+    {
+      "occurrence_count": 17,
+      "percent_of_failures": 2.27,
+      "rank": 11,
+      "root_cause": "\\pm"
+    },
+    {
+      "occurrence_count": 11,
+      "percent_of_failures": 1.47,
+      "rank": 12,
+      "root_cause": "syntax_error: Ký tự thừa hoặc không hợp lệ ',' tại vị trí 2."
+    },
+    {
+      "occurrence_count": 10,
+      "percent_of_failures": 1.34,
+      "rank": 13,
+      "root_cause": "\\det"
+    },
+    {
+      "occurrence_count": 9,
+      "percent_of_failures": 1.2,
+      "rank": 14,
+      "root_cause": "\\Rightarrow"
+    },
+    {
+      "occurrence_count": 9,
+      "percent_of_failures": 1.2,
+      "rank": 15,
+      "root_cause": "\\Leftrightarrow"
+    },
+    {
+      "occurrence_count": 9,
+      "percent_of_failures": 1.2,
+      "rank": 16,
+      "root_cause": "\\equiv"
+    },
+    {
+      "occurrence_count": 7,
+      "percent_of_failures": 0.94,
+      "rank": 17,
+      "root_cause": "\\dots"
+    },
+    {
+      "occurrence_count": 5,
+      "percent_of_failures": 0.67,
+      "rank": 18,
+      "root_cause": "\\cup"
+    },
+    {
+      "occurrence_count": 5,
+      "percent_of_failures": 0.67,
+      "rank": 19,
+      "root_cause": "\\sim"
+    },
+    {
+      "occurrence_count": 4,
+      "percent_of_failures": 0.53,
+      "rank": 20,
+      "root_cause": "syntax_error: Ký tự hoặc cấu trúc bất thường '' tại vị trí 11."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "question_text": "Tìm các khoảng đồng biến của hàm số \\(y = x^3 - 3x\\)",
+  "question_id": "q_test_monotonicity_01",
+  "step_index": 1,
+  "previous_steps": [
+    "Học sinh đã xác định tập xác định D = R"
+  ]
+}
