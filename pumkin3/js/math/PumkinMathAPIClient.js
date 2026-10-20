@@ -16,28 +16,60 @@
 
         /**
          * Checks if the Math API feature flag is enabled.
-         * Default: enabled for beta testing cohort.
-         * Can be toggled via ?math_api=0/1 or localStorage 'PUMKIN_FEATURE_MATH_API'.
+         * GOVERNANCE:
+         * 1. In Production (tsapumkin.pages.dev, pumkin.dev, www.pumkin.dev):
+         *    - Default is strictly DISABLED (false).
+         *    - CANNOT be enabled via URL query param (?math_api=1) or localStorage in production!
+         *    - ONLY enabled for authenticated internal admin/teacher accounts (@pumkin) or explicit server-side config.
+         * 2. In Non-Production / Preview (local dev, PR preview deployment *.tsapumkin.pages.dev):
+         *    - Can be tested via ?math_api=1 or localStorage or defaults to true on preview.
          */
         isFeatureEnabled() {
             try {
-                if (typeof window !== 'undefined' && window.location) {
-                    const params = new URLSearchParams(window.location.search);
-                    if (params.get('math_api') === '0') return false;
-                    if (params.get('math_api') === '1' || params.get('beta') === '1') return true;
+                if (typeof window === 'undefined' || !window.location) return false;
+                const hostname = (window.location.hostname || '').toLowerCase();
+                const isProduction = (
+                    hostname === 'tsapumkin.pages.dev' ||
+                    hostname === 'pumkin.dev' ||
+                    hostname === 'www.pumkin.dev'
+                );
+
+                // 1. Production Governance: strictly locked by default
+                if (isProduction) {
+                    // Check if logged in user is in the authorized admin/tester allowlist
+                    const currentUser = (window.Pumkin && window.Pumkin.Auth && window.Pumkin.Auth.currentUser)
+                        ? window.Pumkin.Auth.currentUser
+                        : ((typeof PumkinAuth !== 'undefined') ? PumkinAuth.currentUser : null);
+
+                    const username = currentUser && currentUser.username ? currentUser.username.toLowerCase().trim() : '';
+                    const isAuthorizedTester = (username === '@pumkin' || username === 'pumkin');
+                    if (isAuthorizedTester) return true;
+
+                    // Server-injected config override (if explicitly provided via secure runtime)
+                    if (window.PUMKIN_CONFIG && window.PUMKIN_CONFIG.FEATURE_MATH_API === true) {
+                        return true;
+                    }
+
+                    // On production, ordinary students/visitors are strictly blocked
+                    return false;
                 }
+
+                // 2. Non-Production / Preview Environments (e.g. branch preview, localhost):
+                const params = new URLSearchParams(window.location.search);
+                if (params.get('math_api') === '0') return false;
+                if (params.get('math_api') === '1' || params.get('beta') === '1') return true;
+
                 if (typeof localStorage !== 'undefined') {
                     const stored = localStorage.getItem('PUMKIN_FEATURE_MATH_API');
                     if (stored !== null) return stored === 'true' || stored === '1';
                 }
-                if (window.PUMKIN_CONFIG && typeof window.PUMKIN_CONFIG.FEATURE_MATH_API === 'boolean') {
-                    return window.PUMKIN_CONFIG.FEATURE_MATH_API;
-                }
+
+                // Preview branches default to enabled for tester verification
+                return true;
             } catch (e) {
-                console.warn('[MathAPIClient] Error reading feature flag:', e);
+                console.warn('[MathAPIClient] Error evaluating feature flag:', e);
+                return false;
             }
-            // Default to true for testing cohort
-            return true;
         },
 
         /**

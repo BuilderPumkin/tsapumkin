@@ -8,6 +8,29 @@
     'use strict';
     window.Pumkin = window.Pumkin || {};
 
+    // 72 Supported Benchmark Question IDs (verified against bench/results/per_case.csv)
+    const SUPPORTED_CAS_QUESTION_IDS = new Set([
+        "q_tsa_04","q_tsa_06","q_tsa_12","q_tsa_28","q_hsa_01","q_hsa_05","q_hsa_06","q_hsa_08","q_hsa_12","q_hsa_15",
+        "q_hsa_19","q_thpt_03","q_thpt_04","q_thpt_06","q_thpt_13","q_thpt_sa_01","q_calc_04","q_calc_07","q_calc_sa_01",
+        "q_tsa_34","q_hsa_23","q_hsa_25","q_thpt_18","q_calc_12","q_calc_13","q_tsa_53","q_tsa_54","q_hsa_35","q_hsa_38",
+        "q_thpt_24","q_thpt_25","q_calc_18","q_calc_20","q_hsa_46","q_thpt_39","q_tsa_sa_04","q_gen_area_1","q_gen_area_2",
+        "q_gen_area_3","q_gen_area_4","q_gen_area_5","q_gen_area_6","q_gen_area_7","q_gen_area_8","q_gen_area_9","q_gen_area_10",
+        "q_gen_area_11","q_gen_area_12","q_gen_area_13","q_gen_area_14","q_gen_area_15","q_gen_area_16","q_gen_matcau_1",
+        "q_gen_matcau_2","q_gen_matcau_3","q_gen_matcau_4","q_gen_matcau_5","q_gen_matcau_6","q_gen_matcau_7","q_gen_matcau_8",
+        "q_gen_matcau_9","q_gen_matcau_10","q_gen_matcau_11","q_gen_matcau_12","q_boost_integral_01","q_boost_integral_02",
+        "q_boost_integral_03","q_boost_plane_01","q_boost_plane_02","q_superhard_type3_01","q_tsa_num_01","q_tsa_num_02"
+    ]);
+
+    function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
 const PumkinScoring = {
     currentResult: null,
 
@@ -578,7 +601,7 @@ const PumkinScoring = {
                         </div>
                         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                             ${badgeHtml}
-                            <button class="btn btn-sm btn-cas-verify" data-qid="${q.id}" title="Kiểm chứng bằng máy đại số CAS tất định">🔬 Kiểm chứng CAS</button>
+                            ${SUPPORTED_CAS_QUESTION_IDS.has(q.id) ? `<button class="btn btn-sm btn-cas-verify" data-qid="${q.id}" title="Kiểm chứng bằng máy đại số CAS tất định">🔬 Kiểm chứng CAS</button>` : `<button class="btn btn-sm btn-cas-disabled" disabled title="Chưa hỗ trợ dạng này bằng CAS" style="opacity: 0.55; cursor: not-allowed; background: #f1f5f9; color: #94a3b8; border: 1px solid #cbd5e1;">🔬 Chưa hỗ trợ CAS</button>`}
                             <button class="btn btn-sm btn-tutor-ask" onclick="PumkinTutorIntegration.openFromQuestion('${q.id}', '${res.exam_id || 'exam'}')">🤖 Hỏi AI</button>
                             <button class="btn btn-sm btn-outline" onclick="PumkinScoring.toggleSaveQuestion('${q.id}', this)">
                                 ${isSaved ? '★ Đã lưu' : '☆ Lưu câu này'}
@@ -743,14 +766,26 @@ const PumkinScoring = {
 
         const data = res.data || {};
         const status = data.status || 'unsupported';
+        const confMethod = (data.confidence && data.confidence.method) ? data.confidence.method : '';
         let badgeClass = 'badge-unsupported';
-        let badgeText = 'Chưa kiểm chứng';
+        let badgeText = 'Chưa kiểm chứng (Ngoài phạm vi CAS)';
         let badgeIcon = 'ℹ️';
 
         if (status === 'verified') {
             badgeClass = 'badge-verified';
-            badgeText = 'Đã kiểm chứng bằng máy đại số';
-            badgeIcon = '🛡️';
+            if (confMethod === 'symbolic') {
+                badgeText = 'Đã kiểm chứng bằng máy đại số (SymPy)';
+                badgeIcon = '🛡️';
+            } else if (confMethod === 'rule_based') {
+                badgeText = 'Đã kiểm chứng bằng quy tắc tất định';
+                badgeIcon = '🛡️';
+            } else if (confMethod === 'llm_consensus') {
+                badgeText = 'Đã đồng thuận đa mẫu (LLM)';
+                badgeIcon = '🤝';
+            } else {
+                badgeText = 'Đã kiểm chứng';
+                badgeIcon = '🛡️';
+            }
         } else if (status === 'needs_review') {
             badgeClass = 'badge-needs-review';
             badgeText = 'Cần kiểm tra lại';
@@ -788,7 +823,7 @@ const PumkinScoring = {
                 </div>
                 ${restateHtml}
                 <div style="font-size: 13.5px; margin: 8px 0;">
-                    <strong>Đáp số CAS:</strong> <code>${data.computed_answer || data.answer || 'N/A'}</code>
+                    <strong>Đáp số CAS:</strong> <code>${escapeHtml(data.computed_answer || data.answer || 'N/A')}</code>
                 </div>
                 ${stepsHtml}
                 <div style="font-size: 11px; color: var(--text-muted, #64748b); margin-top: 8px;">

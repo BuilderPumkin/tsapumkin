@@ -34,6 +34,17 @@ const PumkinRouter = {
                 return;
             }
         }
+        if (viewId === 'math-solver') {
+            const isEnabled = (window.Pumkin && window.Pumkin.MathAPIClient)
+                ? window.Pumkin.MathAPIClient.isFeatureEnabled()
+                : false;
+            if (!isEnabled) {
+                if (typeof PumkinToast !== 'undefined') {
+                    PumkinToast.warning('Tính năng Giải toán CAS đang trong giai đoạn thử nghiệm kín.');
+                }
+                return;
+            }
+        }
         this.currentView = viewId;
 
         // Update nav tabs active state
@@ -123,11 +134,28 @@ const PumkinRouter = {
         if (this.currentView) {
             this.renderView(this.currentView);
         }
+    },
+
+    updateFeatureTabs() {
+        if (typeof document === 'undefined') return;
+        const mathTab = document.getElementById('nav-tab-math-solver');
+        if (mathTab) {
+            const isEnabled = (window.Pumkin && window.Pumkin.MathAPIClient)
+                ? window.Pumkin.MathAPIClient.isFeatureEnabled()
+                : false;
+            mathTab.style.display = isEnabled ? '' : 'none';
+        }
     }
 };
 
 // Auto-re-render current view when data is hydrated from network or storage
 if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+    window.addEventListener('DOMContentLoaded', () => {
+        PumkinRouter.updateFeatureTabs();
+    });
+    window.addEventListener('pumkin:auth-changed', () => {
+        PumkinRouter.updateFeatureTabs();
+    });
     window.addEventListener('pumkin:data-hydrated', () => {
         PumkinRouter.invalidateView();
         if (typeof PumkinFormulas !== 'undefined' && typeof PumkinFormulas.invalidateCache === 'function') {

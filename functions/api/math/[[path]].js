@@ -3,22 +3,31 @@
  * PUMKIN Academic Mathematics API Gateway
  *
  * Security Architecture & Governance:
- * 1. Strict Route Whitelisting: ONLY /solve, /check, /generate (all others 404)
+ * 1. Strict Route Whitelisting: ONLY /solve, /check, /generate (all others 404, path traversal rejected)
  * 2. Zero Client-Side Secret Exposure: Injects X-Pumkin-API-Key securely from Cloudflare env
- * 3. Body Size Validation: Rejects payloads > 64 KB with HTTP 413
- * 4. 20-Second Timeout: AbortController with Vietnamese cold start detection
- * 5. Rate Limiting: Cloudflare KV (30 req/min per IP) with in-memory fallback
- * 6. Deterministic Caching: SHA-256 normalized hash caching for /v1/solve
+ * 3. Client Header Shielding: Never forwards client cookies, Authorization, or PII headers to backend
+ * 4. Body Size Validation: Exactly 64 KB (65,536 bytes) allowed; 64 KB + 1 byte rejected with HTTP 413
+ * 5. 20-Second Timeout: AbortController with Vietnamese cold start detection
+ * 6. Rate Limiting: Cloudflare KV (30 req/min per IP) with in-memory approximation fallback
+ * 7. Case-Sensitive Semantic Cache:
+ *    - Key = SHA-256(schema_version + ":" + targetAction + ":" + raw_trimmed_problem_text + ":" + sorted_params_json)
+ *    - Strictly preserves case & whitespace semantics (\Delta != \delta, P(x) != p(x), \sin x != \sinx, C_5^2 != c_5^2)
+ *    - ONLY caches status="verified" responses (never needs_review, unsupported, cannot_determine, or error)
+ *    - Short TTL (1800s / 30 mins) due to KV eventual consistency and rapid solver patch lifecycle
+ * 8. Pre-warm / Wakeup: Health probe supports ?wake=1 to pre-warm Render before student solves
  */
 
 const ALLOWED_ROUTES = new Set(["solve", "check", "generate"]);
-const MAX_BODY_SIZE_BYTES = 64 * 1024; // 64 KB
+const MAX_BODY_SIZE_BYTES = 64 * 1024; // Exactly 65,536 bytes
 const GATEWAY_TIMEOUT_MS = 20000; // 20 seconds hard timeout
 const RATE_LIMIT_MAX_PER_MINUTE = 30;
 const RATE_LIMIT_WINDOW_SECONDS = 60;
-const CACHE_TTL_SECONDS = 86400; // 24 hours cache for deterministic solutions
+const CACHE_SCHEMA_VERSION = "v1";
+const SHORT_CACHE_TTL_SECONDS = 1800; // 30 minutes short TTL
 
 // In-memory sliding window fallback when Cloudflare KV binding is unavailable
+// NOTE: In-memory state is local to each V8 isolate and is only an approximation.
+// Cloudflare KV or Cloudflare WAF Rate Limiting rules must be used for distributed guarantees.
 const _inMemoryRateLimit = new Map();
 
 /**
@@ -85,7 +94,7 @@ function makeErrorResponse(status, code, messageVi, corsHeaders, extra = {}) {
 /**
  * Computes hexadecimal SHA-256 hash using Web Crypto API
  */
-async function sha256Hex(text) {
+export async function sha256Hex(text) {
     const encoder = new TextEncoder();
     const data = encoder.encode(text);
     const hashBuffer = await crypto.subtle.digest("SHA-256", data);
@@ -94,15 +103,24 @@ async function sha256Hex(text) {
 }
 
 /**
- * Normalizes question text / expression for deterministic cache keys
+ * Constructs canonical cache key input:
+ * Preserves exact case, internal spacing, and LaTeX macros (\Delta != \delta, \sin x != \sinx, etc.)
+ * Only trims outer leading/trailing whitespace.
  */
-function normalizeProblemInput(rawPayload) {
+export function buildCacheKeyInput(targetAction, parsedJson) {
     try {
-        const obj = typeof rawPayload === "string" ? JSON.parse(rawPayload) : rawPayload;
-        const text = obj.question_text || obj.problem_text || obj.raw_latex || obj.expression || JSON.stringify(obj);
-        return text.trim().toLowerCase().replace(/\s+/g, " ");
+        const obj = typeof parsedJson === "string" ? JSON.parse(parsedJson) : parsedJson;
+        const rawText = (obj.question_text || obj.expression || obj.problem_text || obj.raw_latex || "").trim();
+        const params = {};
+        for (const [k, v] of Object.entries(obj)) {
+            if (!['question_text', 'expression', 'problem_text', 'raw_latex'].includes(k)) {
+                params[k] = v;
+            }
+        }
+        const sortedParams = JSON.stringify(params, Object.keys(params).sort());
+        return `${CACHE_SCHEMA_VERSION}:${targetAction}:${rawText}:${sortedParams}`;
     } catch {
-        return String(rawPayload).trim().toLowerCase().replace(/\s+/g, " ");
+        return `${CACHE_SCHEMA_VERSION}:${targetAction}:${String(parsedJson).trim()}:`;
     }
 }
 
@@ -113,7 +131,6 @@ async function enforceRateLimit(clientIp, env) {
     const nowSec = Math.floor(Date.now() / 1000);
     const windowKey = `ratelimit_${clientIp}_${Math.floor(nowSec / RATE_LIMIT_WINDOW_SECONDS)}`;
 
-    // 1. Try Cloudflare KV if configured
     if (env && env.MATH_KV && typeof env.MATH_KV.get === "function") {
         try {
             const currentStr = await env.MATH_KV.get(windowKey);
@@ -130,7 +147,6 @@ async function enforceRateLimit(clientIp, env) {
         }
     }
 
-    // 2. In-memory sliding window fallback
     const nowMs = Date.now();
     const record = _inMemoryRateLimit.get(clientIp) || { count: 0, startTime: nowMs };
     if (nowMs - record.startTime > RATE_LIMIT_WINDOW_SECONDS * 1000) {
@@ -141,7 +157,6 @@ async function enforceRateLimit(clientIp, env) {
     }
     _inMemoryRateLimit.set(clientIp, record);
 
-    // Evict old entries periodically
     if (_inMemoryRateLimit.size > 2000) {
         for (const [k, v] of _inMemoryRateLimit.entries()) {
             if (nowMs - v.startTime > RATE_LIMIT_WINDOW_SECONDS * 1000) {
@@ -165,10 +180,30 @@ export async function onRequest(context = {}) {
         });
     }
 
+    // 1. Path traversal detection on raw URL
+    const requestUrl = new URL(request.url);
+    const rawPathname = requestUrl.pathname;
+    if (
+        rawPathname.includes("..") ||
+        /%2[ef]/i.test(rawPathname) ||
+        /%25/i.test(rawPathname) ||
+        rawPathname.includes("/.")
+    ) {
+        return makeErrorResponse(
+            404,
+            "ROUTE_NOT_FOUND",
+            "Đường dẫn không hợp lệ. Gateway chỉ hỗ trợ các thao tác: solve, check, generate.",
+            corsHeaders
+        );
+    }
+
     // Extract path segment(s)
     const rawPath = params && params.path ? (Array.isArray(params.path) ? params.path : [params.path]) : [];
-    // Normalize path (handle optional "v1" prefix)
-    const segments = rawPath.map(s => s.toLowerCase().trim()).filter(Boolean);
+    // Normalize path (handle trailing slash and case insensitivity on route name)
+    const segments = rawPath
+        .map(s => (typeof s === "string" ? s.trim().toLowerCase() : ""))
+        .filter(Boolean);
+
     let targetAction = "";
 
     if (segments.length === 1 && ALLOWED_ROUTES.has(segments[0])) {
@@ -176,12 +211,29 @@ export async function onRequest(context = {}) {
     } else if (segments.length === 2 && segments[0] === "v1" && ALLOWED_ROUTES.has(segments[1])) {
         targetAction = segments[1];
     } else if (segments.length === 1 && (segments[0] === "health" || segments[0] === "healthz")) {
-        // Gateway health probe
+        // Health probe: optionally ping backend if ?wake=1 or ?backend=1
+        const shouldWake = requestUrl.searchParams.get("wake") === "1" || requestUrl.searchParams.get("backend") === "1";
+        let backendHealth = "untested";
+
+        if (shouldWake) {
+            const backendBaseUrl = (env && env.MATH_API_URL) ? env.MATH_API_URL.replace(/\/+$/, "") : "http://localhost:8000";
+            try {
+                const wakeController = new AbortController();
+                const wakeTimer = setTimeout(() => wakeController.abort(), 3000);
+                const wakeRes = await fetch(`${backendBaseUrl}/health`, { signal: wakeController.signal });
+                clearTimeout(wakeTimer);
+                backendHealth = wakeRes.ok ? "reachable" : `status_${wakeRes.status}`;
+            } catch (wakeErr) {
+                backendHealth = "waking_up_or_unreachable";
+            }
+        }
+
         return new Response(
             JSON.stringify({
                 status: "OK",
                 gateway: "Pumkin Cloudflare Pages Math Gateway",
                 allowed_routes: Array.from(ALLOWED_ROUTES),
+                backend_health: backendHealth,
                 timestamp: new Date().toISOString()
             }, null, 2),
             { status: 200, headers: corsHeaders }
@@ -196,7 +248,7 @@ export async function onRequest(context = {}) {
         );
     }
 
-    // Only POST is permitted for mathematical execution endpoints
+    // Only POST is permitted for execution endpoints
     if (request.method !== "POST") {
         return makeErrorResponse(
             405,
@@ -222,7 +274,7 @@ export async function onRequest(context = {}) {
         );
     }
 
-    // 2. Validate Body Size
+    // 2. Validate Body Size (both Content-Length header and actual received bytes)
     const contentLength = parseInt(request.headers.get("Content-Length") || "0", 10);
     if (contentLength > MAX_BODY_SIZE_BYTES) {
         return makeErrorResponse(
@@ -240,11 +292,12 @@ export async function onRequest(context = {}) {
         return makeErrorResponse(400, "INVALID_BODY", "Không thể đọc nội dung yêu cầu.", corsHeaders);
     }
 
+    // Validates chunked bodies or bodies where Content-Length header was missing/forged
     if (rawBody.length > MAX_BODY_SIZE_BYTES) {
         return makeErrorResponse(
             413,
             "PAYLOAD_TOO_LARGE",
-            `Dung lượng yêu cầu vượt quá giới hạn cho phép (tối đa 64 KB).`,
+            `Dung lượng yêu cầu vượt quá giới hạn cho phép (tối đa 64 KB). Kích thước nhận được: ${rawBody.length} bytes.`,
             corsHeaders
         );
     }
@@ -257,11 +310,11 @@ export async function onRequest(context = {}) {
         return makeErrorResponse(400, "INVALID_JSON", "Định dạng dữ liệu gửi lên không phải JSON hợp lệ.", corsHeaders);
     }
 
-    // 3. Cache Lookup for /v1/solve
+    // 3. Case-Sensitive Semantic Cache Lookup for /v1/solve
     let cacheKey = "";
     if (targetAction === "solve" && env && env.MATH_KV && typeof env.MATH_KV.get === "function") {
-        const normProblem = normalizeProblemInput(parsedJson);
-        const hash = await sha256Hex(normProblem);
+        const canonicalKeyInput = buildCacheKeyInput(targetAction, parsedJson);
+        const hash = await sha256Hex(canonicalKeyInput);
         cacheKey = `math_solve_cache_${hash}`;
 
         try {
@@ -291,6 +344,7 @@ export async function onRequest(context = {}) {
     const traceId = `gw_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
 
     // 5. Proxy to Backend with 20s Hard Timeout
+    // SECURITY: Strictly shields client cookies, Authorization, and student identity from backend
     const abortController = new AbortController();
     const timeoutId = setTimeout(() => abortController.abort(), GATEWAY_TIMEOUT_MS);
 
@@ -321,10 +375,20 @@ export async function onRequest(context = {}) {
             "X-Trace-Id": traceId
         };
 
-        // Cache successful solve responses in KV
+        // Parse response to check status
+        let isVerified = false;
+        try {
+            const parsedData = JSON.parse(responseText);
+            isVerified = (parsedData.status === "verified");
+        } catch {
+            isVerified = false;
+        }
+
+        // Cache ONLY status="verified" responses in KV with short TTL
         if (
             backendResponse.status === 200 &&
             targetAction === "solve" &&
+            isVerified &&
             cacheKey &&
             env &&
             env.MATH_KV &&
@@ -332,7 +396,7 @@ export async function onRequest(context = {}) {
         ) {
             try {
                 await env.MATH_KV.put(cacheKey, responseText, {
-                    expirationTtl: CACHE_TTL_SECONDS
+                    expirationTtl: SHORT_CACHE_TTL_SECONDS
                 });
             } catch (putErr) {
                 console.warn("[MATH_GATEWAY] Cache write exception:", putErr);

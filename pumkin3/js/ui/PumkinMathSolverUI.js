@@ -4,18 +4,83 @@
  * Layer: UI Presentation & Interaction
  * Description: Interactive Math Solver & Verification UI Component
  * Features:
- *  - KaTeX rendering via window.Pumkin.Math
- *  - Standardized Status Badges (verified, needs_review, unsupported)
+ *  - KaTeX rendering via window.Pumkin.Math with trust: false, maxExpand: 50
+ *  - XSS Protection: DOM-escaped text content and strict KaTeX sanitization
+ *  - Standardized Status Badges mapped to confidence.method (symbolic, rule_based, llm_consensus, numeric)
  *  - Restate Vietnamese banner ("Hệ thống hiểu đề là: ...")
- *  - Strictly NO "chính xác 100%" text
+ *  - Strictly NO "chính xác 100%" text anywhere
  *  - Loading indicator with cold-start advisory ("Đang giải...")
  *  - Dynamic "Thử lại" button attached strictly via addEventListener
  *  - Graceful degradation for bank questions and free input
- *  - Accessibility: Keyboard navigable, >= 44px mobile touch targets, WCAG AA contrast
+ *  - Accessibility: Keyboard navigable, >= 44px mobile touch targets, WCAG AA contrast (>= 4.5:1)
  */
 (function(window) {
     'use strict';
     window.Pumkin = window.Pumkin || {};
+
+    /**
+     * Sanitizes plain strings to prevent XSS injection
+     */
+    function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    /**
+     * Standard Badge Descriptor Generator
+     * Strictly maps confidence.method and status to academic labels
+     */
+    function getBadgeDescriptor(status, confidence) {
+        const method = (confidence && confidence.method) ? confidence.method : 'unknown';
+        if (status === 'verified') {
+            if (method === 'symbolic') {
+                return {
+                    className: 'badge-verified',
+                    text: 'Đã kiểm chứng bằng máy đại số (SymPy)',
+                    icon: '🛡️'
+                };
+            } else if (method === 'rule_based') {
+                return {
+                    className: 'badge-verified',
+                    text: 'Đã kiểm chứng bằng quy tắc tất định',
+                    icon: '🛡️'
+                };
+            } else if (method === 'llm_consensus') {
+                return {
+                    className: 'badge-verified',
+                    text: 'Đã đồng thuận đa mẫu (LLM)',
+                    icon: '🤝'
+                };
+            } else if (method === 'numeric') {
+                return {
+                    className: 'badge-verified',
+                    text: 'Đã kiểm chứng xấp xỉ số',
+                    icon: '🔢'
+                };
+            }
+            return {
+                className: 'badge-verified',
+                text: 'Đã kiểm chứng',
+                icon: '🛡️'
+            };
+        } else if (status === 'needs_review') {
+            return {
+                className: 'badge-needs-review',
+                text: 'Cần kiểm tra lại',
+                icon: '⚠️'
+            };
+        }
+        return {
+            className: 'badge-unsupported',
+            text: 'Chưa kiểm chứng (Ngoài phạm vi CAS)',
+            icon: 'ℹ️'
+        };
+    }
 
     // Standard Preset Samples for 1-Click Verification & Testing
     const PRESET_SAMPLES = [
@@ -364,16 +429,16 @@
                 messageText = 'Máy chủ miễn phí tự động tạm dừng khi không có truy cập. Quá trình đánh thức đang diễn ra (mất khoảng 30-50 giây). Vui lòng bấm nút "Thử lại" bên dưới.';
             } else if (isOffline) {
                 titleText = '🔌 Máy chủ tính toán tạm thời gián đoạn';
-                messageText = 'Tính năng nhập đề tự do đang tạm ngưng do máy chủ tính toán đang khởi động hoặc bảo trì. Ngân hàng đề thi chuẩn vẫn hoạt động 100% bằng dữ liệu ngoại tuyến.';
+                messageText = 'Tính năng nhập đề tự do đang tạm ngưng do máy chủ tính toán đang khởi động hoặc bảo trì. Ngân hàng đề thi chuẩn vẫn hoạt động ổn định bằng dữ liệu ngoại tuyến.';
             }
 
             container.innerHTML = `
                 <div class="math-error-state" role="alert">
                     <div class="math-error-title">
                         <span>⚠️</span>
-                        <span>${titleText}</span>
+                        <span>${escapeHtml(titleText)}</span>
                     </div>
-                    <div class="math-error-msg">${messageText}</div>
+                    <div class="math-error-msg">${escapeHtml(messageText)}</div>
                     <div id="math-retry-btn-slot"></div>
                 </div>
             `;
@@ -397,36 +462,20 @@
             const steps = data.steps || [];
             const answer = data.computed_answer || data.answer || data.result || 'Không có kết quả';
 
-            // Generate Badge according to strict academic standards:
-            // verified: "Đã kiểm chứng bằng máy đại số"
-            // needs_review: "Cần kiểm tra lại"
-            // unsupported: "Chưa kiểm chứng"
-            // STRICTLY NO "chính xác 100%"
-            let badgeClass = 'badge-unsupported';
-            let badgeText = 'Chưa kiểm chứng';
-            let badgeIcon = 'ℹ️';
-
-            if (status === 'verified') {
-                badgeClass = 'badge-verified';
-                badgeText = 'Đã kiểm chứng bằng máy đại số';
-                badgeIcon = '🛡️';
-            } else if (status === 'needs_review') {
-                badgeClass = 'badge-needs-review';
-                badgeText = 'Cần kiểm tra lại';
-                badgeIcon = '⚠️';
-            }
+            // Generate Badge according to strict academic standards and confidence.method:
+            const badge = getBadgeDescriptor(status, data.confidence);
 
             const badgeHtml = `
-                <span class="pumkin-math-badge ${badgeClass}" role="status">
-                    <span>${badgeIcon}</span>
-                    <span>${badgeText}</span>
+                <span class="pumkin-math-badge ${badge.className}" role="status">
+                    <span>${badge.icon}</span>
+                    <span>${escapeHtml(badge.text)}</span>
                 </span>
             `;
 
             const restateHtml = restateVi ? `
                 <div class="math-restate-banner">
                     <span class="restate-label">Hệ thống hiểu đề là:</span>
-                    <span class="restate-content">${restateVi}</span>
+                    <span class="restate-content">${escapeHtml(restateVi)}</span>
                 </div>
             ` : '';
 
@@ -439,10 +488,10 @@
                         <div class="math-step-item">
                             <div class="math-step-title">
                                 <span>Bước ${i + 1}:</span>
-                                <span>${st.title || st.action || 'Biến đổi giải tích'}</span>
+                                <span>${escapeHtml(st.title || st.action || 'Biến đổi giải tích')}</span>
                             </div>
                             <div class="math-step-content">
-                                ${st.content || st.expression || st.explanation || ''}
+                                ${escapeHtml(st.content || st.expression || st.explanation || '')}
                             </div>
                         </div>
                     `).join('')}
@@ -462,20 +511,20 @@
 
                     <div class="math-final-answer-box">
                         <span class="math-final-answer-label">Đáp số tính toán (CAS Output):</span>
-                        <span class="math-final-answer-value">${answer}</span>
+                        <span class="math-final-answer-value">${escapeHtml(answer)}</span>
                     </div>
 
                     ${stepsHtml}
 
                     <div class="math-meta-telemetry">
-                        <span>Độ trễ phản hồi: <strong>${res.latency_ms} ms</strong></span>
-                        <span>Trạng thái Cache: <strong>${res.cache_status}</strong></span>
-                        ${res.trace_id ? `<span>Trace: <code>${res.trace_id}</code></span>` : ''}
+                        <span>Độ trễ phản hồi: <strong>${Number(res.latency_ms || 0)} ms</strong></span>
+                        <span>Trạng thái Cache: <strong>${escapeHtml(res.cache_status || 'MISS')}</strong></span>
+                        ${res.trace_id ? `<span>Trace: <code>${escapeHtml(res.trace_id)}</code></span>` : ''}
                     </div>
                 </div>
             `;
 
-            // Trigger KaTeX rendering via Pumkin.Math
+            // Trigger KaTeX rendering via Pumkin.Math with strict safety options
             this.typesetElement(container);
         },
 
@@ -485,35 +534,33 @@
             const detectedTrap = data.detected_misconception_id || null;
             const feedbackVi = data.pedagogical_feedback_vi || data.feedback_vi || (isCorrect ? 'Lời giải và đáp số hoàn toàn chính xác!' : 'Đáp số chưa chính xác.');
 
-            const badgeClass = isCorrect ? 'badge-verified' : 'badge-needs-review';
-            const badgeText = isCorrect ? 'Đã kiểm chứng bằng máy đại số (Đúng)' : 'Cần kiểm tra lại (Sai / Khác biệt)';
-            const badgeIcon = isCorrect ? '✅' : '❌';
+            const badge = getBadgeDescriptor(isCorrect ? 'verified' : 'needs_review', data.confidence);
 
             container.innerHTML = `
                 <div class="math-result-card">
                     <div class="math-result-header">
                         <span style="font-size: 15px; font-weight: 800; color: var(--primary, #1e3a8a);">KẾT QUẢ KIỂM ĐỊNH BÀI LÀM</span>
-                        <span class="pumkin-math-badge ${badgeClass}" role="status">
-                            <span>${badgeIcon}</span>
-                            <span>${badgeText}</span>
+                        <span class="pumkin-math-badge ${badge.className}" role="status">
+                            <span>${badge.icon}</span>
+                            <span>${escapeHtml(badge.text)}</span>
                         </span>
                     </div>
 
                     <div style="margin: 16px 0; font-size: 14.5px; line-height: 1.6;">
                         <strong>Nhận xét sư phạm:</strong>
                         <div style="background: #f8fafc; border-radius: 6px; padding: 12px; margin-top: 6px;">
-                            ${feedbackVi}
+                            ${escapeHtml(feedbackVi)}
                         </div>
                     </div>
 
                     ${detectedTrap ? `
                         <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 10px 14px; margin-top: 10px; font-size: 13.5px; color: #991b1b;">
-                            ⚠️ <strong>Phát hiện bẫy nhận thức:</strong> Mã lỗi <code>${detectedTrap}</code>
+                            ⚠️ <strong>Phát hiện bẫy nhận thức:</strong> Mã lỗi <code>${escapeHtml(detectedTrap)}</code>
                         </div>
                     ` : ''}
 
                     <div class="math-meta-telemetry">
-                        <span>Độ trễ: <strong>${res.latency_ms} ms</strong></span>
+                        <span>Độ trễ: <strong>${Number(res.latency_ms || 0)} ms</strong></span>
                         <span>Gateway: Cloudflare Pages</span>
                     </div>
                 </div>
@@ -523,16 +570,13 @@
         },
 
         /**
-         * Renders all math expressions inside el using Pumkin.Math
+         * Renders all math expressions inside el using KaTeX with strict XSS protections
+         * trust: false, maxExpand: 50 prevents malicious macro expansions and JS execution
          */
         typesetElement(el) {
             if (!el) return;
             try {
-                if (window.Pumkin && window.Pumkin.Math && typeof window.Pumkin.Math.renderElement === 'function') {
-                    window.Pumkin.Math.renderElement(el);
-                } else if (window.PumkinMath && typeof window.PumkinMath.typeset === 'function') {
-                    window.PumkinMath.typeset(el);
-                } else if (typeof renderMathInElement === 'function') {
+                if (typeof renderMathInElement === 'function') {
                     renderMathInElement(el, {
                         delimiters: [
                             { left: '$$', right: '$$', display: true },
@@ -540,8 +584,14 @@
                             { left: '$', right: '$', display: false },
                             { left: '\\(', right: '\\)', display: false }
                         ],
-                        throwOnError: false
+                        throwOnError: false,
+                        trust: false,
+                        maxExpand: 50
                     });
+                } else if (window.Pumkin && window.Pumkin.Math && typeof window.Pumkin.Math.renderElement === 'function') {
+                    window.Pumkin.Math.renderElement(el);
+                } else if (window.PumkinMath && typeof window.PumkinMath.typeset === 'function') {
+                    window.PumkinMath.typeset(el);
                 }
             } catch (err) {
                 console.warn('[MathSolverUI] KaTeX typesetting error:', err);

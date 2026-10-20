@@ -16,6 +16,7 @@ Theo tài liệu chính thức từ [Render Documentation - Free Web Services](h
 | **Cơ chế ngủ (Spin-down)** | Tự động ngủ sau **15 phút** không có lưu lượng truy cập HTTP. | Khi học sinh không truy cập trong 15 phút, container sẽ tạm dừng hoàn toàn để tiết kiệm tài nguyên. |
 | **Khởi động nguội (Cold Start)** | Mất khoảng **50 giây đến 1 phút** để khởi động lại container khi có request mới. | Request đầu tiên sau khi ngủ sẽ gặp độ trễ cao. Gateway đã được cài đặt timeout 20s và tự động phát hiện cold start để thông báo cho học sinh. |
 | **Hạn mức giờ chạy** | **750 giờ/tháng** miễn phí cho mỗi workspace. | Đủ chạy liên tục 1 dịch vụ cả tháng (744 giờ) nếu được giữ thức, hoặc chia sẻ giữa các dịch vụ. |
+| **Băng thông ra (Bandwidth)** | **100 GB/tháng** miễn phí. | Hoàn toàn dồi dào đối với API JSON (mỗi payload phản hồi chỉ 2 - 5 KB, tương đương >20 triệu requests). |
 | **Hệ thống tệp** | **Ephemeral** (tệp cục bộ bị xóa sạch khi khởi động lại). | Hoàn toàn tương thích vì Pumkin Math API là stateless microservice (không ghi tệp lâu dài). |
 
 ---

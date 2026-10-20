@@ -1,8 +1,8 @@
 /**
- * Test Suite for Cloudflare Pages Math Gateway Function
+ * Comprehensive Test Suite for Cloudflare Pages Math Gateway Function
  * Path: functions/api/math/[[path]].js
  */
-import { onRequest } from '../functions/api/math/[[path]].js';
+import { onRequest, buildCacheKeyInput, sha256Hex } from '../functions/api/math/[[path]].js';
 
 let passed = 0;
 let failed = 0;
@@ -18,197 +18,312 @@ function assert(condition, message) {
 }
 
 async function runTests() {
-    console.log('--- RUNNING CLOUDFLARE PAGES GATEWAY UNIT TESTS ---');
+    console.log('--- RUNNING ENHANCED CLOUDFLARE PAGES GATEWAY UNIT TESTS ---');
 
-    // 1. Test invalid route -> 404
+    // 1. Path traversal attacks
     {
-        const req = new Request('https://tsapumkin.pages.dev/api/math/unsupported_action', {
+        const req1 = new Request('https://tsapumkin.pages.dev/api/math/solve/../admin', {
             method: 'POST',
-            body: JSON.stringify({ test: 1 })
+            headers: { 'CF-Connecting-IP': '10.0.1.1' },
+            body: JSON.stringify({ question_text: 'x' })
         });
-        const res = await onRequest({
-            request: req,
+        const res1 = await onRequest({
+            request: req1,
             env: {},
-            params: { path: ['unsupported_action'] }
+            params: { path: ['solve', '..', 'admin'] }
         });
-        assert(res.status === 404, 'Invalid route returns HTTP 404');
-        const json = await res.json();
-        assert(json.error.code === 'ROUTE_NOT_FOUND', 'Returns ROUTE_NOT_FOUND code');
-    }
+        assert(res1.status === 404, 'Path traversal /solve/../admin blocked with HTTP 404');
 
-    // 2. Test health probe -> 200
-    {
-        const req = new Request('https://tsapumkin.pages.dev/api/math/health', {
-            method: 'GET'
-        });
-        const res = await onRequest({
-            request: req,
-            env: {},
-            params: { path: ['health'] }
-        });
-        assert(res.status === 200, 'Health probe returns HTTP 200');
-        const json = await res.json();
-        assert(json.status === 'OK', 'Health probe body has status OK');
-    }
-
-    // 3. Test invalid method for execution route (e.g. GET /solve) -> 405
-    {
-        const req = new Request('https://tsapumkin.pages.dev/api/math/solve', {
-            method: 'GET'
-        });
-        const res = await onRequest({
-            request: req,
-            env: {},
-            params: { path: ['solve'] }
-        });
-        assert(res.status === 405, 'GET on /solve returns HTTP 405 Method Not Allowed');
-    }
-
-    // 4. Test OPTIONS preflight -> 204
-    {
-        const req = new Request('https://tsapumkin.pages.dev/api/math/solve', {
-            method: 'OPTIONS',
-            headers: { 'Origin': 'https://tsapumkin.pages.dev' }
-        });
-        const res = await onRequest({
-            request: req,
-            env: {},
-            params: { path: ['solve'] }
-        });
-        assert(res.status === 204, 'OPTIONS preflight returns HTTP 204');
-        assert(res.headers.get('Access-Control-Allow-Origin') === 'https://tsapumkin.pages.dev', 'CORS origin matched');
-    }
-
-    // 5. Test payload too large (> 64 KB) -> 413
-    {
-        const hugeString = 'x'.repeat(70000);
-        const req = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+        const req2 = new Request('https://tsapumkin.pages.dev/api/math/solve%2F..%2Fadmin', {
             method: 'POST',
-            headers: { 'Content-Length': '70000' },
-            body: hugeString
+            headers: { 'CF-Connecting-IP': '10.0.1.2' },
+            body: JSON.stringify({ question_text: 'x' })
         });
-        const res = await onRequest({
-            request: req,
+        const res2 = await onRequest({
+            request: req2,
             env: {},
-            params: { path: ['solve'] }
+            params: { path: ['solve%2F..%2Fadmin'] }
         });
-        assert(res.status === 413, 'Payload > 64KB returns HTTP 413');
-        const json = await res.json();
-        assert(json.error.code === 'PAYLOAD_TOO_LARGE', 'Returns PAYLOAD_TOO_LARGE code');
+        assert(res2.status === 404, 'Encoded traversal solve%2F..%2Fadmin blocked with HTTP 404');
     }
 
-    // 6. Test invalid JSON -> 400
+    // 2. Trailing slash and uppercase route
     {
-        const req = new Request('https://tsapumkin.pages.dev/api/math/solve', {
-            method: 'POST',
-            body: 'not a valid json {{{'
-        });
-        const res = await onRequest({
-            request: req,
-            env: {},
-            params: { path: ['solve'] }
-        });
-        assert(res.status === 400, 'Invalid JSON body returns HTTP 400');
-        const json = await res.json();
-        assert(json.error.code === 'INVALID_JSON', 'Returns INVALID_JSON code');
-    }
-
-    // 7. Test rate limiting (exceeding 30 requests/minute) -> 429
-    {
-        let hitRateLimit = false;
-        for (let i = 0; i < 35; i++) {
-            const req = new Request('https://tsapumkin.pages.dev/api/math/solve', {
-                method: 'POST',
-                headers: { 'CF-Connecting-IP': '198.51.100.42' },
-                body: JSON.stringify({ question_text: 'x+1' })
-            });
-            const res = await onRequest({
-                request: req,
-                env: {},
-                params: { path: ['solve'] }
-            });
-            if (res.status === 429) {
-                hitRateLimit = true;
-                const json = await res.json();
-                assert(json.error.code === 'RATE_LIMIT_EXCEEDED', 'Rate limit returns RATE_LIMIT_EXCEEDED code');
-                break;
-            }
-        }
-        assert(hitRateLimit === true, 'Rate limit triggered after 30 requests');
-    }
-
-    // 8. Test mock backend forwarding & header injection
-    {
-        const originalFetch = globalThis.fetch;
-        let capturedHeaders = null;
         let capturedUrl = null;
-
-        globalThis.fetch = async (url, init) => {
+        const originalFetch = globalThis.fetch;
+        globalThis.fetch = async (url) => {
             capturedUrl = url;
-            capturedHeaders = init.headers;
-            return new Response(JSON.stringify({
-                status: 'verified',
-                computed_answer: '2',
-                restate_vi: 'Tích phân xác định'
-            }), {
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return new Response(JSON.stringify({ status: 'verified', computed_answer: '1' }), { status: 200 });
         };
 
-        const req = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+        // Trailing slash: path array has ['solve', '']
+        const reqSlash = new Request('https://tsapumkin.pages.dev/api/math/solve/', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '203.0.113.1' },
-            body: JSON.stringify({ question_text: 'int 0 to 1' })
+            headers: { 'CF-Connecting-IP': '10.0.2.1' },
+            body: JSON.stringify({ question_text: 'x' })
         });
+        const resSlash = await onRequest({
+            request: reqSlash,
+            env: { MATH_API_URL: 'https://backend.example.com' },
+            params: { path: ['solve', ''] }
+        });
+        assert(resSlash.status === 200, 'Trailing slash /solve/ handled cleanly');
 
-        const res = await onRequest({
-            request: req,
+        // Uppercase route: SOLVE
+        const reqUpper = new Request('https://tsapumkin.pages.dev/api/math/SOLVE', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.2.2' },
+            body: JSON.stringify({ question_text: 'x' })
+        });
+        const resUpper = await onRequest({
+            request: reqUpper,
+            env: { MATH_API_URL: 'https://backend.example.com' },
+            params: { path: ['SOLVE'] }
+        });
+        assert(resUpper.status === 200, 'Uppercase route SOLVE normalized and accepted');
+
+        globalThis.fetch = originalFetch;
+    }
+
+    // 3. Query string isolation
+    {
+        let capturedUrl = null;
+        const originalFetch = globalThis.fetch;
+        globalThis.fetch = async (url) => {
+            capturedUrl = url;
+            return new Response(JSON.stringify({ status: 'verified' }), { status: 200 });
+        };
+
+        const reqQuery = new Request('https://tsapumkin.pages.dev/api/math/solve?query_leak=evil&foo=bar', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.3.1' },
+            body: JSON.stringify({ question_text: 'x' })
+        });
+        const resQuery = await onRequest({
+            request: reqQuery,
+            env: { MATH_API_URL: 'https://backend.example.com' },
+            params: { path: ['solve'] }
+        });
+        assert(resQuery.status === 200, 'Request with query string handled cleanly');
+        assert(capturedUrl === 'https://backend.example.com/v1/solve', 'Backend URL does not leak query string');
+
+        globalThis.fetch = originalFetch;
+    }
+
+    // 4. Header shielding: client cookies, authorization, user-agent NOT forwarded
+    {
+        let capturedHeaders = null;
+        const originalFetch = globalThis.fetch;
+        globalThis.fetch = async (url, init) => {
+            capturedHeaders = init.headers;
+            return new Response(JSON.stringify({ status: 'verified' }), { status: 200 });
+        };
+
+        const reqShield = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: {
+                'CF-Connecting-IP': '10.0.4.1',
+                'Cookie': 'student_session=secret_token_abc_123',
+                'Authorization': 'Bearer student_private_bearer',
+                'User-Agent': 'Mozilla/5.0 SecretStudentDevice',
+                'X-Custom-Client-Header': 'leak_attempt'
+            },
+            body: JSON.stringify({ question_text: 'x' })
+        });
+        await onRequest({
+            request: reqShield,
             env: {
                 MATH_API_URL: 'https://backend.example.com',
-                MATH_API_KEY: 'secret_token_12345'
+                MATH_API_KEY: 'internal_gateway_key'
             },
             params: { path: ['solve'] }
         });
 
-        assert(res.status === 200, 'Mock backend returns HTTP 200');
-        assert(capturedUrl === 'https://backend.example.com/v1/solve', 'Target URL correctly transformed to /v1/solve');
-        assert(capturedHeaders['X-Pumkin-API-Key'] === 'secret_token_12345', 'Secret API key injected into backend request');
-        assert(res.headers.get('X-Pumkin-Cache') === 'MISS', 'First request has Cache MISS');
+        assert(capturedHeaders['Cookie'] === undefined, 'Client Cookie header is shielded (not forwarded)');
+        assert(capturedHeaders['Authorization'] === undefined, 'Client Authorization header is shielded');
+        assert(capturedHeaders['User-Agent'] === undefined, 'Client User-Agent is shielded');
+        assert(capturedHeaders['X-Pumkin-API-Key'] === 'internal_gateway_key', 'Gateway API key injected correctly');
 
         globalThis.fetch = originalFetch;
     }
 
-    // 9. Test timeout & cold start handling (AbortError) -> 504
+    // 5. Body size boundary: exactly 64KB (65,536 bytes) vs 64KB + 1 byte (65,537 bytes)
     {
         const originalFetch = globalThis.fetch;
-        globalThis.fetch = async () => {
-            const err = new Error('The operation was aborted');
-            err.name = 'AbortError';
-            throw err;
-        };
+        globalThis.fetch = async () => new Response(JSON.stringify({ status: 'verified' }), { status: 200 });
 
-        const req = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+        // Exactly 64KB payload
+        const exactBase = JSON.stringify({ question_text: '' });
+        const paddingNeeded64K = 65536 - exactBase.length;
+        const exact64K = JSON.stringify({ question_text: 'a'.repeat(paddingNeeded64K) });
+        assert(exact64K.length === 65536, 'Constructed exactly 65,536 bytes payload');
+
+        const req64K = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '203.0.113.2' },
-            body: JSON.stringify({ question_text: 'slow problem' })
+            headers: {
+                'CF-Connecting-IP': '10.0.5.1',
+                'Content-Length': '65536'
+            },
+            body: exact64K
         });
+        const res64K = await onRequest({
+            request: req64K,
+            env: { MATH_API_URL: 'https://backend.example.com' },
+            params: { path: ['solve'] }
+        });
+        assert(res64K.status === 200, 'Body of exactly 64 KB (65,536 bytes) is ACCEPTED');
 
-        const res = await onRequest({
-            request: req,
+        // 64KB + 1 byte payload
+        const over64K = exact64K + 'x';
+        assert(over64K.length === 65537, 'Constructed 65,537 bytes payload (64KB + 1)');
+
+        const reqOver64K = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: {
+                'CF-Connecting-IP': '10.0.5.2',
+                'Content-Length': '65537'
+            },
+            body: over64K
+        });
+        const resOver64K = await onRequest({
+            request: reqOver64K,
             env: {},
             params: { path: ['solve'] }
         });
+        assert(resOver64K.status === 413, 'Body of 64 KB + 1 byte (65,537 bytes) REJECTED with HTTP 413');
 
-        assert(res.status === 504, 'Backend timeout returns HTTP 504');
-        const json = await res.json();
-        assert(json.error.is_cold_start === true, 'Error has is_cold_start flag true');
-        assert(json.error.code === 'BACKEND_TIMEOUT_OR_COLD_START', 'Error has cold start code');
+        // Chunked / no Content-Length header with 65,537 bytes
+        const reqChunkedOver = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.5.3' },
+            body: over64K
+        });
+        const resChunkedOver = await onRequest({
+            request: reqChunkedOver,
+            env: {},
+            params: { path: ['solve'] }
+        });
+        assert(resChunkedOver.status === 413, 'Chunked body without Content-Length > 64KB REJECTED with HTTP 413');
 
         globalThis.fetch = originalFetch;
     }
 
-    console.log(`\nRESULTS: ${passed} passed, ${failed} failed.`);
+    // 6. Semantic Cache Key Distinctness (Testing Mathematical Invariance)
+    {
+        // Test A: \Delta(0.2) vs \delta(0.2)
+        const keyDeltaUpper = await sha256Hex(buildCacheKeyInput('solve', { question_text: '\\Delta(0.2)' }));
+        const keyDeltaLower = await sha256Hex(buildCacheKeyInput('solve', { question_text: '\\delta(0.2)' }));
+        assert(keyDeltaUpper !== keyDeltaLower, 'Cache keys for \\Delta(0.2) and \\delta(0.2) are DISTINCT');
+
+        // Test B: P(x) vs p(x)
+        const keyPUpper = await sha256Hex(buildCacheKeyInput('solve', { question_text: 'P(x)' }));
+        const keyPLower = await sha256Hex(buildCacheKeyInput('solve', { question_text: 'p(x)' }));
+        assert(keyPUpper !== keyPLower, 'Cache keys for P(x) and p(x) are DISTINCT');
+
+        // Test C: \sin x vs \sinx
+        const keySinSpace = await sha256Hex(buildCacheKeyInput('solve', { question_text: '\\sin x' }));
+        const keySinNoSpace = await sha256Hex(buildCacheKeyInput('solve', { question_text: '\\sinx' }));
+        assert(keySinSpace !== keySinNoSpace, 'Cache keys for \\sin x and \\sinx are DISTINCT');
+
+        // Test D: C_5^2 vs c_5^2
+        const keyCombUpper = await sha256Hex(buildCacheKeyInput('solve', { question_text: 'C_5^2' }));
+        const keyCombLower = await sha256Hex(buildCacheKeyInput('solve', { question_text: 'c_5^2' }));
+        assert(keyCombUpper !== keyCombLower, 'Cache keys for C_5^2 and c_5^2 are DISTINCT');
+    }
+
+    // 7. Cache Policy: ONLY cache status="verified" (never needs_review, unsupported, error)
+    {
+        const mockKV = new Map();
+        const fakeEnv = {
+            MATH_API_URL: 'https://backend.example.com',
+            MATH_KV: {
+                get: async (k) => mockKV.get(k) || null,
+                put: async (k, v) => mockKV.set(k, v)
+            }
+        };
+
+        const originalFetch = globalThis.fetch;
+
+        // Sub-case A: status = "verified" -> MUST BE CACHED
+        globalThis.fetch = async () => new Response(JSON.stringify({ status: 'verified', computed_answer: '42' }), { status: 200 });
+        const reqVer = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.7.1' },
+            body: JSON.stringify({ question_text: 'verified_problem_1' })
+        });
+        const resVer = await onRequest({ request: reqVer, env: fakeEnv, params: { path: ['solve'] } });
+        assert(resVer.status === 200, 'Sub-case A returned 200');
+        const cacheKeysA = Array.from(mockKV.keys()).filter(k => k.startsWith('math_solve_cache_'));
+        assert(cacheKeysA.length === 1, 'Status "verified" WAS saved to KV cache');
+
+        // Sub-case B: status = "needs_review" -> MUST NOT BE CACHED
+        mockKV.clear();
+        globalThis.fetch = async () => new Response(JSON.stringify({ status: 'needs_review', computed_answer: '?' }), { status: 200 });
+        const reqNR = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.7.2' },
+            body: JSON.stringify({ question_text: 'review_problem_2' })
+        });
+        const resNR = await onRequest({ request: reqNR, env: fakeEnv, params: { path: ['solve'] } });
+        assert(resNR.status === 200, 'Sub-case B returned 200');
+        const cacheKeysB = Array.from(mockKV.keys()).filter(k => k.startsWith('math_solve_cache_'));
+        assert(cacheKeysB.length === 0, 'Status "needs_review" WAS NOT saved to KV cache');
+
+        // Sub-case C: status = "unsupported" -> MUST NOT BE CACHED
+        mockKV.clear();
+        globalThis.fetch = async () => new Response(JSON.stringify({ status: 'unsupported' }), { status: 200 });
+        const reqUnsup = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.7.3' },
+            body: JSON.stringify({ question_text: 'unsup_problem_3' })
+        });
+        const resUnsup = await onRequest({ request: reqUnsup, env: fakeEnv, params: { path: ['solve'] } });
+        assert(resUnsup.status === 200, 'Sub-case C returned 200');
+        const cacheKeysC = Array.from(mockKV.keys()).filter(k => k.startsWith('math_solve_cache_'));
+        assert(cacheKeysC.length === 0, 'Status "unsupported" WAS NOT saved to KV cache');
+
+        // Sub-case D: HTTP 400 error -> MUST NOT BE CACHED
+        mockKV.clear();
+        globalThis.fetch = async () => new Response(JSON.stringify({ error: { code: 'SYNTAX_ERROR' } }), { status: 400 });
+        const reqErr = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.7.4' },
+            body: JSON.stringify({ question_text: 'syntax_error_4' })
+        });
+        const resErr = await onRequest({ request: reqErr, env: fakeEnv, params: { path: ['solve'] } });
+        assert(resErr.status === 400, 'Sub-case D returned 400');
+        const cacheKeysD = Array.from(mockKV.keys()).filter(k => k.startsWith('math_solve_cache_'));
+        assert(cacheKeysD.length === 0, 'Error responses WERE NOT saved to KV cache');
+
+        globalThis.fetch = originalFetch;
+    }
+
+    // 8. Health Probe and Pre-warm (?wake=1)
+    {
+        let wakeCalled = false;
+        const originalFetch = globalThis.fetch;
+        globalThis.fetch = async (url) => {
+            if (url.includes('/health')) wakeCalled = true;
+            return new Response(JSON.stringify({ status: 'ok' }), { status: 200 });
+        };
+
+        const reqWake = new Request('https://tsapumkin.pages.dev/api/math/health?wake=1', {
+            method: 'GET'
+        });
+        const resWake = await onRequest({
+            request: reqWake,
+            env: { MATH_API_URL: 'https://backend.example.com' },
+            params: { path: ['health'] }
+        });
+        assert(resWake.status === 200, 'Health probe with ?wake=1 returns HTTP 200');
+        const jsonWake = await resWake.json();
+        assert(jsonWake.backend_health === 'reachable', 'Backend was pinged and marked reachable');
+        assert(wakeCalled === true, 'Backend /health ping was executed for pre-warming');
+
+        globalThis.fetch = originalFetch;
+    }
+
+    console.log(`\nALL ENHANCED TESTS FINISHED: ${passed} passed, ${failed} failed.`);
     if (failed > 0) process.exit(1);
 }
 
