@@ -15,7 +15,6 @@ import json
 import math
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any
 
 from bench.runner import BenchmarkSummary, ItemResult
 
@@ -151,7 +150,11 @@ def export_benchmark_results(
     _export_needs_review_cases(summary, needs_review_md, needs_review_json)
 
     # Also write suspected_ground_truth_errors for backward compatibility
-    _export_needs_review_cases(summary, out_dir / "suspected_ground_truth_errors.md", out_dir / "suspected_ground_truth_errors.json")
+    _export_needs_review_cases(
+        summary,
+        out_dir / "suspected_ground_truth_errors.md",
+        out_dir / "suspected_ground_truth_errors.json",
+    )
 
     # 3. Export per-case CSV
     csv_path = out_dir / "per_case.csv"
@@ -228,7 +231,9 @@ def _generate_markdown_report(
     cov_low, cov_high = wilson_ci(summary.supported_count, summary.bank_questions_total)
     ci_low, ci_high = wilson_ci(summary.confident_incorrect_count, summary.supported_count)
     nr_low, nr_high = wilson_ci(summary.needs_review_count, summary.supported_count)
-    adv_low, adv_high = wilson_ci(summary.adversarial_blocked_count, summary.adversarial_items_total)
+    adv_low, adv_high = wilson_ci(
+        summary.adversarial_blocked_count, summary.adversarial_items_total
+    )
     sgd_low, sgd_high = wilson_ci(summary.correct_count, summary.bank_questions_total)
 
     # Compute Holdout vs Dev Metrics if split file is present
@@ -291,7 +296,7 @@ def _generate_markdown_report(
         f"| **Độ phủ trên tổng thể 583 items** | **{(summary.supported_count / summary.total_items) * 100:.2f}%** (= {summary.supported_count}/{summary.total_items}) | - | Minh bạch mẫu số | Đạt |",
         f"| **Độ chính xác trên dạng bài hỗ trợ** | **{summary.accuracy_on_supported * 100:.2f}%** ({summary.correct_count}/{summary.supported_count}) | [{acc_low * 100:.2f}%, {acc_high * 100:.2f}%] | > 75% | **VƯỢT TRỘI** |",
         f"| **Độ chính xác Solver-given-DSL trên Bank** | **{summary.end_to_end_accuracy * 100:.2f}%** ({summary.correct_count}/{summary.bank_questions_total}) | [{sgd_low * 100:.2f}%, {sgd_high * 100:.2f}%] | - | Đạt |",
-        f"| **Độ chính xác Tầng Parse (Đề bài -> DSL)** | **Chưa đo** | - | Chờ cấp ngân sách LLM | Trung thực |",
+        "| **Độ chính xác Tầng Parse (Đề bài -> DSL)** | **Chưa đo** | - | Chờ cấp ngân sách LLM | Trung thực |",
         f"| **SAI-MÀ-TỰ-TIN (Confident Incorrect)** | **{summary.confident_incorrect_count}** ca (0.00%) | [{ci_low * 100:.2f}%, {ci_high * 100:.2f}%] | **0** | **TUYỆT ĐỐI (0 ca)** |",
         f"| **Tỷ lệ cần duyệt lại (Needs Review)** | **{summary.needs_review_count}** ca ({summary.needs_review_count / summary.supported_count * 100:.2f}%) | [{nr_low * 100:.2f}%, {nr_high * 100:.2f}%] | < 5% | Đạt |",
         f"| **Lỗi hệ thống (System Errors)** | **{summary.system_error_count}** ca (0.00%) | - | 0 | **HOÀN HẢO (0 lỗi)** |",
