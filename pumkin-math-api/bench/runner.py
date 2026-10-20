@@ -23,7 +23,7 @@ from app.schemas.dsl import MathProblemDSL
 from app.security.input_limits import sanitize_and_validate_question_text
 from app.solvers.registry import solve_dsl
 from bench.dataset import BenchmarkItem, load_benchmark_dataset
-from bench.evaluator import are_answers_equivalent, classify_discrepancy
+from bench.evaluator import are_answers_equivalent
 
 logger = logging.getLogger("pumkin.bench")
 math_problem_adapter = TypeAdapter(MathProblemDSL)
@@ -49,7 +49,6 @@ class ItemResult:
     cost_usd: float = 0.0
     error_message: str | None = None
     notes: str | None = None
-
 
 
 @dataclass
@@ -129,7 +128,6 @@ SOLVER_DISCREPANCY_EXPLANATIONS: dict[str, dict[str, str]] = {
         ),
     },
 }
-
 
 
 def _extract_expected_answer_string(item: BenchmarkItem) -> str | None:
@@ -302,7 +300,9 @@ def run_single_item(
                     notes = explanation["reason"]
                 else:
                     discrepancy = "cas_key_conflict"
-                    notes = f"CAS mâu thuẫn key: solver tính '{computed_val}', key là '{expected_ans}'."
+                    notes = (
+                        f"CAS mâu thuẫn key: solver tính '{computed_val}', key là '{expected_ans}'."
+                    )
 
             return ItemResult(
                 id=item.id,
@@ -418,9 +418,7 @@ def execute_benchmark_suite(
     confident_incorrect = [r for r in bank_results if r.is_confident_incorrect]
     needs_review = [r for r in bank_results if r.status == "needs_review"]
     system_errors = [r for r in bank_results if r.discrepancy_type == "system_error"]
-    suspected_errors = [
-        r for r in bank_results if r.status == "needs_review"
-    ]
+    suspected_errors = [r for r in bank_results if r.status == "needs_review"]
 
     adv_blocked = [r for r in adv_results if r.is_correct]
     adv_blocked_count = len(adv_blocked)
