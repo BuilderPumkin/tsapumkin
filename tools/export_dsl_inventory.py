@@ -54,7 +54,7 @@ for qid in sorted(_PREPARED_DSL_MAP.keys()):
                 "hash DSL": dsl_hash,
                 "do ai/cái gì tạo DSL": "soạn cùng solver",
                 "đã được giáo viên duyệt": "không",
-                "tính độc lập": "độc lập",
+                "tính độc lập": "độc lập (con người soạn)",
             }
         )
         seen_ids.add(qid)
@@ -78,7 +78,7 @@ for qid in sorted(_PREPARED_DSL_MAP.keys()):
 
         # If question text came from dsl["restate_vi"], it is a circular test problem ("đề vòng tròn")
         is_circular = not has_orig_meta_text
-        independence_label = "đề vòng tròn" if is_circular else "độc lập"
+        independence_label = "đề vòng tròn" if is_circular else "độc lập (con người soạn)"
 
         all_records.append(
             {
@@ -94,7 +94,7 @@ for qid in sorted(_PREPARED_DSL_MAP.keys()):
         seen_ids.add(qid)
         seen_texts.add(norm_t)
 
-# 3. Generator pairs (20 deterministic template instances)
+# 3. Generator pairs (20 deterministic template instances - NOT independent)
 rng = random.Random(20261018)
 gen_added = 0
 gen_attempts = 0
@@ -129,7 +129,7 @@ while gen_added < 20 and gen_attempts < 100:
                     "hash DSL": dsl_hash,
                     "do ai/cái gì tạo DSL": "soạn cùng solver",
                     "đã được giáo viên duyệt": "không",
-                    "tính độc lập": "độc lập",
+                    "tính độc lập": "không độc lập (sinh từ template)",
                 }
             )
             seen_ids.add(qid)
@@ -156,9 +156,16 @@ with open(out_path, "w", encoding="utf-8-sig", newline="") as f:
 
 print(f"Wrote {len(all_records)} records to {out_path}")
 
-# Calculate independent count
-circular_records = [r for r in all_records if r["tính độc lập"] == "đề vòng tròn"]
-independent_records = [r for r in all_records if r["tính độc lập"] != "đề vòng tròn"]
+# Calculate counts
+human_independent_records = [
+    r for r in all_records if r["tính độc lập"] == "độc lập (con người soạn)"
+]
+template_records = [
+    r for r in all_records if r["tính độc lập"] == "không độc lập (sinh từ template)"
+]
+circular_records = [
+    r for r in all_records if r["tính độc lập"] == "đề vòng tròn"
+]
 
 print("\n--- SUMMARY OF DEDUPED DSL PAIRS ---")
 by_source = {}
@@ -169,6 +176,8 @@ for r in all_records:
 for s, count in sorted(by_source.items()):
     print(f"  • Nguồn '{s}': {count} cặp")
 
-print(f"  • Tổng số cặp ghi nhận trong kho : {len(all_records)} cặp")
-print(f"  • Số cặp 'đề vòng tròn' bị loại : {len(circular_records)} cặp (đề sinh từ dsl[restate_vi])")
-print(f"  • SỐ CẶP ĐỘC LẬP THỰC TẾ SAU KHI LOẠI: {len(independent_records)} cặp duy nhất")
+print(f"  • Tổng số cặp ghi nhận trong kho          : {len(all_records)} cặp")
+print(f"  • SỐ CẶP ĐỘC LẬP CHÍNH (CON NGƯỜI SOẠN)  : {len(human_independent_records)} cặp (82 bank + 8 fixture)")
+print(f"  • Số cặp template (KHÔNG ĐỘC LẬP)         : {len(template_records)} cặp (sinh từ template generator)")
+print(f"  • Số cặp 'đề vòng tròn' bị loại           : {len(circular_records)} cặp (đề lấy từ dsl[restate_vi])")
+
