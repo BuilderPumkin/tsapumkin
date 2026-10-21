@@ -1179,6 +1179,51 @@
         "title": "ValidationError",
         "type": "object"
       },
+      "VersionResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "commit_hash": {
+            "description": "Mã băm commit Git hiện tại",
+            "title": "Commit Hash",
+            "type": "string"
+          },
+          "prompt_parser_version": {
+            "description": "Phiên bản prompt của bộ dịch ngữ nghĩa DSL",
+            "title": "Prompt Parser Version",
+            "type": "string"
+          },
+          "python_version": {
+            "description": "Phiên bản môi trường thực thi Python",
+            "title": "Python Version",
+            "type": "string"
+          },
+          "service_version": {
+            "description": "Phiên bản microservice",
+            "title": "Service Version",
+            "type": "string"
+          },
+          "solver_version": {
+            "description": "Phiên bản bộ giải toán hình thức CAS",
+            "title": "Solver Version",
+            "type": "string"
+          },
+          "sympy_version": {
+            "description": "Phiên bản thư viện SymPy CAS",
+            "title": "Sympy Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "service_version",
+          "prompt_parser_version",
+          "solver_version",
+          "commit_hash",
+          "sympy_version",
+          "python_version"
+        ],
+        "title": "VersionResponse",
+        "type": "object"
+      },
       "WarningCode": {
         "enum": [
           "WARN_SOFT_VISUAL_DEPENDENCY",
@@ -1439,6 +1484,28 @@
         "summary": "Gia sư AI giải toán Socratic 4 bậc",
         "tags": [
           "Core"
+        ]
+      }
+    },
+    "/version": {
+      "get": {
+        "description": "Public version endpoint returning microservice, prompt parser, CAS solver, and commit hash.",
+        "operationId": "version_check_version_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Lấy chi tiết phiên bản dịch vụ, prompt parser, bộ giải CAS và git commit",
+        "tags": [
+          "System"
         ]
       }
     }

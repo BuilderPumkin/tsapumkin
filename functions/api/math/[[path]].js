@@ -255,11 +255,35 @@ export async function onRequest(context = {}) {
             }, null, 2),
             { status: 200, headers: corsHeaders }
         );
+    } else if (segments.length === 1 && segments[0] === "version") {
+        const backendBaseUrl = (env && env.MATH_API_URL) ? env.MATH_API_URL.replace(/\/+$/, "") : "http://localhost:8000";
+        let backendVersion = null;
+        try {
+            const vController = new AbortController();
+            const vTimer = setTimeout(() => vController.abort(), 3000);
+            const vRes = await fetch(`${backendBaseUrl}/version`, { signal: vController.signal });
+            clearTimeout(vTimer);
+            if (vRes.ok) {
+                backendVersion = await vRes.json();
+            }
+        } catch {
+            backendVersion = "unreachable";
+        }
+
+        return new Response(
+            JSON.stringify({
+                gateway_version: "1.1.0",
+                schema_version: "1.1.0",
+                backend: backendVersion,
+                timestamp: new Date().toISOString()
+            }, null, 2),
+            { status: 200, headers: corsHeaders }
+        );
     } else {
         return makeErrorResponse(
             404,
             "ROUTE_NOT_FOUND",
-            "Đường dẫn không hợp lệ. Gateway chỉ hỗ trợ các thao tác: solve, check, generate.",
+            "Đường dẫn không hợp lệ. Gateway chỉ hỗ trợ các thao tác: solve, check, generate, health, version.",
             corsHeaders,
             { requested_path: "/" + segments.join("/") }
         );

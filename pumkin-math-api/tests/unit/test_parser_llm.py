@@ -80,12 +80,49 @@ async def test_budget_tracker_limits():
     await tracker.record_usage(cost_usd=0.045, prompt_tokens=100, completion_tokens=100)
     with pytest.raises(BudgetExceededError) as exc_info2:
         await tracker.check_budget_before_request(0.01)
-    assert "chạm trần" in str(exc_info2.value)
+    assert "ngân sách mỗi giờ" in str(exc_info2.value)
 
-    # 4. Reset budget
+    # 4. Exceeds daily limit
+    tracker_daily = BudgetTracker(
+        max_cost_per_request_usd=1.0,
+        max_cost_per_hour_usd=10.0,
+        max_cost_per_day_usd=0.10,
+    )
+    await tracker_daily.record_usage(cost_usd=0.095, prompt_tokens=200, completion_tokens=200)
+    with pytest.raises(BudgetExceededError) as exc_info3:
+        await tracker_daily.check_budget_before_request(0.01)
+    assert "ngân sách mỗi ngày" in str(exc_info3.value)
+    assert exc_info3.value.details["period"] == "day"
+
+    # 5. Reset budget
     tracker.reset()
     assert tracker.hourly_spent_usd == 0.0
+    assert tracker.daily_spent_usd == 0.0
     await tracker.check_budget_before_request(0.005)
+
+
+@pytest.mark.unit
+def test_solve_budget_exceeded_returns_429(client, valid_auth_headers, monkeypatch):
+    """
+    When budget is exceeded, /v1/solve must return HTTP 429 with status 'error' and code 'budget_exceeded'.
+    """
+    from app.parser.budget import global_budget_tracker
+
+    monkeypatch.setattr(global_budget_tracker, "hourly_budget_usd", 0.0001)
+    monkeypatch.setattr(global_budget_tracker, "_hourly_spent", 0.0005)
+
+    payload = {"question_text": "Tính diện tích hình phẳng giới hạn bởi y = x và y = 0"}
+    response = client.post("/v1/solve", json=payload, headers=valid_auth_headers)
+
+    assert response.status_code == 429
+    data = response.json()
+    assert data["status"] == "error"
+    assert data["error"]["code"] == "budget_exceeded"
+    assert "chạm trần" in data["error"]["message_vi"]
+    assert data["error"]["details"]["period"] == "hour"
+
+    # Clean up
+    global_budget_tracker.reset()
 
 
 @pytest.mark.unit
