@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-10-21T11:40:32.597988+00:00",
+  "description": "Các quyết định ghi đè đáp án/lời giải đã được giáo viên thẩm định. Build release sẽ tự động áp dụng các quyết định này mà không làm biến dạng dữ liệu thô.",
+  "overrides": []
+}
