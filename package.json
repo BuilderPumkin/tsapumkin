@@ -7,5 +7,8 @@
     "build": "echo Build complete",
     "dev": "wrangler pages dev pumkin3",
     "deploy": "wrangler pages deploy pumkin3"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.3"
   }
 }

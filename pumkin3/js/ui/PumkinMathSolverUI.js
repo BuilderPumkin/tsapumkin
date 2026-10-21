@@ -33,12 +33,12 @@
 
     /**
      * Standard Badge Descriptor Generator
-     * Strictly conforms to API_CONTRACT.md (Section 3.2 & 3.3):
-     * - symbolic: "Đã giải chính xác bằng đại số (SymPy)"
-     * - numeric: "Đã kiểm tra bằng tính số"
-     * - consensus: "Đồng thuận đa phương pháp kiểm tra"
-     * - LLM involvement (llm_consensus, llm_assisted, llm_parsed): NEVER labeled "Đã kiểm chứng"!
-     *   Uses cautious label: "Gợi ý qua mô hình ngôn ngữ (Chưa kiểm chứng)"
+     * Strictly conforms to API_CONTRACT.md (Section 3.2 & 3.3, Schema Version 1.1.0):
+     * - symbolic: "Đã xác minh bằng máy đại số" (verified, green)
+     * - numeric: "Đã kiểm tra bằng tính số" (verified, teal)
+     * - consensus: "Đồng thuận đa phương pháp / AI (Cần kiểm tra lại)" (needs_review, amber)
+     *   Academic rule: Any flow involving LLM in parse/consensus MUST NEVER be labeled "verified".
+     *   CAS only verifies the mathematical correctness of the parsed DSL, NOT that the DSL matches the original problem.
      * - needs_review: "Cần thầy cô kiểm tra lại"
      * - unsupported: "Dạng bài chưa hỗ trợ tự động"
      */
@@ -54,8 +54,17 @@
         if (isLlmAssisted) {
             return {
                 className: 'badge-needs-review',
-                text: 'Gợi ý qua mô hình ngôn ngữ (Chưa kiểm chứng)',
+                text: 'Gợi ý qua mô hình ngôn ngữ (Cần kiểm tra lại)',
                 icon: '🤖'
+            };
+        }
+
+        // Academic Governance: Consensus involving LLM/multi-methods must use cautious label
+        if (method === 'consensus') {
+            return {
+                className: 'badge-needs-review',
+                text: 'Đồng thuận đa phương pháp / AI (Cần kiểm tra lại)',
+                icon: '⚠️'
             };
         }
 
@@ -68,15 +77,9 @@
                 };
             } else if (method === 'numeric') {
                 return {
-                    className: 'badge-verified',
-                    text: 'Đã kiểm tra bằng tính số',
+                    className: 'badge-numeric',
+                    text: 'Đã kiểm tra bằng tính số (Thực nghiệm)',
                     icon: '🔢'
-                };
-            } else if (method === 'consensus') {
-                return {
-                    className: 'badge-verified',
-                    text: 'Đồng thuận đối chiếu (Đại số & Số học)',
-                    icon: '🤝'
                 };
             }
             return {
@@ -495,25 +498,6 @@
                 </div>
             ` : '';
 
-            const stepsHtml = steps.length > 0 ? `
-                <div style="font-size: 14px; font-weight: 700; color: var(--primary, #1e3a8a); margin-top: 16px;">
-                    📋 CÁC BƯỚC BIẾN ĐỔI KÝ HIỆU (STEP-BY-STEP TRACES):
-                </div>
-                <div class="math-steps-list">
-                    ${steps.map((st, i) => `
-                        <div class="math-step-item">
-                            <div class="math-step-title">
-                                <span>Bước ${i + 1}:</span>
-                                <span>${escapeHtml(st.title || st.action || 'Biến đổi giải tích')}</span>
-                            </div>
-                            <div class="math-step-content">
-                                ${escapeHtml(st.content || st.expression || st.explanation || '')}
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            ` : '';
-
             container.innerHTML = `
                 <div class="math-result-card">
                     <div class="math-result-header">
@@ -530,7 +514,7 @@
                         <span class="math-final-answer-value">${escapeHtml(answer)}</span>
                     </div>
 
-                    ${stepsHtml}
+                    <div class="math-steps-mount-point"></div>
 
                     <div class="math-meta-telemetry">
                         <span>Độ trễ phản hồi: <strong>${Number(res.latency_ms || 0)} ms</strong></span>
@@ -540,7 +524,63 @@
                 </div>
             `;
 
-            // Trigger KaTeX rendering via Pumkin.Math with strict safety options
+            // Secure step rendering: use textContent + katex.render to completely avoid
+            // HTML entity escaping artifacts (such as x < 3 or a & b) and neutralize XSS
+            if (steps.length > 0) {
+                const mount = container.querySelector('.math-steps-mount-point');
+                if (mount) {
+                    const header = document.createElement('div');
+                    header.style.cssText = 'font-size: 14px; font-weight: 700; color: var(--primary, #1e3a8a); margin-top: 16px;';
+                    header.textContent = '📋 CÁC BƯỚC BIẾN ĐỔI KÝ HIỆU (STEP-BY-STEP TRACES):';
+                    mount.appendChild(header);
+
+                    const list = document.createElement('div');
+                    list.className = 'math-steps-list';
+
+                    steps.forEach((st, i) => {
+                        const item = document.createElement('div');
+                        item.className = 'math-step-item';
+
+                        const title = document.createElement('div');
+                        title.className = 'math-step-title';
+
+                        const stepNum = document.createElement('span');
+                        stepNum.textContent = `Bước ${i + 1}: `;
+                        title.appendChild(stepNum);
+
+                        const stepNote = document.createElement('span');
+                        stepNote.textContent = st.note_vi || st.title || st.action || 'Biến đổi giải tích';
+                        title.appendChild(stepNote);
+                        item.appendChild(title);
+
+                        const content = document.createElement('div');
+                        content.className = 'math-step-content';
+
+                        const rawLatex = st.latex || st.content || st.expression || st.explanation || '';
+                        const katexObj = typeof katex !== 'undefined' ? katex : (window.katex || (window.Pumkin && window.Pumkin.Math && window.Pumkin.Math.katex));
+                        if (katexObj && typeof katexObj.render === 'function') {
+                            try {
+                                katexObj.render(rawLatex, content, {
+                                    throwOnError: false,
+                                    trust: false,
+                                    displayMode: false
+                                });
+                            } catch (e) {
+                                content.textContent = rawLatex;
+                            }
+                        } else {
+                            content.textContent = rawLatex;
+                        }
+
+                        item.appendChild(content);
+                        list.appendChild(item);
+                    });
+
+                    mount.appendChild(list);
+                }
+            }
+
+            // Trigger KaTeX rendering via Pumkin.Math for restate_vi and other parts
             this.typesetElement(container);
         },
 

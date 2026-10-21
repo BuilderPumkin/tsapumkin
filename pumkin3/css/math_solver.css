@@ -266,6 +266,12 @@
     border: 1.5px solid #a7f3d0;
 }
 
+.pumkin-math-badge.badge-numeric {
+    background: #f0fdfa;
+    color: #0f766e;
+    border: 1.5px solid #99f6e4;
+}
+
 .pumkin-math-badge.badge-needs-review {
     background: #fffbeb;
     color: #92400e;
