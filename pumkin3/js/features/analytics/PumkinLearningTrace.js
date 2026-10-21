@@ -47,7 +47,12 @@ const PumkinLearningTrace = {
         const trace = this.getTrace();
         const q = (typeof PumkinStorage !== "undefined") ? PumkinStorage.getQuestionById(record.questionId) : null;
         
-        // Auto classify error if wrong
+        // Auto classify error if wrong (INVARIANT 3: cannot_determine is NEVER recorded as an error)
+        if (record.status === "cannot_determine" || record.verdict === "cannot_determine") {
+            return;
+        }
+
+
         let errorType = null;
         let classification = null;
         if (!record.isCorrect && record.status !== "correct") {

@@ -6,6 +6,7 @@ Strictly enforces Criterion #1: Zero False Negatives.
 """
 
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -13,9 +14,21 @@ import pytest
 from app.checker.checker import check_student_submission
 from app.schemas.check import AnswerTypeEnum, CheckRequest, CheckVerdictEnum
 
-CANDIDATE_PATHS = [
-    Path(__file__).resolve().parent.parent.parent.parent.parent / "data" / "questions" / "all.json",
+env_path = os.environ.get("QUESTION_BANK_PATH")
+CANDIDATE_PATHS = ([Path(env_path)] if env_path else []) + [
+    Path(__file__).resolve().parent.parent.parent / "bench" / "data" / "all.json",
+    Path(__file__).resolve().parent.parent.parent.parent
+    / "public"
+    / "data"
+    / "questions"
+    / "all.json",
+    Path(__file__).resolve().parent.parent.parent.parent
+    / "pumkin3"
+    / "data"
+    / "questions"
+    / "all.json",
     Path(__file__).resolve().parent.parent.parent.parent / "data" / "questions" / "all.json",
+    Path(__file__).resolve().parent.parent.parent.parent.parent / "data" / "questions" / "all.json",
 ]
 ALL_QUESTIONS_PATH = next((p for p in CANDIDATE_PATHS if p.exists()), CANDIDATE_PATHS[0])
 

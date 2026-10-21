@@ -125,7 +125,7 @@ class GeminiLLMClient(LLMClient):
         self.api_key = (
             api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
         )
-        self.model = model or os.environ.get("GEMINI_MODEL") or "gemini-2.0-flash"
+        self.model = model or os.environ.get("GEMINI_MODEL") or "gemini-2.5-flash-lite"
         self.timeout_seconds = timeout_seconds
 
     async def complete_structured(
@@ -196,8 +196,16 @@ class GeminiLLMClient(LLMClient):
         completion_tokens = usage.get("candidatesTokenCount", 0)
         total_tokens = usage.get("totalTokenCount", prompt_tokens + completion_tokens)
 
-        # Gemini 2.0 Flash pricing: $0.10 / 1M prompt, $0.40 / 1M candidates
-        cost = (prompt_tokens * 0.10 + completion_tokens * 0.40) / 1_000_000.0
+        # Official Google AI Studio pricing (Source: https://ai.google.dev/pricing, tra cứu 21/10/2026):
+        # - gemini-2.5-flash-lite: $0.15 / 1M prompt tokens, $0.60 / 1M candidates
+        # - gemini-2.5-flash: $0.30 / 1M prompt tokens, $2.50 / 1M candidates
+        model_lower = (self.model or "").lower()
+        if "lite" in model_lower:
+            cost = (prompt_tokens * 0.15 + completion_tokens * 0.60) / 1_000_000.0
+        elif "2.5-flash" in model_lower or "3." in model_lower:
+            cost = (prompt_tokens * 0.30 + completion_tokens * 2.50) / 1_000_000.0
+        else:
+            cost = (prompt_tokens * 0.15 + completion_tokens * 0.60) / 1_000_000.0
 
         return LLMResponse(
             content=parsed_json,
@@ -290,28 +298,43 @@ class OpenAILLMClient(LLMClient):
         )
 
 
+def _is_placeholder_key(key: str | None) -> bool:
+    if not key:
+        return True
+    k = key.strip()
+    return not k or "YOUR_GEMINI_API_KEY" in k or "YOUR_OPENAI_API_KEY" in k
+
+
 def get_llm_client(provider: str | None = None) -> LLMClient:
     """
     Factory creating configured LLMClient.
     Priority:
     1. Explicit provider parameter
     2. LLM_PROVIDER env var ('fake', 'gemini', 'openai')
-    3. If GEMINI_API_KEY present -> GeminiLLMClient
+    3. If GEMINI_API_KEY present (and not a placeholder) -> GeminiLLMClient
     4. Default -> FakeLLMClient (safe offline default)
     """
     selected = (provider or os.environ.get("LLM_PROVIDER", "")).strip().lower()
 
     if selected == "gemini":
+        gemini_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+        if _is_placeholder_key(gemini_key):
+            return FakeLLMClient()
         return GeminiLLMClient()
     if selected == "openai":
+        openai_key = os.environ.get("OPENAI_API_KEY")
+        if _is_placeholder_key(openai_key):
+            return FakeLLMClient()
         return OpenAILLMClient()
     if selected == "fake":
         return FakeLLMClient()
 
     # Auto-detection
-    if os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"):
+    gemini_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not _is_placeholder_key(gemini_key):
         return GeminiLLMClient()
-    if os.environ.get("OPENAI_API_KEY"):
+    openai_key = os.environ.get("OPENAI_API_KEY")
+    if not _is_placeholder_key(openai_key):
         return OpenAILLMClient()
 
     return FakeLLMClient()

@@ -111,7 +111,7 @@ class BaseResponseEnvelope(StrictBaseModel, Generic[T]):
     """
 
     schema_version: str = Field(
-        default="1.0.0",
+        default="1.1.0",
         description="Phiên bản schema hợp đồng dữ liệu",
     )
     trace_id: str = Field(
@@ -182,3 +182,14 @@ class HealthResponse(StrictBaseModel):
     service_version: str = Field(..., description="Phiên bản microservice")
     sympy_version: str = Field(..., description="Phiên bản SymPy CAS")
     python_version: str = Field(..., description="Phiên bản Python runtime")
+
+
+class VersionResponse(StrictBaseModel):
+    service_version: str = Field(..., description="Phiên bản microservice")
+    prompt_parser_version: str = Field(
+        ..., description="Phiên bản prompt của bộ dịch ngữ nghĩa DSL"
+    )
+    solver_version: str = Field(..., description="Phiên bản bộ giải toán hình thức CAS")
+    commit_hash: str = Field(..., description="Mã băm commit Git hiện tại")
+    sympy_version: str = Field(..., description="Phiên bản thư viện SymPy CAS")
+    python_version: str = Field(..., description="Phiên bản môi trường thực thi Python")

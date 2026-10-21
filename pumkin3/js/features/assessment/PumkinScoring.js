@@ -8,6 +8,29 @@
     'use strict';
     window.Pumkin = window.Pumkin || {};
 
+    // 72 Supported Benchmark Question IDs (verified against bench/results/per_case.csv)
+    const SUPPORTED_CAS_QUESTION_IDS = new Set([
+        "q_tsa_04","q_tsa_06","q_tsa_12","q_tsa_28","q_hsa_01","q_hsa_05","q_hsa_06","q_hsa_08","q_hsa_12","q_hsa_15",
+        "q_hsa_19","q_thpt_03","q_thpt_04","q_thpt_06","q_thpt_13","q_thpt_sa_01","q_calc_04","q_calc_07","q_calc_sa_01",
+        "q_tsa_34","q_hsa_23","q_hsa_25","q_thpt_18","q_calc_12","q_calc_13","q_tsa_53","q_tsa_54","q_hsa_35","q_hsa_38",
+        "q_thpt_24","q_thpt_25","q_calc_18","q_calc_20","q_hsa_46","q_thpt_39","q_tsa_sa_04","q_gen_area_1","q_gen_area_2",
+        "q_gen_area_3","q_gen_area_4","q_gen_area_5","q_gen_area_6","q_gen_area_7","q_gen_area_8","q_gen_area_9","q_gen_area_10",
+        "q_gen_area_11","q_gen_area_12","q_gen_area_13","q_gen_area_14","q_gen_area_15","q_gen_area_16","q_gen_matcau_1",
+        "q_gen_matcau_2","q_gen_matcau_3","q_gen_matcau_4","q_gen_matcau_5","q_gen_matcau_6","q_gen_matcau_7","q_gen_matcau_8",
+        "q_gen_matcau_9","q_gen_matcau_10","q_gen_matcau_11","q_gen_matcau_12","q_boost_integral_01","q_boost_integral_02",
+        "q_boost_integral_03","q_boost_plane_01","q_boost_plane_02","q_superhard_type3_01","q_tsa_num_01","q_tsa_num_02"
+    ]);
+
+    function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
 const PumkinScoring = {
     currentResult: null,
 
@@ -34,6 +57,17 @@ const PumkinScoring = {
 
     isShortAnswerCorrect(userAns, q) {
         if (!userAns || typeof userAns !== 'string' || !userAns.trim()) return false;
+
+        // Use Pumkin.AnswerChecker if available for advanced equivalence
+        const checker = (typeof window !== 'undefined' && window.Pumkin && window.Pumkin.AnswerChecker)
+            ? window.Pumkin.AnswerChecker
+            : (typeof window !== 'undefined' && window.PumkinAnswerChecker ? window.PumkinAnswerChecker : null);
+        if (checker && typeof checker.isEquivalentLocal === 'function') {
+            const canonical = q.correct_value ?? q.correct_answer ?? '';
+            const res = checker.isEquivalentLocal(userAns, canonical, q.accepted_answers);
+            return res.isMatch;
+        }
+
         const normUser = this.normalizeMathString(userAns);
         const accepted = [q.correct_value, ...(q.accepted_answers || [])];
         if (accepted.some(acc => this.normalizeMathString(acc) === normUser)) {
@@ -111,11 +145,21 @@ const PumkinScoring = {
                     status = "skipped";
                     skippedCount++;
                 } else {
-                    const isRight = this.isShortAnswerCorrect(userAns, q);
-                    if (isRight) {
+                    const checker = (typeof window !== 'undefined' && window.Pumkin && window.Pumkin.AnswerChecker)
+                        ? window.Pumkin.AnswerChecker
+                        : (typeof window !== 'undefined' && window.PumkinAnswerChecker ? window.PumkinAnswerChecker : null);
+                    const canonical = q.correct_value ?? q.correct_answer ?? "";
+                    const evalRes = checker
+                        ? checker.isEquivalentLocal(userAns, canonical, q.accepted_answers)
+                        : { isMatch: this.isShortAnswerCorrect(userAns, q), isDifferentForm: false };
+
+                    if (evalRes.isMatch) {
                         earned = 1.00;
                         status = "correct";
                         correctCount++;
+                        if (evalRes.isDifferentForm) {
+                            detail = `Đáp án của bạn tương đương, dạng chuẩn là: ${canonical}`;
+                        }
                     } else {
                         status = "wrong";
                         wrongCount++;
@@ -208,10 +252,14 @@ const PumkinScoring = {
             try {
                 const raschResponses = questions.map((q, idx) => {
                     const qG = questionGrading[idx];
+                    // Safety: cannot_determine MUST be excluded from Rasch calibration
+                    if (qG && (qG.status === "cannot_determine" || qG.verdict === "cannot_determine")) {
+                        return null;
+                    }
                     const isCorrect = qG && (qG.status === "correct" || qG.earned >= 0.5);
                     const b = raschEngine.getItemDifficulty(q);
                     return { b, correct: isCorrect, questionId: q.id };
-                });
+                }).filter(Boolean);
                 shadowRasch = raschEngine.estimateTheta(raschResponses);
             } catch (err) {
                 console.warn("[Rasch Shadow Mode] Error estimating theta:", err);
@@ -576,8 +624,9 @@ const PumkinScoring = {
                             <span class="question-number-badge">CÂU ${qIdx + 1}</span>
                             <span style="font-size: 12.5px; color: var(--text-muted); margin-left: 8px;">${q.topic} • ${q.difficulty}</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                             ${badgeHtml}
+                            ${SUPPORTED_CAS_QUESTION_IDS.has(q.id) ? `<button class="btn btn-sm btn-cas-verify" data-qid="${q.id}" title="Kiểm chứng bằng máy đại số CAS tất định">🔬 Kiểm chứng CAS</button>` : `<button class="btn btn-sm btn-cas-disabled" disabled title="Chưa hỗ trợ dạng này bằng CAS" style="opacity: 0.55; cursor: not-allowed; background: #f1f5f9; color: #94a3b8; border: 1px solid #cbd5e1;">🔬 Chưa hỗ trợ CAS</button>`}
                             <button class="btn btn-sm btn-tutor-ask" onclick="PumkinTutorIntegration.openFromQuestion('${q.id}', '${res.exam_id || 'exam'}')">🤖 Hỏi AI</button>
                             <button class="btn btn-sm btn-outline" onclick="PumkinScoring.toggleSaveQuestion('${q.id}', this)">
                                 ${isSaved ? '★ Đã lưu' : '☆ Lưu câu này'}
@@ -599,6 +648,8 @@ const PumkinScoring = {
                             ${q.explanation || 'Đang cập nhật lời giải chi tiết cho câu hỏi này.'}
                         </div>
                     </div>
+
+                    <div id="cas-verification-slot-${q.id}" class="cas-verification-slot" style="display:none;"></div>
 
                     <div class="pumkin-card-watermark">
                         <span class="brand-dot"></span> PUMKIN.DEV • NỀN TẢNG KHẢO THÍ TOÁN HỌC CHUẨN HÓA
@@ -629,6 +680,15 @@ const PumkinScoring = {
             }
         }
 
+        // Bind CAS Verification buttons strictly using addEventListener (NO inline onclick)
+        container.querySelectorAll('.btn-cas-verify:not([data-bound])').forEach(btn => {
+            btn.setAttribute('data-bound', 'true');
+            btn.addEventListener('click', (e) => {
+                const qid = e.currentTarget.dataset.qid;
+                PumkinScoring.verifyQuestionWithCAS(qid, e.currentTarget);
+            });
+        });
+
         if (filteredIndices.length > this._reviewDisplayLimit) {
             const remaining = filteredIndices.length - this._reviewDisplayLimit;
             const loadMoreDiv = document.createElement("div");
@@ -649,10 +709,168 @@ const PumkinScoring = {
         this.renderReviewSlice(true);
     },
 
-        toggleSaveQuestion(qId, btnEl) {
+    toggleSaveQuestion(qId, btnEl) {
         const added = PumkinStorage.toggleBookmark(qId);
         if (btnEl) {
             btnEl.textContent = added ? "★ Đã lưu" : "☆ Lưu câu này";
+        }
+    },
+
+    /**
+     * Verifies a bank question via PumkinMathAPIClient with graceful degradation
+     */
+    async verifyQuestionWithCAS(qid, btnEl) {
+        const slot = document.getElementById(`cas-verification-slot-${qid}`);
+        if (!slot) return;
+
+        // If already rendered, toggle display
+        if (slot.dataset.loaded === 'true') {
+            slot.style.display = (slot.style.display === 'none') ? 'block' : 'none';
+            return;
+        }
+
+        const question = (this.currentResult && this.currentResult.questions)
+            ? this.currentResult.questions.find(q => q.id === qid)
+            : (typeof PumkinStorage !== 'undefined' ? PumkinStorage.getQuestionById(qid) : null);
+
+        if (!question) return;
+
+        slot.style.display = 'block';
+        slot.dataset.loaded = 'true';
+        slot.innerHTML = `
+            <div class="math-loading-state" style="padding: 16px; margin: 10px 0;">
+                <div class="math-spinner" style="width: 24px; height: 24px; border-width: 2.5px;"></div>
+                <div style="font-size: 13.5px; font-weight: 700; color: var(--primary, #1e3a8a);">Đang kiểm chứng bằng máy đại số CAS...</div>
+            </div>
+        `;
+
+        if (!window.Pumkin.MathAPIClient) {
+            slot.innerHTML = `<div style="font-size: 13px; color: var(--text-muted); padding: 8px;">Mô-đun kiểm chứng CAS chưa sẵn sàng.</div>`;
+            return;
+        }
+
+        const payload = {
+            question_id: question.id,
+            question_text: question.question_text || question.question || question.content || ''
+        };
+
+        const res = await window.Pumkin.MathAPIClient.solve(payload);
+
+        if (!res.success) {
+            // Graceful Fallback to bank data
+            const fallback = window.Pumkin.MathAPIClient.getFallbackBankSolution(qid);
+            slot.innerHTML = `
+                <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 14px; margin-top: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+                        <span style="font-weight: 700; font-size: 13.5px; color: #334155;">KẾT QUẢ KIỂM CHỨNG</span>
+                        <span class="pumkin-math-badge badge-unsupported" style="font-size: 12px; padding: 4px 10px;">
+                            <span>ℹ️</span> <span>Chưa kiểm chứng (Ngoại tuyến)</span>
+                        </span>
+                    </div>
+                    <p style="font-size: 13px; color: #475569; margin: 0 0 10px 0; line-height: 1.5;">
+                        ${fallback.notes}
+                    </p>
+                    <div id="cas-retry-slot-${qid}"></div>
+                </div>
+            `;
+            const retrySlot = slot.querySelector(`#cas-retry-slot-${qid}`);
+            if (retrySlot) {
+                const retryBtn = document.createElement('button');
+                retryBtn.className = 'btn-math-retry';
+                retryBtn.style.padding = '6px 14px';
+                retryBtn.style.fontSize = '12.5px';
+                retryBtn.innerHTML = '<span>🔄</span><span>Thử lại kết nối CAS</span>';
+                retryBtn.addEventListener('click', () => {
+                    slot.dataset.loaded = 'false';
+                    this.verifyQuestionWithCAS(qid, btnEl);
+                });
+                retrySlot.appendChild(retryBtn);
+            }
+            return;
+        }
+
+        const data = res.data || {};
+        const status = data.status || 'unsupported';
+        const confMethod = (data.confidence && data.confidence.method) ? data.confidence.method : '';
+        const isLlmAssisted = Boolean(
+            (data.confidence && (data.confidence.llm_assisted || data.confidence.llm_parsed)) ||
+            confMethod === 'llm_consensus' ||
+            confMethod === 'llm'
+        );
+
+        let badgeClass = 'badge-unsupported';
+        let badgeText = 'Dạng bài chưa hỗ trợ tự động';
+        let badgeIcon = 'ℹ️';
+
+        if (isLlmAssisted) {
+            badgeClass = 'badge-needs-review';
+            badgeText = 'Gợi ý qua mô hình ngôn ngữ (Chưa kiểm chứng)';
+            badgeIcon = '🤖';
+        } else if (status === 'verified') {
+            badgeClass = 'badge-verified';
+            if (confMethod === 'symbolic') {
+                badgeText = 'Đã xác minh bằng máy đại số';
+                badgeIcon = '🛡️';
+            } else if (confMethod === 'numeric') {
+                badgeText = 'Đã kiểm tra bằng tính số';
+                badgeIcon = '🔢';
+            } else if (confMethod === 'consensus') {
+                badgeText = 'Đồng thuận đối chiếu (Đại số & Số học)';
+                badgeIcon = '🤝';
+            } else {
+                badgeText = 'Đã kiểm chứng hình thức';
+                badgeIcon = '🛡️';
+            }
+        } else if (status === 'needs_review') {
+            badgeClass = 'badge-needs-review';
+            badgeText = 'Cần thầy cô kiểm tra lại';
+            badgeIcon = '⚠️';
+        }
+
+        const restateHtml = data.restate_vi ? `
+            <div class="math-restate-banner" style="margin: 8px 0; font-size: 13px; padding: 8px 12px;">
+                <span class="restate-label">Hệ thống hiểu đề là:</span>
+                <span class="restate-content">${data.restate_vi}</span>
+            </div>
+        ` : '';
+
+        const stepsHtml = (data.steps && data.steps.length > 0) ? `
+            <div style="font-size: 12.5px; font-weight: 700; color: var(--primary, #1e3a8a); margin: 8px 0 4px 0;">
+                CÁC BƯỚC BIẾN ĐỔI KÝ HIỆU:
+            </div>
+            <div class="math-steps-list" style="gap: 6px;">
+                ${data.steps.map((st, i) => `
+                    <div class="math-step-item" style="padding: 8px 12px; font-size: 13px;">
+                        <span style="font-weight: 700; color: var(--primary, #1e3a8a);">Bước ${i+1}: ${st.title || ''}</span>
+                        <div style="margin-top: 4px;">${st.content || st.expression || ''}</div>
+                    </div>
+                `).join('')}
+            </div>
+        ` : '';
+
+        slot.innerHTML = `
+            <div style="background: #ffffff; border: 1.5px solid var(--border-color, #e2e8f0); border-radius: 8px; padding: 14px; margin-top: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+                    <span style="font-weight: 800; font-size: 13.5px; color: var(--primary, #1e3a8a);">KẾT QUẢ TÍNH TOÁN CAS</span>
+                    <span class="pumkin-math-badge ${badgeClass}" style="font-size: 12px; padding: 4px 10px;">
+                        <span>${badgeIcon}</span> <span>${badgeText}</span>
+                    </span>
+                </div>
+                ${restateHtml}
+                <div style="font-size: 13.5px; margin: 8px 0;">
+                    <strong>Đáp số CAS:</strong> <code>${escapeHtml(data.computed_answer || data.answer || 'N/A')}</code>
+                </div>
+                ${stepsHtml}
+                <div style="font-size: 11px; color: var(--text-muted, #64748b); margin-top: 8px;">
+                    Độ trễ: ${res.latency_ms} ms • Cache: ${res.cache_status}
+                </div>
+            </div>
+        `;
+
+        if (window.Pumkin && window.Pumkin.Math && typeof window.Pumkin.Math.renderElement === 'function') {
+            window.Pumkin.Math.renderElement(slot);
+        } else if (window.PumkinMath && typeof window.PumkinMath.typeset === 'function') {
+            window.PumkinMath.typeset(slot);
         }
     }
 };

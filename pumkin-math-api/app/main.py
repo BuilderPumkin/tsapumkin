@@ -8,6 +8,7 @@ import sys
 from uuid import uuid4
 
 import sympy
+from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -19,6 +20,8 @@ from app.auth import verify_api_key
 from app.checker import check_student_submission
 from app.generator import generate_questions
 from app.parser import parse_and_solve_with_consensus
+from app.parser.budget import BudgetExceededError
+from app.parser.consensus import PROMPT_VERSION
 from app.sandbox import (
     SandboxMemoryError,
     SandboxTimeoutError,
@@ -31,6 +34,7 @@ from app.schemas.common import (
     ConfidenceMethod,
     HealthResponse,
     StatusEnum,
+    VersionResponse,
 )
 from app.schemas.generate import GenerateRequest, GenerateResponse
 from app.schemas.solve import SolveRequest, SolveResponse
@@ -39,6 +43,8 @@ from app.security import (
     global_concurrency_limiter,
     sanitize_and_validate_question_text,
 )
+
+load_dotenv()
 
 # 1 MB body size threshold enforced at application layer
 MAX_BODY_SIZE_BYTES = 1024 * 1024
@@ -61,7 +67,7 @@ def make_envelope_error_response(
 ) -> JSONResponse:
     """Helper creating standardized BaseResponseEnvelope for error status codes."""
     payload = {
-        "schema_version": "1.0.0",
+        "schema_version": "1.1.0",
         "trace_id": str(uuid4()),
         "status": StatusEnum.ERROR,
         "confidence": {
@@ -205,15 +211,39 @@ DEFAULT_CORS_ORIGINS = [
 
 
 def get_cors_allowed_origins() -> list[str]:
-    raw = os.getenv("PUMKIN_CORS_ALLOWED_ORIGINS", "")
+    raw = os.getenv("CORS_ORIGINS", os.getenv("PUMKIN_CORS_ALLOWED_ORIGINS", ""))
     if raw.strip():
         return [origin.strip() for origin in raw.split(",") if origin.strip()]
     return DEFAULT_CORS_ORIGINS
 
 
+def get_git_commit_hash() -> str:
+    """Returns current git commit hash from env or git CLI."""
+    for var_name in ("GIT_COMMIT", "COMMIT_SHA", "RENDER_GIT_COMMIT", "CF_PAGES_COMMIT_SHA"):
+        val = os.getenv(var_name, "").strip()
+        if val:
+            return val[:8]
+    try:
+        import subprocess
+
+        res = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"],
+            capture_output=True,
+            text=True,
+            timeout=1,
+            check=False,
+        )
+        if res.returncode == 0 and res.stdout.strip():
+            return res.stdout.strip()
+    except Exception:
+        pass
+    return "unknown"
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_cors_allowed_origins(),
+    allow_origin_regex=r"^https://[a-z0-9-]+\.tsapumkin\.pages\.dev$",
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
@@ -233,6 +263,24 @@ async def health_check():
     return HealthResponse(
         status="healthy",
         service_version=__version__,
+        sympy_version=sympy.__version__,
+        python_version=sys.version.split()[0],
+    )
+
+
+@app.get(
+    "/version",
+    response_model=VersionResponse,
+    tags=["System"],
+    summary="Lấy chi tiết phiên bản dịch vụ, prompt parser, bộ giải CAS và git commit",
+)
+async def version_check() -> VersionResponse:
+    """Public version endpoint returning microservice, prompt parser, CAS solver, and commit hash."""
+    return VersionResponse(
+        service_version=__version__,
+        prompt_parser_version=PROMPT_VERSION,
+        solver_version="1.1.0",
+        commit_hash=get_git_commit_hash(),
         sympy_version=sympy.__version__,
         python_version=sys.version.split()[0],
     )
@@ -264,6 +312,13 @@ async def solve_endpoint(
     async with global_concurrency_limiter.limit_concurrency():
         try:
             return await parse_and_solve_with_consensus(request)
+        except BudgetExceededError as exc:
+            return make_envelope_error_response(
+                status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+                code="budget_exceeded",
+                message_vi=exc.message_vi,
+                details=None,
+            )
         except SandboxTimeoutError as exc:
             return make_envelope_error_response(
                 status_code=status.HTTP_504_GATEWAY_TIMEOUT,

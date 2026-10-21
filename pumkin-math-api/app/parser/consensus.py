@@ -21,7 +21,7 @@ from pydantic import TypeAdapter, ValidationError
 
 from app.checker.evaluators import evaluate_expression, evaluate_number
 from app.checker.normalizer import strip_latex_wrappers
-from app.parser.budget import global_budget_tracker
+from app.parser.budget import BudgetExceededError, global_budget_tracker
 from app.parser.cache import compute_problem_hash, global_problem_cache
 from app.parser.llm_client import LLMClient, LLMResponse, get_llm_client
 from app.pedagogy.engine import generate_pedagogical_guidance
@@ -132,6 +132,8 @@ async def _translate_single_sample_with_retry(
             prompt_tokens=resp.prompt_tokens,
             completion_tokens=resp.completion_tokens,
         )
+    except BudgetExceededError:
+        raise
     except Exception as e:
         return SampleOutcome(
             sample_index=sample_idx,
@@ -167,6 +169,8 @@ async def _translate_single_sample_with_retry(
             content = resp_retry.content
             dsl_obj = math_problem_adapter.validate_python(content)
             resp = resp_retry
+        except BudgetExceededError:
+            raise
         except Exception as retry_err:
             return SampleOutcome(
                 sample_index=sample_idx,

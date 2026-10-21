@@ -68,10 +68,12 @@ def _load_key_file_hashes() -> tuple[set[str], set[str]]:
 def get_configured_key_hashes() -> set[str]:
     """
     Retrieves the set of valid SHA-256 hashes configured in environment variables or key file.
-    Variable format: PUMKIN_API_KEY_HASHES=hash1,hash2,...
+    Variable format: MATH_API_KEY_HASHES=hash1,hash2,... or PUMKIN_API_KEY_HASHES=hash1,hash2,...
     """
     hashes: set[str] = set()
-    raw_hashes = os.environ.get("PUMKIN_API_KEY_HASHES", "")
+    raw_hashes = os.environ.get("MATH_API_KEY_HASHES") or os.environ.get(
+        "PUMKIN_API_KEY_HASHES", ""
+    )
     if raw_hashes:
         hashes.update(h.strip().lower() for h in raw_hashes.split(",") if h.strip())
 
@@ -83,10 +85,12 @@ def get_configured_key_hashes() -> set[str]:
 def get_revoked_key_hashes() -> set[str]:
     """
     Retrieves the set of explicitly revoked SHA-256 hashes.
-    Variable format: PUMKIN_REVOKED_KEY_HASHES=hash1,hash2,...
+    Variable format: MATH_REVOKED_KEY_HASHES=hash1,hash2,... or PUMKIN_REVOKED_KEY_HASHES=hash1,hash2,...
     """
     revoked: set[str] = set()
-    raw_revoked = os.environ.get("PUMKIN_REVOKED_KEY_HASHES", "")
+    raw_revoked = os.environ.get("MATH_REVOKED_KEY_HASHES") or os.environ.get(
+        "PUMKIN_REVOKED_KEY_HASHES", ""
+    )
     if raw_revoked:
         revoked.update(h.strip().lower() for h in raw_revoked.split(",") if h.strip())
 

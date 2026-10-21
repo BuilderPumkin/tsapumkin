@@ -11,6 +11,10 @@ Prompt 7 Verification Suite:
 - End-to-end API integration
 """
 
+import os
+import tempfile
+import time
+
 import pytest
 
 from app.parser.budget import BudgetExceededError, BudgetTracker
@@ -80,12 +84,112 @@ async def test_budget_tracker_limits():
     await tracker.record_usage(cost_usd=0.045, prompt_tokens=100, completion_tokens=100)
     with pytest.raises(BudgetExceededError) as exc_info2:
         await tracker.check_budget_before_request(0.01)
-    assert "chạm trần" in str(exc_info2.value)
+    assert "ngân sách mỗi giờ" in str(exc_info2.value)
 
-    # 4. Reset budget
+    # 4. Exceeds daily limit
+    tracker_daily = BudgetTracker(
+        max_cost_per_request_usd=1.0,
+        max_cost_per_hour_usd=10.0,
+        max_cost_per_day_usd=0.10,
+    )
+    await tracker_daily.record_usage(cost_usd=0.095, prompt_tokens=200, completion_tokens=200)
+    with pytest.raises(BudgetExceededError) as exc_info3:
+        await tracker_daily.check_budget_before_request(0.01)
+    assert "ngân sách mỗi ngày" in str(exc_info3.value)
+    assert exc_info3.value.details["period"] == "day"
+
+    # 5. Multi-Worker & Process Restart Persistence Test
+    with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as tf:
+        shared_db_path = tf.name
+
+    try:
+        # Worker 1 instance
+        worker1 = BudgetTracker(
+            max_cost_per_request_usd=0.05,
+            max_cost_per_hour_usd=0.05,
+            db_path=shared_db_path,
+        )
+        # Worker 2 instance (simulating concurrent worker process)
+        worker2 = BudgetTracker(
+            max_cost_per_request_usd=0.05,
+            max_cost_per_hour_usd=0.05,
+            db_path=shared_db_path,
+        )
+
+        # Worker 1 records usage of $0.035
+        await worker1.record_usage(cost_usd=0.035, prompt_tokens=100, completion_tokens=50)
+
+        # Worker 2 immediately observes the shared spent amount without delay
+        assert worker2.hourly_spent_usd == 0.035
+
+        # Worker 2 tries to run a $0.02 request -> would total $0.055 > $0.05 limit -> BLOCKED!
+        with pytest.raises(BudgetExceededError) as w2_exc:
+            await worker2.check_budget_before_request(0.02)
+        assert "ngân sách mỗi giờ" in str(w2_exc.value).lower()
+
+        # Worker 2 records small $0.01 request (total $0.045)
+        await worker2.record_usage(cost_usd=0.01, prompt_tokens=20, completion_tokens=20)
+
+        # Simulate service restart: create Worker 3 as a fresh instance
+        worker3_after_restart = BudgetTracker(
+            max_cost_per_request_usd=0.05,
+            max_cost_per_hour_usd=0.05,
+            db_path=shared_db_path,
+        )
+        # Verifies restart DID NOT reset budget or double limits
+        assert worker3_after_restart.hourly_spent_usd == 0.045
+        with pytest.raises(BudgetExceededError):
+            await worker3_after_restart.check_budget_before_request(0.01)
+
+    finally:
+        if os.path.exists(shared_db_path):
+            try:
+                os.remove(shared_db_path)
+            except Exception:
+                pass
+
+    # 6. Reset budget
     tracker.reset()
     assert tracker.hourly_spent_usd == 0.0
+    assert tracker.daily_spent_usd == 0.0
     await tracker.check_budget_before_request(0.005)
+
+
+@pytest.mark.unit
+def test_solve_budget_exceeded_returns_429(client, valid_auth_headers, monkeypatch):
+    """
+    When budget is exceeded, /v1/solve must return HTTP 429 with status 'error', code 'budget_exceeded',
+    and details=None (never leaks internal cost numbers to client).
+    """
+    from app.parser.budget import global_budget_tracker
+
+    monkeypatch.setattr(global_budget_tracker, "hourly_budget_usd", 0.0001)
+
+    # Force SQLite hourly spent to exceed
+    conn = global_budget_tracker._get_connection()
+    try:
+        with conn:
+            conn.execute(
+                "INSERT OR REPLACE INTO budget_windows (window_name, window_start, spent_usd, tokens) VALUES ('hourly', ?, 0.0005, 10)",
+                (time.time(),),
+            )
+    finally:
+        if global_budget_tracker.db_path != ":memory:":
+            conn.close()
+
+    payload = {"question_text": "Tính diện tích hình phẳng giới hạn bởi y = x và y = 0"}
+    response = client.post("/v1/solve", json=payload, headers=valid_auth_headers)
+
+    assert response.status_code == 429
+    data = response.json()
+    assert data["status"] == "error"
+    assert data["error"]["code"] == "budget_exceeded"
+    assert "ngân sách" in data["error"]["message_vi"].lower()
+    # SECURITY ASSERTION: Internal cost details must be strictly None for client!
+    assert data["error"]["details"] is None
+
+    # Clean up
+    global_budget_tracker.reset()
 
 
 @pytest.mark.unit
@@ -355,7 +459,7 @@ def test_solve_endpoint_full_pipeline(auth_client):
     resp = auth_client.post("/v1/solve", json=payload)
     assert resp.status_code == 200
     data = resp.json()
-    assert data["schema_version"] == "1.0.0"
+    assert data["schema_version"] == "1.1.0"
     assert "trace_id" in data
     assert data["status"] == "verified"
     assert data["confidence"]["level"] == "high"

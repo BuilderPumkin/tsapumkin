@@ -1,6 +1,6 @@
 # PUMKIN MATH API — HỢP ĐỒNG DỮ LIỆU & ĐẶC TẢ GIAO DIỆN (API_CONTRACT.md)
 
-- **Phiên bản hợp đồng:** `v1.0.0`
+- **Phiên bản hợp đồng:** `v1.1.0`
 - **Mã dịch vụ:** `Pumkin Math API` (Microservice tính toán tất định & kiểm định toán học)
 - **Nền tảng tích hợp:** Cloudflare Pages Gateway (`functions/api/math/*`) $\rightarrow$ FastAPI Backend.
 - **Tác giả:** Senior Backend/AI Engineer kiêm Release Engineer.
@@ -11,7 +11,7 @@
 
 Hợp đồng dữ liệu này quy định cấu trúc giao tiếp giữa **Cloudflare Pages Gateway** (Client-side proxy giữ secret) và **FastAPI Microservice**, tuân thủ 3 nguyên tắc bất khả xâm phạm:
 1. **Toàn vẹn kiểu dữ liệu (Strict Typing):** Mọi schema đều được kiểm tra chặt chẽ bằng Pydantic v2. Mọi trường lạ (extra fields) đều bị **từ chối ngay lập tức** (`extra="forbid"`).
-2. **Phiên bản hóa tường minh (Explicit Versioning):** Mọi endpoint nghiệp vụ đều mang tiền tố `/v1/`. Mọi phản hồi đều chứa trường `schema_version: "1.0.0"` và `trace_id` (UUIDv4) để phục vụ giám sát và truy vết sự cố.
+2. **Phiên bản hóa tường minh (Explicit Versioning):** Mọi endpoint nghiệp vụ đều mang tiền tố `/v1/`. Mọi phản hồi đều chứa trường `schema_version: "1.1.0"` và `trace_id` (UUIDv4) để phục vụ giám sát và truy vết sự cố.
 3. **Cấu trúc bao đóng thống nhất (Standardized Response Envelope):** Mọi kết quả trả về từ `/v1/solve`, `/v1/check`, `/v1/generate` đều được bọc trong cấu trúc phong bì `BaseResponseEnvelope`.
 
 ### 1.1. Quy tắc quản lý phiên bản SemVer cho `schema_version`
@@ -20,9 +20,9 @@ Trường `schema_version` tuân thủ nguyên tắc Semantic Versioning (`MAJOR
   - Xóa bỏ hoặc đổi tên một trường trong Request hoặc Response.
   - Thay đổi kiểu dữ liệu của một trường (vd: chuyển từ chuỗi sang đối tượng).
   - Bổ sung trường bắt buộc mới trong Request payload.
-- **MINOR bump (vd: `1.0.0` $\rightarrow$ `1.1.0`):** Khi bổ sung tính năng nhưng bảo toàn tương thích ngược (backwards-compatible):
+- **MINOR bump (vd: `1.0.0` $\rightarrow$ `1.1.0`):** Khi bổ sung tính năng hoặc điều chỉnh chính sách kiểm định bảo toàn tương thích ngược:
   - Bổ sung trường tùy chọn (`optional` / có giá trị mặc định) trong Request hoặc Response.
-  - Bổ sung giá trị mới vào Enum mà client có thể xử lý an toàn bằng fallback.
+  - Cập nhật quy tắc an toàn sư phạm: Tách bạch rõ ranh giới giữa bộ giải CAS tất định và bộ dịch LLM. Mọi kết quả có sự tham gia của LLM trong bước dịch DSL hoặc đồng thuận đa ứng viên (`consensus`) đều chuyển sang nhóm nhãn thận trọng `needs_review` trên giao diện người dùng. Máy đại số CAS chỉ chứng minh lời giải của đoạn mã DSL, hoàn toàn không kiểm tra được DSL có dịch đúng ý đề bài gốc hay không.
 - **PATCH bump (vd: `1.0.0` $\rightarrow$ `1.0.1`):** Khi có chỉnh sửa tài liệu, sửa lỗi nhỏ về định dạng hoặc cập nhật mô tả sư phạm mà không thay đổi bất kỳ trường hay kiểu dữ liệu nào.
 
 ---
@@ -43,26 +43,29 @@ Trường `schema_version` tuân thủ nguyên tắc Semantic Versioning (`MAJOR
 
 ### 3.1. Quy tắc hiển thị bất biến trên giao diện (Frontend Invariant Rule)
 > [!IMPORTANT]
-> **NGHIÊM CẤM HIỂN THỊ CỤM TỪ "CHÍNH XÁC 100%" TRÊN GIAO DIỆN:**
+> **NGHIÊM CẤM HIỂN THỊ CỤM TỪ "CHÍNH XÁC 100%" HOẶC GẮN NHÃN KIỂM CHỨNG CHO LLM TRÊN GIAO DIỆN:**
 > Nền tảng học thuật PUMKIN.DEV coi việc tuyên bố "chính xác 100%" là phi khoa học và phản sư phạm. Mọi kết luận toán học hiển thị cho học sinh đều phải minh bạch về phương pháp kiểm chứng (`method: symbolic | numeric | consensus`) và mức độ tin cậy (`confidence.level`).
 
 ### 3.2. Định nghĩa chính xác phương pháp kiểm chứng (`confidence.method`)
 Hệ thống xác định tường minh vai trò của các phương pháp:
-- **`symbolic`:** Tính toán thuần túy đại số giải tích bằng bộ giải tất định SymPy CAS. **TUYỆT ĐỐI KHÔNG CÓ SỰ THAM GIA CỦA LLM** trong vòng lặp tính toán.
-- **`numeric`:** Xác minh bằng xấp xỉ số học, lấy mẫu nghiệm và số học khoảng (Interval Arithmetic). **TUYỆT ĐỐI KHÔNG CÓ LLM**. Phương pháp này kiểm chứng tính hợp lý của nghiệm nhưng **KHÔNG NGỤ Ý ĐÃ CHỨNG MINH HÌNH THỨC TOÁN HỌC**.
-- **`consensus`:** Sự đồng thuận giữa nhiều phương pháp kiểm chứng tất định độc lập (vd: kết hợp tính toán giải tích SymPy với quét mẫu số học nhiều điểm biên). **TUYỆT ĐỐI KHÔNG DÙNG LLM ĐỂ BỎ PHIẾU ĐỒNG THUẬN**. Nếu có LLM tham gia thì kết quả KHÔNG được mang nhãn verified.
+- **`symbolic`:** Tính toán thuần túy đại số giải tích bằng bộ giải tất định SymPy CAS từ cấu trúc DSL chuẩn. **TUYỆT ĐỐI KHÔNG CÓ SỰ THAM GIA CỦA LLM** trong vòng lặp tính toán. Nhãn UI: `verified` ("Đã xác minh bằng máy đại số").
+- **`numeric`:** Xác minh bằng xấp xỉ số học, lấy mẫu nghiệm và số học khoảng (Interval Arithmetic). **TUYỆT ĐỐI KHÔNG CÓ LLM**. Phương pháp này kiểm chứng tính hợp lý của nghiệm nhưng **KHÔNG NGỤ Ý ĐÃ CHỨNG MINH HÌNH THỨC TOÁN HỌC**. Nhãn UI: `verified` ("Đã kiểm tra bằng tính số").
+- **`consensus` (Đồng thuận đa phương pháp / ứng viên):** Kết quả đạt được khi có sự thống nhất giữa các phương pháp độc lập hoặc đa ứng viên DSL qua bộ dịch ngữ nghĩa LLM được kiểm tra lại bởi SymPy CAS.
+  > [!CAUTION]
+  > **RANH GIỚI KIỂM CHỨNG & AN TOÀN SƯ PHẠM CHO CONSENSUS:**
+  > Hợp đồng dữ liệu định nghĩa `consensus` trong luồng phân tích đề có sự tham gia của LLM (sinh đa phương án DSL). Máy đại số CAS chỉ xác minh lời giải của chuỗi DSL được đưa vào, **CAS HOÀN TOÀN KHÔNG THỂ BIẾT ĐƯỢC DSL CÓ DỊCH ĐÚNG Ý ĐỒ CỦA ĐỀ BÀI TIẾNG VIỆT HAY KHÔNG**. Do đó, trường `restate_vi` đóng vai trò tối quan trọng để người dùng tự đối chiếu. Bất kỳ kết quả nào có LLM trong bước dịch hoặc đồng thuận đều **KHÔNG ĐƯỢC DÙNG NHÃN THUỘC NHÓM `verified`** ("Đã kiểm chứng"). Thay vào đó, UI bắt buộc hiển thị nhãn thận trọng (`needs_review`).
 
 ### 3.3. Bảng ánh xạ trạng thái & phương pháp sang Huy hiệu giao diện
 Giao diện người dùng căn cứ vào trường `status` và `confidence.method` trong phong bì phản hồi để hiển thị huy hiệu chẩn đoán tương ứng:
 
-| Trạng thái (`status`) | Phương pháp kiểm chứng (`confidence.method`) | Tên huy hiệu giao diện (UI Badge Label) | Màu sắc | Ý nghĩa sư phạm & Hành vi giao diện |
+| Trạng thái (`status`) | Phương pháp kiểm chứng (`confidence.method`) | Tên huy hiệu giao diện (UI Badge Label) | Màu sắc & Kiểu hiển thị | Ý nghĩa sư phạm & Hành vi giao diện |
 | :--- | :--- | :--- | :---: | :--- |
-| **`verified`** | `symbolic` | **"Đã giải chính xác bằng đại số"** | Xanh lá (Green) | Kết quả được giải tích toán học tất định qua SymPy, thỏa mãn mọi điều kiện biên và tập xác định. Được tính điểm bình thường. |
-| **`verified`** | `numeric` | **"Đã kiểm tra bằng tính số"** | Xanh lục nhạt (Teal) | Kết quả vượt qua kiểm tra mẫu số học tất định. Câu chữ thận trọng, không ngụ ý là chứng minh hình thức. Được tính điểm bình thường. |
-| **`verified`** | `consensus` | **"Đồng thuận đa phương pháp kiểm tra"** | Xanh dương (Blue) | Kết quả đạt được nhờ sự thống nhất giữa bộ giải giải tích và bộ quét số học độc lập. Được tính điểm bình thường. |
-| **`needs_review`** | Bất kỳ | **"Cần thầy cô kiểm tra lại"** | Vàng cam (Amber) | Phát hiện mâu thuẫn CAS (`conflict == true`), hoặc câu phụ thuộc trực quan nhẹ (SOFT), hoặc bước giải mơ hồ. **TUYỆT ĐỐI KHÔNG TRỪ ĐIỂM HỌC SINH**; bảo lưu kết quả để giáo viên thẩm định tay. |
-| **`unsupported`** | Bất kỳ | **"Dạng bài chưa hỗ trợ tự động"** | Xám (Gray) | Dạng bài nằm ngoài phạm vi giải tự động (phụ thuộc hình vẽ cứng, hình học cổ điển, kéo thả v1...). Hệ thống giữ nguyên điểm, hướng dẫn học sinh xem bài giải chi tiết. |
-| **`error`** | Bất kỳ | **"Có lỗi xử lý hệ thống"** | Đỏ (Red) | Lỗi cú pháp đầu vào, timeout quá thời gian xử lý, hoặc ngoại lệ runtime. Hiển thị thông điệp từ trường `error.message_vi`. |
+| **`verified`** | `symbolic` | **"Đã xác minh bằng máy đại số"** | Xanh lá (Green: `badge-verified`) | Kết quả được giải tích toán học tất định qua SymPy (không qua LLM), thỏa mãn mọi điều kiện biên và tập xác định. Được tính điểm bình thường. |
+| **`verified`** | `numeric` | **"Đã kiểm tra bằng tính số (Thực nghiệm)"** | Xanh ngọc lam (Teal: `badge-numeric`) | Kết quả vượt qua kiểm tra mẫu số học tất định và số học khoảng (Interval Arithmetic). Phân biệt rõ ranh giới: câu chữ thận trọng, không ngụ ý là chứng minh hình thức. Được tính điểm bình thường. |
+| **`needs_review`** | `consensus` | **"Đồng thuận đa phương pháp / AI (Cần kiểm tra lại)"** | Vàng cam (Amber: `badge-needs-review`) | Kết quả đạt được nhờ đồng thuận nhiều ứng viên DSL/phương pháp có LLM tham gia. CAS đã xác minh DSL nhưng chưa thể bảo đảm DSL phản ánh 100% đề gốc. Cần học sinh/giáo viên đọc lại `restate_vi`. Không trừ điểm. |
+| **`needs_review`** | Bất kỳ (khác) | **"Cần thầy cô kiểm tra lại"** | Vàng cam (Amber: `badge-needs-review`) | Phát hiện mâu thuẫn CAS (`conflict == true`), hoặc câu phụ thuộc trực quan nhẹ (SOFT), hoặc bước giải mơ hồ. **TUYỆT ĐỐI KHÔNG TRỪ ĐIỂM HỌC SINH**; bảo lưu kết quả để giáo viên thẩm định tay. |
+| **`unsupported`** | Bất kỳ | **"Dạng bài chưa hỗ trợ tự động"** | Xám (Gray: `badge-unsupported`) | Dạng bài nằm ngoài phạm vi giải tự động (phụ thuộc hình vẽ cứng, hình học cổ điển, kéo thả v1...). Hệ thống giữ nguyên điểm, hướng dẫn học sinh xem bài giải chi tiết. |
+| **`error`** | Bất kỳ | **"Có lỗi xử lý hệ thống"** | Đỏ (Red: `badge-error`) | Lỗi cú pháp đầu vào, timeout quá thời gian xử lý, hoặc ngoại lệ runtime. Hiển thị thông điệp từ trường `error.message_vi`. |
 
 ---
 
@@ -72,7 +75,7 @@ Tất cả phản hồi từ các endpoint `/v1/*` đều tuân thủ cấu trú
 
 ```json
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "trace_id": "c4b93198-8e31-4890-9512-1f481c0cb123",
   "status": "verified",
   "confidence": {
@@ -195,7 +198,7 @@ Khi hệ thống trả về `status: "unsupported"`, trường `unsupported_reas
 #### Response Schema Payload (`SolveResultPayload` trong `result`):
 ```json
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "trace_id": "550e8400-e29b-41d4-a716-446655440000",
   "status": "verified",
   "confidence": {
@@ -251,7 +254,7 @@ Bao gồm 9 kiểu:
 #### Response Schema Payload (`CheckResultPayload` trong `result`):
 ```json
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "trace_id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
   "status": "verified",
   "confidence": {
@@ -304,7 +307,7 @@ Khi SymPy CAS giải ra đáp án khác với `canonical_answer` lưu trong ngâ
 #### Response Schema Payload (`GenerateResultPayload` trong `result`):
 ```json
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "trace_id": "8f3b2169-c081-4e4b-9e23-7fa52349a202",
   "status": "verified",
   "confidence": {

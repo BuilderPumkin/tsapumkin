@@ -4,7 +4,9 @@
     "name": "Quên đổi dấu khi chuyển vế",
     "category": "algebra_calculus",
     "description_vi": "Quên đổi dấu của hạng tử khi chuyển từ vế này sang vế kia của phương trình/bất phương trình.",
-    "skillIds": ["skill_calculation"],
+    "skillIds": [
+      "skill_calculation"
+    ],
     "severity": "medium",
     "remediationHint": "Khi chuyển một hạng tử qua dấu '=', em bắt buộc phải đổi dấu của hạng tử đó: '+' thành '-' và ngược lại."
   },
@@ -13,7 +15,9 @@
     "name": "Quên nhân hệ số phân phối",
     "category": "algebra_calculus",
     "description_vi": "Quên nhân hệ số ngoài ngoặc với tất cả các hạng tử bên trong ngoặc (ví dụ: 2*(x + 3) = 2x + 3).",
-    "skillIds": ["skill_calculation"],
+    "skillIds": [
+      "skill_calculation"
+    ],
     "severity": "medium",
     "remediationHint": "Quy tắc phân phối: a*(b + c) = a*b + a*c. Em hãy nhân hệ số ngoài ngoặc với từng số hạng bên trong."
   },
@@ -22,7 +26,9 @@
     "name": "Bỏ quên số hạng kép hằng đẳng thức",
     "category": "algebra_calculus",
     "description_vi": "Khai triển bình phương của một tổng/hiệu bị thiếu số hạng 2ab: tính nhầm (a + b)^2 = a^2 + b^2.",
-    "skillIds": ["skill_calculation"],
+    "skillIds": [
+      "skill_calculation"
+    ],
     "severity": "high",
     "remediationHint": "Hằng đẳng thức đáng nhớ: (a + b)^2 = a^2 + 2ab + b^2 và (a - b)^2 = a^2 - 2ab + b^2."
   },
@@ -31,7 +37,9 @@
     "name": "Nhầm căn của tổng thành tổng hai căn",
     "category": "algebra_calculus",
     "description_vi": "Áp dụng sai tính chất căn thức: nhầm sqrt(a + b) = sqrt(a) + sqrt(b).",
-    "skillIds": ["skill_calculation"],
+    "skillIds": [
+      "skill_calculation"
+    ],
     "severity": "high",
     "remediationHint": "Căn bậc hai chỉ có tính chất phân phối với phép nhân và phép chia (với số dương), không phân phối với phép cộng: sqrt(a + b) != sqrt(a) + sqrt(b)."
   },
@@ -40,7 +48,10 @@
     "name": "Quên điều kiện căn bậc hai f(x) >= 0",
     "category": "algebra_calculus",
     "description_vi": "Bỏ qua điều kiện xác định của biểu thức dưới dấu căn bậc chẵn, dẫn đến nhận nghiệm ngoại lai.",
-    "skillIds": ["skill_reasoning", "skill_calculation"],
+    "skillIds": [
+      "skill_reasoning",
+      "skill_calculation"
+    ],
     "severity": "critical",
     "remediationHint": "Biểu thức dưới dấu căn bậc hai sqrt(f(x)) chỉ xác định khi và chỉ khi f(x) >= 0. Em cần đặt điều kiện trước khi biến đổi."
   },
@@ -49,7 +60,10 @@
     "name": "Quên điều kiện xác định logarit",
     "category": "algebra_calculus",
     "description_vi": "Bỏ qua điều kiện xác định của biểu thức lấy logarit (b > 0) hoặc cơ số (a > 0, a != 1), nhận nghiệm ngoại lai.",
-    "skillIds": ["skill_reasoning", "skill_calculation"],
+    "skillIds": [
+      "skill_reasoning",
+      "skill_calculation"
+    ],
     "severity": "critical",
     "remediationHint": "Biểu thức log_a(b) chỉ có nghĩa khi cơ số a > 0, a != 1 và biểu thức dưới dấu logarit b > 0."
   },
@@ -58,7 +72,9 @@
     "name": "Nhầm logarit của tổng thành tích logarit",
     "category": "algebra_calculus",
     "description_vi": "Áp dụng sai công thức logarit: nhầm ln(a + b) = ln(a)*ln(b) hoặc ln(a + b) = ln(a) + ln(b).",
-    "skillIds": ["skill_calculation"],
+    "skillIds": [
+      "skill_calculation"
+    ],
     "severity": "high",
     "remediationHint": "Công thức logarit đúng: ln(a * b) = ln(a) + ln(b). Không có công thức tách cho logarit của một tổng ln(a + b)."
   },
@@ -67,7 +83,9 @@
     "name": "Sai quy tắc đạo hàm của tích",
     "category": "algebra_calculus",
     "description_vi": "Tính đạo hàm tích bằng tích các đạo hàm: (u*v)' = u'*v' thay vì u'*v + u*v'.",
-    "skillIds": ["skill_calculation"],
+    "skillIds": [
+      "skill_calculation"
+    ],
     "severity": "high",
     "remediationHint": "Quy tắc Leibniz: Đạo hàm của một tích là (u*v)' = u'*v + u*v', không được đạo hàm rời rạc rồi nhân lại."
   },
@@ -76,7 +94,9 @@
     "name": "Sai dấu công thức đạo hàm thương",
     "category": "algebra_calculus",
     "description_vi": "Nhầm dấu trừ thành dấu cộng ở tử số đạo hàm thương: lấy u'*v + u*v' thay vì u'*v - u*v'.",
-    "skillIds": ["skill_calculation"],
+    "skillIds": [
+      "skill_calculation"
+    ],
     "severity": "high",
     "remediationHint": "Công thức đạo hàm thương: (u/v)' = (u'*v - u*v') / (v^2) với v != 0 (dấu trừ ở tử số)."
   },
@@ -85,7 +105,9 @@
     "name": "Nhầm lẫn giữa Delta, Delta' và Delta y'",
     "category": "algebra_calculus",
     "description_vi": "Nhầm công thức Delta = b^2 - 4ac của phương trình bậc 2 với Delta_y' = b^2 - 3ac khi xét cực trị hàm bậc 3.",
-    "skillIds": ["skill_calculation"],
+    "skillIds": [
+      "skill_calculation"
+    ],
     "severity": "high",
     "remediationHint": "Hàm bậc 3 y = ax^3 + bx^2 + cx + d có đạo hàm y' = 3ax^2 + 2bx + c. Điều kiện có 2 cực trị là a != 0 và Delta_y' = b^2 - 3ac > 0."
   },
@@ -94,7 +116,9 @@
     "name": "Nhầm điểm cực trị với giá trị cực trị",
     "category": "algebra_calculus",
     "description_vi": "Nhầm lẫn giữa điểm cực trị của hàm số (hoành độ x0) với giá trị cực trị / cực trị (tung độ y0 = f(x0)).",
-    "skillIds": ["skill_reasoning"],
+    "skillIds": [
+      "skill_reasoning"
+    ],
     "severity": "high",
     "remediationHint": "'Điểm cực trị của hàm số' là giá trị x; 'Cực trị' hoặc 'Giá trị cực trị' là giá trị y = f(x); 'Điểm cực trị của đồ thị' là tọa độ M(x, y)."
   },
@@ -103,7 +127,10 @@
     "name": "Chia hai vế cho biểu thức chứa biến làm mất nghiệm",
     "category": "algebra_calculus",
     "description_vi": "Chia hai vế phương trình cho biểu thức chứa biến x khi chưa xét trường hợp biểu thức đó bằng 0, làm mất nghiệm.",
-    "skillIds": ["skill_reasoning", "skill_calculation"],
+    "skillIds": [
+      "skill_reasoning",
+      "skill_calculation"
+    ],
     "severity": "critical",
     "remediationHint": "Không được tự ý chia hai vế cho biểu thức chứa x. Hãy chuyển vế và đặt nhân tử chung để không làm mất nghiệm."
   },
@@ -112,7 +139,10 @@
     "name": "Bình phương hai vế sinh nghiệm ngoại lai",
     "category": "algebra_calculus",
     "description_vi": "Bình phương hai vế phương trình vô tỉ mà không đặt điều kiện vế còn lại không âm, làm sinh nghiệm ngoại lai.",
-    "skillIds": ["skill_reasoning", "skill_calculation"],
+    "skillIds": [
+      "skill_reasoning",
+      "skill_calculation"
+    ],
     "severity": "critical",
     "remediationHint": "Phương trình sqrt(f(x)) = g(x) tương đương với hệ: g(x) >= 0 và f(x) = [g(x)]^2."
   },
@@ -121,7 +151,9 @@
     "name": "Quên trị tuyệt đối cos góc hai đường thẳng",
     "category": "geometry_oxyz",
     "description_vi": "Tính góc giữa hai đường thẳng mà quên trị tuyệt đối ở tử số, dẫn đến cos âm và góc bị tù (> 90 độ).",
-    "skillIds": ["skill_spatial"],
+    "skillIds": [
+      "skill_spatial"
+    ],
     "severity": "high",
     "remediationHint": "Góc giữa hai đường thẳng phi luôn thuộc [0, 90 độ], do đó cos(phi) = |u1 . u2| / (|u1| * |u2|) >= 0 (bắt buộc có trị tuyệt đối)."
   },
@@ -130,7 +162,9 @@
     "name": "Quên điều kiện bán kính mặt cầu R^2 > 0",
     "category": "geometry_oxyz",
     "description_vi": "Nhận diện mặt cầu x^2 + y^2 + z^2 - 2ax - 2by - 2cz + d = 0 mà quên kiểm tra điều kiện a^2 + b^2 + c^2 - d > 0.",
-    "skillIds": ["skill_spatial"],
+    "skillIds": [
+      "skill_spatial"
+    ],
     "severity": "critical",
     "remediationHint": "Điều kiện cần và đủ để phương trình là mặt cầu: R^2 = a^2 + b^2 + c^2 - d > 0. Nếu <= 0 thì là điểm hoặc tập rỗng."
   },
@@ -139,7 +173,10 @@
     "name": "Quên trị tuyệt đối khoảng cách đến mặt phẳng",
     "category": "geometry_oxyz",
     "description_vi": "Tính khoảng cách từ điểm đến mặt phẳng mà bỏ quên dấu giá trị tuyệt đối ở tử số, dẫn đến khoảng cách âm.",
-    "skillIds": ["skill_spatial", "skill_calculation"],
+    "skillIds": [
+      "skill_spatial",
+      "skill_calculation"
+    ],
     "severity": "high",
     "remediationHint": "Khoảng cách là một đại lượng không âm: d(M0, P) = |A*x0 + B*y0 + C*z0 + D| / sqrt(A^2 + B^2 + C^2)."
   },
@@ -148,7 +185,9 @@
     "name": "Mẫu số bằng 0 trong phương trình chính tắc",
     "category": "geometry_oxyz",
     "description_vi": "Viết phương trình chính tắc đường thẳng với mẫu số bằng 0 khi VTCP có thành phần tọa độ triệt tiêu.",
-    "skillIds": ["skill_spatial"],
+    "skillIds": [
+      "skill_spatial"
+    ],
     "severity": "high",
     "remediationHint": "Phương trình chính tắc (x - x0)/a = (y - y0)/b = (z - z0)/c chỉ viết được khi a*b*c != 0. Nếu có thành phần bằng 0, bắt buộc dùng phương trình tham số."
   },
@@ -157,7 +196,9 @@
     "name": "Nhầm tích có hướng là số vô hướng",
     "category": "geometry_oxyz",
     "description_vi": "Nhầm lẫn bản chất hình học: coi tích có hướng [u, v] là một số thực thay vì là một vector trực giao.",
-    "skillIds": ["skill_spatial"],
+    "skillIds": [
+      "skill_spatial"
+    ],
     "severity": "high",
     "remediationHint": "Tích có hướng [u, v] của hai vector trong Oxyz là một vector vuông góc với cả u và v; tích vô hướng u . v mới là một số thực."
   },
@@ -166,7 +207,10 @@
     "name": "Chia cho 0 khi xét điều kiện cùng phương",
     "category": "geometry_oxyz",
     "description_vi": "Lập tỉ số x1/x2 = y1/y2 khi x2 hoặc y2 bằng 0. Cần sử dụng tích chéo x1*y2 - x2*y1 = 0.",
-    "skillIds": ["skill_spatial", "skill_calculation"],
+    "skillIds": [
+      "skill_spatial",
+      "skill_calculation"
+    ],
     "severity": "medium",
     "remediationHint": "Hai vector (x1, y1) và (x2, y2) cùng phương tương đương với hệ thức tích chéo: x1*y2 - x2*y1 = 0 (tránh chia cho 0)."
   },
@@ -175,7 +219,9 @@
     "name": "Nhầm lẫn giữa Tổ hợp và Chỉnh hợp",
     "category": "combinatorics_probability",
     "description_vi": "Dùng C_n^k thay vì A_n^k hoặc ngược lại: không phân biệt được bài toán có thứ tự (xếp thứ tự, chức vụ) hay không thứ tự (chọn nhóm).",
-    "skillIds": ["skill_probability"],
+    "skillIds": [
+      "skill_probability"
+    ],
     "severity": "high",
     "remediationHint": "Nếu hoán đổi vị trí các phần tử tạo ra kết quả mới thì dùng Chỉnh hợp A_n^k (hoặc n!); nếu không phân biệt thứ tự thì dùng Tổ hợp C_n^k."
   },
@@ -184,7 +230,9 @@
     "name": "Nhầm bàn có ghế đánh số với bàn tròn tự do",
     "category": "combinatorics_probability",
     "description_vi": "Tính (n - 1)! cho bàn tròn có ghế đã đánh số thay vì hoán vị thẳng n!.",
-    "skillIds": ["skill_probability"],
+    "skillIds": [
+      "skill_probability"
+    ],
     "severity": "high",
     "remediationHint": "Khi các ghế trên bàn tròn đã đánh số (1, 2, ..., n) hoặc cố định vị trí phòng, tính chất bất biến phép quay bị triệt tiêu: số cách xếp là n!."
   },
@@ -193,7 +241,9 @@
     "name": "Sai bậc giai thừa khi buộc phần tử bàn tròn",
     "category": "combinatorics_probability",
     "description_vi": "Buộc 2 người thành 1 khối thì còn n - 1 khối, xếp tròn có (n - 2)! cách. Tính nhầm (n - 1)! * 2 là quên trừ 1 bậc tự do quay.",
-    "skillIds": ["skill_probability"],
+    "skillIds": [
+      "skill_probability"
+    ],
     "severity": "high",
     "remediationHint": "Xếp k khối vào bàn tròn có (k - 1)! cách. Buộc 2 người thì có (n - 1) khối, xếp tròn có ((n - 1) - 1)! = (n - 2)! cách, nhân thêm 2! hoán vị nội bộ: (n - 2)! * 2!."
   },
@@ -202,7 +252,9 @@
     "name": "Nhân thừa 2 khi xếp xen kẽ bàn tròn",
     "category": "combinatorics_probability",
     "description_vi": "Xếp n nam và n nữ xen kẽ bàn tròn: đúng là (n - 1)! * n!. Bị nhầm nhân thêm 2 như hàng thẳng.",
-    "skillIds": ["skill_probability"],
+    "skillIds": [
+      "skill_probability"
+    ],
     "severity": "medium",
     "remediationHint": "Trên vòng tròn đóng kín, khi n nam đã ngồi (có (n - 1)! cách), các vị trí của nữ đã phân biệt tương đối, chỉ có n! cách xếp nữ, không nhân thêm 2."
   },
@@ -211,7 +263,9 @@
     "name": "Quên chia 2 đối xứng gương (chuỗi hạt / vòng hoa)",
     "category": "combinatorics_probability",
     "description_vi": "Xếp chuỗi hạt hoặc vòng hoa có thể lật úp ngược (2 mặt giống nhau) mà quên chia 2: số cách đúng là (n - 1)! / 2.",
-    "skillIds": ["skill_probability"],
+    "skillIds": [
+      "skill_probability"
+    ],
     "severity": "medium",
     "remediationHint": "Chuỗi hạt có thể lật ngược trong không gian 3 chiều nên mỗi cách xếp bị tính lặp 2 lần do đối xứng gương: số cách là (n - 1)! / 2."
   },
@@ -220,7 +274,9 @@
     "name": "Cộng xác suất quên trừ giao biến cố",
     "category": "combinatorics_probability",
     "description_vi": "Áp dụng công thức cộng P(A + B) = P(A) + P(B) mà quên trừ P(A giao B) khi hai biến cố không xung khắc.",
-    "skillIds": ["skill_probability"],
+    "skillIds": [
+      "skill_probability"
+    ],
     "severity": "high",
     "remediationHint": "Công thức cộng xác suất tổng quát: P(A hợp B) = P(A) + P(B) - P(A giao B). Chỉ khi A và B xung khắc thì P(A giao B) mới bằng 0."
   }
