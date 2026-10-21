@@ -243,6 +243,7 @@ def get_git_commit_hash() -> str:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_cors_allowed_origins(),
+    allow_origin_regex=r"https://.*\.tsapumkin\.pages\.dev",
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],

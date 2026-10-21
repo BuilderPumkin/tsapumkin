@@ -54,7 +54,10 @@ function getCorsHeaders(request, env) {
         origin === "http://127.0.0.1"
     ) {
         matchedOrigin = origin;
-    } else if (allAllowed.includes(origin.toLowerCase())) {
+    } else if (
+        allAllowed.includes(origin.toLowerCase()) ||
+        (/^https:\/\/[a-z0-9\-_.]+\.tsapumkin\.pages\.dev$/i.test(origin))
+    ) {
         matchedOrigin = origin;
     } else if (!origin) {
         matchedOrigin = "*";
