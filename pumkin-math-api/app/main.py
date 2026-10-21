@@ -8,6 +8,7 @@ import sys
 from uuid import uuid4
 
 import sympy
+from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -39,6 +40,8 @@ from app.security import (
     global_concurrency_limiter,
     sanitize_and_validate_question_text,
 )
+
+load_dotenv()
 
 # 1 MB body size threshold enforced at application layer
 MAX_BODY_SIZE_BYTES = 1024 * 1024
