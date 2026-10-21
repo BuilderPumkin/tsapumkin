@@ -243,7 +243,7 @@ def get_git_commit_hash() -> str:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_cors_allowed_origins(),
-    allow_origin_regex=r"https://.*\.tsapumkin\.pages\.dev",
+    allow_origin_regex=r"^https://[a-z0-9-]+\.tsapumkin\.pages\.dev$",
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
@@ -317,7 +317,7 @@ async def solve_endpoint(
                 status_code=status.HTTP_429_TOO_MANY_REQUESTS,
                 code="budget_exceeded",
                 message_vi=exc.message_vi,
-                details=exc.details,
+                details=None,
             )
         except SandboxTimeoutError as exc:
             return make_envelope_error_response(

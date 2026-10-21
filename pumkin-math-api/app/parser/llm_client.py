@@ -125,7 +125,7 @@ class GeminiLLMClient(LLMClient):
         self.api_key = (
             api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
         )
-        self.model = model or os.environ.get("GEMINI_MODEL") or "gemini-2.0-flash"
+        self.model = model or os.environ.get("GEMINI_MODEL") or "gemini-2.5-flash-lite"
         self.timeout_seconds = timeout_seconds
 
     async def complete_structured(
@@ -196,8 +196,16 @@ class GeminiLLMClient(LLMClient):
         completion_tokens = usage.get("candidatesTokenCount", 0)
         total_tokens = usage.get("totalTokenCount", prompt_tokens + completion_tokens)
 
-        # Gemini 2.0 Flash pricing: $0.10 / 1M prompt, $0.40 / 1M candidates
-        cost = (prompt_tokens * 0.10 + completion_tokens * 0.40) / 1_000_000.0
+        # Official Google AI Studio pricing (Source: https://ai.google.dev/pricing, tra cứu 21/10/2026):
+        # - gemini-2.5-flash-lite: $0.15 / 1M prompt tokens, $0.60 / 1M candidates
+        # - gemini-2.5-flash: $0.30 / 1M prompt tokens, $2.50 / 1M candidates
+        model_lower = (self.model or "").lower()
+        if "lite" in model_lower:
+            cost = (prompt_tokens * 0.15 + completion_tokens * 0.60) / 1_000_000.0
+        elif "2.5-flash" in model_lower or "3." in model_lower:
+            cost = (prompt_tokens * 0.30 + completion_tokens * 2.50) / 1_000_000.0
+        else:
+            cost = (prompt_tokens * 0.15 + completion_tokens * 0.60) / 1_000_000.0
 
         return LLMResponse(
             content=parsed_json,

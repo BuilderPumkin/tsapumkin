@@ -56,7 +56,7 @@ function getCorsHeaders(request, env) {
         matchedOrigin = origin;
     } else if (
         allAllowed.includes(origin.toLowerCase()) ||
-        (/^https:\/\/[a-z0-9\-_.]+\.tsapumkin\.pages\.dev$/i.test(origin))
+        (/^https:\/\/[a-z0-9-]+\.tsapumkin\.pages\.dev$/i.test(origin))
     ) {
         matchedOrigin = origin;
     } else if (!origin) {
@@ -460,11 +460,20 @@ export async function onRequest(context = {}) {
             "X-Trace-Id": traceId
         };
 
-        // Parse response to check status
+        // Parse response to check status and sanitize internal details
+        let finalResponseText = responseText;
         let isVerified = false;
         try {
             const parsedData = JSON.parse(responseText);
             isVerified = (parsedData.status === "verified");
+
+            // SECURITY: Never leak internal cost numbers or quota details to client
+            if (parsedData && parsedData.error && parsedData.error.code === "budget_exceeded") {
+                if (parsedData.error.details) {
+                    delete parsedData.error.details;
+                    finalResponseText = JSON.stringify(parsedData, null, 2);
+                }
+            }
         } catch {
             isVerified = false;
         }
@@ -488,7 +497,7 @@ export async function onRequest(context = {}) {
             }
         }
 
-        return new Response(responseText, {
+        return new Response(finalResponseText, {
             status: backendResponse.status,
             headers: responseHeaders
         });

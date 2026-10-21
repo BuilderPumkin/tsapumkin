@@ -430,6 +430,56 @@ async function runTests() {
         });
         assert(resPreview.status === 200, 'Preview deployment allows tester requests with HTTP 200');
 
+        // Case 9: CORS Origin Spoofing & Fullmatch Protection
+        const spoofOrigins = [
+            'https://evil.com',
+            'https://tsapumkin.pages.dev.evil.com',
+            'https://evil.tsapumkin.pages.dev.evil.com',
+            'https://user@tsapumkin.pages.dev',
+            'http://tsapumkin.pages.dev',
+            'https://sub.sub.tsapumkin.pages.dev',
+            'https://tsapumkin.pages.dev:8080'
+        ];
+        for (const spoof of spoofOrigins) {
+            const reqSpoof = new Request('https://tsapumkin.pages.dev/api/math/health', {
+                method: 'GET',
+                headers: { 'Origin': spoof }
+            });
+            const resSpoof = await onRequest({ request: reqSpoof, env: previewEnv, params: { path: ['health'] } });
+            const acao = resSpoof.headers.get('Access-Control-Allow-Origin');
+            assert(acao !== spoof, `Spoofed Origin blocked: ${spoof} (Returned safe: ${acao})`);
+        }
+
+        // Valid preview origin passes
+        const validPreviewOrigin = 'https://pr-456.tsapumkin.pages.dev';
+        const reqValid = new Request('https://tsapumkin.pages.dev/api/math/health', {
+            method: 'GET',
+            headers: { 'Origin': validPreviewOrigin }
+        });
+        const resValid = await onRequest({ request: reqValid, env: previewEnv, params: { path: ['health'] } });
+        assert(resValid.headers.get('Access-Control-Allow-Origin') === validPreviewOrigin, 'Valid preview subdomain accepted by CORS');
+
+        // Case 10: Budget Exceeded strips details
+        globalThis.fetch = async () => new Response(JSON.stringify({
+            status: 'error',
+            error: {
+                code: 'budget_exceeded',
+                message: 'Ngân sách AI đã chạm trần.',
+                details: { current_cost_usd: 1.25, limit_usd: 1.0 }
+            }
+        }), { status: 429 });
+
+        const reqBudget = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.8.6' },
+            body: JSON.stringify({ question_text: 'x + 1 = 2' })
+        });
+        const resBudget = await onRequest({ request: reqBudget, env: publicEnv, params: { path: ['solve'] } });
+        assert(resBudget.status === 429, 'Budget exceeded returns HTTP 429');
+        const budgetJson = await resBudget.json();
+        assert(budgetJson.error.code === 'budget_exceeded', 'Error code is budget_exceeded');
+        assert(budgetJson.error.details === undefined, 'Internal cost details are stripped from client response');
+
         globalThis.fetch = originalFetch;
     }
 
