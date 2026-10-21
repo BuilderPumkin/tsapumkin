@@ -1,5 +1,5 @@
 // PUMKIN.DEV Service Worker - Offline Cache & Performance
-const CACHE_NAME = "pumkin-cache-v4.4.0";
+const CACHE_NAME = "pumkin-cache-v4.5.0-74596517b7";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
@@ -12,11 +12,20 @@ const ASSETS_TO_CACHE = [
   "./data/knowledge/all.json",
   "./data/skills/skills.json",
   "./data/taxonomy/topics.json",
+  "./data/taxonomy/misconceptions.json",
   "./data/formulas/cheatsheet.json",
+  "./js/data/fallback_bundle.js",
   "./js/ai/TutorContextBuilder.js",
   "./js/ui/TutorUI.js",
   "./js/integration/TutorIntegration.js",
-  "./css/tutor.css"
+  "./js/math/PumkinAnswerChecker.js",
+  "./js/math/PumkinMathAPIClient.js",
+  "./js/ui/PumkinMathSolverUI.js",
+  "./js/services/PumkinMathAPI.js",
+  "./js/services/PumkinTelemetry.js",
+  "./js/services/PumkinPrefetchQueue.js",
+  "./css/tutor.css",
+  "./css/math_solver.css"
 ];
 
 self.addEventListener("install", (event) => {

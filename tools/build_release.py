@@ -363,15 +363,21 @@ def build_release(check_only: bool = False) -> bool:
     if os.path.exists(index_html_path):
         with open(index_html_path, "r", encoding="utf-8") as f:
             html_content = f.read()
+        # Update fallback_bundle.js and all asset tags (?v=...)
         updated_html = re.sub(
             r'src="js/data/fallback_bundle\.js(\?v=[^"]*)?"',
             f'src="js/data/fallback_bundle.js?v={version_param}"',
             html_content
         )
+        updated_html = re.sub(
+            r'((?:src|href)="(?:js|css)/[^"]+?)(\?v=[^"]*)?(")',
+            f'\\1?v={version_param}\\3',
+            updated_html
+        )
         if updated_html != html_content:
             with open(index_html_path, "w", encoding="utf-8", newline="\n") as f:
                 f.write(updated_html)
-            print(f"      Updated cache-busting tag in pumkin3/index.html -> ?v={version_param}")
+            print(f"      Updated all asset cache-busting tags in pumkin3/index.html -> ?v={version_param}")
 
     tsa_html_path = os.path.join(PUMKIN3_DIR, "TSA_do_an.html")
     if os.path.exists(tsa_html_path):
@@ -382,10 +388,30 @@ def build_release(check_only: bool = False) -> bool:
             f'src="js/data/fallback_bundle.js?v={version_param}"',
             tsa_content
         )
+        updated_tsa = re.sub(
+            r'((?:src|href)="(?:js|css)/[^"]+?)(\?v=[^"]*)?(")',
+            f'\\1?v={version_param}\\3',
+            updated_tsa
+        )
         if updated_tsa != tsa_content:
             with open(tsa_html_path, "w", encoding="utf-8", newline="\n") as f:
                 f.write(updated_tsa)
-            print(f"      Updated cache-busting tag in pumkin3/TSA_do_an.html -> ?v={version_param}")
+            print(f"      Updated all asset cache-busting tags in pumkin3/TSA_do_an.html -> ?v={version_param}")
+
+    # Update sw.js cache name
+    sw_path = os.path.join(PUMKIN3_DIR, "sw.js")
+    if os.path.exists(sw_path):
+        with open(sw_path, "r", encoding="utf-8") as f:
+            sw_content = f.read()
+        updated_sw = re.sub(
+            r'const CACHE_NAME = "pumkin-cache-[^"]+";',
+            f'const CACHE_NAME = "pumkin-cache-v{version_param}";',
+            sw_content
+        )
+        if updated_sw != sw_content:
+            with open(sw_path, "w", encoding="utf-8", newline="\n") as f:
+                f.write(updated_sw)
+            print(f"      Updated service worker CACHE_NAME in pumkin3/sw.js -> pumkin-cache-v{version_param}")
 
     print("\n" + "=" * 70)
     print("RELEASE BUILD SUMMARY:")
