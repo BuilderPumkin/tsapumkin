@@ -19,7 +19,9 @@
 
 const ALLOWED_ROUTES = new Set(["solve", "check", "generate"]);
 const MAX_BODY_SIZE_BYTES = 64 * 1024; // Exactly 65,536 bytes
-const GATEWAY_TIMEOUT_MS = 20000; // 20 seconds hard timeout
+const GATEWAY_TIMEOUT_MS = 15000; // 15 seconds synchronized timeout (Sandbox: 5s < Backend: 12s < Gateway: 15s < Client: 18s)
+const MAX_CONCURRENT_QUEUE_CEILING = 60; // Max in-flight requests (Tier b Backpressure)
+let _activeInFlightRequests = 0;
 const RATE_LIMIT_MAX_PER_MINUTE = 30;
 const RATE_LIMIT_WINDOW_SECONDS = 60;
 const CACHE_SCHEMA_VERSION = "v1";
@@ -46,7 +48,7 @@ function getCorsHeaders(request, env) {
     }
     const allAllowed = [...defaultAllowed, ...customAllowed];
 
-    let matchedOrigin = "https://tsapumkin.pages.dev";
+    let matchedOrigin = null;
     if (
         origin.startsWith("http://localhost:") ||
         origin.startsWith("http://127.0.0.1:") ||
@@ -56,21 +58,23 @@ function getCorsHeaders(request, env) {
         matchedOrigin = origin;
     } else if (
         allAllowed.includes(origin.toLowerCase()) ||
-        (/^https:\/\/[a-z0-9-]+\.tsapumkin\.pages\.dev$/i.test(origin))
+        (/^https:\/\/[a-z0-9-]+\.tsapumkin\.pages\.dev$/i.test(origin)) ||
+        (/^https:\/\/[a-z0-9-]+\.pumkin\.dev$/i.test(origin))
     ) {
         matchedOrigin = origin;
-    } else if (!origin) {
-        matchedOrigin = "*";
     }
 
-    return {
+    const headers = {
         "Content-Type": "application/json; charset=utf-8",
-        "Access-Control-Allow-Origin": matchedOrigin,
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With, X-Pumkin-Tester-Id, X-Pumkin-User-Id, X-Pumkin-Tester-Token",
         "Access-Control-Max-Age": "86400",
         "Vary": "Origin"
     };
+    if (matchedOrigin) {
+        headers["Access-Control-Allow-Origin"] = matchedOrigin;
+    }
+    return headers;
 }
 
 /**
@@ -200,6 +204,47 @@ export async function onRequest(context = {}) {
         });
     }
 
+    // 0. Emergency Kill Switch: "MATH_ENABLED" via Environment Variable or Cloudflare KV
+    // Allows immediate server-side shutdown across all routes without redeploying
+    let isEmergencyDisabled = false;
+    if (env && (env.MATH_ENABLED === "false" || env.MATH_ENABLED === false || env.MATH_ENABLED === "0")) {
+        isEmergencyDisabled = true;
+    } else if (env && env.MATH_KV && typeof env.MATH_KV.get === "function") {
+        try {
+            const kvMathEnabled = await env.MATH_KV.get("MATH_ENABLED");
+            if (kvMathEnabled === "false" || kvMathEnabled === "0") {
+                isEmergencyDisabled = true;
+            }
+        } catch (kvErr) {
+            console.warn("[MATH_GATEWAY] Error checking MATH_ENABLED in KV:", kvErr);
+        }
+    }
+
+    if (isEmergencyDisabled) {
+        return makeErrorResponse(
+            503,
+            "SERVICE_TEMPORARILY_DISABLED",
+            "Dịch vụ tính toán và giải toán CAS đang tạm ngưng bảo trì khẩn cấp. Vui lòng quay lại sau.",
+            corsHeaders,
+            { tier: "emergency_kill_switch", is_emergency: true, math_enabled: false }
+        );
+    }
+
+    // Tier (b) - High Traffic Overload / Bounded Request Queue
+    if (_activeInFlightRequests >= MAX_CONCURRENT_QUEUE_CEILING) {
+        return makeErrorResponse(
+            503,
+            "HIGH_TRAFFIC_OVERLOAD",
+            "Hệ thống đang có quá nhiều học sinh làm bài cùng lúc. Vui lòng thử lại sau ít giây.",
+            corsHeaders,
+            {
+                tier: "overload_backpressure",
+                retry_after_seconds: 3,
+                active_requests: _activeInFlightRequests
+            }
+        );
+    }
+
     // 1. Path traversal detection on raw URL
     const requestUrl = new URL(request.url);
     const rawPathname = requestUrl.pathname;
@@ -299,6 +344,18 @@ export async function onRequest(context = {}) {
             "METHOD_NOT_ALLOWED",
             `Phương thức ${request.method} không được hỗ trợ. Vui lòng gửi yêu cầu POST.`,
             corsHeaders
+        );
+    }
+
+    // Content-Type validation: only application/json is accepted
+    const contentType = (request.headers.get("Content-Type") || "").toLowerCase();
+    if (!contentType.includes("application/json")) {
+        return makeErrorResponse(
+            415,
+            "UNSUPPORTED_MEDIA_TYPE",
+            "Yêu cầu phải có tiêu đề 'Content-Type: application/json'.",
+            corsHeaders,
+            { received_content_type: contentType || "missing" }
         );
     }
 

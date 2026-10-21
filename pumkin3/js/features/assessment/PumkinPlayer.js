@@ -224,21 +224,23 @@ const PumkinPlayer = {
             optContainer.innerHTML = `
                 <div class="short-answer-wrapper">
                     <label style="font-size: 14px; font-weight: 700; color: var(--primary);">
-                        ✍️ Nhập kết quả số hoặc phân số của bạn:
+                        ✍️ Nhập kết quả số, phân số hoặc biểu thức của bạn:
                     </label>
                     <div class="short-answer-input-group">
                         <input type="text" id="short-answer-field" class="short-answer-input" 
-                               placeholder="Ví dụ: 0.75 hoặc 3/4..." 
+                               placeholder="Ví dụ: 3,14 hoặc 3/4 hoặc x = 5..." 
                                value="${currentVal}" 
                                oninput="PumkinPlayer.inputShortAnswer(this.value)">
                         <button class="btn btn-primary" onclick="PumkinPlayer.nextQuestion()">Xác nhận →</button>
                     </div>
-                    <div class="short-answer-helper">
-                        <span>💡 <em>Hệ thống tự động hiểu dấu phẩy (,), dấu chấm (.) và phân số (a/b).</em></span>
+                    <div id="short-answer-preview" class="short-answer-preview" style="min-height: 28px; margin-top: 6px; display: none;"></div>
+                    <div class="short-answer-helper" style="font-size: 12.5px; color: #64748b; margin-top: 6px;">
+                        <span>💡 <em>Hệ thống tự động hiểu dấu phẩy thập phân (vd: 3,14), phân số (a/b), phương trình (x = 5), khoảng/tập nghiệm (vd: (1; 3)).</em></span>
                     </div>
-                    <div class="math-pad-row">
+                    <div class="math-pad-row" style="margin-top: 8px;">
                         <span style="font-size: 12px; color: #64748b; font-weight: 600;">Bàn phím phụ trợ:</span>
                         <button class="math-pad-btn" onclick="PumkinPlayer.insertMathPad('.')">.</button>
+                        <button class="math-pad-btn" onclick="PumkinPlayer.insertMathPad(',')">,</button>
                         <button class="math-pad-btn" onclick="PumkinPlayer.insertMathPad('/')">/</button>
                         <button class="math-pad-btn" onclick="PumkinPlayer.insertMathPad('-')">-</button>
                         <button class="math-pad-btn" onclick="PumkinPlayer.insertMathPad('π')">π</button>
@@ -247,6 +249,7 @@ const PumkinPlayer = {
                     </div>
                 </div>
             `;
+            setTimeout(() => this.updateShortAnswerPreview(currentVal), 10);
         } else if (q.type === "drag_drop") {
             const currentAns = (this.userAnswers[index] && typeof this.userAnswers[index] === "object") ? this.userAnswers[index] : {};
             const blanks = q.blanks || [];
@@ -468,6 +471,24 @@ const PumkinPlayer = {
         this.userAnswers[this.currentIndex] = val;
         this.updateNavCell(this.currentIndex);
         this.debouncedSaveSession();
+        this.updateShortAnswerPreview(val);
+    },
+
+    updateShortAnswerPreview(val) {
+        const previewEl = document.getElementById("short-answer-preview");
+        if (!previewEl) return;
+        const checker = (typeof window !== 'undefined' && window.Pumkin && window.Pumkin.AnswerChecker)
+            ? window.Pumkin.AnswerChecker
+            : (typeof window !== 'undefined' && window.PumkinAnswerChecker ? window.PumkinAnswerChecker : null);
+        if (checker && typeof checker.renderPreview === 'function') {
+            checker.renderPreview(val, previewEl);
+        } else if (val && val.trim()) {
+            previewEl.textContent = "Xem trước: " + val;
+            previewEl.style.display = "block";
+        } else {
+            previewEl.innerHTML = "";
+            previewEl.style.display = "none";
+        }
     },
 
     insertMathPad(char) {

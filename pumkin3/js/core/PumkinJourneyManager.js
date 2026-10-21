@@ -190,6 +190,41 @@
                 }
             }
 
+            // Check Isomorphic Generator Prefetch Queue (W6 Engine)
+            let finalQuestions = [];
+            let isGenerated = false;
+            let sourceBadge = null;
+
+            const prefetchQueue = (typeof window !== 'undefined' && window.Pumkin && window.Pumkin.PrefetchQueue)
+                ? window.Pumkin.PrefetchQueue
+                : (typeof window !== 'undefined' && window.PumkinPrefetchQueue ? window.PumkinPrefetchQueue : null);
+
+            if (prefetchQueue && prefetchQueue.isGenerateEnabled()) {
+                const packRes = prefetchQueue.getDailyFocusPack({
+                    skillId: chosenSkill,
+                    misconceptionId: chosenMisconception,
+                    topic: chosenTopic,
+                    count: 6
+                });
+
+                if (packRes.success && Array.isArray(packRes.questions) && packRes.questions.length >= 5) {
+                    finalQuestions = packRes.questions;
+                    isGenerated = true;
+                    sourceBadge = 'Đề tự sinh (Đã duyệt mẫu)';
+                } else {
+                    // Graceful fallback to bank questions
+                    reason += ` (Hệ thống đang dùng đề tuyển chọn từ ngân hàng đề do ${packRes.reason || 'đề tự sinh đang chờ giáo viên duyệt mẫu'}).`;
+                }
+
+                // Trigger background prefetch for future sessions
+                setTimeout(() => {
+                    const cat = (chosenTopic && chosenTopic.toLowerCase().includes('hình')) ? 'geometry_oxyz' : 'nguyen_ham_tich_phan';
+                    prefetchQueue.prefetchInBackground({ category: cat, count: 6 });
+                }, 1000);
+            }
+
+            // Fallback / standard selection from verified question bank
+            if (finalQuestions.length === 0) {
             // Filter question pool
             let candidates = allQuestions.filter(q => {
                 if (chosenMisconception && q.distractors) {
@@ -229,7 +264,8 @@
                 combinedSet.add(extra);
             }
 
-            const finalQuestions = Array.from(combinedSet).slice(0, 6);
+            finalQuestions = Array.from(combinedSet).slice(0, 6);
+            } // End bank fallback selection
 
             const dailyFocus = {
                 id: `daily_${todayStr}`,
@@ -242,7 +278,9 @@
                 total: finalQuestions.length,
                 completed: 0,
                 questionIds: finalQuestions.map(q => q.id),
-                questions: finalQuestions
+                questions: finalQuestions,
+                is_generated: isGenerated,
+                source_badge: sourceBadge
             };
 
             this.transitionTo(this.getState(), { dailyFocus });
@@ -259,9 +297,18 @@
                 return;
             }
 
+            // INVARIANT (W6): Diagnostic test STRICTLY uses verified bank questions, NEVER generated questions!
+            const verifiedBank = allQuestions.filter(q => q.is_generated !== true && q.source_type !== "generated" && !String(q.id || "").startsWith("gen_"));
+            const bankPool = verifiedBank.length >= 10 ? verifiedBank : verifiedBank;
+
+            if (bankPool.length === 0) {
+                if (typeof PumkinToast !== "undefined") PumkinToast.error("Không tìm thấy câu hỏi chuẩn từ ngân hàng đề.");
+                return;
+            }
+
             // Balanced 10 questions: 3 M1/M2 + 4 M2/M3 + 3 M3/M4
             const pickTier = (pattern, count) => {
-                const matched = allQuestions.filter(q => {
+                const matched = bankPool.filter(q => {
                     const lvl = String(q.cognitive_level || "").toUpperCase();
                     return pattern.some(p => lvl.includes(p));
                 });
@@ -273,8 +320,12 @@
             const tier3 = pickTier(["M3", "M4", "VẬN"], 3);
 
             const diagQuestions = [...tier1, ...tier2, ...tier3];
-            while (diagQuestions.length < 10) {
-                diagQuestions.push(allQuestions[Math.floor(Math.random() * allQuestions.length)]);
+            const remainingPool = bankPool.filter(q => !diagQuestions.some(d => d.id === q.id));
+            while (diagQuestions.length < 10 && remainingPool.length > 0) {
+                diagQuestions.push(remainingPool.pop());
+            }
+            while (diagQuestions.length < 10 && bankPool.length > 0) {
+                diagQuestions.push(bankPool[Math.floor(Math.random() * bankPool.length)]);
             }
 
             const diagExam = {
@@ -373,6 +424,7 @@
          * Render the Focused 1-CTA Hero Card on Dashboard
          */
         renderDashboardHero() {
+            if (typeof document === "undefined") return;
             const heroContainer = document.getElementById("dashboard-hero-journey-card");
             if (!heroContainer) return;
 

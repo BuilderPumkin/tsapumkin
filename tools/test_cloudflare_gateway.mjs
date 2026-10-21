@@ -24,7 +24,7 @@ async function runTests() {
     {
         const req1 = new Request('https://tsapumkin.pages.dev/api/math/solve/../admin', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.1.1' },
+            headers: { 'CF-Connecting-IP': '10.0.1.1', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: 'x' })
         });
         const res1 = await onRequest({
@@ -36,7 +36,7 @@ async function runTests() {
 
         const req2 = new Request('https://tsapumkin.pages.dev/api/math/solve%2F..%2Fadmin', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.1.2' },
+            headers: { 'CF-Connecting-IP': '10.0.1.2', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: 'x' })
         });
         const res2 = await onRequest({
@@ -45,6 +45,60 @@ async function runTests() {
             params: { path: ['solve%2F..%2Fadmin'] }
         });
         assert(res2.status === 404, 'Encoded traversal solve%2F..%2Fadmin blocked with HTTP 404');
+    }
+
+    // 1.1 Emergency Kill Switch: MATH_ENABLED = "false"
+    {
+        const reqKill = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.1.3', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ question_text: 'x' })
+        });
+        const resKillEnv = await onRequest({
+            request: reqKill,
+            env: { MATH_ENABLED: 'false' },
+            params: { path: ['solve'] }
+        });
+        assert(resKillEnv.status === 503, 'Emergency kill switch via MATH_ENABLED env blocks with HTTP 503');
+
+        const mockKV = new Map([['MATH_ENABLED', 'false']]);
+        const resKillKV = await onRequest({
+            request: reqKill,
+            env: {
+                MATH_KV: {
+                    get: async (k) => mockKV.get(k) || null
+                }
+            },
+            params: { path: ['solve'] }
+        });
+        assert(resKillKV.status === 503, 'Emergency kill switch via MATH_KV blocks with HTTP 503');
+    }
+
+    // 1.2 Content-Type validation: only application/json allowed
+    {
+        const reqNoCT = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.1.4' },
+            body: JSON.stringify({ question_text: 'x' })
+        });
+        const resNoCT = await onRequest({
+            request: reqNoCT,
+            env: { FEATURE_MATH_API_ENABLED: 'true' },
+            params: { path: ['solve'] }
+        });
+        assert(resNoCT.status === 415, 'Request without Content-Type rejected with HTTP 415');
+
+        const reqHtmlCT = new Request('https://tsapumkin.pages.dev/api/math/solve', {
+            method: 'POST',
+            headers: { 'CF-Connecting-IP': '10.0.1.5', 'Content-Type': 'text/html' },
+            body: '<html></html>'
+        });
+        const resHtmlCT = await onRequest({
+            request: reqHtmlCT,
+            env: { FEATURE_MATH_API_ENABLED: 'true' },
+            params: { path: ['solve'] }
+        });
+        assert(resHtmlCT.status === 415, 'Request with text/html Content-Type rejected with HTTP 415');
     }
 
     // 2. Trailing slash and uppercase route
@@ -59,7 +113,7 @@ async function runTests() {
         // Trailing slash: path array has ['solve', '']
         const reqSlash = new Request('https://tsapumkin.pages.dev/api/math/solve/', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.2.1' },
+            headers: { 'CF-Connecting-IP': '10.0.2.1', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: 'x' })
         });
         const resSlash = await onRequest({
@@ -72,7 +126,7 @@ async function runTests() {
         // Uppercase route: SOLVE
         const reqUpper = new Request('https://tsapumkin.pages.dev/api/math/SOLVE', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.2.2' },
+            headers: { 'CF-Connecting-IP': '10.0.2.2', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: 'x' })
         });
         const resUpper = await onRequest({
@@ -96,7 +150,7 @@ async function runTests() {
 
         const reqQuery = new Request('https://tsapumkin.pages.dev/api/math/solve?query_leak=evil&foo=bar', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.3.1' },
+            headers: { 'CF-Connecting-IP': '10.0.3.1', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: 'x' })
         });
         const resQuery = await onRequest({
@@ -123,6 +177,7 @@ async function runTests() {
             method: 'POST',
             headers: {
                 'CF-Connecting-IP': '10.0.4.1',
+                'Content-Type': 'application/json',
                 'Cookie': 'student_session=secret_token_abc_123',
                 'Authorization': 'Bearer student_private_bearer',
                 'User-Agent': 'Mozilla/5.0 SecretStudentDevice',
@@ -163,7 +218,8 @@ async function runTests() {
             method: 'POST',
             headers: {
                 'CF-Connecting-IP': '10.0.5.1',
-                'Content-Length': '65536'
+                'Content-Length': '65536',
+                'Content-Type': 'application/json'
             },
             body: exact64K
         });
@@ -182,7 +238,8 @@ async function runTests() {
             method: 'POST',
             headers: {
                 'CF-Connecting-IP': '10.0.5.2',
-                'Content-Length': '65537'
+                'Content-Length': '65537',
+                'Content-Type': 'application/json'
             },
             body: over64K
         });
@@ -196,7 +253,7 @@ async function runTests() {
         // Chunked / no Content-Length header with 65,537 bytes
         const reqChunkedOver = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.5.3' },
+            headers: { 'CF-Connecting-IP': '10.0.5.3', 'Content-Type': 'application/json' },
             body: over64K
         });
         const resChunkedOver = await onRequest({
@@ -250,7 +307,7 @@ async function runTests() {
         globalThis.fetch = async () => new Response(JSON.stringify({ status: 'verified', computed_answer: '42' }), { status: 200 });
         const reqVer = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.7.1' },
+            headers: { 'CF-Connecting-IP': '10.0.7.1', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: 'verified_problem_1' })
         });
         const resVer = await onRequest({ request: reqVer, env: fakeEnv, params: { path: ['solve'] } });
@@ -263,7 +320,7 @@ async function runTests() {
         globalThis.fetch = async () => new Response(JSON.stringify({ status: 'needs_review', computed_answer: '?' }), { status: 200 });
         const reqNR = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.7.2' },
+            headers: { 'CF-Connecting-IP': '10.0.7.2', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: 'review_problem_2' })
         });
         const resNR = await onRequest({ request: reqNR, env: fakeEnv, params: { path: ['solve'] } });
@@ -276,7 +333,7 @@ async function runTests() {
         globalThis.fetch = async () => new Response(JSON.stringify({ status: 'unsupported' }), { status: 200 });
         const reqUnsup = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.7.3' },
+            headers: { 'CF-Connecting-IP': '10.0.7.3', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: 'unsup_problem_3' })
         });
         const resUnsup = await onRequest({ request: reqUnsup, env: fakeEnv, params: { path: ['solve'] } });
@@ -289,7 +346,7 @@ async function runTests() {
         globalThis.fetch = async () => new Response(JSON.stringify({ error: { code: 'SYNTAX_ERROR' } }), { status: 400 });
         const reqErr = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.7.4' },
+            headers: { 'CF-Connecting-IP': '10.0.7.4', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: 'syntax_error_4' })
         });
         const resErr = await onRequest({ request: reqErr, env: fakeEnv, params: { path: ['solve'] } });
@@ -352,7 +409,7 @@ async function runTests() {
         // Case 8A: Production request with NO tester token -> Rejection with HTTP 403
         const reqNoId = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.8.1' },
+            headers: { 'CF-Connecting-IP': '10.0.8.1', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
         });
         const resNoId = await onRequest({
@@ -369,6 +426,7 @@ async function runTests() {
             method: 'POST',
             headers: {
                 'CF-Connecting-IP': '10.0.8.2',
+                'Content-Type': 'application/json',
                 'X-Pumkin-Tester-Token': 'guessable_email_or_teacher_id'
             },
             body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
@@ -385,6 +443,7 @@ async function runTests() {
             method: 'POST',
             headers: {
                 'CF-Connecting-IP': '10.0.8.3',
+                'Content-Type': 'application/json',
                 'X-Pumkin-Tester-Token': secretTokenAlpha
             },
             body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
@@ -403,7 +462,7 @@ async function runTests() {
         };
         const reqPublic = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.8.4' },
+            headers: { 'CF-Connecting-IP': '10.0.8.4', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
         });
         const resPublic = await onRequest({
@@ -420,7 +479,7 @@ async function runTests() {
         };
         const reqPreview = new Request('https://pr-123.tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.8.5' },
+            headers: { 'CF-Connecting-IP': '10.0.8.5', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: '\\int_0^1 x dx' })
         });
         const resPreview = await onRequest({
@@ -471,7 +530,7 @@ async function runTests() {
 
         const reqBudget = new Request('https://tsapumkin.pages.dev/api/math/solve', {
             method: 'POST',
-            headers: { 'CF-Connecting-IP': '10.0.8.6' },
+            headers: { 'CF-Connecting-IP': '10.0.8.6', 'Content-Type': 'application/json' },
             body: JSON.stringify({ question_text: 'x + 1 = 2' })
         });
         const resBudget = await onRequest({ request: reqBudget, env: publicEnv, params: { path: ['solve'] } });

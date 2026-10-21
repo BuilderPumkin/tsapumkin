@@ -5944,8 +5944,14 @@ input[type="range"]::-moz-range-thumb, .pdl-slider::-moz-range-thumb {
     <script src="js/core/PumkinTeacherDashboard.js"></script>
     <script src="js/core/PumkinLevelSystem.js"></script>
     <script src="js/core/LiveExamClient.js"></script>
-    <script src="js/data/fallback_bundle.js"></script>
+    <script src="js/data/fallback_bundle.js?v=4.5.0-74596517b7"></script>
     <script src="js/repository/DataRepository.js"></script>
+    <script src="js/services/PumkinMathAPI.js"></script>
+    <script src="js/services/PumkinPrefetchQueue.js"></script>
+    <script src="js/services/PumkinTelemetry.js"></script>
+    <script src="js/math/PumkinMathAPIClient.js"></script>
+    <script src="js/math/PumkinAnswerChecker.js"></script>
+    <script src="js/ui/PumkinMathSolverUI.js"></script>
 </head>
 <body data-author="PUMKIN.DEV">
 <a href="#main-content" class="skip-to-content">Chuyển đến nội dung chính</a>
@@ -8125,6 +8131,8 @@ input[type="range"]::-moz-range-thumb, .pdl-slider::-moz-range-thumb {
             <a href="privacy.html" style="color: var(--primary, #1e3a8a); text-decoration: underline; font-weight: 500;">Chính sách bảo mật</a>
             <span style="color: var(--text-muted, #94a3b8);">•</span>
             <a href="terms.html" style="color: var(--primary, #1e3a8a); text-decoration: underline; font-weight: 500;">Điều khoản sử dụng</a>
+            <span style="color: var(--text-muted, #94a3b8);">•</span>
+            <button type="button" onclick="PumkinTelemetry ? PumkinTelemetry.showPrivacyModal() : null" style="color: var(--primary, #1e3a8a); text-decoration: underline; font-weight: 500; background: none; border: none; cursor: pointer; font-size: 12px; padding: 0;">🛡️ Quyền riêng tư & Opt-out</button>
         </div>
     </footer>
 

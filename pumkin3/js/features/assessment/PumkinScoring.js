@@ -57,6 +57,17 @@ const PumkinScoring = {
 
     isShortAnswerCorrect(userAns, q) {
         if (!userAns || typeof userAns !== 'string' || !userAns.trim()) return false;
+
+        // Use Pumkin.AnswerChecker if available for advanced equivalence
+        const checker = (typeof window !== 'undefined' && window.Pumkin && window.Pumkin.AnswerChecker)
+            ? window.Pumkin.AnswerChecker
+            : (typeof window !== 'undefined' && window.PumkinAnswerChecker ? window.PumkinAnswerChecker : null);
+        if (checker && typeof checker.isEquivalentLocal === 'function') {
+            const canonical = q.correct_value ?? q.correct_answer ?? '';
+            const res = checker.isEquivalentLocal(userAns, canonical, q.accepted_answers);
+            return res.isMatch;
+        }
+
         const normUser = this.normalizeMathString(userAns);
         const accepted = [q.correct_value, ...(q.accepted_answers || [])];
         if (accepted.some(acc => this.normalizeMathString(acc) === normUser)) {
@@ -134,11 +145,21 @@ const PumkinScoring = {
                     status = "skipped";
                     skippedCount++;
                 } else {
-                    const isRight = this.isShortAnswerCorrect(userAns, q);
-                    if (isRight) {
+                    const checker = (typeof window !== 'undefined' && window.Pumkin && window.Pumkin.AnswerChecker)
+                        ? window.Pumkin.AnswerChecker
+                        : (typeof window !== 'undefined' && window.PumkinAnswerChecker ? window.PumkinAnswerChecker : null);
+                    const canonical = q.correct_value ?? q.correct_answer ?? "";
+                    const evalRes = checker
+                        ? checker.isEquivalentLocal(userAns, canonical, q.accepted_answers)
+                        : { isMatch: this.isShortAnswerCorrect(userAns, q), isDifferentForm: false };
+
+                    if (evalRes.isMatch) {
                         earned = 1.00;
                         status = "correct";
                         correctCount++;
+                        if (evalRes.isDifferentForm) {
+                            detail = `Đáp án của bạn tương đương, dạng chuẩn là: ${canonical}`;
+                        }
                     } else {
                         status = "wrong";
                         wrongCount++;
@@ -231,10 +252,14 @@ const PumkinScoring = {
             try {
                 const raschResponses = questions.map((q, idx) => {
                     const qG = questionGrading[idx];
+                    // Safety: cannot_determine MUST be excluded from Rasch calibration
+                    if (qG && (qG.status === "cannot_determine" || qG.verdict === "cannot_determine")) {
+                        return null;
+                    }
                     const isCorrect = qG && (qG.status === "correct" || qG.earned >= 0.5);
                     const b = raschEngine.getItemDifficulty(q);
                     return { b, correct: isCorrect, questionId: q.id };
-                });
+                }).filter(Boolean);
                 shadowRasch = raschEngine.estimateTheta(raschResponses);
             } catch (err) {
                 console.warn("[Rasch Shadow Mode] Error estimating theta:", err);

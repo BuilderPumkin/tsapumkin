@@ -1,20 +1,20 @@
 {
   "name": "pumkindev-math-open-data",
   "version": "v2.1.0",
-  "schema_version": "2.0",
+  "schema_version": "2.1.0",
   "title": "PUMKIN.DEV Standardized Math Examination, Skill Graph and Knowledge Open Dataset",
   "description": "Kho du lieu mo chuan hoa phuc vu khao thi va luyen thi Toan TSA, HSA, THPT, Giai tich 1 voi Question DNA va Do thi Ky nang",
   "license": "CC BY-NC-SA 4.0",
-  "generated_at": "2026-09-08T16:32:00Z",
+  "generated_at": "2026-10-21T12:39:13.958159+00:00",
   "maintainer": {
     "team": "PUMKIN.DEV Education and Open Source Team",
     "repository": "https://github.com/pumkindev/math-exam-platform"
   },
   "stats": {
-    "total_questions": 182,
-    "total_exams": 43,
-    "total_knowledge_articles": 25,
-    "total_formulas": 84,
+    "total_questions": 553,
+    "total_exams": 44,
+    "total_knowledge_articles": 27,
+    "total_formulas": 100,
     "total_skills": 6,
     "total_public_files": 25
   },

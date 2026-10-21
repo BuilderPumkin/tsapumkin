@@ -75,7 +75,7 @@
     <script src="js/core/PumkinTeacherDashboard.js?v=4.4.0"></script>
     <script src="js/core/PumkinLevelSystem.js?v=4.4.0"></script>
     <script src="js/core/LiveExamClient.js?v=4.4.0"></script>
-    <script src="js/data/fallback_bundle.js?v=4.4.0"></script>
+    <script src="js/data/fallback_bundle.js?v=4.5.0-74596517b7"></script>
     <script src="js/repository/DataRepository.js?v=4.4.0"></script>
     <script src="js/data/PumkinDefaultData.js?v=4.4.0"></script>
     <script src="js/core/PumkinPerf.js?v=4.4.0"></script>
@@ -105,9 +105,13 @@
     <script src="js/features/analytics/PumkinLearningTrace.js?v=4.4.0"></script>
     <script src="js/features/analytics/PumkinRecommendationEngine.js?v=4.4.0"></script>
     <script src="js/features/analytics/PumkinAdaptivePractice.js?v=4.4.0"></script>
+    <script src="js/services/PumkinPrefetchQueue.js?v=4.4.0"></script>
+    <script src="js/services/PumkinTelemetry.js?v=4.5.0"></script>
     <script src="js/core/PumkinJourneyManager.js?v=4.4.0"></script>
     <script src="js/features/analytics/PumkinAnalytics.js?v=4.4.0"></script>
+    <script src="js/services/PumkinMathAPI.js?v=4.4.0"></script>
     <script src="js/math/PumkinMathAPIClient.js?v=4.4.0"></script>
+    <script src="js/math/PumkinAnswerChecker.js?v=4.4.0"></script>
     <script src="js/ui/PumkinMathSolverUI.js?v=4.4.0"></script>
 </head>
 <body data-author="PUMKIN.DEV">
@@ -2312,6 +2316,8 @@
             <a href="privacy.html" style="color: var(--primary, #1e3a8a); text-decoration: underline; font-weight: 500;">Chính sách bảo mật</a>
             <span style="color: var(--text-muted, #94a3b8);">•</span>
             <a href="terms.html" style="color: var(--primary, #1e3a8a); text-decoration: underline; font-weight: 500;">Điều khoản sử dụng</a>
+            <span style="color: var(--text-muted, #94a3b8);">•</span>
+            <button type="button" onclick="PumkinTelemetry ? PumkinTelemetry.showPrivacyModal() : null" style="color: var(--primary, #1e3a8a); text-decoration: underline; font-weight: 500; background: none; border: none; cursor: pointer; font-size: 12px; padding: 0;">🛡️ Quyền riêng tư & Opt-out</button>
         </div>
     </footer>
 
