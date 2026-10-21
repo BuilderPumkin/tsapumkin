@@ -355,7 +355,7 @@ def test_solve_endpoint_full_pipeline(auth_client):
     resp = auth_client.post("/v1/solve", json=payload)
     assert resp.status_code == 200
     data = resp.json()
-    assert data["schema_version"] == "1.0.0"
+    assert data["schema_version"] == "1.1.0"
     assert "trace_id" in data
     assert data["status"] == "verified"
     assert data["confidence"]["level"] == "high"

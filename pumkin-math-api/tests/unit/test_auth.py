@@ -67,7 +67,7 @@ def test_solve_valid_api_key_returns_200_verified(client, valid_auth_headers):
     assert response.status_code == 200
 
     data = response.json()
-    assert data["schema_version"] == "1.0.0"
+    assert data["schema_version"] == "1.1.0"
     assert "trace_id" in data
     assert data["status"] in ["verified", "needs_review"]
     assert data["confidence"]["method"] == "consensus"
@@ -88,7 +88,7 @@ def test_check_valid_api_key_returns_200_verified(client, valid_auth_headers):
     assert response.status_code == 200
 
     data = response.json()
-    assert data["schema_version"] == "1.0.0"
+    assert data["schema_version"] == "1.1.0"
     assert "trace_id" in data
     assert data["status"] == "verified"
     assert data["result"]["is_correct"] is True
@@ -105,7 +105,7 @@ def test_generate_valid_api_key_returns_200_verified(client, valid_auth_headers)
     assert response.status_code == 200
 
     data = response.json()
-    assert data["schema_version"] == "1.0.0"
+    assert data["schema_version"] == "1.1.0"
     assert "trace_id" in data
     assert data["status"] == "verified"
     assert data["result"]["count"] == 1

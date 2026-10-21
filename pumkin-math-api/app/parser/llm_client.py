@@ -306,10 +306,6 @@ def get_llm_client(provider: str | None = None) -> LLMClient:
     3. If GEMINI_API_KEY present (and not a placeholder) -> GeminiLLMClient
     4. Default -> FakeLLMClient (safe offline default)
     """
-    # Safe guard: during pytest test suite execution without explicit provider, use deterministic FakeLLMClient
-    if not provider and "PYTEST_CURRENT_TEST" in os.environ:
-        return FakeLLMClient()
-
     selected = (provider or os.environ.get("LLM_PROVIDER", "")).strip().lower()
 
     if selected == "gemini":

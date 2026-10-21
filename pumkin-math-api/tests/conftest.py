@@ -14,6 +14,15 @@ TEST_RAW_KEY = "pumkin_test_secret_key_fixed_for_unit_tests_only"
 TEST_KEY_HASH = hashlib.sha256(TEST_RAW_KEY.encode("utf-8")).hexdigest().lower()
 
 
+@pytest.fixture(autouse=True)
+def force_fake_llm_provider(monkeypatch):
+    """
+    Ensure all tests run with deterministic FakeLLMClient unless explicitly overridden.
+    Guarantees zero accidental external network requests during test runs.
+    """
+    monkeypatch.setenv("LLM_PROVIDER", "fake")
+
+
 @pytest.fixture
 def client(monkeypatch):
     """

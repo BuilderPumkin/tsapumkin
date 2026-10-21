@@ -111,7 +111,7 @@ class BaseResponseEnvelope(StrictBaseModel, Generic[T]):
     """
 
     schema_version: str = Field(
-        default="1.0.0",
+        default="1.1.0",
         description="Phiên bản schema hợp đồng dữ liệu",
     )
     trace_id: str = Field(
